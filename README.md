@@ -2,6 +2,11 @@
 
 A design language for the web.
 
+## Design guidelines
+
+The design language is defined in [guidelines/](./guidelines/README.md). The guidelines state
+intent and behavior; workspace packages implement them and do not extend them.
+
 ## Requirements
 
 - Node.js 22 or newer

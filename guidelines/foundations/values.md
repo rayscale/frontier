@@ -143,10 +143,10 @@ No other weight is part of the system.
 
 ### Families
 
-| Role | Value                                                        |
-| ---- | ------------------------------------------------------------ |
-| Sans | Neutral grotesque with open forms and high legibility        |
-| Mono | `ui-monospace`, `SFMono-Regular`, Menlo, Consolas, monospace |
+| Role | Value      |
+| ---- | ---------- |
+| Sans | Geist Sans |
+| Mono | Geist Mono |
 
 Numbers are tabular by default.
 

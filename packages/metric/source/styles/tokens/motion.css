@@ -1,0 +1,5 @@
+:root {
+  --metric-duration-transition: 0ms;
+  --metric-duration-spinner: 800ms;
+  --metric-easing-spinner: linear;
+}

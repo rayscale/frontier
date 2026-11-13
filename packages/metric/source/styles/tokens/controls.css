@@ -1,0 +1,14 @@
+:root {
+  --metric-control-height: 2.25rem;
+  --metric-hit-area: 2.75rem;
+  --metric-menu-item-height: 2.25rem;
+  --metric-table-row-height: 2.25rem;
+  --metric-table-header-height: 2.5rem;
+  --metric-checkbox-size: 1rem;
+  --metric-radio-size: 1rem;
+  --metric-switch-track-width: 2.25rem;
+  --metric-switch-track-height: 1.25rem;
+  --metric-switch-thumb-size: 1rem;
+  --metric-slider-track-size: 0.25rem;
+  --metric-slider-thumb-size: 1rem;
+}

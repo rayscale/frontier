@@ -8,9 +8,8 @@ See [Values](./values.md#typography) for the family criteria, sizes, line height
 
 ## One family
 
-Metric uses a neutral grotesque with open forms and high legibility. The family is not tied to a
-specific typeface; an implementation may choose any grotesque that meets the criteria. A second
-display family is not part of the system.
+Metric uses Geist Sans, a neutral grotesque with open forms and high legibility. Geist Mono is the
+matching family for code and technical content. A second display family is not part of the system.
 
 ## One weight
 

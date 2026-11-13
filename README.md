@@ -29,19 +29,48 @@ tests, and TypeScript configuration next to its `package.json`.
 TypeScript sources live under `source/`, tests mirror that structure under `tests/`, and build
 output goes to `dist/`.
 
+## Styles
+
+The CSS token layer lives in [packages/metric/source/styles/](./packages/metric/source/styles). It
+implements the values in [guidelines/foundations/values.md](./guidelines/foundations/values.md) and
+is published as `metric/styles.css`. Typography uses Geist Sans and Geist Mono, loaded through
+Fontsource.
+
+Import the stylesheet once:
+
+```js
+import 'metric/styles.css'
+```
+
+The default theme is light. Set `data-theme="dark"` on the root element to switch every color role
+to its dark value.
+
+## Storybook
+
+Storybook renders the styles and, in the future, the components:
+
+```sh
+pnpm storybook
+```
+
+Use the theme control in the toolbar to preview both themes. `pnpm storybook:build` produces a
+static build under `packages/metric/storybook-static/`.
+
 ## Scripts
 
-| Script              | Description                                          |
-| ------------------- | ---------------------------------------------------- |
-| `pnpm build`        | Builds every workspace project.                      |
-| `pnpm test`         | Runs every workspace project's tests.                |
-| `pnpm typecheck`    | Type-checks every workspace project.                 |
-| `pnpm lint`         | Builds the workspace, then lints every file.         |
-| `pnpm lint:fix`     | Applies available ESLint fixes.                      |
-| `pnpm lint:files`   | Lints specific files without building the workspace. |
-| `pnpm format`       | Formats the workspace with Prettier.                 |
-| `pnpm format:check` | Verifies formatting without writing changes.         |
-| `pnpm format:files` | Formats specific files with Prettier.                |
+| Script                 | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| `pnpm build`           | Builds every workspace project.                      |
+| `pnpm test`            | Runs every workspace project's tests.                |
+| `pnpm typecheck`       | Type-checks every workspace project.                 |
+| `pnpm storybook`       | Starts the Storybook development server.             |
+| `pnpm storybook:build` | Builds the static Storybook site.                    |
+| `pnpm lint`            | Builds the workspace, then lints every file.         |
+| `pnpm lint:fix`        | Applies available ESLint fixes.                      |
+| `pnpm lint:files`      | Lints specific files without building the workspace. |
+| `pnpm format`          | Formats the workspace with Prettier.                 |
+| `pnpm format:check`    | Verifies formatting without writing changes.         |
+| `pnpm format:files`    | Formats specific files with Prettier.                |
 
 ## Tooling
 
@@ -49,6 +78,7 @@ output goes to `dist/`.
 - **ESLint** enforces structure and code quality; the configuration is the authoritative source
   of the rules.
 - **Prettier** owns token-level formatting.
+- **Storybook** documents the styles and components.
 - **Vitest** runs tests.
 - **Commitlint** and **lint-staged** run from the Git hooks managed by **Husky**.
 - **GitHub Actions** runs formatting, lint, type-check, tests, and builds on every push and pull

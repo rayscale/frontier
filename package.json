@@ -18,6 +18,8 @@
     "format:files": "prettier --write",
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
+    "storybook": "pnpm --filter metric storybook",
+    "storybook:build": "pnpm --filter metric storybook:build",
     "prepare": "husky"
   },
   "lint-staged": {

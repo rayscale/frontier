@@ -1,0 +1,9 @@
+:root {
+  --metric-icon-grid: 1.5rem;
+  --metric-icon-size-inline: 1rem;
+  --metric-icon-size-control: 1.25rem;
+  --metric-icon-size-standalone: 1.5rem;
+  --metric-icon-stroke-width: 1.5;
+  --metric-icon-stroke-linecap: square;
+  --metric-icon-stroke-linejoin: square;
+}

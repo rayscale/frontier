@@ -17,6 +17,64 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalledOnce()
   })
 
+  it('marks the action pressed while an activation key is held', async () => {
+    const user = userEvent.setup()
+
+    render(<Button>Save changes</Button>)
+
+    const button = screen.getByRole('button', { name: 'Save changes' })
+
+    await user.tab()
+    await user.keyboard('{Enter>}')
+
+    expect(button).toHaveAttribute('data-pressed', 'key')
+
+    await user.keyboard('{/Enter}')
+
+    expect(button).not.toHaveAttribute('data-pressed')
+  })
+
+  it('releases the pressed state when focus leaves the action', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <Button>Save changes</Button>
+        <button type="button">Next</button>
+      </>,
+    )
+
+    const button = screen.getByRole('button', { name: 'Save changes' })
+
+    await user.tab()
+    await user.keyboard('{Enter>}')
+    expect(button).toHaveAttribute('data-pressed', 'key')
+
+    await user.tab()
+
+    expect(button).not.toHaveAttribute('data-pressed')
+    await user.keyboard('{/Enter}')
+  })
+
+  it('does not acknowledge a press when disabled', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Button disabled disabledReason="You need permission to save changes">
+        Save changes
+      </Button>,
+    )
+
+    const button = screen.getByRole('button', { name: 'Save changes' })
+
+    await user.tab()
+    await user.keyboard('{Enter>}')
+
+    expect(button).not.toHaveAttribute('data-pressed')
+
+    await user.keyboard('{/Enter}')
+  })
+
   it('defaults to type button and forwards native props', () => {
     render(
       <Button type="submit" className="custom-button">

@@ -1,13 +1,16 @@
 import {
   cloneElement,
+  type FocusEvent,
   forwardRef,
   Fragment,
   isValidElement,
+  type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
   type Ref,
   useId,
+  useState,
 } from 'react'
 
 import type { TButtonProps } from './types.js'
@@ -34,7 +37,10 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
     disabled = false,
     disabledReason,
     iconOnly = false,
+    onBlur,
     onClick,
+    onKeyDown,
+    onKeyUp,
     title,
     type = 'button',
     variant = 'primary',
@@ -44,6 +50,7 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
   } = props
 
   const reasonId = useId()
+  const [keyPressed, setKeyPressed] = useState(false)
   const unavailable = disabled
   const classes = [
     'metric-button',
@@ -76,6 +83,30 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
     onClick?.(event)
   }
 
+  const isPressKey = (event: KeyboardEvent<HTMLElement>): boolean =>
+    event.key === 'Enter' || event.key === ' '
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>): void => {
+    if (!unavailable && isPressKey(event)) {
+      setKeyPressed(true)
+    }
+
+    onKeyDown?.(event)
+  }
+
+  const handleKeyUp = (event: KeyboardEvent<HTMLElement>): void => {
+    if (isPressKey(event)) {
+      setKeyPressed(false)
+    }
+
+    onKeyUp?.(event)
+  }
+
+  const handleBlur = (event: FocusEvent<HTMLElement>): void => {
+    setKeyPressed(false)
+    onBlur?.(event)
+  }
+
   if (asChild) {
     if (!isValidElement(children) || children.type === Fragment) {
       throw new Error('Button asChild requires a single React element as children.')
@@ -96,6 +127,18 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
         ? childProps['aria-describedby']
         : undefined
     const childTitle = typeof childProps.title === 'string' ? childProps.title : undefined
+    const childOnBlur =
+      typeof childProps.onBlur === 'function'
+        ? (childProps.onBlur as (event: FocusEvent<HTMLElement>) => void)
+        : undefined
+    const childOnKeyDown =
+      typeof childProps.onKeyDown === 'function'
+        ? (childProps.onKeyDown as (event: KeyboardEvent<HTMLElement>) => void)
+        : undefined
+    const childOnKeyUp =
+      typeof childProps.onKeyUp === 'function'
+        ? (childProps.onKeyUp as (event: KeyboardEvent<HTMLElement>) => void)
+        : undefined
     const childAriaLabel =
       typeof childProps['aria-label'] === 'string' ? childProps['aria-label'] : undefined
     const mergedDescribedBy = [childDescribedBy, describedBy].filter(Boolean).join(' ') || undefined
@@ -113,7 +156,20 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
           'aria-disabled': unavailable ? true : childProps['aria-disabled'],
           'aria-describedby': mergedDescribedBy,
           'aria-label': childAriaLabel ?? ariaLabel,
+          'data-pressed': keyPressed ? 'key' : undefined,
           title: mergedTitle,
+          onBlur: (event: FocusEvent<HTMLElement>) => {
+            handleBlur(event)
+            childOnBlur?.(event)
+          },
+          onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+            handleKeyDown(event)
+            childOnKeyDown?.(event)
+          },
+          onKeyUp: (event: KeyboardEvent<HTMLElement>) => {
+            handleKeyUp(event)
+            childOnKeyUp?.(event)
+          },
           onClick: (event: MouseEvent<HTMLElement>) => {
             if (unavailable) {
               event.preventDefault()
@@ -143,8 +199,12 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
         className={classes}
         aria-disabled={unavailable || undefined}
         aria-describedby={describedBy}
+        data-pressed={keyPressed ? 'key' : undefined}
         title={resolvedTitle}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        onBlur={handleBlur}
       >
         <span className="metric-button__content">{children}</span>
       </button>

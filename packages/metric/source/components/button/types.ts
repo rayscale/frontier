@@ -1,13 +1,22 @@
-import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react'
+import type {
+  ButtonHTMLAttributes,
+  FocusEventHandler,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  ReactNode,
+} from 'react'
 
 export type TButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
 
 type TButtonBaseProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
-  'aria-disabled' | 'children' | 'disabled' | 'onClick'
+  'aria-disabled' | 'children' | 'disabled' | 'onBlur' | 'onClick' | 'onKeyDown' | 'onKeyUp'
 > & {
   asChild?: boolean
+  onBlur?: FocusEventHandler<HTMLElement>
   onClick?: MouseEventHandler<HTMLElement>
+  onKeyDown?: KeyboardEventHandler<HTMLElement>
+  onKeyUp?: KeyboardEventHandler<HTMLElement>
   variant?: TButtonVariant
 }
 

@@ -21,6 +21,10 @@
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
+  transition:
+    background-color var(--metric-duration-fast) var(--metric-easing-standard),
+    border-color var(--metric-duration-fast) var(--metric-easing-standard),
+    color var(--metric-duration-fast) var(--metric-easing-standard);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -35,6 +39,10 @@
   align-items: center;
   justify-content: center;
   gap: inherit;
+}
+
+.metric-button:not([aria-disabled='true']):is(:active, [data-pressed]) {
+  transform: translateY(var(--metric-press-travel));
 }
 
 .metric-button__reason {
@@ -62,24 +70,38 @@
 }
 
 .metric-button--primary:not([aria-disabled='true']):hover {
-  background: var(--metric-color-primary-hover);
+  border-color: var(--metric-color-primary);
+  background: transparent;
+  color: var(--metric-color-text);
 }
 
-.metric-button--primary:not([aria-disabled='true']):active {
-  background: var(--metric-color-primary-pressed);
+.metric-button--primary:not([aria-disabled='true']):active:not([data-pressed='key']) {
+  border-color: var(--metric-color-primary);
+  background: var(--metric-color-pressed);
+  color: var(--metric-color-text);
 }
 
 .metric-button--secondary {
   border-color: var(--metric-color-border-strong);
 }
 
-.metric-button--secondary:not([aria-disabled='true']):hover,
+.metric-button--secondary:not([aria-disabled='true']):hover {
+  border-color: var(--metric-color-primary);
+  background: var(--metric-color-primary);
+  color: var(--metric-color-on-primary);
+}
+
+.metric-button--secondary:not([aria-disabled='true']):active:not([data-pressed='key']) {
+  border-color: var(--metric-color-primary-pressed);
+  background: var(--metric-color-primary-pressed);
+  color: var(--metric-color-on-primary);
+}
+
 .metric-button--ghost:not([aria-disabled='true']):hover {
   background: var(--metric-color-highlight);
 }
 
-.metric-button--secondary:not([aria-disabled='true']):active,
-.metric-button--ghost:not([aria-disabled='true']):active {
+.metric-button--ghost:not([aria-disabled='true']):active:not([data-pressed='key']) {
   background: var(--metric-color-pressed);
 }
 
@@ -89,13 +111,15 @@
 }
 
 .metric-button--danger:not([aria-disabled='true']):hover {
-  border-color: var(--metric-color-danger-hover);
-  color: var(--metric-color-danger-hover);
+  border-color: var(--metric-color-danger);
+  background: var(--metric-color-danger);
+  color: var(--metric-color-on-danger);
 }
 
-.metric-button--danger:not([aria-disabled='true']):active {
+.metric-button--danger:not([aria-disabled='true']):active:not([data-pressed='key']) {
   border-color: var(--metric-color-danger-pressed);
-  color: var(--metric-color-danger-pressed);
+  background: var(--metric-color-danger-pressed);
+  color: var(--metric-color-on-danger);
 }
 
 .metric-button[aria-disabled='true'] {
@@ -103,4 +127,10 @@
   background: transparent;
   color: var(--metric-color-text-disabled);
   cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metric-button {
+    transition: none;
+  }
 }

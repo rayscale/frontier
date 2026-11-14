@@ -33,13 +33,13 @@ output goes to `dist/`.
 
 The CSS token layer lives in [packages/metric/source/styles/](./packages/metric/source/styles). It
 implements the values in [guidelines/foundations/values.md](./guidelines/foundations/values.md) and
-is published as `metric/styles.css`. Typography uses Geist Sans and Geist Mono, loaded through
-Fontsource.
+is published as `@dotm4x/metric/styles.css`. Typography uses Geist Sans and Geist Mono, loaded
+through Fontsource.
 
 Import the stylesheet once:
 
 ```js
-import 'metric/styles.css'
+import '@dotm4x/metric/styles.css'
 ```
 
 The default theme is light. Set `data-theme="dark"` on the root element to switch every color role

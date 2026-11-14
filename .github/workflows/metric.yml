@@ -43,10 +43,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Test
-        run: pnpm --filter metric test
+        run: pnpm --filter @dotm4x/metric test
 
       - name: Type-check
-        run: pnpm --filter metric typecheck
+        run: pnpm --filter @dotm4x/metric typecheck
 
       - name: Build
-        run: pnpm --filter metric build
+        run: pnpm --filter @dotm4x/metric build

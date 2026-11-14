@@ -331,7 +331,7 @@ Follow the accessibility, focus, and interaction guidelines.
 - Preserve supported import paths and module formats.
 - Treat export changes as public API changes.
 - Verify that the build emits the expected files and declarations.
-- The package exposes `metric/styles.css`; keep its source and export path aligned.
+- The package exposes `@dotm4x/metric/styles.css`; keep its source and export path aligned.
 
 ## Dependencies
 
@@ -346,10 +346,10 @@ Follow the accessibility, focus, and interaction guidelines.
 Run the checks that cover the change from the package:
 
 ```sh
-pnpm --filter metric test
-pnpm --filter metric typecheck
-pnpm --filter metric build
-pnpm --filter metric storybook:build
+pnpm --filter @dotm4x/metric test
+pnpm --filter @dotm4x/metric typecheck
+pnpm --filter @dotm4x/metric build
+pnpm --filter @dotm4x/metric storybook:build
 pnpm lint
 pnpm format:check
 ```

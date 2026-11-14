@@ -1,0 +1,106 @@
+.metric-button {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--metric-spacing-2);
+  height: var(--metric-control-height);
+  padding-block: 0;
+  padding-inline: var(--metric-spacing-4);
+  border: var(--metric-border-width) solid transparent;
+  border-radius: var(--metric-radius);
+  background: transparent;
+  color: var(--metric-color-text);
+  font-family: var(--metric-font-family-sans);
+  font-size: var(--metric-font-size-sm);
+  font-weight: var(--metric-font-weight-regular);
+  line-height: var(--metric-line-height-sm);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.metric-button::after {
+  position: absolute;
+  inset: calc((var(--metric-hit-area) - var(--metric-control-height)) / -2);
+  content: '';
+}
+
+.metric-button__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+}
+
+.metric-button__reason {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.metric-button--icon {
+  width: var(--metric-control-height);
+  min-width: var(--metric-control-height);
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.metric-button--primary {
+  background: var(--metric-color-primary);
+  color: var(--metric-color-on-primary);
+}
+
+.metric-button--primary:not([aria-disabled='true']):hover {
+  background: var(--metric-color-primary-hover);
+}
+
+.metric-button--primary:not([aria-disabled='true']):active {
+  background: var(--metric-color-primary-pressed);
+}
+
+.metric-button--secondary {
+  border-color: var(--metric-color-border-strong);
+}
+
+.metric-button--secondary:not([aria-disabled='true']):hover,
+.metric-button--ghost:not([aria-disabled='true']):hover {
+  background: var(--metric-color-highlight);
+}
+
+.metric-button--secondary:not([aria-disabled='true']):active,
+.metric-button--ghost:not([aria-disabled='true']):active {
+  background: var(--metric-color-pressed);
+}
+
+.metric-button--danger {
+  border-color: var(--metric-color-danger);
+  color: var(--metric-color-danger);
+}
+
+.metric-button--danger:not([aria-disabled='true']):hover {
+  border-color: var(--metric-color-danger-hover);
+  color: var(--metric-color-danger-hover);
+}
+
+.metric-button--danger:not([aria-disabled='true']):active {
+  border-color: var(--metric-color-danger-pressed);
+  color: var(--metric-color-danger-pressed);
+}
+
+.metric-button[aria-disabled='true'] {
+  border-color: var(--metric-color-border-disabled);
+  background: transparent;
+  color: var(--metric-color-text-disabled);
+  cursor: not-allowed;
+}

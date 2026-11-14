@@ -17,8 +17,9 @@ but the mark describes the group, not an individual toggle. An individual toggle
 
 ## Keyboard
 
-Space toggles the focused value. Enter does not toggle it, because Enter is reserved for confirming
-an action. See [Keyboard](../patterns/keyboard.md).
+Space and Enter both toggle the focused value. A toggle has one result and nothing to confirm
+separately, so it accepts the two activation keys a person already expects and needs no third
+gesture. See [Keyboard](../patterns/keyboard.md).
 
 ## Labels
 

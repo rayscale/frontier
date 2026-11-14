@@ -47,7 +47,7 @@ to its dark value.
 
 ## Storybook
 
-Storybook renders the styles and, in the future, the components:
+Storybook renders the styles and the components:
 
 ```sh
 pnpm storybook

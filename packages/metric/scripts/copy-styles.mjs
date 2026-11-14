@@ -7,8 +7,6 @@ const sourceRoot = join(packageRoot, 'source')
 const targetRoot = join(packageRoot, 'dist')
 
 async function copyCss(source, target) {
-  await mkdir(target, { recursive: true })
-
   const entries = await readdir(source, { withFileTypes: true })
 
   await Promise.all(
@@ -19,6 +17,7 @@ async function copyCss(source, target) {
       if (entry.isDirectory()) {
         await copyCss(from, to)
       } else if (entry.name.endsWith('.css')) {
+        await mkdir(target, { recursive: true })
         await cp(from, to)
       }
     }),
@@ -28,3 +27,4 @@ async function copyCss(source, target) {
 await rm(join(targetRoot, 'styles'), { force: true, recursive: true })
 await copyCss(join(sourceRoot, 'styles'), join(targetRoot, 'styles'))
 await copyCss(join(sourceRoot, 'components'), join(targetRoot, 'components'))
+await copyCss(join(sourceRoot, 'icons'), join(targetRoot, 'icons'))

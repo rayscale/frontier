@@ -5,5 +5,5 @@
   --metric-icon-size-standalone: 1.5rem;
   --metric-icon-stroke-width: 1.5;
   --metric-icon-stroke-linecap: square;
-  --metric-icon-stroke-linejoin: square;
+  --metric-icon-stroke-linejoin: miter;
 }

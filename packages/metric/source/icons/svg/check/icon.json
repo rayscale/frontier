@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "check",
+  "description": "Confirms a value or a completed step, as in a checked box.",
+  "keywords": ["check", "tick", "confirm", "done", "success"],
+  "categories": ["status", "ui"],
+  "aliases": ["tick", "done", "success"],
+  "useCases": ["checked box", "confirmation", "completed step"]
+}

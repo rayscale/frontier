@@ -46,6 +46,20 @@ const namingConvention = [
   },
 ]
 
+const reactNamingConvention = namingConvention.map((rule) => {
+  if (
+    typeof rule === 'object' &&
+    rule !== null &&
+    'selector' in rule &&
+    Array.isArray(rule.selector) &&
+    rule.selector.includes('function')
+  ) {
+    return { ...rule, format: ['camelCase', 'PascalCase'] }
+  }
+
+  return rule
+})
+
 export default defineConfig(
   {
     ignores: [
@@ -258,6 +272,12 @@ export default defineConfig(
           message: 'Parameter properties must have an explicit type annotation.',
         },
       ],
+    },
+  },
+  {
+    files: ['**/*.tsx'],
+    rules: {
+      '@typescript-eslint/naming-convention': reactNamingConvention,
     },
   },
   eslintConfigPrettier,

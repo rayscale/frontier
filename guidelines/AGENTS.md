@@ -51,6 +51,8 @@ Do not redefine shared guidance to match one implementation's incidental behavio
 ## 5. Review checklist
 
 - The rule lives in the correct layer.
+- Every described movement does a job: it confirms input, explains a change, reveals a temporary
+  surface, or shows progress.
 - No rule is duplicated; related documents link to the owner.
 - Values are stated only in `foundations/values.md`.
 - No implementation details, class names, or framework APIs.

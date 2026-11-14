@@ -15,10 +15,19 @@ The highlight does not change the selected value. A person can move the highligh
 without committing anything. The selected value keeps its own treatment while the highlight moves.
 See [Selection](./selection.md).
 
-## Instant movement
+## Movement
 
-The highlight jumps directly to its new option. There is no transition, trail, or traveling
-indicator. Metric does not animate the highlight; see [Motion](../foundations/motion.md).
+The highlight travels to its new option in a short movement that settles without overshoot. The
+travel is what tells the person the highlight followed their input instead of appearing there.
+
+A new highlight that appears for the first time, or a group that first receives focus, shows the
+highlight already in place on the first frame. It does not fly in from an earlier position.
+
+When input changes while the highlight is still moving, it continues toward the newest option. It
+does not finish the abandoned move first and then start again. There is no trail, no glow, and no
+second indicator. When a person prefers reduced motion, the highlight jumps.
+
+See [Motion](../foundations/motion.md) and [Continuity](../principles/continuity.md).
 
 ## Valid targets only
 

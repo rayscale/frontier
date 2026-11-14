@@ -21,10 +21,16 @@ content more than necessary.
 Enter and Space toggle the focused disclosure. A disclosure does not trap focus. Its content is
 reachable in reading order when expanded. See [Keyboard](../patterns/keyboard.md).
 
-## No animation
+## Expansion
 
-Expanding and collapsing are instant. There is no height animation, fade, or slide. See
-[Motion](../foundations/motion.md).
+Expanding reveals the content by growing its height while the content fades in, so the person can
+follow where the space came from. Collapsing is shorter, because the person has already decided.
+
+The control's own position does not move, and unrelated content below is pushed only by the height
+the disclosure actually takes. There is no slide, no overshoot, and no horizontal movement. A
+collapsed disclosure leaves no trace. See [Motion](../foundations/motion.md).
+
+When a person prefers reduced motion, both directions are instant.
 
 ## State retention
 

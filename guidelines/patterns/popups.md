@@ -26,10 +26,17 @@ A popup uses the overlay surface and a functional border where the edge must be 
 no shadow. Its content uses the shared surface roles rather than a component-specific color. See
 [Elevation](../foundations/elevation.md) and [Shape](../foundations/shape.md).
 
-## No motion
+## Appearance and departure
 
-A popup appears and disappears instantly. It does not scale, slide, or fade. See
-[Motion](../foundations/motion.md).
+A popup enters with a short fade and a small growth from its anchor, so it reads as coming from the
+control that opened it. It leaves faster than it arrived, because the person has already decided.
+
+The entrance starts from the position it will keep. A popup never flies in from another place, and
+it never moves after it is placed, even when it is repositioned for space. A popup does not bounce,
+rotate, or travel across the page.
+
+When a person prefers reduced motion, the popup appears and disappears with an instant change or a
+simple fade. It remains fully usable either way. See [Motion](../foundations/motion.md).
 
 ## Contents
 

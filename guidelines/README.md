@@ -1,7 +1,7 @@
 # Metric Design Guidelines
 
 Metric is a brutalist-minimalist design language for any interface. It is monochrome by default,
-flat, square, and quiet: structure carries the layout, content carries the meaning, and nothing is
+flat, square, and calm: structure carries the layout, content carries the meaning, and nothing is
 added without a job.
 
 These guidelines define design intent. They do not define code, styling, tokens, or framework APIs,
@@ -38,7 +38,8 @@ exception and its reason.
 - **Restrained.** Color is functional; only `danger` carries a hue. There is one type weight, no
   shadows, and no decoration.
 - **Consistent.** The same element and interaction behave the same way everywhere.
-- **Quiet.** Nothing moves except the indeterminate progress indicator.
+- **Composed.** Nothing moves while nothing changes. When something does change, it moves briefly
+  and directly.
 
 ## What Metric is not
 
@@ -47,7 +48,7 @@ exception and its reason.
 - It is not expressive through weight. There is one weight; hierarchy comes from size and space.
 - It is not soft or layered. Corners are square, surfaces are flat, and borders exist only where
   they are functional.
-- It is not animated. Changes are instant.
+- It is not playful in motion. Movement is quick, direct, and never bounces or overshoots.
 - It is not a multi-selection language. Selection is single; independent multiple choices are
   toggles.
 

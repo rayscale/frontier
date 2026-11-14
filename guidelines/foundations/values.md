@@ -201,8 +201,38 @@ Numbers are tabular by default.
 
 ## Motion
 
-| Token            | Value  |
-| ---------------- | ------ |
-| Transition       | 0      |
-| Spinner duration | 800    |
-| Spinner easing   | Linear |
+Durations are in milliseconds.
+
+### Durations
+
+| Token   | Value |
+| ------- | ----- |
+| Fast    | 120   |
+| Base    | 160   |
+| Medium  | 200   |
+| Enter   | 240   |
+| Exit    | 160   |
+| Ambient | 1600  |
+| Spinner | 800   |
+
+Fast answers a direct input. Base carries a state change. Medium carries a movement across a
+surface. Enter and Exit are used when a temporary surface appears or leaves. Ambient is the slow
+rhythm of a loading placeholder. Spinner is the rotation of the indeterminate indicator.
+
+### Curves
+
+| Token    | Value                        |
+| -------- | ---------------------------- |
+| Standard | `cubic-bezier(0.2, 0, 0, 1)` |
+| Exit     | `cubic-bezier(0.4, 0, 1, 1)` |
+| Ambient  | `ease-in-out`                |
+| Spinner  | Linear                       |
+
+Standard decelerates into its destination without overshoot. Exit accelerates away. Ambient is
+symmetric, for looping motion that should not read as urgent.
+
+### Press
+
+| Token  | Value |
+| ------ | ----- |
+| Travel | 1     |

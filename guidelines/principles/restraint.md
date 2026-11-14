@@ -20,11 +20,12 @@ Hierarchy is a sequence, not a collection of strong signals.
 A resting interface is calm. Emphasis appears in response to state, selection, or input. An element
 that is always prominent stops being prominent at all.
 
-## No decorative motion
+## Motion needs a job
 
-Metric does not animate transitions, entrances, or exits. The only exception is the indeterminate
-progress indicator, because it communicates ongoing activity that a static state cannot express.
-See [Motion](../foundations/motion.md).
+Movement is allowed when it confirms an input, explains a change, reveals a temporary surface, or
+shows progress. It is removed when it only decorates, and nothing moves while nothing changes. The
+amount of motion a moment can carry is decided here; the shape of that motion belongs to
+[Motion](../foundations/motion.md).
 
 ## Consistency over novelty
 

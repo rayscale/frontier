@@ -9,6 +9,7 @@ principles.
 - [Clarity](./clarity.md): every element states what it is and what state it is in.
 - [Structure](./structure.md): layout and alignment make the interface legible before styling.
 - [Consistency](./consistency.md): the same element and interaction behave the same way everywhere.
+- [Continuity](./continuity.md): a person can follow every change.
 - [Restraint](./restraint.md): nothing is added without a job.
 - [Precision](./precision.md): values, alignment, and states are exact.
 
@@ -21,9 +22,11 @@ When principles conflict, they apply in this order:
 2. **Structure** comes next. Hierarchy and alignment must remain readable before visual treatment.
 3. **Consistency** keeps the system predictable. A local improvement does not justify a new
    vocabulary for the same thing.
-4. **Restraint** decides how much visual means a moment can carry. It never removes information,
+4. **Continuity** serves clarity. Movement that shows how one state became another makes change
+   understandable. Movement that exists for its own sake does not.
+5. **Restraint** decides how much visual means a moment can carry. It never removes information,
    but it removes decoration.
-5. **Precision** governs execution. When an optical correction conflicts with system consistency,
+6. **Precision** governs execution. When an optical correction conflicts with system consistency,
    the system value wins unless the correction is documented and systematic.
 
 ## Trade-offs
@@ -39,6 +42,9 @@ Some trade-offs are unavoidable. The guidelines do not hide them.
   not enough, a functional border is allowed; decoration is not.
 - **Monochrome versus semantic color.** Only `danger` carries a hue. Other statuses rely on text,
   icons, and structure, which costs some immediacy but preserves a calm, consistent surface.
+- **Continuity versus immediacy.** A transition takes time. Frequent, direct feedback stays short,
+  and a longer movement is reserved for a change that spans a surface, because a person must be
+  able to follow it.
 
 ## Relationship to the other layers
 

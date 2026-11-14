@@ -12,7 +12,7 @@ elevation, motion, focus, icons, and accessibility.
 - [Layout](./layout.md): the adaptive grid, breakpoints, and reading width.
 - [Shape](./shape.md): square corners and functional borders.
 - [Elevation](./elevation.md): flat layering and the three surfaces.
-- [Motion](./motion.md): no movement, except the spinner.
+- [Motion](./motion.md): movement with a job, from input feedback to progress.
 - [Focus](./focus.md): the outline and `focus-visible`.
 - [Icons](./icons.md): grid, geometry, sizes, color, and usage.
 - [Accessibility](./accessibility.md): the baseline every design must meet.

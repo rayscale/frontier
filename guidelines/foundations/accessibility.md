@@ -46,9 +46,10 @@ unavailability is communicated with text and structure, not with a faint appeara
 
 ## Motion
 
-The system does not animate, so there is no decorative motion to disable. The indeterminate spinner
-is replaced by a static status indicator when a person prefers reduced motion. See
-[Motion](./motion.md).
+A person who prefers reduced motion keeps every outcome. Movement becomes an instant change or a
+simple fade, looping motion stops, and the information the movement carried remains visible in the
+final state. Motion is never the only signal of a state, and it never delays an action or a change
+of focus. See [Motion](./motion.md).
 
 ## Forms
 

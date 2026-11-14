@@ -25,10 +25,14 @@ jump to the minimum and maximum. The slider is reachable with Tab. See
 The slider has one focusable thumb and one value. Focus is visible on the thumb. See
 [Focus](../foundations/focus.md).
 
-## No motion
+## Movement
 
-The thumb moves with the person's input, not with an animation. Programmatic changes update
-instantly.
+While the person drags or holds an arrow key, the thumb follows the input directly, without easing,
+lag, or inertia. A change the person did not make, such as a value applied by the surface or a jump
+from Home or End, travels to the new position in a short movement so the person can see where the
+value went. See [Motion](../foundations/motion.md).
+
+When a person prefers reduced motion, programmatic changes are instant.
 
 ## Disabled and read-only
 

@@ -53,10 +53,12 @@ Directional icons mirror in right-to-left layouts: arrows, chevrons, back and fo
 whose meaning depends on reading direction. Icons that represent objects, brands, or media controls
 do not mirror.
 
-## No animation
+## Motion
 
-Icons do not animate. State changes are instant. The spinner is the only animated indicator and is
-not an icon in the set. See [Motion](./motion.md).
+An icon does not transform into another icon and does not move on its own. It may change form to
+show its state, and it may accompany the transition of the surface it belongs to, since the surface
+explains the change and the icon travels with it. The indeterminate spinner is an indicator, not an
+icon in the set. See [Motion](./motion.md).
 
 ## Inventory
 

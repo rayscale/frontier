@@ -31,7 +31,12 @@ A gesture is never the only way to complete a task. See
 ## Feedback
 
 During a drag, the surface communicates the source, the current position or target, and whether the
-result will commit. Feedback updates instantly and does not use a trail or easing.
+result will commit. Feedback follows the input without a trail or easing, because a delayed
+indicator would describe a position the person has already left.
+
+On release, a committed result settles into place, and a cancelled result returns to its previous
+value. The settling is short and never overshoots; it confirms the outcome instead of repeating the
+gesture. See [Motion](../foundations/motion.md).
 
 ## Touch and pointer
 

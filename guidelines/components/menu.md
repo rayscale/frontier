@@ -37,10 +37,12 @@ icon-only items is not part of the system.
 Related items may be grouped with space and, where a group needs a name, a group label. Groups do
 not use dividers or containers. See [Structure](../principles/structure.md).
 
-## No animation
+## Appearance
 
-Menus appear and disappear instantly. They do not fade, slide, or grow. See
-[Motion](../foundations/motion.md).
+A menu appears in its anchoring position from the first frame with a short fade, and leaves faster
+than it arrived. It does not slide across the page, and it does not move after it is placed. Items
+keep their positions; only the highlight moves between them. See [Popups](../patterns/popups.md) and
+[Highlight](../patterns/highlight.md).
 
 ## Principle
 

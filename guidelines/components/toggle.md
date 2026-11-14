@@ -28,9 +28,11 @@ mark. Icon-only toggles are not part of the system.
 
 ## State and feedback
 
-The change is visible immediately. There is no animation. When the change must be saved, the surface
-shows the pending or saved state; the toggle itself does not pretend that the change is already
-durable.
+The change is visible immediately: the mark or the track settles into its new state in a short
+transition that starts on the press frame and never overshoots. The transition shows which value
+became active; it does not delay the value. When the change must be saved, the surface shows the
+pending or saved state; the toggle itself does not pretend that the change is already durable. See
+[Motion](../foundations/motion.md).
 
 ## Disabled
 

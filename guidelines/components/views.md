@@ -25,10 +25,17 @@ Arrow keys move the highlight within the tab list. The current view changes on c
 highlight alone. Home and End move to the first and last tab. Tab moves out of the list. See
 [Keyboard](../patterns/keyboard.md).
 
-## No animation
+## Transition
 
-Changing a view is instant. There is no slide, fade, or cross-fade. See
+A view replaces another with a short fade: the outgoing view fades out and the incoming view fades
+in, entering faster than the outgoing view leaves so the surface never looks empty. There is no
+slide, no cross-fade of two fully visible views, and no change of layout.
+
+Views occupy the same region and keep their positions, so a person who switches repeatedly never
+hunts for the tab or the panel. The incoming view is readable from its first frame. See
 [Motion](../foundations/motion.md).
+
+When a person prefers reduced motion, the change is instant.
 
 ## State retention
 

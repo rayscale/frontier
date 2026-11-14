@@ -49,10 +49,17 @@ A toast may be dismissed and disappears on its own. A banner stays until its con
 or it is explicitly dismissed. An inline message stays with the content. A message never reappears
 after the person dismissed it unless the condition occurs again.
 
-## No motion
+## Appearance and dismissal
 
-Toasts, banners, and inline messages appear and disappear instantly. There is no slide, fade, or
-auto-dismiss animation. See [Motion](../foundations/motion.md).
+A message enters with a short fade and a small movement away from the edge it belongs to, so it is
+noticed without competing with the content. It leaves with a shorter fade, and a toast never slides
+across the surface.
+
+An inline message changes the layout only by the space it actually takes, and it does not make the
+content it describes jump. A message that replaces another in the same place changes in place.
+
+When a person prefers reduced motion, messages appear and disappear with an instant change or a
+simple fade; a toast still dismisses on its own. See [Motion](../foundations/motion.md).
 
 ## Principle
 

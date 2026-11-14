@@ -7,9 +7,10 @@ spinner for actions, and a progress bar when the amount of work is known.
 
 - **Skeleton** for content that is arriving. It mirrors the final layout so the page does not jump
   when the content appears.
-- **Spinner** for an action whose duration is unknown. It is the only animated element in the
-  system.
-- **Progress** when the amount completed is known. The bar updates instantly as progress changes.
+- **Spinner** for an action whose duration is unknown. It communicates activity that no static state
+  can express.
+- **Progress** when the amount completed is known. The bar moves to the new value in a short
+  transition, so the person can follow the rate of progress.
 
 A skeleton is not used for an action, and a spinner is not used to stand in for a whole page that
 could show its structure.
@@ -22,11 +23,22 @@ replaces. When content arrives, nothing below it moves.
 ## The spinner
 
 The spinner is an indeterminate indicator: it runs continuously, linearly, and without easing. It
-is not decorative, and it is not used where a static state would communicate the same thing. See
+is not decorative, and it is not used where a static state would communicate the same thing. It is
+the only element that repeats a movement without a state to show. See
 [Motion](../foundations/motion.md) and [Values](../foundations/values.md#motion).
 
+## The loading placeholder
+
+A skeleton shows that content is arriving with a slow, soft pulse of its surface. The pulse is
+ambient: it is slower than any other movement in the system, it does not change the skeleton's size
+or layout, and it never competes with arriving content. It is not a shimmer that sweeps across the
+surface, because a sweep draws attention to the wait itself. It stops when the content arrives.
+
+## Reduced motion
+
 When a person prefers reduced motion, the spinner is replaced by a static status indicator with a
-text label, or by a determinate progress value.
+text label or by a determinate progress value, and the pulse stops. The information that content is
+loading remains visible in every case.
 
 ## Labels and announcements
 

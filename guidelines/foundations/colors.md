@@ -15,7 +15,9 @@ Every color has a job. Designs use the role, never a raw value.
 - **Text** has primary, muted, subtle, disabled, and inverse strengths.
 - **Border** is functional: it marks an edge that must be identified, such as a field or a floating
   surface. Strong borders separate regions that need a clearer limit.
-- **Highlight** is the neutral surface under the pointer or keyboard focus.
+- **Highlight** is the neutral surface shown under the pointer or keyboard focus where a control
+  takes one; a filled control may instead clear its fill and show its boundary. See
+  [Emphasis exchange](#emphasis-exchange).
 - **Pressed** is the stronger neutral surface shown while an input is held.
 - **Selected** uses an inverse fill, not a tinted surface.
 - **Primary** is the strongest neutral fill, used for the main action. Its text uses the inverse role.
@@ -53,6 +55,17 @@ border. There are no shadows; see [Elevation](./elevation.md).
 A highlighted item uses the neutral highlight surface. A selected item uses the inverse fill with
 inverse text. The two states remain distinguishable when they coexist. See
 [Selection](../patterns/selection.md).
+
+## Emphasis exchange
+
+A control may exchange its fill for its boundary when its emphasis changes. A fill and its text role
+always change together, so a filled surface takes the text role that keeps contrast; one never moves
+without the other.
+
+An exchange changes only what sits inside the control's box. The box keeps its size and its position,
+and neighbouring elements and the surrounding layout do not move. See [Shape](./shape.md).
+
+The condition that triggers an exchange belongs to the interaction that uses it.
 
 ## Principle
 

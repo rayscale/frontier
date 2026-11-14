@@ -22,6 +22,29 @@ discernible when they combine; one state never hides another.
 Focus always remains visible alongside hover and selection. Selection persists when the pointer
 leaves. A pressed state ends when the input is released, even if the result is selected.
 
+## Press by input source
+
+A press is acknowledged with the same timing and the same direction whatever input produced it. A
+pointer press may also change the surface of the control, because the pointer carries no other sign
+of where the input went. A key press moves the control and leaves its surface as it is: focus
+already marks where the input goes, and a second surface change would compete with it.
+
+Changing input source never removes the press. A pointer press on a control that already has
+keyboard focus still shows its pressed surface, and a key press on a control that was last used by
+the pointer still moves it.
+
+## Changes between states
+
+A change of state is shown by a short transition so the person can connect the previous state to the
+new one. The transition changes what the state already means; it never carries the meaning on its
+own, and it never delays the state itself.
+
+Focus appears immediately. A state that must be read to act, such as an error, is complete on the
+frame it appears. Nothing animates while an element is at rest. See
+[Motion](../foundations/motion.md).
+
+When a person prefers reduced motion, state changes are instant.
+
 ## Hover is optional
 
 Touch produces no persistent hover. A design never depends on hover to reveal information, expose an

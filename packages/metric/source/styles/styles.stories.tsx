@@ -62,6 +62,20 @@ const typeScale = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] as const
 
 const spacingSteps = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16] as const
 
+const motionTokens = [
+  { label: 'Fast', token: '--metric-duration-fast' },
+  { label: 'Base', token: '--metric-duration-base' },
+  { label: 'Medium', token: '--metric-duration-medium' },
+  { label: 'Enter', token: '--metric-duration-enter' },
+  { label: 'Exit', token: '--metric-duration-exit' },
+  { label: 'Ambient', token: '--metric-duration-ambient' },
+  { label: 'Spinner', token: '--metric-duration-spinner' },
+  { label: 'Standard', token: '--metric-easing-standard' },
+  { label: 'Exit', token: '--metric-easing-exit' },
+  { label: 'Ambient', token: '--metric-easing-ambient' },
+  { label: 'Spinner', token: '--metric-easing-spinner' },
+] as const
+
 const mainStyle: CSSProperties = {
   boxSizing: 'border-box',
   width: 'min(72rem, 100%)',
@@ -101,7 +115,7 @@ export const tokens: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the color, typography, and spacing tokens in the active mode.',
+        story: 'Shows the color, typography, spacing, and motion tokens in the active mode.',
       },
     },
   },
@@ -245,6 +259,26 @@ export const tokens: TStory = {
                   background: 'var(--metric-color-primary)',
                 }}
               />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <h2 style={headingStyle}>Motion</h2>
+        <div style={gridStyle}>
+          {motionTokens.map((motion) => (
+            <div
+              key={motion.token}
+              style={{
+                display: 'grid',
+                gap: 'var(--metric-spacing-1)',
+                padding: 'var(--metric-spacing-3)',
+                border: 'var(--metric-border-width) solid var(--metric-color-border-subtle)',
+              }}
+            >
+              <span style={{ fontSize: 'var(--metric-font-size-sm)' }}>{motion.label}</span>
+              <code style={tokenStyle}>{motion.token}</code>
             </div>
           ))}
         </div>

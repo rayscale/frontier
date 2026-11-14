@@ -1,5 +1,22 @@
 :root {
-  --metric-duration-transition: 0ms;
+  /* Durations: fast answers a direct input; base carries a state change; medium
+     carries a movement across a surface; enter and exit bring a temporary
+     surface in and out; ambient is the rhythm of a loading placeholder. */
+  --metric-duration-fast: 120ms;
+  --metric-duration-base: 160ms;
+  --metric-duration-medium: 200ms;
+  --metric-duration-enter: 240ms;
+  --metric-duration-exit: 160ms;
+  --metric-duration-ambient: 1600ms;
   --metric-duration-spinner: 800ms;
+
+  /* Standard decelerates into its destination without overshoot; exit
+     accelerates away; ambient is symmetric and never reads as urgent. */
+  --metric-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --metric-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+  --metric-easing-ambient: ease-in-out;
   --metric-easing-spinner: linear;
+
+  /* Distance the content of a pressed action moves. */
+  --metric-press-travel: 1px;
 }

@@ -170,8 +170,18 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 - Component-scoped custom properties use the `--_` prefix and stay in the component stylesheet or
   an inline style from the component. Never add them to `source/styles/tokens/`.
 - Expose a customization value as an intentional prop, not as a public custom property.
-- Metric is static: do not add an animation library, and do not add transitions outside the
-  spinner defined by the motion guidelines.
+- Every transition uses the motion tokens: `--metric-duration-*` and `--metric-easing-*`. Never
+  hardcode a duration or a curve.
+- A transition must do one of the jobs in the [motion foundation](../../guidelines/foundations/motion.md):
+  confirm an input, explain a change, reveal a temporary surface, or show progress. Nothing
+  transitions while it is at rest.
+- Move `transform`, `opacity`, `background-color`, `border-color`, and `color`; avoid animating
+  layout properties such as `width`, `height`, or `margin`.
+- Enter with `--metric-duration-enter` and leave with `--metric-duration-exit`, which is shorter.
+- Use `--metric-press-travel` for the press response instead of a local offset.
+- Wrap every transition and animation in a `prefers-reduced-motion: reduce` fallback that keeps the
+  final state and the information it carries. Do not remove state feedback under reduced motion.
+- Do not add an animation library. Distances, delays, and spring physics are not part of the system.
 
 ### CSS
 

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Checkbox } from '../../index.js'
+import { Checkbox } from './index.js'
 
 describe('Checkbox', () => {
   it('renders a checkbox named by its label', () => {

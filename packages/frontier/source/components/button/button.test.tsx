@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Button } from '../../index.js'
+import { Button } from './index.js'
 
 describe('Button', () => {
   it('renders its label and handles clicks', async () => {

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { Input } from '../../index.js'
+import { Input } from './index.js'
 
 describe('Input', () => {
   it('renders a labeled text input', () => {

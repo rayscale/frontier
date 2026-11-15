@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { createRef } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { Check, createIcon, Icon } from '../index.js'
+import { Check, createIcon, Icon } from './index.js'
 
 describe('Icon', () => {
   it('draws its shapes on the 24-unit grid and stays out of the accessibility tree', () => {

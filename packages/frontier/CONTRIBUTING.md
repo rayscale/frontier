@@ -318,6 +318,7 @@ mode control.
 ## Testing
 
 - Use Vitest. Place tests beside the source file they cover.
+- Import the unit under test from its own folder's index (`./index.js`), not from the package root.
 - For React component tests, use React Testing Library and `user-event`; add them when the first
   component test is introduced.
 - Use Arrange–Act–Assert and descriptive names.

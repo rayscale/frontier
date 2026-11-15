@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Switch } from '../../index.js'
+import { Switch } from './index.js'
 
 describe('Switch', () => {
   it('renders a switch named by its label', () => {

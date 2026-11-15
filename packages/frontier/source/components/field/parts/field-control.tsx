@@ -31,6 +31,7 @@ export const FieldControl = forwardRef<HTMLInputElement, TFieldControlProps>(
         {...rest}
         ref={ref}
         id={controlId}
+        type={rest.type ?? 'text'}
         className={classes}
         aria-describedby={describedBy}
         aria-invalid={invalidValue || undefined}

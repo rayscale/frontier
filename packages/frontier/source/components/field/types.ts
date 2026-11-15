@@ -3,7 +3,7 @@ import type { ComponentProps, InputHTMLAttributes, LabelHTMLAttributes, ReactNod
 export type TFieldRootProps = Omit<ComponentProps<'div'>, 'children'> & {
   children: ReactNode
   disabled?: boolean
-  id?: string
+  id?: string | undefined
   invalid?: boolean
   required?: boolean
 }

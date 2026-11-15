@@ -1,6 +1,7 @@
 export * from './components/button/index.js'
 export * from './components/checkbox/index.js'
 export * from './components/field/index.js'
+export * from './components/input/index.js'
 export * from './components/label/index.js'
 export * from './components/switch/index.js'
 export * from './icons/index.js'

@@ -10,8 +10,8 @@ See [Values](./values.md#radius) for the radius scale and [Borders](./values.md#
 
 Every surface and control uses a radius from the shared scale. The radius follows the role of the
 element: a small mark uses the small radius, a large surface the large radius, and a control uses
-the medium radius or, when it should read as a pill, the full radius. A circle is reserved for a
-form that carries meaning, such as a switch or an avatar. Icons use round caps and joins; see
+the medium or large radius, or the full radius when it should read as a pill. A circle is reserved
+for a form that carries meaning, such as a switch or an avatar. Icons use round caps and joins; see
 [Icons](./icons.md).
 
 ## Borders are functional

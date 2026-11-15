@@ -24,7 +24,7 @@
     "generate:icons": "node --experimental-strip-types scripts/generate-icons.ts && pnpm exec prettier --write \"source/icons/components/**/*.{ts,tsx}\" \"source/icons/generated.ts\"",
     "prebuild": "node -e \"for (const path of ['source/icons/components', 'source/icons/generated.ts', 'source/icons/metadata.generated.ts']) require('node:fs').rmSync(path, { force: true, recursive: true })\" && pnpm generate:icons",
     "build": "tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",

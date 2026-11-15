@@ -102,8 +102,8 @@ export default defineConfig(
         {
           devDependencies: [
             '**/*.config.{js,mjs,cjs,ts,mts,cts}',
+            '**/vitest.setup.ts',
             '**/scripts/**',
-            '**/tests/**',
             '**/.storybook/**',
             '**/*.{test,spec,stories}.{js,jsx,mjs,cjs,ts,tsx,mts,cts}',
           ],

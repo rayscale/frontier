@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 
-import { Field } from '../../../source/index.js'
+import { Field } from '../../index.js'
 
 describe('Field', () => {
   it('names the control from the label', () => {

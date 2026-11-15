@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { Label } from '../../../source/index.js'
+import { Label } from '../../index.js'
 
 describe('Label', () => {
   it('names the field it points at and moves focus into it', async () => {

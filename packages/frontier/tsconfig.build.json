@@ -7,5 +7,13 @@
     "outDir": "dist"
   },
   "include": ["source/**/*.ts", "source/**/*.tsx"],
-  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", "**/*.stories.tsx"]
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/coverage",
+    "**/*.stories.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

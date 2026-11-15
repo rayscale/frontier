@@ -4,6 +4,7 @@ import { Field } from '../field/field.js'
 
 import type { TInputProps } from './types.js'
 
+/** Collects a single line of text with an optional label, description, error, and icons. */
 export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(props, ref) {
   const {
     className,

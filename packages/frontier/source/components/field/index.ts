@@ -1,4 +1,5 @@
 export { Field } from './field.js'
+export type { TFieldComponent } from './field.js'
 export type {
   TFieldBoxProps,
   TFieldControlProps,

@@ -71,6 +71,19 @@ Use a namespace API when a component has meaningful public parts:
 - Do not create empty or uniform subcomponents.
 - Keep internal helpers private.
 - Preserve accessible relationships across parts.
+- Type the namespace with an exported interface and document each part on that interface, so
+  hovering a part shows what it is for. A comment on the part function is not what a consumer sees.
+
+  ```ts
+  export interface TFieldComponent {
+    /** Groups one field's parts and shares its ids and accessible relationships. */
+    Root: typeof FieldRoot
+    /** Renders the control's label with the required marker. */
+    Label: typeof FieldLabel
+  }
+
+  export const Field: TFieldComponent = { Root: FieldRoot, Label: FieldLabel }
+  ```
 
 ### Interaction primitives
 

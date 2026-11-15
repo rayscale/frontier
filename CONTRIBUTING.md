@@ -106,8 +106,8 @@ to the statement they protect.
 Keep dependencies and scripts in the project that uses them, and do not commit generated output,
 dependencies, or secrets.
 
-Workspace projects follow the same layout: TypeScript sources live under `source/`, tests mirror
-the source structure under `tests/`, and each project owns its type-check and build configuration
+Workspace projects follow the same layout: TypeScript sources live under `source/`, tests sit
+beside the source files they cover, and each project owns its type-check and build configuration
 next to its `package.json`. Use `.js` extensions in relative imports so the emitted ESM resolves
 at runtime.
 

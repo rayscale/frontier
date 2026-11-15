@@ -109,9 +109,9 @@ packages/frontier/
 │   ├── styles/            # stylesheet entry, fonts, tokens, and system stories
 │   ├── index.ts           # public package entry
 │   └── styles.d.ts
-├── tests/                 # tests mirror `source/`
 ├── scripts/
 ├── .storybook/
+├── vitest.setup.ts
 └── package.json
 ```
 
@@ -122,6 +122,7 @@ source/components/{component}/
 ├── {component}.tsx
 ├── {component}.css
 ├── {component}.stories.tsx
+├── {component}.test.tsx
 ├── index.ts
 ├── types.ts       # only when the public contract needs shared types
 ├── context.ts     # only when the component needs context
@@ -130,9 +131,9 @@ source/components/{component}/
 └── hooks/         # component-specific hooks
 ```
 
-Tests mirror the source tree under `tests/`. A component at
-`source/components/button/button.tsx` has its tests at
-`tests/components/button/button.test.tsx`.
+Tests live beside the source they cover: a component at `source/components/button/button.tsx` has
+its tests at `source/components/button/button.test.tsx`. Do not mirror the tree under a separate
+`tests/` directory.
 
 - Only create files the component needs.
 - Keep implementation, stylesheet, story, and public entry at the component root.
@@ -316,7 +317,7 @@ mode control.
 
 ## Testing
 
-- Use Vitest. Place tests under `tests/`, mirroring the source tree.
+- Use Vitest. Place tests beside the source file they cover.
 - For React component tests, use React Testing Library and `user-event`; add them when the first
   component test is introduced.
 - Use Arrange–Act–Assert and descriptive names.

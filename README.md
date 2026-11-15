@@ -26,7 +26,7 @@ pnpm test
 Workspace projects live under `packages/`. Each project keeps its own dependencies, scripts,
 tests, and TypeScript configuration next to its `package.json`.
 
-TypeScript sources live under `source/`, tests mirror that structure under `tests/`, and build
+TypeScript sources live under `source/`, tests sit beside the source files they cover, and build
 output goes to `dist/`.
 
 ## Styles

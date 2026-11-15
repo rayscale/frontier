@@ -1,26 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Button } from '../../index.js'
-
-function PlusIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      viewBox="0 0 24 24"
-      style={{
-        width: 'var(--frontier-icon-size-control)',
-        height: 'var(--frontier-icon-size-control)',
-      }}
-    >
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  )
-}
+import { Button, Plus } from '../../index.js'
 
 const meta = {
   title: 'Components/Button',
@@ -133,13 +113,13 @@ export const IconOnly: TStory = {
   render: () => (
     <div style={rowStyle}>
       <Button iconOnly aria-label="Add item">
-        <PlusIcon />
+        <Plus size="control" />
       </Button>
       <Button iconOnly variant="secondary" aria-label="Add item">
-        <PlusIcon />
+        <Plus size="control" />
       </Button>
       <Button iconOnly variant="ghost" aria-label="Add item">
-        <PlusIcon />
+        <Plus size="control" />
       </Button>
     </div>
   ),

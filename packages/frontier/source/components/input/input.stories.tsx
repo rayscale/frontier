@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { Input } from './input.js'
+import { Input, Search, X } from '../../index.js'
 
 function ClearableSearchExample() {
   const [value, setValue] = useState('Frontier')
@@ -13,7 +13,7 @@ function ClearableSearchExample() {
       onChange={(event) => {
         setValue(event.target.value)
       }}
-      leadingIcon={<span aria-hidden="true">⌕</span>}
+      leadingIcon={<Search size="control" />}
       trailingIcon={
         <button
           type="button"
@@ -29,7 +29,7 @@ function ClearableSearchExample() {
             cursor: 'pointer',
           }}
         >
-          ✕
+          <X size="control" />
         </button>
       }
       trailingIconInteractive
@@ -153,8 +153,8 @@ export const Icons: TStory = {
   args: {
     label: 'Search',
     placeholder: 'Search your projects',
-    leadingIcon: <span aria-hidden="true">⌕</span>,
-    trailingIcon: <span aria-hidden="true">@</span>,
+    leadingIcon: <Search size="control" />,
+    trailingIcon: <X size="control" />,
   },
 }
 

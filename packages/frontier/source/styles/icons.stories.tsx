@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { CSSProperties } from 'react'
 
-import { Check } from '../index.js'
+import { Check, Plus, Search, X } from '../index.js'
 
 const meta = {
   title: 'Foundations/Icons',
@@ -32,6 +32,32 @@ const labelStyle: CSSProperties = {
   fontSize: 'var(--frontier-font-size-xs)',
 }
 
+const nameStyle: CSSProperties = {
+  ...labelStyle,
+  minWidth: '5rem',
+}
+
+const cellStyle: CSSProperties = {
+  display: 'grid',
+  justifyItems: 'center',
+  gap: 'var(--frontier-spacing-2)',
+  minWidth: '5rem',
+}
+
+const gridStyle: CSSProperties = {
+  display: 'grid',
+  gap: 'var(--frontier-spacing-6)',
+}
+
+const sizes = ['inline', 'control', 'standalone'] as const
+
+const iconSet = [
+  { Icon: Check, name: 'check' },
+  { Icon: Plus, name: 'plus' },
+  { Icon: Search, name: 'search' },
+  { Icon: X, name: 'x' },
+]
+
 export const icons: TStory = {
   parameters: {
     docs: {
@@ -41,19 +67,25 @@ export const icons: TStory = {
     },
   },
   render: () => (
-    <div style={rowStyle}>
-      <div style={{ display: 'grid', justifyItems: 'center', gap: 'var(--frontier-spacing-2)' }}>
-        <Check size="inline" />
-        <code style={labelStyle}>inline</code>
+    <div style={gridStyle}>
+      <div style={rowStyle}>
+        <span style={nameStyle} />
+        {sizes.map((size) => (
+          <div key={size} style={cellStyle}>
+            <code style={labelStyle}>{size}</code>
+          </div>
+        ))}
       </div>
-      <div style={{ display: 'grid', justifyItems: 'center', gap: 'var(--frontier-spacing-2)' }}>
-        <Check size="control" />
-        <code style={labelStyle}>control</code>
-      </div>
-      <div style={{ display: 'grid', justifyItems: 'center', gap: 'var(--frontier-spacing-2)' }}>
-        <Check size="standalone" />
-        <code style={labelStyle}>standalone</code>
-      </div>
+      {iconSet.map(({ Icon, name }) => (
+        <div key={name} style={rowStyle}>
+          <code style={nameStyle}>{name}</code>
+          {sizes.map((size) => (
+            <div key={size} style={cellStyle}>
+              <Icon size={size} />
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   ),
 }

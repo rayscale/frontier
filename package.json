@@ -1,5 +1,5 @@
 {
-  "name": "metric-workspace",
+  "name": "frontier-workspace",
   "description": "A design language for the web.",
   "license": "MIT",
   "private": true,
@@ -18,8 +18,8 @@
     "format:files": "prettier --write",
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
-    "storybook": "pnpm --filter @dotm4x/metric storybook",
-    "storybook:build": "pnpm --filter @dotm4x/metric storybook:build",
+    "storybook": "pnpm --filter @rayscale/frontier storybook",
+    "storybook:build": "pnpm --filter @rayscale/frontier storybook:build",
     "prepare": "husky"
   },
   "lint-staged": {

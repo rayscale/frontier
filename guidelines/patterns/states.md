@@ -1,6 +1,6 @@
 # States
 
-A state describes the condition of an element at a given moment. Metric uses a small, consistent set
+A state describes the condition of an element at a given moment. Frontier uses a small, consistent set
 of states so a person can understand what an element is doing and how it will respond.
 
 ## The states

@@ -1,7 +1,7 @@
 # Accessibility
 
-Accessibility is the baseline for every Metric design. A design is not finished until it works with
-a keyboard, a pointer, touch, and assistive technology. Metric does not treat accessibility as a
+Accessibility is the baseline for every Frontier design. A design is not finished until it works with
+a keyboard, a pointer, touch, and assistive technology. Frontier does not treat accessibility as a
 separate mode.
 
 ## Contrast
@@ -70,5 +70,5 @@ understandable. A design is also checked with a keyboard and, where possible, wi
 
 ## Principle
 
-Everything Metric offers should be available to everyone, through every input, without a separate
+Everything Frontier offers should be available to everyone, through every input, without a separate
 mode.

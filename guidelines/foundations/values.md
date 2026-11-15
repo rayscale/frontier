@@ -1,6 +1,6 @@
 # Values
 
-This page lists the concrete values behind Metric's foundations. Each foundation explains when and
+This page lists the concrete values behind Frontier's foundations. Each foundation explains when and
 why to use them; this page is the only place where the numbers and colors are stated.
 
 Values are expressed in logical units. An implementation maps them to the units of its platform;

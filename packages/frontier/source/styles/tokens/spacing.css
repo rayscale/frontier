@@ -1,0 +1,13 @@
+:root {
+  --frontier-spacing-0: 0;
+  --frontier-spacing-1: 0.25rem;
+  --frontier-spacing-2: 0.5rem;
+  --frontier-spacing-3: 0.75rem;
+  --frontier-spacing-4: 1rem;
+  --frontier-spacing-5: 1.25rem;
+  --frontier-spacing-6: 1.5rem;
+  --frontier-spacing-8: 2rem;
+  --frontier-spacing-10: 2.5rem;
+  --frontier-spacing-12: 3rem;
+  --frontier-spacing-16: 4rem;
+}

@@ -1,6 +1,6 @@
 # Forms
 
-Forms collect input. Metric keeps forms explicit: every field has a visible label, errors are
+Forms collect input. Frontier keeps forms explicit: every field has a visible label, errors are
 explained next to the field and summarized at the start, and no state depends on color alone.
 
 ## Labels and help

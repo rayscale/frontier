@@ -1,6 +1,6 @@
 # Code
 
-Code is content that must remain exact. Metric presents it in a monospaced family, in monochrome,
+Code is content that must remain exact. Frontier presents it in a monospaced family, in monochrome,
 and without decoration that competes with the characters.
 
 ## Monochrome

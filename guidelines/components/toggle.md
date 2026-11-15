@@ -2,7 +2,7 @@
 
 A toggle sets one independent value on or off. It is the contract behind checkboxes and switches.
 A group of toggles expresses multiple independent choices, which is the only multiple-choice model in
-Metric.
+Frontier.
 
 ## Independent state
 

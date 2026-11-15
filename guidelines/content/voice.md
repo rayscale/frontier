@@ -1,6 +1,6 @@
 # Voice
 
-Metric speaks like a precise instrument: neutral, direct, and technical. It does not perform
+Frontier speaks like a precise instrument: neutral, direct, and technical. It does not perform
 personality through language. The interface states facts, gives instructions, and gets out of the
 way.
 

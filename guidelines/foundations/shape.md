@@ -1,6 +1,6 @@
 # Shape
 
-Shape in Metric is rectangular. Corners are square, edges are straight, and borders exist only when
+Shape in Frontier is rectangular. Corners are square, edges are straight, and borders exist only when
 they do work. The visual character comes from exact alignment and from the contrast between
 surfaces, not from rounding or decoration.
 
@@ -14,7 +14,7 @@ meaning rather than decoration.
 
 ## Borders are functional
 
-Metric has no structural or decorative borders. Surfaces and spacing group content. A border is
+Frontier has no structural or decorative borders. Surfaces and spacing group content. A border is
 allowed only when a person must identify an edge:
 
 - a field or another control whose target would be ambiguous without one;

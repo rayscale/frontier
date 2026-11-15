@@ -1,0 +1,9 @@
+:root {
+  --frontier-icon-grid: 1.5rem;
+  --frontier-icon-size-inline: 1rem;
+  --frontier-icon-size-control: 1.25rem;
+  --frontier-icon-size-standalone: 1.5rem;
+  --frontier-icon-stroke-width: 1.5;
+  --frontier-icon-stroke-linecap: square;
+  --frontier-icon-stroke-linejoin: miter;
+}

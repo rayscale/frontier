@@ -1,7 +1,7 @@
 # Data display
 
 Data display presents structured content for comparison and action. Tables are the main surface.
-Metric keeps them flat, dense enough to scan, and free of decorative striping.
+Frontier keeps them flat, dense enough to scan, and free of decorative striping.
 
 ## Tables
 

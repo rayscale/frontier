@@ -1,0 +1,61 @@
+@import './fonts.css';
+@import './tokens/colors.css';
+@import './tokens/spacing.css';
+@import './tokens/radii.css';
+@import './tokens/borders.css';
+@import './tokens/focus.css';
+@import './tokens/controls.css';
+@import './tokens/typography.css';
+@import './tokens/icons.css';
+@import './tokens/layers.css';
+@import './tokens/motion.css';
+
+:root {
+  font-family: var(--frontier-font-family-sans);
+  font-size: var(--frontier-font-size-md);
+  font-weight: var(--frontier-font-weight-regular);
+  line-height: var(--frontier-line-height-md);
+  font-variant-numeric: tabular-nums;
+  color: var(--frontier-color-text);
+  background-color: var(--frontier-color-page);
+}
+
+body {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: inherit;
+}
+
+b,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+  font-weight: var(--frontier-font-weight-regular);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+::selection {
+  color: var(--frontier-color-selected-text);
+  background-color: var(--frontier-color-selected);
+}

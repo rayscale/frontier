@@ -215,7 +215,7 @@ importers:
         specifier: ^8.72.1
         version: 8.72.2(eslint@10.14.0(jiti@2.7.0))(typescript@6.0.3)
 
-  packages/metric:
+  packages/frontier:
     dependencies:
       '@fontsource-variable/geist':
         specifier: ^5.3.0

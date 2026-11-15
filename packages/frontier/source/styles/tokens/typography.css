@@ -1,0 +1,27 @@
+:root {
+  --frontier-font-family-sans: 'Geist Variable', system-ui, sans-serif;
+  --frontier-font-family-mono:
+    'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --frontier-font-size-xs: 0.75rem;
+  --frontier-font-size-sm: 0.875rem;
+  --frontier-font-size-md: 1rem;
+  --frontier-font-size-lg: 1.25rem;
+  --frontier-font-size-xl: 1.5rem;
+  --frontier-font-size-2xl: 2rem;
+  --frontier-font-size-3xl: 2.5rem;
+  --frontier-font-size-4xl: 3rem;
+
+  --frontier-line-height-xs: 1rem;
+  --frontier-line-height-sm: 1.25rem;
+  --frontier-line-height-md: 1.5rem;
+  --frontier-line-height-lg: 1.75rem;
+  --frontier-line-height-xl: 2rem;
+  --frontier-line-height-2xl: 2.5rem;
+  --frontier-line-height-3xl: 3rem;
+  --frontier-line-height-4xl: 3.5rem;
+
+  --frontier-font-weight-regular: 400;
+
+  --frontier-reading-measure: 68ch;
+}

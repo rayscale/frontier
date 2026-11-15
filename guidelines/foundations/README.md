@@ -1,6 +1,6 @@
 # Foundations
 
-Foundations are the shared rules that every component and pattern builds on. They define how Metric
+Foundations are the shared rules that every component and pattern builds on. They define how Frontier
 looks and behaves before any specific interaction is involved: color, type, space, layout, shape,
 elevation, motion, focus, icons, and accessibility.
 

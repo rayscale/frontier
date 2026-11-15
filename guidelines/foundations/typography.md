@@ -1,6 +1,6 @@
 # Typography
 
-Typography carries most of Metric's content. It is neutral, technical, and quiet: one grotesque
+Typography carries most of Frontier's content. It is neutral, technical, and quiet: one grotesque
 family, one weight, and a small fixed scale. Hierarchy comes from size, space, and structure rather
 than from weight or color.
 
@@ -8,7 +8,7 @@ See [Values](./values.md#typography) for the family criteria, sizes, line height
 
 ## One family
 
-Metric uses Geist Sans, a neutral grotesque with open forms and high legibility. Geist Mono is the
+Frontier uses Geist Sans, a neutral grotesque with open forms and high legibility. Geist Mono is the
 matching family for code and technical content. A second display family is not part of the system.
 
 ## One weight

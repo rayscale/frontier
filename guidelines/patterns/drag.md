@@ -1,7 +1,7 @@
 # Drag
 
 Drag is direct manipulation: a person presses a control, moves it, and either commits or cancels the
-result. In Metric, drag is used by sliders and by a small number of surfaces that cannot offer the
+result. In Frontier, drag is used by sliders and by a small number of surfaces that cannot offer the
 same result another way. Every drag has a keyboard equivalent.
 
 ## Commitment

@@ -1,6 +1,6 @@
 # Principles
 
-Principles are the values behind every Metric decision. They are short, stable, and independent of
+Principles are the values behind every Frontier decision. They are short, stable, and independent of
 platform, component, or technology. When a specific rule is missing or unclear, reason from the
 principles.
 
@@ -33,7 +33,7 @@ When principles conflict, they apply in this order:
 
 Some trade-offs are unavoidable. The guidelines do not hide them.
 
-- **Density versus air.** Metric favors comfortable density for reading, but data-heavy surfaces may
+- **Density versus air.** Frontier favors comfortable density for reading, but data-heavy surfaces may
   use a tighter internal rhythm drawn from the same spacing scale. There is no separate compact
   mode.
 - **Uniformity versus context.** The same element keeps its behavior everywhere. Its size and

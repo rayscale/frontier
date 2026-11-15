@@ -14,7 +14,7 @@ decoration, and it is removed under [Restraint](./restraint.md).
 
 A person should be able to tell, at the same time, which option is selected, which one is under the
 pointer, which one has keyboard focus, which one is unavailable, and which one is loading. These
-are different facts. Metric never merges them into one visual cue.
+are different facts. Frontier never merges them into one visual cue.
 
 The full state model is defined in [States](../patterns/states.md).
 

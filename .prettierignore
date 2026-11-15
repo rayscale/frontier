@@ -5,5 +5,5 @@ coverage/
 storybook-static/
 pnpm-lock.yaml
 
-# Generated icon metadata (see packages/metric/scripts/generate-icons.ts)
+# Generated icon metadata (see packages/frontier/scripts/generate-icons.ts)
 **/source/icons/metadata.generated.ts

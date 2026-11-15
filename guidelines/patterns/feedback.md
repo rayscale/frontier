@@ -1,6 +1,6 @@
 # Feedback
 
-Feedback tells a person what happened. Metric has four channels: inline messages, toasts, banners,
+Feedback tells a person what happened. Frontier has four channels: inline messages, toasts, banners,
 and empty states. Each channel has a distinct job, and a message uses the smallest channel that can
 carry it.
 

@@ -1,6 +1,6 @@
-# AGENTS.md — Metric design guidelines
+# AGENTS.md — Frontier design guidelines
 
-`guidelines/` is the authoritative source of Metric's design decisions. It is independent of any
+`guidelines/` is the authoritative source of Frontier's design decisions. It is independent of any
 implementation.
 
 This file covers how to write and change the guidelines. Follow the root `AGENTS.md` for

@@ -1,6 +1,6 @@
 # Content
 
-Content defines how Metric speaks. Interface text is part of the design: it carries meaning, sets
+Content defines how Frontier speaks. Interface text is part of the design: it carries meaning, sets
 tone, and must survive translation and right-to-left layouts.
 
 ## Documents in this category

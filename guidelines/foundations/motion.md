@@ -1,6 +1,6 @@
 # Motion
 
-Motion is part of Metric, and it is always an explanation. It shows that an input was received, how
+Motion is part of Frontier, and it is always an explanation. It shows that an input was received, how
 one state became another, or that work is in progress. When a change has nothing to explain, it
 happens without motion.
 
@@ -20,7 +20,7 @@ A movement that does none of these is decoration and is removed. See
 
 ## Character
 
-Metric moves quickly and directly. Movement starts with the input, settles once, and stops. It never
+Frontier moves quickly and directly. Movement starts with the input, settles once, and stops. It never
 overshoots, bounces, springs, or travels farther than its destination. A short fade, a small travel,
 or a change of fill is enough; a larger movement is reserved for a change that spans a surface.
 

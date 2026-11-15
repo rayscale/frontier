@@ -1,6 +1,6 @@
 # Restraint
 
-Restraint means that Metric adds visual or interaction effects only when they carry meaning. The
+Restraint means that Frontier adds visual or interaction effects only when they carry meaning. The
 language has a strong character, but that character comes from what it refuses as much as from what
 it includes.
 

@@ -1,6 +1,0 @@
-.metric-label {
-  color: var(--metric-color-text);
-  font-family: var(--metric-font-family-sans);
-  font-size: var(--metric-font-size-sm);
-  line-height: var(--metric-line-height-sm);
-}

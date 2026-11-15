@@ -1,7 +1,7 @@
 # Spacing
 
 Spacing creates grouping and rhythm. It tells a person what belongs together before they read a
-word. Metric uses one base-4 scale, one comfortable density, and a clear minimum target size.
+word. Frontier uses one base-4 scale, one comfortable density, and a clear minimum target size.
 
 See [Values](./values.md#spacing) for the scale and [Controls](./values.md#controls) for heights.
 

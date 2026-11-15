@@ -1,6 +1,6 @@
 # Colors
 
-Color in Metric identifies a role. It never decorates. The system is monochrome by default: surfaces,
+Color in Frontier identifies a role. It never decorates. The system is monochrome by default: surfaces,
 text, borders, and state are built from pure neutrals, and only `danger` carries a hue.
 
 See [Values](./values.md#colors) for the palette and the value of each role.
@@ -46,7 +46,7 @@ including highlight and selected states.
 
 ## Surfaces
 
-Metric has three surfaces: page, surface, and overlay. They must remain distinguishable in both
+Frontier has three surfaces: page, surface, and overlay. They must remain distinguishable in both
 themes. Separation comes from value contrast and, where an edge must be identified, a functional
 border. There are no shadows; see [Elevation](./elevation.md).
 

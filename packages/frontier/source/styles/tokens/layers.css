@@ -1,0 +1,7 @@
+:root {
+  --frontier-layer-sticky: 10;
+  --frontier-layer-overlay: 100;
+  --frontier-layer-popup: 200;
+  --frontier-layer-tooltip: 300;
+  --frontier-layer-toast: 400;
+}

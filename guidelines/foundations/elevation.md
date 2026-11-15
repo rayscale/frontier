@@ -1,6 +1,6 @@
 # Elevation
 
-Metric is flat. There are no shadows, no glows, and no simulated depth. Layering is expressed
+Frontier is flat. There are no shadows, no glows, and no simulated depth. Layering is expressed
 through surfaces and, only when necessary, a functional border.
 
 See [Values](./values.md#surfaces) for surface roles and [Layering](./values.md#layering) for

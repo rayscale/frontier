@@ -1,6 +1,6 @@
 # Layout
 
-Layout is the first layer of hierarchy. Metric uses an adaptive grid, a mobile-first strategy, and
+Layout is the first layer of hierarchy. Frontier uses an adaptive grid, a mobile-first strategy, and
 a controlled reading width, so the same content reads well on every screen.
 
 See [Values](./values.md#layout) for breakpoints, columns, margins, and gutters.

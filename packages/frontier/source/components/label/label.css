@@ -1,0 +1,6 @@
+.frontier-label {
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family-sans);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-sm);
+}

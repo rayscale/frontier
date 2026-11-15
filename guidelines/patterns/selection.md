@@ -1,6 +1,6 @@
 # Selection
 
-Selection is a committed choice that persists. Metric supports single selection only. Multiple
+Selection is a committed choice that persists. Frontier supports single selection only. Multiple
 independent choices are expressed with [toggles](../components/toggle.md), not with a multi-select
 mode.
 

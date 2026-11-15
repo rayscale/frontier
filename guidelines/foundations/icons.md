@@ -1,7 +1,7 @@
 # Icons
 
-Icons are part of the Metric language. They are drawn on a shared grid, use one geometry, and carry
-meaning rather than decoration. The set is owned by Metric and follows the same restraint as the
+Icons are part of the Frontier language. They are drawn on a shared grid, use one geometry, and carry
+meaning rather than decoration. The set is owned by Frontier and follows the same restraint as the
 rest of the system.
 
 See [Values](./values.md#icons) for sizes, grid, and stroke.

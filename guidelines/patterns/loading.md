@@ -1,6 +1,6 @@
 # Loading
 
-Loading feedback communicates that work is in progress. Metric uses skeletons for content, the
+Loading feedback communicates that work is in progress. Frontier uses skeletons for content, the
 spinner for actions, and a progress bar when the amount of work is known.
 
 ## Choose by context

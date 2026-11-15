@@ -1,4 +1,4 @@
-# Metric
+# Frontier
 
 A design language for the web.
 
@@ -31,15 +31,15 @@ output goes to `dist/`.
 
 ## Styles
 
-The CSS token layer lives in [packages/metric/source/styles/](./packages/metric/source/styles). It
+The CSS token layer lives in [packages/frontier/source/styles/](./packages/frontier/source/styles). It
 implements the values in [guidelines/foundations/values.md](./guidelines/foundations/values.md) and
-is published as `@dotm4x/metric/styles.css`. Typography uses Geist Sans and Geist Mono, loaded
+is published as `@rayscale/frontier/styles.css`. Typography uses Geist Sans and Geist Mono, loaded
 through Fontsource.
 
 Import the stylesheet once:
 
 ```js
-import '@dotm4x/metric/styles.css'
+import '@rayscale/frontier/styles.css'
 ```
 
 The default theme is light. Set `data-theme="dark"` on the root element to switch every color role
@@ -54,7 +54,7 @@ pnpm storybook
 ```
 
 Use the theme control in the toolbar to preview both themes. `pnpm storybook:build` produces a
-static build under `packages/metric/storybook-static/`.
+static build under `packages/frontier/storybook-static/`.
 
 ## Scripts
 

@@ -1,6 +1,6 @@
 # Precision
 
-Precision means that Metric values, alignments, and states are exact. Quality is visible in the
+Precision means that Frontier values, alignments, and states are exact. Quality is visible in the
 details: a consistent inset, a correct optical alignment, a state that appears exactly where it
 should.
 

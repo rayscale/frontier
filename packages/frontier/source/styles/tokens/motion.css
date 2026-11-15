@@ -1,0 +1,22 @@
+:root {
+  /* Durations: fast answers a direct input; base carries a state change; medium
+     carries a movement across a surface; enter and exit bring a temporary
+     surface in and out; ambient is the rhythm of a loading placeholder. */
+  --frontier-duration-fast: 120ms;
+  --frontier-duration-base: 160ms;
+  --frontier-duration-medium: 200ms;
+  --frontier-duration-enter: 240ms;
+  --frontier-duration-exit: 160ms;
+  --frontier-duration-ambient: 1600ms;
+  --frontier-duration-spinner: 800ms;
+
+  /* Standard decelerates into its destination without overshoot; exit
+     accelerates away; ambient is symmetric and never reads as urgent. */
+  --frontier-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --frontier-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+  --frontier-easing-ambient: ease-in-out;
+  --frontier-easing-spinner: linear;
+
+  /* Distance the content of a pressed action moves. */
+  --frontier-press-travel: 1px;
+}

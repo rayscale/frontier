@@ -1,6 +1,6 @@
-# Metric Design Guidelines
+# Frontier Design Guidelines
 
-Metric is a brutalist-minimalist design language for any interface. It is monochrome by default,
+Frontier is a brutalist-minimalist design language for any interface. It is monochrome by default,
 flat, square, and calm: structure carries the layout, content carries the meaning, and nothing is
 added without a job.
 
@@ -31,7 +31,7 @@ A rule lives in exactly one document. Other documents link to the owner instead 
 When a decision conflicts with a principle, the principle wins: revise the decision or record the
 exception and its reason.
 
-## What Metric is
+## What Frontier is
 
 - **Precise.** Values, alignment, and states are exact. Nothing is approximate by accident.
 - **Structured.** Grid, alignment, and boundaries make hierarchy legible before any styling.
@@ -41,7 +41,7 @@ exception and its reason.
 - **Composed.** Nothing moves while nothing changes. When something does change, it moves briefly
   and directly.
 
-## What Metric is not
+## What Frontier is not
 
 - It is not colorful. Success, warning, and information are communicated with neutral text, icons,
   and structure.

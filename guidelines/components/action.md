@@ -52,7 +52,7 @@ A control does not change its role when it becomes disabled or busy.
 
 ## Hierarchy without weight
 
-Metric has one text weight and one surface weight. Actions do not create hierarchy through border
+Frontier has one text weight and one surface weight. Actions do not create hierarchy through border
 width, shadow, or rounded containers. Hierarchy comes from placement, grouping, and the amount of
 space around the action. See [Structure](../principles/structure.md) and
 [Shape](../foundations/shape.md).

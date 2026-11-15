@@ -1,0 +1,5 @@
+html,
+body {
+  color: var(--frontier-color-text);
+  background-color: var(--frontier-color-page);
+}

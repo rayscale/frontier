@@ -1,6 +1,6 @@
 # Focus
 
-Focus shows where keyboard interaction is directed. In Metric it is a visible, square outline that
+Focus shows where keyboard interaction is directed. In Frontier it is a visible, square outline that
 never depends on color alone and never disappears.
 
 See [Values](./values.md#focus) for the outline width and offset.

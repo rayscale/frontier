@@ -1,6 +1,6 @@
 # Structure
 
-Structure is how Metric makes an interface legible before any color, border, or icon is added. The
+Structure is how Frontier makes an interface legible before any color, border, or icon is added. The
 grid, the alignment, and the distance between elements tell a person what belongs together and what
 comes next.
 

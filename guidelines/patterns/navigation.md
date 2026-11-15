@@ -1,6 +1,6 @@
 # Navigation
 
-Navigation tells a person where they are and how to move. Metric distinguishes location from
+Navigation tells a person where they are and how to move. Frontier distinguishes location from
 selection and keeps the path visible without decoration.
 
 ## Current location

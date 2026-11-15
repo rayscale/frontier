@@ -1,6 +1,6 @@
 # Keyboard
 
-Metric is fully operable by keyboard. The keyboard model is conventional: it uses the keys people
+Frontier is fully operable by keyboard. The keyboard model is conventional: it uses the keys people
 already expect for each kind of control, and it never requires a pointer to discover an action.
 
 ## Order and focus

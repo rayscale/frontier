@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "x",
+  "description": "Closes, dismisses, or removes something.",
+  "keywords": ["x", "close", "dismiss", "cancel", "remove", "clear"],
+  "categories": ["actions", "ui"],
+  "aliases": ["close", "dismiss", "cancel", "clear"],
+  "useCases": ["clear input", "dismiss", "remove item"]
+}

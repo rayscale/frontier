@@ -31,6 +31,92 @@ export const iconMetadata: TIconMetadata[] = [
       "confirmation",
       "completed step"
     ]
+  },
+  {
+    "aliases": [
+      "add",
+      "create",
+      "new"
+    ],
+    "categories": [
+      "actions",
+      "ui"
+    ],
+    "component": "Plus",
+    "contributors": [],
+    "description": "Adds or creates something, as in a new item.",
+    "keywords": [
+      "plus",
+      "add",
+      "create",
+      "new",
+      "increase"
+    ],
+    "name": "plus",
+    "tags": [],
+    "useCases": [
+      "add item",
+      "create new",
+      "increment"
+    ]
+  },
+  {
+    "aliases": [
+      "find",
+      "magnifying-glass",
+      "lookup"
+    ],
+    "categories": [
+      "navigation",
+      "ui"
+    ],
+    "component": "Search",
+    "contributors": [],
+    "description": "Finds content, as in a search field or a lookup action.",
+    "keywords": [
+      "search",
+      "find",
+      "magnifying glass",
+      "lookup",
+      "query"
+    ],
+    "name": "search",
+    "tags": [],
+    "useCases": [
+      "search input",
+      "find",
+      "filter"
+    ]
+  },
+  {
+    "aliases": [
+      "close",
+      "dismiss",
+      "cancel",
+      "clear"
+    ],
+    "categories": [
+      "actions",
+      "ui"
+    ],
+    "component": "X",
+    "contributors": [],
+    "description": "Closes, dismisses, or removes something.",
+    "keywords": [
+      "x",
+      "close",
+      "dismiss",
+      "cancel",
+      "remove",
+      "clear"
+    ],
+    "name": "x",
+    "tags": [],
+    "useCases": [
+      "clear input",
+      "dismiss",
+      "remove item"
+    ]
   }
 ]
 

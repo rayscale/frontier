@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "search",
+  "description": "Finds content, as in a search field or a lookup action.",
+  "keywords": ["search", "find", "magnifying glass", "lookup", "query"],
+  "categories": ["navigation", "ui"],
+  "aliases": ["find", "magnifying-glass", "lookup"],
+  "useCases": ["search input", "find", "filter"]
+}

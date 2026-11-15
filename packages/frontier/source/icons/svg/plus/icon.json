@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "plus",
+  "description": "Adds or creates something, as in a new item.",
+  "keywords": ["plus", "add", "create", "new", "increase"],
+  "categories": ["actions", "ui"],
+  "aliases": ["add", "create", "new"],
+  "useCases": ["add item", "create new", "increment"]
+}

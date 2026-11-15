@@ -1,0 +1,98 @@
+.frontier-field {
+  display: grid;
+  gap: var(--frontier-spacing-2);
+  width: 100%;
+}
+
+.frontier-field__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-field__box {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  min-height: var(--frontier-control-height);
+  padding-inline: var(--frontier-spacing-3);
+  border: var(--frontier-border-width) solid var(--frontier-color-border);
+  border-radius: var(--frontier-radius-lg);
+  background: transparent;
+  transition: border-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-field__box:not([data-disabled='true']):hover {
+  border-color: var(--frontier-color-border-strong);
+}
+
+.frontier-field__box:focus-within {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+.frontier-field__box[data-invalid='true'] {
+  border-color: var(--frontier-color-danger);
+}
+
+.frontier-field__box[data-disabled='true'] {
+  border-color: var(--frontier-color-border-disabled);
+  cursor: not-allowed;
+}
+
+.frontier-field__control {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding-block: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family-sans);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-sm);
+}
+
+.frontier-field__control::placeholder {
+  color: var(--frontier-color-text-subtle);
+  opacity: 1;
+}
+
+.frontier-field__control[aria-disabled='true'] {
+  color: var(--frontier-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.frontier-field__control[aria-disabled='true']::placeholder {
+  color: var(--frontier-color-text-disabled);
+}
+
+.frontier-field__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-field__required {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-xs);
+  line-height: var(--frontier-line-height-sm);
+}
+
+.frontier-field__description,
+.frontier-field__error {
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-sm);
+}
+
+.frontier-field__description {
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-field__error {
+  color: var(--frontier-color-danger);
+}

@@ -22,6 +22,8 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(pr
     ...controlProps
   } = props
 
+  const support = disabled && disabledReason ? disabledReason : description
+
   return (
     <Field.Root id={id} invalid={invalid || Boolean(error)} disabled={disabled} required={required}>
       {label ? <Field.Label>{label}</Field.Label> : null}
@@ -50,8 +52,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(pr
           </span>
         ) : null}
       </Field.Box>
-      {description && !disabled ? <Field.Description>{description}</Field.Description> : null}
-      {disabled && disabledReason ? <Field.Description>{disabledReason}</Field.Description> : null}
+      {support ? <Field.Description>{support}</Field.Description> : null}
       {error ? <Field.Error>{error}</Field.Error> : null}
     </Field.Root>
   )

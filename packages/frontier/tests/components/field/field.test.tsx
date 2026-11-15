@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 
 import { Field } from '../../../source/index.js'
@@ -34,9 +35,42 @@ describe('Field', () => {
     )
   })
 
+  it('associates the description on the first render', () => {
+    const html = renderToStaticMarkup(
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Box>
+          <Field.Control />
+        </Field.Box>
+        <Field.Description>We never share it.</Field.Description>
+      </Field.Root>,
+    )
+
+    expect(html).toMatch(/aria-describedby="[^"]+"/)
+    expect(html).toContain('frontier-field__description')
+  })
+
+  it('honors explicit aria attributes', () => {
+    render(
+      <Field.Control
+        aria-describedby="hint"
+        aria-disabled="true"
+        aria-invalid="grammar"
+        aria-required="true"
+      />,
+    )
+
+    const input = screen.getByRole('textbox')
+
+    expect(input).toHaveAttribute('aria-describedby', 'hint')
+    expect(input).toHaveAttribute('aria-disabled', 'true')
+    expect(input).toHaveAttribute('aria-invalid', 'grammar')
+    expect(input).toHaveAttribute('aria-required', 'true')
+  })
+
   it('marks invalid from the error and announces it', () => {
     render(
-      <Field.Root>
+      <Field.Root invalid>
         <Field.Label>Email</Field.Label>
         <Field.Box>
           <Field.Control />

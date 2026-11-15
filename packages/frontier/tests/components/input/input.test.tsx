@@ -89,6 +89,14 @@ describe('Input', () => {
     expect(input).toHaveValue('a@b.co')
   })
 
+  it('keeps the description when disabled without a reason', () => {
+    render(<Input label="Email" disabled description="We never share it." />)
+
+    expect(screen.getByRole('textbox', { name: 'Email' })).toHaveAccessibleDescription(
+      'We never share it.',
+    )
+  })
+
   it('keeps a read-only input focusable without editing', async () => {
     const user = userEvent.setup()
 

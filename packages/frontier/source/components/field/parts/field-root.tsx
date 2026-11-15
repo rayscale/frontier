@@ -1,4 +1,4 @@
-import { forwardRef, useId, useState } from 'react'
+import { forwardRef, useId } from 'react'
 
 import { fieldContext } from '../context.js'
 import type { TFieldRootProps } from '../types.js'
@@ -16,19 +16,16 @@ export const FieldRoot = forwardRef<HTMLDivElement, TFieldRootProps>(
     } = props
 
     const generatedId = useId()
-    const [descriptionId, setDescriptionId] = useState<string>()
-    const [errorId, setErrorId] = useState<string>()
+    const descriptionId = useId()
+    const errorId = useId()
     const controlId = id ?? generatedId
-    const invalidValue = invalid || Boolean(errorId)
     const classes = ['frontier-field', className].filter(Boolean).join(' ')
     const context = {
       controlId,
       descriptionId,
       disabled,
       errorId,
-      invalid: invalidValue,
-      registerDescription: setDescriptionId,
-      registerError: setErrorId,
+      invalid,
       required,
     }
 
@@ -39,7 +36,7 @@ export const FieldRoot = forwardRef<HTMLDivElement, TFieldRootProps>(
           ref={ref}
           className={classes}
           data-disabled={disabled ? true : undefined}
-          data-invalid={invalidValue ? true : undefined}
+          data-invalid={invalid ? true : undefined}
         >
           {children}
         </div>

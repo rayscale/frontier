@@ -96,3 +96,9 @@
 .frontier-field__error {
   color: var(--frontier-color-danger);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-field__box {
+    transition: none;
+  }
+}

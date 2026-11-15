@@ -23,8 +23,8 @@ treatment. Both can be visible at once. See [Highlight](../patterns/highlight.md
 ## Keyboard
 
 Arrow keys move the highlight between options. The selected option does not change until the person
-confirms. Enter or Space confirms the highlighted option. Home and End move to the first and last
-option. See [Keyboard](../patterns/keyboard.md).
+confirms, except in a radio group, which follows its native role: the arrow keys move the selection,
+and Home and End jump to the first and last option. Enter or Space confirms the highlighted option. See [Keyboard](../patterns/keyboard.md).
 
 ## Disabled options
 

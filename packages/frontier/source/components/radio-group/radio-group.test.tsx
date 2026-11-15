@@ -257,6 +257,18 @@ describe('RadioGroup', () => {
     expect(option).not.toBeChecked()
   })
 
+  it('lays the options out horizontally when asked', () => {
+    render(
+      <RadioGroup label="Plan" orientation="horizontal">
+        <RadioGroup.Item value="free" label="Free" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('group', { name: 'Plan' })).toHaveClass(
+      'frontier-radio-group--horizontal',
+    )
+  })
+
   it('forwards a ref to the fieldset and to an option input', () => {
     const groupRef = createRef<HTMLFieldSetElement>()
     const inputRef = createRef<HTMLInputElement>()

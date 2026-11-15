@@ -17,6 +17,12 @@
   gap: var(--frontier-spacing-3);
 }
 
+.frontier-radio-group--horizontal .frontier-radio-group__options {
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: var(--frontier-spacing-4);
+}
+
 .frontier-radio-group__item {
   display: grid;
   justify-items: start;

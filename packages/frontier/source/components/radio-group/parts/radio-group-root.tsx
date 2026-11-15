@@ -17,6 +17,7 @@ export const RadioGroupRoot = forwardRef<HTMLFieldSetElement, TRadioGroupProps>(
       label,
       name,
       onValueChange,
+      orientation = 'vertical',
       required = false,
       value,
       'aria-describedby': ariaDescribedBy,
@@ -38,7 +39,9 @@ export const RadioGroupRoot = forwardRef<HTMLFieldSetElement, TRadioGroupProps>(
       error ? errorId : undefined,
     ].filter(Boolean)
     const describedBy = describedByIds.length > 0 ? describedByIds.join(' ') : undefined
-    const classes = ['frontier-radio-group', className].filter(Boolean).join(' ')
+    const classes = ['frontier-radio-group', `frontier-radio-group--${orientation}`, className]
+      .filter(Boolean)
+      .join(' ')
     const context = {
       disabled: unavailable,
       errorId,

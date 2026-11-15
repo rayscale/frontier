@@ -1,5 +1,8 @@
 import type { FieldsetHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react'
 
+/** Direction in which the radio options are laid out. */
+export type TRadioGroupOrientation = 'vertical' | 'horizontal'
+
 type TRadioGroupBaseProps = Omit<
   FieldsetHTMLAttributes<HTMLFieldSetElement>,
   'children' | 'disabled' | 'name' | 'onChange'
@@ -23,6 +26,8 @@ type TRadioGroupBaseProps = Omit<
   name?: string
   /** Requires one option to be selected. */
   required?: boolean
+  /** Layout direction of the options. Defaults to vertical. */
+  orientation?: TRadioGroupOrientation
 }
 
 interface TRadioGroupEnabledProps {

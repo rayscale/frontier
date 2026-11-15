@@ -62,6 +62,13 @@ const typeScale = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] as const
 
 const spacingSteps = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16] as const
 
+const radiusTokens = [
+  { label: 'Small', token: '--frontier-radius-sm' },
+  { label: 'Medium', token: '--frontier-radius-md' },
+  { label: 'Large', token: '--frontier-radius-lg' },
+  { label: 'Full', token: '--frontier-radius-full' },
+] as const
+
 const motionTokens = [
   { label: 'Fast', token: '--frontier-duration-fast' },
   { label: 'Base', token: '--frontier-duration-base' },
@@ -260,6 +267,25 @@ export const tokens: TStory = {
                   background: 'var(--frontier-color-primary)',
                 }}
               />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <h2 style={headingStyle}>Radius</h2>
+        <div style={gridStyle}>
+          {radiusTokens.map((radius) => (
+            <div key={radius.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+              <div
+                style={{
+                  height: 'var(--frontier-spacing-16)',
+                  background: 'var(--frontier-color-primary)',
+                  borderRadius: `var(${radius.token})`,
+                }}
+              />
+              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{radius.label}</span>
+              <code style={tokenStyle}>{radius.token}</code>
             </div>
           ))}
         </div>

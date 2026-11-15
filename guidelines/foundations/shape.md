@@ -1,16 +1,18 @@
 # Shape
 
-Shape in Frontier is rectangular. Corners are square, edges are straight, and borders exist only when
-they do work. The visual character comes from exact alignment and from the contrast between
-surfaces, not from rounding or decoration.
+Shape in Frontier is rectangular with rounded corners. Edges are straight, corners are soft, and
+borders exist only when they do work. The visual character comes from exact alignment and from the
+contrast between surfaces, not from decoration.
 
-See [Values](./values.md#radius) for the radius and [Borders](./values.md#borders) for widths.
+See [Values](./values.md#radius) for the radius scale and [Borders](./values.md#borders) for widths.
 
-## Square corners
+## Rounded corners
 
-The radius is zero for every surface, control, icon, and overlay. There are no capsules, circles, or
-softened corners. A status dot or an avatar may be the only exception, because its form carries
-meaning rather than decoration.
+Every surface and control uses a radius from the shared scale. The radius follows the role of the
+element: a small mark uses the small radius, a large surface the large radius, and a control uses
+the medium radius or, when it should read as a pill, the full radius. A circle is reserved for a
+form that carries meaning, such as a switch or an avatar. Icons use round caps and joins; see
+[Icons](./icons.md).
 
 ## Borders are functional
 
@@ -27,22 +29,22 @@ limit, use a surface change or a separator in the right place.
 
 ## Two widths
 
-A functional border is 1 unit wide. A boundary that must stay distinct over a surface of similar
-value may use 2 units. Width is chosen by the role of the edge, not by the size of the element. The
-focus outline has its own rule in [Focus](./focus.md).
+A functional border uses the functional width. A boundary that must stay distinct over a surface of
+similar value may use the strong width. Width is chosen by the role of the edge, not by the size of
+the element. The focus outline has its own rule in [Focus](./focus.md).
 
 ## Straight edges
 
-Borders and separators are straight and square. There are no inset shadows, glows, or bevels. The
-edge of a surface is either its boundary or its border, never both with a decorative effect.
+Borders and separators are straight. There are no inset shadows, glows, or bevels. The edge of a
+surface is either its boundary or its border, never both with a decorative effect.
 
 ## Nested alignment
 
 A nested region aligns to its container's edges or to the grid. Where a border is present, the
-content aligns to the inner edge, not to the outer one. Inconsistent insets make a rectangle look
-off even when every value is correct.
+content aligns to the inner edge, not to the outer one. Inconsistent insets make a surface look off
+even when every value is correct.
 
 ## Principle
 
-Shape should be exact and quiet: square corners, straight edges, and a border only where an edge
+Shape should be exact and quiet: rounded corners, straight edges, and a border only where an edge
 must be identified.

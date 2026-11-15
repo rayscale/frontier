@@ -4,11 +4,11 @@
   --frontier-menu-item-height: 2.25rem;
   --frontier-table-row-height: 2.25rem;
   --frontier-table-header-height: 2.5rem;
-  --frontier-checkbox-size: 1rem;
+  --frontier-checkbox-size: 1.25rem;
   --frontier-radio-size: 1rem;
   --frontier-switch-track-width: 2.25rem;
   --frontier-switch-track-height: 1.25rem;
-  --frontier-switch-thumb-size: 1rem;
+  --frontier-switch-thumb-size: 0.875rem;
   --frontier-slider-track-size: 0.25rem;
   --frontier-slider-thumb-size: 1rem;
 }

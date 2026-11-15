@@ -10,7 +10,7 @@ elevation, motion, focus, icons, and accessibility.
 - [Typography](./typography.md): the neutral grotesque, the fixed scale, one weight, and mono.
 - [Spacing](./spacing.md): the base-4 scale, rhythm, density, and target size.
 - [Layout](./layout.md): the adaptive grid, breakpoints, and reading width.
-- [Shape](./shape.md): square corners and functional borders.
+- [Shape](./shape.md): rounded corners and functional borders.
 - [Elevation](./elevation.md): flat layering and the three surfaces.
 - [Motion](./motion.md): movement with a job, from input feedback to progress.
 - [Focus](./focus.md): the outline and `focus-visible`.

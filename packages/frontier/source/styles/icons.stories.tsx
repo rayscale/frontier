@@ -9,7 +9,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Draws the frontier icon set on a 24-unit grid with square caps and joins.',
+        component: 'Draws the frontier icon set on a 24-unit grid with round caps and joins.',
       },
     },
   },

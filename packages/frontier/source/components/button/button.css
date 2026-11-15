@@ -9,7 +9,7 @@
   padding-block: 0;
   padding-inline: var(--frontier-spacing-4);
   border: var(--frontier-border-width) solid transparent;
-  border-radius: var(--frontier-radius);
+  border-radius: var(--frontier-radius-full);
   background: transparent;
   color: var(--frontier-color-text);
   font-family: var(--frontier-font-family-sans);
@@ -24,7 +24,8 @@
   transition:
     background-color var(--frontier-duration-fast) var(--frontier-easing-standard),
     border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
-    color var(--frontier-duration-fast) var(--frontier-easing-standard);
+    color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    transform var(--frontier-duration-fast) var(--frontier-easing-standard);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -42,7 +43,7 @@
 }
 
 .frontier-button:not([aria-disabled='true']):is(:active, [data-pressed]) {
-  transform: translateY(var(--frontier-press-travel));
+  transform: scale(var(--frontier-press-scale));
 }
 
 .frontier-button__reason {
@@ -70,31 +71,23 @@
 }
 
 .frontier-button--primary:not([aria-disabled='true']):hover {
-  border-color: var(--frontier-color-primary);
-  background: transparent;
-  color: var(--frontier-color-text);
+  background: var(--frontier-color-primary-hover);
 }
 
 .frontier-button--primary:not([aria-disabled='true']):active:not([data-pressed='key']) {
-  border-color: var(--frontier-color-primary);
-  background: var(--frontier-color-pressed);
-  color: var(--frontier-color-text);
+  background: var(--frontier-color-primary-pressed);
 }
 
 .frontier-button--secondary {
-  border-color: var(--frontier-color-border-strong);
+  border-color: var(--frontier-color-border);
 }
 
 .frontier-button--secondary:not([aria-disabled='true']):hover {
-  border-color: var(--frontier-color-primary);
-  background: var(--frontier-color-primary);
-  color: var(--frontier-color-on-primary);
+  background: var(--frontier-color-highlight);
 }
 
 .frontier-button--secondary:not([aria-disabled='true']):active:not([data-pressed='key']) {
-  border-color: var(--frontier-color-primary-pressed);
-  background: var(--frontier-color-primary-pressed);
-  color: var(--frontier-color-on-primary);
+  background: var(--frontier-color-pressed);
 }
 
 .frontier-button--ghost:not([aria-disabled='true']):hover {
@@ -111,15 +104,12 @@
 }
 
 .frontier-button--danger:not([aria-disabled='true']):hover {
-  border-color: var(--frontier-color-danger);
-  background: var(--frontier-color-danger);
-  color: var(--frontier-color-on-danger);
+  background: var(--frontier-color-danger-subtle);
 }
 
 .frontier-button--danger:not([aria-disabled='true']):active:not([data-pressed='key']) {
   border-color: var(--frontier-color-danger-pressed);
-  background: var(--frontier-color-danger-pressed);
-  color: var(--frontier-color-on-danger);
+  background: var(--frontier-color-danger-subtle-pressed);
 }
 
 .frontier-button[aria-disabled='true'] {

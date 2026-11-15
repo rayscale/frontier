@@ -11,35 +11,34 @@ two actions, not one ambiguous control. The label names the result. See
 
 ## Press and response
 
-The press is acknowledged on the frame it happens. The action moves by the press distance, so it
-reads as pressed rather than merely recolored. That movement is small and immediate, and it is
-confined to the action: the control keeps its size, and neighbouring elements and the surrounding
-layout do not move.
+The press is acknowledged on the frame it happens. The action contracts slightly under the press, so
+it reads as pressed rather than merely recolored. That contraction is small and immediate, and it is
+confined to the action: the control keeps its layout size, and neighbouring elements and the
+surrounding layout do not move.
 
 How the press is expressed for each input source belongs to [States](../patterns/states.md).
 
 When the operation takes time, the control shows a busy state and keeps its label. See
 [Loading](../patterns/loading.md).
 
-## Hover inverts emphasis
+## Hover shifts the surface
 
-An action exchanges its fill for its boundary under the pointer: a filled action clears its fill and
-shows the boundary it already had, and an outlined action takes the fill. The person sees the same
-action from its opposite emphasis, so hover is unmistakable without adding a new treatment to the
-system.
+An action keeps its emphasis under the pointer. A filled action moves its fill to the hover value
+and keeps the text role that contrasts with it; an outlined action keeps its boundary and adds the
+neutral highlight surface; a ghost action adds the same highlight surface. The action keeps its size
+and position, and the change is a short transition, never a jump.
 
-The exchange follows [Colors](../foundations/colors.md): the text role inverts with the fill, and
-the action keeps its size and position. It is a short transition, never a jump. Press keeps the
-hovered emphasis and adds the pressed surface; it does not revert to the resting emphasis while the
-pointer is still there.
+Press builds on the hover state. A filled action moves to its pressed value, and an outlined or ghost
+action replaces the highlight with the pressed surface; neither reverts to the resting emphasis
+while the pointer is still there. See [Colors](../foundations/colors.md) and
+[States](../patterns/states.md).
 
-Two roles keep their own hover. A destructive action fills with its hue under the pointer and stays
-filled while pressed: the label already names the result, and the hue appears only at the moment of
-commitment, so a destructive action stays quiet at rest. A ghost action has no boundary to exchange
-and adds the neutral highlight surface instead.
+A destructive action keeps its hue in its label and boundary and adds the quiet danger surface under
+the pointer; it never fills with the hue. The label already names the result, so the action stays
+quiet at rest and the hue remains a warning rather than a fill.
 
 Hover previews the press without committing to it, and focus is separate from both. See
-[States](../patterns/states.md) and [Motion](../foundations/motion.md).
+[Motion](../foundations/motion.md).
 
 ## Button, link, and icon button
 
@@ -53,7 +52,7 @@ A control does not change its role when it becomes disabled or busy.
 ## Hierarchy without weight
 
 Frontier has one text weight and one surface weight. Actions do not create hierarchy through border
-width, shadow, or rounded containers. Hierarchy comes from placement, grouping, and the amount of
+width, shadow, or decorative framing. Hierarchy comes from placement, grouping, and the amount of
 space around the action. See [Structure](../principles/structure.md) and
 [Shape](../foundations/shape.md).
 

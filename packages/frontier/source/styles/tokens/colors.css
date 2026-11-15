@@ -44,7 +44,7 @@
   --frontier-color-selected: var(--frontier-gray-900);
   --frontier-color-selected-text: var(--frontier-white);
 
-  --frontier-color-border: #767676;
+  --frontier-color-border: #8f8f8f;
   --frontier-color-border-subtle: var(--frontier-gray-300);
   --frontier-color-border-strong: var(--frontier-gray-600);
   --frontier-color-border-disabled: var(--frontier-gray-300);
@@ -54,6 +54,8 @@
   --frontier-color-danger: #b42318;
   --frontier-color-danger-hover: #961c12;
   --frontier-color-danger-pressed: #7f1d1d;
+  --frontier-color-danger-subtle: #fef2f2;
+  --frontier-color-danger-subtle-pressed: #fee2e2;
   --frontier-color-on-danger: var(--frontier-white);
 }
 
@@ -83,7 +85,7 @@
   --frontier-color-selected: var(--frontier-gray-100);
   --frontier-color-selected-text: var(--frontier-gray-900);
 
-  --frontier-color-border: #767676;
+  --frontier-color-border: #6b6b6b;
   --frontier-color-border-subtle: var(--frontier-gray-700);
   --frontier-color-border-strong: var(--frontier-gray-400);
   --frontier-color-border-disabled: var(--frontier-gray-700);
@@ -93,5 +95,7 @@
   --frontier-color-danger: #f87171;
   --frontier-color-danger-hover: #fca5a5;
   --frontier-color-danger-pressed: #fecaca;
+  --frontier-color-danger-subtle: #450a0a;
+  --frontier-color-danger-subtle-pressed: #5b0f0f;
   --frontier-color-on-danger: var(--frontier-gray-900);
 }

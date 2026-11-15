@@ -9,7 +9,7 @@ A table has a header row and rows of data. The header names each column and does
 from the data it describes unless the table provides a sticky header with a surface of its own.
 
 Rows use the shared row height and functional separators where the row boundary must be visible.
-There is no zebra striping, no rounded container, and no shadow.
+There is no zebra striping, no decorative container, and no shadow.
 
 ## Alignment
 

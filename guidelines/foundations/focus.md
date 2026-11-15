@@ -1,16 +1,15 @@
 # Focus
 
-Focus shows where keyboard interaction is directed. In Frontier it is a visible, square outline that
-never depends on color alone and never disappears.
+Focus shows where keyboard interaction is directed. In Frontier it is a visible outline that follows
+the element's corners, never depends on color alone, and never disappears.
 
 See [Values](./values.md#focus) for the outline width and offset.
 
 ## The outline
 
 Focus is drawn as an outline at the width and offset defined in [Values](./values.md#focus). The
-outline is square and follows the element's rectangular boundary. It uses the strongest text role
-of the theme, so it
-remains visible on page, surface, highlight, and selected states.
+outline follows the element's corner radius and boundary. It uses the strongest text role
+of the theme, so it remains visible on page, surface, highlight, and selected states.
 
 A component does not replace the outline with a border, a background change, or a shadow.
 

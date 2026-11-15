@@ -55,6 +55,7 @@
   height: 100%;
   padding: var(--_switch-padding);
   border: var(--frontier-border-width) solid var(--frontier-color-border);
+  border-radius: var(--frontier-radius-full);
   background: transparent;
   transition:
     background-color var(--frontier-duration-base) var(--frontier-easing-standard),
@@ -67,6 +68,7 @@
   width: var(--frontier-switch-thumb-size);
   height: var(--frontier-switch-thumb-size);
   background: var(--frontier-color-text);
+  border-radius: var(--frontier-radius-full);
   transition:
     transform var(--frontier-duration-base) var(--frontier-easing-standard),
     background-color var(--frontier-duration-base) var(--frontier-easing-standard);

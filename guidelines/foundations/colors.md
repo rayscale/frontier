@@ -16,12 +16,15 @@ Every color has a job. Designs use the role, never a raw value.
 - **Border** is functional: it marks an edge that must be identified, such as a field or a floating
   surface. Strong borders separate regions that need a clearer limit.
 - **Highlight** is the neutral surface shown under the pointer or keyboard focus where a control
-  takes one; a filled control may instead clear its fill and show its boundary. See
-  [Emphasis exchange](#emphasis-exchange).
+  takes one. A filled control moves its fill to the hover value instead. See
+  [Surface shift](#surface-shift).
 - **Pressed** is the stronger neutral surface shown while an input is held.
 - **Selected** uses an inverse fill, not a tinted surface.
-- **Primary** is the strongest neutral fill, used for the main action. Its text uses the inverse role.
+- **Primary** is the strongest neutral fill, used for the main action. Its text uses the inverse
+  role, and the fill moves to its hover and pressed values under input.
 - **Danger** is the only hue in the system. It marks errors, destructive actions, and danger states.
+- **Danger subtle** is the quiet danger surface shown under the pointer on a destructive action; its
+  pressed value is stronger.
 - **Scrim** covers the page behind a modal surface.
 
 ## One hue
@@ -56,16 +59,17 @@ A highlighted item uses the neutral highlight surface. A selected item uses the 
 inverse text. The two states remain distinguishable when they coexist. See
 [Selection](../patterns/selection.md).
 
-## Emphasis exchange
+## Surface shift
 
-A control may exchange its fill for its boundary when its emphasis changes. A fill and its text role
-always change together, so a filled surface takes the text role that keeps contrast; one never moves
-without the other.
+A control changes its surface when the pointer hovers it or an input is held. A filled control moves
+to its hover and pressed values; an outlined or ghost control adds the highlight and pressed
+surfaces. A destructive action adds its quiet danger surface instead.
 
-An exchange changes only what sits inside the control's box. The box keeps its size and its position,
-and neighbouring elements and the surrounding layout do not move. See [Shape](./shape.md).
+A surface shift happens inside the control's box. The box keeps its layout size and position, and
+neighbouring elements and the surrounding layout do not move. The text keeps contrast with the fill
+in every state. See [Shape](./shape.md).
 
-The condition that triggers an exchange belongs to the interaction that uses it.
+The condition that triggers a surface shift belongs to the interaction that uses it.
 
 ## Principle
 

@@ -29,34 +29,36 @@ the relationships between values are what the system guarantees.
 
 ### Roles
 
-| Role            | Light     | Dark      |
-| --------------- | --------- | --------- |
-| Page            | `#ffffff` | `#0b0b0b` |
-| Surface         | `#f0f0f0` | `#1a1a1a` |
-| Overlay         | `#ffffff` | `#262626` |
-| Scrim           | Black 60% | Black 70% |
-| Text            | `#171717` | `#f0f0f0` |
-| Text muted      | `#545454` | `#a6a6a6` |
-| Text subtle     | `#6b6b6b` | `#8f8f8f` |
-| Text disabled   | `#8f8f8f` | `#767676` |
-| Text inverse    | `#ffffff` | `#171717` |
-| Primary         | `#171717` | `#f0f0f0` |
-| On primary      | `#ffffff` | `#171717` |
-| Primary hover   | `#3d3d3d` | `#d1d1d1` |
-| Primary pressed | `#545454` | `#a6a6a6` |
-| Highlight       | `#e4e4e4` | `#3d3d3d` |
-| Pressed         | `#d1d1d1` | `#545454` |
-| Selected        | `#171717` | `#f0f0f0` |
-| Selected text   | `#ffffff` | `#171717` |
-| Border          | `#767676` | `#767676` |
-| Border subtle   | `#d1d1d1` | `#3d3d3d` |
-| Border strong   | `#545454` | `#a6a6a6` |
-| Border disabled | `#d1d1d1` | `#3d3d3d` |
-| Focus           | `#171717` | `#f0f0f0` |
-| Danger          | `#b42318` | `#f87171` |
-| Danger hover    | `#961c12` | `#fca5a5` |
-| Danger pressed  | `#7f1d1d` | `#fecaca` |
-| On danger       | `#ffffff` | `#171717` |
+| Role                  | Light     | Dark      |
+| --------------------- | --------- | --------- |
+| Page                  | `#ffffff` | `#0b0b0b` |
+| Surface               | `#f0f0f0` | `#1a1a1a` |
+| Overlay               | `#ffffff` | `#262626` |
+| Scrim                 | Black 60% | Black 70% |
+| Text                  | `#171717` | `#f0f0f0` |
+| Text muted            | `#545454` | `#a6a6a6` |
+| Text subtle           | `#6b6b6b` | `#8f8f8f` |
+| Text disabled         | `#8f8f8f` | `#767676` |
+| Text inverse          | `#ffffff` | `#171717` |
+| Primary               | `#171717` | `#f0f0f0` |
+| On primary            | `#ffffff` | `#171717` |
+| Primary hover         | `#3d3d3d` | `#d1d1d1` |
+| Primary pressed       | `#545454` | `#a6a6a6` |
+| Highlight             | `#e4e4e4` | `#3d3d3d` |
+| Pressed               | `#d1d1d1` | `#545454` |
+| Selected              | `#171717` | `#f0f0f0` |
+| Selected text         | `#ffffff` | `#171717` |
+| Border                | `#8f8f8f` | `#6b6b6b` |
+| Border subtle         | `#d1d1d1` | `#3d3d3d` |
+| Border strong         | `#545454` | `#a6a6a6` |
+| Border disabled       | `#d1d1d1` | `#3d3d3d` |
+| Focus                 | `#171717` | `#f0f0f0` |
+| Danger                | `#b42318` | `#f87171` |
+| Danger hover          | `#961c12` | `#fca5a5` |
+| Danger pressed        | `#7f1d1d` | `#fecaca` |
+| Danger subtle         | `#fef2f2` | `#450a0a` |
+| Danger subtle pressed | `#fee2e2` | `#5b0f0f` |
+| On danger             | `#ffffff` | `#171717` |
 
 Success, warning, and information have no color role. They use the neutral text, icon, and border
 roles described in [Colors](./colors.md).
@@ -79,16 +81,19 @@ roles described in [Colors](./colors.md).
 
 ## Radius
 
-| Token | Value |
-| ----- | ----- |
-| All   | 0     |
+| Token  | Value |
+| ------ | ----- |
+| Small  | 4     |
+| Medium | 8     |
+| Large  | 12    |
+| Full   | 9999  |
 
 ## Borders
 
 | Token             | Value |
 | ----------------- | ----- |
-| Functional border | 1     |
-| Strong border     | 2     |
+| Functional border | 2     |
+| Strong border     | 3     |
 
 ## Focus
 
@@ -106,10 +111,10 @@ roles described in [Colors](./colors.md).
 | Menu item      | 36    |
 | Table row      | 36    |
 | Table header   | 40    |
-| Checkbox       | 16    |
+| Checkbox       | 20    |
 | Radio          | 16    |
 | Switch track   | 36×20 |
-| Switch thumb   | 16    |
+| Switch thumb   | 14    |
 | Slider track   | 4     |
 | Slider thumb   | 16    |
 
@@ -158,8 +163,10 @@ Numbers are tabular by default.
 | Size inline     | 16      |
 | Size control    | 20      |
 | Size standalone | 24      |
+| Size mark       | 14      |
 | Stroke          | 1.5     |
-| Caps and joins  | Square  |
+| Mark stroke     | 2.5     |
+| Caps and joins  | Round   |
 | Default form    | Outline |
 | Active form     | Filled  |
 
@@ -233,6 +240,6 @@ symmetric, for looping motion that should not read as urgent.
 
 ### Press
 
-| Token  | Value |
-| ------ | ----- |
-| Travel | 1     |
+| Token | Value |
+| ----- | ----- |
+| Scale | 0.97  |

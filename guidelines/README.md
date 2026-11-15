@@ -1,8 +1,8 @@
 # Frontier Design Guidelines
 
-Frontier is a brutalist-minimalist design language for any interface. It is monochrome by default,
-flat, square, and calm: structure carries the layout, content carries the meaning, and nothing is
-added without a job.
+Frontier is a minimalist design language for any interface. It is monochrome by default, flat,
+rounded, and calm: structure carries the layout, content carries the meaning, and nothing is added
+without a job.
 
 These guidelines define design intent. They do not define code, styling, tokens, or framework APIs,
 and they stay valid when an implementation changes.
@@ -34,6 +34,8 @@ exception and its reason.
 ## What Frontier is
 
 - **Precise.** Values, alignment, and states are exact. Nothing is approximate by accident.
+- **Approachable.** Corners are rounded and icon strokes are soft, so the language stays precise
+  without feeling harsh.
 - **Structured.** Grid, alignment, and boundaries make hierarchy legible before any styling.
 - **Restrained.** Color is functional; only `danger` carries a hue. There is one type weight, no
   shadows, and no decoration.
@@ -46,8 +48,8 @@ exception and its reason.
 - It is not colorful. Success, warning, and information are communicated with neutral text, icons,
   and structure.
 - It is not expressive through weight. There is one weight; hierarchy comes from size and space.
-- It is not soft or layered. Corners are square, surfaces are flat, and borders exist only where
-  they are functional.
+- It is not layered or decorative. Surfaces are flat, corners are rounded, and borders exist only
+  where they are functional.
 - It is not playful in motion. Movement is quick, direct, and never bounces or overshoots.
 - It is not a multi-selection language. Selection is single; independent multiple choices are
   toggles.

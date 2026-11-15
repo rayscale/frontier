@@ -17,6 +17,6 @@
   --frontier-easing-ambient: ease-in-out;
   --frontier-easing-spinner: linear;
 
-  /* Distance the content of a pressed action moves. */
-  --frontier-press-travel: 1px;
+  /* Amount a pressed action contracts. */
+  --frontier-press-scale: 0.97;
 }

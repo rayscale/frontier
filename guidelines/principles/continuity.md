@@ -6,7 +6,7 @@ interface feel considered rather than abrupt.
 
 ## Changes can be traced
 
-When something changes position, size, or state, the change is visible. An exchange that happens
+When something changes position, size, or state, the change is visible. A change that happens
 without a trace forces a person to re-read the surface. A short movement, a fade, or a settle keeps
 attention on the thing that changed.
 

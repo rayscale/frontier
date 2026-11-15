@@ -8,7 +8,7 @@ See [Values](./values.md#icons) for sizes, grid, and stroke.
 
 ## One geometry
 
-Icons are drawn on a 24-unit grid with a 1.5-unit stroke, square caps, and square joins. The
+Icons are drawn on a 24-unit grid with a 1.5-unit stroke, round caps, and round joins. The
 outline is the default form. A selected or active icon may switch to a filled form, but the
 silhouette does not change between the two.
 
@@ -22,6 +22,12 @@ Only three sizes are used:
 
 Smaller sizes are not part of the system. Larger renderings are illustrative and not interface
 icons.
+
+## Marks
+
+A mark inside a filled control, such as the check in a selected box, is drawn smaller than the
+control so it keeps clear space from the edge. It keeps the set's geometry and uses the mark size and
+mark stroke from [Values](./values.md#icons) so it reads with the same weight.
 
 ## Optical alignment
 

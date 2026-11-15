@@ -24,9 +24,9 @@ leaves. A pressed state ends when the input is released, even if the result is s
 
 ## Press by input source
 
-A press is acknowledged with the same timing and the same direction whatever input produced it. A
+A press is acknowledged with the same timing and the same contraction whatever input produced it. A
 pointer press may also change the surface of the control, because the pointer carries no other sign
-of where the input went. A key press moves the control and leaves its surface as it is: focus
+of where the input went. A key press contracts the control and leaves its surface as it is: focus
 already marks where the input goes, and a second surface change would compete with it.
 
 Changing input source never removes the press. A pointer press on a control that already has

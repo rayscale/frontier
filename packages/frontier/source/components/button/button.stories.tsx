@@ -8,8 +8,8 @@ function PlusIcon() {
       aria-hidden="true"
       fill="none"
       stroke="currentColor"
-      strokeLinecap="square"
-      strokeLinejoin="miter"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       strokeWidth={1.5}
       viewBox="0 0 24 24"
       style={{
@@ -55,7 +55,7 @@ const meta = {
     },
     iconOnly: {
       control: false,
-      description: 'Uses a square control for an icon-only action.',
+      description: 'Uses a rounded control for an icon-only action.',
     },
     asChild: {
       control: false,

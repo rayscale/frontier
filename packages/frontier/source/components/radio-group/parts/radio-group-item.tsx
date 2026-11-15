@@ -6,14 +6,30 @@ import type { TRadioGroupItemProps } from '../types.js'
 
 export const RadioGroupItem = forwardRef<HTMLInputElement, TRadioGroupItemProps>(
   function RadioGroupItem(props, ref) {
-    const { className, id, label, onChange, value, ...rest } = props
+    const {
+      className,
+      description,
+      disabled = false,
+      id,
+      label,
+      onChange,
+      value,
+      'aria-describedby': ariaDescribedBy,
+      ...rest
+    } = props
     const group = useRadioGroupContext()
     const generatedId = useId()
+    const descriptionId = useId()
     const inputId = id ?? generatedId
+    const unavailable = group.disabled || disabled
+    const describedByIds = [ariaDescribedBy, description ? descriptionId : undefined].filter(
+      Boolean,
+    )
+    const describedBy = describedByIds.length > 0 ? describedByIds.join(' ') : undefined
     const classes = ['frontier-radio-group__input', className].filter(Boolean).join(' ')
 
     return (
-      <div className="frontier-radio-group__item">
+      <div className="frontier-radio-group__item" data-disabled={unavailable ? true : undefined}>
         <Label className="frontier-radio-group__option" htmlFor={inputId}>
           <span className="frontier-radio-group__control">
             <input
@@ -26,6 +42,9 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, TRadioGroupItemProps>
               className={classes}
               checked={group.selectedValue === value}
               required={group.required}
+              disabled={unavailable}
+              aria-describedby={describedBy}
+              aria-invalid={group.invalid ? true : undefined}
               onChange={(event) => {
                 onChange?.(event)
                 group.onSelect(value)
@@ -37,6 +56,11 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, TRadioGroupItemProps>
           </span>
           <span className="frontier-radio-group__text">{label}</span>
         </Label>
+        {description ? (
+          <span className="frontier-radio-group__option-description" id={descriptionId}>
+            {description}
+          </span>
+        ) : null}
       </div>
     )
   },

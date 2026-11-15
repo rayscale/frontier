@@ -122,9 +122,7 @@ describe('RadioGroup', () => {
   it('throws when an item is rendered outside a group', () => {
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined)
 
-    expect(() => render(<RadioGroup.Item value="free" label="Free" />)).toThrow(
-      /inside RadioGroup/,
-    )
+    expect(() => render(<RadioGroup.Item value="free" label="Free" />)).toThrow(/inside RadioGroup/)
 
     consoleError.mockRestore()
   })
@@ -157,6 +155,106 @@ describe('RadioGroup', () => {
     await user.keyboard(' ')
 
     expect(screen.getByRole('radio', { name: 'Free' })).toBeChecked()
+  })
+
+  it('associates the group description', () => {
+    render(
+      <RadioGroup label="Plan" description="Cancel whenever you want.">
+        <RadioGroup.Item value="free" label="Free" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('group', { name: 'Plan' })).toHaveAccessibleDescription(
+      'Cancel whenever you want.',
+    )
+  })
+
+  it('associates an option description with its radio', () => {
+    render(
+      <RadioGroup label="Plan">
+        <RadioGroup.Item value="free" label="Free" description="For one person." />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('radio', { name: 'Free' })).toHaveAccessibleDescription(
+      'For one person.',
+    )
+  })
+
+  it('announces the error and marks every option invalid', () => {
+    render(
+      <RadioGroup label="Plan" error="Choose a plan.">
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Choose a plan.')
+
+    for (const radio of screen.getAllByRole('radio')) {
+      expect(radio).toHaveAttribute('aria-invalid', 'true')
+    }
+  })
+
+  it('marks the group invalid without an error', () => {
+    render(
+      <RadioGroup label="Plan" invalid>
+        <RadioGroup.Item value="free" label="Free" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('radio', { name: 'Free' })).toHaveAttribute('aria-invalid', 'true')
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
+
+  it('disables every option and explains why', async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+
+    render(
+      <RadioGroup
+        label="Plan"
+        description="Cancel whenever you want."
+        disabled
+        disabledReason="Your plan is managed by your admin."
+        onValueChange={onValueChange}
+      >
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('group', { name: 'Plan' })).toHaveAccessibleDescription(
+      'Your plan is managed by your admin.',
+    )
+
+    for (const radio of screen.getAllByRole('radio')) {
+      expect(radio).toBeDisabled()
+    }
+
+    await user.click(screen.getByText('Pro'))
+
+    expect(onValueChange).not.toHaveBeenCalled()
+  })
+
+  it('cannot select a disabled option', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <RadioGroup label="Plan" defaultValue="free">
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" disabled />
+      </RadioGroup>,
+    )
+
+    const option = screen.getByRole('radio', { name: 'Pro' })
+
+    expect(option).toBeDisabled()
+    expect(option.closest('.frontier-radio-group__item')).toHaveAttribute('data-disabled', 'true')
+
+    await user.click(screen.getByText('Pro'))
+
+    expect(option).not.toBeChecked()
   })
 
   it('forwards a ref to the fieldset and to an option input', () => {

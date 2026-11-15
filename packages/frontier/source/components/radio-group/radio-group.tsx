@@ -6,8 +6,9 @@ import type { TRadioGroupProps } from './types.js'
 
 import './radio-group.css'
 
-export interface TRadioGroupComponent
-  extends ForwardRefExoticComponent<TRadioGroupProps & RefAttributes<HTMLFieldSetElement>> {
+export interface TRadioGroupComponent extends ForwardRefExoticComponent<
+  TRadioGroupProps & RefAttributes<HTMLFieldSetElement>
+> {
   /** Renders one option in the group. Its `value` is what the group selects and submits. */
   Item: typeof RadioGroupItem
 }

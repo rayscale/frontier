@@ -1,6 +1,9 @@
 import { type Context, createContext, useContext } from 'react'
 
 export interface TRadioGroupContext {
+  disabled: boolean
+  errorId: string
+  invalid: boolean
   name: string
   onSelect: (value: string) => void
   required: boolean

@@ -83,6 +83,106 @@ const motionTokens = [
   { label: 'Spinner', token: '--frontier-easing-spinner' },
 ] as const
 
+const borderTokens = [
+  { label: 'Functional border', token: '--frontier-border-width' },
+  { label: 'Strong border', token: '--frontier-border-width-strong' },
+] as const
+
+const focusTokens = [
+  {
+    label: 'Outline width',
+    token: '--frontier-focus-width',
+    outline: 'var(--frontier-focus-width) solid var(--frontier-color-focus)',
+    offset: '0',
+  },
+  {
+    label: 'Outline offset',
+    token: '--frontier-focus-offset',
+    outline: 'var(--frontier-border-width) solid var(--frontier-color-focus)',
+    offset: 'var(--frontier-focus-offset)',
+  },
+] as const
+
+const controlTokens = [
+  {
+    label: 'Control height',
+    token: '--frontier-control-height',
+    radius: '--frontier-radius-sm',
+    width: '8rem',
+    height: 'var(--frontier-control-height)',
+  },
+  {
+    label: 'Hit area',
+    token: '--frontier-hit-area',
+    radius: '--frontier-radius-sm',
+    width: '8rem',
+    height: 'var(--frontier-hit-area)',
+  },
+  {
+    label: 'Menu item',
+    token: '--frontier-menu-item-height',
+    radius: '--frontier-radius-sm',
+    width: '8rem',
+    height: 'var(--frontier-menu-item-height)',
+  },
+  {
+    label: 'Table row',
+    token: '--frontier-table-row-height',
+    radius: '--frontier-radius-sm',
+    width: '8rem',
+    height: 'var(--frontier-table-row-height)',
+  },
+  {
+    label: 'Table header',
+    token: '--frontier-table-header-height',
+    radius: '--frontier-radius-sm',
+    width: '8rem',
+    height: 'var(--frontier-table-header-height)',
+  },
+  {
+    label: 'Checkbox',
+    token: '--frontier-checkbox-size',
+    radius: '--frontier-radius-full',
+    width: 'var(--frontier-checkbox-size)',
+    height: 'var(--frontier-checkbox-size)',
+  },
+  {
+    label: 'Radio',
+    token: '--frontier-radio-size',
+    radius: '--frontier-radius-full',
+    width: 'var(--frontier-radio-size)',
+    height: 'var(--frontier-radio-size)',
+  },
+  {
+    label: 'Switch track',
+    token: '--frontier-switch-track-width',
+    radius: '--frontier-radius-full',
+    width: 'var(--frontier-switch-track-width)',
+    height: 'var(--frontier-switch-track-height)',
+  },
+  {
+    label: 'Switch thumb',
+    token: '--frontier-switch-thumb-size',
+    radius: '--frontier-radius-full',
+    width: 'var(--frontier-switch-thumb-size)',
+    height: 'var(--frontier-switch-thumb-size)',
+  },
+  {
+    label: 'Slider track',
+    token: '--frontier-slider-track-size',
+    radius: '--frontier-radius-full',
+    width: '8rem',
+    height: 'var(--frontier-slider-track-size)',
+  },
+  {
+    label: 'Slider thumb',
+    token: '--frontier-slider-thumb-size',
+    radius: '--frontier-radius-full',
+    width: 'var(--frontier-slider-thumb-size)',
+    height: 'var(--frontier-slider-thumb-size)',
+  },
+] as const
+
 const mainStyle: CSSProperties = {
   boxSizing: 'border-box',
   width: 'min(72rem, 100%)',
@@ -122,7 +222,8 @@ export const tokens: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the color, typography, spacing, and motion tokens in the active mode.',
+        story:
+          'Shows the color, typography, spacing, shape, border, focus, control, and motion tokens in the active mode.',
       },
     },
   },
@@ -286,6 +387,86 @@ export const tokens: TStory = {
               />
               <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{radius.label}</span>
               <code style={tokenStyle}>{radius.token}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <h2 style={headingStyle}>Borders</h2>
+        <div style={gridStyle}>
+          {borderTokens.map((border) => (
+            <div key={border.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+              <div
+                style={{
+                  height: `var(${border.token})`,
+                  background: 'var(--frontier-color-border)',
+                  borderRadius: 'var(--frontier-radius-full)',
+                }}
+              />
+              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{border.label}</span>
+              <code style={tokenStyle}>{border.token}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <h2 style={headingStyle}>Focus</h2>
+        <div style={gridStyle}>
+          {focusTokens.map((focus) => (
+            <div key={focus.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+              <div
+                style={{
+                  display: 'grid',
+                  placeItems: 'center',
+                  height: 'var(--frontier-spacing-16)',
+                }}
+              >
+                <span
+                  style={{
+                    display: 'block',
+                    width: '6rem',
+                    height: 'var(--frontier-spacing-8)',
+                    background: 'var(--frontier-color-surface)',
+                    border: 'var(--frontier-border-width) solid var(--frontier-color-border)',
+                    borderRadius: 'var(--frontier-radius-md)',
+                    outline: focus.outline,
+                    outlineOffset: focus.offset,
+                  }}
+                />
+              </div>
+              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{focus.label}</span>
+              <code style={tokenStyle}>{focus.token}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={sectionStyle}>
+        <h2 style={headingStyle}>Controls</h2>
+        <div style={gridStyle}>
+          {controlTokens.map((control) => (
+            <div key={control.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+              <div
+                style={{
+                  display: 'grid',
+                  placeItems: 'center',
+                  height: 'var(--frontier-spacing-16)',
+                }}
+              >
+                <span
+                  style={{
+                    display: 'block',
+                    width: control.width,
+                    height: control.height,
+                    background: 'var(--frontier-color-primary)',
+                    borderRadius: `var(${control.radius})`,
+                  }}
+                />
+              </div>
+              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{control.label}</span>
+              <code style={tokenStyle}>{control.token}</code>
             </div>
           ))}
         </div>

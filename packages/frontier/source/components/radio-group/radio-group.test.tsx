@@ -269,6 +269,30 @@ describe('RadioGroup', () => {
     )
   })
 
+  it('applies the consumer class name to the option row', () => {
+    render(
+      <RadioGroup label="Plan">
+        <RadioGroup.Item value="free" label="Free" className="custom-option" />
+      </RadioGroup>,
+    )
+
+    expect(
+      screen.getByRole('radio', { name: 'Free' }).closest('.frontier-radio-group__item'),
+    ).toHaveClass('custom-option')
+  })
+
+  it('announces the group error on each option', () => {
+    render(
+      <RadioGroup label="Plan" error="Choose a plan.">
+        <RadioGroup.Item value="free" label="Free" description="For one person." />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByRole('radio', { name: 'Free' })).toHaveAccessibleDescription(
+      'For one person. Choose a plan.',
+    )
+  })
+
   it('forwards a ref to the fieldset and to an option input', () => {
     const groupRef = createRef<HTMLFieldSetElement>()
     const inputRef = createRef<HTMLInputElement>()

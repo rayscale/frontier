@@ -46,7 +46,7 @@ export type TRadioGroupProps = TRadioGroupBaseProps &
 
 export type TRadioGroupItemProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'checked' | 'defaultChecked' | 'name' | 'type' | 'value'
+  'checked' | 'defaultChecked' | 'name' | 'required' | 'type' | 'value'
 > & {
   /** Value submitted with the form when this option is selected. */
   value: string

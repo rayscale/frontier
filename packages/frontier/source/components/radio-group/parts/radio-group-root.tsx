@@ -44,7 +44,7 @@ export const RadioGroupRoot = forwardRef<HTMLFieldSetElement, TRadioGroupProps>(
       .join(' ')
     const context = {
       disabled: unavailable,
-      errorId,
+      errorId: error ? errorId : undefined,
       invalid: invalidValue,
       name: name ?? generatedName,
       onSelect: (nextValue: string) => {

@@ -22,14 +22,16 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, TRadioGroupItemProps>
     const descriptionId = useId()
     const inputId = id ?? generatedId
     const unavailable = group.disabled || disabled
-    const describedByIds = [ariaDescribedBy, description ? descriptionId : undefined].filter(
-      Boolean,
-    )
+    const describedByIds = [
+      ariaDescribedBy,
+      description ? descriptionId : undefined,
+      group.errorId,
+    ].filter(Boolean)
     const describedBy = describedByIds.length > 0 ? describedByIds.join(' ') : undefined
-    const classes = ['frontier-radio-group__input', className].filter(Boolean).join(' ')
+    const classes = ['frontier-radio-group__item', className].filter(Boolean).join(' ')
 
     return (
-      <div className="frontier-radio-group__item" data-disabled={unavailable ? true : undefined}>
+      <div className={classes} data-disabled={unavailable ? true : undefined}>
         <Label className="frontier-radio-group__option" htmlFor={inputId}>
           <span className="frontier-radio-group__control">
             <input
@@ -39,7 +41,7 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, TRadioGroupItemProps>
               type="radio"
               name={group.name}
               value={value}
-              className={classes}
+              className="frontier-radio-group__input"
               checked={group.selectedValue === value}
               required={group.required}
               disabled={unavailable}

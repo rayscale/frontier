@@ -21,7 +21,7 @@ const meta = {
     },
   },
   args: {
-    value: 'pnpm add @dotm4x/one',
+    value: 'pnpm add @rayscale/frontier',
     label: 'Copy',
     copiedLabel: 'Copied',
     showLabel: true,

@@ -68,10 +68,10 @@ export const FloatingActions: TStory = {
   render: () => (
     <CodeBlock>
       <CodeBlock.Actions>
-        <CodeBlock.CopyButton value="pnpm add @dotm4x/one" />
+        <CodeBlock.CopyButton value="pnpm add @rayscale/frontier" />
       </CodeBlock.Actions>
       <CodeBlock.Content lineNumbers>
-        {'$ pnpm add @dotm4x/one\nPackages: +4\nDone.'}
+        {'$ pnpm add @rayscale/frontier\nPackages: +4\nDone.'}
       </CodeBlock.Content>
     </CodeBlock>
   ),

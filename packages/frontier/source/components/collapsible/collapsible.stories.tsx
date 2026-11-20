@@ -132,7 +132,7 @@ export const LongText: TStory = {
       <Collapsible.Content>
         <div>
           <p>
-            One components are designed to be expressive, coherent, and accessible. Each disclosure
+            Frontier components are designed to be expressive, coherent, and accessible. Each disclosure
             keeps its content in the document so that state survives toggling, while the visible
             height animates smoothly between the collapsed and expanded states.
           </p>

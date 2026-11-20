@@ -11,23 +11,26 @@ from scripts.design.stroke import Pen
 
 @glyph("germandbls", 0xDF, zone="x")
 def germandbls(f: Frame) -> Drawing:
-    w = f.w(500)
-    right = w - f.h
+    top = f.A + 10 - f.hh
     waist = 0.56 * f.A
-    top = f.A + 8 - f.hh
-    upper_bowl = Pen(f.h, 0).line(f.h, 0.60 * f.A).through(
-        (f.h, 0.60 * f.A, 90),
-        (w * 0.42, top, 0),
-        (right - 40, 0.80 * f.A, 285),
-        (w * 0.46, waist, 205),
-        tension=1.0,
+    r_upper = (top - waist) / 2
+    r_lower = (waist - f.lo) / 2
+    cx_upper = f.h + r_upper
+    # The bottom terminal stays a stem's width clear of the stem so the letter reads as an open ß,
+    # not a B; heavy weights push the lower bowl out to keep that opening.
+    terminal = max(4 * f.h, 2 * f.h + 70)
+    cx_lower = max(f.h + 2 * r_upper + 0.15 * r_lower - r_lower, terminal + 30)
+    upper_bowl = (
+        Pen(f.h, 0)
+        .line(f.h, top - r_upper)
+        .arc(cx_upper, top - r_upper, r_upper, r_upper, 180, -90)
+        .line(f.h + 0.45 * r_upper, waist)
     )
-    lower_bowl = Pen(0, 0).through(
-        (w * 0.44, waist, 340),
-        (right, 0.55 * waist, 270),
-        (w * 0.50, f.lo_r, 180),
-        (f.h + 0.1 * w, 0.20 * waist, 112),
-        tension=1.0,
+    lower_bowl = (
+        Pen(f.h + 0.45 * r_upper, waist)
+        .line(cx_lower, waist)
+        .arc(cx_lower, waist - r_lower, r_lower, r_lower, 90, -90)
+        .line(terminal, f.lo)
     )
     return ink(upper_bowl, lower_bowl)
 

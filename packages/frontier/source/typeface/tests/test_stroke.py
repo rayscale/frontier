@@ -55,7 +55,7 @@ def test_corner_between_two_lines_is_mitred() -> None:
     (contour,) = expand(corner, 100)
 
     x_min, y_min, _, _ = outline_bounds([contour])
-    assert (x_min, y_min) == (pytest.approx(-50), pytest.approx(-45))
+    assert (x_min, y_min) == (pytest.approx(-50), pytest.approx(-50 * HORIZONTAL))
     assert len(contour) == 6
 
 

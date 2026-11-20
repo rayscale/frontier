@@ -1,3 +1,5 @@
+import math
+
 from scripts.design.glyph import Drawing, Frame, at, glyph, ink
 from scripts.design.glyphs.shapes import (
     diagonal,
@@ -6,9 +8,14 @@ from scripts.design.glyphs.shapes import (
     heading,
     on_ellipse,
     round_ring,
+    round_width,
     vstem,
 )
 from scripts.design.stroke import Pen
+
+
+def x_round(f: Frame) -> float:
+    return round_width(f, f.xt_r, f.lo_r)
 
 
 def bowl(f: Frame, w: float) -> Pen:
@@ -16,100 +23,79 @@ def bowl(f: Frame, w: float) -> Pen:
 
 
 def arch(f: Frame, x0: float, x1: float) -> Pen:
-    rx = (x1 - x0) / 2
-    ry = rx * 0.94
-    cy = f.xt_r - ry
-    return Pen(x0, cy).arc((x0 + x1) / 2, cy, rx, ry, 180, 0).line(x1, 0)
+    r = (x1 - x0) / 2
+    cy = f.xt_r - r
+    return Pen(x0, cy).arc((x0 + x1) / 2, cy, r, r, 180, 0).line(x1, 0)
 
 
 @glyph("o", 0x6F, zone="x")
 def o(f: Frame) -> Drawing:
-    return ink(bowl(f, f.w(500)))
+    return ink(bowl(f, x_round(f)))
 
 
 def terminal_arc(f: Frame, w: float, top: float, bottom: float, angle: float) -> Pen:
     cx, cy, rx, ry = w / 2, (top + bottom) / 2, w / 2 - f.h, (top - bottom) / 2
-    a, b = on_ellipse(cx, cy, rx, ry, angle), on_ellipse(cx, cy, rx, ry, -angle)
-    return Pen(0, 0).through(
-        (a[0], a[1], 90 + angle),
-        (cx, cy + ry, 180),
-        (cx - rx, cy, 270),
-        (cx, cy - ry, 0),
-        (b[0], b[1], 90 - angle),
-        tension=1.08,
-    )
+    return at(cx, cy, rx, ry, angle).arc(cx, cy, rx, ry, angle, 360 - angle)
 
 
 @glyph("c", 0x63, zone="x")
 def c(f: Frame) -> Drawing:
-    return ink(terminal_arc(f, f.w(470), f.xt_r, f.lo_r, 40))
+    return ink(terminal_arc(f, x_round(f), f.xt_r, f.lo_r, 45))
 
 
 @glyph("e", 0x65, zone="x")
 def e(f: Frame) -> Drawing:
-    w = f.w(500)
-    cx, cy, rx, ry = w / 2, (f.xt_r + f.lo_r) / 2, w / 2 - f.h, (f.xt_r - f.lo_r) / 2
-    end = on_ellipse(cx, cy, rx, ry, -42)
-    stroke = Pen(cx + rx, cy).through(
-        (cx + rx, cy, 90),
-        (cx, cy + ry, 180),
-        (cx - rx, cy, 270),
-        (cx, cy - ry, 0),
-        (end[0], end[1], 48),
-        tension=1.08,
-    )
-    return ink(stroke, hbar(cy, f.h, w))
+    w = x_round(f)
+    cx, cy, r = w / 2, (f.xt_r + f.lo_r) / 2, (f.xt_r - f.lo_r) / 2
+    start = -math.degrees(math.asin(f.hh / r))
+    arc = at(cx, cy, r, r, start).arc(cx, cy, r, r, start, 320).cut("h", "perp")
+    return ink(arc, hbar(cy, f.h, w - f.h))
 
 
 def double_storey_a(f: Frame, w: float) -> Drawing:
     right = w - f.h
-    left = f.h + 0.04 * w
-    cx = (left + right) / 2
-    arch_stroke = Pen(left, 0.76 * f.X).through(
-        (left, 0.76 * f.X, 62),
-        (cx, f.xt_r, 0),
-        (right, 0.62 * f.X, 270),
-        tension=1.05,
-    ).line(right, 0)
-    top = 0.56 * f.X
-    ry = (top - f.lo) / 2
-    cyb = f.lo + ry
-    rxb = (right - f.h) / 2
-    cxb = (right + f.h) / 2
-    bowl_stroke = Pen(right, top).line(cxb, top).arc(cxb, cyb, rxb, ry, 90, 270).line(right, f.lo)
+    top = 0.54 * f.X
+    r_bowl = (top - f.lo) / 2
+    cyb = f.lo + r_bowl
+    cxb = right - r_bowl * 1.12
+    rxb = r_bowl * 1.12
+    r_arch = (right - f.h) / 2
+    cya = f.xt_r - r_arch
+    arch_stroke = at(f.h + r_arch, cya, r_arch, r_arch, 150).arc(f.h + r_arch, cya, r_arch, r_arch, 150, 0).line(right, 0)
+    bowl_stroke = Pen(right, top).line(cxb, top).arc(cxb, cyb, rxb, r_bowl, 90, 270).line(right, f.lo)
     return ink(arch_stroke, bowl_stroke)
 
 
 @glyph("a", 0x61, zone="x")
 def a(f: Frame) -> Drawing:
-    return double_storey_a(f, f.w(470))
+    w = x_round(f)
+    return ink(bowl(f, w), vstem(w - f.h, f.X, 0))
 
 
 @glyph("a.ss01", zone="x")
-def a_single(f: Frame) -> Drawing:
-    w = f.w(480)
-    return ink(bowl(f, w), vstem(w - f.h, f.X, 0))
+def a_double(f: Frame) -> Drawing:
+    return double_storey_a(f, f.w(460))
 
 
 @glyph("b", 0x62, zone="x")
 def b(f: Frame) -> Drawing:
-    return ink(bowl(f, f.w(490)), vstem(f.h, f.A, 0))
+    return ink(bowl(f, x_round(f)), vstem(f.h, f.A, 0))
 
 
 @glyph("d", 0x64, zone="x")
 def d(f: Frame) -> Drawing:
-    w = f.w(490)
+    w = x_round(f)
     return ink(bowl(f, w), vstem(w - f.h, f.A, 0))
 
 
 @glyph("p", 0x70, zone="x")
 def p(f: Frame) -> Drawing:
-    return ink(bowl(f, f.w(490)), vstem(f.h, f.X, -f.D))
+    return ink(bowl(f, x_round(f)), vstem(f.h, f.X, -f.D))
 
 
 @glyph("q", 0x71, zone="x")
 def q(f: Frame) -> Drawing:
-    w = f.w(490)
+    w = x_round(f)
     return ink(bowl(f, w), vstem(w - f.h, f.X, -f.D))
 
 
@@ -122,7 +108,7 @@ def descender_hook(f: Frame, x: float, top: float, reach: float) -> Pen:
 
 @glyph("g", 0x67, zone="x")
 def g(f: Frame) -> Drawing:
-    w = f.w(480)
+    w = x_round(f)
     return ink(bowl(f, w), descender_hook(f, w - f.h, f.X, w * 0.78))
 
 
@@ -148,19 +134,21 @@ def m(f: Frame) -> Drawing:
 @glyph("u", 0x75, zone="x")
 def u(f: Frame) -> Drawing:
     w = f.w(440)
-    rx = (w - 2 * f.h) / 2
-    ry = rx * 0.94
-    cy = f.lo_r + ry
-    left = Pen(f.h, f.X).line(f.h, cy).arc(w / 2, cy, rx, ry, 180, 360)
+    r = (w - 2 * f.h) / 2
+    cy = f.lo_r + r
+    left = Pen(f.h, f.X).line(f.h, cy).arc(w / 2, cy, r, r, 180, 360)
     return ink(left, vstem(w - f.h, f.X, 0))
 
 
 @glyph("r", 0x72, zone="x")
 def r(f: Frame) -> Drawing:
-    rx = f.w(165)
-    ry = rx * 0.9
-    cy = f.xt_r - ry
-    return ink(vstem(f.h, f.X, 0), Pen(f.h, cy).arc(f.h + rx, cy, rx, ry, 180, 52))
+    r = f.w(160)
+    cy = f.xt_r - r
+    return ink(vstem(f.h, f.X, 0), Pen(f.h, cy).arc(f.h + r, cy, r, r, 180, 50))
+
+
+def s_width(f: Frame, top: float, bottom: float) -> float:
+    return 2 * ((top - bottom) / 4.309) * 1.18 + 2 * f.h
 
 
 def s_curve(f: Frame, w: float, top: float, bottom: float, lean: float = 0.0) -> Pen:
@@ -172,16 +160,16 @@ def s_curve(f: Frame, w: float, top: float, bottom: float, lean: float = 0.0) ->
     spine_start = on_ellipse(upper[0], upper[1], rx, ry, 240)
     spine_end = on_ellipse(lower[0], lower[1], rx, ry, 60)
     return (
-        at(upper[0], upper[1], rx, ry, 26)
-        .arc(upper[0], upper[1], rx, ry, 26, 240)
+        at(upper[0], upper[1], rx, ry, 30)
+        .arc(upper[0], upper[1], rx, ry, 30, 240)
         .line(*spine_end)
-        .arc(lower[0], lower[1], rx, ry, 60, -154)
+        .arc(lower[0], lower[1], rx, ry, 60, -150)
     ) if spine_start else Pen(0, 0)
 
 
 @glyph("s", 0x73, zone="x")
 def s(f: Frame) -> Drawing:
-    return ink(s_curve(f, f.w(420), f.xt_r, f.lo_r))
+    return ink(s_curve(f, s_width(f, f.xt_r, f.lo_r), f.xt_r, f.lo_r))
 
 
 @glyph("t", 0x74, zone="x")

@@ -1,24 +1,28 @@
-from scripts.design.glyph import Drawing, Frame, glyph, ink
-from scripts.design.glyphs.lower import s_curve, terminal_arc
+from scripts.design.glyph import Drawing, Frame, at, glyph, ink
+from scripts.design.glyphs.lower import s_curve, s_width, terminal_arc
 from scripts.design.glyphs.shapes import (
     diagonal,
     flush,
     hbar,
     heading,
-    on_ellipse,
     round_ring,
+    round_width,
     vstem,
 )
 from scripts.design.stroke import Pen
 
 
+def cap_round(f: Frame) -> float:
+    return round_width(f, f.ct_r, f.lo_r)
+
+
 def cap_ring(f: Frame, w: float) -> Pen:
-    return round_ring(w / 2, (f.ct_r + f.lo_r) / 2, w / 2 - f.h, (f.ct_r - f.lo_r) / 2, 1.12)
+    return round_ring(w / 2, (f.ct_r + f.lo_r) / 2, w / 2 - f.h, (f.ct_r - f.lo_r) / 2)
 
 
 def cap_bowl(f: Frame, right: float, top: float, bottom: float) -> Pen:
     ry = (top - bottom) / 2
-    rx = min(ry * 0.92, right - f.h - 30)
+    rx = min(ry, right - f.h - 30)
     xb = right - rx
     return Pen(f.h, top).line(xb, top).arc(xb, (top + bottom) / 2, rx, ry, 90, -90).line(f.h, bottom)
 
@@ -53,15 +57,14 @@ def B(f: Frame) -> Drawing:
 
 @glyph("C", 0x43, zone="cap")
 def C(f: Frame) -> Drawing:
-    return ink(terminal_arc(f, f.w(590), f.ct_r, f.lo_r, 40))
+    return ink(terminal_arc(f, cap_round(f), f.ct_r, f.lo_r, 45))
 
 
 @glyph("D", 0x44, zone="cap")
 def D(f: Frame) -> Drawing:
-    w = f.w(560)
-    ym, ry = (f.ct + f.lo) / 2, (f.ct - f.lo) / 2
-    xd = f.h + 30
-    return ink(stem(f), Pen(f.h, f.ct).line(xd, f.ct).arc(xd, ym, w - f.h - xd, ry, 90, -90).line(f.h, f.lo))
+    ym, r = (f.ct + f.lo) / 2, (f.ct - f.lo) / 2
+    xd = f.h + 0.18 * f.C
+    return ink(stem(f), Pen(f.h, f.ct).line(xd, f.ct).arc(xd, ym, r, r, 90, -90).line(f.h, f.lo))
 
 
 @glyph("E", 0x45, zone="cap")
@@ -79,19 +82,10 @@ def F(f: Frame) -> Drawing:
 
 @glyph("G", 0x47, zone="cap")
 def G(f: Frame) -> Drawing:
-    w = f.w(610)
-    cx, cy, rx, ry = w / 2, (f.ct_r + f.lo_r) / 2, w / 2 - f.h, (f.ct_r - f.lo_r) / 2
-    a = on_ellipse(cx, cy, rx, ry, 40)
-    arc = Pen(0, 0).through(
-        (a[0], a[1], 130),
-        (cx, cy + ry, 180),
-        (cx - rx, cy, 270),
-        (cx, cy - ry, 0),
-        (cx + rx, cy - 0.36 * ry, 90),
-        (cx + rx, cy + 0.02 * ry, 90),
-        tension=1.1,
-    )
-    return ink(arc, hbar(cy + 0.02 * ry, w * 0.54, w))
+    w = cap_round(f)
+    cx, cy, r = w / 2, (f.ct_r + f.lo_r) / 2, (f.ct_r - f.lo_r) / 2
+    arc = at(cx, cy, r, r, 45).arc(cx, cy, r, r, 45, 360)
+    return ink(arc, hbar(cy, w * 0.55, w))
 
 
 @glyph("H", 0x48, zone="cap")
@@ -160,7 +154,7 @@ def N(f: Frame) -> Drawing:
 
 @glyph("O", 0x4F, zone="cap")
 def O(f: Frame) -> Drawing:
-    return ink(cap_ring(f, f.w(680)))
+    return ink(cap_ring(f, cap_round(f)))
 
 
 @glyph("P", 0x50, zone="cap")
@@ -171,7 +165,7 @@ def P(f: Frame) -> Drawing:
 
 @glyph("Q", 0x51, zone="cap")
 def Q(f: Frame) -> Drawing:
-    w = f.w(680)
+    w = cap_round(f)
     return ink(cap_ring(f, w), diagonal(f, (w * 0.58, 0.26 * f.C), (w * 0.88, -30), ("perp", "h")))
 
 
@@ -185,7 +179,7 @@ def R(f: Frame) -> Drawing:
 
 @glyph("S", 0x53, zone="cap")
 def S(f: Frame) -> Drawing:
-    return ink(s_curve(f, f.w(500), f.ct_r, f.lo_r))
+    return ink(s_curve(f, s_width(f, f.ct_r, f.lo_r), f.ct_r, f.lo_r))
 
 
 @glyph("T", 0x54, zone="cap")

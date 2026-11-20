@@ -1,6 +1,6 @@
 feature ss01 {
   featureNames {
-    name "Single-storey a";
+    name "Double-storey a";
   };
   sub a by a.ss01;
 } ss01;

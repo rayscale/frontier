@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 Point = tuple[float, float]
 KAPPA = 0.5522847498307936
-HORIZONTAL = 0.9
+HORIZONTAL = 0.95
 CORNER_TOLERANCE = math.radians(2)
 
 

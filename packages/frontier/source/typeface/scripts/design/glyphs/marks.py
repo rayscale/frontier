@@ -98,7 +98,7 @@ def ring_mark(f: Frame) -> Drawing:
     from scripts.design.glyphs.shapes import round_ring
 
     r = 58
-    return ink(round_ring(0, BASE_Y + 12 + r + 20, r, r, 1.0).weight(0.62))
+    return ink(round_ring(0, BASE_Y + 12 + r + 20, r, r).weight(0.62))
 
 
 def hungarumlaut(f: Frame) -> Drawing:

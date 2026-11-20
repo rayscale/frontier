@@ -28,7 +28,7 @@ It is original work. It is not derived from Geist, Outfit, Inter, SF, or any oth
 
 ## Usage
 
-The Frontier styles already use the typeface through the `--frontier-font-family` token, which lists `'Frontier Sans'`, then `'Outfit Variable'`, then `sans-serif`.
+The Frontier styles already use the typeface through the `--frontier-font-family` token, which lists `'Frontier Sans'`, then `system-ui`, then `sans-serif`.
 
 ```css
 body {
@@ -87,8 +87,8 @@ typeface/
 ## Integration with Frontier
 
 - `source/styles/fonts.css` declares the `@font-face` for `fonts/FrontierSans-Variable.woff2`.
-- `--frontier-font-family` lists Frontier Sans first and Outfit as the fallback.
-- `scripts/copy-styles.mjs` copies the WOFF2 to `dist/typeface/fonts/`, so the same relative URL works in source and in the built package. Without a build, it warns and text falls back to Outfit.
+- `--frontier-font-family` lists Frontier Sans first and the system font as the fallback.
+- `scripts/copy-styles.mjs` copies the WOFF2 to `dist/typeface/fonts/`, so the same relative URL works in source and in the built package. Without a build, it warns and text uses the system font.
 - `prepublishOnly` builds the font before the package, so the tarball contains it.
 
 ## Extending the typeface

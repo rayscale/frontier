@@ -1,6 +1,7 @@
+import math
 from collections.abc import Callable
 
-from scripts.design.glyph import GLYPHS, Drawing, Frame, GlyphSpec, ink, turn
+from scripts.design.glyph import GLYPHS, Drawing, Frame, GlyphSpec, at, ink, turn
 from scripts.design.glyphs.shapes import (
     diagonal,
     flush,
@@ -16,7 +17,7 @@ TABULAR_ADVANCE = 620
 
 def zero(f: Frame) -> Drawing:
     w = f.w(500)
-    return ink(round_ring(w / 2, (f.ct_r + f.lo_r) / 2, w / 2 - f.h, (f.ct_r - f.lo_r) / 2, 1.1))
+    return ink(round_ring(w / 2, (f.ct_r + f.lo_r) / 2, w / 2 - f.h, (f.ct_r - f.lo_r) / 2))
 
 
 def zero_slashed(f: Frame) -> Drawing:
@@ -34,38 +35,30 @@ def one(f: Frame) -> Drawing:
 
 def two(f: Frame) -> Drawing:
     w = f.w(480)
-    right = w - f.h
-    cx = w / 2
-    top = Pen(0, 0).through(
-        (f.h + 6, 0.77 * f.C, 62),
-        (cx - 6, f.ct_r, 0),
-        (right, 0.74 * f.C, 280),
-        (0.64 * w, 0.50 * f.C, 235),
-        (f.h + 14, f.lo + 14, 232),
-        tension=1.0,
-    )
-    return ink(top, hbar(f.lo, 0, w))
+    r = (w - 2 * f.h) / 2
+    cx, cy = w / 2, f.ct_r - r
+    end_angle = -38
+    end = on_ellipse(cx, cy, r, r, end_angle)
+    tangent = (math.sin(math.radians(end_angle)), -math.cos(math.radians(end_angle)))
+    bottom_x = end[0] + tangent[0] * (end[1] - f.lo) / -tangent[1]
+    stroke = at(cx, cy, r, r, 162).arc(cx, cy, r, r, 162, end_angle).line(bottom_x, f.lo)
+    return ink(stroke, hbar(f.lo, 0, w))
 
 
 def three(f: Frame) -> Drawing:
-    w = f.w(480)
-    right = w - f.h
-    ym = 0.535 * f.C
-    xm = 0.44 * w
-    upper = Pen(0, 0).through(
-        (f.h + 12, 0.80 * f.C, 55),
-        (w * 0.47, f.ct_r, 0),
-        (right - 14, 0.745 * f.C, 285),
-        (xm, ym, 195),
-        tension=1.0,
+    ym = 0.545 * f.C
+    r_lower = (ym - f.lo_r) / 2
+    r_upper = (f.ct_r - ym) / 2
+    w = 2 * r_lower + 2 * f.h
+    cx_lower = w / 2
+    cx_upper = cx_lower + (r_lower - r_upper) * 0.5
+    tick = cx_lower - r_lower * 0.3
+    upper = (
+        at(cx_upper, ym + r_upper, r_upper, r_upper, 155)
+        .arc(cx_upper, ym + r_upper, r_upper, r_upper, 155, -90)
+        .line(tick, ym)
     )
-    lower = Pen(0, 0).through(
-        (xm, ym, 0),
-        (right, 0.28 * f.C, 270),
-        (w * 0.46, f.lo_r, 180),
-        (f.h + 6, 0.21 * f.C, 112),
-        tension=1.0,
-    )
+    lower = Pen(tick, ym).line(cx_lower, ym).arc(cx_lower, ym - r_lower, r_lower, r_lower, 90, -150)
     return ink(upper, lower)
 
 
@@ -80,35 +73,22 @@ def four(f: Frame) -> Drawing:
 
 def five(f: Frame) -> Drawing:
     w = f.w(480)
-    cx, rx = w / 2, w / 2 - f.h
-    ry = 0.335 * f.C
-    cy = f.lo_r + ry
-    a = on_ellipse(cx, cy, rx, ry, 148)
-    xs = f.h + 10
-    bowl = Pen(a[0], a[1]).through(
-        (a[0], a[1], 58),
-        (cx, cy + ry, 0),
-        (cx + rx, cy, 270),
-        (cx, cy - ry, 180),
-        (f.h + 10, cy - 0.7 * ry, 120),
-        tension=1.05,
-    )
-    return ink(hbar(f.ct, xs, w - 20), vstem(xs, f.C, a[1] + 4), bowl)
+    r = (w - 2 * f.h) / 2
+    cx, cy = w / 2, f.lo_r + r
+    start = on_ellipse(cx, cy, r, r, 140)
+    bowl = at(cx, cy, r, r, 140).arc(cx, cy, r, r, 140, -150)
+    return ink(hbar(f.ct, start[0], w - f.h), vstem(start[0], f.C, start[1]).cut("perp", 140), bowl)
 
 
 def six(f: Frame) -> Drawing:
-    w = f.w(500)
-    rx = (w - 2 * f.h) / 2
-    ry = 0.345 * f.C
-    cy = f.lo_r + ry
-    arm = Pen(0, 0).through(
-        (f.h, cy, 90),
-        (f.h + 0.04 * w, 0.70 * f.C, 80),
-        (w * 0.55, f.ct_r, 0),
-        (w - f.h - 10, 0.86 * f.C, 330),
-        tension=1.0,
-    )
-    return ink(round_ring(w / 2, cy, rx, ry), arm)
+    w = f.w(480)
+    r = (w - 2 * f.h) / 2
+    cx, cy = w / 2, f.lo_r + r
+    angle = 155
+    start = on_ellipse(cx, cy, r, r, angle)
+    direction = (math.sin(math.radians(angle)), -math.cos(math.radians(angle)))
+    top_x = start[0] + direction[0] * (f.C - start[1]) / direction[1]
+    return ink(round_ring(cx, cy, r, r), diagonal(f, (start[0], start[1]), (top_x, f.C), ("perp", "h")))
 
 
 def seven(f: Frame) -> Drawing:
@@ -130,7 +110,7 @@ def eight(f: Frame) -> Drawing:
 
 
 def nine(f: Frame) -> Drawing:
-    return turn(six(f), f.w(500) / 2, (f.ct_r + f.lo_r) / 2)
+    return turn(six(f), f.w(480) / 2, (f.ct_r + f.lo_r) / 2)
 
 
 DIGITS: list[tuple[str, int, Callable[[Frame], Drawing]]] = [

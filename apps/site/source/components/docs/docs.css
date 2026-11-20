@@ -1,16 +1,13 @@
-.docs-layout__home {
-  display: block;
-  color: inherit;
-  text-decoration: none;
+.docs-layout {
+  --frontier-sidebar-offset: calc(var(--frontier-spacing-16) + var(--frontier-spacing-2));
+
+  min-block-size: calc(100dvh - var(--frontier-spacing-16));
 }
 
 .docs-layout__inset {
+  min-block-size: 0;
   min-inline-size: 0;
   flex: 1;
-}
-
-.docs-layout__header {
-  justify-content: space-between;
 }
 
 .docs-layout__trail {
@@ -18,4 +15,5 @@
   align-items: center;
   gap: var(--frontier-spacing-3);
   min-inline-size: 0;
+  padding: var(--frontier-spacing-4) var(--frontier-spacing-6) 0;
 }

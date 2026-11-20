@@ -12,6 +12,24 @@ afterEach(() => {
 })
 
 describe('Sidebar', () => {
+  it('marks the layout as docked by default and floating on request', () => {
+    const { container, rerender } = render(
+      <Sidebar.Root>
+        <Sidebar.Content>content</Sidebar.Content>
+      </Sidebar.Root>,
+    )
+
+    expect(container.firstElementChild).toHaveAttribute('data-variant', 'docked')
+
+    rerender(
+      <Sidebar.Root variant="floating">
+        <Sidebar.Content>content</Sidebar.Content>
+      </Sidebar.Root>,
+    )
+
+    expect(container.firstElementChild).toHaveAttribute('data-variant', 'floating')
+  })
+
   it('toggles uncontrolled expansion and marks the active link', async () => {
     const user = userEvent.setup()
 

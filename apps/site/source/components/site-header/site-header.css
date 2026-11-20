@@ -1,3 +1,10 @@
+/* The header never paints a surface of its own: the page shows through it. */
+.frontier-header.site-header:not(.frontier-header--expanded) {
+  --_header-surface: transparent;
+
+  box-shadow: none;
+}
+
 .site-header__brand {
   display: inline-flex;
   align-items: center;

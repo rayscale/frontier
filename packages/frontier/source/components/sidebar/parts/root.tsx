@@ -31,6 +31,7 @@ export const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(functio
     keyboardShortcut = 'b',
     animateOnHover = true,
     label = 'Sidebar',
+    variant = 'docked',
     className,
     style,
     children,
@@ -111,6 +112,7 @@ export const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(functio
         className={classes}
         data-state={openState ? 'expanded' : 'collapsed'}
         data-mobile={mobileState ? 'true' : undefined}
+        data-variant={variant}
         style={{ ...style }}
       >
         {mobileState ? (

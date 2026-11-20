@@ -191,9 +191,9 @@ export const ${component} = createIcon({ name: '${component}', iconNode })
 }
 
 function generateBarrel(prepared: readonly TPreparedIcon[]): string {
-  return `${[...prepared]
-    .sort((first, second) => first.name.localeCompare(second.name))
+  return `${prepared
     .map(({ name }) => `export * from './components/${name}/index.js'`)
+    .sort()
     .join('\n')}\n`
 }
 

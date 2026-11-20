@@ -1,7 +1,9 @@
+'use client'
+
 import { Tabs } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 
-import { HighlightedCode } from './docs-code-block.js'
+import { HighlightedCode } from './highlighted-code.js'
 
 interface TPackageManagerTabsProps {
   pnpm: string

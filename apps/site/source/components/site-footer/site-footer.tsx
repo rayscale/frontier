@@ -1,3 +1,5 @@
+'use client'
+
 import { Footer } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 

@@ -1,14 +1,18 @@
+'use client'
+
 import { Breadcrumb } from '@rayscale/frontier'
+import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
-import { useLocation } from 'react-router'
 
 import { getBreadcrumbs } from '#/docs/navigation.js'
-import { pages } from '#/docs/pages.js'
+
+import { useDocsPages } from './docs-provider.js'
 
 /** Where the current page sits in the documentation. */
 export function DocsBreadcrumbs(): ReactElement {
-  const { pathname } = useLocation()
-  const trail = getBreadcrumbs(pages, pathname.replace(/\/+$/, '') || '/docs')
+  const pathname = usePathname()
+  const pages = useDocsPages()
+  const trail = getBreadcrumbs([...pages], pathname.replace(/\/+$/, '') || '/docs')
 
   return (
     <Breadcrumb aria-label="Breadcrumb" maxVisibleItems={4}>

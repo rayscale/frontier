@@ -2,7 +2,7 @@
 
 **The home of the Frontier documentation.**
 
-The site for the Frontier design language. It is a single-page app built with React, React Router, and Vite, and it uses the styles and components of [`@rayscale/frontier`](../../packages/frontier/README.md).
+The site for the Frontier design language. It is a Next.js app that exports plain static files, and it uses the styles and components of [`@rayscale/frontier`](../../packages/frontier/README.md).
 
 ## Contents
 
@@ -24,13 +24,12 @@ The site for the Frontier design language. It is a single-page app built with Re
 
 The site is a workspace project. Run these from the repository root.
 
-| Command                                  | Description                             |
-| ---------------------------------------- | --------------------------------------- |
-| `pnpm site`                              | Starts the development server.          |
-| `pnpm --filter @frontier/site build`     | Builds the site into `apps/site/dist/`. |
-| `pnpm --filter @frontier/site preview`   | Serves the built site locally.          |
-| `pnpm --filter @frontier/site test`      | Runs the tests.                         |
-| `pnpm --filter @frontier/site typecheck` | Type-checks the site.                   |
+| Command                                  | Description                            |
+| ---------------------------------------- | -------------------------------------- |
+| `pnpm site`                              | Starts the development server.         |
+| `pnpm --filter @frontier/site build`     | Builds the site into `apps/site/out/`. |
+| `pnpm --filter @frontier/site test`      | Runs the tests.                        |
+| `pnpm --filter @frontier/site typecheck` | Type-checks the site.                  |
 
 The site imports `@rayscale/frontier`, which is served from the built package. Run `pnpm build` once so that `packages/frontier/dist` exists before starting the development server.
 
@@ -45,9 +44,9 @@ apps/site/
 │   ├── components/     # docs shell, theme, header, footer
 │   ├── docs/           # the docs engine
 │   ├── layout/         # shared layouts
-│   ├── pages/          # home, docs, not found
-│   └── routes.tsx      # the route table
-└── index.html
+│   └── pages/          # the screens: home, covers, not found
+├── app/                # the routes: layouts and pages
+└── next.config.ts
 ```
 
 ## Development status

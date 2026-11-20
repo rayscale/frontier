@@ -1,3 +1,5 @@
+'use client'
+
 import {
   createContext,
   type ReactElement,
@@ -10,6 +12,7 @@ import {
 } from 'react'
 
 import { useSystemDark } from './system-theme.js'
+import { themeStorageKey } from './theme-script.js'
 
 /** What the visitor chose. `system` follows the operating system. */
 export type TThemePreference = 'light' | 'dark' | 'system'
@@ -23,7 +26,6 @@ export interface TThemeContext {
   setPreference: (preference: TThemePreference) => void
 }
 
-const storageKey = 'frontier-theme'
 const themeContext = createContext<TThemeContext | null>(null)
 
 function isPreference(value: unknown): value is TThemePreference {
@@ -40,7 +42,7 @@ function resolveTheme(preference: TThemePreference, systemDark: boolean): TResol
 
 function readStoredPreference(): TThemePreference {
   try {
-    const stored = window.localStorage.getItem(storageKey)
+    const stored = window.localStorage.getItem(themeStorageKey)
 
     return isPreference(stored) ? stored : 'system'
   } catch {
@@ -50,19 +52,29 @@ function readStoredPreference(): TThemePreference {
 
 /** Keeps the theme preference, remembers it, and applies it as `data-theme` on the root element. */
 export function ThemeProvider({ children }: { children: ReactNode }): ReactElement {
-  const [preference, setStoredPreference] = useState<TThemePreference>(readStoredPreference)
+  // The page is rendered once for everyone, so the stored choice is read after it hydrates. An
+  // inline script in the document head applies it before the first paint.
+  const [preference, setStoredPreference] = useState<TThemePreference>('system')
+  const [ready, setReady] = useState(false)
   const systemDark = useSystemDark()
   const resolved = resolveTheme(preference, systemDark)
 
   useEffect(() => {
-    document.documentElement.dataset.theme = resolved
-  }, [resolved])
+    setStoredPreference(readStoredPreference())
+    setReady(true)
+  }, [])
+
+  useEffect(() => {
+    if (ready) {
+      document.documentElement.dataset.theme = resolved
+    }
+  }, [ready, resolved])
 
   const setPreference = useCallback((next: TThemePreference) => {
     setStoredPreference(next)
 
     try {
-      window.localStorage.setItem(storageKey, next)
+      window.localStorage.setItem(themeStorageKey, next)
     } catch {
       return
     }

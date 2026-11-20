@@ -1,3 +1,5 @@
+'use client'
+
 import { Input, SegmentedControl, Slider, type TSliderValue } from '@rayscale/frontier'
 import { type CSSProperties, type ReactElement, useState } from 'react'
 

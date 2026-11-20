@@ -1,3 +1,5 @@
+'use client'
+
 import { Table } from '@rayscale/frontier'
 import type { ComponentPropsWithoutRef, ReactElement } from 'react'
 
@@ -14,15 +16,26 @@ function cellAlign(align: string | undefined): TCellAlign | undefined {
 }
 
 /** The elements of a Markdown table, rendered with the Frontier table. */
-export const tableComponents = {
-  table: (props: ComponentPropsWithoutRef<'table'>): ReactElement => <Table {...props} />,
-  thead: (props: ComponentPropsWithoutRef<'thead'>): ReactElement => <Table.Header {...props} />,
-  tbody: (props: ComponentPropsWithoutRef<'tbody'>): ReactElement => <Table.Body {...props} />,
-  tr: (props: ComponentPropsWithoutRef<'tr'>): ReactElement => <Table.Row {...props} />,
-  th: ({ align, ...props }: ComponentPropsWithoutRef<'th'>): ReactElement => (
-    <Table.Head {...props} align={cellAlign(align)} />
-  ),
-  td: ({ align, ...props }: ComponentPropsWithoutRef<'td'>): ReactElement => (
-    <Table.Cell {...props} align={cellAlign(align)} />
-  ),
+export function DocsTable(props: ComponentPropsWithoutRef<'table'>): ReactElement {
+  return <Table {...props} />
+}
+
+export function DocsTableHeader(props: ComponentPropsWithoutRef<'thead'>): ReactElement {
+  return <Table.Header {...props} />
+}
+
+export function DocsTableBody(props: ComponentPropsWithoutRef<'tbody'>): ReactElement {
+  return <Table.Body {...props} />
+}
+
+export function DocsTableRow(props: ComponentPropsWithoutRef<'tr'>): ReactElement {
+  return <Table.Row {...props} />
+}
+
+export function DocsTableHead({ align, ...props }: ComponentPropsWithoutRef<'th'>): ReactElement {
+  return <Table.Head {...props} align={cellAlign(align)} />
+}
+
+export function DocsTableCell({ align, ...props }: ComponentPropsWithoutRef<'td'>): ReactElement {
+  return <Table.Cell {...props} align={cellAlign(align)} />
 }

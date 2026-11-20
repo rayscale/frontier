@@ -1,56 +1,27 @@
-import { Tabs } from '@rayscale/frontier'
-import { lazy, type ReactElement, Suspense, useEffect, useMemo, useState } from 'react'
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
-import { loadDemo, loadDemoSource } from '#/docs/demos.js'
+import type { ReactElement } from 'react'
 
-import { HighlightedCode } from './docs-code-block.js'
-import { useDocsPage } from './docs-context.js'
+import { demoLocation } from '#/docs/demos.js'
+import { contentDirectory } from '#/docs/pages.js'
+import type { TDocsPage } from '#/docs/types.js'
 
-/** A live example with its source. `name` is the camelCase name of a file in the page's `demos` folder. */
-export function Demo({ name }: { name: string }): ReactElement {
-  const page = useDocsPage()
-  const [source, setSource] = useState<string | null>(null)
-  const Example = useMemo(
-    () => lazy(async () => ({ default: await loadDemo(page, name) })),
-    [page, name],
-  )
+import { DemoView } from './demo-view.js'
 
-  useEffect(() => {
-    let active = true
+/**
+ * A live example with its source. `name` is the camelCase name of a file in the page's `demos`
+ * folder. The source is read while the site is built; the example loads in the browser.
+ */
+export async function Demo({
+  page,
+  name,
+}: {
+  page: TDocsPage
+  name: string
+}): Promise<ReactElement> {
+  const { directory, file } = demoLocation(page, name)
+  const source = await readFile(join(contentDirectory, directory, 'demos', file), 'utf8')
 
-    loadDemoSource(page, name)
-      .then((text) => {
-        if (active) {
-          setSource(text.trim())
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setSource('')
-        }
-      })
-
-    return () => {
-      active = false
-    }
-  }, [page, name])
-
-  return (
-    <Tabs defaultValue="preview" className="docs-demo">
-      <Tabs.List aria-label={`${name} example`}>
-        <Tabs.Trigger value="preview">Preview</Tabs.Trigger>
-        <Tabs.Trigger value="code">Code</Tabs.Trigger>
-      </Tabs.List>
-      <Tabs.Content value="preview">
-        <div className="docs-demo__preview">
-          <Suspense fallback={<p role="status">Loading example…</p>}>
-            <Example />
-          </Suspense>
-        </div>
-      </Tabs.Content>
-      <Tabs.Content value="code">
-        {source ? <HighlightedCode code={source} language="tsx" title={`${name}.tsx`} /> : null}
-      </Tabs.Content>
-    </Tabs>
-  )
+  return <DemoView directory={directory} file={file} name={name} source={source.trim()} />
 }

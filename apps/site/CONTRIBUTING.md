@@ -1,7 +1,7 @@
 # Contributing to site
 
-`@frontier/site` is the documentation and marketing site of Frontier. It is a Vite and React
-app routed with React Router, and it uses the components, symbols, styles, and typeface of
+`@frontier/site` is the documentation and marketing site of Frontier. It is a Next.js app
+that exports plain static files, and it uses the components, symbols, styles, and typeface of
 [`@rayscale/frontier`](../../packages/frontier/README.md).
 
 Follow the workspace [CONTRIBUTING.md](../../CONTRIBUTING.md) and [AGENTS.md](../../AGENTS.md)
@@ -16,11 +16,9 @@ apps/site/
 │   ├── components/          # site UI: docs shell, theme, header, footer, logo
 │   ├── docs/                # the docs engine: navigation, headings, demos, page registry
 │   ├── layout/              # layouts shared by routes
-│   ├── pages/               # one folder per screen: home, docs, not found
-│   ├── main.tsx             # mounts the router
-│   └── routes.tsx           # the route table; every screen loads on demand
-├── index.html
-└── vite.config.ts           # Vite, MDX, and the docs manifest plugin
+│   └── pages/               # one folder per screen: home, covers, not found
+├── app/                     # the routes: layouts, pages, and metadata
+└── next.config.ts           # static export and the `.js` extension alias
 ```
 
 Import across the source with the `#/` alias, for example `#/docs/navigation.js`.
@@ -29,14 +27,25 @@ Import across the source with the `#/` alias, for example `#/docs/navigation.js`
 
 The engine in `source/docs/` has no React in it where it can avoid it, so it stays easy to test.
 
-- `build/manifest.ts` and `build/plugin.ts` scan `content/` at build time and expose the pages as
-  the `virtual:docs-manifest` module. Editing a page reloads the dev server.
+- `build/manifest.ts` scans `content/` and lists the pages. `pages.ts` runs it once on the server and
+  derives the tree and the reading order; `compile.ts` turns the MDX of a page into a component.
+  Editing a page shows up on the next request of the dev server.
 - `navigation.ts` builds the sidebar tree, the reading order, and the breadcrumbs from the pages.
 - `headings.ts` collects the headings that the table of contents links to.
-- `demos.ts` resolves the examples in a page's `demos` folder and their source text.
-- `pages.ts` joins the manifest with the lazily loaded content of each page.
+- `demos.ts` locates the examples in a page's `demos` folder.
 
 Keep decisions in these pure modules and test them. Components only render what they return.
+
+## Server and client code
+
+Next renders every page to HTML while the site is built. The pages in `app/` and the docs engine run
+on the server; the interactive parts run in the browser too.
+
+- `@rayscale/frontier` is not marked for the server, so a file that imports a component or a hook
+  from it starts with `'use client'`. Do the same for a file that uses hooks or browser APIs.
+- The server reads `content/`, compiles the MDX, and hands the result to client components as
+  children or serializable props. Keep functions and class instances out of those props.
+- Set the title of a page with the `metadata` export of its route, not with an effect.
 
 ## Writing documentation
 
@@ -67,6 +76,8 @@ Keep decisions in these pure modules and test them. Components only render what 
   a default export.
 - Reference it by its camelCase name: `<Demo name="withSymbol" />`.
 - Demos use the real Frontier components. They are checked like any other source.
+- A demo is a client component loaded in the browser, so it may use hooks. Do not add a
+  `'use client'` line: the file is shown as written in the Code tab.
 
 ### Component pages
 

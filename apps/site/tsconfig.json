@@ -2,17 +2,25 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "allowJs": false,
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
     "paths": {
       "#/*": ["./source/*"]
     }
   },
   "include": [
+    "next-env.d.ts",
+    "next.config.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
     "source/**/*.ts",
     "source/**/*.tsx",
     "content/**/*.ts",
     "content/**/*.tsx",
-    "vite.config.ts",
-    "vitest.setup.ts"
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage"]
+  "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", ".next", "out"]
 }

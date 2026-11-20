@@ -1,3 +1,5 @@
+'use client'
+
 import { type ReactElement, useState } from 'react'
 
 import { glyphs, metrics } from './metrics.js'

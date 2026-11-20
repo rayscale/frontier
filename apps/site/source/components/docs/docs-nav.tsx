@@ -1,10 +1,13 @@
-import { Button, Drawer, PanelLeft, Tree, type TTreeNode } from '@rayscale/frontier'
-import { type ReactElement, useState } from 'react'
-import { useLocation } from 'react-router'
+'use client'
 
-import { navigationTree, readingOrder } from '#/docs/pages.js'
+import { Button, Drawer, PanelLeft, Tree, type TTreeNode } from '@rayscale/frontier'
+import { usePathname } from 'next/navigation'
+import { type ReactElement, useMemo, useState } from 'react'
+
 import { renderSidebarSymbol } from '#/docs/symbols.js'
 import type { TDocsNavigationNode } from '#/docs/types.js'
+
+import { useDocsNavigation } from './docs-provider.js'
 
 function toTreeNode(node: TDocsNavigationNode): TTreeNode {
   return {
@@ -16,10 +19,10 @@ function toTreeNode(node: TDocsNavigationNode): TTreeNode {
   }
 }
 
-const items = navigationTree.map(toTreeNode)
-
 function DocsTree({ onNavigate }: { onNavigate?: (() => void) | undefined }): ReactElement {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
+  const { navigationTree, readingOrder } = useDocsNavigation()
+  const items = useMemo(() => navigationTree.map(toTreeNode), [navigationTree])
   const clean = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
   const activeId = readingOrder.find((leaf) => leaf.href === clean)?.id
 

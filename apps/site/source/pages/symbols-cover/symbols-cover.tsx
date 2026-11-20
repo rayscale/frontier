@@ -1,5 +1,7 @@
+'use client'
+
 import { Button } from '@rayscale/frontier'
-import { type ReactElement, useEffect } from 'react'
+import type { ReactElement } from 'react'
 
 import { CoverHero } from '#/components/cover/index.js'
 import SymbolGallery from '#/components/docs/symbol-gallery.js'
@@ -8,10 +10,6 @@ import '#/components/cover/cover.css'
 
 /** The cover of the symbols: the whole catalog, searchable, with its usage. */
 export function SymbolsCover(): ReactElement {
-  useEffect(() => {
-    document.title = 'Symbols · Frontier'
-  }, [])
-
   return (
     <main className="cover cover--wide">
       <CoverHero

@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Laptop, Moon, Sun } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 

@@ -18,3 +18,9 @@ storybook-static/
 
 # Local state of the Serena coding tool
 .serena/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo

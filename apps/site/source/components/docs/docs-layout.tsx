@@ -1,17 +1,20 @@
-import type { ReactElement } from 'react'
-import { Outlet } from 'react-router'
+import type { ReactElement, ReactNode } from 'react'
 
 import { SiteHeader } from '#/components/site-header/index.js'
+import { loadDocs } from '#/docs/pages.js'
 
 import { DocsBreadcrumbs } from './docs-breadcrumbs.js'
 import { DocsNav, DocsNavDrawer } from './docs-nav.js'
+import { DocsProvider } from './docs-provider.js'
 
 import './docs.css'
 
 /** The documentation frame: the shared site header, the floating tree, and the page. */
-export function DocsLayout(): ReactElement {
+export async function DocsLayout({ children }: { children: ReactNode }): Promise<ReactElement> {
+  const { pages } = await loadDocs()
+
   return (
-    <>
+    <DocsProvider pages={pages}>
       <SiteHeader />
       <div className="docs-layout">
         <DocsNav />
@@ -20,9 +23,9 @@ export function DocsLayout(): ReactElement {
             <DocsNavDrawer />
             <DocsBreadcrumbs />
           </div>
-          <Outlet />
+          {children}
         </div>
       </div>
-    </>
+    </DocsProvider>
   )
 }

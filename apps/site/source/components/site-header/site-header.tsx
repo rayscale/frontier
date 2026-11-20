@@ -1,6 +1,8 @@
+'use client'
+
 import { Header, NavigationMenu } from '@rayscale/frontier'
+import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
-import { useLocation } from 'react-router'
 
 import { Logo } from '#/components/logo/index.js'
 import { ThemeToggle } from '#/components/theme/index.js'
@@ -17,7 +19,7 @@ const links = [
 
 /** The header of the marketing pages. It collapses its links into a panel on narrow screens. */
 export function SiteHeader(): ReactElement {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
 
   return (
     <Header mode="dynamic" className="site-header">

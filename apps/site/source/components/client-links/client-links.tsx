@@ -1,5 +1,7 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router'
 
 function isPlainLeftClick(event: MouseEvent): boolean {
   return (
@@ -13,12 +15,12 @@ function isPlainLeftClick(event: MouseEvent): boolean {
 }
 
 /**
- * Routes clicks on internal links through React Router. Frontier components
+ * Routes clicks on internal links through the Next.js router. Frontier components
  * render native anchors, so one delegated handler gives every one of them
  * client-side navigation without wrapping each link.
  */
 export function ClientLinks(): null {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   useEffect(() => {
     const handleClick = (event: MouseEvent): void => {
@@ -47,7 +49,7 @@ export function ClientLinks(): null {
       }
 
       event.preventDefault()
-      Promise.resolve(navigate(`${url.pathname}${url.search}${url.hash}`)).catch(() => undefined)
+      router.push(`${url.pathname}${url.search}${url.hash}`)
     }
 
     document.addEventListener('click', handleClick)
@@ -55,7 +57,7 @@ export function ClientLinks(): null {
     return () => {
       document.removeEventListener('click', handleClick)
     }
-  }, [navigate])
+  }, [router])
 
   return null
 }

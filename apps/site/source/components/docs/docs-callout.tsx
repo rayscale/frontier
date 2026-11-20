@@ -1,3 +1,5 @@
+'use client'
+
 import { Callout, CheckCircle, CircleX, Info, TriangleAlert } from '@rayscale/frontier'
 import type { ReactElement, ReactNode } from 'react'
 

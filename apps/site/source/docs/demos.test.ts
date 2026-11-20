@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { demoModulePath, toKebabCase } from './demos.js'
+import { demoLocation, toKebabCase } from './demos.js'
 import type { TDocsPage } from './types.js'
 
 function page(file: string): TDocsPage {
@@ -18,14 +18,15 @@ describe('toKebabCase', () => {
   })
 })
 
-describe('demoModulePath', () => {
+describe('demoLocation', () => {
   it('points at the demos folder next to the page', () => {
-    expect(demoModulePath(page('components/button/index.mdx'), 'withSymbol')).toBe(
-      '/content/components/button/demos/with-symbol.tsx',
-    )
+    expect(demoLocation(page('components/button/index.mdx'), 'withSymbol')).toEqual({
+      directory: 'components/button',
+      file: 'with-symbol.tsx',
+    })
   })
 
-  it('resolves demos of the root page', () => {
-    expect(demoModulePath(page('index.mdx'), 'hello')).toBe('/content/demos/hello.tsx')
+  it('has no folder for the root page', () => {
+    expect(demoLocation(page('index.mdx'), 'hello').directory).toBe('')
   })
 })

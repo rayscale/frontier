@@ -1,3 +1,5 @@
+'use client'
+
 import * as frontier from '@rayscale/frontier'
 import {
   Badge,
@@ -9,7 +11,7 @@ import {
 } from '@rayscale/frontier'
 import { type ReactElement, useState } from 'react'
 
-import { HighlightedCode } from './docs-code-block.js'
+import { HighlightedCode } from './highlighted-code.js'
 
 import './symbol-gallery.css'
 

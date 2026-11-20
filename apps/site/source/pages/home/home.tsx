@@ -1,5 +1,7 @@
+'use client'
+
 import { Button, Card } from '@rayscale/frontier'
-import { type ReactElement, useEffect } from 'react'
+import type { ReactElement } from 'react'
 
 import { PackageManagerTabs } from '#/components/docs/package-manager-tabs.js'
 
@@ -25,10 +27,6 @@ const features = [
 
 /** The landing page. */
 export function Home(): ReactElement {
-  useEffect(() => {
-    document.title = 'Frontier'
-  }, [])
-
   return (
     <main className="home">
       <section className="home__hero" aria-labelledby="home-title">

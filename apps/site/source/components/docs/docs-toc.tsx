@@ -1,3 +1,5 @@
+'use client'
+
 import { TableOfContents } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 

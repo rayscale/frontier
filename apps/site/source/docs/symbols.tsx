@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Home, LayoutGrid, Shapes, type TSymbolComponent, Typeface } from '@rayscale/frontier'
 import type { ReactNode } from 'react'
 

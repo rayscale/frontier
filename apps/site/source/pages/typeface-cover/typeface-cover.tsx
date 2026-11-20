@@ -1,5 +1,7 @@
+'use client'
+
 import { Badge, Button } from '@rayscale/frontier'
-import { type ReactElement, useEffect } from 'react'
+import type { ReactElement } from 'react'
 
 import { GlyphExplorer } from './glyph-explorer.js'
 import { TypeTester } from './type-tester.js'
@@ -10,10 +12,6 @@ import './typeface-cover.css'
 
 /** The cover of the typeface: a tester, and a sample of its characters. */
 export function TypefaceCover(): ReactElement {
-  useEffect(() => {
-    document.title = 'Typeface · Frontier'
-  }, [])
-
   return (
     <main className="cover cover--wide">
       <section className="typeface-cover__hero" aria-labelledby="cover-title">

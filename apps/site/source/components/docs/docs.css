@@ -39,7 +39,7 @@
   padding: var(--frontier-spacing-4) var(--frontier-spacing-6) 0;
 }
 
-.docs-nav-trigger {
+.frontier-button.docs-nav-trigger {
   display: none;
 }
 
@@ -53,7 +53,7 @@
     display: none;
   }
 
-  .docs-nav-trigger {
+  .frontier-button.docs-nav-trigger {
     display: inline-flex;
   }
 

@@ -1,5 +1,7 @@
+'use client'
+
 import { Button } from '@rayscale/frontier'
-import { type ReactElement, useEffect } from 'react'
+import type { ReactElement } from 'react'
 
 import { CoverHero } from '#/components/cover/index.js'
 
@@ -10,10 +12,6 @@ import './components-cover.css'
 
 /** The cover of the components: a live sample of the set, with a way into the documentation. */
 export function ComponentsCover(): ReactElement {
-  useEffect(() => {
-    document.title = 'Components · Frontier'
-  }, [])
-
   return (
     <main className="cover cover--wide">
       <CoverHero

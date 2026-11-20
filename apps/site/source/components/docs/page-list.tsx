@@ -1,13 +1,18 @@
+'use client'
+
 import { Card } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 
-import { pages } from '#/docs/pages.js'
+import type { TDocsPage } from '#/docs/types.js'
 
-import { useDocsPage } from './docs-context.js'
-
-/** Lists the pages directly under the current page as cards. */
-export function PageList(): ReactElement {
-  const current = useDocsPage()
+/** Lists the pages directly under a page as cards. */
+export function PageList({
+  current,
+  pages,
+}: {
+  current: TDocsPage
+  pages: readonly TDocsPage[]
+}): ReactElement {
   const depth = current.path.split('/').length + 1
   const children = pages
     .filter(

@@ -15,3 +15,6 @@ storybook-static/
 
 # Editor/FUSE temp files
 .fuse_hidden*
+
+# Local state of the Serena coding tool
+.serena/

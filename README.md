@@ -36,7 +36,7 @@ The layers are described in [guidelines/](./guidelines/README.md).
 Workspace projects live under `apps/` and `packages/`.
 
 - **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, design tokens, and the Frontier Sans typeface.
-- **[@rayscale/site](./apps/site/README.md)** — The documentation and marketing site, built with React, React Router, and Vite.
+- **[@frontier/site](./apps/site/README.md)** — The documentation and marketing site, built with React, React Router, and Vite.
 
 ## Getting started
 

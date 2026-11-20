@@ -20,7 +20,7 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "storybook": "pnpm --filter @rayscale/frontier storybook",
     "storybook:build": "pnpm --filter @rayscale/frontier storybook:build",
-    "site": "pnpm --filter @rayscale/site dev",
+    "site": "pnpm --filter @frontier/site dev",
     "prepare": "husky"
   },
   "lint-staged": {

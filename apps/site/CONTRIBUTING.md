@@ -1,6 +1,6 @@
 # Contributing to site
 
-`@rayscale/site` is the documentation and marketing site of Frontier. It is a Vite and React
+`@frontier/site` is the documentation and marketing site of Frontier. It is a Vite and React
 app routed with React Router, and it uses the components, symbols, styles, and typeface of
 [`@rayscale/frontier`](../../packages/frontier/README.md).
 
@@ -90,9 +90,9 @@ in a stylesheet next to the component they style, scoped to site classes.
 From the repository root:
 
 ```sh
-pnpm --filter @rayscale/site typecheck
-pnpm --filter @rayscale/site test
-pnpm --filter @rayscale/site build
+pnpm --filter @frontier/site typecheck
+pnpm --filter @frontier/site test
+pnpm --filter @frontier/site build
 pnpm lint
 pnpm format:check
 ```

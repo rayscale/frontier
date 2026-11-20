@@ -27,10 +27,10 @@ The site is a workspace project. Run these from the repository root.
 | Command                                  | Description                             |
 | ---------------------------------------- | --------------------------------------- |
 | `pnpm site`                              | Starts the development server.          |
-| `pnpm --filter @rayscale/site build`     | Builds the site into `apps/site/dist/`. |
-| `pnpm --filter @rayscale/site preview`   | Serves the built site locally.          |
-| `pnpm --filter @rayscale/site test`      | Runs the tests.                         |
-| `pnpm --filter @rayscale/site typecheck` | Type-checks the site.                   |
+| `pnpm --filter @frontier/site build`     | Builds the site into `apps/site/dist/`. |
+| `pnpm --filter @frontier/site preview`   | Serves the built site locally.          |
+| `pnpm --filter @frontier/site test`      | Runs the tests.                         |
+| `pnpm --filter @frontier/site typecheck` | Type-checks the site.                   |
 
 The site imports `@rayscale/frontier`, which is served from the built package. Run `pnpm build` once so that `packages/frontier/dist` exists before starting the development server.
 

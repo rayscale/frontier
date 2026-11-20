@@ -45,13 +45,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build the packages the site uses
-        run: pnpm --filter "@rayscale/site^..." build
+        run: pnpm --filter "@frontier/site^..." build
 
       - name: Test
-        run: pnpm --filter @rayscale/site test
+        run: pnpm --filter @frontier/site test
 
       - name: Type-check
-        run: pnpm --filter @rayscale/site typecheck
+        run: pnpm --filter @frontier/site typecheck
 
       - name: Build
-        run: pnpm --filter @rayscale/site build
+        run: pnpm --filter @frontier/site build

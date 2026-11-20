@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from 'react'
 
 import { revealSelection } from '../helpers/reveal-selection.js'
+
 import '../../../internal/styles/visually-hidden.css'
 
 interface TTimeColumnProps {

@@ -51,8 +51,8 @@
   border-radius: var(--frontier-radius-full);
   color: var(--frontier-color-selected-text);
   transition:
-    background-color var(--frontier-duration-fast) var(--frontier-easing-standard),
-    border-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+    background-color var(--frontier-duration-base) var(--frontier-easing-standard),
+    border-color var(--frontier-duration-base) var(--frontier-easing-standard);
 }
 
 .frontier-checkbox__mark .frontier-icon {
@@ -60,7 +60,7 @@
   height: var(--frontier-icon-size-mark);
   stroke-width: var(--frontier-icon-mark-stroke-width);
   opacity: 0;
-  transition: opacity var(--frontier-duration-fast) var(--frontier-easing-standard);
+  transition: opacity var(--frontier-duration-base) var(--frontier-easing-standard);
 }
 
 .frontier-checkbox__text {

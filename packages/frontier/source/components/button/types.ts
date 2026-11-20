@@ -40,6 +40,8 @@ interface TButtonIconProps {
   'aria-label': string
   disabled?: false
   disabledReason?: never
+  /** An icon-only action is never destructive: destructive actions keep visible text. */
+  variant?: Exclude<TButtonVariant, 'danger'>
 }
 
 interface TButtonDisabledIconProps {
@@ -48,6 +50,8 @@ interface TButtonDisabledIconProps {
   disabledReason: string
   iconOnly: true
   'aria-label': string
+  /** An icon-only action is never destructive: destructive actions keep visible text. */
+  variant?: Exclude<TButtonVariant, 'danger'>
 }
 
 export type TButtonProps = TButtonBaseProps &

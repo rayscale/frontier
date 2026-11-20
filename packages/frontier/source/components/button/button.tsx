@@ -13,6 +13,8 @@ import {
   useState,
 } from 'react'
 
+import { classNames } from '../../internal/helpers/class-names.js'
+
 import type { TButtonProps } from './types.js'
 
 import './button.css'
@@ -27,6 +29,14 @@ function mergeRefs<TNode>(...refs: (Ref<TNode> | undefined)[]): Ref<TNode> {
       }
     }
   }
+}
+
+function ButtonTooltip({ label }: { label: string | undefined }): ReactElement {
+  return (
+    <span className="frontier-button__tooltip" aria-hidden="true">
+      {label}
+    </span>
+  )
 }
 
 export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(props, forwardedRef) {
@@ -52,19 +62,16 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
   const reasonId = useId()
   const [keyPressed, setKeyPressed] = useState(false)
   const unavailable = disabled
-  const classes = [
+  const classes = classNames(
     'frontier-button',
     `frontier-button--${variant}`,
-    iconOnly ? 'frontier-button--icon' : undefined,
+    iconOnly && 'frontier-button--icon',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  )
   const describedBy =
     [ariaDescribedBy, unavailable && disabledReason ? reasonId : undefined]
       .filter(Boolean)
       .join(' ') || undefined
-  const resolvedTitle = unavailable ? disabledReason : (title ?? (iconOnly ? ariaLabel : undefined))
   const reason =
     unavailable && disabledReason ? (
       <span className="frontier-button__reason" id={reasonId}>
@@ -142,9 +149,8 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
     const childAriaLabel =
       typeof childProps['aria-label'] === 'string' ? childProps['aria-label'] : undefined
     const mergedDescribedBy = [childDescribedBy, describedBy].filter(Boolean).join(' ') || undefined
-    const mergedTitle = unavailable
-      ? disabledReason
-      : (childTitle ?? title ?? (iconOnly ? (childAriaLabel ?? ariaLabel) : undefined))
+    const mergedTitle = childTitle ?? title
+    const mergedAriaLabel = childAriaLabel ?? ariaLabel
 
     return (
       <>
@@ -152,10 +158,10 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
           ...rest,
           ...childProps,
           ref: mergeRefs(forwardedRef, child.ref),
-          className: [classes, childClassName].filter(Boolean).join(' '),
+          className: classNames(classes, childClassName),
           'aria-disabled': unavailable ? true : childProps['aria-disabled'],
           'aria-describedby': mergedDescribedBy,
-          'aria-label': childAriaLabel ?? ariaLabel,
+          'aria-label': mergedAriaLabel,
           'data-pressed': keyPressed ? 'key' : undefined,
           title: mergedTitle,
           onBlur: (event: FocusEvent<HTMLElement>) => {
@@ -182,7 +188,10 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
             onClick?.(event)
           },
           children: (
-            <span className="frontier-button__content">{childProps.children as ReactNode}</span>
+            <>
+              <span className="frontier-button__content">{childProps.children as ReactNode}</span>
+              {iconOnly ? <ButtonTooltip label={mergedAriaLabel} /> : null}
+            </>
           ),
         })}
         {reason}
@@ -199,14 +208,16 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
         className={classes}
         aria-disabled={unavailable || undefined}
         aria-describedby={describedBy}
+        aria-label={ariaLabel}
         data-pressed={keyPressed ? 'key' : undefined}
-        title={resolvedTitle}
+        title={title}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
         onBlur={handleBlur}
       >
         <span className="frontier-button__content">{children}</span>
+        {iconOnly ? <ButtonTooltip label={ariaLabel} /> : null}
       </button>
       {reason}
     </>

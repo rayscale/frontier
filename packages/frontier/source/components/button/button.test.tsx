@@ -105,7 +105,7 @@ describe('Button', () => {
     },
   )
 
-  it('renders an icon-only button with its accessible name as the title', () => {
+  it('renders an icon-only button with its name as a tooltip, not a title', () => {
     render(
       <Button iconOnly aria-label="Add item">
         <svg aria-hidden="true" />
@@ -115,7 +115,9 @@ describe('Button', () => {
     const button = screen.getByRole('button', { name: 'Add item' })
 
     expect(button).toHaveClass('frontier-button--icon')
-    expect(button).toHaveAttribute('title', 'Add item')
+    expect(button).not.toHaveAttribute('title')
+    expect(button.querySelector('.frontier-button__tooltip')).toHaveTextContent('Add item')
+    expect(button.querySelector('.frontier-button__tooltip')).toHaveAttribute('aria-hidden', 'true')
   })
 
   it('keeps a disabled button focusable, explains why, and ignores activation', async () => {
@@ -133,7 +135,8 @@ describe('Button', () => {
     expect(button).toHaveAttribute('aria-disabled', 'true')
     expect(button).not.toBeDisabled()
     expect(button).toHaveAccessibleDescription('You need permission to save changes')
-    expect(button).toHaveAttribute('title', 'You need permission to save changes')
+    expect(screen.getByText('You need permission to save changes')).toBeVisible()
+    expect(button).not.toHaveAttribute('title')
 
     await user.tab()
     expect(button).toHaveFocus()

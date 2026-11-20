@@ -44,9 +44,9 @@ interface TRadioGroupDisabledProps {
 export type TRadioGroupProps = TRadioGroupBaseProps &
   (TRadioGroupEnabledProps | TRadioGroupDisabledProps)
 
-export type TRadioGroupItemProps = Omit<
+type TRadioGroupItemBaseProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'checked' | 'defaultChecked' | 'name' | 'required' | 'type' | 'value'
+  'checked' | 'defaultChecked' | 'disabled' | 'name' | 'required' | 'type' | 'value'
 > & {
   /** Value submitted with the form when this option is selected. */
   value: string
@@ -54,6 +54,19 @@ export type TRadioGroupItemProps = Omit<
   label: ReactNode
   /** Helper text announced as the description of the option. */
   description?: ReactNode
-  /** Disables this option only. */
-  disabled?: boolean
 }
+
+interface TRadioGroupItemEnabledProps {
+  disabled?: false
+  disabledReason?: never
+}
+
+interface TRadioGroupItemDisabledProps {
+  /** Disables this option only. */
+  disabled: true
+  /** Explains why the option is unavailable. It replaces the description. */
+  disabledReason: string
+}
+
+export type TRadioGroupItemProps = TRadioGroupItemBaseProps &
+  (TRadioGroupItemEnabledProps | TRadioGroupItemDisabledProps)

@@ -1,5 +1,7 @@
 import { forwardRef, useId, useState } from 'react'
 
+import { classNames } from '../../../internal/helpers/class-names.js'
+import { RequiredMarker } from '../../../internal/primitives/required-marker/required-marker.js'
 import { radioGroupContext } from '../context.js'
 import type { TRadioGroupProps } from '../types.js'
 
@@ -39,9 +41,11 @@ export const RadioGroupRoot = forwardRef<HTMLFieldSetElement, TRadioGroupProps>(
       error ? errorId : undefined,
     ].filter(Boolean)
     const describedBy = describedByIds.length > 0 ? describedByIds.join(' ') : undefined
-    const classes = ['frontier-radio-group', `frontier-radio-group--${orientation}`, className]
-      .filter(Boolean)
-      .join(' ')
+    const classes = classNames(
+      'frontier-radio-group',
+      `frontier-radio-group--${orientation}`,
+      className,
+    )
     const context = {
       disabled: unavailable,
       errorId: error ? errorId : undefined,
@@ -68,13 +72,18 @@ export const RadioGroupRoot = forwardRef<HTMLFieldSetElement, TRadioGroupProps>(
           data-disabled={unavailable ? true : undefined}
           data-invalid={invalidValue ? true : undefined}
         >
-          {label ? <legend className="frontier-radio-group__label">{label}</legend> : null}
+          {label ? (
+            <legend className="frontier-radio-group__label">
+              {label}
+              {required ? <RequiredMarker /> : null}
+            </legend>
+          ) : null}
+          <div className="frontier-radio-group__options">{children}</div>
           {support ? (
             <span className="frontier-radio-group__description" id={descriptionId}>
               {support}
             </span>
           ) : null}
-          <div className="frontier-radio-group__options">{children}</div>
           {error ? (
             <span className="frontier-radio-group__error" id={errorId} role="alert">
               {error}

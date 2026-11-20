@@ -229,12 +229,103 @@ describe('RadioGroup', () => {
     )
 
     for (const radio of screen.getAllByRole('radio')) {
-      expect(radio).toBeDisabled()
+      expect(radio).toHaveAttribute('aria-disabled', 'true')
     }
 
     await user.click(screen.getByText('Pro'))
 
     expect(onValueChange).not.toHaveBeenCalled()
+  })
+
+  it('keeps a disabled group reachable by keyboard without changing the value', async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+
+    render(
+      <RadioGroup
+        label="Plan"
+        defaultValue="free"
+        disabled
+        disabledReason="Your plan is managed by your admin."
+        onValueChange={onValueChange}
+      >
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" />
+      </RadioGroup>,
+    )
+
+    await user.tab()
+    expect(screen.getByRole('radio', { name: 'Free' })).toHaveFocus()
+
+    await user.keyboard('{ArrowDown}{End}{Enter} ')
+
+    expect(onValueChange).not.toHaveBeenCalled()
+    expect(screen.getByRole('radio', { name: 'Free' })).toBeChecked()
+  })
+
+  it('moves the selection to the first and last option with Home and End', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <RadioGroup label="Plan" defaultValue="pro">
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" />
+        <RadioGroup.Item value="team" label="Team" />
+        <RadioGroup.Item value="legacy" label="Legacy" disabled disabledReason="Retired." />
+      </RadioGroup>,
+    )
+
+    await user.tab()
+    await user.keyboard('{End}')
+
+    expect(screen.getByRole('radio', { name: 'Team' })).toBeChecked()
+    expect(screen.getByRole('radio', { name: 'Team' })).toHaveFocus()
+
+    await user.keyboard('{Home}')
+
+    expect(screen.getByRole('radio', { name: 'Free' })).toBeChecked()
+    expect(screen.getByRole('radio', { name: 'Free' })).toHaveFocus()
+  })
+
+  it('selects the focused option with Enter', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <RadioGroup label="Plan">
+        <RadioGroup.Item value="free" label="Free" />
+        <RadioGroup.Item value="pro" label="Pro" />
+      </RadioGroup>,
+    )
+
+    await user.tab()
+    await user.keyboard('{Enter}')
+
+    expect(screen.getByRole('radio', { name: 'Free' })).toBeChecked()
+  })
+
+  it('marks the group label as required', () => {
+    render(
+      <RadioGroup label="Plan" required>
+        <RadioGroup.Item value="free" label="Free" />
+      </RadioGroup>,
+    )
+
+    expect(screen.getByText('Required')).toBeInTheDocument()
+  })
+
+  it('places the description after the options', () => {
+    render(
+      <RadioGroup label="Plan" description="Cancel whenever you want.">
+        <RadioGroup.Item value="free" label="Free" />
+      </RadioGroup>,
+    )
+
+    const description = screen.getByText('Cancel whenever you want.')
+    const option = screen.getByRole('radio', { name: 'Free' })
+
+    expect(
+      option.compareDocumentPosition(description) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
   })
 
   it('cannot select a disabled option', async () => {
@@ -243,13 +334,14 @@ describe('RadioGroup', () => {
     render(
       <RadioGroup label="Plan" defaultValue="free">
         <RadioGroup.Item value="free" label="Free" />
-        <RadioGroup.Item value="pro" label="Pro" disabled />
+        <RadioGroup.Item value="pro" label="Pro" disabled disabledReason="Ask your admin." />
       </RadioGroup>,
     )
 
     const option = screen.getByRole('radio', { name: 'Pro' })
 
     expect(option).toBeDisabled()
+    expect(option).toHaveAccessibleDescription('Ask your admin.')
     expect(option.closest('.frontier-radio-group__item')).toHaveAttribute('data-disabled', 'true')
 
     await user.click(screen.getByText('Pro'))

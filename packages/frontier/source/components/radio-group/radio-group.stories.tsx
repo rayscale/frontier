@@ -177,7 +177,7 @@ export const DisabledOption: TStory = {
           value="pro"
           label="Pro"
           disabled
-          description="Ask your admin to enable it."
+          disabledReason="Ask your admin to enable it."
         />
       </>
     ),

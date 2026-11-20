@@ -106,7 +106,7 @@ export const IconOnly: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows icon-only actions with an accessible name and a hover title.',
+        story: 'Shows icon-only actions with an accessible name and a tooltip on hover and focus.',
       },
     },
   },

@@ -19,6 +19,13 @@ accessible name. Help text explains a constraint before the person encounters it
 Focus is a meaningful state for a field, not an incidental one. The focus treatment follows
 [Focus](../foundations/focus.md). A field with a value and no focus remains visually calm.
 
+When a field takes focus, its boundary takes the focus color and the focus outline grows outward
+from the boundary in a short transition, so the person sees which field is being edited. The
+transition is direct, because it answers an input, and it runs the same way when focus moves on. An invalid field
+keeps its danger boundary. The field keeps its layout size and its content does not move. When a
+person prefers reduced motion, the change is instant. See [Focus](../foundations/focus.md) and
+[Motion](../foundations/motion.md).
+
 ## Suggestions
 
 Suggestions narrow as the person types and keep a stable order where possible. An option that

@@ -39,7 +39,8 @@ A change of state is shown by a short transition so the person can connect the p
 new one. The transition changes what the state already means; it never carries the meaning on its
 own, and it never delays the state itself.
 
-Focus appears immediately. A state that must be read to act, such as an error, is complete on the
+Focus appears immediately, except on a field, where the outline grows from the boundary in a short
+transition. See [Field](../components/field.md). A state that must be read to act, such as an error, is complete on the
 frame it appears. Nothing animates while an element is at rest. See
 [Motion](../foundations/motion.md).
 

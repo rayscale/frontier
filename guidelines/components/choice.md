@@ -30,8 +30,7 @@ and Home and End jump to the first and last option. Enter or Space confirms the 
 
 A disabled option is visible but cannot be selected. The platform skips it when the arrow keys move
 the selection, so it explains why through its own text. A disabled option never receives the
-highlight. If all options are disabled, the group
-itself explains why.
+highlight. If all options are disabled, the group itself explains why and, like any disabled element, stays reachable by keyboard.
 
 ## Popup presentations
 

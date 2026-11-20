@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "typeface",
+  "description": "A capital and a lowercase letter that stand for a typeface.",
+  "keywords": ["typeface", "font", "typography", "letters", "case"],
+  "categories": ["text"],
+  "aliases": ["font", "typography"],
+  "useCases": ["typeface settings", "font picker"]
+}

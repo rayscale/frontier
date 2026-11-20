@@ -987,6 +987,31 @@ export const symbolMetadata: TSymbolMetadata[] = [
     ]
   },
   {
+    "aliases": [
+      "symbols",
+      "icons"
+    ],
+    "categories": [
+      "design"
+    ],
+    "component": "Shapes",
+    "contributors": [],
+    "description": "A triangle, a circle, and a square that stand for a set of symbols.",
+    "keywords": [
+      "shapes",
+      "symbols",
+      "icons",
+      "glyphs",
+      "geometry"
+    ],
+    "name": "shapes",
+    "tags": [],
+    "useCases": [
+      "symbol library",
+      "icon set"
+    ]
+  },
+  {
     "aliases": [],
     "categories": [
       "ui"
@@ -1060,6 +1085,31 @@ export const symbolMetadata: TSymbolMetadata[] = [
     "tags": [],
     "useCases": [
       "warning message"
+    ]
+  },
+  {
+    "aliases": [
+      "font",
+      "typography"
+    ],
+    "categories": [
+      "text"
+    ],
+    "component": "Typeface",
+    "contributors": [],
+    "description": "A capital and a lowercase letter that stand for a typeface.",
+    "keywords": [
+      "typeface",
+      "font",
+      "typography",
+      "letters",
+      "case"
+    ],
+    "name": "typeface",
+    "tags": [],
+    "useCases": [
+      "typeface settings",
+      "font picker"
     ]
   },
   {

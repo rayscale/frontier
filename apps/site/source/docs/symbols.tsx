@@ -1,12 +1,12 @@
-import { Box, Home, Italic, LayoutGrid, Sparkles, type TSymbolComponent } from '@rayscale/frontier'
+import { Box, Home, LayoutGrid, Shapes, type TSymbolComponent, Typeface } from '@rayscale/frontier'
 import type { ReactNode } from 'react'
 
 const sidebarSymbols: { [name: string]: TSymbolComponent | undefined } = {
   box: Box,
   home: Home,
-  italic: Italic,
   'layout-grid': LayoutGrid,
-  sparkles: Sparkles,
+  shapes: Shapes,
+  typeface: Typeface,
 }
 
 /** Renders the sidebar symbol named in a page's frontmatter, if the site knows it. */

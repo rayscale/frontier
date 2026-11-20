@@ -59,6 +59,13 @@ A highlighted item uses the neutral highlight surface. A selected item uses the 
 inverse text. The two states remain distinguishable when they coexist. See
 [Selection](../patterns/selection.md).
 
+## Inverse fill
+
+Primary and selected share one treatment: the strongest neutral as a fill, with the inverse text
+role on top. The same fill marks any small element that must stand out from every surface it can
+float over, such as a tooltip. Contrast with the surface identifies its edge, so an inverse fill
+carries no border. See [Popups](../patterns/popups.md).
+
 ## Surface shift
 
 A control changes its surface when the pointer hovers it or an input is held. A filled control moves

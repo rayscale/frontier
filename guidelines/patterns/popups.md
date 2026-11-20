@@ -38,6 +38,20 @@ rotate, or travel across the page.
 When a person prefers reduced motion, the popup appears and disappears with an instant change or a
 simple fade. It remains fully usable either way. See [Motion](../foundations/motion.md).
 
+## Tooltips
+
+A tooltip names or briefly explains the element it is anchored to. It appears when the pointer rests
+on the element or when the element receives keyboard focus, and it leaves when either ends or when
+Escape is pressed. The pointer waits briefly before the tooltip appears so that crossing a control
+does not flash it; keyboard focus shows it at once.
+
+A tooltip is the exception to the overlay surface: it uses the inverse fill without a border, so it
+reads as a small label above whatever it floats over. See [Colors](../foundations/colors.md).
+
+A tooltip holds plain, short text and nothing interactive. It never carries information that the
+element does not already expose through its own name or description, because touch has no hover and
+assistive technology does not depend on it. See [Accessibility](../foundations/accessibility.md).
+
 ## Contents
 
 Popup content is short enough to scan. Long content scrolls inside the popup instead of extending

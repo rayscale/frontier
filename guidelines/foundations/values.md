@@ -223,7 +223,8 @@ Durations are in milliseconds.
 | Spinner | 800   |
 
 Fast answers a direct input. Base carries a state change. Medium carries a movement across a
-surface. Enter and Exit are used when a temporary surface appears or leaves. Ambient is the slow
+surface. Enter and Exit are used when a temporary surface appears or leaves; a tooltip, which answers hover or
+focus, uses Base to appear and Fast to leave. Ambient is the slow
 rhythm of a loading placeholder. Spinner is the rotation of the indeterminate indicator.
 
 ### Curves

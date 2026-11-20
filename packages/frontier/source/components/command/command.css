@@ -1,0 +1,99 @@
+.frontier-command__dialog .frontier-dialog__body {
+  gap: 0;
+  padding: 0;
+}
+
+.frontier-command__input {
+  padding: var(--frontier-spacing-4) var(--frontier-spacing-4) var(--frontier-spacing-2);
+}
+
+.frontier-command__list-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 var(--frontier-spacing-4) var(--frontier-spacing-4);
+}
+
+.frontier-command__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: min(24rem, 60dvh);
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+
+.frontier-command__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.frontier-command__group-label {
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-3) var(--frontier-spacing-1);
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-xs);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-command__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-3);
+  min-height: var(--frontier-item-height);
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-3);
+  border-radius: var(--frontier-radius-md);
+  font-size: var(--frontier-font-size-md);
+  line-height: var(--frontier-line-height-tight);
+  cursor: pointer;
+  user-select: none;
+  overflow-wrap: anywhere;
+}
+
+.frontier-command__item[data-disabled] {
+  color: var(--frontier-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.frontier-command__item-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-command__item-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.frontier-command__item-description {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+}
+
+.frontier-command__item-shortcut {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--frontier-spacing-1);
+  margin-inline-start: auto;
+}
+
+.frontier-command__empty {
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-4) var(--frontier-spacing-4);
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+}
+
+.frontier-command__separator {
+  height: 1px;
+  margin: var(--frontier-spacing-1) 0;
+  background: var(--frontier-color-border-subtle);
+}

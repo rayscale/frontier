@@ -15,13 +15,13 @@ import './switch.css'
 /** Props for a checkbox exposed with switch semantics. */
 export type TSwitchProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   /** Helper text associated with the switch for assistive technologies. */
-  description?: ReactNode
+  description?: ReactNode | undefined
   /** Error message associated with the switch and announced politely. */
-  error?: ReactNode
+  error?: ReactNode | undefined
   /** Marks the switch as invalid even when no error is displayed. */
-  invalid?: boolean
+  invalid?: boolean | undefined
   /** Visible label associated with the switch. */
-  label?: ReactNode
+  label?: ReactNode | undefined
 }
 
 interface TDragState {

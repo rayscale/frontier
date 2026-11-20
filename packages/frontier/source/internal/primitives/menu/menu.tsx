@@ -24,12 +24,12 @@ export type TMenuAlign = 'start' | 'center' | 'end'
 
 export interface TMenuRootProps {
   /** Controlled open state. */
-  open?: boolean
+  open?: boolean | undefined
   /** Initial open state when uncontrolled. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the menu opens or closes. */
-  onOpenChange?: (open: boolean) => void
-  children?: ReactNode
+  onOpenChange?: ((open: boolean) => void) | undefined
+  children?: ReactNode | undefined
 }
 
 export interface TMenuTriggerProps {
@@ -40,71 +40,71 @@ export interface TMenuTriggerProps {
 export type TMenuContextTriggerProps = ComponentPropsWithoutRef<typeof BaseContextMenu.Trigger>
 
 export type TMenuPopupProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className'> & {
-  className?: string
-  side?: TMenuSide
-  align?: TMenuAlign
-  sideOffset?: number
-  alignOffset?: number
+  className?: string | undefined
+  side?: TMenuSide | undefined
+  align?: TMenuAlign | undefined
+  sideOffset?: number | undefined
+  alignOffset?: number | undefined
 }
 
 export type TMenuItemProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Item>, 'className'> & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuCheckboxItemProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuRadioGroupProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.RadioGroup>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuRadioItemProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export interface TMenuSubmenuRootProps {
   /** Controlled open state of the submenu. */
-  open?: boolean
+  open?: boolean | undefined
   /** Initial open state of the submenu when uncontrolled. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the submenu opens or closes. */
-  onOpenChange?: (open: boolean) => void
-  children?: ReactNode
+  onOpenChange?: ((open: boolean) => void) | undefined
+  children?: ReactNode | undefined
 }
 
 export type TMenuSubmenuTriggerProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuGroupProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Group>, 'className'> & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuGroupLabelProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TMenuSeparatorProps = Omit<
   ComponentPropsWithoutRef<typeof BaseMenu.Separator>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 function classNames(...classNames: (string | undefined)[]): string {
@@ -144,7 +144,7 @@ export function MenuTrigger({ render }: TMenuTriggerProps): ReactElement {
 const MenuSubmenuContext = createContext(false)
 
 type TMenuPopupSurfaceProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className'> & {
-  className?: string
+  className?: string | undefined
 }
 
 /** The styled popup shared by root menus and context menus. */

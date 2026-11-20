@@ -1,0 +1,103 @@
+.frontier-data-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-4);
+  width: 100%;
+  min-width: 0;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-data-table__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--frontier-spacing-3);
+}
+
+.frontier-data-table__filter {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+
+.frontier-data-table__view-options {
+  margin-inline-start: auto;
+}
+
+.frontier-data-table__column-title {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--frontier-control-size-small);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-data-table__sort-button {
+  margin-inline-start: calc(-1 * var(--frontier-spacing-2));
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-data-table__sort-icons {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 1rem;
+  color: var(--frontier-color-text-subtle);
+  line-height: 1;
+}
+
+.frontier-data-table__sort-icons > svg {
+  display: block;
+  flex: none;
+}
+
+.frontier-data-table__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frontier-spacing-3);
+}
+
+.frontier-data-table__selection,
+.frontier-data-table__page-info,
+.frontier-data-table__page-size {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+}
+
+.frontier-data-table__pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--frontier-spacing-4);
+}
+
+.frontier-data-table__page-size {
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  white-space: nowrap;
+}
+
+.frontier-data-table__page-size .frontier-select__trigger {
+  min-width: 4.5rem;
+}
+
+.frontier-data-table__pagination .frontier-pagination {
+  margin: 0;
+}
+
+@media (max-width: 48rem) {
+  .frontier-data-table__pagination {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .frontier-data-table__pagination-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

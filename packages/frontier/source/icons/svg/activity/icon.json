@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "activity",
+  "description": "Represents activity or a pulse.",
+  "keywords": ["activity", "pulse"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["activity feed"]
+}

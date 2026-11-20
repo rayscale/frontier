@@ -7,11 +7,11 @@ export interface TDropdownMenuProps {
   /** Controlled open state. Omit to let the menu manage its own state. */
   open?: boolean | undefined
   /** Initial open state when uncontrolled. Defaults to `false`. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the menu opens or closes. */
   onOpenChange?: ((open: boolean) => void) | undefined
   /** Menu parts, such as `DropdownMenu.Trigger` and `DropdownMenu.Content`. */
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 /** Props for `DropdownMenu.Trigger`. */
@@ -26,13 +26,13 @@ export interface TDropdownMenuTriggerProps {
 /** Props for `DropdownMenu.Content`, which renders the menu popup. */
 export type TDropdownMenuContentProps = ComponentPropsWithoutRef<'div'> & {
   /** Side of the trigger where the menu appears. Defaults to `bottom`, or the inline end for submenus. */
-  side?: TMenuSide
+  side?: TMenuSide | undefined
   /** Alignment along the chosen side. Defaults to `start`. */
-  align?: TMenuAlign
+  align?: TMenuAlign | undefined
   /** Distance in pixels between the trigger and the menu. Defaults to `4`. */
-  sideOffset?: number
+  sideOffset?: number | undefined
   /** Distance in pixels to shift the menu along the aligned edge. */
-  alignOffset?: number
+  alignOffset?: number | undefined
 }
 
 /**
@@ -41,7 +41,7 @@ export type TDropdownMenuContentProps = ComponentPropsWithoutRef<'div'> & {
  */
 export type TDropdownMenuItemProps = ComponentPropsWithoutRef<'div'> & {
   /** Disables the item. Disabled items are skipped by keyboard navigation. */
-  disabled?: boolean
+  disabled?: boolean | undefined
 }
 
 /** Props for `DropdownMenu.Group`. */
@@ -54,13 +54,13 @@ export type TDropdownMenuGroupProps = ComponentPropsWithoutRef<'div'>
  */
 export type TDropdownMenuCheckboxItemProps = ComponentPropsWithoutRef<'div'> & {
   /** Controlled checked state. Omit to let the item manage its own state. */
-  checked?: boolean
+  checked?: boolean | undefined
   /** Initial checked state when uncontrolled. Defaults to `false`. */
-  defaultChecked?: boolean
+  defaultChecked?: boolean | undefined
   /** Called with the new checked state when the item is activated. */
-  onCheckedChange?: (checked: boolean) => void
+  onCheckedChange?: ((checked: boolean) => void) | undefined
   /** Disables the item. Disabled items are skipped by keyboard navigation. */
-  disabled?: boolean
+  disabled?: boolean | undefined
 }
 
 /**
@@ -69,11 +69,11 @@ export type TDropdownMenuCheckboxItemProps = ComponentPropsWithoutRef<'div'> & {
  */
 export type TDropdownMenuRadioGroupProps = ComponentPropsWithoutRef<'div'> & {
   /** Controlled value of the selected radio item. */
-  value?: string
+  value?: string | undefined
   /** Initial value when uncontrolled. */
-  defaultValue?: string
+  defaultValue?: string | undefined
   /** Called with the newly selected value. */
-  onValueChange?: (value: string) => void
+  onValueChange?: ((value: string) => void) | undefined
 }
 
 /**
@@ -84,7 +84,7 @@ export type TDropdownMenuRadioItemProps = ComponentPropsWithoutRef<'div'> & {
   /** TValue this item represents within its `DropdownMenu.RadioGroup`. */
   value: string
   /** Disables the item. Disabled items are skipped by keyboard navigation. */
-  disabled?: boolean
+  disabled?: boolean | undefined
 }
 
 /** Props for `DropdownMenu.GroupLabel`. */
@@ -99,13 +99,13 @@ export type TDropdownMenuSeparatorProps = ComponentPropsWithoutRef<'div'>
  */
 export interface TDropdownMenuSubmenuProps {
   /** Controlled open state of the submenu. */
-  open?: boolean
+  open?: boolean | undefined
   /** Initial open state when uncontrolled. Defaults to `false`. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the submenu opens or closes. */
-  onOpenChange?: (open: boolean) => void
+  onOpenChange?: ((open: boolean) => void) | undefined
   /** A `DropdownMenu.SubmenuTrigger` and a `DropdownMenu.Content`. */
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 /**
@@ -114,5 +114,5 @@ export interface TDropdownMenuSubmenuProps {
  */
 export type TDropdownMenuSubmenuTriggerProps = ComponentPropsWithoutRef<'div'> & {
   /** Disables the trigger so its submenu cannot be opened. */
-  disabled?: boolean
+  disabled?: boolean | undefined
 }

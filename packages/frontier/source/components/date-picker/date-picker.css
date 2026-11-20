@@ -1,0 +1,81 @@
+.frontier-date-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--frontier-control-size-large);
+  margin: 0;
+  padding: 0 var(--frontier-spacing-3);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  border-radius: var(--frontier-radius-lg);
+  background: var(--frontier-color-surface);
+  box-shadow: var(--frontier-shadow-sm);
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-md);
+  line-height: var(--frontier-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard),
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-date-picker__trigger:hover {
+  background: var(--frontier-color-surface-hover);
+}
+
+.frontier-date-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--frontier-color-focus);
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+.frontier-date-picker__trigger[aria-expanded='true'] {
+  border-color: var(--frontier-color-focus);
+}
+
+.frontier-date-picker__trigger[data-readonly] {
+  cursor: default;
+  background: var(--frontier-color-surface-sunken);
+}
+
+.frontier-date-picker__trigger:disabled {
+  border-color: var(--frontier-color-border-disabled);
+  background: var(--frontier-color-disabled);
+  color: var(--frontier-color-on-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.frontier-date-picker__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-date-picker__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.frontier-date-picker__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.frontier-date-picker__value[data-placeholder] {
+  color: var(--frontier-color-text-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-date-picker__trigger {
+    transition: none;
+  }
+}

@@ -11,13 +11,13 @@ export type TButtonSize = 'small' | 'medium' | 'large' | 'icon' | 'icon-small' |
 export type TButtonProps = Omit<HTMLMotionProps<'button'>, 'disabled' | 'children'> & {
   [key: string]: unknown
   /** Button content. Icon-only buttons need an accessible name. */
-  children?: ReactNode
+  children?: ReactNode | undefined
   /** Visual appearance. Defaults to `primary`. */
-  variant?: TButtonVariant
+  variant?: TButtonVariant | undefined
   /** Button size. Defaults to `medium`. */
-  size?: TButtonSize
+  size?: TButtonSize | undefined
   /** Disables the button and its interaction animations. Defaults to `false`. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** When true, renders the child element with button styles and interactions instead of a button element. */
-  asChild?: boolean
+  asChild?: boolean | undefined
 }

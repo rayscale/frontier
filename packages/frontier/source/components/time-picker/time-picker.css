@@ -1,0 +1,180 @@
+.frontier-time-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--frontier-control-size-large);
+  margin: 0;
+  padding: 0 var(--frontier-spacing-3);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  border-radius: var(--frontier-radius-lg);
+  background: var(--frontier-color-surface);
+  box-shadow: var(--frontier-shadow-sm);
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-md);
+  line-height: var(--frontier-line-height-normal);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard),
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-time-picker__trigger:hover {
+  background: var(--frontier-color-surface-hover);
+}
+
+.frontier-time-picker__trigger:focus-visible {
+  outline: none;
+  border-color: var(--frontier-color-focus);
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+.frontier-time-picker__trigger[aria-expanded='true'] {
+  border-color: var(--frontier-color-focus);
+}
+
+.frontier-time-picker__trigger[data-readonly] {
+  cursor: default;
+  background: var(--frontier-color-surface-sunken);
+}
+
+.frontier-time-picker__trigger:disabled {
+  border-color: var(--frontier-color-border-disabled);
+  background: var(--frontier-color-disabled);
+  color: var(--frontier-color-on-disabled);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.frontier-time-picker__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-time-picker__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.frontier-time-picker__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--frontier-font-weight-medium);
+}
+
+.frontier-time-picker__value[data-placeholder] {
+  color: var(--frontier-color-text-subtle);
+  font-weight: var(--frontier-font-weight-regular);
+}
+.frontier-popover.frontier-time-picker__popup {
+  width: max-content;
+  max-width: calc(100vw - var(--frontier-spacing-8));
+  padding: 0;
+}
+
+.frontier-time-picker__panel {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding: var(--frontier-spacing-2);
+}
+.frontier-time-picker__column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0 var(--frontier-spacing-2);
+  border: 0;
+}
+
+.frontier-time-picker__column + .frontier-time-picker__column {
+  border-inline-start: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
+}
+
+.frontier-time-picker__legend {
+  padding: 0 0 var(--frontier-spacing-2);
+  color: var(--frontier-color-text-subtle);
+  font-size: var(--frontier-font-size-xs);
+  font-weight: var(--frontier-font-weight-semibold);
+  text-align: center;
+}
+
+.frontier-time-picker__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-0);
+  max-height: 14rem;
+  overflow-y: auto;
+  padding: var(--frontier-spacing-0);
+}
+
+.frontier-time-picker__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--frontier-spacing-12);
+  min-height: var(--frontier-item-height);
+  padding: 0 var(--frontier-spacing-3);
+  border-radius: var(--frontier-radius-md);
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-md);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.frontier-time-picker__option[data-selected] {
+  color: var(--frontier-color-primary);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-time-picker__option[data-selected]::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  width: 3px;
+  height: var(--frontier-spacing-5);
+  border-radius: var(--frontier-radius-full);
+  background: var(--frontier-color-primary);
+  transform: translateY(-50%);
+}
+
+.frontier-time-picker__option:has(.frontier-time-picker__input:focus-visible) {
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+
+.frontier-time-picker__option[data-disabled] {
+  color: var(--frontier-color-text-disabled);
+  cursor: not-allowed;
+}
+.frontier-time-picker__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-time-picker__trigger,
+  .frontier-time-picker__option {
+    transition: none;
+  }
+}

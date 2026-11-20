@@ -1,0 +1,68 @@
+.frontier-header {
+  --_header-inset: var(--frontier-spacing-3);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--frontier-spacing-4);
+  box-sizing: border-box;
+  padding-inline: var(--frontier-spacing-4);
+  padding-block: var(--frontier-spacing-3);
+  background: var(--frontier-color-surface);
+  border-block-end: var(--frontier-border-width-subtle) solid var(--frontier-color-border-subtle);
+}
+
+.frontier-header--fixed,
+.frontier-header--dynamic {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--frontier-layer-sticky);
+  padding-block-start: calc(var(--frontier-spacing-3) + env(safe-area-inset-top));
+}
+
+.frontier-header--dynamic {
+  transition-property:
+    transform, margin-inline, border-radius, background-color, box-shadow, border-block-end-color,
+    backdrop-filter;
+  transition-duration: var(--frontier-duration-enter);
+  transition-timing-function: var(--frontier-easing-emphasized-decelerate);
+}
+
+.frontier-header--attached {
+  background: transparent;
+  border-block-end-color: transparent;
+}
+
+.frontier-header--floating,
+.frontier-header--hidden {
+  --_header-gutter: clamp(var(--frontier-spacing-2), 2vw, var(--frontier-spacing-6));
+
+  margin-inline: var(--_header-gutter);
+  border-radius: var(--frontier-radius-lg);
+  border-block-end-color: transparent;
+  background: color-mix(in srgb, var(--frontier-color-surface-floating) 80%, transparent);
+  box-shadow: var(--frontier-shadow-sm);
+  transform: translateY(var(--_header-inset));
+}
+
+.frontier-header--floating {
+  backdrop-filter: blur(var(--frontier-blur-medium));
+}
+
+.frontier-header--hidden {
+  transform: translateY(calc(-100% - var(--_header-inset) - var(--frontier-spacing-4)));
+  transition-duration: var(--frontier-duration-exit);
+  transition-timing-function: var(--frontier-easing-emphasized-accelerate);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .frontier-header--floating {
+    background: var(--frontier-color-surface-floating);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-header--dynamic {
+    transition: none;
+  }
+}

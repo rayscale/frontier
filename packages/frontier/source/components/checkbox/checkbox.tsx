@@ -21,11 +21,11 @@ export type TCheckboxProps = Omit<
   'type' | 'aria-checked'
 > & {
   /** Helper text associated with the checkbox for assistive technologies. */
-  description?: ReactNode
+  description?: ReactNode | undefined
   /** Enables the native indeterminate state. Defaults to `false`. */
-  indeterminate?: boolean
+  indeterminate?: boolean | undefined
   /** Visible label associated with the checkbox. */
-  label?: ReactNode
+  label?: ReactNode | undefined
 }
 
 /**

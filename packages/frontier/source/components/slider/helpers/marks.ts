@@ -4,7 +4,7 @@ import type { TSliderMark } from '../types.js'
 
 interface TResolvedSliderMark {
   value: number
-  label?: ReactNode
+  label?: ReactNode | undefined
 }
 
 export function hasMarkLabel(label: ReactNode): boolean {

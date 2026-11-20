@@ -18,59 +18,59 @@ export type TSliderProps = Omit<
   | 'onChange'
 > & {
   /** Helper text associated with the slider for assistive technologies. */
-  description?: ReactNode
+  description?: ReactNode | undefined
   /** TValue selected initially when the slider is uncontrolled. */
-  defaultValue?: TSliderValue
+  defaultValue?: TSliderValue | undefined
   /** Disables interaction with the slider. Defaults to `false`. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** Message associated with an invalid slider. */
-  error?: ReactNode
+  error?: ReactNode | undefined
   /** Options used to format numeric values with `Intl.NumberFormat`. */
-  format?: Intl.NumberFormatOptions
+  format?: Intl.NumberFormatOptions | undefined
   /** Form identifier when the slider is submitted. */
-  form?: string
+  form?: string | undefined
   /** Returns a display and accessible value string for each numeric value. */
-  formatValue?: (value: number) => string
+  formatValue?: ((value: number) => string) | undefined
   /** Visible label associated with the slider. */
-  label?: ReactNode
+  label?: ReactNode | undefined
   /** Maximum allowed value. Defaults to `100`. */
-  max?: number
+  max?: number | undefined
   /** Minimum allowed value. Defaults to `0`. */
-  min?: number
+  min?: number | undefined
   /** Minimum distance between range thumbs, in steps. Defaults to `0`. */
-  minStepsBetweenValues?: number
+  minStepsBetweenValues?: number | undefined
   /** Visible marks. A numeric mark is displayed without a label. */
-  marks?: readonly TSliderMark[]
+  marks?: readonly TSliderMark[] | undefined
   /** Adds marks at this interval, including the minimum and maximum. */
-  markInterval?: number
+  markInterval?: number | undefined
   /** Form name used when the slider is submitted. */
-  name?: string
+  name?: string | undefined
   /** Called with the new numeric value or range when the slider changes. */
-  onValueChange?: (value: TSliderValue) => void
+  onValueChange?: ((value: TSliderValue) => void) | undefined
   /** Called when the value is committed after an interaction. */
-  onValueCommitted?: (value: TSliderValue) => void
+  onValueCommitted?: ((value: TSliderValue) => void) | undefined
   /** Horizontal by default; vertical sliders are supported. */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: 'horizontal' | 'vertical' | undefined
   /** Disables interaction without removing the current value from forms. */
-  readOnly?: boolean
+  readOnly?: boolean | undefined
   /** Marks the slider as required for assistive technology. */
-  required?: boolean
+  required?: boolean | undefined
   /** Distance between selectable values. Defaults to `1`. */
-  step?: number
+  step?: number | undefined
   /** Displays the current value beside the label. Defaults to `false`. */
-  showValue?: boolean
+  showValue?: boolean | undefined
   /** Thumb labels, in value order, for range sliders. */
-  thumbLabels?: readonly string[]
+  thumbLabels?: readonly string[] | undefined
   /** How thumbs align at the endpoints. Defaults to `center`. */
-  thumbAlignment?: 'center' | 'edge' | 'edge-client-only'
+  thumbAlignment?: 'center' | 'edge' | 'edge-client-only' | undefined
   /** How range thumbs behave when they collide. Defaults to `push`. */
-  thumbCollisionBehavior?: 'push' | 'swap' | 'none'
+  thumbCollisionBehavior?: 'push' | 'swap' | 'none' | undefined
   /** Locale passed to `Intl.NumberFormat`. */
-  locale?: Intl.LocalesArgument
+  locale?: Intl.LocalesArgument | undefined
   /** Larger keyboard increment. Defaults to `10`. */
-  largeStep?: number
+  largeStep?: number | undefined
   /** Marks the slider as invalid even when no error is displayed. */
-  invalid?: boolean
+  invalid?: boolean | undefined
   /** Current value when the slider is controlled. */
-  value?: TSliderValue
+  value?: TSliderValue | undefined
 }

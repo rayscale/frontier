@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-text",
+  "description": "Represents a text document.",
+  "keywords": ["file", "text", "document"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["document"]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "square-pen",
+  "description": "Edits content.",
+  "keywords": ["edit", "pen", "write"],
+  "categories": ["actions"],
+  "aliases": [],
+  "useCases": ["edit item"]
+}

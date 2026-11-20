@@ -5,7 +5,7 @@ import { classNames } from '../../internal/helpers/class-names.js'
 import './form.css'
 
 export type TFormProps = Omit<ComponentProps<'form'>, 'className'> & {
-  className?: string
+  className?: string | undefined
 }
 
 /**

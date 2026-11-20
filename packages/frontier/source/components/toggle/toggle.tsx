@@ -18,19 +18,19 @@ export type TToggleProps = Omit<
   'aria-pressed' | 'value'
 > & {
   /** Content of the toggle. Icon-only toggles need an accessible name. */
-  children?: ReactNode
+  children?: ReactNode | undefined
   /** Unique string value when the toggle is used within a toggle group. */
-  value?: string
+  value?: string | undefined
   /** Whether the toggle is pressed in controlled mode. */
-  pressed?: boolean
+  pressed?: boolean | undefined
   /** Initial pressed state in uncontrolled mode. Defaults to `false`. */
-  defaultPressed?: boolean
+  defaultPressed?: boolean | undefined
   /** Called when the pressed state changes. */
-  onPressedChange?: (pressed: boolean) => void
+  onPressedChange?: ((pressed: boolean) => void) | undefined
   /** Visual appearance. Defaults to `default`. */
-  variant?: TToggleVariant
+  variant?: TToggleVariant | undefined
   /** Visual size. Defaults to `medium`. */
-  size?: TToggleSize
+  size?: TToggleSize | undefined
 }
 
 /** Renders an independently controlled two-state button. */

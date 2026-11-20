@@ -7,7 +7,7 @@ import './link.css'
 /** Props for {@link Link}. Accepts all native anchor attributes. */
 export type TLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   /** Shows a trailing arrow after the label. Defaults to `false`. */
-  arrow?: boolean
+  arrow?: boolean | undefined
 }
 
 /**

@@ -17,27 +17,27 @@ export type TScrollAreaEdgeEffect = 'none' | 'fade' | 'blur'
 
 export type TScrollAreaProps = Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'style'> & {
   /** Axes that can scroll. Overflow on the other axis is clipped. Defaults to `vertical`. */
-  orientation?: TScrollAreaOrientation
+  orientation?: TScrollAreaOrientation | undefined
   /**
    * Which custom scrollbar orientations to show. Defaults to `none`.
    * Orientation options are limited to the axes enabled by `orientation`.
    * `auto` shows those bars on hover or while scrolling; legacy `visible` shows
    * both enabled axes and `hidden` is equivalent to `none`.
    */
-  scrollbar?: TScrollAreaScrollbar
+  scrollbar?: TScrollAreaScrollbar | undefined
   /**
    * Edge indicator for the sides that have hidden content in the scroll direction. Defaults to `none`.
    */
-  edgeEffect?: TScrollAreaEdgeEffect
+  edgeEffect?: TScrollAreaEdgeEffect | undefined
   /**
    * Length of the edge effect, such as `"24px"`. Defaults to `24px`.
    */
-  edgeEffectSize?: string
+  edgeEffectSize?: string | undefined
   /** Applied to the root wrapper. */
-  className?: string
+  className?: string | undefined
   /** Applied to the root wrapper. */
-  style?: CSSProperties
-  children?: ReactNode
+  style?: CSSProperties | undefined
+  children?: ReactNode | undefined
 }
 
 /**

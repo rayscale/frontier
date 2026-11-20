@@ -1,0 +1,209 @@
+.frontier-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-3);
+  min-width: 0;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-sm);
+}
+.frontier-calendar__header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-calendar__title-container {
+  min-width: 0;
+  justify-self: center;
+}
+
+.frontier-calendar__title {
+  display: inline-block;
+  font-weight: var(--frontier-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.frontier-calendar__nav-icon {
+  width: var(--frontier-spacing-4);
+  height: var(--frontier-spacing-4);
+}
+.frontier-calendar__viewport {
+  position: relative;
+  overflow: hidden;
+  padding: var(--frontier-spacing-1);
+}
+
+.frontier-calendar__month {
+  width: 100%;
+}
+.frontier-calendar__grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.frontier-calendar__month:not([data-active]) {
+  pointer-events: none;
+}
+
+.frontier-calendar__weekday {
+  padding: 0 0 var(--frontier-spacing-1);
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-xs);
+  font-weight: var(--frontier-font-weight-medium);
+  text-align: center;
+}
+
+.frontier-calendar__weekday abbr {
+  text-decoration: none;
+  cursor: default;
+}
+
+.frontier-calendar__cell {
+  padding: 0;
+  text-align: center;
+}
+.frontier-calendar__day {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--frontier-spacing-10);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  padding: 0;
+  border: var(--frontier-border-width-subtle) solid transparent;
+  border-radius: var(--frontier-radius-full);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    transform var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+.frontier-calendar__day:active {
+  background: var(--frontier-color-surface-active);
+  transform: scale(0.94);
+}
+
+.frontier-calendar__day:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+.frontier-calendar__day[data-outside] {
+  color: var(--frontier-color-text-subtle);
+}
+
+.frontier-calendar__day[data-today] {
+  border-color: var(--frontier-color-border-strong);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-calendar__day[data-selected] {
+  border-color: transparent;
+  background: var(--frontier-color-primary);
+  color: var(--frontier-color-on-primary);
+}
+
+.frontier-calendar__day[data-selected]:hover {
+  background: var(--frontier-color-primary);
+  opacity: 0.9;
+}
+.frontier-calendar__cell {
+  position: relative;
+}
+
+.frontier-calendar__cell[data-in-range] {
+  --_calendar-range-color: color-mix(in srgb, var(--frontier-color-primary) 14%, transparent);
+}
+
+.frontier-calendar__cell[data-in-range][data-preview] {
+  --_calendar-range-color: color-mix(in srgb, var(--frontier-color-primary) 7%, transparent);
+}
+
+.frontier-calendar__cell::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: var(--frontier-spacing-10);
+  translate: 0 -50%;
+  background: var(--_calendar-range-color, transparent);
+  opacity: 0;
+  scale: 0.85 1;
+  pointer-events: none;
+  transition:
+    opacity var(--frontier-duration-fast) var(--frontier-easing-standard),
+    scale var(--frontier-duration-fast) var(--frontier-easing-standard),
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-calendar__cell[data-in-range]::before {
+  opacity: 1;
+  scale: 1 1;
+}
+
+.frontier-calendar__cell[data-range-start]::before {
+  inset-inline-start: 50%;
+}
+
+.frontier-calendar__cell[data-range-end]::before {
+  inset-inline-end: 50%;
+}
+
+.frontier-calendar__cell[data-range-start][data-range-end]::before {
+  opacity: 0;
+}
+
+tr > .frontier-calendar__cell:first-child[data-in-range]::before {
+  border-start-start-radius: var(--frontier-radius-full);
+  border-end-start-radius: var(--frontier-radius-full);
+}
+
+tr > .frontier-calendar__cell:last-child[data-in-range]::before {
+  border-start-end-radius: var(--frontier-radius-full);
+  border-end-end-radius: var(--frontier-radius-full);
+}
+.frontier-calendar__day[data-selected][data-preview] {
+  opacity: 0.6;
+}
+.frontier-calendar__day[aria-disabled='true'] {
+  color: var(--frontier-color-text-disabled);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.frontier-calendar__day[aria-disabled='true']:hover,
+.frontier-calendar__day[aria-disabled='true']:active {
+  background: transparent;
+  transform: none;
+}
+.frontier-calendar--disabled .frontier-calendar__day {
+  opacity: 0.6;
+}
+
+.frontier-calendar__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-calendar__day,
+  .frontier-calendar__cell::before {
+    transition: none;
+  }
+}

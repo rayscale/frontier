@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "archive",
+  "description": "Stores an item out of the way.",
+  "keywords": ["archive", "box", "store"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["archive item"]
+}

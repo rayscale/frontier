@@ -8,13 +8,13 @@ export type TDialogSize = 'small' | 'medium' | 'large'
 /** Props for the {@link Dialog} root component. */
 export interface TDialogProps {
   /** Controlled open state. Omit to let the dialog manage its own state. */
-  open?: boolean
+  open?: boolean | undefined
   /** Initial open state when uncontrolled. Defaults to `false`. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the dialog opens or closes. */
-  onOpenChange?: (open: boolean) => void
+  onOpenChange?: ((open: boolean) => void) | undefined
   /** Dialog parts, such as `Dialog.Trigger` and `Dialog.Content`. */
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 /** Props for `Dialog.Trigger`. */
@@ -26,11 +26,11 @@ export interface TDialogTriggerProps {
 /** Props for `Dialog.Content`, which renders the modal popup. */
 export type TDialogContentProps = HTMLAttributes<HTMLDivElement> & {
   /** Width of the dialog. Defaults to `medium`. */
-  size?: TDialogSize
+  size?: TDialogSize | undefined
   /** Shows a close button in the top-right corner. Defaults to `true`. */
-  showCloseButton?: boolean
+  showCloseButton?: boolean | undefined
   /** Closes the dialog when the backdrop is clicked. Defaults to `true`. */
-  closeOnBackdropClick?: boolean
+  closeOnBackdropClick?: boolean | undefined
 }
 
 /** Props for `Dialog.Header`. */

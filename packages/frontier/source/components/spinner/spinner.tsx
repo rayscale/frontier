@@ -10,11 +10,11 @@ export type TSpinnerSize = 'small' | 'medium' | 'large'
 /** Props for {@link Spinner}, in addition to native `span` attributes. */
 export type TSpinnerProps = HTMLAttributes<HTMLSpanElement> & {
   /** Additional CSS class for the status element. */
-  className?: string
+  className?: string | undefined
   /** Accessible status name. Defaults to `Loading`; `aria-label` takes precedence. */
-  label?: string
+  label?: string | undefined
   /** Indicator size. Defaults to `medium`. */
-  size?: TSpinnerSize
+  size?: TSpinnerSize | undefined
 }
 
 /** Renders a decorative loading icon inside an accessible status element. */

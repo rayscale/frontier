@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "folder",
+  "description": "Represents a folder.",
+  "keywords": ["folder", "directory"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["folder"]
+}

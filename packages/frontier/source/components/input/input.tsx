@@ -6,21 +6,21 @@ import { Field } from '../field/field.js'
 /** Props for an input with an optional label, description, error, and adornments. */
 export type TInputProps = InputHTMLAttributes<HTMLInputElement> & {
   /** Helper text associated with the input for assistive technologies. */
-  description?: ReactNode
+  description?: ReactNode | undefined
   /** Error message associated with the input; also marks it as invalid. */
-  error?: ReactNode
+  error?: ReactNode | undefined
   /** Marks the input as invalid even when no error is displayed. */
-  invalid?: boolean
+  invalid?: boolean | undefined
   /** Visible label associated with the native input. */
-  label?: ReactNode
+  label?: ReactNode | undefined
   /** Decorative or interactive content displayed before the value. */
-  leadingIcon?: ReactNode
+  leadingIcon?: ReactNode | undefined
   /** Prevents assistive technologies from hiding the leading adornment. */
-  leadingIconInteractive?: boolean
+  leadingIconInteractive?: boolean | undefined
   /** Decorative or interactive content displayed after the value. */
-  trailingIcon?: ReactNode
+  trailingIcon?: ReactNode | undefined
   /** Prevents assistive technologies from hiding the trailing adornment. */
-  trailingIconInteractive?: boolean
+  trailingIconInteractive?: boolean | undefined
 }
 
 /**

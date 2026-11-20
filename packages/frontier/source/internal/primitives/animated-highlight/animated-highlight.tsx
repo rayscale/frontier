@@ -17,12 +17,12 @@ import './animated-highlight.css'
 /** Props for {@link AnimatedHighlight}. */
 export interface TAnimatedHighlightProps {
   /** Extra class for component-specific shape, such as corner radii. */
-  className?: string
+  className?: string | undefined
   /**
    * Morphs the corner radius to match the highlighted item, so circular and
    * rounded items keep their shape while the highlight moves between them.
    */
-  followTargetShape?: boolean
+  followTargetShape?: boolean | undefined
 }
 
 /**

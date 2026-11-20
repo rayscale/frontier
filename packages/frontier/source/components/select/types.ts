@@ -4,23 +4,23 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 /** Props for the select root. Options are declared as `Select.Item` children. */
 export interface TSelectProps {
   /** Selected option value. Pass `null` for no selection. */
-  value?: string | null
+  value?: string | null | undefined
   defaultValue?: string | null | undefined
   onValueChange?: ((value: string | null) => void) | undefined
-  open?: boolean
-  defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
+  open?: boolean | undefined
+  defaultOpen?: boolean | undefined
+  onOpenChange?: ((open: boolean) => void) | undefined
   disabled?: boolean | undefined
-  readOnly?: boolean
+  readOnly?: boolean | undefined
   required?: boolean | undefined
   /** Field name used when the select is submitted with a form. */
   name?: string | undefined
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 /** Base UI props with `className` narrowed to a string, since One composes class names directly. */
 type TWithStringClassName<TProps extends { className?: unknown }> = Omit<TProps, 'className'> & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TSelectLabelProps = TWithStringClassName<
@@ -40,10 +40,10 @@ export type TSelectIconProps = TWithStringClassName<
 >
 
 export type TSelectContentProps = ComponentPropsWithoutRef<'div'> & {
-  side?: 'top' | 'bottom' | 'left' | 'right'
-  align?: 'start' | 'center' | 'end'
-  sideOffset?: number
-  alignOffset?: number
+  side?: 'top' | 'bottom' | 'left' | 'right' | undefined
+  align?: 'start' | 'center' | 'end' | undefined
+  sideOffset?: number | undefined
+  alignOffset?: number | undefined
 }
 
 export type TSelectListProps = TWithStringClassName<

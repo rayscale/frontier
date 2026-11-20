@@ -11,8 +11,8 @@ const dragThreshold = 3
 export interface TSelectorBounds {
   left: number
   width: number
-  top?: number
-  height?: number
+  top?: number | undefined
+  height?: number | undefined
 }
 
 interface TSelectorDragState {
@@ -24,7 +24,7 @@ interface TSelectorDragState {
 
 export interface TSelectorDragItem<TValue extends string> {
   value: TValue
-  disabled?: boolean
+  disabled?: boolean | undefined
 }
 
 interface TUseSelectorDragOptions<TValue extends string> {
@@ -38,7 +38,7 @@ interface TUseSelectorDragOptions<TValue extends string> {
   onSelect: (value: TValue) => void
   measureIndicator: () => void
   selectedValue: TValue | undefined
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: 'horizontal' | 'vertical' | undefined
 }
 
 export function useSelectorDrag<TValue extends string>({

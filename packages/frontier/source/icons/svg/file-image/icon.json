@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-image",
+  "description": "Represents an image file.",
+  "keywords": ["file", "image", "picture"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["image file"]
+}

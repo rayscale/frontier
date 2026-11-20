@@ -11,13 +11,13 @@ export type TPopoverAlign = 'start' | 'center' | 'end'
 /** Props for the {@link Popover} root component. */
 export interface TPopoverProps {
   /** Controlled open state. Omit to let the popover manage its own state. */
-  open?: boolean
+  open?: boolean | undefined
   /** Initial open state when uncontrolled. Defaults to `false`. */
-  defaultOpen?: boolean
+  defaultOpen?: boolean | undefined
   /** Called with the requested open state when the popover opens or closes. */
-  onOpenChange?: (open: boolean) => void
+  onOpenChange?: ((open: boolean) => void) | undefined
   /** Popover parts, such as `Popover.Trigger` and `Popover.Content`. */
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 /** Props for `Popover.Trigger`. */
@@ -29,13 +29,13 @@ export interface TPopoverTriggerProps {
 /** Props for `Popover.Content`, which renders the non-modal popup. */
 export type TPopoverContentProps = HTMLAttributes<HTMLDivElement> & {
   /** Side of the trigger where the popup appears. Defaults to `bottom`. */
-  side?: TPopoverSide
+  side?: TPopoverSide | undefined
   /** Alignment along the chosen side. Defaults to `center`. */
-  align?: TPopoverAlign
+  align?: TPopoverAlign | undefined
   /** Distance in pixels between the trigger and the popup. Defaults to `8`. */
-  sideOffset?: number
+  sideOffset?: number | undefined
   /** Distance in pixels to shift the popup along the aligned edge. Defaults to `0`. */
-  alignOffset?: number
+  alignOffset?: number | undefined
 }
 
 /** Props for `Popover.Header`. */

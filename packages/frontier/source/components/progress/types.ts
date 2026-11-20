@@ -29,7 +29,7 @@ type TProgressBaseProps = Omit<
   'children' | 'role' | 'aria-valuemin' | 'aria-valuemax' | 'aria-valuenow' | 'aria-valuetext'
 > & {
   /** Additional CSS class for the progress element. */
-  className?: string
+  className?: string | undefined
   /**
    * Current progress. Omit it for indeterminate progress. Values are clamped
    * to `0` through `max`; `NaN` is treated as indeterminate.
@@ -39,39 +39,39 @@ type TProgressBaseProps = Omit<
    * TValue that represents completion. Defaults to `100`. Zero, negative, and
    * non-finite values fall back to `100`.
    */
-  max?: number
+  max?: number | undefined
   /**
    * Track thickness. For linear progress this is the bar height; for circular
    * progress it is the ring's stroke width, capped at half the diameter. A
    * number is treated as pixels, and any other string is used as CSS.
    */
-  thickness?: number | (string & NonNullable<unknown>)
+  thickness?: number | (string & NonNullable<unknown>) | undefined
   /**
    * Indicator color. A One token name maps to its color token, and any other
    * string is used as CSS as provided. Defaults to the primary color.
    */
-  color?: TProgressColor | (string & NonNullable<unknown>)
+  color?: TProgressColor | (string & NonNullable<unknown>) | undefined
   /**
    * Track color. A One token name maps to its border token, and any other
    * string is used as CSS as provided. Defaults to the standard border color.
    */
-  trackColor?: TProgressTrackColor | (string & NonNullable<unknown>)
+  trackColor?: TProgressTrackColor | (string & NonNullable<unknown>) | undefined
   /** Animation for changes and indeterminate movement. Defaults to `smooth`. */
-  animation?: TProgressAnimation
+  animation?: TProgressAnimation | undefined
 }
 
 /** Props for a linear {@link Progress}, the default variant. */
 export type TProgressLinearProps = TProgressBaseProps & {
   /** Visual shape. Defaults to `linear`. */
-  variant?: 'linear'
+  variant?: 'linear' | undefined
   /** Track thickness preset. Defaults to `medium`. */
-  size?: TProgressSize
+  size?: TProgressSize | undefined
   /**
    * Track corner radius. A One radius token name maps to its token, a
    * number is treated as pixels, and any other string is used as CSS. Defaults
    * to a pill shape.
    */
-  radius?: TProgressRadiusToken | number | (string & NonNullable<unknown>)
+  radius?: TProgressRadiusToken | number | (string & NonNullable<unknown>) | undefined
 }
 
 /** Props for a circular {@link Progress}. */
@@ -82,9 +82,9 @@ export type TProgressCircularProps = TProgressBaseProps & {
    * Ring diameter. A preset maps to a One spacing size, a number is treated
    * as pixels, and any other string is used as CSS. Defaults to `medium`.
    */
-  size?: TProgressSize | number | (string & NonNullable<unknown>)
+  size?: TProgressSize | number | (string & NonNullable<unknown>) | undefined
   /** Not applicable to circular progress, which always renders a round ring. */
-  radius?: never
+  radius?: undefined
 }
 
 /** Props for {@link Progress}, in addition to native `div` attributes. */

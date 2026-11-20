@@ -10,11 +10,11 @@ export interface TSegmentedControlOption<TValue extends string = string> {
   /** Unique value for this option. */
   value: TValue
   /** Whether this option is disabled. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** Optional icon displayed alongside the label. */
-  icon?: ReactNode
+  icon?: ReactNode | undefined
   /** Optional explicit accessible name for the option. */
-  'aria-label'?: string
+  'aria-label'?: string | undefined
 }
 
 /** Props for a single-selection options group. */
@@ -25,17 +25,17 @@ export type TSegmentedControlProps<TValue extends string = string> = Omit<
   /** Options displayed in the group. */
   options: readonly TSegmentedControlOption<TValue>[]
   /** Selected value in controlled mode. */
-  value?: TValue
+  value?: TValue | undefined
   /** Initial value in uncontrolled mode. */
-  defaultValue?: TValue
+  defaultValue?: TValue | undefined
   /** Called with the selected value when the selection changes. */
-  onChange?: (value: TValue) => void
+  onChange?: ((value: TValue) => void) | undefined
   /** Disables all options. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** Visual size. Defaults to `medium`. */
-  size?: TSegmentedControlSize
+  size?: TSegmentedControlSize | undefined
   /** Name shared by native radio inputs for form submission. */
-  name?: string
+  name?: string | undefined
   /** Optional visible group label rendered above the control. */
-  label?: ReactNode
+  label?: ReactNode | undefined
 }

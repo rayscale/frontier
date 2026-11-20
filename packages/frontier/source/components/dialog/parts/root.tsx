@@ -46,7 +46,7 @@ export function DialogTrigger({ children }: TDialogTriggerProps): ReactElement {
   useDialogContext('Dialog.Trigger')
 
   const trigger: ReactElement<{ onClick?: MouseEventHandler<HTMLElement> }> = isValidElement<{
-    onClick?: MouseEventHandler<HTMLElement>
+    onClick?: MouseEventHandler<HTMLElement> | undefined
   }>(children) ? (
     children
   ) : (

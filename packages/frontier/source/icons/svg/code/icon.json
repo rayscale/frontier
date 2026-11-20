@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "code",
+  "description": "Represents source code.",
+  "keywords": ["code", "developer"],
+  "categories": ["development"],
+  "aliases": [],
+  "useCases": ["code block"]
+}

@@ -11,14 +11,14 @@ export type TAutoSizeAxis = 'vertical' | 'horizontal' | 'both'
 /** Props for {@link AutoSize}. */
 export interface TAutoSizeProps {
   /** Which dimensions animate when the content size changes. Defaults to `vertical`. */
-  axis?: TAutoSizeAxis
+  axis?: TAutoSizeAxis | undefined
   /** Spring or tween applied to each size change. Defaults to the layout spring. */
-  transition?: TAutoSizeTransition
+  transition?: TAutoSizeTransition | undefined
   /** Extra class for component-specific layout. */
-  className?: string
+  className?: string | undefined
   /** Ref to the animated container element. */
-  ref?: Ref<HTMLDivElement>
-  children?: ReactNode
+  ref?: Ref<HTMLDivElement> | undefined
+  children?: ReactNode | undefined
 }
 
 /** Motion options accepted for each size change. */

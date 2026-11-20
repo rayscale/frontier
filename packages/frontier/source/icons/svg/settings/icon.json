@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "settings",
+  "description": "Opens settings.",
+  "keywords": ["settings", "gear", "preferences"],
+  "categories": ["ui"],
+  "aliases": [],
+  "useCases": ["settings"]
+}

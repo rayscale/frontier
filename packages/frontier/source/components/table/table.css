@@ -1,0 +1,97 @@
+.frontier-table__scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border-subtle);
+  border-radius: var(--frontier-radius-lg);
+  background-color: var(--frontier-color-surface);
+}
+
+.frontier-table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+}
+
+.frontier-table__caption {
+  caption-side: bottom;
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-4);
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-xs);
+  text-align: start;
+}
+
+.frontier-table__header {
+  background-color: var(--frontier-color-surface-sunken);
+}
+
+.frontier-table__head {
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-4);
+  border-block-end: var(--frontier-border-width-subtle) solid var(--frontier-color-border);
+  color: var(--frontier-color-text-muted);
+  font-weight: var(--frontier-font-weight-semibold);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.frontier-table__body .frontier-table__row:not(:last-child) .frontier-table__cell {
+  border-block-end: var(--frontier-border-width-subtle) solid var(--frontier-color-border-subtle);
+}
+
+.frontier-table__row {
+  transition: background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-table__body .frontier-table__row:hover {
+  background-color: var(--frontier-color-surface-hover);
+}
+
+.frontier-table__row[data-state='selected'] {
+  background-color: var(--frontier-color-surface-highlight);
+}
+
+.frontier-table__cell {
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-4);
+  vertical-align: middle;
+  text-align: start;
+}
+
+.frontier-table__head--center,
+.frontier-table__cell--center {
+  text-align: center;
+}
+
+.frontier-table__head--end,
+.frontier-table__cell--end {
+  text-align: end;
+}
+
+.frontier-table__cell--end {
+  font-variant-numeric: tabular-nums;
+}
+
+.frontier-table__footer {
+  background-color: var(--frontier-color-surface-sunken);
+  font-weight: var(--frontier-font-weight-medium);
+}
+
+.frontier-table__footer .frontier-table__cell {
+  border-block-start: var(--frontier-border-width-subtle) solid var(--frontier-color-border);
+}
+
+@media (max-width: 40rem) {
+  .frontier-table__head,
+  .frontier-table__cell {
+    padding-inline: var(--frontier-spacing-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-table__row {
+    transition: none;
+  }
+}

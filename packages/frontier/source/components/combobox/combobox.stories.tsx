@@ -1,0 +1,474 @@
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { CSSProperties, SyntheticEvent } from 'react'
+import { useState } from 'react'
+
+import { Button } from '../button/button.js'
+
+import {
+  Combobox,
+  type TComboboxOption,
+  type TComboboxOptionGroup,
+  type TComboboxProps,
+} from './combobox.js'
+
+const meta = {
+  parameters: {
+    layout: 'centered',
+  },
+  title: 'Components/Combobox',
+  component: Combobox,
+  tags: ['autodocs'],
+} satisfies Meta<typeof Combobox>
+
+export default meta
+
+type TStory = StoryObj<Partial<TComboboxProps>>
+
+const fruitOptions: readonly TComboboxOption[] = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'apricot', label: 'Apricot' },
+  { value: 'banana', label: 'Banana' },
+  { value: 'blackberry', label: 'Blackberry' },
+  { value: 'blueberry', label: 'Blueberry' },
+  { value: 'cherry', label: 'Cherry' },
+  { value: 'grape', label: 'Grape' },
+  { value: 'kiwi', label: 'Kiwi' },
+  { value: 'lemon', label: 'Lemon' },
+  { value: 'mango', label: 'Mango' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'papaya', label: 'Papaya' },
+]
+
+const fruitOptionsWithDisabled: readonly TComboboxOption[] = fruitOptions.map((option) => ({
+  ...option,
+  disabled: option.value === 'blackberry' || option.value === 'papaya',
+}))
+
+const groupedOptions: readonly TComboboxOptionGroup[] = [
+  {
+    label: 'Frontend',
+    items: [
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'svelte', label: 'Svelte' },
+    ],
+  },
+  {
+    label: 'Backend',
+    items: [
+      { value: 'node', label: 'Node.js' },
+      { value: 'go', label: 'Go' },
+      { value: 'rust', label: 'Rust' },
+    ],
+  },
+]
+
+const longOptions: readonly TComboboxOption[] = Array.from({ length: 200 }, (_, index) => ({
+  value: `item-${String(index + 1)}`,
+  label: `Option ${String(index + 1)}`,
+}))
+
+const stackStyle: CSSProperties = {
+  display: 'grid',
+  gap: '1rem',
+  width: 'min(100%, 22rem)',
+}
+
+const narrowStyle: CSSProperties = {
+  display: 'grid',
+  gap: '1rem',
+  width: '12rem',
+}
+
+const formStyle: CSSProperties = {
+  display: 'grid',
+  gap: '1rem',
+  width: 'min(100%, 22rem)',
+  margin: 0,
+}
+
+function ControlledCombobox() {
+  const [value, setValue] = useState<string | null>('banana')
+
+  return (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions} value={value} onValueChange={setValue}>
+        <Combobox.Input label="Fruit" placeholder="Search fruit" />
+        <Combobox.Content>
+          <Combobox.List />
+        </Combobox.Content>
+      </Combobox>
+      <p>Selected value: {value ?? 'none'}</p>
+      <Button
+        variant="secondary"
+        onClick={() => {
+          setValue(null)
+        }}
+      >
+        Reset selection
+      </Button>
+    </div>
+  )
+}
+
+function RequiredFormCombobox() {
+  const [submitted, setSubmitted] = useState<string | null>(null)
+
+  function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const fruit = formData.get('fruit')
+    setSubmitted(typeof fruit === 'string' ? fruit : '')
+  }
+
+  return (
+    <form style={formStyle} onSubmit={handleSubmit}>
+      <Combobox items={fruitOptions} name="fruit" required>
+        <Combobox.Input
+          label="Favorite fruit"
+          description="Required. Choose one option."
+          placeholder="Search fruit"
+        />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No fruit found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+      <Button type="submit" variant="primary">
+        Save preference
+      </Button>
+      {submitted !== null && <p>Saved value: {submitted}</p>}
+    </form>
+  )
+}
+
+function RealisticFormExample() {
+  const [submitted, setSubmitted] = useState<string | null>(null)
+
+  function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    setSubmitted([formData.get('framework'), formData.get('language')].map(String).join(' / '))
+  }
+
+  return (
+    <form style={formStyle} onSubmit={handleSubmit}>
+      <Combobox items={groupedOptions} name="framework">
+        <Combobox.Input
+          label="Framework"
+          placeholder="Search frameworks"
+          description="Grouped by layer."
+        />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No frameworks match your search.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+      <Combobox items={fruitOptions} name="language">
+        <Combobox.Input label="Preferred language" placeholder="Search" />
+        <Combobox.Content>
+          <Combobox.List />
+        </Combobox.Content>
+      </Combobox>
+      <Button type="submit" variant="primary">
+        Create project
+      </Button>
+      {submitted !== null && <p>Submitted: {submitted}</p>}
+    </form>
+  )
+}
+
+export const Default: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Single-select combobox with a searchable list of options.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions}>
+        <Combobox.Input label="Fruit" placeholder="Search fruit" />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No fruit found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Searchable: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Typing filters the list. Press Arrow keys to move through the matches.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions}>
+        <Combobox.Input label="Search fruit" placeholder="Type to filter" />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No fruit found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Preselected: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The combobox starts with a selected value shown in the input.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions} defaultValue="mango">
+        <Combobox.Input label="Fruit" />
+        <Combobox.Content>
+          <Combobox.List />
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Clearable: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A clear button removes the selection and returns focus to the input.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions} defaultValue="kiwi">
+        <Combobox.Input label="Fruit">
+          <Combobox.Clear />
+          <Combobox.Trigger />
+        </Combobox.Input>
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No fruit found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Disabled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The whole combobox is disabled and cannot be focused or opened.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions} disabled defaultValue="lemon">
+        <Combobox.Input label="Fruit" />
+        <Combobox.Trigger />
+        <Combobox.Content>
+          <Combobox.List />
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const DisabledOptions: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Individual options can be disabled. They can be highlighted but cannot be selected.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptionsWithDisabled}>
+        <Combobox.Input label="Fruit" placeholder="Search fruit" />
+        <Combobox.Content>
+          <Combobox.List />
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Grouped: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Options grouped under labeled headings. Filtering keeps the groups intact.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={groupedOptions}>
+        <Combobox.Input label="Technology" placeholder="Search technologies" />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No technology found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const CustomContent: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A custom option renderer that adds a secondary line to each item.',
+      },
+    },
+  },
+  render: () => {
+    const people: readonly TComboboxOption[] = [
+      { value: 'ada', label: 'Ada Lovelace' },
+      { value: 'grace', label: 'Grace Hopper' },
+      { value: 'linus', label: 'Linus Torvalds' },
+    ]
+
+    return (
+      <div style={stackStyle}>
+        <Combobox items={people}>
+          <Combobox.Input label="Maintainer" placeholder="Search people" />
+          <Combobox.Content>
+            <Combobox.List>
+              {(option) => (
+                <Combobox.Item value={option.value}>
+                  <span>
+                    <strong>{option.label}</strong>
+                    <br />
+                    <small>Role: {option.value}</small>
+                  </span>
+                </Combobox.Item>
+              )}
+            </Combobox.List>
+            <Combobox.Empty>No people found.</Combobox.Empty>
+          </Combobox.Content>
+        </Combobox>
+      </div>
+    )
+  },
+}
+
+export const Empty: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The empty state appears when no option matches the query.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={fruitOptions}>
+        <Combobox.Input label="Fruit" placeholder="Try typing “zzz”" />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No fruit matches your search.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const LongList: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A long list scrolls inside the popup while the popup height stays bounded.',
+      },
+    },
+  },
+  render: () => (
+    <div style={stackStyle}>
+      <Combobox items={longOptions}>
+        <Combobox.Input label="Option" placeholder="Search 200 options" />
+        <Combobox.Content>
+          <Combobox.List />
+          <Combobox.Empty>No option found.</Combobox.Empty>
+        </Combobox.Content>
+      </Combobox>
+    </div>
+  ),
+}
+
+export const Controlled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Controlled value and open state managed by the consumer.',
+      },
+    },
+  },
+  render: () => <ControlledCombobox />,
+}
+
+export const RequiredForm: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A required combobox submitted inside a native form.',
+      },
+    },
+  },
+  render: () => <RequiredFormCombobox />,
+}
+
+export const Narrow: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A narrow container. The popup matches the input width and flips when there is no space.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}>
+      <div style={narrowStyle}>
+        <Combobox items={fruitOptions}>
+          <Combobox.Input label="Fruit" placeholder="Search" />
+          <Combobox.Content>
+            <Combobox.List />
+            <Combobox.Empty>No fruit found.</Combobox.Empty>
+          </Combobox.Content>
+        </Combobox>
+      </div>
+      <div style={{ ...narrowStyle, marginTop: 'auto' }}>
+        <Combobox items={fruitOptions}>
+          <Combobox.Input label="Opens upward" placeholder="Search" />
+          <Combobox.Content side="top" align="end">
+            <Combobox.List />
+          </Combobox.Content>
+        </Combobox>
+      </div>
+    </div>
+  ),
+}
+
+export const RealisticForm: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Several comboboxes in a realistic form with groups and a submit action.',
+      },
+    },
+  },
+  render: () => <RealisticFormExample />,
+}

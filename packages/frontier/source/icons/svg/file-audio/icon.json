@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-audio",
+  "description": "Represents an audio file.",
+  "keywords": ["file", "audio", "sound"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["audio file"]
+}

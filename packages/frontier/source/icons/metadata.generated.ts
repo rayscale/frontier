@@ -7,6 +7,61 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "status"
+    ],
+    "component": "Activity",
+    "contributors": [],
+    "description": "Represents activity or a pulse.",
+    "keywords": [
+      "activity",
+      "pulse"
+    ],
+    "name": "activity",
+    "tags": [],
+    "useCases": [
+      "activity feed"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "Archive",
+    "contributors": [],
+    "description": "Stores an item out of the way.",
+    "keywords": [
+      "archive",
+      "box",
+      "store"
+    ],
+    "name": "archive",
+    "tags": [],
+    "useCases": [
+      "archive item"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows"
+    ],
+    "component": "ArrowDown",
+    "contributors": [],
+    "description": "Points down.",
+    "keywords": [
+      "arrow",
+      "down"
+    ],
+    "name": "arrow-down",
+    "tags": [],
+    "useCases": [
+      "sort descending"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "arrows",
       "ui"
     ],
@@ -24,6 +79,24 @@ export const iconMetadata: TIconMetadata[] = [
     "useCases": [
       "next",
       "go forward"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows"
+    ],
+    "component": "ArrowUp",
+    "contributors": [],
+    "description": "Points up.",
+    "keywords": [
+      "arrow",
+      "up"
+    ],
+    "name": "arrow-up",
+    "tags": [],
+    "useCases": [
+      "sort ascending"
     ]
   },
   {
@@ -49,6 +122,25 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "communication"
+    ],
+    "component": "Bell",
+    "contributors": [],
+    "description": "Represents notifications.",
+    "keywords": [
+      "bell",
+      "notification",
+      "alert"
+    ],
+    "name": "bell",
+    "tags": [],
+    "useCases": [
+      "notifications"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "text"
     ],
     "component": "Bold",
@@ -68,21 +160,19 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
-      "time",
-      "ui"
+      "objects"
     ],
-    "component": "Calendar",
+    "component": "Box",
     "contributors": [],
-    "description": "Represents a date or a schedule.",
+    "description": "Represents a package or an object.",
     "keywords": [
-      "calendar",
-      "date",
-      "schedule"
+      "box",
+      "package"
     ],
-    "name": "calendar",
+    "name": "box",
     "tags": [],
     "useCases": [
-      "pick date"
+      "package"
     ]
   },
   {
@@ -236,6 +326,44 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "arrows"
+    ],
+    "component": "ChevronsLeft",
+    "contributors": [],
+    "description": "Jumps to the first item.",
+    "keywords": [
+      "chevrons",
+      "first",
+      "left"
+    ],
+    "name": "chevrons-left",
+    "tags": [],
+    "useCases": [
+      "first page"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows"
+    ],
+    "component": "ChevronsRight",
+    "contributors": [],
+    "description": "Jumps to the last item.",
+    "keywords": [
+      "chevrons",
+      "last",
+      "right"
+    ],
+    "name": "chevrons-right",
+    "tags": [],
+    "useCases": [
+      "last page"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "shapes"
     ],
     "component": "Circle",
@@ -332,6 +460,193 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "development"
+    ],
+    "component": "Code",
+    "contributors": [],
+    "description": "Represents source code.",
+    "keywords": [
+      "code",
+      "developer"
+    ],
+    "name": "code",
+    "tags": [],
+    "useCases": [
+      "code block"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "actions"
+    ],
+    "component": "Copy",
+    "contributors": [],
+    "description": "Copies content.",
+    "keywords": [
+      "copy",
+      "duplicate",
+      "clipboard"
+    ],
+    "name": "copy",
+    "tags": [],
+    "useCases": [
+      "copy text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "ui"
+    ],
+    "component": "Ellipsis",
+    "contributors": [],
+    "description": "Shows that more options are available.",
+    "keywords": [
+      "ellipsis",
+      "more",
+      "dots"
+    ],
+    "name": "ellipsis",
+    "tags": [],
+    "useCases": [
+      "more actions"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "File",
+    "contributors": [],
+    "description": "Represents a file.",
+    "keywords": [
+      "file",
+      "document"
+    ],
+    "name": "file",
+    "tags": [],
+    "useCases": [
+      "file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FileAudio",
+    "contributors": [],
+    "description": "Represents an audio file.",
+    "keywords": [
+      "file",
+      "audio",
+      "sound"
+    ],
+    "name": "file-audio",
+    "tags": [],
+    "useCases": [
+      "audio file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FileImage",
+    "contributors": [],
+    "description": "Represents an image file.",
+    "keywords": [
+      "file",
+      "image",
+      "picture"
+    ],
+    "name": "file-image",
+    "tags": [],
+    "useCases": [
+      "image file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FilePlus",
+    "contributors": [],
+    "description": "Adds a file.",
+    "keywords": [
+      "file",
+      "add",
+      "new"
+    ],
+    "name": "file-plus",
+    "tags": [],
+    "useCases": [
+      "new file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FileText",
+    "contributors": [],
+    "description": "Represents a text document.",
+    "keywords": [
+      "file",
+      "text",
+      "document"
+    ],
+    "name": "file-text",
+    "tags": [],
+    "useCases": [
+      "document"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FileVideo",
+    "contributors": [],
+    "description": "Represents a video file.",
+    "keywords": [
+      "file",
+      "video",
+      "movie"
+    ],
+    "name": "file-video",
+    "tags": [],
+    "useCases": [
+      "video file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "Folder",
+    "contributors": [],
+    "description": "Represents a folder.",
+    "keywords": [
+      "folder",
+      "directory"
+    ],
+    "name": "folder",
+    "tags": [],
+    "useCases": [
+      "folder"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "files"
     ],
     "component": "FolderOpen",
@@ -346,6 +661,25 @@ export const iconMetadata: TIconMetadata[] = [
     "tags": [],
     "useCases": [
       "empty folder"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "navigation"
+    ],
+    "component": "Home",
+    "contributors": [],
+    "description": "Represents the home page.",
+    "keywords": [
+      "home",
+      "house",
+      "start"
+    ],
+    "name": "home",
+    "tags": [],
+    "useCases": [
+      "home page"
     ]
   },
   {
@@ -465,6 +799,25 @@ export const iconMetadata: TIconMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "communication"
+    ],
+    "component": "Mail",
+    "contributors": [],
+    "description": "Represents email.",
+    "keywords": [
+      "mail",
+      "email",
+      "message"
+    ],
+    "name": "mail",
+    "tags": [],
+    "useCases": [
+      "email"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "actions",
       "ui"
     ],
@@ -500,6 +853,43 @@ export const iconMetadata: TIconMetadata[] = [
     "tags": [],
     "useCases": [
       "dark theme"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "layout"
+    ],
+    "component": "PanelLeft",
+    "contributors": [],
+    "description": "Toggles a side panel.",
+    "keywords": [
+      "panel",
+      "sidebar",
+      "left"
+    ],
+    "name": "panel-left",
+    "tags": [],
+    "useCases": [
+      "sidebar toggle"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "Paperclip",
+    "contributors": [],
+    "description": "Attaches a file.",
+    "keywords": [
+      "paperclip",
+      "attach"
+    ],
+    "name": "paperclip",
+    "tags": [],
+    "useCases": [
+      "attachment"
     ]
   },
   {
@@ -582,6 +972,25 @@ export const iconMetadata: TIconMetadata[] = [
     "categories": [
       "ui"
     ],
+    "component": "Settings",
+    "contributors": [],
+    "description": "Opens settings.",
+    "keywords": [
+      "settings",
+      "gear",
+      "preferences"
+    ],
+    "name": "settings",
+    "tags": [],
+    "useCases": [
+      "settings"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "ui"
+    ],
     "component": "Sparkles",
     "contributors": [],
     "description": "Marks something new or highlighted.",
@@ -594,6 +1003,25 @@ export const iconMetadata: TIconMetadata[] = [
     "tags": [],
     "useCases": [
       "new feature"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "actions"
+    ],
+    "component": "SquarePen",
+    "contributors": [],
+    "description": "Edits content.",
+    "keywords": [
+      "edit",
+      "pen",
+      "write"
+    ],
+    "name": "square-pen",
+    "tags": [],
+    "useCases": [
+      "edit item"
     ]
   },
   {

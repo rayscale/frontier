@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-plus",
+  "description": "Adds a file.",
+  "keywords": ["file", "add", "new"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["new file"]
+}

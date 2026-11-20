@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "box",
+  "description": "Represents a package or an object.",
+  "keywords": ["box", "package"],
+  "categories": ["objects"],
+  "aliases": [],
+  "useCases": ["package"]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "arrow-up",
+  "description": "Points up.",
+  "keywords": ["arrow", "up"],
+  "categories": ["arrows"],
+  "aliases": [],
+  "useCases": ["sort ascending"]
+}

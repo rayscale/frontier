@@ -1,0 +1,56 @@
+.frontier-collapsible {
+  min-width: 0;
+  color: inherit;
+  font-family: inherit;
+}
+.frontier-collapsible__trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--frontier-radius-xs);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.frontier-collapsible__trigger:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+.frontier-collapsible__trigger:disabled {
+  color: var(--frontier-color-text-disabled);
+  cursor: not-allowed;
+}
+.frontier-collapsible__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+.frontier-collapsible__content[hidden] {
+  display: none;
+}
+
+.frontier-collapsible__content[data-open] {
+  grid-template-rows: 1fr;
+}
+.frontier-collapsible__content[data-starting-style] {
+  grid-template-rows: 0fr;
+}
+
+.frontier-collapsible__content-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-collapsible__trigger,
+  .frontier-collapsible__content {
+    transition: none;
+  }
+}

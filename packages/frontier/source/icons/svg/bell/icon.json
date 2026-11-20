@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "bell",
+  "description": "Represents notifications.",
+  "keywords": ["bell", "notification", "alert"],
+  "categories": ["communication"],
+  "aliases": [],
+  "useCases": ["notifications"]
+}

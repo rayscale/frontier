@@ -14,9 +14,9 @@ export type TPagerProps = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
   /** Next destination. Omit it on the last page. */
   next?: TPagerItem | undefined
   /** Label for the previous direction. Defaults to `Previous`. */
-  previousLabel?: string
+  previousLabel?: string | undefined
   /** Label for the next direction. Defaults to `Next`. */
-  nextLabel?: string
+  nextLabel?: string | undefined
   /** Accessible name of the navigation landmark. Defaults to `Pagination`. */
-  label?: string
+  label?: string | undefined
 }

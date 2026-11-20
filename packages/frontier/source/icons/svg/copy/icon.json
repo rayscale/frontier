@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "copy",
+  "description": "Copies content.",
+  "keywords": ["copy", "duplicate", "clipboard"],
+  "categories": ["actions"],
+  "aliases": [],
+  "useCases": ["copy text"]
+}

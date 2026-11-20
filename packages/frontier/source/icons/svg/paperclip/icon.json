@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "paperclip",
+  "description": "Attaches a file.",
+  "keywords": ["paperclip", "attach"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["attachment"]
+}

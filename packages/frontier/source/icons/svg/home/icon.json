@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "home",
+  "description": "Represents the home page.",
+  "keywords": ["home", "house", "start"],
+  "categories": ["navigation"],
+  "aliases": [],
+  "useCases": ["home page"]
+}

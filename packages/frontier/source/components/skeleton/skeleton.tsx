@@ -16,19 +16,19 @@ export type TSkeletonRadiusToken = TRadiusToken
 /** Props for {@link Skeleton}, in addition to native `span` attributes. */
 export type TSkeletonProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
   /** Additional CSS class for the placeholder element. */
-  className?: string
+  className?: string | undefined
   /**
    * Placeholder animation. Defaults to `shimmer`. Both animations are disabled
    * when the user prefers reduced motion.
    */
-  animation?: TSkeletonAnimation
+  animation?: TSkeletonAnimation | undefined
   /**
    * Border radius. A One token name maps to its radius token, a number is
    * treated as pixels, and any other string is used as CSS as provided.
    */
-  radius?: TSkeletonRadiusToken | number | (string & NonNullable<unknown>)
+  radius?: TSkeletonRadiusToken | number | (string & NonNullable<unknown>) | undefined
   /** Placeholder height. A number is treated as pixels. */
-  height?: number | (string & NonNullable<unknown>)
+  height?: number | (string & NonNullable<unknown>) | undefined
   /** Placeholder width. A number is treated as pixels. */
   width?: number | (string & NonNullable<unknown>) | undefined
   /**
@@ -37,7 +37,7 @@ export type TSkeletonProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> &
    * is set. When both dimensions are set, they are honored as given, so the
    * result can be an ellipse.
    */
-  variant?: TSkeletonVariant
+  variant?: TSkeletonVariant | undefined
 }
 
 /**

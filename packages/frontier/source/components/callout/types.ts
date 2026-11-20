@@ -8,26 +8,26 @@ export type TCalloutRole = 'note' | 'alert' | 'status'
 
 export type TCalloutProps = HTMLAttributes<HTMLDivElement> & {
   /** Semantic tone of the message. Defaults to `info`. */
-  tone?: TCalloutTone
+  tone?: TCalloutTone | undefined
   /** Accessible role. Use `alert` only for urgent, time-sensitive messages. */
-  role?: TCalloutRole
-  children?: ReactNode
+  role?: TCalloutRole | undefined
+  children?: ReactNode | undefined
 }
 
 export type TCalloutIconProps = HTMLAttributes<HTMLSpanElement> & {
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 export type TCalloutContentProps = HTMLAttributes<HTMLDivElement> & {
-  children?: ReactNode
+  children?: ReactNode | undefined
 }
 
 export type TCalloutTitleProps = HTMLAttributes<HTMLElement> & {
   /** Element to render. Defaults to `p`. */
-  as?: 'p' | 'div' | 'h2' | 'h3' | 'h4'
-  children?: ReactNode
+  as?: 'p' | 'div' | 'h2' | 'h3' | 'h4' | undefined
+  children?: ReactNode | undefined
 }
 
 export type TCalloutActionsProps = HTMLAttributes<HTMLDivElement> & {
-  children?: ReactNode
+  children?: ReactNode | undefined
 }

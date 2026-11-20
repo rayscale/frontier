@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
 import {
-  Calendar,
   CalendarDays,
   CalendarRange,
   Clock,
@@ -252,7 +251,7 @@ function InteractivePeriodDemo() {
           {
             label: 'Day',
             value: 'day',
-            icon: <Calendar aria-hidden="true" />,
+            icon: <CalendarDays aria-hidden="true" />,
           },
           {
             label: 'Week',

@@ -5,7 +5,7 @@ type TBaseFieldProps<TPart extends keyof typeof BaseField> = Omit<
   ComponentProps<(typeof BaseField)[TPart]>,
   'className'
 > & {
-  className?: string
+  className?: string | undefined
 }
 
 export type TFieldRootProps = TBaseFieldProps<'Root'>

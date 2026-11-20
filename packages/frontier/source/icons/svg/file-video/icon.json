@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "file-video",
+  "description": "Represents a video file.",
+  "keywords": ["file", "video", "movie"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["video file"]
+}

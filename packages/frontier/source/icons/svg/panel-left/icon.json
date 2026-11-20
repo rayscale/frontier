@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "panel-left",
+  "description": "Toggles a side panel.",
+  "keywords": ["panel", "sidebar", "left"],
+  "categories": ["layout"],
+  "aliases": [],
+  "useCases": ["sidebar toggle"]
+}

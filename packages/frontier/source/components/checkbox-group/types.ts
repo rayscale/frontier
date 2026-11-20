@@ -8,17 +8,17 @@ export type TCheckboxGroupProps = Omit<
   'defaultValue' | 'onChange' | 'value'
 > & {
   /** Visible group label, rendered as the fieldset legend. */
-  label?: ReactNode
+  label?: ReactNode | undefined
   /** Helper text associated with the group for assistive technologies. */
-  description?: ReactNode
+  description?: ReactNode | undefined
   /** Values selected initially when the group is uncontrolled. Defaults to none. */
-  defaultValue?: readonly string[]
+  defaultValue?: readonly string[] | undefined
   /** Selected values when the group is controlled. */
-  value?: readonly string[]
+  value?: readonly string[] | undefined
   /** Called with the complete list of selected values after each user change. */
-  onValueChange?: (value: string[]) => void
+  onValueChange?: ((value: string[]) => void) | undefined
   /** Disables every option in the group. Defaults to `false`. */
-  disabled?: boolean
+  disabled?: boolean | undefined
 }
 
 /** Props for a single option within a `CheckboxGroup`. */

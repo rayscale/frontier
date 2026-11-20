@@ -13,13 +13,13 @@ type TToggleGroupBaseProps = Omit<
   'defaultValue' | 'onChange' | 'value'
 > & {
   /** Disables every item in the group. Defaults to `false`. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** TLayout direction. Defaults to `horizontal`. */
-  orientation?: TToggleGroupOrientation
+  orientation?: TToggleGroupOrientation | undefined
   /** Visual appearance inherited by each item. Defaults to `default`. */
-  variant?: TToggleVariant
+  variant?: TToggleVariant | undefined
   /** Visual size inherited by each item. Defaults to `medium`. */
-  size?: TToggleSize
+  size?: TToggleSize | undefined
 }
 
 /** Props for a single-selection toggle group. */
@@ -27,11 +27,11 @@ export type TToggleGroupSingleProps = TToggleGroupBaseProps & {
   /** Enables exclusive single selection. */
   type: 'single'
   /** Selected non-empty item value, or `null` for no selection. */
-  value?: string | null
+  value?: string | null | undefined
   /** Initial non-empty item value in uncontrolled mode. */
-  defaultValue?: string
+  defaultValue?: string | undefined
   /** Called with the selected value, or `null` when the selection is cleared. */
-  onValueChange?: (value: string | null) => void
+  onValueChange?: ((value: string | null) => void) | undefined
 }
 
 /** Props for a multiple-selection toggle group. */
@@ -39,11 +39,11 @@ export type TToggleGroupMultipleProps = TToggleGroupBaseProps & {
   /** Enables independent multiple selection. */
   type: 'multiple'
   /** Selected non-empty item values in controlled mode. */
-  value?: readonly string[]
+  value?: readonly string[] | undefined
   /** Initial non-empty item values in uncontrolled mode. */
-  defaultValue?: readonly string[]
+  defaultValue?: readonly string[] | undefined
   /** Called with the complete list of selected values after a change. */
-  onValueChange?: (value: string[]) => void
+  onValueChange?: ((value: string[]) => void) | undefined
 }
 
 /** Props for a single- or multiple-selection toggle group. */

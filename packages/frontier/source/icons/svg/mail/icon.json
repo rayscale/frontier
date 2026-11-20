@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "mail",
+  "description": "Represents email.",
+  "keywords": ["mail", "email", "message"],
+  "categories": ["communication"],
+  "aliases": [],
+  "useCases": ["email"]
+}

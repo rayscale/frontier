@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevrons-left",
+  "description": "Jumps to the first item.",
+  "keywords": ["chevrons", "first", "left"],
+  "categories": ["arrows"],
+  "aliases": [],
+  "useCases": ["first page"]
+}

@@ -13,13 +13,13 @@ export interface TTooltipProps {
   /** Text displayed in the tooltip. */
   content: string
   /** Additional CSS class for the trigger wrapper. */
-  className?: string
+  className?: string | undefined
   /** Delay before showing the tooltip, in milliseconds. Defaults to `350`. */
-  delay?: number
+  delay?: number | undefined
   /** Prevents the tooltip from being shown. Defaults to `false`. */
-  disabled?: boolean
+  disabled?: boolean | undefined
   /** Preferred position; Base UI flips and shifts it to fit within the viewport. */
-  placement?: TTooltipPlacement
+  placement?: TTooltipPlacement | undefined
 }
 
 /**

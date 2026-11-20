@@ -67,11 +67,12 @@ const fills: TSwatch[] = [
   },
 ]
 
-const tones: TSwatch[] = ['danger', 'success', 'warning', 'info'].map((tone) => ({
-  label: tone[0]?.toUpperCase() + tone.slice(1),
-  token: `--frontier-color-${tone}-subtle`,
-  text: `--frontier-color-${tone}`,
-}))
+const tones: TSwatch[] = [
+  { label: 'Danger', token: '--frontier-color-danger-subtle', text: '--frontier-color-danger' },
+  { label: 'Success', token: '--frontier-color-success-subtle', text: '--frontier-color-success' },
+  { label: 'Warning', token: '--frontier-color-warning-subtle', text: '--frontier-color-warning' },
+  { label: 'Information', token: '--frontier-color-info-subtle', text: '--frontier-color-info' },
+]
 
 const textRoles: TSwatch[] = [
   { label: 'Text', token: '--frontier-color-text' },
@@ -82,7 +83,7 @@ const textRoles: TSwatch[] = [
 
 const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const
 const weights = ['regular', 'medium', 'semibold', 'bold'] as const
-const spacingSteps = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16] as const
+const spacingSteps = ['1', '2', '3', '4', '5', '6', '8', '10', '12', '16'] as const
 const radii = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const
 const shadows = ['sm', 'md', 'lg'] as const
 const blurs = ['none', 'subtle', 'medium', 'strong', 'intense'] as const

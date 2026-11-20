@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { Folder, Home } from '../../icons/index.js'
+import { Folder, Home } from '../../symbols/index.js'
 
 import { Sidebar } from './index.js'
 
@@ -18,7 +18,7 @@ describe('Sidebar', () => {
     render(
       <Sidebar.Root defaultOpen={false}>
         <Sidebar.Header>
-          <Sidebar.Brand icon={<Home aria-hidden="true" />}>Workspace</Sidebar.Brand>
+          <Sidebar.Brand symbol={<Home aria-hidden="true" />}>Workspace</Sidebar.Brand>
           <Sidebar.Trigger />
         </Sidebar.Header>
         <Sidebar.Content>
@@ -27,7 +27,7 @@ describe('Sidebar', () => {
             <Sidebar.GroupContent>
               <Sidebar.Menu>
                 <Sidebar.MenuItem>
-                  <Sidebar.Item href="/overview" icon={<Home aria-hidden="true" />} active>
+                  <Sidebar.Item href="/overview" symbol={<Home aria-hidden="true" />} active>
                     Overview
                   </Sidebar.Item>
                 </Sidebar.MenuItem>
@@ -102,7 +102,7 @@ describe('Sidebar', () => {
         <Sidebar.Content>
           <Sidebar.Menu>
             <Sidebar.MenuItem>
-              <Sidebar.Submenu label="Projects" icon={<Folder aria-hidden="true" />}>
+              <Sidebar.Submenu label="Projects" symbol={<Folder aria-hidden="true" />}>
                 <Sidebar.SubmenuItem href="/projects/alpha">Alpha</Sidebar.SubmenuItem>
               </Sidebar.Submenu>
             </Sidebar.MenuItem>

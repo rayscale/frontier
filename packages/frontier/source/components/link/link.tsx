@@ -1,6 +1,6 @@
 import { type AnchorHTMLAttributes, forwardRef } from 'react'
 
-import { ArrowRight } from '../../icons/index.js'
+import { ArrowRight } from '../../symbols/index.js'
 
 import './link.css'
 

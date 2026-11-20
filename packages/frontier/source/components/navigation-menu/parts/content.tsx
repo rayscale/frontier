@@ -1,8 +1,8 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
 import { forwardRef } from 'react'
 
-import { ChevronDown } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { ChevronDown } from '../../../symbols/index.js'
 import { useNavigationMenuContext } from '../context.js'
 import type {
   TNavigationMenuContentProps,
@@ -32,7 +32,7 @@ export const NavigationMenuTrigger = forwardRef<HTMLButtonElement, TNavigationMe
       >
         {children}
         <ChevronDown
-          className="frontier-navigation-menu__trigger-icon"
+          className="frontier-navigation-menu__trigger-symbol"
           aria-hidden="true"
           focusable="false"
           size={16}

@@ -105,7 +105,7 @@
   background: transparent;
 }
 
-.frontier-tree__icon {
+.frontier-tree__symbol {
   display: inline-flex;
   flex: none;
   align-items: center;
@@ -115,7 +115,7 @@
   color: inherit;
 }
 
-.frontier-tree__icon > svg {
+.frontier-tree__symbol > svg {
   width: 1.125rem;
   height: 1.125rem;
 }

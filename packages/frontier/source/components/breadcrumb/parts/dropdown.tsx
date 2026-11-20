@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react'
 
-import { ChevronDown } from '../../../icons/index.js'
 import { MenuItem } from '../../../internal/primitives/menu/menu.js'
+import { ChevronDown } from '../../../symbols/index.js'
 import { DropdownMenu } from '../../dropdown-menu/dropdown-menu.js'
 import type { TBreadcrumbDropdownProps } from '../types.js'
 

@@ -11,7 +11,7 @@ export type TBadgeSize = 'small' | 'medium'
 
 /** Props for {@link Badge}, in addition to native `span` attributes. */
 export type TBadgeProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Text, icons, or other inline content. */
+  /** Text, symbols, or other inline content. */
   children?: ReactNode | undefined
   /** Visual appearance. Defaults to `default`. */
   variant?: TBadgeVariant | undefined

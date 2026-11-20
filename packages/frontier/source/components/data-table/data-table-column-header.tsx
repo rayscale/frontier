@@ -1,7 +1,7 @@
 import type { RowData } from '@tanstack/react-table'
 import type { ReactElement } from 'react'
 
-import { ArrowDown, ArrowUp } from '../../icons/index.js'
+import { ArrowDown, ArrowUp } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 
 import type { TDataTableColumnHeaderProps } from './types.js'
@@ -27,7 +27,7 @@ export function DataTableColumnHeader<TData extends RowData, TValue = unknown>({
       variant="ghost"
     >
       <span>{title}</span>
-      <span aria-hidden="true" className="frontier-data-table__sort-icons">
+      <span aria-hidden="true" className="frontier-data-table__sort-symbols">
         {sorted === 'asc' ? <ArrowUp size={12} /> : null}
         {sorted === 'desc' ? <ArrowDown size={12} /> : null}
         {sorted === false ? (

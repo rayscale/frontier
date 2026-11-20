@@ -28,8 +28,8 @@ Disabled items remain visible but cannot be invoked. They never receive the high
 
 ## Labels
 
-Every menu item has a text label. Icons may support the label but never replace it. A menu with
-icon-only items is not part of the system.
+Every menu item has a text label. Symbols may support the label but never replace it. A menu with
+symbol-only items is not part of the system.
 
 ## Grouping
 

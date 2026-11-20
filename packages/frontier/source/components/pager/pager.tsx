@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
-import { ChevronLeft, ChevronRight } from '../../icons/index.js'
 import { classNames } from '../../internal/helpers/class-names.js'
+import { ChevronLeft, ChevronRight } from '../../symbols/index.js'
 import { Card } from '../card/card.js'
 
 import type { TPagerItem, TPagerProps } from './types.js'

@@ -1,7 +1,7 @@
 import type { RowData } from '@tanstack/react-table'
 import type { ReactElement } from 'react'
 
-import { Settings } from '../../icons/index.js'
+import { Settings } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js'
 

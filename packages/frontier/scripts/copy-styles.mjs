@@ -27,20 +27,18 @@ async function copyCss(source, target) {
 await rm(join(targetRoot, 'styles'), { force: true, recursive: true })
 await copyCss(join(sourceRoot, 'styles'), join(targetRoot, 'styles'))
 await copyCss(join(sourceRoot, 'components'), join(targetRoot, 'components'))
-await copyCss(join(sourceRoot, 'icons'), join(targetRoot, 'icons'))
+await copyCss(join(sourceRoot, 'symbols'), join(targetRoot, 'symbols'))
 
-const fontsSource = join(sourceRoot, 'typography', 'fonts')
+const fontsSource = join(sourceRoot, 'typeface', 'fonts')
 const fonts = (await readdir(fontsSource).catch(() => [])).filter((name) => name.endsWith('.woff2'))
 
-await rm(join(targetRoot, 'typography'), { force: true, recursive: true })
+await rm(join(targetRoot, 'typeface'), { force: true, recursive: true })
 
 if (fonts.length === 0) {
-  console.warn(
-    'Frontier Sans is not built; run `pnpm typography:build`. Text falls back to Outfit.',
-  )
+  console.warn('Frontier Sans is not built; run `pnpm typeface:build`. Text falls back to Outfit.')
 } else {
-  await mkdir(join(targetRoot, 'typography', 'fonts'), { recursive: true })
+  await mkdir(join(targetRoot, 'typeface', 'fonts'), { recursive: true })
   await Promise.all(
-    fonts.map((name) => cp(join(fontsSource, name), join(targetRoot, 'typography', 'fonts', name))),
+    fonts.map((name) => cp(join(fontsSource, name), join(targetRoot, 'typeface', 'fonts', name))),
   )
 }

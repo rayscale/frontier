@@ -1,6 +1,6 @@
 import { forwardRef, useId, useState } from 'react'
 
-import { ChevronDown } from '../../../icons/index.js'
+import { ChevronDown } from '../../../symbols/index.js'
 import { Button } from '../../button/button.js'
 import { Collapsible } from '../../collapsible/collapsible.js'
 import { Tooltip } from '../../tooltip/tooltip.js'
@@ -11,7 +11,7 @@ import { SidebarItem } from './menu.js'
 
 export const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
   function SidebarSubmenu(
-    { label, icon, open, defaultOpen = false, onOpenChange, className, children, ...props },
+    { label, symbol, open, defaultOpen = false, onOpenChange, className, children, ...props },
     ref,
   ) {
     const {
@@ -54,9 +54,9 @@ export const SidebarSubmenu = forwardRef<HTMLDivElement, TSidebarSubmenuProps>(
         aria-controls={submenuId}
         onClick={handleClick}
       >
-        {icon && (
-          <span className="frontier-sidebar__item-icon" aria-hidden="true">
-            {icon}
+        {symbol && (
+          <span className="frontier-sidebar__item-symbol" aria-hidden="true">
+            {symbol}
           </span>
         )}
         <span className="frontier-sidebar__item-label">{label}</span>

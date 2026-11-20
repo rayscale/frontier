@@ -6,10 +6,10 @@ storybook-static/
 .superpowers/
 pnpm-lock.yaml
 
-# Generated icon metadata (see packages/frontier/scripts/generate-icons.ts)
-**/source/icons/metadata.generated.ts
+# Generated symbol metadata (see packages/frontier/scripts/generate-symbols.ts)
+**/source/symbols/metadata.generated.ts
 
-# Python environment and caches for Frontier Sans (see packages/frontier/source/typography)
+# Python environment and caches for Frontier Sans (see packages/frontier/source/typeface)
 **/.venv/
 **/.pytest_cache/
 **/.ruff_cache/

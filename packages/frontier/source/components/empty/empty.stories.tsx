@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ReactElement, ReactNode } from 'react'
 
-import { FolderOpen, Inbox, Plus, SearchX, Upload, UserPlus } from '../../icons/index.js'
+import { FolderOpen, Inbox, Plus, SearchX, Upload, UserPlus } from '../../symbols/index.js'
 import { AvatarGroup } from '../avatar-group/avatar-group.js'
 import { Avatar } from '../avatar/avatar.js'
 import { Button } from '../button/button.js'
@@ -35,7 +35,7 @@ const meta = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <FolderOpen />
         </Empty.Media>
         <Empty.Title>No projects yet</Empty.Title>
@@ -53,7 +53,7 @@ export const Default: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'The default empty state with a centered header and icon.',
+        story: 'The default empty state with a centered header and symbol.',
       },
     },
   },
@@ -70,7 +70,7 @@ export const Action: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <FolderOpen />
         </Empty.Media>
         <Empty.Title>No projects yet</Empty.Title>
@@ -97,7 +97,7 @@ export const Actions: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <Inbox />
         </Empty.Media>
         <Empty.Title>Your inbox is empty</Empty.Title>
@@ -127,7 +127,7 @@ export const Search: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <SearchX />
         </Empty.Media>
         <Empty.Title>No results found</Empty.Title>
@@ -228,7 +228,7 @@ export const Outline: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <FolderOpen />
         </Empty.Media>
         <Empty.Title>No files in this folder</Empty.Title>
@@ -255,7 +255,7 @@ export const Surface: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <Inbox />
         </Empty.Media>
         <Empty.Title>No notifications</Empty.Title>
@@ -280,7 +280,7 @@ export const Compact: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <Inbox />
         </Empty.Media>
         <Empty.Title>No items</Empty.Title>
@@ -309,7 +309,7 @@ export const Spacious: TStory = {
   render: (args) => (
     <Empty {...args}>
       <Empty.Header>
-        <Empty.Media variant="icon">
+        <Empty.Media variant="symbol">
           <FolderOpen />
         </Empty.Media>
         <Empty.Title>Welcome to your workspace</Empty.Title>
@@ -342,7 +342,7 @@ export const InsideCard: TStory = {
       <Card.Content>
         <Empty size="compact">
           <Empty.Header>
-            <Empty.Media variant="icon">
+            <Empty.Media variant="symbol">
               <FolderOpen />
             </Empty.Media>
             <Empty.Title as="h4">Nothing shared yet</Empty.Title>

@@ -216,9 +216,9 @@ Pixel values assume a root size of 16 px.
 | Emphasized decelerate | `cubic-bezier(0.32, 0.72, 0, 1)` |
 | Emphasized accelerate | `cubic-bezier(0.5, 0, 0.75, 0)`  |
 
-## Typography
+## Typeface
 
-### Typeface
+### Family
 
 | Token  | Value                                                             |
 | ------ | ----------------------------------------------------------------- |

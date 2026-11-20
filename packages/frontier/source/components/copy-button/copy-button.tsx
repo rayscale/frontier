@@ -2,8 +2,8 @@
 
 import { type ReactElement, useEffect, useRef, useState } from 'react'
 
-import { Check, Copy } from '../../icons/index.js'
 import { copyToClipboard } from '../../internal/helpers/clipboard.js'
+import { Check, Copy } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 
 import type { TCopyButtonProps } from './types.js'
@@ -18,8 +18,8 @@ export function CopyButton({
   copiedLabel = 'Copied',
   timeout = 1600,
   showLabel = true,
-  icon,
-  copiedIcon,
+  symbol,
+  copiedSymbol,
   onCopy,
   onError,
   type = 'button',
@@ -72,8 +72,8 @@ export function CopyButton({
         variant={variant}
       >
         {copied
-          ? (copiedIcon ?? <Check aria-hidden="true" size={16} />)
-          : (icon ?? <Copy aria-hidden="true" size={16} />)}
+          ? (copiedSymbol ?? <Check aria-hidden="true" size={16} />)
+          : (symbol ?? <Copy aria-hidden="true" size={16} />)}
         {showLabel ? <span>{copied ? copiedLabel : label}</span> : null}
       </Button>
       <span

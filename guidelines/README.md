@@ -7,7 +7,7 @@ Frontier is a friendly, expressive interface system. It is built for people who 
 The guidelines form five layers. Each layer rests on the one above it.
 
 - [Principles](./principles/README.md) are the values behind every decision.
-- [Foundations](./foundations/README.md) define the shared visual, spatial, typographic, motion, and accessibility rules.
+- [Foundations](./foundations/README.md) define the shared visual, spatial, typeface, motion, and accessibility rules.
 - [Patterns](./patterns/README.md) describe reusable interaction behaviors, such as selection, the moving highlight, dragging, and popups.
 - [Components](./components/README.md) are the fundamental, reusable interaction primitives. Finished widgets are compositions of these primitives, patterns, and foundations.
 - [Content](./content/README.md) defines the voice and writing rules for everything the interface says.

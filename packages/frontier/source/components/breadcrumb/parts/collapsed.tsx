@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react'
 
-import { Ellipsis } from '../../../icons/index.js'
+import { Ellipsis } from '../../../symbols/index.js'
 import { DropdownMenu } from '../../dropdown-menu/dropdown-menu.js'
 import { renderHiddenEntry } from '../helpers/slots.js'
 

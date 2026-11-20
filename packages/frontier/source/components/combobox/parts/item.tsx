@@ -1,8 +1,8 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { forwardRef } from 'react'
 
-import { Check } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { Check } from '../../../symbols/index.js'
 import type {
   TComboboxGroupLabelProps,
   TComboboxGroupProps,

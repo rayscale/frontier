@@ -11,9 +11,9 @@ import {
   useState,
 } from 'react'
 
-import { ChevronLeft, ChevronRight } from '../../icons/index.js'
 import { AnimatedHighlight } from '../../internal/primitives/animated-highlight/animated-highlight.js'
 import { AutoSize } from '../../internal/primitives/auto-size/auto-size.js'
+import { ChevronLeft, ChevronRight } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 
 import {
@@ -248,14 +248,14 @@ export const Calendar = forwardRef<HTMLDivElement, TCalendarProps>(function Cale
       <div className="frontier-calendar__header">
         <Button
           variant="ghost"
-          size="icon"
+          size="symbol"
           aria-label="Previous month"
           disabled={disabled || !goPrevious}
           onClick={() => {
             shiftMonth(-1)
           }}
         >
-          <ChevronLeft className="frontier-calendar__nav-icon" aria-hidden="true" />
+          <ChevronLeft className="frontier-calendar__nav-symbol" aria-hidden="true" />
         </Button>
         <AutoSize axis="horizontal" className="frontier-calendar__title-container">
           <span id={titleId} className="frontier-calendar__title" aria-live="polite">
@@ -264,14 +264,14 @@ export const Calendar = forwardRef<HTMLDivElement, TCalendarProps>(function Cale
         </AutoSize>
         <Button
           variant="ghost"
-          size="icon"
+          size="symbol"
           aria-label="Next month"
           disabled={disabled || !goNext}
           onClick={() => {
             shiftMonth(1)
           }}
         >
-          <ChevronRight className="frontier-calendar__nav-icon" aria-hidden="true" />
+          <ChevronRight className="frontier-calendar__nav-symbol" aria-hidden="true" />
         </Button>
       </div>
 

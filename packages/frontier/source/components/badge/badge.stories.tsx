@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Check, CircleHelp, Clock, Info, Sparkles, TriangleAlert } from '../../icons/index.js'
+import { Check, CircleHelp, Clock, Info, Sparkles, TriangleAlert } from '../../symbols/index.js'
 
 import { Badge, type TBadgeVariant } from './badge.js'
 
@@ -89,11 +89,11 @@ export const Sizes: TStory = {
   ),
 }
 
-export const Icons: TStory = {
+export const Symbols: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Badges can include leading icons to reinforce status or meaning.',
+        story: 'Badges can include leading symbols to reinforce status or meaning.',
       },
     },
   },
@@ -118,11 +118,11 @@ export const Icons: TStory = {
   ),
 }
 
-export const Icon: TStory = {
+export const Symbol: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Badges can render solely with an icon for compact indicators.',
+        story: 'Badges can render solely with a symbol for compact indicators.',
       },
     },
   },

@@ -51,7 +51,7 @@ describe('SegmentedControl', () => {
       expect(group).toHaveClass(`frontier-segmented-control--${size}`)
     })
 
-    it('renders optional icons with aria-hidden', () => {
+    it('renders optional symbols with aria-hidden', () => {
       render(
         <SegmentedControl
           aria-label="View format"
@@ -59,7 +59,7 @@ describe('SegmentedControl', () => {
             {
               label: 'List',
               value: 'list',
-              icon: <span data-testid="list-icon">Icon</span>,
+              symbol: <span data-testid="list-symbol">Symbol</span>,
             },
             { label: 'Grid', value: 'grid' },
           ]}
@@ -67,8 +67,8 @@ describe('SegmentedControl', () => {
         />,
       )
 
-      const icon = screen.getByTestId('list-icon').parentElement
-      expect(icon).toHaveAttribute('aria-hidden', 'true')
+      const symbol = screen.getByTestId('list-symbol').parentElement
+      expect(symbol).toHaveAttribute('aria-hidden', 'true')
       expect(screen.getByRole('radio', { name: 'List' })).toBeInTheDocument()
     })
 

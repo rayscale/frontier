@@ -39,7 +39,7 @@ error text.
 ## Case
 
 Use sentence case for labels, headings, and body text. Uppercase is reserved for short acronyms and
-established abbreviations. See [Typography](../foundations/typography.md).
+established abbreviations. See [Typeface](../foundations/typeface.md).
 
 ## Tone by situation
 

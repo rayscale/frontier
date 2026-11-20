@@ -1,6 +1,6 @@
 import { type ComponentType, isValidElement, type ReactNode } from 'react'
 
-import { ChevronRight } from '../../../icons/index.js'
+import { ChevronRight } from '../../../symbols/index.js'
 import { DropdownMenu } from '../../dropdown-menu/dropdown-menu.js'
 import { BreadcrumbDropdown, BreadcrumbMenuLink } from '../parts/dropdown.js'
 import { BreadcrumbItem } from '../parts/item.js'

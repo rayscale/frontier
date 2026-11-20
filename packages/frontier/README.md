@@ -2,13 +2,13 @@
 
 **A design language for the web.**
 
-The React implementation of the Frontier design language: components, icons, design tokens, and the Frontier Sans typeface, built to work together.
+The React implementation of the Frontier design language: components, symbols, design tokens, and the Frontier Sans typeface, built to work together.
 
 The [design guidelines](../../guidelines/README.md) state intent and behavior. This package implements them and does not extend them.
 
 ## Usage
 
-Import the stylesheet once, then use the components and icons.
+Import the stylesheet once, then use the components and symbols.
 
 ```tsx
 import { Button, Check } from '@rayscale/frontier'
@@ -30,15 +30,15 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 ## What's included
 
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
-- **Icons** — A set of icons that follow one grid and one stroke, available from the package entry.
+- **Symbols** — A set of symbols that follow one grid and one stroke, available from the package entry.
 - **Styles** — Design tokens and component styles through `@rayscale/frontier/styles.css`.
-- **Typeface** — Frontier Sans, a variable typeface built from source in [source/typography](./source/typography/README.md) and exported as `@rayscale/frontier/fonts/*`. Outfit is the automatic fallback.
+- **Typeface** — Frontier Sans, a variable typeface built from source in [source/typeface](./source/typeface/README.md) and exported as `@rayscale/frontier/fonts/*`. Outfit is the automatic fallback.
 
 ## Exports
 
 | Path                            | Contents                                            |
 | ------------------------------- | --------------------------------------------------- |
-| `@rayscale/frontier`            | Components, icons, and their types.                 |
+| `@rayscale/frontier`            | Components, symbols, and their types.               |
 | `@rayscale/frontier/styles.css` | Design tokens, the font face, and component styles. |
 | `@rayscale/frontier/fonts/*`    | The compiled Frontier Sans font files.              |
 

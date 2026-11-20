@@ -37,7 +37,7 @@
   --_callout-border: var(--frontier-color-danger-border);
 }
 
-.frontier-callout__icon {
+.frontier-callout__symbol {
   display: inline-flex;
   flex: none;
   align-items: center;
@@ -46,7 +46,7 @@
   color: var(--_callout-accent);
 }
 
-.frontier-callout__icon > svg {
+.frontier-callout__symbol > svg {
   width: var(--frontier-spacing-5);
   height: var(--frontier-spacing-5);
 }

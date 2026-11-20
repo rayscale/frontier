@@ -117,7 +117,7 @@
   height: var(--frontier-control-size-small);
 }
 
-.frontier-pagination__icon {
+.frontier-pagination__symbol {
   flex-shrink: 0;
   width: var(--frontier-spacing-4);
   height: var(--frontier-spacing-4);

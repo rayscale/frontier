@@ -1,8 +1,8 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { forwardRef, type ReactElement, useLayoutEffect } from 'react'
 
-import { X } from '../../../icons/index.js'
 import { withConsumerClick } from '../../../internal/helpers/with-consumer-click.js'
+import { X } from '../../../symbols/index.js'
 import { Button } from '../../button/button.js'
 import { useDialogContext } from '../context.js'
 import type { TDialogCloseProps, TDialogContentProps } from '../types.js'
@@ -39,7 +39,7 @@ export const DialogContent = forwardRef<HTMLDivElement, TDialogContentProps>(fun
               render={
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="symbol"
                   className="frontier-dialog__close-button"
                   aria-label="Close dialog"
                 />

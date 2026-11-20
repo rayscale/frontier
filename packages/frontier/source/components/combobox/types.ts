@@ -34,7 +34,7 @@ export interface TComboboxProps {
   children?: ReactNode | undefined
 }
 
-export type TComboboxInputProps = Omit<TInputProps, 'children' | 'trailingIcon'> & {
+export type TComboboxInputProps = Omit<TInputProps, 'children' | 'trailingSymbol'> & {
   /** Trailing controls, such as `Combobox.Clear` and `Combobox.Trigger`. */
   children?: ReactNode | undefined
 }

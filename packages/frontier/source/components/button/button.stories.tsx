@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { CircleEllipsis, Plus, Search } from '../../icons/index.js'
+import { CircleEllipsis, Plus, Search } from '../../symbols/index.js'
 import { Spinner } from '../spinner/spinner.js'
 
 import { Button } from './button.js'
@@ -26,7 +26,7 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['small', 'medium', 'large', 'icon', 'icon-small', 'icon-large'],
+      options: ['small', 'medium', 'large', 'symbol', 'symbol-small', 'symbol-large'],
       description: 'The size of the button.',
     },
     disabled: {
@@ -88,25 +88,25 @@ export const Sizes: TStory = {
   ),
 }
 
-export const Icons: TStory = {
+export const Symbols: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Buttons can be rendered as icons for compact actions.',
+        story: 'Buttons can be rendered as symbols for compact actions.',
       },
     },
   },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-      <Button variant="ghost" size="icon" aria-label="Add item">
+      <Button variant="ghost" size="symbol" aria-label="Add item">
         <Plus aria-hidden="true" />
       </Button>
 
-      <Button variant="outline" size="icon-small" aria-label="Search">
+      <Button variant="outline" size="symbol-small" aria-label="Search">
         <Search aria-hidden="true" size={20} />
       </Button>
 
-      <Button variant="secondary" size="icon-large" aria-label="More options">
+      <Button variant="secondary" size="symbol-large" aria-label="More options">
         <CircleEllipsis aria-hidden="true" />
       </Button>
     </div>

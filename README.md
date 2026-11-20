@@ -2,7 +2,7 @@
 
 **A design language for the web.**
 
-Frontier is a design language and the React implementation that follows it. It brings together guidelines, design tokens, components, icons, and a typeface, so an interface can be built from one set of rules.
+Frontier is a design language and the React implementation that follows it. It brings together guidelines, design tokens, components, symbols, and a typeface, so an interface can be built from one set of rules.
 
 The guidelines state design intent. The packages implement it and do not extend it.
 
@@ -24,7 +24,7 @@ The guidelines state design intent. The packages implement it and do not extend 
 The Frontier design language defines the visual foundations and principles behind everything in the workspace. It is built around five layers:
 
 - **Principles** — The values behind every decision.
-- **Foundations** — Color, typography, spacing, shape, elevation, focus, motion, and accessibility.
+- **Foundations** — Color, typeface, spacing, shape, elevation, focus, motion, and accessibility.
 - **Patterns** — Shared approaches to interaction, selection, loading, and interface states.
 - **Components** — Reusable interaction primitives that finished widgets are composed from.
 - **Content** — The voice and writing rules for everything the interface says.
@@ -35,7 +35,7 @@ The layers are described in [guidelines/](./guidelines/README.md).
 
 Workspace projects live under `packages/`.
 
-- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, icons, design tokens, and the Frontier Sans typeface.
+- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, design tokens, and the Frontier Sans typeface.
 
 ## Getting started
 

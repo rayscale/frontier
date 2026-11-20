@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { CircleHelp, UserRound } from '../../icons/index.js'
+import { CircleHelp, UserRound } from '../../symbols/index.js'
 
 import { Avatar } from './avatar.js'
 
@@ -33,7 +33,8 @@ export const Default: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'The default avatar displays a built-in icon when no image or fallback is provided.',
+        story:
+          'The default avatar displays a built-in symbol when no image or fallback is provided.',
       },
     },
   },
@@ -70,11 +71,11 @@ export const Initials: TStory = {
   ),
 }
 
-export const Icon: TStory = {
+export const Symbol: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Icons can be used as fallback content.',
+        story: 'Symbols can be used as fallback content.',
       },
     },
   },

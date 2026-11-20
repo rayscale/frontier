@@ -7,7 +7,7 @@
   font-family: var(--frontier-font-family);
 }
 
-.frontier-spinner__icon {
+.frontier-spinner__symbol {
   width: 1em;
   height: 1em;
   animation: frontier-spinner-rotate var(--frontier-duration-slow) linear infinite;
@@ -32,7 +32,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .frontier-spinner__icon {
+  .frontier-spinner__symbol {
     animation: none;
   }
 }

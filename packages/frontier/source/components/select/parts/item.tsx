@@ -1,8 +1,8 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
 import { forwardRef } from 'react'
 
-import { Check } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { Check } from '../../../symbols/index.js'
 import type {
   TSelectGroupLabelProps,
   TSelectGroupProps,

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { ReactElement } from 'react'
 
-import { Ellipsis } from '../../icons/index.js'
+import { Ellipsis } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 import { DropdownMenu } from '../dropdown-menu/dropdown-menu.js'
 

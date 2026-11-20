@@ -65,7 +65,7 @@ function ToastExamples() {
             <Select.Label>Position</Select.Label>
             <Select.Trigger>
               <Select.Value placeholder="Select position" />
-              <Select.Icon />
+              <Select.Symbol />
             </Select.Trigger>
             <Select.Content>
               <Select.List>
@@ -90,7 +90,7 @@ function ToastExamples() {
             <Select.Label>Message type</Select.Label>
             <Select.Trigger>
               <Select.Value placeholder="Select message type" />
-              <Select.Icon />
+              <Select.Symbol />
             </Select.Trigger>
             <Select.Content>
               <Select.List>

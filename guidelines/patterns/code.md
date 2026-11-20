@@ -11,7 +11,7 @@ inside a line makes code harder to read and to copy.
 
 ## Type
 
-Code uses the monospace family from the typography foundation. It does not use
+Code uses the monospace family from the typeface foundation. It does not use
 the interface typeface, because alignment between characters carries meaning.
 Code text is not smaller than the readable minimum for its context.
 

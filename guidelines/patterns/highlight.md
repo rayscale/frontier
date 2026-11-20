@@ -20,7 +20,7 @@ The highlight must follow the actual target rather than infer its position from 
 
 ## Appearance
 
-The highlight sits behind the target's content. It must not obscure text, icons, shortcuts, selection indicators, or other meaningful information.
+The highlight sits behind the target's content. It must not obscure text, symbols, shortcuts, selection indicators, or other meaningful information.
 
 Its surface must remain distinguishable from its surroundings in both themes. Use the shared highlight color role rather than introducing a new color for each context. See [Colors](../foundations/colors.md).
 

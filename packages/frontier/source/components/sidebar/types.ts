@@ -19,7 +19,7 @@ export type TSidebarRootProps = HTMLAttributes<HTMLDivElement> & {
   onOpenChange?: ((open: boolean) => void) | undefined
   /** Expanded desktop width. Defaults to `16rem`. */
   width?: number | string | undefined
-  /** Icon-only desktop width. Defaults to `3rem`. */
+  /** Symbol-only desktop width. Defaults to `3rem`. */
   collapsedWidth?: number | string | undefined
   /** Mobile drawer width. Defaults to `18rem`. */
   mobileWidth?: number | string | undefined
@@ -39,7 +39,7 @@ export type TSidebarHeaderProps = HTMLAttributes<HTMLDivElement>
 /** Props for the sidebar's brand area. */
 export type TSidebarBrandProps = HTMLAttributes<HTMLDivElement> & {
   /** Mark displayed beside the brand name, and alone when collapsed. */
-  icon?: ReactNode | undefined
+  symbol?: ReactNode | undefined
   children?: ReactNode | undefined
 }
 
@@ -52,7 +52,7 @@ export type TSidebarGroupProps = HTMLAttributes<HTMLElement>
 /** Props for a group heading. */
 export type TSidebarGroupLabelProps = HTMLAttributes<HTMLHeadingElement>
 
-/** Props for an icon-only action beside a group heading. */
+/** Props for a symbol-only action beside a group heading. */
 export type TSidebarGroupActionProps = Omit<TButtonProps, 'variant' | 'size' | 'aria-label'> & {
   /** Accessible name describing the action. */
   'aria-label': string
@@ -74,13 +74,13 @@ export type TSidebarItemLabelProps =
 export type TSidebarItemProps = Omit<HTMLAttributes<HTMLElement>, 'children' | 'onClick'> & {
   /** Destination for a native anchor. Omit to render an action button. */
   href?: string | undefined
-  /** Optional Lucide icon or other mark displayed before the label. */
-  icon?: ReactNode | undefined
+  /** Optional Lucide symbol or other mark displayed before the label. */
+  symbol?: ReactNode | undefined
   /** Marks the current destination with `aria-current="page"`. */
   active?: boolean | undefined
-  /** Custom tooltip for icon-only mode; string labels are used by default. */
+  /** Custom tooltip for symbol-only mode; string labels are used by default. */
   tooltip?: string | undefined
-  /** Accessible label for non-text children and tooltip text in icon-only mode. */
+  /** Accessible label for non-text children and tooltip text in symbol-only mode. */
   label?: string | undefined
   /** Prevents activation. */
   disabled?: boolean | undefined
@@ -94,7 +94,7 @@ export type TSidebarItemProps = Omit<HTMLAttributes<HTMLElement>, 'children' | '
   onClick?: MouseEventHandler<HTMLElement> | undefined
 } & TSidebarItemLabelProps
 
-/** Props for an icon-only action beside a menu item. */
+/** Props for a symbol-only action beside a menu item. */
 export type TSidebarMenuActionProps = Omit<TButtonProps, 'variant' | 'size' | 'aria-label'> & {
   /** Accessible name describing the action. */
   'aria-label': string
@@ -107,8 +107,8 @@ export type TSidebarMenuBadgeProps = HTMLAttributes<HTMLSpanElement>
 export type TSidebarSubmenuProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   /** Visible label and accessible name for the disclosure button. */
   label: string
-  /** Optional Lucide icon or other mark displayed before the label. */
-  icon?: ReactNode | undefined
+  /** Optional Lucide symbol or other mark displayed before the label. */
+  symbol?: ReactNode | undefined
   /** Current expanded state. Pass `onOpenChange` to control it. */
   open?: boolean | undefined
   /** Initial expanded state when uncontrolled. Defaults to `false`. */

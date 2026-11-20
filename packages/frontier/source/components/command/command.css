@@ -59,7 +59,7 @@
   cursor: not-allowed;
 }
 
-.frontier-command__item-icon {
+.frontier-command__item-symbol {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;

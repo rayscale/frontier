@@ -68,7 +68,7 @@ export const CodeBlockActions = forwardRef<HTMLDivElement, TCodeBlockActionsProp
   },
 )
 
-/** A compact, icon-only copy action sized for a code block. */
+/** A compact, symbol-only copy action sized for a code block. */
 export function CodeBlockCopyButton({
   showLabel = false,
   size = 'small',

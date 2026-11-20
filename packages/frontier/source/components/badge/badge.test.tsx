@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { Check, CircleHelp } from '../../icons/index.js'
+import { Check, CircleHelp } from '../../symbols/index.js'
 
 import { Badge, Badge as PublicBadge } from './index.js'
 
@@ -52,19 +52,19 @@ describe('Badge', () => {
     expect(badge).toHaveAccessibleName('Status: complete')
   })
 
-  it('renders arbitrary React content and Lucide icons', () => {
+  it('renders arbitrary React content and Lucide symbols', () => {
     render(
       <Badge>
-        <Check aria-hidden="true" data-testid="check-icon" />
+        <Check aria-hidden="true" data-testid="check-symbol" />
         <span>Ready</span>
       </Badge>,
     )
 
-    expect(screen.getByTestId('check-icon')).toBeInTheDocument()
+    expect(screen.getByTestId('check-symbol')).toBeInTheDocument()
     expect(screen.getByText('Ready')).toBeInTheDocument()
   })
 
-  it('supports icon-only content with visually hidden text', () => {
+  it('supports symbol-only content with visually hidden text', () => {
     render(
       <Badge>
         <CircleHelp aria-hidden="true" />

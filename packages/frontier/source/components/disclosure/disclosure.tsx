@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
-import { ChevronDown } from '../../icons/index.js'
 import { classNames } from '../../internal/helpers/class-names.js'
+import { ChevronDown } from '../../symbols/index.js'
 import { Collapsible } from '../collapsible/collapsible.js'
 
 import type { TDisclosureProps } from './types.js'

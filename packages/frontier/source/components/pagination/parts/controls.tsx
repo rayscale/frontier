@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from 'react'
 
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from '../../../symbols/index.js'
 import { usePaginationContext } from '../context.js'
 import type { TPaginationControlProps } from '../types.js'
 
@@ -23,14 +23,14 @@ export function PaginationControl({
 
 type TPaginationEdgeControlProps = TPaginationControlProps & {
   defaultLabel: string
-  icon: ReactNode
+  symbol: ReactNode
   boundaryDisabled: boolean
   onNavigate: () => void
 }
 
 function PaginationEdgeControl({
   defaultLabel,
-  icon,
+  symbol,
   boundaryDisabled,
   onNavigate,
   onClick,
@@ -50,7 +50,7 @@ function PaginationEdgeControl({
       }}
       className={classNames('frontier-pagination__edge', className)}
     >
-      {children ?? icon}
+      {children ?? symbol}
     </PaginationControl>
   )
 }
@@ -61,7 +61,7 @@ export function PaginationFirst(props: TPaginationControlProps): ReactElement {
     <PaginationEdgeControl
       {...props}
       defaultLabel="Go to first page"
-      icon={<ChevronsLeft aria-hidden="true" className="frontier-pagination__icon" />}
+      symbol={<ChevronsLeft aria-hidden="true" className="frontier-pagination__symbol" />}
       boundaryDisabled={currentPage <= 1}
       onNavigate={() => {
         goToPage(1)
@@ -76,7 +76,7 @@ export function PaginationPrevious(props: TPaginationControlProps): ReactElement
     <PaginationEdgeControl
       {...props}
       defaultLabel="Go to previous page"
-      icon={<ChevronLeft aria-hidden="true" className="frontier-pagination__icon" />}
+      symbol={<ChevronLeft aria-hidden="true" className="frontier-pagination__symbol" />}
       boundaryDisabled={currentPage <= 1}
       onNavigate={() => {
         goToPage(currentPage - 1)
@@ -91,7 +91,7 @@ export function PaginationNext(props: TPaginationControlProps): ReactElement {
     <PaginationEdgeControl
       {...props}
       defaultLabel="Go to next page"
-      icon={<ChevronRight aria-hidden="true" className="frontier-pagination__icon" />}
+      symbol={<ChevronRight aria-hidden="true" className="frontier-pagination__symbol" />}
       boundaryDisabled={currentPage >= pageCount}
       onNavigate={() => {
         goToPage(currentPage + 1)
@@ -106,7 +106,7 @@ export function PaginationLast(props: TPaginationControlProps): ReactElement {
     <PaginationEdgeControl
       {...props}
       defaultLabel="Go to last page"
-      icon={<ChevronsRight aria-hidden="true" className="frontier-pagination__icon" />}
+      symbol={<ChevronsRight aria-hidden="true" className="frontier-pagination__symbol" />}
       boundaryDisabled={currentPage >= pageCount}
       onNavigate={() => {
         goToPage(pageCount)

@@ -38,7 +38,7 @@ export const Default: TStory = {
         <Select.Label>Fruit</Select.Label>
         <Select.Trigger>
           <Select.Value placeholder="Pick a fruit" />
-          <Select.Icon />
+          <Select.Symbol />
         </Select.Trigger>
         <Select.Content>
           <Select.List>
@@ -68,7 +68,7 @@ export const DefaultValue: TStory = {
         <Select.Label>Fruit</Select.Label>
         <Select.Trigger>
           <Select.Value placeholder="Pick a fruit" />
-          <Select.Icon />
+          <Select.Symbol />
         </Select.Trigger>
         <Select.Content>
           <Select.List>
@@ -113,7 +113,7 @@ export const Controlled: TStory = {
           <Select.Label>Fruit</Select.Label>
           <Select.Trigger>
             <Select.Value placeholder="Pick a fruit" />
-            <Select.Icon />
+            <Select.Symbol />
           </Select.Trigger>
           <Select.Content>
             <Select.List>
@@ -145,7 +145,7 @@ export const Groups: TStory = {
         <Select.Label>Food</Select.Label>
         <Select.Trigger>
           <Select.Value placeholder="Pick a food" />
-          <Select.Icon />
+          <Select.Symbol />
         </Select.Trigger>
         <Select.Content>
           <Select.List>
@@ -181,7 +181,7 @@ export const LongList: TStory = {
         <Select.Label>Number</Select.Label>
         <Select.Trigger>
           <Select.Value placeholder="Pick a number" />
-          <Select.Icon />
+          <Select.Symbol />
         </Select.Trigger>
         <Select.Content>
           <Select.List>
@@ -211,7 +211,7 @@ export const Disabled: TStory = {
         <Select.Label>Fruit</Select.Label>
         <Select.Trigger>
           <Select.Value placeholder="Pick a fruit" />
-          <Select.Icon />
+          <Select.Symbol />
         </Select.Trigger>
         <Select.Content>
           <Select.List>

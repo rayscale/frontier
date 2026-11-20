@@ -17,7 +17,7 @@ export type TToggleProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'aria-pressed' | 'value'
 > & {
-  /** Content of the toggle. Icon-only toggles need an accessible name. */
+  /** Content of the toggle. Symbol-only toggles need an accessible name. */
   children?: ReactNode | undefined
   /** Unique string value when the toggle is used within a toggle group. */
   value?: string | undefined

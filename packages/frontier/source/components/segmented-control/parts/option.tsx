@@ -50,9 +50,9 @@ export function SegmentedControlOptionItem<TValue extends string>({
         }}
       />
       <span className="frontier-segmented-control__content">
-        {option.icon && (
-          <span className="frontier-segmented-control__icon" aria-hidden="true">
-            {option.icon}
+        {option.symbol && (
+          <span className="frontier-segmented-control__symbol" aria-hidden="true">
+            {option.symbol}
           </span>
         )}
         <span className="frontier-segmented-control__label">{option.label}</span>

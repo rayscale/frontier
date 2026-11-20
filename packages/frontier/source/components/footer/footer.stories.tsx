@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Mail } from '../../icons/index.js'
+import { Mail } from '../../symbols/index.js'
 import { Button } from '../button/button.js'
 import { Link } from '../link/link.js'
 

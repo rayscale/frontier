@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Bold, Italic, Underline } from '../../icons/index.js'
+import { Bold, Italic, Underline } from '../../symbols/index.js'
 
 import { ToggleGroup } from './toggle-group.js'
 

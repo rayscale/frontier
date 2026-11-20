@@ -8,12 +8,12 @@ Foundations are the shared rules that every component builds on. They define how
 - [Shape](./shape.md): corners, borders, and the friendly curve.
 - [Spacing](./spacing.md): grouping, rhythm, and target size.
 - [Layout](./layout.md): the grid, breakpoints, and reading width.
-- [Typography](./typography.md): typeface, hierarchy, and readability.
+- [Typeface](./typeface.md): the family, hierarchy, and readability.
 - [Elevation](./elevation.md): layers, depth, and floating content.
 - [Motion](./motion.md): the character, timing, and reduction of movement.
 - [Focus](./focus.md): keyboard position and its visual treatment.
 - [Accessibility](./accessibility.md): the baseline every design must meet.
-- [Icons](./icons.md): grid, stroke, color, and usage rules for icons.
+- [Symbols](./symbols.md): grid, stroke, color, and usage rules for symbols.
 - [Values](./values.md): the concrete values behind colors, spacing, shape, depth, motion, and type.
 
 ## Relationship to the other categories

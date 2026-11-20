@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, forwardRef, useId, useMemo, useState } from 'react'
 
-import { CalendarDays as CalendarIcon } from '../../icons/index.js'
 import { resolveLabelledBy } from '../../internal/helpers/resolve-labelled-by.js'
+import { CalendarDays as CalendarSymbol } from '../../symbols/index.js'
 import { Calendar } from '../calendar/calendar.js'
 import { Popover } from '../popover/popover.js'
 
@@ -127,8 +127,8 @@ export const DatePicker = forwardRef<HTMLButtonElement, TDatePickerProps>(functi
             aria-labelledby={labelledBy}
             data-readonly={readOnly || undefined}
           >
-            <span className="frontier-date-picker__icon" aria-hidden="true">
-              <CalendarIcon />
+            <span className="frontier-date-picker__symbol" aria-hidden="true">
+              <CalendarSymbol />
             </span>
             <span
               id={valueId}

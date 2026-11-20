@@ -62,7 +62,7 @@
   cursor: not-allowed;
 }
 
-.frontier-field__icon {
+.frontier-field__symbol {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -70,7 +70,7 @@
   color: var(--frontier-color-text-muted);
 }
 
-.frontier-field__icon > :where(svg) {
+.frontier-field__symbol > :where(svg) {
   width: 1.125em;
   height: 1.125em;
 }
@@ -98,7 +98,7 @@
   box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-danger-border);
 }
 
-.frontier-field[data-invalid] .frontier-field__icon {
+.frontier-field[data-invalid] .frontier-field__symbol {
   color: var(--frontier-color-danger);
 }
 

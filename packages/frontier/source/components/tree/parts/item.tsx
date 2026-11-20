@@ -2,7 +2,7 @@
 
 import { type ReactElement, type ReactNode, useId, useState } from 'react'
 
-import { ChevronDown } from '../../../icons/index.js'
+import { ChevronDown } from '../../../symbols/index.js'
 import { Collapsible } from '../../collapsible/collapsible.js'
 import { Tooltip } from '../../tooltip/tooltip.js'
 import { useTreeContext } from '../context.js'
@@ -12,9 +12,9 @@ import type { TTreeNode } from '../types.js'
 function RowContent({ branch, node }: { branch: boolean; node: TTreeNode }): ReactNode {
   return (
     <>
-      {node.icon ? (
-        <span aria-hidden="true" className="frontier-tree__icon">
-          {node.icon}
+      {node.symbol ? (
+        <span aria-hidden="true" className="frontier-tree__symbol">
+          {node.symbol}
         </span>
       ) : null}
       <span className="frontier-tree__label">{node.label}</span>

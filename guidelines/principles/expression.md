@@ -1,6 +1,6 @@
 # Expression
 
-Frontier should feel friendly, warm, and a little playful. Its character is approachable and human. It is not sterile, industrial, or corporate. Expression is carried by shape, motion, typography, and the way feedback responds to the user.
+Frontier should feel friendly, warm, and a little playful. Its character is approachable and human. It is not sterile, industrial, or corporate. Expression is carried by shape, motion, typeface, and the way feedback responds to the user.
 
 ## Warmth through shape
 
@@ -16,7 +16,7 @@ Playful choices stay within a restrained, adult range. Exaggerated bounce, carto
 
 ## Voice through type
 
-Typography carries part of this character, but readability comes first. A warm voice that reduces legibility works against expression. See [Typography](../foundations/typography.md).
+The typeface carries part of this character, but readability comes first. A warm voice that reduces legibility works against expression. See [Typeface](../foundations/typeface.md).
 
 ## Principle
 

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { ChevronDown } from '../../icons/index.js'
+import { ChevronDown } from '../../symbols/index.js'
 
 import { Collapsible, type TCollapsibleProps } from './index.js'
 
@@ -206,12 +206,12 @@ describe('Collapsible', () => {
     expect(inner).toHaveAttribute('aria-expanded', 'true')
   })
 
-  it('renders custom trigger content and icons', () => {
+  it('renders custom trigger content and symbols', () => {
     render(
       <Collapsible>
         <Collapsible.Trigger>
           <span>Advanced options</span>
-          <ChevronDown aria-hidden="true" data-testid="icon" />
+          <ChevronDown aria-hidden="true" data-testid="symbol" />
         </Collapsible.Trigger>
         <Collapsible.Content>Options</Collapsible.Content>
       </Collapsible>,
@@ -219,8 +219,8 @@ describe('Collapsible', () => {
 
     const trigger = screen.getByRole('button', { name: 'Advanced options' })
 
-    expect(trigger).toContainElement(screen.getByTestId('icon'))
-    expect(screen.getByTestId('icon')).toHaveAttribute('aria-hidden', 'true')
+    expect(trigger).toContainElement(screen.getByTestId('symbol'))
+    expect(screen.getByTestId('symbol')).toHaveAttribute('aria-hidden', 'true')
   })
 
   it('renders React children and applies custom classes', () => {

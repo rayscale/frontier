@@ -432,7 +432,7 @@ describe('Dialog', () => {
       expect(screen.getByRole('dialog')).not.toHaveAttribute('aria-describedby')
     })
 
-    it('labels the close button and leaves its icon hidden from assistive technology', () => {
+    it('labels the close button and leaves its symbol hidden from assistive technology', () => {
       renderDialog({ defaultOpen: true })
       const closeButton = screen.getByRole('button', { name: 'Close dialog' })
       expect(closeButton.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')

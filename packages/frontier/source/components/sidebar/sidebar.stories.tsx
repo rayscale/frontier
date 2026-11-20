@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
 
+import { assertDefined } from '../../internal/helpers/assert-defined.js'
 import {
   Activity,
   Bell,
@@ -11,8 +12,7 @@ import {
   Settings,
   SquarePen,
   UserRound,
-} from '../../icons/index.js'
-import { assertDefined } from '../../internal/helpers/assert-defined.js'
+} from '../../symbols/index.js'
 import { Avatar } from '../avatar/avatar.js'
 
 import { Sidebar } from './sidebar.js'
@@ -34,7 +34,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
   return (
     <Sidebar.Root defaultOpen={defaultOpen}>
       <Sidebar.Header>
-        <Sidebar.Brand icon={<Box aria-hidden="true" />}>One</Sidebar.Brand>
+        <Sidebar.Brand symbol={<Box aria-hidden="true" />}>One</Sidebar.Brand>
       </Sidebar.Header>
       <Sidebar.Content>
         <Sidebar.Group>
@@ -42,12 +42,12 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
           <Sidebar.GroupContent>
             <Sidebar.Menu>
               <Sidebar.MenuItem>
-                <Sidebar.Item href="#overview" icon={<Home aria-hidden="true" />} active>
+                <Sidebar.Item href="#overview" symbol={<Home aria-hidden="true" />} active>
                   Overview
                 </Sidebar.Item>
               </Sidebar.MenuItem>
               <Sidebar.MenuItem>
-                <Sidebar.Item href="#activity" icon={<Activity aria-hidden="true" />}>
+                <Sidebar.Item href="#activity" symbol={<Activity aria-hidden="true" />}>
                   Activity
                 </Sidebar.Item>
                 <Sidebar.MenuBadge>
@@ -56,7 +56,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
                 </Sidebar.MenuBadge>
               </Sidebar.MenuItem>
               <Sidebar.MenuItem>
-                <Sidebar.Item href="#notifications" icon={<Bell aria-hidden="true" />}>
+                <Sidebar.Item href="#notifications" symbol={<Bell aria-hidden="true" />}>
                   Notifications
                 </Sidebar.Item>
               </Sidebar.MenuItem>
@@ -71,7 +71,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
           <Sidebar.GroupContent>
             <Sidebar.Menu>
               <Sidebar.MenuItem>
-                <Sidebar.Submenu label="Design system" icon={<Folder aria-hidden="true" />}>
+                <Sidebar.Submenu label="Design system" symbol={<Folder aria-hidden="true" />}>
                   <Sidebar.SubmenuItem href="#foundations">Foundations</Sidebar.SubmenuItem>
                   <Sidebar.SubmenuItem href="#components">Components</Sidebar.SubmenuItem>
                 </Sidebar.Submenu>
@@ -83,12 +83,12 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
       <Sidebar.Footer>
         <Sidebar.Menu>
           <Sidebar.MenuItem>
-            <Sidebar.Item href="#help" icon={<CircleHelp aria-hidden="true" />}>
+            <Sidebar.Item href="#help" symbol={<CircleHelp aria-hidden="true" />}>
               Help and support
             </Sidebar.Item>
           </Sidebar.MenuItem>
           <Sidebar.MenuItem>
-            <Sidebar.Item href="#settings" icon={<Settings aria-hidden="true" />}>
+            <Sidebar.Item href="#settings" symbol={<Settings aria-hidden="true" />}>
               Settings
             </Sidebar.Item>
           </Sidebar.MenuItem>
@@ -97,7 +97,7 @@ function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
           <Sidebar.MenuItem>
             <Sidebar.Item
               href="#profile"
-              icon={
+              symbol={
                 <Avatar size="small">
                   <Avatar.Fallback aria-hidden="true">
                     <UserRound />
@@ -140,35 +140,35 @@ export const Collapsed: TStory = {
     const canvas = within(canvasElement)
     const sidebar = canvas.getByRole('navigation', { name: 'Sidebar' })
     const brand = canvasElement.querySelector<HTMLElement>('.frontier-sidebar__brand')
-    const brandIcon = brand?.querySelector<HTMLElement>('.frontier-sidebar__brand-icon')
+    const brandSymbol = brand?.querySelector<HTMLElement>('.frontier-sidebar__brand-symbol')
     const items = [
       canvas.getByRole('link', { name: 'Overview' }),
       canvas.getByRole('button', { name: 'Design system' }),
     ]
 
-    if (!brand || !brandIcon) {
-      throw new Error('Expected the collapsed sidebar brand to have an icon.')
+    if (!brand || !brandSymbol) {
+      throw new Error('Expected the collapsed sidebar brand to have a symbol.')
     }
 
     const brandBounds = brand.getBoundingClientRect()
-    const brandIconBounds = brandIcon.getBoundingClientRect()
+    const brandSymbolBounds = brandSymbol.getBoundingClientRect()
     await expect(
       Math.abs(
         brandBounds.left +
           brandBounds.width / 2 -
-          (brandIconBounds.left + brandIconBounds.width / 2),
+          (brandSymbolBounds.left + brandSymbolBounds.width / 2),
       ),
-      'brand icon horizontal alignment',
+      'brand symbol horizontal alignment',
     ).toBeLessThan(2)
 
-    const itemIcons = items.map((item) => {
-      const icon = item.querySelector<HTMLElement>('.frontier-sidebar__item-icon')
+    const itemSymbols = items.map((item) => {
+      const symbol = item.querySelector<HTMLElement>('.frontier-sidebar__item-symbol')
 
-      if (!icon) {
-        throw new Error('Expected each collapsed sidebar option to have an icon.')
+      if (!symbol) {
+        throw new Error('Expected each collapsed sidebar option to have a symbol.')
       }
 
-      return { item, icon }
+      return { item, symbol }
     })
     const activeWidthTransition = () =>
       sidebar
@@ -180,9 +180,9 @@ export const Collapsed: TStory = {
             animation.playState === 'running',
         )
 
-    for (const { item, icon } of itemIcons) {
+    for (const { item, symbol } of itemSymbols) {
       const { height, width, left, top } = item.getBoundingClientRect()
-      const iconBounds = icon.getBoundingClientRect()
+      const symbolBounds = symbol.getBoundingClientRect()
 
       await expect(width).toBeGreaterThanOrEqual(38)
       await expect(
@@ -190,12 +190,12 @@ export const Collapsed: TStory = {
         `option size: ${String(width)}x${String(height)}`,
       ).toBeLessThan(1)
       await expect(
-        Math.abs(left + width / 2 - (iconBounds.left + iconBounds.width / 2)),
-        'icon horizontal alignment',
+        Math.abs(left + width / 2 - (symbolBounds.left + symbolBounds.width / 2)),
+        'symbol horizontal alignment',
       ).toBeLessThan(2)
       await expect(
-        Math.abs(top + height / 2 - (iconBounds.top + iconBounds.height / 2)),
-        'icon vertical alignment',
+        Math.abs(top + height / 2 - (symbolBounds.top + symbolBounds.height / 2)),
+        'symbol vertical alignment',
       ).toBeLessThan(1)
       await expect(getComputedStyle(item).aspectRatio).not.toBe('auto')
     }
@@ -203,29 +203,29 @@ export const Collapsed: TStory = {
     await userEvent.click(within(sidebar).getByRole('button', { name: 'Expand sidebar' }))
     await activeWidthTransition()?.finished
     const brandOffsetBeforeClose =
-      brandIcon.getBoundingClientRect().left +
-      brandIcon.getBoundingClientRect().width / 2 -
+      brandSymbol.getBoundingClientRect().left +
+      brandSymbol.getBoundingClientRect().width / 2 -
       sidebar.getBoundingClientRect().left
-    const iconOffsetsBeforeClose = itemIcons.map(({ item, icon }) => {
+    const symbolOffsetsBeforeClose = itemSymbols.map(({ item, symbol }) => {
       const itemLeft = item.getBoundingClientRect().left
-      const iconBounds = icon.getBoundingClientRect()
-      return iconBounds.left + iconBounds.width / 2 - itemLeft
+      const symbolBounds = symbol.getBoundingClientRect()
+      return symbolBounds.left + symbolBounds.width / 2 - itemLeft
     })
     await userEvent.click(within(sidebar).getByRole('button', { name: 'Collapse sidebar' }))
     const brandOffsetAfterClose =
-      brandIcon.getBoundingClientRect().left +
-      brandIcon.getBoundingClientRect().width / 2 -
+      brandSymbol.getBoundingClientRect().left +
+      brandSymbol.getBoundingClientRect().width / 2 -
       sidebar.getBoundingClientRect().left
     await expect(
       Math.abs(brandOffsetAfterClose - brandOffsetBeforeClose),
-      'brand icon should move smoothly when the sidebar closes',
+      'brand symbol should move smoothly when the sidebar closes',
     ).toBeLessThan(2)
-    for (const [index, { item, icon }] of itemIcons.entries()) {
+    for (const [index, { item, symbol }] of itemSymbols.entries()) {
       const itemLeft = item.getBoundingClientRect().left
-      const iconBounds = icon.getBoundingClientRect()
-      const currentOffset = iconBounds.left + iconBounds.width / 2 - itemLeft
+      const symbolBounds = symbol.getBoundingClientRect()
+      const currentOffset = symbolBounds.left + symbolBounds.width / 2 - itemLeft
       await expect(
-        Math.abs(currentOffset - assertDefined(iconOffsetsBeforeClose[index])),
+        Math.abs(currentOffset - assertDefined(symbolOffsetsBeforeClose[index])),
       ).toBeLessThan(10)
     }
 
@@ -254,7 +254,7 @@ export const Collapsed: TStory = {
     docs: {
       description: {
         story:
-          'The sidebar can start in its compact icon-only state and expand from either trigger.',
+          'The sidebar can start in its compact symbol-only state and expand from either trigger.',
       },
     },
   },

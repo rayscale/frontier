@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { ChevronDown, Minus, Plus } from '../../icons/index.js'
+import { ChevronDown, Minus, Plus } from '../../symbols/index.js'
 
 import { Collapsible } from './collapsible.js'
 
@@ -76,7 +76,7 @@ export const CustomTrigger: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Collapsible triggers can include custom icons and elements.',
+        story: 'Collapsible triggers can include custom symbols and elements.',
       },
     },
   },
@@ -97,7 +97,7 @@ export const Controlled: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Collapsibles support controlled open state and dynamic icon toggling.',
+        story: 'Collapsibles support controlled open state and dynamic symbol toggling.',
       },
     },
   },

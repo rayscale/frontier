@@ -57,7 +57,7 @@ export const Separator: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Breadcrumbs support custom separator characters or icons.',
+        story: 'Breadcrumbs support custom separator characters or symbols.',
       },
     },
   },

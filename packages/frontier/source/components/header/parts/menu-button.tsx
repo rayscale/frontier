@@ -12,7 +12,7 @@ export const HeaderMenuButton = forwardRef<HTMLButtonElement, TButtonHTMLProps>(
         ref={ref}
         className={classNames('frontier-header__menu-button', className)}
       >
-        <span className="frontier-header__menu-icon" aria-hidden="true" />
+        <span className="frontier-header__menu-symbol" aria-hidden="true" />
       </button>
     )
   },

@@ -50,8 +50,8 @@ export type TFileUploadRootProps = Omit<
 /** Props for {@link FileUpload.Dropzone}. */
 export type TFileUploadDropzoneProps = Omit<ComponentProps<'div'>, 'onClick'>
 
-/** Props for {@link FileUpload.Icon}. */
-export type TFileUploadIconProps = ComponentProps<'span'>
+/** Props for {@link FileUpload.Symbol}. */
+export type TFileUploadSymbolProps = ComponentProps<'span'>
 
 /** Props for {@link FileUpload.Trigger}, in addition to Button props. */
 export type TFileUploadTriggerProps = TButtonProps

@@ -21,7 +21,7 @@ describes. See [Writing](../content/writing.md).
 
 ## No color-only errors
 
-An invalid field includes a message and, where useful, an icon. A red border or red text alone is
+An invalid field includes a message and, where useful, a symbol. A red border or red text alone is
 not an error state. See [Colors](../foundations/colors.md).
 
 ## Read-only and disabled

@@ -9,7 +9,7 @@
 @import './tokens/radii.css';
 @import './tokens/shadows.css';
 @import './tokens/spacing.css';
-@import './tokens/typography.css';
+@import './tokens/typeface.css';
 
 :root {
   font-family: var(--frontier-font-family);

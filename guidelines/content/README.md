@@ -9,7 +9,7 @@ Content defines how Frontier speaks. Interface text is part of the design: it ca
 
 ## Relationship to the other categories
 
-Voice follows the [Principles](../principles/README.md), particularly clarity and restraint. Writing follows [Typography](../foundations/typography.md) for case and [Accessibility](../foundations/accessibility.md) for names and errors. [Messages](../patterns/messages.md) and [Forms](../patterns/forms.md) apply these rules to specific surfaces.
+Voice follows the [Principles](../principles/README.md), particularly clarity and restraint. Writing follows [Typeface](../foundations/typeface.md) for case and [Accessibility](../foundations/accessibility.md) for names and errors. [Messages](../patterns/messages.md) and [Forms](../patterns/forms.md) apply these rules to specific surfaces.
 
 ## One vocabulary
 

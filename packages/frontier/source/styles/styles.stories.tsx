@@ -173,7 +173,7 @@ export const Tokens: TStory = {
     docs: {
       description: {
         story:
-          'Shows the color, typography, spacing, shape, depth, control, and motion tokens in the active mode.',
+          'Shows the color, typeface, spacing, shape, depth, control, and motion tokens in the active mode.',
       },
     },
   },
@@ -197,7 +197,7 @@ export const Tokens: TStory = {
           ))}
         </div>
       </Section>
-      <Section title="Typography">
+      <Section title="Typeface">
         <div style={{ display: 'grid', gap: 'var(--frontier-spacing-3)' }}>
           {sizes.map((size) => (
             <Labeled key={size} token={`--frontier-font-size-${size}`}>

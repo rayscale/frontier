@@ -51,7 +51,7 @@
   max-width: 100%;
 }
 
-.frontier-empty__media--icon {
+.frontier-empty__media--symbol {
   width: 2.75rem;
   height: 2.75rem;
   box-sizing: border-box;
@@ -61,7 +61,7 @@
   color: var(--frontier-color-text-muted);
 }
 
-.frontier-empty__media--icon > svg {
+.frontier-empty__media--symbol > svg {
   width: var(--frontier-spacing-5);
   height: var(--frontier-spacing-5);
   flex-shrink: 0;

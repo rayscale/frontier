@@ -1,7 +1,7 @@
 import { forwardRef, useId } from 'react'
 
-import { Clock as ClockIcon } from '../../icons/index.js'
 import { resolveLabelledBy } from '../../internal/helpers/resolve-labelled-by.js'
+import { Clock as ClockSymbol } from '../../symbols/index.js'
 import { Popover } from '../popover/popover.js'
 
 import { useTimePicker } from './hooks/use-time-picker.js'
@@ -79,8 +79,8 @@ export const TimePicker = forwardRef<HTMLButtonElement, TTimePickerProps>(functi
             aria-labelledby={labelledBy}
             data-readonly={readOnly || undefined}
           >
-            <span className="frontier-time-picker__icon" aria-hidden="true">
-              <ClockIcon />
+            <span className="frontier-time-picker__symbol" aria-hidden="true">
+              <ClockSymbol />
             </span>
             <span
               id={picker.valueId}

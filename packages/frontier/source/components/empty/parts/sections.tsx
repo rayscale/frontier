@@ -48,7 +48,7 @@ export const EmptyMedia = forwardRef<HTMLDivElement, TEmptyMediaProps>(function 
 ) {
   const classes = [
     'frontier-empty__media',
-    variant === 'icon' && 'frontier-empty__media--icon',
+    variant === 'symbol' && 'frontier-empty__media--symbol',
     className,
   ]
     .filter(Boolean)

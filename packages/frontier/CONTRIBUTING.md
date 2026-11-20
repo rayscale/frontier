@@ -113,7 +113,7 @@ packages/frontier/
 │   │   ├── helpers/       # shared functions and hooks
 │   │   └── primitives/    # shared presentational pieces with their own styles
 │   ├── styles/            # stylesheet entry, fonts, tokens, and system stories
-│   ├── typography/        # Frontier Sans sources, build pipeline, tests, and specimens
+│   ├── typeface/          # Frontier Sans sources, build pipeline, tests, and specimens
 │   ├── index.ts           # public package entry
 │   └── styles.d.ts
 ├── scripts/
@@ -185,7 +185,7 @@ Follow the workspace naming rules. Package-specific names follow the same conven
 
 The styles in `source/styles/` implement the guidelines and are the only source of values.
 
-- Reuse tokens for color, spacing, typography, radii, borders, focus, controls, icons, layering,
+- Reuse tokens for color, spacing, typeface, radii, borders, focus, controls, symbols, layering,
   and motion.
 - Prefer semantic tokens over palette variables.
 - Never hardcode a value when a token exists. Never duplicate a token under a new name.
@@ -219,36 +219,36 @@ The styles in `source/styles/` implement the guidelines and are the only source 
   instead of redundant state classes.
 - Never use unscoped generic classes such as `.root`, `.content`, or `.active`.
 
-## Typography
+## Typeface
 
-Frontier Sans lives in `source/typography/` and has its own Python toolchain; read its
-[README](./source/typography/README.md) before changing it.
+Frontier Sans lives in `source/typeface/` and has its own Python toolchain; read its
+[README](./source/typeface/README.md) before changing it.
 
-- Edit glyph definitions, features, or metrics in `source/typography/`, never the compiled fonts.
-- Run `pnpm typography:build`, `pnpm typography:test`, and `pnpm typography:validate` after any
+- Edit glyph definitions, features, or metrics in `source/typeface/`, never the compiled fonts.
+- Run `pnpm typeface:build`, `pnpm typeface:test`, and `pnpm typeface:validate` after any
   change to the typeface.
 - Compiled fonts, UFO masters, and virtual environments are generated output and stay out of
   version control.
 - The family token lists Frontier Sans first and Outfit as the fallback; do not hardcode a family.
 
-## Icons
+## Symbols
 
-Icons live in `source/icons` and are exported from the package entry. They belong to the set, not to
+Symbols live in `source/symbols` and are exported from the package entry. They belong to the set, not to
 the component that first needed them.
 
-- Add an icon as `source/icons/svg/{name}/icon.svg` plus an `icon.json` that satisfies
-  `source/icons/metadata.schema.json`. That pair is the only source: the React components, the
+- Add a symbol as `source/symbols/svg/{name}/symbol.svg` plus an `symbol.json` that satisfies
+  `source/symbols/metadata.schema.json`. That pair is the only source: the React components, the
   barrel, and the metadata module are generated from it.
-- Run `pnpm --filter @rayscale/frontier generate:icons` after changing an icon source. The build
+- Run `pnpm --filter @rayscale/frontier generate:symbols` after changing a symbol source. The build
   regenerates everything through `prebuild`, so never edit `components/`, `generated.ts`, or
   `metadata.generated.ts` by hand.
 - Draw on the 24-unit grid. The SVG carries the stroke, caps, and joins for designers, and the
-  `Icon` primitive applies the same icon tokens at runtime; a component never sets its own stroke,
+  `Symbol` primitive applies the same symbol tokens at runtime; a component never sets its own stroke,
   cap, or size.
-- Size icons with the named scale (`inline`, `control`, `standalone`) instead of raw pixels.
-- Icons are decorative: they are hidden from assistive technology, and the control that contains one
+- Size symbols with the named scale (`inline`, `control`, `standalone`) instead of raw pixels.
+- Symbols are decorative: they are hidden from assistive technology, and the control that contains one
   carries the accessible name.
-- Add an icon only when no existing icon carries the meaning.
+- Add a symbol only when no existing symbol carries the meaning.
 
 ## Stories
 

@@ -23,7 +23,7 @@ than the content needs.
 ## Alignment
 
 Rows at the same depth share the same start edge, whether they are branches or
-leaves. When some siblings use icons, reserve the icon slot for the rest so
+leaves. When some siblings use symbols, reserve the symbol slot for the rest so
 labels stay aligned. Keep the disclosure control at the end of the row so it
 does not shift the label.
 

@@ -16,26 +16,26 @@
       "import": "./dist/index.js"
     },
     "./styles.css": "./dist/styles/index.css",
-    "./fonts/*": "./dist/typography/fonts/*"
+    "./fonts/*": "./dist/typeface/fonts/*"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "generate:icons": "node --experimental-strip-types scripts/generate-icons.ts && pnpm exec prettier --write \"source/icons/components/**/*.{ts,tsx}\" \"source/icons/generated.ts\"",
-    "prebuild": "node -e \"for (const path of ['source/icons/components', 'source/icons/generated.ts', 'source/icons/metadata.generated.ts']) require('node:fs').rmSync(path, { force: true, recursive: true })\" && pnpm generate:icons",
+    "generate:symbols": "node --experimental-strip-types scripts/generate-symbols.ts && pnpm exec prettier --write \"source/symbols/components/**/*.{ts,tsx}\" \"source/symbols/generated.ts\"",
+    "prebuild": "node -e \"for (const path of ['source/symbols/components', 'source/symbols/generated.ts', 'source/symbols/metadata.generated.ts']) require('node:fs').rmSync(path, { force: true, recursive: true })\" && pnpm generate:symbols",
     "build": "tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "typography:setup": "uv sync --directory source/typography",
-    "typography:build": "uv run --directory source/typography python -m scripts.compile",
-    "typography:build:static": "uv run --directory source/typography python -m scripts.compile --static otf ttf",
-    "typography:validate": "uv run --directory source/typography python -m scripts.validate",
-    "typography:test": "uv run --directory source/typography pytest",
-    "prepublishOnly": "pnpm typography:build && pnpm build"
+    "typeface:setup": "uv sync --directory source/typeface",
+    "typeface:build": "uv run --directory source/typeface python -m scripts.compile",
+    "typeface:build:static": "uv run --directory source/typeface python -m scripts.compile --static otf ttf",
+    "typeface:validate": "uv run --directory source/typeface python -m scripts.validate",
+    "typeface:test": "uv run --directory source/typeface pytest",
+    "prepublishOnly": "pnpm typeface:build && pnpm build"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

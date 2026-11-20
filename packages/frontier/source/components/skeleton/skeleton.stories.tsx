@@ -76,7 +76,7 @@ export const Circular: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Skeletons styled for circular avatar or icon placeholders.',
+        story: 'Skeletons styled for circular avatar or symbol placeholders.',
       },
     },
   },

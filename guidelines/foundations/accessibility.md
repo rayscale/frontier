@@ -10,7 +10,7 @@ Disabled semantics depend on the control. A natively disabled control is unavail
 
 ## Names
 
-Every interactive element needs a name that a person can understand. The name should include the text the user can see. A visible label such as "Max" should appear in the accessible name, so that a spoken name matches what is on screen. Icon-only controls need a name that describes their action.
+Every interactive element needs a name that a person can understand. The name should include the text the user can see. A visible label such as "Max" should appear in the accessible name, so that a spoken name matches what is on screen. Symbol-only controls need a name that describes their action.
 
 ## Landmarks and regions
 
@@ -18,7 +18,7 @@ A region should be labeled as a landmark only when it is a real page area that u
 
 ## Meaning without color
 
-Status, selection, and disabled states must be understood without color alone. Pair color with text, an icon, weight, or a shape change.
+Status, selection, and disabled states must be understood without color alone. Pair color with text, a symbol, weight, or a shape change.
 
 ## Contrast
 

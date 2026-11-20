@@ -1,5 +1,6 @@
 .docs-layout {
   --_nav-offset: calc(var(--frontier-spacing-16) + var(--frontier-spacing-4));
+  --_trail-height: 2rem;
 
   display: grid;
   grid-template-columns: 14rem minmax(0, calc(62rem + var(--frontier-spacing-10)));
@@ -15,7 +16,12 @@
   inset-block-start: var(--_nav-offset);
   box-sizing: border-box;
   max-block-size: calc(100dvh - var(--_nav-offset) - var(--frontier-spacing-4));
-  padding-block: var(--frontier-spacing-8);
+  /* Starts level with the table of contents: below the trail and the page's top padding, less the
+     inner padding of a tree row. */
+  margin-block-start: calc(
+    var(--frontier-spacing-4) + var(--_trail-height) + var(--frontier-spacing-8) -
+      var(--frontier-spacing-2)
+  );
   overflow-y: auto;
 }
 
@@ -29,6 +35,7 @@
   align-items: center;
   gap: var(--frontier-spacing-3);
   min-inline-size: 0;
+  min-block-size: var(--_trail-height);
   padding: var(--frontier-spacing-4) var(--frontier-spacing-6) 0;
 }
 

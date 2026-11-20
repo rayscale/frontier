@@ -17,11 +17,13 @@ export const SelectItem = forwardRef<HTMLDivElement, TSelectItemProps>(function 
   return (
     <BaseSelect.Item
       ref={ref}
-      className={classNames('frontier-select__item', className)}
+      className={classNames('frontier-select__item frontier-option', className)}
       {...props}
     >
-      <BaseSelect.ItemText className="frontier-select__item-text">{children}</BaseSelect.ItemText>
-      <BaseSelect.ItemIndicator className="frontier-select__item-indicator">
+      <BaseSelect.ItemText className="frontier-select__item-text frontier-option__text">
+        {children}
+      </BaseSelect.ItemText>
+      <BaseSelect.ItemIndicator className="frontier-select__item-indicator frontier-option__indicator">
         <Check size={16} aria-hidden="true" />
       </BaseSelect.ItemIndicator>
     </BaseSelect.Item>
@@ -35,7 +37,7 @@ export const SelectGroup = forwardRef<HTMLDivElement, TSelectGroupProps>(functio
   return (
     <BaseSelect.Group
       ref={ref}
-      className={classNames('frontier-select__group', className)}
+      className={classNames('frontier-select__group frontier-option-group', className)}
       {...props}
     />
   )
@@ -46,7 +48,10 @@ export const SelectGroupLabel = forwardRef<HTMLDivElement, TSelectGroupLabelProp
     return (
       <BaseSelect.GroupLabel
         ref={ref}
-        className={classNames('frontier-select__group-label', className)}
+        className={classNames(
+          'frontier-select__group-label frontier-option-group__label',
+          className,
+        )}
         {...props}
       />
     )
@@ -58,7 +63,7 @@ export const SelectSeparator = forwardRef<HTMLDivElement, TSelectSeparatorProps>
     return (
       <BaseSelect.Separator
         ref={ref}
-        className={classNames('frontier-select__separator', className)}
+        className={classNames('frontier-select__separator frontier-option-separator', className)}
         {...props}
       />
     )

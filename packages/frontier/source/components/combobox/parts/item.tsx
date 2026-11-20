@@ -17,11 +17,11 @@ export const ComboboxItem = forwardRef<HTMLDivElement, TComboboxItemProps>(funct
   return (
     <BaseCombobox.Item
       ref={ref}
-      className={classNames('frontier-combobox__item', className)}
+      className={classNames('frontier-combobox__item frontier-option', className)}
       {...props}
     >
-      <span className="frontier-combobox__item-text">{children}</span>
-      <BaseCombobox.ItemIndicator className="frontier-combobox__item-indicator">
+      <span className="frontier-combobox__item-text frontier-option__text">{children}</span>
+      <BaseCombobox.ItemIndicator className="frontier-combobox__item-indicator frontier-option__indicator">
         <Check size={16} aria-hidden="true" />
       </BaseCombobox.ItemIndicator>
     </BaseCombobox.Item>
@@ -35,7 +35,7 @@ export const ComboboxGroup = forwardRef<HTMLDivElement, TComboboxGroupProps>(fun
   return (
     <BaseCombobox.Group
       ref={ref}
-      className={classNames('frontier-combobox__group', className)}
+      className={classNames('frontier-combobox__group frontier-option-group', className)}
       {...props}
     />
   )
@@ -46,7 +46,10 @@ export const ComboboxGroupLabel = forwardRef<HTMLDivElement, TComboboxGroupLabel
     return (
       <BaseCombobox.GroupLabel
         ref={ref}
-        className={classNames('frontier-combobox__group-label', className)}
+        className={classNames(
+          'frontier-combobox__group-label frontier-option-group__label',
+          className,
+        )}
         {...props}
       />
     )
@@ -58,7 +61,7 @@ export const ComboboxSeparator = forwardRef<HTMLDivElement, TComboboxSeparatorPr
     return (
       <BaseCombobox.Separator
         ref={ref}
-        className={classNames('frontier-combobox__separator', className)}
+        className={classNames('frontier-combobox__separator frontier-option-separator', className)}
         {...props}
       />
     )

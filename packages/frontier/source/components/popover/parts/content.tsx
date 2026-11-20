@@ -1,6 +1,8 @@
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import { forwardRef, type ReactElement } from 'react'
 
+import { classNames } from '../../../internal/helpers/class-names.js'
+import { FloatingPopup } from '../../../internal/primitives/floating-popup/floating-popup.js'
 import { Button } from '../../button/button.js'
 import type { TPopoverCloseProps, TPopoverContentProps } from '../types.js'
 
@@ -17,23 +19,19 @@ export const PopoverContent = forwardRef<HTMLDivElement, TPopoverContentProps>(
     },
     ref,
   ) {
-    const classes = ['frontier-popover', 'frontier-floating-surface', className]
-      .filter(Boolean)
-      .join(' ')
-
     return (
-      <BasePopover.Portal>
-        <BasePopover.Positioner
-          side={side}
-          align={align}
-          sideOffset={sideOffset}
-          alignOffset={alignOffset}
-        >
-          <BasePopover.Popup {...props} ref={ref} className={classes}>
-            {children}
-          </BasePopover.Popup>
-        </BasePopover.Positioner>
-      </BasePopover.Portal>
+      <FloatingPopup
+        Portal={BasePopover.Portal}
+        Positioner={BasePopover.Positioner}
+        Popup={BasePopover.Popup}
+        placement={{ side, align, sideOffset, alignOffset }}
+        popupProps={{
+          ...props,
+          ref,
+          className: classNames('frontier-popover', 'frontier-floating-surface', className),
+          children,
+        }}
+      />
     )
   },
 )

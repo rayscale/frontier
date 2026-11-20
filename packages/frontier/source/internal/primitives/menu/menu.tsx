@@ -12,15 +12,22 @@ import {
 import { Check, ChevronRight, Circle } from '../../../icons/index.js'
 import { omitUndefined } from '../../../internal/helpers/omit-undefined.js'
 import { AnimatedHighlight } from '../animated-highlight/animated-highlight.js'
+import {
+  FloatingPopup,
+  type TFloatingAlign,
+  type TFloatingPlacement,
+  type TFloatingSide,
+} from '../floating-popup/floating-popup.js'
 
 import '../../styles/floating-surface.css'
+import '../../styles/option-list.css'
 import './menu.css'
 
 /** Side of the trigger where the menu popup is placed. */
-export type TMenuSide = 'top' | 'right' | 'bottom' | 'left'
+export type TMenuSide = TFloatingSide
 
 /** Alignment of the menu popup along the chosen side. */
-export type TMenuAlign = 'start' | 'center' | 'end'
+export type TMenuAlign = TFloatingAlign
 
 export interface TMenuRootProps {
   /** Controlled open state. */
@@ -39,13 +46,10 @@ export interface TMenuTriggerProps {
 
 export type TMenuContextTriggerProps = ComponentPropsWithoutRef<typeof BaseContextMenu.Trigger>
 
-export type TMenuPopupProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className'> & {
-  className?: string | undefined
-  side?: TMenuSide | undefined
-  align?: TMenuAlign | undefined
-  sideOffset?: number | undefined
-  alignOffset?: number | undefined
-}
+export type TMenuPopupProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className'> &
+  TFloatingPlacement & {
+    className?: string | undefined
+  }
 
 export type TMenuItemProps = Omit<ComponentPropsWithoutRef<typeof BaseMenu.Item>, 'className'> & {
   className?: string | undefined
@@ -153,7 +157,10 @@ const MenuPopupSurface = forwardRef<HTMLDivElement, TMenuPopupSurfaceProps>(
     return (
       <BaseMenu.Popup
         ref={ref}
-        className={classNames('frontier-menu__popup frontier-floating-surface', className)}
+        className={classNames(
+          'frontier-menu__popup frontier-option-popup frontier-floating-surface',
+          className,
+        )}
         {...props}
       >
         <AnimatedHighlight />
@@ -172,19 +179,14 @@ export const MenuPopup = forwardRef<HTMLDivElement, TMenuPopupProps>(function Me
   const resolvedAlign = align ?? (submenuState ? undefined : 'start')
 
   return (
-    <BaseMenu.Portal>
-      <BaseMenu.Positioner
-        side={resolvedSide}
-        align={resolvedAlign}
-        sideOffset={sideOffset}
-        alignOffset={alignOffset}
-        className="frontier-menu__positioner"
-      >
-        <MenuPopupSurface ref={ref} {...omitUndefined({ className })} {...omitUndefined(props)}>
-          {children}
-        </MenuPopupSurface>
-      </BaseMenu.Positioner>
-    </BaseMenu.Portal>
+    <FloatingPopup
+      Portal={BaseMenu.Portal}
+      Positioner={BaseMenu.Positioner}
+      Popup={MenuPopupSurface}
+      placement={{ side: resolvedSide, align: resolvedAlign, sideOffset, alignOffset }}
+      positionerClassName="frontier-menu__positioner"
+      popupProps={{ ...omitUndefined({ className }), ...omitUndefined(props), ref, children }}
+    />
   )
 })
 
@@ -224,13 +226,14 @@ export const MenuContextTrigger = forwardRef<HTMLDivElement, TMenuContextTrigger
 export const MenuContextPopup = forwardRef<HTMLDivElement, TMenuPopupSurfaceProps>(
   function MenuContextPopup({ className, children, ...props }, ref) {
     return (
-      <BaseContextMenu.Portal>
-        <BaseContextMenu.Positioner className="frontier-menu__positioner">
-          <MenuPopupSurface ref={ref} {...omitUndefined({ className })} {...omitUndefined(props)}>
-            {children}
-          </MenuPopupSurface>
-        </BaseContextMenu.Positioner>
-      </BaseContextMenu.Portal>
+      <FloatingPopup
+        Portal={BaseContextMenu.Portal}
+        Positioner={BaseContextMenu.Positioner}
+        Popup={MenuPopupSurface}
+        placement={{}}
+        positionerClassName="frontier-menu__positioner"
+        popupProps={{ ...omitUndefined({ className }), ...omitUndefined(props), ref, children }}
+      />
     )
   },
 )
@@ -262,7 +265,10 @@ export const MenuSubmenuTrigger = forwardRef<HTMLDivElement, TMenuSubmenuTrigger
     return (
       <BaseMenu.SubmenuTrigger
         ref={ref}
-        className={classNames('frontier-menu__item frontier-menu__submenu-trigger', className)}
+        className={classNames(
+          'frontier-menu__item frontier-option frontier-menu__submenu-trigger',
+          className,
+        )}
         {...props}
       >
         {children}
@@ -277,7 +283,11 @@ export const MenuItem = forwardRef<HTMLDivElement, TMenuItemProps>(function Menu
   ref,
 ) {
   return (
-    <BaseMenu.Item ref={ref} className={classNames('frontier-menu__item', className)} {...props} />
+    <BaseMenu.Item
+      ref={ref}
+      className={classNames('frontier-menu__item frontier-option', className)}
+      {...props}
+    />
   )
 })
 
@@ -287,7 +297,10 @@ export const MenuCheckboxItem = forwardRef<HTMLDivElement, TMenuCheckboxItemProp
     return (
       <BaseMenu.CheckboxItem
         ref={ref}
-        className={classNames('frontier-menu__item frontier-menu__item--selectable', className)}
+        className={classNames(
+          'frontier-menu__item frontier-option frontier-menu__item--selectable',
+          className,
+        )}
         {...props}
       >
         <BaseMenu.CheckboxItemIndicator className="frontier-menu__item-indicator" keepMounted>
@@ -320,7 +333,10 @@ export const MenuRadioItem = forwardRef<HTMLDivElement, TMenuRadioItemProps>(fun
   return (
     <BaseMenu.RadioItem
       ref={ref}
-      className={classNames('frontier-menu__item frontier-menu__item--selectable', className)}
+      className={classNames(
+        'frontier-menu__item frontier-option frontier-menu__item--selectable',
+        className,
+      )}
       {...props}
     >
       <BaseMenu.RadioItemIndicator className="frontier-menu__item-indicator" keepMounted>
@@ -338,7 +354,7 @@ export const MenuGroup = forwardRef<HTMLDivElement, TMenuGroupProps>(function Me
   return (
     <BaseMenu.Group
       ref={ref}
-      className={classNames('frontier-menu__group', className)}
+      className={classNames('frontier-menu__group frontier-option-group', className)}
       {...props}
     />
   )
@@ -349,7 +365,7 @@ export const MenuGroupLabel = forwardRef<HTMLDivElement, TMenuGroupLabelProps>(
     return (
       <BaseMenu.GroupLabel
         ref={ref}
-        className={classNames('frontier-menu__group-label', className)}
+        className={classNames('frontier-menu__group-label frontier-option-group__label', className)}
         {...props}
       />
     )
@@ -363,7 +379,7 @@ export const MenuSeparator = forwardRef<HTMLDivElement, TMenuSeparatorProps>(fun
   return (
     <BaseMenu.Separator
       ref={ref}
-      className={classNames('frontier-menu__separator', className)}
+      className={classNames('frontier-menu__separator frontier-option-separator', className)}
       {...props}
     />
   )

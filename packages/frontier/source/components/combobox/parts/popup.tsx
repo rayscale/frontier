@@ -3,6 +3,7 @@ import { forwardRef, Fragment } from 'react'
 
 import { classNames } from '../../../internal/helpers/class-names.js'
 import { AnimatedHighlight } from '../../../internal/primitives/animated-highlight/animated-highlight.js'
+import { FloatingPopup } from '../../../internal/primitives/floating-popup/floating-popup.js'
 import { isOptionGroup } from '../helpers/items.js'
 import type {
   TComboboxContentProps,
@@ -28,24 +29,27 @@ export const ComboboxContent = forwardRef<HTMLDivElement, TComboboxContentProps>
     ref,
   ) {
     return (
-      <BaseCombobox.Portal>
-        <BaseCombobox.Positioner
-          side={side}
-          align={align}
-          sideOffset={sideOffset}
-          alignOffset={alignOffset}
-          className="frontier-combobox__positioner"
-        >
-          <BaseCombobox.Popup
-            ref={ref}
-            className={classNames('frontier-combobox__popup frontier-floating-surface', className)}
-            {...props}
-          >
-            <AnimatedHighlight />
-            {children}
-          </BaseCombobox.Popup>
-        </BaseCombobox.Positioner>
-      </BaseCombobox.Portal>
+      <FloatingPopup
+        Portal={BaseCombobox.Portal}
+        Positioner={BaseCombobox.Positioner}
+        Popup={BaseCombobox.Popup}
+        placement={{ side, align, sideOffset, alignOffset }}
+        positionerClassName="frontier-combobox__positioner"
+        popupProps={{
+          ...props,
+          ref,
+          className: classNames(
+            'frontier-combobox__popup frontier-option-popup frontier-floating-surface',
+            className,
+          ),
+          children: (
+            <>
+              <AnimatedHighlight />
+              {children}
+            </>
+          ),
+        }}
+      />
     )
   },
 )
@@ -65,7 +69,7 @@ export const ComboboxList = forwardRef<HTMLDivElement, TComboboxListProps>(funct
   return (
     <BaseCombobox.List
       ref={ref}
-      className={classNames('frontier-combobox__list', className)}
+      className={classNames('frontier-combobox__list frontier-option-list', className)}
       {...props}
     >
       {(entry: TComboboxOption | TComboboxOptionGroup, index: number) =>
@@ -73,9 +77,9 @@ export const ComboboxList = forwardRef<HTMLDivElement, TComboboxListProps>(funct
           <BaseCombobox.Group
             key={entry.label}
             items={entry.items}
-            className="frontier-combobox__group"
+            className="frontier-combobox__group frontier-option-group"
           >
-            <BaseCombobox.GroupLabel className="frontier-combobox__group-label">
+            <BaseCombobox.GroupLabel className="frontier-combobox__group-label frontier-option-group__label">
               {entry.label}
             </BaseCombobox.GroupLabel>
             <BaseCombobox.Collection>

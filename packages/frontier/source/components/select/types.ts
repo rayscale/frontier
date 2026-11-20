@@ -1,6 +1,8 @@
 import type { Select as BaseSelect } from '@base-ui/react/select'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
+import type { TFloatingPlacement } from '../../internal/primitives/floating-popup/floating-popup.js'
+
 /** Props for the select root. Options are declared as `Select.Item` children. */
 export interface TSelectProps {
   /** Selected option value. Pass `null` for no selection. */
@@ -39,12 +41,7 @@ export type TSelectIconProps = TWithStringClassName<
   ComponentPropsWithoutRef<typeof BaseSelect.Icon>
 >
 
-export type TSelectContentProps = ComponentPropsWithoutRef<'div'> & {
-  side?: 'top' | 'bottom' | 'left' | 'right' | undefined
-  align?: 'start' | 'center' | 'end' | undefined
-  sideOffset?: number | undefined
-  alignOffset?: number | undefined
-}
+export type TSelectContentProps = ComponentPropsWithoutRef<'div'> & TFloatingPlacement
 
 export type TSelectListProps = TWithStringClassName<
   ComponentPropsWithoutRef<typeof BaseSelect.List>

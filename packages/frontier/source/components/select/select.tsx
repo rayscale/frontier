@@ -5,6 +5,7 @@ import { SelectIcon, SelectLabel, SelectTrigger, SelectValue } from './parts/tri
 import type { TSelectProps } from './types.js'
 
 import '../../internal/styles/floating-surface.css'
+import '../../internal/styles/option-list.css'
 import './select.css'
 
 export type {

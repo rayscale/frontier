@@ -5,6 +5,7 @@ import { ComboboxClear, ComboboxTrigger } from './parts/trigger.js'
 import type { TComboboxProps } from './types.js'
 
 import '../../internal/styles/floating-surface.css'
+import '../../internal/styles/option-list.css'
 import './combobox.css'
 
 export type {

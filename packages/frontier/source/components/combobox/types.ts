@@ -1,6 +1,7 @@
 import type { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
+import type { TFloatingPlacement } from '../../internal/primitives/floating-popup/floating-popup.js'
 import type { TInputProps } from '../input/input.js'
 
 /** A selectable option. `value` identifies it; `label` is shown and matched against the query. */
@@ -51,12 +52,7 @@ export type TComboboxClearProps = TWithStringClassName<
   ComponentPropsWithoutRef<typeof BaseCombobox.Clear>
 >
 
-export type TComboboxContentProps = ComponentPropsWithoutRef<'div'> & {
-  side?: 'top' | 'bottom' | 'left' | 'right' | undefined
-  align?: 'start' | 'center' | 'end' | undefined
-  sideOffset?: number | undefined
-  alignOffset?: number | undefined
-}
+export type TComboboxContentProps = ComponentPropsWithoutRef<'div'> & TFloatingPlacement
 
 export type TComboboxListProps = Omit<
   TWithStringClassName<ComponentPropsWithoutRef<typeof BaseCombobox.List>>,

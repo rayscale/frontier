@@ -77,12 +77,6 @@
   color: var(--frontier-color-text-muted);
 }
 
-.frontier-field__required {
-  color: var(--frontier-color-text-muted);
-  font-size: var(--frontier-font-size-xs);
-  line-height: var(--frontier-line-height-sm);
-}
-
 .frontier-field__description,
 .frontier-field__error {
   font-size: var(--frontier-font-size-sm);

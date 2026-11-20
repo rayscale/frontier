@@ -24,3 +24,8 @@ export type TFieldControlProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'di
 export type TFieldDescriptionProps = ComponentProps<'span'>
 
 export type TFieldErrorProps = ComponentProps<'span'>
+
+export type TFieldIconProps = ComponentProps<'span'> & {
+  /** Keeps the content available to assistive technology, for icons that act as controls. */
+  interactive?: boolean
+}

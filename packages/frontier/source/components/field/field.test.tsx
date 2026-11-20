@@ -6,6 +6,22 @@ import { describe, expect, it } from 'vitest'
 import { Field } from './index.js'
 
 describe('Field', () => {
+  it('hides decorative icons and keeps interactive ones available', () => {
+    render(
+      <Field.Root>
+        <Field.Label>Search</Field.Label>
+        <Field.Box>
+          <Field.Icon data-testid="decorative" />
+          <Field.Control />
+          <Field.Icon data-testid="interactive" interactive />
+        </Field.Box>
+      </Field.Root>,
+    )
+
+    expect(screen.getByTestId('decorative')).toHaveAttribute('aria-hidden', 'true')
+    expect(screen.getByTestId('interactive')).not.toHaveAttribute('aria-hidden')
+  })
+
   it('names the control from the label', () => {
     render(
       <Field.Root>

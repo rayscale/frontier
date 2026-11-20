@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 
+import { RequiredMarker } from '../../../internal/primitives/required-marker/required-marker.js'
 import { Label } from '../../label/index.js'
 import { useFieldContext } from '../context.js'
 import type { TFieldLabelProps } from '../types.js'
@@ -13,11 +14,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, TFieldLabelProps>(
     return (
       <Label {...rest} ref={ref} htmlFor={field?.controlId ?? htmlFor} className={classes}>
         {children}
-        {field?.required ? (
-          <span className="frontier-field__required" aria-hidden="true">
-            Required
-          </span>
-        ) : null}
+        {field?.required ? <RequiredMarker /> : null}
       </Label>
     )
   },

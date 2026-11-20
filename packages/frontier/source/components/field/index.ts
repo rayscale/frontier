@@ -5,6 +5,7 @@ export type {
   TFieldControlProps,
   TFieldDescriptionProps,
   TFieldErrorProps,
+  TFieldIconProps,
   TFieldLabelProps,
   TFieldRootProps,
 } from './types.js'

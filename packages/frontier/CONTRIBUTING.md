@@ -48,6 +48,10 @@ Public components compose through public APIs. They never depend on another comp
   their props, state, or types as the public API.
 - Place code shared by two or more components in `source/internal/`; keep component-specific code
   inside the component folder. Do not create a third location for the same concern.
+- Inside `source/internal/`, shared functions and hooks (class joining, behavior shared by native
+  inputs) go in `helpers/`, and shared presentational pieces that render markup and own a
+  stylesheet (the required marker) go in `primitives/{name}/`. Internal code follows the component
+  rules: kebab-case files, no barrels, and no export from the package entry.
 - Style components with tokens and their own public classes. Do not select another component's
   internals.
 - If a composition would create a cycle, extract a shared internal contract or pass behavior
@@ -105,7 +109,9 @@ or coordinated state. Do not recreate that behavior by hand.
 packages/frontier/
 ├── source/
 │   ├── components/        # public components
-│   ├── internal/          # shared helpers, primitives, and styles
+│   ├── internal/          # code shared by two or more components
+│   │   ├── helpers/       # shared functions and hooks
+│   │   └── primitives/    # shared presentational pieces with their own styles
 │   ├── styles/            # stylesheet entry, fonts, tokens, and system stories
 │   ├── index.ts           # public package entry
 │   └── styles.d.ts

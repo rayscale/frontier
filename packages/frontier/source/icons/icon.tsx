@@ -1,12 +1,14 @@
 import { createElement, forwardRef } from 'react'
 
+import { classNames } from '../internal/helpers/class-names.js'
+
 import type { TIconProps } from './types.js'
 
 import './icon.css'
 
 export const Icon = forwardRef<SVGSVGElement, TIconProps>(function Icon(props, ref) {
   const { className, iconNode, size = 'inline', ...rest } = props
-  const classes = ['frontier-icon', `frontier-icon--${size}`, className].filter(Boolean).join(' ')
+  const classes = classNames('frontier-icon', `frontier-icon--${size}`, className)
 
   return (
     <svg

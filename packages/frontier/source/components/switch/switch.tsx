@@ -1,5 +1,7 @@
-import { forwardRef, type KeyboardEvent, type MouseEvent, useId } from 'react'
+import { forwardRef, useId } from 'react'
 
+import { classNames } from '../../internal/helpers/class-names.js'
+import { createToggleHandlers } from '../../internal/helpers/toggle-handlers.js'
 import { Label } from '../label/index.js'
 
 import type { TSwitchProps } from './types.js'
@@ -28,30 +30,10 @@ export const Switch = forwardRef<HTMLInputElement, TSwitchProps>(function Switch
   const describedBy =
     [ariaDescribedBy, support ? supportId : undefined].filter(Boolean).join(' ') || undefined
 
-  const handleClick = (event: MouseEvent<HTMLInputElement>): void => {
-    if (unavailable) {
-      event.preventDefault()
-      event.stopPropagation()
-
-      return
-    }
-
-    onClick?.(event)
-  }
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      event.currentTarget.click()
-    } else if (unavailable && event.key === ' ') {
-      event.preventDefault()
-    }
-
-    onKeyDown?.(event)
-  }
+  const handlers = createToggleHandlers(unavailable, onClick, onKeyDown)
 
   return (
-    <span className={['frontier-switch', className].filter(Boolean).join(' ')}>
+    <span className={classNames('frontier-switch', className)}>
       <Label className="frontier-switch__label" htmlFor={inputId}>
         <span className="frontier-switch__control">
           <input
@@ -63,8 +45,8 @@ export const Switch = forwardRef<HTMLInputElement, TSwitchProps>(function Switch
             className="frontier-switch__input"
             aria-describedby={describedBy}
             aria-disabled={unavailable || undefined}
-            onClick={handleClick}
-            onKeyDown={handleKeyDown}
+            onClick={handlers.onClick}
+            onKeyDown={handlers.onKeyDown}
           />
           <span className="frontier-switch__track" aria-hidden="true">
             <span className="frontier-switch__thumb" />

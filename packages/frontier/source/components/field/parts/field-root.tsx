@@ -1,5 +1,6 @@
 import { forwardRef, useId } from 'react'
 
+import { classNames } from '../../../internal/helpers/class-names.js'
 import { fieldContext } from '../context.js'
 import type { TFieldRootProps } from '../types.js'
 
@@ -19,7 +20,7 @@ export const FieldRoot = forwardRef<HTMLDivElement, TFieldRootProps>(
     const descriptionId = useId()
     const errorId = useId()
     const controlId = id ?? generatedId
-    const classes = ['frontier-field', className].filter(Boolean).join(' ')
+    const classes = classNames('frontier-field', className)
     const context = {
       controlId,
       descriptionId,

@@ -1,6 +1,8 @@
-import { forwardRef, type KeyboardEvent, type MouseEvent, useId } from 'react'
+import { forwardRef, useId } from 'react'
 
 import { Check } from '../../icons/index.js'
+import { classNames } from '../../internal/helpers/class-names.js'
+import { createToggleHandlers } from '../../internal/helpers/toggle-handlers.js'
 import { Label } from '../label/index.js'
 
 import type { TCheckboxProps } from './types.js'
@@ -29,30 +31,10 @@ export const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(function Ch
   const describedBy =
     [ariaDescribedBy, support ? supportId : undefined].filter(Boolean).join(' ') || undefined
 
-  const handleClick = (event: MouseEvent<HTMLInputElement>): void => {
-    if (unavailable) {
-      event.preventDefault()
-      event.stopPropagation()
-
-      return
-    }
-
-    onClick?.(event)
-  }
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      event.currentTarget.click()
-    } else if (unavailable && event.key === ' ') {
-      event.preventDefault()
-    }
-
-    onKeyDown?.(event)
-  }
+  const handlers = createToggleHandlers(unavailable, onClick, onKeyDown)
 
   return (
-    <span className={['frontier-checkbox', className].filter(Boolean).join(' ')}>
+    <span className={classNames('frontier-checkbox', className)}>
       <Label className="frontier-checkbox__label" htmlFor={inputId}>
         <span className="frontier-checkbox__control">
           <input
@@ -63,8 +45,8 @@ export const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(function Ch
             className="frontier-checkbox__input"
             aria-describedby={describedBy}
             aria-disabled={unavailable || undefined}
-            onClick={handleClick}
-            onKeyDown={handleKeyDown}
+            onClick={handlers.onClick}
+            onKeyDown={handlers.onKeyDown}
           />
           <span className="frontier-checkbox__mark" aria-hidden="true">
             <Check />

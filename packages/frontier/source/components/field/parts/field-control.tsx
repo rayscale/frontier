@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 
+import { classNames } from '../../../internal/helpers/class-names.js'
 import { useFieldContext } from '../context.js'
 import type { TFieldControlProps } from '../types.js'
 
@@ -57,7 +58,7 @@ export const FieldControl = forwardRef<HTMLInputElement, TFieldControlProps>(
       ariaRequired === 'true'
     const describedByParts = [field?.descriptionId, field?.errorId, ariaDescribedBy].filter(Boolean)
     const describedBy = describedByParts.length > 0 ? describedByParts.join(' ') : undefined
-    const classes = ['frontier-field__control', className].filter(Boolean).join(' ')
+    const classes = classNames('frontier-field__control', className)
 
     return (
       <input

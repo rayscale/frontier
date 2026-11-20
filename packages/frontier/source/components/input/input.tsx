@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { Field } from '../field/field.js'
+import { Field } from '../field/index.js'
 
 import type { TInputProps } from './types.js'
 
@@ -30,12 +30,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(pr
       {label ? <Field.Label>{label}</Field.Label> : null}
       <Field.Box>
         {leadingIcon ? (
-          <span
-            className="frontier-field__icon"
-            aria-hidden={leadingIconInteractive ? undefined : true}
-          >
-            {leadingIcon}
-          </span>
+          <Field.Icon interactive={leadingIconInteractive}>{leadingIcon}</Field.Icon>
         ) : null}
         <Field.Control
           {...controlProps}
@@ -45,12 +40,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(pr
           required={required}
         />
         {trailingIcon ? (
-          <span
-            className="frontier-field__icon"
-            aria-hidden={trailingIconInteractive ? undefined : true}
-          >
-            {trailingIcon}
-          </span>
+          <Field.Icon interactive={trailingIconInteractive}>{trailingIcon}</Field.Icon>
         ) : null}
       </Field.Box>
       {support ? <Field.Description>{support}</Field.Description> : null}

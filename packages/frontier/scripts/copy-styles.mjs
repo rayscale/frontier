@@ -24,9 +24,9 @@ async function copyCss(source, target) {
   )
 }
 
-await rm(join(targetRoot, 'styles'), { force: true, recursive: true })
 await copyCss(join(sourceRoot, 'styles'), join(targetRoot, 'styles'))
 await copyCss(join(sourceRoot, 'components'), join(targetRoot, 'components'))
+await copyCss(join(sourceRoot, 'internal'), join(targetRoot, 'internal'))
 await copyCss(join(sourceRoot, 'symbols'), join(targetRoot, 'symbols'))
 
 const fontsSource = join(sourceRoot, 'typeface', 'fonts')

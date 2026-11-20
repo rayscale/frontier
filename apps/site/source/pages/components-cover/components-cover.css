@@ -1,0 +1,97 @@
+.showcase {
+  display: grid;
+  gap: var(--frontier-spacing-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+}
+
+.showcase__cell {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--frontier-spacing-4);
+  box-sizing: border-box;
+  min-block-size: 16rem;
+  padding: var(--frontier-spacing-4) var(--frontier-spacing-5) var(--frontier-spacing-6);
+  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border);
+  border-radius: var(--frontier-radius-xl);
+  background: var(--frontier-color-surface);
+}
+
+.showcase__label {
+  margin: 0;
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  font-weight: var(--frontier-font-weight-medium);
+}
+
+.showcase__stage {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-inline-size: 0;
+}
+
+.showcase__stage > * {
+  inline-size: min(100%, 18rem);
+}
+
+.showcase__stack {
+  display: grid;
+  gap: var(--frontier-spacing-4);
+  justify-items: start;
+}
+
+.showcase__number {
+  display: grid;
+  justify-items: center;
+  gap: var(--frontier-spacing-1);
+  font-size: var(--frontier-font-size-3xl);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.showcase__caption {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  font-weight: var(--frontier-font-weight-regular);
+}
+
+.showcase__symbols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--frontier-spacing-3);
+  justify-items: center;
+}
+
+.showcase__symbol {
+  display: grid;
+  place-items: center;
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  border-radius: var(--frontier-radius-lg);
+  color: var(--frontier-color-text-muted);
+  transition:
+    background-color var(--frontier-duration-medium) var(--frontier-easing-standard),
+    color var(--frontier-duration-medium) var(--frontier-easing-standard);
+}
+
+.showcase__symbol[data-active] {
+  background: var(--frontier-color-surface-hover);
+  color: var(--frontier-color-text);
+}
+
+.showcase__progress {
+  display: grid;
+  gap: var(--frontier-spacing-2);
+}
+
+.showcase__progress p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: var(--frontier-font-size-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase__symbol {
+    transition: none;
+  }
+}

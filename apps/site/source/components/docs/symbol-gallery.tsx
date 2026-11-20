@@ -11,6 +11,8 @@ import { type ReactElement, useState } from 'react'
 
 import { HighlightedCode } from './docs-code-block.js'
 
+import './symbol-gallery.css'
+
 const library: { [name: string]: unknown } = frontier
 
 function isSymbolComponent(value: unknown): value is TSymbolComponent {
@@ -63,7 +65,12 @@ function SymbolDetail({ metadata }: { metadata: TSymbolMetadata }): ReactElement
 }
 
 /** Searchable catalog of every symbol, with the usage of the one selected. */
-export default function SymbolGallery(): ReactElement {
+export default function SymbolGallery({
+  layout = 'stacked',
+}: {
+  /** `split` puts the selected symbol beside the grid on wide screens. */
+  layout?: 'split' | 'stacked'
+}): ReactElement {
   const [query, setQuery] = useState('')
   const [selectedName, setSelectedName] = useState(symbolMetadata[0]?.name)
   const normalized = query.trim().toLowerCase()
@@ -71,7 +78,7 @@ export default function SymbolGallery(): ReactElement {
   const selected = symbolMetadata.find((metadata) => metadata.name === selectedName)
 
   return (
-    <div className="symbol-gallery">
+    <div className="symbol-gallery" data-layout={layout}>
       <Input
         type="search"
         label="Search symbols"
@@ -85,28 +92,30 @@ export default function SymbolGallery(): ReactElement {
       <p className="symbol-gallery__count" role="status">
         {visible.length} {visible.length === 1 ? 'symbol' : 'symbols'}
       </p>
-      <ul className="symbol-gallery__grid">
-        {visible.map((metadata) => {
-          const Current = getSymbolComponent(metadata)
+      <div className="symbol-gallery__body">
+        <ul className="symbol-gallery__grid">
+          {visible.map((metadata) => {
+            const Current = getSymbolComponent(metadata)
 
-          return (
-            <li key={metadata.name}>
-              <button
-                type="button"
-                className="symbol-gallery__item"
-                aria-pressed={metadata.name === selectedName}
-                onClick={() => {
-                  setSelectedName(metadata.name)
-                }}
-              >
-                {Current ? <Current aria-hidden="true" /> : null}
-                <span>{metadata.name}</span>
-              </button>
-            </li>
-          )
-        })}
-      </ul>
-      {selected ? <SymbolDetail metadata={selected} /> : null}
+            return (
+              <li key={metadata.name}>
+                <button
+                  type="button"
+                  className="symbol-gallery__item"
+                  aria-pressed={metadata.name === selectedName}
+                  onClick={() => {
+                    setSelectedName(metadata.name)
+                  }}
+                >
+                  {Current ? <Current aria-hidden="true" /> : null}
+                  <span>{metadata.name}</span>
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+        {selected ? <SymbolDetail metadata={selected} /> : null}
+      </div>
     </div>
   )
 }

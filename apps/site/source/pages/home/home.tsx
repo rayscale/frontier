@@ -8,17 +8,17 @@ import './home.css'
 const features = [
   {
     title: 'Components',
-    href: '/docs/components',
+    href: '/components',
     description: 'Accessible React components built on native HTML, with their API and usage.',
   },
   {
     title: 'Symbols',
-    href: '/docs/symbols',
+    href: '/symbols',
     description: 'A set of symbols that share one grid and one stroke.',
   },
   {
     title: 'Typeface',
-    href: '/docs/typeface',
+    href: '/typeface',
     description: 'Geist, the variable typeface of the system.',
   },
 ]
@@ -42,7 +42,7 @@ export function Home(): ReactElement {
             <a href="/docs">Get started</a>
           </Button>
           <Button asChild variant="outline">
-            <a href="/docs/components">Browse components</a>
+            <a href="/components">Browse components</a>
           </Button>
         </div>
       </section>

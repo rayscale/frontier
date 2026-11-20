@@ -27,7 +27,7 @@ export function SiteFooter(): ReactElement {
               <a href="/docs/installation">Installation</a>
             </li>
             <li>
-              <a href="/docs/components">Components</a>
+              <a href="/components">Components</a>
             </li>
           </ul>
         </Footer.Section>
@@ -35,10 +35,10 @@ export function SiteFooter(): ReactElement {
           <Footer.Heading>System</Footer.Heading>
           <ul className="site-footer__links">
             <li>
-              <a href="/docs/symbols">Symbols</a>
+              <a href="/symbols">Symbols</a>
             </li>
             <li>
-              <a href="/docs/typeface">Typeface</a>
+              <a href="/typeface">Typeface</a>
             </li>
           </ul>
         </Footer.Section>

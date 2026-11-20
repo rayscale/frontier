@@ -26,3 +26,10 @@
 .site-footer__links a:hover {
   color: var(--frontier-color-text);
 }
+
+/* Keep the footer in the same centered column as the pages above it. */
+.site-footer > * {
+  box-sizing: border-box;
+  inline-size: min(100%, 72rem);
+  margin-inline: auto;
+}

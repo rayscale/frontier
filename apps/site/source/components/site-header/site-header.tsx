@@ -8,10 +8,11 @@ import { ThemeToggle } from '#/components/theme/index.js'
 import './site-header.css'
 
 const links = [
+  { label: 'Home', href: '/' },
+  { label: 'Components', href: '/components' },
+  { label: 'Symbols', href: '/symbols' },
+  { label: 'Typeface', href: '/typeface' },
   { label: 'Docs', href: '/docs' },
-  { label: 'Components', href: '/docs/components' },
-  { label: 'Symbols', href: '/docs/symbols' },
-  { label: 'Typeface', href: '/docs/typeface' },
 ]
 
 /** The header of the marketing pages. It collapses its links into a panel on narrow screens. */
@@ -30,9 +31,7 @@ export function SiteHeader(): ReactElement {
             <NavigationMenu.Item key={link.href}>
               <NavigationMenu.Link
                 href={link.href}
-                active={
-                  link.href === '/docs' ? pathname === '/docs' : pathname.startsWith(link.href)
-                }
+                active={link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)}
               >
                 {link.label}
               </NavigationMenu.Link>

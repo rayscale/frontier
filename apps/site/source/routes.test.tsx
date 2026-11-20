@@ -21,6 +21,20 @@ describe('routes', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
+  it.each([
+    ['/components', 'Components built on native HTML.'],
+    ['/symbols', 'One grid, one stroke, every symbol.'],
+    ['/typeface', 'Set in Geist.'],
+  ])('renders the cover page at %s with its link to the documentation', async (path, title) => {
+    renderAt(path)
+
+    expect(await screen.findByRole('heading', { level: 1, name: title })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Read the docs' })).toHaveAttribute(
+      'href',
+      `/docs${path}`,
+    )
+  })
+
   it('renders a not found page for an unknown path', async () => {
     renderAt('/missing')
 

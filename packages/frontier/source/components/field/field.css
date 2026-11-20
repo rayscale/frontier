@@ -20,7 +20,12 @@
   border: var(--frontier-border-width) solid var(--frontier-color-border);
   border-radius: var(--frontier-radius-lg);
   background: transparent;
-  transition: border-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+  outline: 0 solid var(--frontier-color-focus);
+  outline-offset: 0;
+  transition:
+    border-color var(--frontier-duration-fast) var(--frontier-easing-exit),
+    outline-offset var(--frontier-duration-fast) var(--frontier-easing-exit),
+    outline-width var(--frontier-duration-fast) var(--frontier-easing-exit);
 }
 
 .frontier-field__box:not([data-disabled='true']):hover {
@@ -28,8 +33,13 @@
 }
 
 .frontier-field__box:focus-within {
-  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  border-color: var(--frontier-color-focus);
+  outline-width: var(--frontier-focus-width);
   outline-offset: var(--frontier-focus-offset);
+  transition:
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    outline-offset var(--frontier-duration-fast) var(--frontier-easing-standard),
+    outline-width var(--frontier-duration-fast) var(--frontier-easing-standard);
 }
 
 .frontier-field__box[data-invalid='true'] {
@@ -92,7 +102,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .frontier-field__box {
+  .frontier-field__box,
+  .frontier-field__box:focus-within {
     transition: none;
   }
 }

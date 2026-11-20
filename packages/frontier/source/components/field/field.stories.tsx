@@ -46,6 +46,26 @@ export const Default: TStory = {
   },
 }
 
+export const Focus: TStory = {
+  name: 'Focus',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Click or tab into the field to see its boundary take the focus color while the outline grows outward from it. Input shares this behavior.',
+      },
+    },
+  },
+  render: () => (
+    <Field.Root>
+      <Field.Label>Email</Field.Label>
+      <Field.Box>
+        <Field.Control placeholder="name@example.com" />
+      </Field.Box>
+    </Field.Root>
+  ),
+}
+
 export const Description: TStory = {
   name: 'Description',
   parameters: {

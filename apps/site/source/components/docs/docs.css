@@ -1,25 +1,22 @@
 .docs-layout {
-  --_nav-offset: calc(var(--frontier-spacing-16) + var(--frontier-spacing-2));
+  --_nav-offset: calc(var(--frontier-spacing-16) + var(--frontier-spacing-4));
 
-  display: flex;
-  align-items: flex-start;
-  gap: var(--frontier-spacing-4);
-  padding-inline-start: var(--frontier-spacing-4);
+  display: grid;
+  grid-template-columns: 14rem minmax(0, calc(62rem + var(--frontier-spacing-10)));
+  gap: var(--frontier-spacing-6);
+  align-items: start;
+  justify-content: center;
+  padding-inline-start: var(--frontier-spacing-6);
 }
 
+/* The tree mirrors the table of contents: no surface, sticky at the same height. */
 .docs-nav {
   position: sticky;
   inset-block-start: var(--_nav-offset);
-  flex: none;
   box-sizing: border-box;
-  inline-size: 16rem;
   max-block-size: calc(100dvh - var(--_nav-offset) - var(--frontier-spacing-4));
-  padding: var(--frontier-spacing-2);
+  padding-block: var(--frontier-spacing-8);
   overflow-y: auto;
-  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border-subtle);
-  border-radius: var(--frontier-radius-lg);
-  background: var(--frontier-color-surface-floating);
-  box-shadow: var(--frontier-shadow-sm);
 }
 
 .docs-layout__inset {
@@ -41,6 +38,7 @@
 
 @media (max-width: 48rem) {
   .docs-layout {
+    display: block;
     padding-inline-start: 0;
   }
 

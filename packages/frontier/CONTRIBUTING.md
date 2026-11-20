@@ -171,6 +171,9 @@ Follow the workspace naming rules. Package-specific names follow the same conven
 - Prefer immutable values and `readonly` where it expresses the contract.
 - Use `satisfies` when it validates without losing inference.
 - Keep props minimal. Avoid boolean combinations that allow invalid states.
+- Type optional props as `prop?: T | undefined` so callers can pass an explicit `undefined` under
+  `exactOptionalPropertyTypes`. When spreading props into a primitive that does not allow it, drop
+  the `undefined` values with `omitUndefined`.
 - Use controlled or uncontrolled state according to the component's contract.
 - Derive values during render. Use effects only for external synchronization.
 - Use `useMemo` and `useCallback` only for a concrete identity, performance, or correctness need.

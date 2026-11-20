@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
+import { type ReactElement, type ReactNode, useState } from 'react'
 
 import { Calendar, type TCalendarProps } from './calendar.js'
 
@@ -14,6 +14,9 @@ const meta = {
     defaultMonth: new Date(2025, 2, 1),
     locale: 'en-US',
   },
+  decorators: [
+    (story: () => ReactNode): ReactElement => <div style={{ width: '20rem' }}>{story()}</div>,
+  ],
 } satisfies Meta<typeof Calendar>
 
 export default meta

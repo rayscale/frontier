@@ -33,9 +33,10 @@ The layers are described in [guidelines/](./guidelines/README.md).
 
 ## Packages
 
-Workspace projects live under `packages/`.
+Workspace projects live under `apps/` and `packages/`.
 
 - **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, design tokens, and the Frontier Sans typeface.
+- **[@rayscale/site](./apps/site/README.md)** — The documentation and marketing site, built with React, React Router, and Vite.
 
 ## Getting started
 
@@ -70,6 +71,7 @@ Use the theme control in the toolbar to preview both themes. `pnpm storybook:bui
 | `pnpm build`           | Builds every workspace project.                      |
 | `pnpm test`            | Runs every workspace project's tests.                |
 | `pnpm typecheck`       | Type-checks every workspace project.                 |
+| `pnpm site`            | Starts the development server of the site.           |
 | `pnpm storybook`       | Starts the Storybook development server.             |
 | `pnpm storybook:build` | Builds the static Storybook site.                    |
 | `pnpm lint`            | Builds the workspace, then lints every file.         |

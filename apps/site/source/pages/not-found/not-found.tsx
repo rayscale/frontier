@@ -1,13 +1,21 @@
-import type { ReactElement } from 'react'
-import { Link } from 'react-router'
+import { Button } from '@rayscale/frontier'
+import { type ReactElement, useEffect } from 'react'
 
-/** Shown when no route matches the current path. */
+import './not-found.css'
+
+/** Shown when no route or page matches the current path. */
 export function NotFound(): ReactElement {
+  useEffect(() => {
+    document.title = 'Page not found · Frontier'
+  }, [])
+
   return (
-    <>
+    <main className="not-found">
       <h1>Page not found</h1>
       <p>The page you are looking for does not exist.</p>
-      <Link to="/">Go to the home page</Link>
-    </>
+      <Button asChild>
+        <a href="/docs">Go to the documentation</a>
+      </Button>
+    </main>
   )
 }

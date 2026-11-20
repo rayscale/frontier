@@ -1,17 +1,43 @@
 import type { RouteObject } from 'react-router'
 
-import { Layout } from './layout/index.js'
-import { Home } from './pages/home/index.js'
-import { NotFound } from './pages/not-found/index.js'
+import { RootLayout } from '#/layout/root-layout.js'
 
-/** The routes of the site. Every page renders inside the shared layout. */
+/** The routes of the site. Each screen loads on demand. */
 export const routes: RouteObject[] = [
   {
-    path: '/',
-    Component: Layout,
+    Component: RootLayout,
     children: [
-      { index: true, Component: Home },
-      { path: '*', Component: NotFound },
+      {
+        lazy: async () => ({
+          Component: (await import('#/layout/landing-layout.js')).LandingLayout,
+        }),
+        children: [
+          {
+            index: true,
+            lazy: async () => ({ Component: (await import('#/pages/home/index.js')).Home }),
+          },
+          {
+            path: '*',
+            lazy: async () => ({
+              Component: (await import('#/pages/not-found/index.js')).NotFound,
+            }),
+          },
+        ],
+      },
+      {
+        path: '/docs',
+        lazy: async () => ({ Component: (await import('#/components/docs/index.js')).DocsLayout }),
+        children: [
+          {
+            index: true,
+            lazy: async () => ({ Component: (await import('#/pages/docs/index.js')).DocsPage }),
+          },
+          {
+            path: '*',
+            lazy: async () => ({ Component: (await import('#/pages/docs/index.js')).DocsPage }),
+          },
+        ],
+      },
     ],
   },
 ]

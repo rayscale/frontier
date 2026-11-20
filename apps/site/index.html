@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>Frontier</title>
+    <script>
+      try {
+        var stored = localStorage.getItem('frontier-theme')
+        var dark =
+          stored === 'dark' ||
+          ((stored === null || stored === 'system') &&
+            matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      } catch (error) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

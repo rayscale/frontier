@@ -1,0 +1,60 @@
+---
+title: Symbols
+description: A set of symbols that share one grid, one stroke, and one way to use them.
+order: 30
+symbol: sparkles
+---
+
+Symbols are simple, single-color pictograms drawn on a shared grid. They carry meaning quickly and stay legible at small sizes. Every symbol is a React component exported from the package.
+
+## Usage
+
+```tsx
+import { Button, Plus } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Button>
+      <Plus aria-hidden="true" />
+      New file
+    </Button>
+  )
+}
+```
+
+A symbol is decorative: it is hidden from assistive technology, and the control that contains it carries the accessible name.
+
+## Catalog
+
+<SymbolGallery />
+
+## How symbols are drawn
+
+- Symbols are drawn on a 24 × 24 grid, with the artwork inside a 20 × 20 safe area.
+- Every symbol uses a 2 px stroke with round caps and joins, and `currentColor`, so it follows the text color.
+- Size a symbol with the `size` prop, in pixels or as any CSS length. The default is 24.
+
+## API reference
+
+### Symbol
+
+`Symbol` renders an `<svg>` from the shapes of a symbol and forwards the native SVG attributes. Most code uses the named symbols instead, such as `Plus`, which are made with `createSymbol`.
+
+| Prop         | Type               | Default | Description                                |
+| ------------ | ------------------ | ------- | ------------------------------------------ |
+| `symbolNode` | `TSymbolNode`      | —       | The shapes to draw on the 24-unit grid.    |
+| `size`       | `number \| string` | `24`    | Width and height in pixels or as a length. |
+
+### createSymbol
+
+`createSymbol({ name, symbolNode })` returns a symbol component. The component also exposes the shapes it draws as `symbolNode`.
+
+## Accessibility
+
+<Callout title="Symbols are decorative">
+  Symbols are hidden from assistive technology. Name the control that holds a symbol, never the
+  symbol itself.
+</Callout>
+
+- Do not rely on a symbol alone to carry a meaning that a word can state.
+- A symbol-only control needs an accessible name and, where the meaning is not universal, a visible text alternative.

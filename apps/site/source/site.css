@@ -3,3 +3,7 @@ body {
   color: var(--frontier-color-text);
   line-height: var(--frontier-line-height-normal);
 }
+
+a {
+  color: inherit;
+}

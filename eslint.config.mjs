@@ -111,7 +111,7 @@ export default defineConfig(
         },
       ],
       'import-x/no-self-import': 'error',
-      'import-x/no-unresolved': ['error', { ignore: ['\\.css$'] }],
+      'import-x/no-unresolved': ['error', { ignore: ['\\.css$', '^virtual:'] }],
       'no-alert': 'error',
       'no-constant-binary-expression': 'error',
       'no-debugger': 'error',
@@ -280,6 +280,11 @@ export default defineConfig(
     rules: {
       '@typescript-eslint/naming-convention': reactNamingConvention,
     },
+  },
+  {
+    // Documentation demos are the code a reader copies, so they omit return types as consumer code does.
+    files: ['apps/site/content/**/demos/*.tsx'],
+    rules: { '@typescript-eslint/explicit-module-boundary-types': 'off' },
   },
   eslintConfigPrettier,
   {

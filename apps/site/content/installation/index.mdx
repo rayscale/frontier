@@ -1,0 +1,45 @@
+---
+title: Installation
+description: Add the package, import the styles, and render your first component.
+order: 10
+symbol: box
+---
+
+Frontier is one package with the components, the symbols, and the styles. React and React DOM 18 or 19 are required as peer dependencies.
+
+<Callout title="Work in progress">
+  The package is at version 0.0.0 and its API is still changing.
+</Callout>
+
+## Add the package
+
+<PackageManagerTabs
+  pnpm="pnpm add @rayscale/frontier"
+  npm="npm install @rayscale/frontier"
+  yarn="yarn add @rayscale/frontier"
+  bun="bun add @rayscale/frontier"
+/>
+
+## Import the styles
+
+Import the stylesheet once, in the entry point of your application:
+
+```tsx
+import '@rayscale/frontier/styles.css'
+```
+
+It includes the design tokens, the component styles, and the typeface. The default theme is light. Set `data-theme="dark"` on the root element to switch every color role to its dark value.
+
+## Render a component
+
+```tsx
+import { Button } from '@rayscale/frontier'
+
+export function Example() {
+  return <Button>Save</Button>
+}
+```
+
+## The typeface
+
+The stylesheet declares Frontier Sans and puts it first in the `--frontier-font-family` token, with Outfit as the fallback. See [Typeface](/docs/typeface) for the details.

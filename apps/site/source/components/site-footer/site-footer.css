@@ -1,0 +1,28 @@
+.site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.site-footer__summary {
+  margin: var(--frontier-spacing-2) 0 0;
+  color: var(--frontier-color-text-muted);
+}
+
+.site-footer__links {
+  display: grid;
+  gap: var(--frontier-spacing-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__links a {
+  color: var(--frontier-color-text-muted);
+  text-decoration: none;
+}
+
+.site-footer__links a:hover {
+  color: var(--frontier-color-text);
+}

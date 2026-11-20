@@ -1,0 +1,9 @@
+.landing-layout {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+}
+
+.landing-layout__page {
+  flex: 1;
+}

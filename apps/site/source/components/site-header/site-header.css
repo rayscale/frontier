@@ -1,0 +1,9 @@
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  color: var(--frontier-color-text);
+  font-size: var(--frontier-font-size-lg);
+  font-weight: var(--frontier-font-weight-semibold);
+  text-decoration: none;
+}

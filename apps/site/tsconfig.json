@@ -1,8 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "#/*": ["./source/*"]
+    }
   },
-  "include": ["source/**/*.ts", "source/**/*.tsx", "vite.config.ts", "vitest.setup.ts"],
+  "include": [
+    "source/**/*.ts",
+    "source/**/*.tsx",
+    "content/**/*.ts",
+    "content/**/*.tsx",
+    "vite.config.ts",
+    "vitest.setup.ts"
+  ],
   "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage"]
 }

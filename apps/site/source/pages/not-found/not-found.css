@@ -1,0 +1,19 @@
+.not-found {
+  display: grid;
+  justify-items: center;
+  gap: var(--frontier-spacing-4);
+  box-sizing: border-box;
+  min-block-size: 60dvh;
+  padding: var(--frontier-spacing-16) var(--frontier-spacing-6);
+  text-align: center;
+  align-content: center;
+}
+
+.not-found h1,
+.not-found p {
+  margin: 0;
+}
+
+.not-found p {
+  color: var(--frontier-color-text-muted);
+}

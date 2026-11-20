@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "calendar-range",
+  "description": "Represents a span between two dates.",
+  "keywords": ["calendar", "range", "period"],
+  "categories": ["time"],
+  "aliases": [],
+  "useCases": ["date range"]
+}

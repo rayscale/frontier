@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "underline",
+  "description": "Underlines text.",
+  "keywords": ["underline", "format"],
+  "categories": ["text"],
+  "aliases": [],
+  "useCases": ["format text"]
+}

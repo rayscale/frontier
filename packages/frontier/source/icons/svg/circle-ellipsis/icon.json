@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-ellipsis",
+  "description": "Shows that more options are available.",
+  "keywords": ["ellipsis", "more", "dots"],
+  "categories": ["ui"],
+  "aliases": [],
+  "useCases": ["more options"]
+}

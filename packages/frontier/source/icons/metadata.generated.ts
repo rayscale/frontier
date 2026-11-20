@@ -5,6 +5,125 @@ import type { TIconMetadata } from './types.js'
 
 export const iconMetadata: TIconMetadata[] = [
   {
+    "aliases": [],
+    "categories": [
+      "arrows",
+      "ui"
+    ],
+    "component": "ArrowRight",
+    "contributors": [],
+    "description": "Points forward or to the next destination.",
+    "keywords": [
+      "arrow",
+      "right",
+      "next",
+      "forward"
+    ],
+    "name": "arrow-right",
+    "tags": [],
+    "useCases": [
+      "next",
+      "go forward"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "communication"
+    ],
+    "component": "AtSign",
+    "contributors": [],
+    "description": "Marks an email address or a mention.",
+    "keywords": [
+      "at",
+      "email",
+      "mention"
+    ],
+    "name": "at-sign",
+    "tags": [],
+    "useCases": [
+      "email address",
+      "mention"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "text"
+    ],
+    "component": "Bold",
+    "contributors": [],
+    "description": "Applies bold emphasis to text.",
+    "keywords": [
+      "bold",
+      "strong",
+      "format"
+    ],
+    "name": "bold",
+    "tags": [],
+    "useCases": [
+      "format text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "time",
+      "ui"
+    ],
+    "component": "Calendar",
+    "contributors": [],
+    "description": "Represents a date or a schedule.",
+    "keywords": [
+      "calendar",
+      "date",
+      "schedule"
+    ],
+    "name": "calendar",
+    "tags": [],
+    "useCases": [
+      "pick date"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "time"
+    ],
+    "component": "CalendarDays",
+    "contributors": [],
+    "description": "Represents a calendar with individual days.",
+    "keywords": [
+      "calendar",
+      "days",
+      "month"
+    ],
+    "name": "calendar-days",
+    "tags": [],
+    "useCases": [
+      "month view"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "time"
+    ],
+    "component": "CalendarRange",
+    "contributors": [],
+    "description": "Represents a span between two dates.",
+    "keywords": [
+      "calendar",
+      "range",
+      "period"
+    ],
+    "name": "calendar-range",
+    "tags": [],
+    "useCases": [
+      "date range"
+    ]
+  },
+  {
     "aliases": [
       "tick",
       "done",
@@ -30,6 +149,357 @@ export const iconMetadata: TIconMetadata[] = [
       "checked box",
       "confirmation",
       "completed step"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "CheckCircle",
+    "contributors": [],
+    "description": "Confirms that something succeeded or is complete.",
+    "keywords": [
+      "check",
+      "success",
+      "done"
+    ],
+    "name": "check-circle",
+    "tags": [],
+    "useCases": [
+      "success message"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows",
+      "ui"
+    ],
+    "component": "ChevronDown",
+    "contributors": [],
+    "description": "Points down or opens a list.",
+    "keywords": [
+      "chevron",
+      "down",
+      "expand"
+    ],
+    "name": "chevron-down",
+    "tags": [],
+    "useCases": [
+      "open select",
+      "expand"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows",
+      "ui"
+    ],
+    "component": "ChevronLeft",
+    "contributors": [],
+    "description": "Points to the left or to the previous item.",
+    "keywords": [
+      "chevron",
+      "left",
+      "previous",
+      "back"
+    ],
+    "name": "chevron-left",
+    "tags": [],
+    "useCases": [
+      "previous page"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "arrows",
+      "ui"
+    ],
+    "component": "ChevronRight",
+    "contributors": [],
+    "description": "Points to the right or to the next item.",
+    "keywords": [
+      "chevron",
+      "right",
+      "next"
+    ],
+    "name": "chevron-right",
+    "tags": [],
+    "useCases": [
+      "next page",
+      "expand"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "shapes"
+    ],
+    "component": "Circle",
+    "contributors": [],
+    "description": "Represents an empty marker or a radio.",
+    "keywords": [
+      "circle",
+      "dot",
+      "radio"
+    ],
+    "name": "circle",
+    "tags": [],
+    "useCases": [
+      "radio marker"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "ui"
+    ],
+    "component": "CircleEllipsis",
+    "contributors": [],
+    "description": "Shows that more options are available.",
+    "keywords": [
+      "ellipsis",
+      "more",
+      "dots"
+    ],
+    "name": "circle-ellipsis",
+    "tags": [],
+    "useCases": [
+      "more options"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status",
+      "ui"
+    ],
+    "component": "CircleHelp",
+    "contributors": [],
+    "description": "Offers help or an explanation.",
+    "keywords": [
+      "help",
+      "question",
+      "support"
+    ],
+    "name": "circle-help",
+    "tags": [],
+    "useCases": [
+      "help text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "CircleX",
+    "contributors": [],
+    "description": "Marks a failure or an error.",
+    "keywords": [
+      "error",
+      "failed",
+      "close"
+    ],
+    "name": "circle-x",
+    "tags": [],
+    "useCases": [
+      "error message"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "time"
+    ],
+    "component": "Clock",
+    "contributors": [],
+    "description": "Represents time of day or duration.",
+    "keywords": [
+      "clock",
+      "time",
+      "hour"
+    ],
+    "name": "clock",
+    "tags": [],
+    "useCases": [
+      "time picker"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files"
+    ],
+    "component": "FolderOpen",
+    "contributors": [],
+    "description": "Represents an open folder or an empty collection.",
+    "keywords": [
+      "folder",
+      "open",
+      "files"
+    ],
+    "name": "folder-open",
+    "tags": [],
+    "useCases": [
+      "empty folder"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "communication"
+    ],
+    "component": "Inbox",
+    "contributors": [],
+    "description": "Represents incoming items or an empty list.",
+    "keywords": [
+      "inbox",
+      "mail",
+      "empty"
+    ],
+    "name": "inbox",
+    "tags": [],
+    "useCases": [
+      "empty state"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "Info",
+    "contributors": [],
+    "description": "Provides neutral information.",
+    "keywords": [
+      "info",
+      "information",
+      "details"
+    ],
+    "name": "info",
+    "tags": [],
+    "useCases": [
+      "information message"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "text"
+    ],
+    "component": "Italic",
+    "contributors": [],
+    "description": "Applies italic emphasis to text.",
+    "keywords": [
+      "italic",
+      "slant",
+      "format"
+    ],
+    "name": "italic",
+    "tags": [],
+    "useCases": [
+      "format text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "devices"
+    ],
+    "component": "Laptop",
+    "contributors": [],
+    "description": "Represents a computer or the system theme.",
+    "keywords": [
+      "laptop",
+      "computer",
+      "system"
+    ],
+    "name": "laptop",
+    "tags": [],
+    "useCases": [
+      "system theme"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "layout"
+    ],
+    "component": "LayoutGrid",
+    "contributors": [],
+    "description": "Represents a grid of items.",
+    "keywords": [
+      "grid",
+      "layout",
+      "tiles"
+    ],
+    "name": "layout-grid",
+    "tags": [],
+    "useCases": [
+      "grid view"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "LoaderCircle",
+    "contributors": [],
+    "description": "Shows that work is in progress.",
+    "keywords": [
+      "loader",
+      "spinner",
+      "loading"
+    ],
+    "name": "loader-circle",
+    "tags": [],
+    "useCases": [
+      "loading indicator"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "actions",
+      "ui"
+    ],
+    "component": "Minus",
+    "contributors": [],
+    "description": "Removes or decreases something.",
+    "keywords": [
+      "minus",
+      "remove",
+      "decrease"
+    ],
+    "name": "minus",
+    "tags": [],
+    "useCases": [
+      "decrement",
+      "mixed state"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "theme"
+    ],
+    "component": "Moon",
+    "contributors": [],
+    "description": "Represents the dark theme or night.",
+    "keywords": [
+      "moon",
+      "dark",
+      "night"
+    ],
+    "name": "moon",
+    "tags": [],
+    "useCases": [
+      "dark theme"
     ]
   },
   {
@@ -86,6 +556,159 @@ export const iconMetadata: TIconMetadata[] = [
       "search input",
       "find",
       "filter"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "SearchX",
+    "contributors": [],
+    "description": "Shows that a search found nothing.",
+    "keywords": [
+      "search",
+      "empty",
+      "no results"
+    ],
+    "name": "search-x",
+    "tags": [],
+    "useCases": [
+      "no results"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "ui"
+    ],
+    "component": "Sparkles",
+    "contributors": [],
+    "description": "Marks something new or highlighted.",
+    "keywords": [
+      "sparkles",
+      "new",
+      "magic"
+    ],
+    "name": "sparkles",
+    "tags": [],
+    "useCases": [
+      "new feature"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "theme"
+    ],
+    "component": "Sun",
+    "contributors": [],
+    "description": "Represents the light theme or day.",
+    "keywords": [
+      "sun",
+      "light",
+      "day"
+    ],
+    "name": "sun",
+    "tags": [],
+    "useCases": [
+      "light theme"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "status"
+    ],
+    "component": "TriangleAlert",
+    "contributors": [],
+    "description": "Warns about a risk or a problem.",
+    "keywords": [
+      "warning",
+      "alert",
+      "caution"
+    ],
+    "name": "triangle-alert",
+    "tags": [],
+    "useCases": [
+      "warning message"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "text"
+    ],
+    "component": "Underline",
+    "contributors": [],
+    "description": "Underlines text.",
+    "keywords": [
+      "underline",
+      "format"
+    ],
+    "name": "underline",
+    "tags": [],
+    "useCases": [
+      "format text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files",
+      "actions"
+    ],
+    "component": "Upload",
+    "contributors": [],
+    "description": "Sends a file to a destination.",
+    "keywords": [
+      "upload",
+      "send",
+      "file"
+    ],
+    "name": "upload",
+    "tags": [],
+    "useCases": [
+      "upload file"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "people"
+    ],
+    "component": "UserPlus",
+    "contributors": [],
+    "description": "Adds a person.",
+    "keywords": [
+      "user",
+      "add",
+      "invite"
+    ],
+    "name": "user-plus",
+    "tags": [],
+    "useCases": [
+      "invite user"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "people"
+    ],
+    "component": "UserRound",
+    "contributors": [],
+    "description": "Represents a person or an account.",
+    "keywords": [
+      "user",
+      "person",
+      "account"
+    ],
+    "name": "user-round",
+    "tags": [],
+    "useCases": [
+      "profile",
+      "avatar fallback"
     ]
   },
   {

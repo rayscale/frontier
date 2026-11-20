@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "layout-grid",
+  "description": "Represents a grid of items.",
+  "keywords": ["grid", "layout", "tiles"],
+  "categories": ["layout"],
+  "aliases": [],
+  "useCases": ["grid view"]
+}

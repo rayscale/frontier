@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-down",
+  "description": "Points down or opens a list.",
+  "keywords": ["chevron", "down", "expand"],
+  "categories": ["arrows", "ui"],
+  "aliases": [],
+  "useCases": ["open select", "expand"]
+}

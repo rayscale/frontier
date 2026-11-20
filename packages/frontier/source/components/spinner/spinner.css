@@ -1,0 +1,38 @@
+.frontier-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: currentColor;
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-spinner__icon {
+  width: 1em;
+  height: 1em;
+  animation: frontier-spinner-rotate var(--frontier-duration-slow) linear infinite;
+}
+
+.frontier-spinner--small {
+  font-size: var(--frontier-font-size-sm);
+}
+
+.frontier-spinner--medium {
+  font-size: var(--frontier-font-size-lg);
+}
+
+.frontier-spinner--large {
+  font-size: var(--frontier-font-size-2xl);
+}
+
+@keyframes frontier-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-spinner__icon {
+    animation: none;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "inbox",
+  "description": "Represents incoming items or an empty list.",
+  "keywords": ["inbox", "mail", "empty"],
+  "categories": ["communication"],
+  "aliases": [],
+  "useCases": ["empty state"]
+}

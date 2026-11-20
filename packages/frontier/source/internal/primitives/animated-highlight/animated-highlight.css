@@ -1,0 +1,10 @@
+.frontier-animated-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--frontier-radius-md);
+  background: var(--frontier-color-surface-highlight);
+  pointer-events: none;
+  will-change: transform;
+}

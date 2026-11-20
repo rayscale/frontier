@@ -1,0 +1,13 @@
+.frontier-auto-size {
+  overflow: visible;
+}
+
+.frontier-auto-size[data-animating] {
+  overflow: hidden;
+}
+
+.frontier-auto-size[data-axis='horizontal'] > .frontier-auto-size__content,
+.frontier-auto-size[data-axis='both'] > .frontier-auto-size__content {
+  width: max-content;
+  max-width: none;
+}

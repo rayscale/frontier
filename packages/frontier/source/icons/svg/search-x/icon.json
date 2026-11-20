@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "search-x",
+  "description": "Shows that a search found nothing.",
+  "keywords": ["search", "empty", "no results"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["no results"]
+}

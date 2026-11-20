@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-x",
+  "description": "Marks a failure or an error.",
+  "keywords": ["error", "failed", "close"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["error message"]
+}

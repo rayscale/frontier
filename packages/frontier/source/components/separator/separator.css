@@ -1,0 +1,14 @@
+.frontier-separator {
+  flex: 0 0 auto;
+  align-self: stretch;
+  background: var(--_separator-color, var(--frontier-color-border));
+}
+
+.frontier-separator--horizontal {
+  block-size: var(--_separator-thickness, var(--frontier-border-width));
+}
+
+.frontier-separator--vertical {
+  block-size: 100%;
+  inline-size: var(--_separator-thickness, var(--frontier-border-width));
+}

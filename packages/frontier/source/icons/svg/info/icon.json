@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "info",
+  "description": "Provides neutral information.",
+  "keywords": ["info", "information", "details"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["information message"]
+}

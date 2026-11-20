@@ -1,41 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
-import { Switch } from '../../index.js'
+import { Switch } from './switch.js'
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Switch',
   component: Switch,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'Sets one independent value on or off with a sliding track.',
-      },
-    },
-  },
   args: {
-    label: 'Dark mode',
-    disabled: false,
-  },
-  argTypes: {
-    label: {
-      control: 'text',
-      description: 'Visible text that names the value and toggles it.',
-    },
-    description: {
-      control: 'text',
-      description: 'Helper text announced as the description of the switch.',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Keeps the switch focusable while preventing a change.',
-    },
-    disabledReason: {
-      control: 'text',
-      description: 'Explains why the switch is unavailable. Replaces the description.',
-    },
-    onChange: { action: 'changed' },
+    label: 'Enable notifications',
   },
 } satisfies Meta<typeof Switch>
 
@@ -43,80 +19,142 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-const columnStyle = {
-  display: 'grid',
-  justifyItems: 'start',
-  gap: 'var(--frontier-spacing-4)',
-} as const
-
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story: 'Shows an off value with its label.',
+        story: 'The default toggle switch state.',
       },
     },
   },
 }
 
-export const On: TStory = {
-  name: 'On',
+export const Checked: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the track filled and the thumb at the end when the value is on.',
+        story: 'Switches can be initialized in a checked state.',
       },
     },
   },
   args: {
     defaultChecked: true,
+    label: 'Dark mode',
   },
 }
 
 export const Description: TStory = {
-  name: 'Description',
   parameters: {
     docs: {
       description: {
-        story: 'Adds helper text under the label without changing the accessible name.',
+        story: 'Switches can include supplementary description text.',
       },
     },
   },
   args: {
-    description: 'Follows the system setting until you change it.',
+    label: 'Automatic updates',
+    description: 'Install updates when they are available.',
   },
 }
 
 export const Disabled: TStory = {
-  name: 'Disabled',
   parameters: {
     docs: {
       description: {
-        story: 'Keeps the switch focusable and explains why it cannot change.',
+        story: 'Switches can be disabled to prevent toggling.',
       },
     },
   },
   args: {
+    label: 'Unavailable setting',
     disabled: true,
-    disabledReason: 'Your plan does not include this setting.',
+  },
+}
+
+export const DisabledChecked: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled switches in a checked state representing locked settings.',
+      },
+    },
+  },
+  args: {
+    label: 'Managed by your organization',
+    disabled: true,
+    defaultChecked: true,
+  },
+}
+
+export const Invalid: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches support invalid error states and error messages.',
+      },
+    },
+  },
+  args: {
+    label: 'Required consent',
+    invalid: true,
+    error: 'Please enable this setting to continue.',
   },
 }
 
 export const Settings: TStory = {
-  name: 'Settings',
   parameters: {
     docs: {
       description: {
-        story: 'Composes independent values with mixed states.',
+        story: 'Switches grouped together in a settings list layout.',
       },
     },
   },
   render: () => (
-    <div style={columnStyle}>
-      <Switch defaultChecked label="Dark mode" />
-      <Switch label="Reduce motion" description="Follows the system setting." />
-      <Switch label="Automatic updates" />
+    <div style={{ display: 'grid', gap: '20px' }}>
+      <Switch
+        label="Email notifications"
+        description="Receive important updates by email."
+        defaultChecked
+      />
+      <Switch label="Weekly summary" description="Get a weekly overview of your activity." />
     </div>
   ),
+}
+
+function DraggableSwitches() {
+  const [wifi, setWifi] = useState(true)
+  const [bluetooth, setBluetooth] = useState(false)
+
+  return (
+    <div style={{ display: 'grid', gap: '20px' }}>
+      <Switch
+        label="Wi-Fi"
+        description="Drag the thumb or click to toggle."
+        checked={wifi}
+        onChange={(event) => {
+          setWifi(event.target.checked)
+        }}
+      />
+      <Switch
+        label="Bluetooth"
+        description="Connect to nearby devices."
+        checked={bluetooth}
+        onChange={(event) => {
+          setBluetooth(event.target.checked)
+        }}
+      />
+      <Switch label="Airplane mode" description="Uncontrolled and draggable." />
+    </div>
+  )
+}
+
+export const Draggable: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches support dragging the thumb horizontally in addition to clicking.',
+      },
+    },
+  },
+  render: () => <DraggableSwitches />,
 }

@@ -1,38 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Plus } from '../../icons/index.js'
-import { Button } from '../button/index.js'
+import { Button } from '../button/button.js'
 
-import { Tooltip } from './index.js'
+import { Tooltip } from './tooltip.js'
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component:
-          'Names or briefly explains its trigger on pointer rest and keyboard focus. It holds plain text that the trigger already exposes as its name or description, and it never takes focus.',
-      },
-    },
-  },
   args: {
-    children: <Button variant="secondary">Hover or focus me</Button>,
-    content: 'Saves your changes',
+    content: 'More information about this action',
+    delay: 350,
     disabled: false,
-    side: 'top',
+    placement: 'top',
+    children: <Button variant="outline">Hover or focus me</Button>,
   },
   argTypes: {
-    content: {
-      description: 'Short plain text. It must repeat what the trigger already exposes.',
-    },
-    side: {
+    placement: {
       control: 'select',
-      options: ['top', 'bottom', 'inline-start', 'inline-end'],
-      description:
-        'Preferred side of the trigger. It moves to the opposite side when there is no room.',
+      options: ['top', 'right', 'bottom', 'left'],
+    },
+    delay: {
+      control: { type: 'number', min: 0, step: 50 },
+    },
+    disabled: {
+      control: 'boolean',
     },
   },
 } satisfies Meta<typeof Tooltip>
@@ -42,57 +37,37 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story:
-          'Shows the tooltip above its trigger when the pointer rests on it or it receives focus.',
+        story: 'The default tooltip appearing on hover or focus.',
       },
     },
   },
 }
 
-export const Sides: TStory = {
-  name: 'Sides',
+export const Placement: TStory = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Places the tooltip on each side of the trigger. Inline sides follow the writing direction.',
+        story: 'Tooltips can be positioned on top, right, bottom, or left of the trigger.',
       },
     },
   },
   render: () => (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--frontier-spacing-4)' }}>
-      <Tooltip content="Above" side="top">
-        <Button variant="secondary">Top</Button>
-      </Tooltip>
-      <Tooltip content="Below" side="bottom">
-        <Button variant="secondary">Bottom</Button>
-      </Tooltip>
-      <Tooltip content="Before" side="inline-start">
-        <Button variant="secondary">Start</Button>
-      </Tooltip>
-      <Tooltip content="After" side="inline-end">
-        <Button variant="secondary">End</Button>
-      </Tooltip>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '48px',
+        padding: '64px',
+      }}
+    >
+      {(['top', 'right', 'bottom', 'left'] as const).map((placement) => (
+        <Tooltip key={placement} content={`Tooltip positioned ${placement}`} placement={placement}>
+          <Button variant="outline">{placement}</Button>
+        </Tooltip>
+      ))}
     </div>
-  ),
-}
-
-export const IconButton: TStory = {
-  name: 'Icon button',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Icon-only buttons show their accessible name as a tooltip without extra setup.',
-      },
-    },
-  },
-  render: () => (
-    <Button iconOnly aria-label="Add item">
-      <Plus size={20} />
-    </Button>
   ),
 }

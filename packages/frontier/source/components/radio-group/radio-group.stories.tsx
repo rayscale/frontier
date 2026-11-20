@@ -1,82 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { RadioGroup } from '../../index.js'
-
-const plans = (
-  <>
-    <RadioGroup.Item value="free" label="Free" />
-    <RadioGroup.Item value="pro" label="Pro" description="For growing teams." />
-  </>
-)
-
-function ControlledExample() {
-  const [value, setValue] = useState('pro')
-
-  return (
-    <RadioGroup
-      label="Plan"
-      description={`Selected: ${value}`}
-      value={value}
-      onValueChange={setValue}
-    >
-      {plans}
-    </RadioGroup>
-  )
-}
+import { RadioGroup, RadioGroupItem } from './radio-group.js'
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'Selects one value out of several with native radio options.',
-      },
-    },
-  },
   args: {
-    children: null,
-    label: 'Plan',
+    label: 'Notification frequency',
   },
-  argTypes: {
-    label: {
-      control: 'text',
-      description: 'Visible group name, rendered as the legend.',
-    },
-    description: {
-      control: 'text',
-      description: 'Helper text announced as the description of the group.',
-    },
-    error: {
-      control: 'text',
-      description: 'Message that marks the group invalid and is announced.',
-    },
-    invalid: {
-      control: 'boolean',
-      description: 'Marks the group invalid without showing a message.',
-    },
-    orientation: {
-      control: 'inline-radio',
-      options: ['vertical', 'horizontal'],
-      description: 'Layout direction of the options.',
-    },
-    required: {
-      control: 'boolean',
-      description: 'Requires one option to be selected.',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disables every option and requires a reason.',
-    },
-    disabledReason: {
-      control: 'text',
-      description: 'Explains why the group is unavailable. Replaces the description.',
-    },
-    onValueChange: { action: 'changed' },
-  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="instant" label="Instant" />
+      <RadioGroupItem value="daily" label="Daily digest" />
+      <RadioGroupItem value="weekly" label="Weekly summary" />
+    </RadioGroup>
+  ),
 } satisfies Meta<typeof RadioGroup>
 
 export default meta
@@ -84,129 +27,234 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story: 'Shows a labeled group with one selected option.',
+        story: 'The default vertical radio group.',
       },
     },
   },
   args: {
-    children: plans,
-    defaultValue: 'pro',
+    defaultValue: 'daily',
   },
 }
 
 export const Horizontal: TStory = {
-  name: 'Horizontal',
   parameters: {
     docs: {
       description: {
-        story: 'Lays the options out along one row.',
+        story: 'Radio groups support horizontal orientation.',
       },
     },
   },
   args: {
-    children: plans,
+    label: 'Display density',
     orientation: 'horizontal',
+    defaultValue: 'comfortable',
   },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="compact" label="Compact" />
+      <RadioGroupItem value="comfortable" label="Comfortable" />
+      <RadioGroupItem value="spacious" label="Spacious" />
+    </RadioGroup>
+  ),
 }
 
-export const Description: TStory = {
-  name: 'Description',
+export const Vertical: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Adds helper text for the group and for an option.',
+        story: 'Radio groups in standard vertical layout.',
       },
     },
   },
   args: {
-    children: plans,
+    label: 'Theme',
+    orientation: 'vertical',
+    defaultValue: 'system',
   },
-}
-
-export const Error: TStory = {
-  name: 'Error',
-  parameters: {
-    docs: {
-      description: {
-        story: 'An error message marks the group invalid and is announced.',
-      },
-    },
-  },
-  args: {
-    children: plans,
-    error: 'Choose a plan.',
-  },
-}
-
-export const DisabledGroup: TStory = {
-  name: 'Disabled group',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Disables every option and explains why in place of the description.',
-      },
-    },
-  },
-  args: {
-    children: plans,
-    defaultValue: 'pro',
-    disabled: true,
-    disabledReason: 'Your plan is managed by your admin.',
-    description: 'Cancel whenever you want.',
-  },
-}
-
-export const DisabledOption: TStory = {
-  name: 'Disabled option',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Keeps one option visible and unselectable while the rest stay active.',
-      },
-    },
-  },
-  args: {
-    children: (
-      <>
-        <RadioGroup.Item value="free" label="Free" />
-        <RadioGroup.Item
-          value="pro"
-          label="Pro"
-          disabled
-          disabledReason="Ask your admin to enable it."
-        />
-      </>
-    ),
-  },
-}
-
-export const Required: TStory = {
-  name: 'Required',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Marks every option required and shows the required marker.',
-      },
-    },
-  },
-  args: {
-    children: plans,
-    required: true,
-  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="light" label="Light" />
+      <RadioGroupItem value="dark" label="Dark" />
+      <RadioGroupItem value="system" label="Match system" />
+    </RadioGroup>
+  ),
 }
 
 export const Controlled: TStory = {
-  name: 'Controlled',
   parameters: {
     docs: {
       description: {
-        story: 'Shows a group whose selection is owned by the surface.',
+        story: 'Radio groups support controlled value state management.',
       },
     },
   },
-  render: () => <ControlledExample />,
+  render: () => <ControlledRadioGroup />,
+}
+
+function ControlledRadioGroup() {
+  const [plan, setPlan] = useState('free')
+
+  return (
+    <div style={{ display: 'grid', gap: '20px' }}>
+      <RadioGroup label="Plan" value={plan} onValueChange={setPlan}>
+        <RadioGroupItem value="free" label="Free" />
+        <RadioGroupItem value="pro" label="Pro" />
+        <RadioGroupItem value="team" label="Team" />
+      </RadioGroup>
+      <p style={{ margin: 0 }}>Selected plan: {plan}</p>
+    </div>
+  )
+}
+
+export const Selection: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups can be initialized with a preselected default value.',
+      },
+    },
+  },
+  args: {
+    label: 'Shipping speed',
+    defaultValue: 'standard',
+  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="standard" label="Standard" />
+      <RadioGroupItem value="express" label="Express" />
+    </RadioGroup>
+  ),
+}
+
+export const DisabledOption: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual radio items within a group can be disabled.',
+      },
+    },
+  },
+  args: {
+    label: 'Export format',
+    defaultValue: 'pdf',
+  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="pdf" label="PDF" />
+      <RadioGroupItem value="csv" label="CSV" />
+      <RadioGroupItem value="xml" label="XML" disabled />
+    </RadioGroup>
+  ),
+}
+
+export const Disabled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'An entire radio group can be disabled.',
+      },
+    },
+  },
+  args: {
+    label: 'Managed by your organization',
+    disabled: true,
+    defaultValue: 'secure',
+  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem value="secure" label="Require verification" />
+      <RadioGroupItem value="standard" label="Standard access" />
+    </RadioGroup>
+  ),
+}
+
+export const Descriptions: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Individual radio items can include supplementary descriptions.',
+      },
+    },
+  },
+  args: {
+    label: 'Visibility',
+    description: 'Choose who can find your profile.',
+    defaultValue: 'members',
+  },
+  render: (args) => (
+    <RadioGroup {...args}>
+      <RadioGroupItem
+        value="public"
+        label="Public"
+        description="Anyone on the internet can view your profile."
+      />
+      <RadioGroupItem
+        value="members"
+        label="Members only"
+        description="Only signed-in members can view your profile."
+      />
+      <RadioGroupItem
+        value="private"
+        label="Private"
+        description="Only you can view your profile."
+      />
+    </RadioGroup>
+  ),
+}
+
+export const Required: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support required validation inside native forms.',
+      },
+    },
+  },
+  args: {
+    label: 'Preferred contact method',
+    required: true,
+  },
+  render: (args) => (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+      }}
+      style={{ display: 'grid', gap: '16px', justifyItems: 'start' }}
+    >
+      <RadioGroup {...args} name="contact">
+        <RadioGroupItem value="email" label="Email" />
+        <RadioGroupItem value="phone" label="Phone" />
+      </RadioGroup>
+      <button type="submit">Submit</button>
+    </form>
+  ),
+}
+
+export const Sizes: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Radio groups support small, medium, and large sizing.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gap: '24px' }}>
+      <RadioGroup label="Small" size="small" defaultValue="a">
+        <RadioGroupItem value="a" label="Option A" />
+        <RadioGroupItem value="b" label="Option B" />
+      </RadioGroup>
+      <RadioGroup label="Medium" size="medium" defaultValue="a">
+        <RadioGroupItem value="a" label="Option A" />
+        <RadioGroupItem value="b" label="Option B" />
+      </RadioGroup>
+      <RadioGroup label="Large" size="large" defaultValue="a">
+        <RadioGroupItem value="a" label="Option A" />
+        <RadioGroupItem value="b" label="Option B" />
+      </RadioGroup>
+    </div>
+  ),
 }

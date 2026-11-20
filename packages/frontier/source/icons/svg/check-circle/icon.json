@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "check-circle",
+  "description": "Confirms that something succeeded or is complete.",
+  "keywords": ["check", "success", "done"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["success message"]
+}

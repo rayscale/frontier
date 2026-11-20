@@ -1,0 +1,44 @@
+.frontier-number-flow {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.frontier-number-flow__visual {
+  display: inline;
+}
+.frontier-number-flow__digit {
+  display: inline-block;
+  height: 1lh;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.frontier-number-flow__strip {
+  display: block;
+  text-align: center;
+  transform: translate3d(0, calc(var(--_number-flow-digit, 0) * -10%), 0);
+  transition: transform var(--_number-flow-duration, var(--frontier-duration-base))
+    var(--frontier-easing-spring);
+}
+
+.frontier-number-flow__glyph {
+  display: block;
+}
+.frontier-number-flow__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-number-flow__strip {
+    transition: none;
+  }
+}

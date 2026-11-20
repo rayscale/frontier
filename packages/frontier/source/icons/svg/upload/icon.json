@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "upload",
+  "description": "Sends a file to a destination.",
+  "keywords": ["upload", "send", "file"],
+  "categories": ["files", "actions"],
+  "aliases": [],
+  "useCases": ["upload file"]
+}

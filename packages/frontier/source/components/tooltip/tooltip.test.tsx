@@ -1,96 +1,135 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { Tooltip } from './index.js'
 
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+
 describe('Tooltip', () => {
-  it('stays hidden until the trigger is hovered or focused', () => {
-    render(
-      <Tooltip content="Add item">
-        <button type="button">Add</button>
-      </Tooltip>,
-    )
-
-    expect(screen.queryByText('Add item')).not.toBeInTheDocument()
-  })
-
-  it('appears at once on keyboard focus and never takes focus', async () => {
+  it('describes its trigger with the tooltip content', async () => {
     const user = userEvent.setup()
 
     render(
-      <Tooltip content="Add item">
-        <button type="button">Add</button>
+      <Tooltip content="More information">
+        <button type="button">Help</button>
       </Tooltip>,
     )
 
-    await user.tab()
+    const trigger = screen.getByRole('button', { name: 'Help' })
+    await user.hover(trigger)
 
-    expect(await screen.findByText('Add item')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Add' })).toHaveFocus()
+    const tooltip = await screen.findByRole('tooltip')
+
+    expect(tooltip).toHaveTextContent('More information')
+    expect(trigger.getAttribute('aria-describedby')).toBe(tooltip.id)
   })
 
-  it('appears when the pointer rests on the trigger and leaves with it', async () => {
+  it('waits for the configured delay before showing', async () => {
     const user = userEvent.setup()
 
     render(
-      <Tooltip content="Add item">
-        <button type="button">Add</button>
+      <Tooltip content="More information" delay={300}>
+        <button type="button">Help</button>
       </Tooltip>,
     )
 
-    await user.hover(screen.getByRole('button', { name: 'Add' }))
+    await user.hover(screen.getByRole('button', { name: 'Help' }))
 
-    expect(await screen.findByText('Add item')).toBeInTheDocument()
-
-    await user.unhover(screen.getByRole('button', { name: 'Add' }))
+    expect(document.querySelector('.frontier-tooltip__content[data-open]')).toBeNull()
 
     await waitFor(() => {
-      expect(screen.queryByText('Add item')).not.toBeInTheDocument()
+      expect(document.querySelector('.frontier-tooltip__content[data-open]')).not.toBeNull()
     })
   })
 
-  it('closes with Escape', async () => {
+  it('does not show or describe the tooltip when disabled', async () => {
     const user = userEvent.setup()
 
     render(
-      <Tooltip content="Add item">
-        <button type="button">Add</button>
+      <Tooltip content="More information" disabled>
+        <button type="button">Help</button>
+      </Tooltip>,
+    )
+
+    const trigger = screen.getByRole('button', { name: 'Help' })
+    await user.hover(trigger)
+    await user.tab()
+
+    expect(trigger).toHaveFocus()
+    expect(trigger).not.toHaveAttribute('aria-describedby')
+    expect(document.querySelector('.frontier-tooltip__content[data-open]')).toBeNull()
+  })
+
+  it('shows the tooltip on keyboard focus', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tooltip content="More information">
+        <button type="button">Help</button>
       </Tooltip>,
     )
 
     await user.tab()
-    await screen.findByText('Add item')
+
+    expect(screen.getByRole('button', { name: 'Help' })).toHaveFocus()
+    expect(await screen.findByRole('tooltip')).toHaveTextContent('More information')
+  })
+
+  it('preserves existing descriptions of the trigger', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <span id="existing-description">Existing description</span>
+        <Tooltip content="More information">
+          <button type="button" aria-describedby="existing-description">
+            Help
+          </button>
+        </Tooltip>
+      </>,
+    )
+
+    const trigger = screen.getByRole('button', { name: 'Help' })
+    await user.hover(trigger)
+    const tooltip = await screen.findByRole('tooltip')
+
+    expect(trigger.getAttribute('aria-describedby')).toContain('existing-description')
+    expect(trigger.getAttribute('aria-describedby')).toContain(tooltip.id)
+  })
+
+  it('applies the preferred placement to the popup', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tooltip content="More information" placement="bottom">
+        <button type="button">Help</button>
+      </Tooltip>,
+    )
+
+    await user.hover(screen.getByRole('button', { name: 'Help' }))
+
+    expect(await screen.findByRole('tooltip')).toHaveAttribute('data-side', 'bottom')
+  })
+
+  it('dismisses on Escape', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tooltip content="More information">
+        <button type="button">Help</button>
+      </Tooltip>,
+    )
+
+    await user.tab()
+    expect(await screen.findByRole('tooltip')).toBeInTheDocument()
+
     await user.keyboard('{Escape}')
 
     await waitFor(() => {
-      expect(screen.queryByText('Add item')).not.toBeInTheDocument()
+      expect(document.querySelector('.frontier-tooltip__content[data-open]')).toBeNull()
     })
-  })
-
-  it('does not appear when disabled', async () => {
-    const user = userEvent.setup()
-
-    render(
-      <Tooltip content="Add item" disabled>
-        <button type="button">Add</button>
-      </Tooltip>,
-    )
-
-    await user.tab()
-
-    expect(screen.queryByText('Add item')).not.toBeInTheDocument()
-  })
-
-  it('keeps the trigger props and ref of the child', () => {
-    render(
-      <Tooltip content="Add item">
-        <button type="button" data-testid="trigger" className="custom">
-          Add
-        </button>
-      </Tooltip>,
-    )
-
-    expect(screen.getByTestId('trigger')).toHaveClass('custom')
   })
 })

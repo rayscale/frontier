@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-right",
+  "description": "Points to the right or to the next item.",
+  "keywords": ["chevron", "right", "next"],
+  "categories": ["arrows", "ui"],
+  "aliases": [],
+  "useCases": ["next page", "expand"]
+}

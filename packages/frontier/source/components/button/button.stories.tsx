@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Button, Plus } from '../../index.js'
+import { CircleEllipsis, Plus, Search } from '../../icons/index.js'
+import { Spinner } from '../spinner/spinner.js'
+
+import { Button } from './button.js'
 
 const meta = {
   title: 'Components/Button',
@@ -8,38 +11,27 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    docs: {
-      description: {
-        component: 'Triggers one action with a label that names the result.',
-      },
-    },
   },
   args: {
-    children: 'Save changes',
+    children: 'Button',
     variant: 'primary',
+    size: 'medium',
     disabled: false,
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger'],
-      description: 'The visual role of the action.',
+      options: ['primary', 'secondary', 'outline', 'ghost', 'danger'],
+      description: 'The visual style of the button.',
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large', 'icon', 'icon-small', 'icon-large'],
+      description: 'The size of the button.',
     },
     disabled: {
       control: 'boolean',
-      description: 'Keeps the action focusable while preventing activation.',
-    },
-    disabledReason: {
-      control: 'text',
-      description: 'Explains why the action is unavailable. Required when disabled.',
-    },
-    iconOnly: {
-      control: false,
-      description: 'Uses a rounded control for an icon-only action.',
-    },
-    asChild: {
-      control: false,
-      description: 'Renders the child element with button styles and behavior.',
+      description: 'Whether the button is non-interactive.',
     },
     onClick: { action: 'clicked' },
   },
@@ -49,125 +41,130 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-const rowStyle = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  gap: 'var(--frontier-spacing-3)',
-} as const
-
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story: 'Shows the primary action with its default label.',
+        story: 'The default button style used for primary actions.',
       },
     },
   },
 }
 
 export const Variants: TStory = {
-  name: 'Variants',
   parameters: {
     docs: {
       description: {
-        story: 'Shows the four action roles at the same hierarchy level.',
+        story:
+          'Buttons are available in several visual variants to communicate importance and intent.',
       },
     },
   },
   render: () => (
-    <div style={rowStyle}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="danger">Delete file</Button>
+      <Button variant="danger">Delete</Button>
+    </div>
+  ),
+}
+
+export const Sizes: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons come in multiple sizes to fit different contexts.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <Button size="small">Small</Button>
+      <Button size="medium">Medium</Button>
+      <Button size="large">Large</Button>
+    </div>
+  ),
+}
+
+export const Icons: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons can be rendered as icons for compact actions.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <Button variant="ghost" size="icon" aria-label="Add item">
+        <Plus aria-hidden="true" />
+      </Button>
+
+      <Button variant="outline" size="icon-small" aria-label="Search">
+        <Search aria-hidden="true" size={20} />
+      </Button>
+
+      <Button variant="secondary" size="icon-large" aria-label="More options">
+        <CircleEllipsis aria-hidden="true" />
+      </Button>
+    </div>
+  ),
+}
+
+export const Loading: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Buttons can show a loading state while an action is in progress.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+      <Button disabled aria-busy="true">
+        <Spinner size="small" />
+        Saving...
+      </Button>
+      <Button variant="secondary" disabled aria-busy="true">
+        <Spinner size="small" />
+        Secondary
+      </Button>
+      <Button variant="outline" disabled aria-busy="true">
+        <Spinner size="small" />
+        Loading
+      </Button>
+      <Button variant="danger" disabled aria-busy="true">
+        <Spinner size="small" />
+        Deleting...
+      </Button>
     </div>
   ),
 }
 
 export const Disabled: TStory = {
-  name: 'Disabled',
   parameters: {
     docs: {
       description: {
-        story: 'Keeps the action reachable while explaining why it cannot run.',
+        story: 'Disabled buttons prevent user interaction.',
       },
     },
   },
   args: {
     disabled: true,
-    disabledReason: 'You need permission to save changes.',
   },
 }
 
-export const IconOnly: TStory = {
-  name: 'Icon only',
+export const LongText: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows icon-only actions with an accessible name and a tooltip on hover and focus.',
-      },
-    },
-  },
-  render: () => (
-    <div style={rowStyle}>
-      <Button iconOnly aria-label="Add item">
-        <Plus size={20} />
-      </Button>
-      <Button iconOnly variant="secondary" aria-label="Add item">
-        <Plus size={20} />
-      </Button>
-      <Button iconOnly variant="ghost" aria-label="Add item">
-        <Plus size={20} />
-      </Button>
-    </div>
-  ),
-}
-
-export const AsLink: TStory = {
-  name: 'As link',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Renders an anchor with button styles while preserving link semantics.',
-      },
-    },
-  },
-  render: () => (
-    <Button asChild variant="secondary">
-      <a href="#documentation">Open documentation</a>
-    </Button>
-  ),
-}
-
-export const LongLabel: TStory = {
-  name: 'Long label',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Grows with a longer action label without changing its height.',
+        story: 'Buttons automatically adjust their width to fit longer labels.',
       },
     },
   },
   args: {
     children: 'Continue to checkout',
   },
-}
-
-export const Actions: TStory = {
-  name: 'Actions',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Composes a secondary and a primary action in a form footer.',
-      },
-    },
-  },
-  render: () => (
-    <div aria-label="Form actions" role="group" style={rowStyle}>
-      <Button variant="secondary">Cancel</Button>
-      <Button>Save changes</Button>
-    </div>
-  ),
 }

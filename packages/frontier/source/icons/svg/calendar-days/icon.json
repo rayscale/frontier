@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "calendar-days",
+  "description": "Represents a calendar with individual days.",
+  "keywords": ["calendar", "days", "month"],
+  "categories": ["time"],
+  "aliases": [],
+  "useCases": ["month view"]
+}

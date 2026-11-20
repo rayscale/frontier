@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "laptop",
+  "description": "Represents a computer or the system theme.",
+  "keywords": ["laptop", "computer", "system"],
+  "categories": ["devices"],
+  "aliases": [],
+  "useCases": ["system theme"]
+}

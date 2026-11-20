@@ -1,64 +1,104 @@
-import { forwardRef, useId } from 'react'
-
-import { Check } from '../../icons/index.js'
-import { classNames } from '../../internal/helpers/class-names.js'
-import { createToggleHandlers } from '../../internal/helpers/toggle-handlers.js'
-import { Label } from '../label/index.js'
-
-import type { TCheckboxProps } from './types.js'
+import {
+  forwardRef,
+  type InputHTMLAttributes,
+  type ReactNode,
+  useCallback,
+  useId,
+  useLayoutEffect,
+  useRef,
+} from 'react'
 
 import './checkbox.css'
 
-export const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(function Checkbox(props, ref) {
-  const {
+/**
+ * Props for a native checkbox with an optional label and description. Use
+ * `indeterminate` for the mixed state; `aria-checked` is not supported on a
+ * native checkbox because the browser already exposes the checked and mixed
+ * states.
+ */
+export type TCheckboxProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'aria-checked'
+> & {
+  /** Helper text associated with the checkbox for assistive technologies. */
+  description?: ReactNode
+  /** Enables the native indeterminate state. Defaults to `false`. */
+  indeterminate?: boolean
+  /** Visible label associated with the checkbox. */
+  label?: ReactNode
+}
+
+/**
+ * Renders a native checkbox with an optional label and description.
+ * Forwards its ref to the native input.
+ */
+export const Checkbox = forwardRef<HTMLInputElement, TCheckboxProps>(function Checkbox(
+  {
     className,
     description,
-    disabled = false,
-    disabledReason,
     id,
+    indeterminate = false,
     label,
-    onClick,
-    onKeyDown,
     'aria-describedby': ariaDescribedBy,
-    ...rest
-  } = props
-
+    ...props
+  },
+  ref,
+) {
   const generatedId = useId()
-  const supportId = useId()
-  const inputId = id ?? generatedId
-  const unavailable = disabled
-  const support = unavailable ? disabledReason : description
-  const describedBy =
-    [ariaDescribedBy, support ? supportId : undefined].filter(Boolean).join(' ') || undefined
+  const checkboxId = id ?? generatedId
+  const inputRef = useRef<HTMLInputElement>(null)
+  const descriptionId = description ? `${checkboxId}-description` : undefined
+  const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined
+  const setInputRef = useCallback(
+    (node: HTMLInputElement | null) => {
+      inputRef.current = node
+      if (typeof ref === 'function') {
+        ref(node)
+      } else if (ref) {
+        ref.current = node
+      }
+    },
+    [ref],
+  )
 
-  const handlers = createToggleHandlers(unavailable, onClick, onKeyDown)
+  useLayoutEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.indeterminate = indeterminate
+    }
+  }, [indeterminate])
 
   return (
-    <span className={classNames('frontier-checkbox', className)}>
-      <Label className="frontier-checkbox__label" htmlFor={inputId}>
+    <div className="frontier-checkbox-field" data-disabled={props.disabled ? true : undefined}>
+      <label className="frontier-checkbox" htmlFor={checkboxId}>
         <span className="frontier-checkbox__control">
           <input
-            {...rest}
-            ref={ref}
-            id={inputId}
+            {...props}
+            ref={setInputRef}
+            id={checkboxId}
             type="checkbox"
-            className="frontier-checkbox__input"
+            className={['frontier-checkbox__input', className].filter(Boolean).join(' ')}
             aria-describedby={describedBy}
-            aria-disabled={unavailable || undefined}
-            onClick={handlers.onClick}
-            onKeyDown={handlers.onKeyDown}
           />
-          <span className="frontier-checkbox__mark" aria-hidden="true">
-            <Check />
+          <span className="frontier-checkbox__indicator" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path
+                d="m3.5 8.5 3 3 6-7"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+              <path d="M3.5 8h9" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
+            </svg>
           </span>
         </span>
-        <span className="frontier-checkbox__text">{label}</span>
-      </Label>
-      {support ? (
-        <span className="frontier-checkbox__description" id={supportId}>
-          {support}
+        {label && <span className="frontier-checkbox__label">{label}</span>}
+      </label>
+      {description && (
+        <span className="frontier-checkbox__description" id={descriptionId}>
+          {description}
         </span>
-      ) : null}
-    </span>
+      )}
+    </div>
   )
 })

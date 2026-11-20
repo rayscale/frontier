@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "minus",
+  "description": "Removes or decreases something.",
+  "keywords": ["minus", "remove", "decrease"],
+  "categories": ["actions", "ui"],
+  "aliases": [],
+  "useCases": ["decrement", "mixed state"]
+}

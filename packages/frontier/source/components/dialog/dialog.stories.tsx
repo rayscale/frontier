@@ -1,0 +1,295 @@
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { CSSProperties } from 'react'
+import { useState } from 'react'
+
+import { Button } from '../button/button.js'
+import { Input } from '../input/input.js'
+
+import { Dialog, type TDialogSize } from './dialog.js'
+
+const meta = {
+  parameters: {
+    layout: 'centered',
+  },
+  title: 'Components/Dialog',
+  component: Dialog,
+  tags: ['autodocs'],
+} satisfies Meta<typeof Dialog>
+
+export default meta
+
+type TStory = StoryObj<typeof meta>
+
+function ControlledDialog() {
+  const [open, setOpen] = useState(false)
+  const [lastAction, setLastAction] = useState('Dialog has not been opened yet.')
+
+  return (
+    <div style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}>
+      <p style={{ margin: 0 }}>{lastAction}</p>
+      <Dialog
+        open={open}
+        onOpenChange={(nextOpen) => {
+          setOpen(nextOpen)
+          setLastAction(nextOpen ? 'Dialog opened by the parent.' : 'Dialog closed by the parent.')
+        }}
+      >
+        <Dialog.Trigger>
+          <Button>Open controlled dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Controlled dialog</Dialog.Title>
+            <Dialog.Description>
+              The parent owns the open state and reacts to every change request.
+            </Dialog.Description>
+          </Dialog.Header>
+          <Dialog.Footer>
+            <Dialog.Close>Close</Dialog.Close>
+          </Dialog.Footer>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  )
+}
+
+function ConfirmationDialog() {
+  const [status, setStatus] = useState('No project deleted yet.')
+
+  return (
+    <div style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}>
+      <p style={{ margin: 0 }}>{status}</p>
+      <Dialog>
+        <Dialog.Trigger>
+          <Button variant="danger">Delete project</Button>
+        </Dialog.Trigger>
+        <Dialog.Content size="small">
+          <Dialog.Header>
+            <Dialog.Title>Delete project?</Dialog.Title>
+            <Dialog.Description>
+              This action cannot be undone. All files in the project will be removed.
+            </Dialog.Description>
+          </Dialog.Header>
+          <Dialog.Footer>
+            <Dialog.Close>Cancel</Dialog.Close>
+            <Button
+              variant="danger"
+              onClick={() => {
+                setStatus('Project deleted.')
+              }}
+            >
+              Delete
+            </Button>
+          </Dialog.Footer>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  )
+}
+
+function FormDialog() {
+  const [savedName, setSavedName] = useState('')
+
+  return (
+    <div style={{ display: 'grid', gap: '1rem', justifyItems: 'start' }}>
+      <p style={{ margin: 0 }}>
+        {savedName ? `Saved project: ${savedName}` : 'No project saved yet.'}
+      </p>
+      <Dialog>
+        <Dialog.Trigger>
+          <Button variant="secondary">Rename project</Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+              const formData = new FormData(event.currentTarget)
+              const projectName = formData.get('projectName')
+              setSavedName(typeof projectName === 'string' ? projectName : '')
+            }}
+          >
+            <Dialog.Header>
+              <Dialog.Title>Rename project</Dialog.Title>
+              <Dialog.Description>
+                Choose a name that is easy to recognize in your workspace.
+              </Dialog.Description>
+            </Dialog.Header>
+            <Input
+              label="Project name"
+              name="projectName"
+              defaultValue="Quarterly report"
+              required
+            />
+            <Dialog.Footer>
+              <Dialog.Close>Cancel</Dialog.Close>
+              <Button type="submit">Save</Button>
+            </Dialog.Footer>
+          </form>
+        </Dialog.Content>
+      </Dialog>
+    </div>
+  )
+}
+
+const sizes: TDialogSize[] = ['small', 'medium', 'large']
+
+export const Default: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'The default modal dialog with header, content, and footer.',
+      },
+    },
+  },
+  render: () => (
+    <Dialog>
+      <Dialog.Trigger>
+        <Button>Open dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Share project</Dialog.Title>
+          <Dialog.Description>
+            Anyone with the link can view this project. You can revoke access at any time.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Footer>
+          <Dialog.Close>Done</Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog>
+  ),
+}
+
+export const Confirmation: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A confirmation dialog pattern for destructive actions.',
+      },
+    },
+  },
+  render: () => <ConfirmationDialog />,
+}
+
+export const Form: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A form dialog pattern for collecting user input.',
+      },
+    },
+  },
+  render: () => <FormDialog />,
+}
+
+export const Scrollable: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs with lengthy scrollable content areas.',
+      },
+    },
+  },
+  render: () => (
+    <Dialog>
+      <Dialog.Trigger>
+        <Button variant="outline">Read terms</Button>
+      </Dialog.Trigger>
+      <Dialog.Content size="large">
+        <Dialog.Header>
+          <Dialog.Title>Terms of service</Dialog.Title>
+          <Dialog.Description>Review the full agreement before continuing.</Dialog.Description>
+        </Dialog.Header>
+        {Array.from({ length: 12 }, (_, index) => (
+          <p key={index} style={{ margin: 0 }}>
+            Section {index + 1}: Access to the service is granted for the duration of your
+            subscription. You are responsible for keeping your credentials secure and for all
+            activity that occurs under your account.
+          </p>
+        ))}
+        <Dialog.Footer>
+          <Dialog.Close variant="outline">Decline</Dialog.Close>
+          <Dialog.Close variant="primary">Accept</Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog>
+  ),
+}
+
+export const Sizes: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs support small, medium, and large sizing.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+      {sizes.map((size) => (
+        <Dialog key={size}>
+          <Dialog.Trigger>
+            <Button variant="outline">{size}</Button>
+          </Dialog.Trigger>
+          <Dialog.Content size={size}>
+            <Dialog.Header>
+              <Dialog.Title>{`${size.charAt(0).toUpperCase()}${size.slice(1)} dialog`}</Dialog.Title>
+              <Dialog.Description>This dialog uses the {size} width.</Dialog.Description>
+            </Dialog.Header>
+            <Dialog.Footer>
+              <Dialog.Close>Close</Dialog.Close>
+            </Dialog.Footer>
+          </Dialog.Content>
+        </Dialog>
+      ))}
+    </div>
+  ),
+}
+
+export const CustomStyling: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs can be customized using CSS custom properties and styles.',
+      },
+    },
+  },
+  render: () => (
+    <Dialog>
+      <Dialog.Trigger>
+        <Button variant="secondary">Open styled dialog</Button>
+      </Dialog.Trigger>
+      <Dialog.Content
+        style={
+          {
+            '--_dialog-width': '40rem',
+            backgroundColor: 'var(--frontier-color-primary)',
+            color: 'var(--frontier-color-on-primary)',
+          } as CSSProperties
+        }
+      >
+        <Dialog.Header>
+          <Dialog.Title>Custom styling</Dialog.Title>
+          <Dialog.Description>
+            Width and colors are set through One CSS custom properties.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Footer>
+          <Dialog.Close>Close</Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog>
+  ),
+}
+
+export const Controlled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Dialogs support controlled open state management.',
+      },
+    },
+  },
+  render: () => <ControlledDialog />,
+}

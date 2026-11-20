@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "chevron-left",
+  "description": "Points to the left or to the previous item.",
+  "keywords": ["chevron", "left", "previous", "back"],
+  "categories": ["arrows", "ui"],
+  "aliases": [],
+  "useCases": ["previous page"]
+}

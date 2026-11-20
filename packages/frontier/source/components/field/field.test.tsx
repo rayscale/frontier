@@ -1,198 +1,67 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 
 import { Field } from './index.js'
 
 describe('Field', () => {
-  it('hides decorative icons and keeps interactive ones available', () => {
-    render(
-      <Field.Root>
-        <Field.Label>Search</Field.Label>
-        <Field.Box>
-          <Field.Icon data-testid="decorative" />
-          <Field.Control />
-          <Field.Icon data-testid="interactive" interactive />
-        </Field.Box>
-      </Field.Root>,
-    )
-
-    expect(screen.getByTestId('decorative')).toHaveAttribute('aria-hidden', 'true')
-    expect(screen.getByTestId('interactive')).not.toHaveAttribute('aria-hidden')
-  })
-
-  it('names the control from the label', () => {
+  it('labels a control placed inside the field', () => {
     render(
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
+        <Field.Control />
       </Field.Root>,
     )
 
-    expect(screen.getByRole('textbox', { name: 'Email' })).toBeInTheDocument()
+    expect(screen.getByLabelText('Email')).toBeInstanceOf(HTMLInputElement)
   })
 
-  it('associates the description', () => {
+  it('describes the control with its description', () => {
     render(
       <Field.Root>
         <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-        <Field.Description>We never share it.</Field.Description>
+        <Field.Control />
+        <Field.Description>We never share it</Field.Description>
       </Field.Root>,
     )
 
     expect(screen.getByRole('textbox', { name: 'Email' })).toHaveAccessibleDescription(
-      'We never share it.',
+      'We never share it',
     )
   })
 
-  it('associates the description on the first render', () => {
-    const html = renderToStaticMarkup(
-      <Field.Root>
-        <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-        <Field.Description>We never share it.</Field.Description>
-      </Field.Root>,
-    )
-
-    expect(html).toMatch(/aria-describedby="[^"]+"/)
-    expect(html).toContain('frontier-field__description')
-  })
-
-  it('honors explicit aria attributes', () => {
-    render(
-      <Field.Control
-        aria-describedby="hint"
-        aria-disabled="true"
-        aria-invalid="grammar"
-        aria-required="true"
-      />,
-    )
-
-    const input = screen.getByRole('textbox')
-
-    expect(input).toHaveAttribute('aria-describedby', 'hint')
-    expect(input).toHaveAttribute('aria-disabled', 'true')
-    expect(input).toHaveAttribute('aria-invalid', 'grammar')
-    expect(input).toHaveAttribute('aria-required', 'true')
-  })
-
-  it('marks invalid from the error and announces it', () => {
+  it('describes the control with an error that is always shown when matched', () => {
     render(
       <Field.Root invalid>
         <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-        <Field.Error>Enter a valid email.</Field.Error>
+        <Field.Control />
+        <Field.Error match>Enter an email address</Field.Error>
       </Field.Root>,
     )
 
-    const input = screen.getByRole('textbox', { name: 'Email' })
-
-    expect(input).toHaveAttribute('aria-invalid', 'true')
-    expect(input).toHaveAccessibleDescription('Enter a valid email.')
-    expect(screen.getByRole('alert')).toHaveTextContent('Enter a valid email.')
+    const control = screen.getByRole('textbox', { name: 'Email' })
+    expect(control).toHaveAccessibleDescription('Enter an email address')
+    expect(control).toHaveAttribute('aria-invalid', 'true')
   })
 
-  it('describes both the help text and the error', () => {
+  it('marks the root as invalid when the field is invalid', () => {
     render(
-      <Field.Root>
-        <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-        <Field.Description>Use your work address.</Field.Description>
-        <Field.Error>Enter a valid email.</Field.Error>
+      <Field.Root className="custom-field" data-testid="field" invalid>
+        <Field.Control aria-label="Email" />
       </Field.Root>,
     )
 
-    expect(screen.getByRole('textbox', { name: 'Email' })).toHaveAccessibleDescription(
-      'Use your work address. Enter a valid email.',
-    )
+    expect(screen.getByTestId('field')).toHaveAttribute('data-invalid')
+    expect(screen.getByTestId('field')).toHaveClass('frontier-field', 'custom-field')
   })
 
-  it('shows a required marker and marks the control required', () => {
-    render(
-      <Field.Root required>
-        <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-      </Field.Root>,
-    )
-
-    expect(screen.getByText('Required')).toBeInTheDocument()
-
-    const input = screen.getByRole('textbox', { name: 'Email' })
-
-    expect(input).toBeRequired()
-    expect(input).toHaveAttribute('aria-required', 'true')
-  })
-
-  it('keeps a disabled field focusable, read-only, and prevents edits', async () => {
-    const user = userEvent.setup()
-
+  it('disables the control when the field is disabled', () => {
     render(
       <Field.Root disabled>
         <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control defaultValue="a@b.co" />
-        </Field.Box>
-        <Field.Description>Your plan does not include email.</Field.Description>
+        <Field.Control />
       </Field.Root>,
     )
 
-    const input = screen.getByRole('textbox', { name: 'Email' })
-
-    expect(input).toHaveAttribute('aria-disabled', 'true')
-    expect(input).not.toBeDisabled()
-    expect(input).toHaveAttribute('readonly')
-    expect(input).toHaveAccessibleDescription('Your plan does not include email.')
-
-    await user.tab()
-    expect(input).toHaveFocus()
-
-    await user.type(input, 'x')
-    expect(input).toHaveValue('a@b.co')
-  })
-
-  it('uses the given id for the label and the control', () => {
-    render(
-      <Field.Root id="email">
-        <Field.Label>Email</Field.Label>
-        <Field.Box>
-          <Field.Control />
-        </Field.Box>
-      </Field.Root>,
-    )
-
-    expect(screen.getByLabelText('Email')).toHaveAttribute('id', 'email')
-  })
-
-  it('merges a given aria-describedby with the field text', () => {
-    render(
-      <>
-        <span id="hint">Read the policy.</span>
-        <Field.Root>
-          <Field.Label>Email</Field.Label>
-          <Field.Box>
-            <Field.Control aria-describedby="hint" />
-          </Field.Box>
-          <Field.Description>We never share it.</Field.Description>
-        </Field.Root>
-      </>,
-    )
-
-    expect(screen.getByRole('textbox', { name: 'Email' })).toHaveAccessibleDescription(
-      'We never share it. Read the policy.',
-    )
+    expect(screen.getByRole('textbox', { name: 'Email' })).toBeDisabled()
   })
 })

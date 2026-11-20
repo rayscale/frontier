@@ -1,68 +1,51 @@
 .frontier-field {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--frontier-spacing-2);
   width: 100%;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
 }
 
 .frontier-field__label {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--frontier-spacing-2);
+  margin: 0;
+  font-size: var(--frontier-font-size-sm);
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-normal);
 }
 
 .frontier-field__box {
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: var(--frontier-spacing-2);
-  min-height: var(--frontier-control-height);
-  padding-inline: var(--frontier-spacing-3);
-  border: var(--frontier-border-width) solid var(--frontier-color-border);
+  min-height: var(--frontier-control-size-large);
+  padding: 0 var(--frontier-spacing-3);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
   border-radius: var(--frontier-radius-lg);
-  background: transparent;
-  outline: 0 solid var(--frontier-color-focus);
-  outline-offset: 0;
+  background: var(--frontier-color-surface);
+  box-shadow: var(--frontier-shadow-sm);
   transition:
-    border-color var(--frontier-duration-fast) var(--frontier-easing-exit),
-    outline-offset var(--frontier-duration-fast) var(--frontier-easing-exit),
-    outline-width var(--frontier-duration-fast) var(--frontier-easing-exit);
-}
-
-.frontier-field__box:not([data-disabled='true']):hover {
-  border-color: var(--frontier-color-border-strong);
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard),
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
 }
 
 .frontier-field__box:focus-within {
   border-color: var(--frontier-color-focus);
-  outline-width: var(--frontier-focus-width);
-  outline-offset: var(--frontier-focus-offset);
-  transition:
-    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
-    outline-offset var(--frontier-duration-fast) var(--frontier-easing-standard),
-    outline-width var(--frontier-duration-fast) var(--frontier-easing-standard);
-}
-
-.frontier-field__box[data-invalid='true'] {
-  border-color: var(--frontier-color-danger);
-}
-
-.frontier-field__box[data-disabled='true'] {
-  border-color: var(--frontier-color-border-disabled);
-  cursor: not-allowed;
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
 }
 
 .frontier-field__control {
-  flex: 1;
+  width: 100%;
   min-width: 0;
-  height: 100%;
-  padding-block: 0;
+  padding: var(--frontier-spacing-2) 0;
   border: 0;
   outline: none;
   background: transparent;
-  color: var(--frontier-color-text);
-  font-family: var(--frontier-font-family-sans);
-  font-size: var(--frontier-font-size-sm);
-  line-height: var(--frontier-line-height-sm);
+  color: inherit;
+  font: inherit;
+  font-size: var(--frontier-font-size-md);
+  line-height: var(--frontier-line-height-normal);
 }
 
 .frontier-field__control::placeholder {
@@ -70,13 +53,13 @@
   opacity: 1;
 }
 
-.frontier-field__control[aria-disabled='true'] {
-  color: var(--frontier-color-text-disabled);
-  cursor: not-allowed;
+.frontier-field__control:focus-visible {
+  outline: none;
 }
 
-.frontier-field__control[aria-disabled='true']::placeholder {
-  color: var(--frontier-color-text-disabled);
+.frontier-field__control:disabled {
+  color: var(--frontier-color-on-disabled);
+  cursor: not-allowed;
 }
 
 .frontier-field__icon {
@@ -87,10 +70,16 @@
   color: var(--frontier-color-text-muted);
 }
 
+.frontier-field__icon > :where(svg) {
+  width: 1.125em;
+  height: 1.125em;
+}
+
 .frontier-field__description,
 .frontier-field__error {
-  font-size: var(--frontier-font-size-sm);
-  line-height: var(--frontier-line-height-sm);
+  margin: 0;
+  font-size: var(--frontier-font-size-xs);
+  line-height: var(--frontier-line-height-normal);
 }
 
 .frontier-field__description {
@@ -101,9 +90,29 @@
   color: var(--frontier-color-danger);
 }
 
+.frontier-field[data-invalid] .frontier-field__box {
+  border-color: var(--frontier-color-danger);
+}
+
+.frontier-field[data-invalid] .frontier-field__box:focus-within {
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-danger-border);
+}
+
+.frontier-field[data-invalid] .frontier-field__icon {
+  color: var(--frontier-color-danger);
+}
+
+.frontier-field[data-disabled] .frontier-field__box {
+  border-color: var(--frontier-color-border-disabled);
+  background: var(--frontier-color-disabled);
+}
+
+.frontier-field[data-readonly] .frontier-field__box {
+  background: var(--frontier-color-surface-sunken);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .frontier-field__box,
-  .frontier-field__box:focus-within {
+  .frontier-field__box {
     transition: none;
   }
 }

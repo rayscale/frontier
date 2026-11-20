@@ -3,30 +3,22 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Field } from './field.js'
 
 const meta = {
+  parameters: {
+    layout: 'centered',
+  },
   title: 'Components/Field',
   component: Field.Root,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'Composes a label, a bordered box, a control, a description, and an error.',
-      },
-    },
-  },
   args: {
-    children: null,
-    disabled: false,
-    invalid: false,
-    required: false,
+    className: 'frontier-story-field',
   },
   render: (args) => (
     <Field.Root {...args}>
-      <Field.Label>Email</Field.Label>
+      <Field.Label>Email address</Field.Label>
       <Field.Box>
         <Field.Control placeholder="you@example.com" />
       </Field.Box>
-      <Field.Description>We only use this to contact you.</Field.Description>
+      <Field.Description>We will only use this to contact you.</Field.Description>
     </Field.Root>
   ),
 } satisfies Meta<typeof Field.Root>
@@ -36,106 +28,65 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story: 'Shows the label, box, control, and description together.',
+        story: 'The default field structure with label, control, and description.',
       },
     },
   },
 }
 
-export const Focus: TStory = {
-  name: 'Focus',
+export const Invalid: TStory = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Click or tab into the field to see its boundary take the focus color while the outline grows outward from it. Input shares this behavior.',
-      },
-    },
-  },
-  render: () => (
-    <Field.Root>
-      <Field.Label>Email</Field.Label>
-      <Field.Box>
-        <Field.Control placeholder="name@example.com" />
-      </Field.Box>
-    </Field.Root>
-  ),
-}
-
-export const Description: TStory = {
-  name: 'Description',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Adds helper text under the box.',
-      },
-    },
-  },
-  render: (args) => (
-    <Field.Root {...args}>
-      <Field.Label>Email</Field.Label>
-      <Field.Box>
-        <Field.Control placeholder="you@example.com" />
-      </Field.Box>
-      <Field.Description>We only use this to contact you and never share it.</Field.Description>
-    </Field.Root>
-  ),
-}
-
-export const Error: TStory = {
-  name: 'Error',
-  parameters: {
-    docs: {
-      description: {
-        story: 'An error message marks the field invalid and is announced.',
+        story: 'Fields support invalid state and error message presentation.',
       },
     },
   },
   args: {
-    children: null,
     invalid: true,
   },
   render: (args) => (
     <Field.Root {...args}>
-      <Field.Label>Email</Field.Label>
+      <Field.Label>Email address</Field.Label>
       <Field.Box>
         <Field.Control defaultValue="not-an-email" />
       </Field.Box>
-      <Field.Error>Enter a valid email.</Field.Error>
+      <Field.Error match>Enter a valid email address.</Field.Error>
     </Field.Root>
   ),
 }
 
-export const Required: TStory = {
-  name: 'Required',
+export const Disabled: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the visible required marker and marks the control required.',
+        story: 'Fields can be disabled to prevent interaction.',
       },
     },
   },
   args: {
-    children: null,
-    required: true,
+    disabled: true,
   },
 }
 
-export const Disabled: TStory = {
-  name: 'Disabled',
+export const CustomControl: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Keeps the control focusable and read-only.',
+        story: 'Fields can wrap custom controls such as textareas via the `render` prop.',
       },
     },
   },
-  args: {
-    children: null,
-    disabled: true,
-  },
+  render: (args) => (
+    <Field.Root {...args}>
+      <Field.Label>Notes</Field.Label>
+      <Field.Box>
+        <Field.Control render={<textarea rows={3} />} />
+      </Field.Box>
+      <Field.Description>Shown to the reviewer.</Field.Description>
+    </Field.Root>
+  ),
 }

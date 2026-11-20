@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle-help",
+  "description": "Offers help or an explanation.",
+  "keywords": ["help", "question", "support"],
+  "categories": ["status", "ui"],
+  "aliases": [],
+  "useCases": ["help text"]
+}

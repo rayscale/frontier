@@ -1,0 +1,29 @@
+.frontier-floating-surface {
+  background: var(--frontier-color-surface-floating);
+  color: var(--frontier-color-text);
+  border-radius: var(--frontier-radius-lg);
+  box-shadow: var(--frontier-shadow-md);
+  transform-origin: var(--transform-origin);
+  font-family: var(--frontier-font-family);
+  transition:
+    opacity var(--frontier-duration-base)
+      var(--_floating-surface-easing, var(--frontier-easing-standard)),
+    transform var(--frontier-duration-base)
+      var(--_floating-surface-easing, var(--frontier-easing-standard));
+}
+
+.frontier-floating-surface[data-starting-style],
+.frontier-floating-surface[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.frontier-floating-surface[data-ending-style] {
+  transition-duration: var(--frontier-duration-fast);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-floating-surface {
+    transition: none;
+  }
+}

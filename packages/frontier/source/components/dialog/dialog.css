@@ -1,0 +1,112 @@
+.frontier-dialog {
+  --_dialog-width: 32rem;
+
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  z-index: var(--frontier-layer-overlay);
+  box-sizing: border-box;
+  width: min(var(--_dialog-width), calc(100vw - var(--frontier-spacing-8)));
+  max-height: calc(100dvh - var(--frontier-spacing-8));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--frontier-radius-xl);
+  background: var(--frontier-color-surface-raised);
+  color: var(--frontier-color-text);
+  box-shadow: var(--frontier-shadow-lg);
+  overflow: auto;
+  overscroll-behavior: contain;
+  font-family: var(--frontier-font-family);
+  transition:
+    opacity var(--frontier-duration-base) var(--frontier-easing-standard),
+    transform var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+
+.frontier-dialog[data-starting-style],
+.frontier-dialog[data-ending-style] {
+  opacity: 0;
+  transform: translateY(var(--frontier-spacing-2)) scale(0.98);
+}
+
+.frontier-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--frontier-layer-overlay);
+  background-color: var(--frontier-color-overlay);
+  backdrop-filter: blur(var(--frontier-blur-subtle));
+  transition:
+    opacity var(--frontier-duration-base) var(--frontier-easing-standard),
+    backdrop-filter var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+
+.frontier-dialog__backdrop[data-starting-style],
+.frontier-dialog__backdrop[data-ending-style] {
+  opacity: 0;
+  backdrop-filter: blur(var(--frontier-blur-none));
+}
+
+.frontier-dialog--small {
+  --_dialog-width: 24rem;
+}
+
+.frontier-dialog--medium {
+  --_dialog-width: 32rem;
+}
+
+.frontier-dialog--large {
+  --_dialog-width: 48rem;
+}
+
+.frontier-dialog__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-4);
+  padding: var(--frontier-spacing-6);
+}
+
+.frontier-dialog__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-1);
+}
+
+.frontier-dialog__body:has(.frontier-dialog__close-button) > .frontier-dialog__header {
+  padding-inline-end: var(--frontier-spacing-8);
+}
+
+.frontier-dialog__title {
+  margin: 0;
+  color: var(--frontier-color-text);
+  font-size: var(--frontier-font-size-lg);
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-tight);
+}
+
+.frontier-dialog__description {
+  margin: 0;
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+}
+
+.frontier-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-dialog__close-button {
+  position: absolute;
+  inset-block-start: var(--frontier-spacing-3);
+  inset-inline-end: var(--frontier-spacing-3);
+}
+@media (prefers-reduced-motion: reduce) {
+  .frontier-dialog,
+  .frontier-dialog__backdrop {
+    transition: none;
+  }
+}

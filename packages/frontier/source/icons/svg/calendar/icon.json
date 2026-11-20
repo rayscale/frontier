@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "calendar",
+  "description": "Represents a date or a schedule.",
+  "keywords": ["calendar", "date", "schedule"],
+  "categories": ["time", "ui"],
+  "aliases": [],
+  "useCases": ["pick date"]
+}

@@ -1,37 +1,33 @@
-import { FieldBox } from './parts/field-box.js'
-import { FieldControl } from './parts/field-control.js'
-import { FieldDescription } from './parts/field-description.js'
-import { FieldError } from './parts/field-error.js'
-import { FieldIcon } from './parts/field-icon.js'
-import { FieldLabel } from './parts/field-label.js'
-import { FieldRoot } from './parts/field-root.js'
+import {
+  FieldBox,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  FieldRoot,
+} from './parts/sections.js'
 
 import './field.css'
 
-export interface TFieldComponent {
-  /** Draws the control's surface and carries its invalid and disabled styling. */
-  Box: typeof FieldBox
-  /** Renders the native input that the label and messages describe. */
-  Control: typeof FieldControl
-  /** Renders helper text associated with the control. */
-  Description: typeof FieldDescription
-  /** Renders the error message that marks the control invalid and announces itself. */
-  Error: typeof FieldError
-  /** Places decorative or interactive content before or after the control inside the box. */
-  Icon: typeof FieldIcon
-  /** Renders the control's label with the required marker. */
-  Label: typeof FieldLabel
-  /** Groups one field's parts and shares its ids, state, and accessible relationships. */
-  Root: typeof FieldRoot
-}
+export type {
+  TFieldBoxProps,
+  TFieldControlProps,
+  TFieldDescriptionProps,
+  TFieldErrorProps,
+  TFieldLabelProps,
+  TFieldRootProps,
+} from './types.js'
 
-/** Lays out a control with its label, description, and error message. */
-export const Field: TFieldComponent = {
+/**
+ * Field layout for a control with its label, description, and error message.
+ * Built on Base UI Field; use `Field.Control` for the control or pass any
+ * Base UI or One input to it with `render`.
+ */
+export const Field = {
+  Root: FieldRoot,
+  Label: FieldLabel,
   Box: FieldBox,
   Control: FieldControl,
   Description: FieldDescription,
   Error: FieldError,
-  Icon: FieldIcon,
-  Label: FieldLabel,
-  Root: FieldRoot,
 }

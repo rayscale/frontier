@@ -1,23 +1,20 @@
-import { type Context, createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
 
-export interface TRadioGroupContext {
-  disabled: boolean
-  errorId: string | undefined
-  invalid: boolean
+export interface TRadioGroupContextValue {
   name: string
-  onSelect: (value: string) => void
-  required: boolean
   selectedValue: string | undefined
+  disabled: boolean
+  required: boolean
+  onSelect: (value: string) => void
 }
 
-export const radioGroupContext: Context<TRadioGroupContext | null> =
-  createContext<TRadioGroupContext | null>(null)
+export const radioGroupContext = createContext<TRadioGroupContextValue | null>(null)
 
-export function useRadioGroupContext(): TRadioGroupContext {
+export function useRadioGroupContext(componentName: string): TRadioGroupContextValue {
   const context = useContext(radioGroupContext)
 
   if (!context) {
-    throw new Error('RadioGroup.Item must be rendered inside RadioGroup.')
+    throw new Error(`${componentName} must be rendered inside a RadioGroup.`)
   }
 
   return context

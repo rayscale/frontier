@@ -1,0 +1,84 @@
+.frontier-toggle {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--frontier-spacing-2);
+
+  min-height: var(--frontier-control-size-medium);
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-4);
+
+  border: var(--frontier-border-width) solid transparent;
+  border-radius: var(--frontier-radius-full);
+  background: transparent;
+  color: var(--frontier-color-text);
+
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-sm);
+  font-weight: var(--frontier-font-weight-medium);
+  line-height: var(--frontier-line-height-normal);
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-toggle:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+.frontier-toggle:disabled,
+.frontier-toggle[data-disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+  color: var(--frontier-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.frontier-toggle--default:not([data-pressed]):hover:not(:disabled) {
+  background: var(--frontier-color-surface-hover);
+}
+
+.frontier-toggle--default[data-pressed] {
+  background: var(--frontier-color-secondary);
+  color: var(--frontier-color-on-secondary);
+}
+
+.frontier-toggle--outline {
+  border-color: var(--frontier-color-border-strong);
+}
+
+.frontier-toggle--outline:not([data-pressed]):hover:not(:disabled) {
+  background: var(--frontier-color-surface-hover);
+}
+
+.frontier-toggle--outline[data-pressed] {
+  background: var(--frontier-color-surface-active);
+}
+
+.frontier-toggle--small {
+  min-height: var(--frontier-control-size-small);
+  padding: var(--frontier-spacing-1) var(--frontier-spacing-3);
+  font-size: var(--frontier-font-size-xs);
+}
+
+.frontier-toggle--large {
+  min-height: var(--frontier-control-size-large);
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-6);
+  font-size: var(--frontier-font-size-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-toggle {
+    transition: none;
+  }
+}

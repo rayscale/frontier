@@ -1,0 +1,95 @@
+.frontier-empty {
+  --_empty-padding: var(--frontier-spacing-8);
+  --_empty-gap: var(--frontier-spacing-5);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--_empty-gap);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--_empty-padding);
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  text-align: center;
+}
+
+.frontier-empty--outline {
+  border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
+  border-radius: var(--frontier-radius-lg);
+}
+
+.frontier-empty--surface {
+  border-radius: var(--frontier-radius-lg);
+  background-color: var(--frontier-color-surface-sunken);
+}
+
+.frontier-empty--compact {
+  --_empty-padding: var(--frontier-spacing-4);
+  --_empty-gap: var(--frontier-spacing-3);
+}
+
+.frontier-empty--spacious {
+  --_empty-padding: var(--frontier-spacing-16);
+  --_empty-gap: var(--frontier-spacing-6);
+}
+
+.frontier-empty__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  max-width: 100%;
+}
+
+.frontier-empty__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.frontier-empty__media--icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  box-sizing: border-box;
+  border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
+  border-radius: var(--frontier-radius-md);
+  background-color: var(--frontier-color-surface-raised);
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-empty__media--icon > svg {
+  width: var(--frontier-spacing-5);
+  height: var(--frontier-spacing-5);
+  flex-shrink: 0;
+}
+
+.frontier-empty__title {
+  margin: 0;
+  color: var(--frontier-color-text);
+  font-size: var(--frontier-font-size-lg);
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-tight);
+  text-wrap: balance;
+}
+
+.frontier-empty__description {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+  text-wrap: balance;
+}
+
+.frontier-empty__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--frontier-spacing-2);
+  max-width: 100%;
+}

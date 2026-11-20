@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "bold",
+  "description": "Applies bold emphasis to text.",
+  "keywords": ["bold", "strong", "format"],
+  "categories": ["text"],
+  "aliases": [],
+  "useCases": ["format text"]
+}

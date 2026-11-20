@@ -1,58 +1,23 @@
-import type {
-  ButtonHTMLAttributes,
-  FocusEventHandler,
-  KeyboardEventHandler,
-  MouseEventHandler,
-  ReactNode,
-} from 'react'
+import type { HTMLMotionProps } from 'motion/react'
+import type { ReactNode } from 'react'
 
-export type TButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
+/** Visual appearance of the button. */
+export type TButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
 
-type TButtonBaseProps = Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  'aria-disabled' | 'children' | 'disabled' | 'onBlur' | 'onClick' | 'onKeyDown' | 'onKeyUp'
-> & {
-  asChild?: boolean
-  onBlur?: FocusEventHandler<HTMLElement>
-  onClick?: MouseEventHandler<HTMLElement>
-  onKeyDown?: KeyboardEventHandler<HTMLElement>
-  onKeyUp?: KeyboardEventHandler<HTMLElement>
+/** Available button sizes, including icon-only sizes. */
+export type TButtonSize = 'small' | 'medium' | 'large' | 'icon' | 'icon-small' | 'icon-large'
+
+/** Props for {@link Button}, including Motion props. */
+export type TButtonProps = Omit<HTMLMotionProps<'button'>, 'disabled' | 'children'> & {
+  [key: string]: unknown
+  /** Button content. Icon-only buttons need an accessible name. */
+  children?: ReactNode
+  /** Visual appearance. Defaults to `primary`. */
   variant?: TButtonVariant
+  /** Button size. Defaults to `medium`. */
+  size?: TButtonSize
+  /** Disables the button and its interaction animations. Defaults to `false`. */
+  disabled?: boolean
+  /** When true, renders the child element with button styles and interactions instead of a button element. */
+  asChild?: boolean
 }
-
-interface TButtonTextProps {
-  children: ReactNode
-  disabled?: false
-  disabledReason?: never
-  iconOnly?: false
-}
-
-interface TButtonDisabledTextProps {
-  children: ReactNode
-  disabled: true
-  disabledReason: string
-  iconOnly?: false
-}
-
-interface TButtonIconProps {
-  children: ReactNode
-  iconOnly: true
-  'aria-label': string
-  disabled?: false
-  disabledReason?: never
-  /** An icon-only action is never destructive: destructive actions keep visible text. */
-  variant?: Exclude<TButtonVariant, 'danger'>
-}
-
-interface TButtonDisabledIconProps {
-  children: ReactNode
-  disabled: true
-  disabledReason: string
-  iconOnly: true
-  'aria-label': string
-  /** An icon-only action is never destructive: destructive actions keep visible text. */
-  variant?: Exclude<TButtonVariant, 'danger'>
-}
-
-export type TButtonProps = TButtonBaseProps &
-  (TButtonTextProps | TButtonDisabledTextProps | TButtonIconProps | TButtonDisabledIconProps)

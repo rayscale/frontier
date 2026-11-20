@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "clock",
+  "description": "Represents time of day or duration.",
+  "keywords": ["clock", "time", "hour"],
+  "categories": ["time"],
+  "aliases": [],
+  "useCases": ["time picker"]
+}

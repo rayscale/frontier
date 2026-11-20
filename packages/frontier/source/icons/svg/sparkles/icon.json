@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "sparkles",
+  "description": "Marks something new or highlighted.",
+  "keywords": ["sparkles", "new", "magic"],
+  "categories": ["ui"],
+  "aliases": [],
+  "useCases": ["new feature"]
+}

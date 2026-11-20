@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "folder-open",
+  "description": "Represents an open folder or an empty collection.",
+  "keywords": ["folder", "open", "files"],
+  "categories": ["files"],
+  "aliases": [],
+  "useCases": ["empty folder"]
+}

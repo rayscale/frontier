@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { describe, expect, it, vi } from 'vitest'
@@ -6,111 +6,123 @@ import { describe, expect, it, vi } from 'vitest'
 import { Checkbox } from './index.js'
 
 describe('Checkbox', () => {
-  it('renders a checkbox named by its label', () => {
-    render(<Checkbox label="Send me updates" />)
+  it('renders an accessible native checkbox with its label', () => {
+    render(<Checkbox label="Accept terms" name="terms" value="accepted" />)
 
-    expect(screen.getByRole('checkbox', { name: 'Send me updates' })).toBeInTheDocument()
+    const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' })
+
+    expect(checkbox).toHaveAttribute('type', 'checkbox')
+    expect(checkbox).toHaveAttribute('name', 'terms')
+    expect(checkbox).toHaveAttribute('value', 'accepted')
   })
 
-  it('toggles when the visible label is clicked', async () => {
+  it('supports uncontrolled interaction and form submission', async () => {
     const user = userEvent.setup()
 
-    render(<Checkbox label="Send me updates" />)
+    render(
+      <form aria-label="Preferences">
+        <Checkbox label="Email updates" name="updates" value="yes" />
+      </form>,
+    )
 
-    const checkbox = screen.getByRole('checkbox', { name: 'Send me updates' })
+    const checkbox = screen.getByRole('checkbox', { name: 'Email updates' })
+    const form = document.querySelector('form')
 
     expect(checkbox).not.toBeChecked()
-
-    await user.click(screen.getByText('Send me updates'))
+    await user.click(screen.getByText('Email updates'))
 
     expect(checkbox).toBeChecked()
+    if (!form) {
+      throw new Error('Expected the checkbox to be rendered inside a form.')
+    }
+
+    expect(new FormData(form).get('updates')).toBe('yes')
   })
 
-  it('toggles with Space and with Enter', async () => {
-    const user = userEvent.setup()
-
-    render(<Checkbox label="Send me updates" />)
-
-    const checkbox = screen.getByRole('checkbox', { name: 'Send me updates' })
-
-    await user.tab()
-    expect(checkbox).toHaveFocus()
-
-    await user.keyboard('{Enter}')
-    expect(checkbox).toBeChecked()
-
-    await user.keyboard(' ')
-    expect(checkbox).not.toBeChecked()
-  })
-
-  it('reports the change once', async () => {
+  it('supports controlled checked state and change handlers', async () => {
     const user = userEvent.setup()
     const onChange = vi.fn()
 
-    render(<Checkbox label="Send me updates" onChange={onChange} />)
+    render(<Checkbox aria-label="Enable notifications" checked={false} onChange={onChange} />)
 
-    await user.click(screen.getByRole('checkbox', { name: 'Send me updates' }))
+    const checkbox = screen.getByRole('checkbox', {
+      name: 'Enable notifications',
+    })
+    await user.click(checkbox)
 
     expect(onChange).toHaveBeenCalledOnce()
+    expect(checkbox).not.toBeChecked()
   })
 
-  it('associates its description without changing the name', () => {
-    render(<Checkbox label="Send me updates" description="No more than one a week." />)
+  it('exposes the indeterminate state through the native checkbox', () => {
+    const { rerender } = render(<Checkbox aria-label="Select all items" indeterminate />)
+    const checkbox = screen.getByRole('checkbox', {
+      name: 'Select all items',
+    })
 
-    const checkbox = screen.getByRole('checkbox', { name: 'Send me updates' })
+    expect(checkbox).toHaveProperty('indeterminate', true)
+    expect(checkbox).toBePartiallyChecked()
+    expect(checkbox).not.toHaveAttribute('aria-checked')
 
-    expect(checkbox).toHaveAccessibleDescription('No more than one a week.')
+    rerender(<Checkbox aria-label="Select all items" />)
+
+    expect(checkbox).toHaveProperty('indeterminate', false)
+    expect(checkbox).not.toBePartiallyChecked()
   })
 
-  it('merges a given description with the helper text', () => {
+  it('supports disabled, required, and forwarded ref attributes', () => {
+    const ref = createRef<HTMLInputElement>()
+
+    render(<Checkbox ref={ref} label="Required choice" disabled required defaultChecked />)
+
+    const checkbox = screen.getByRole('checkbox', { name: 'Required choice' })
+
+    expect(checkbox).toBeDisabled()
+    expect(checkbox).toBeRequired()
+    expect(checkbox).toBeChecked()
+    expect(ref.current).toBe(checkbox)
+  })
+
+  it('associates descriptions and preserves existing described-by IDs', () => {
     render(
       <>
-        <span id="hint">Read the policy.</span>
+        <span id="external-description">Additional help</span>
         <Checkbox
-          label="Send me updates"
-          description="No more than one a week."
-          aria-describedby="hint"
+          label="Share profile"
+          aria-describedby="external-description"
+          description="Your profile will be visible to other members."
         />
       </>,
     )
 
-    expect(screen.getByRole('checkbox', { name: 'Send me updates' })).toHaveAccessibleDescription(
-      'Read the policy. No more than one a week.',
-    )
+    const checkbox = screen.getByRole('checkbox', { name: 'Share profile' })
+    const description = screen.getByText('Your profile will be visible to other members.')
+
+    expect(checkbox.getAttribute('aria-describedby')).toBe(`external-description ${description.id}`)
   })
 
-  it('keeps a disabled checkbox focusable, explains why, and ignores changes', async () => {
+  it('preserves keyboard focus and native input events', async () => {
     const user = userEvent.setup()
+    const onChange = vi.fn()
 
-    render(
-      <Checkbox
-        disabled
-        disabledReason="You need permission to change notifications."
-        label="Send me updates"
-      />,
-    )
-
-    const checkbox = screen.getByRole('checkbox', { name: 'Send me updates' })
-
-    expect(checkbox).toHaveAttribute('aria-disabled', 'true')
-    expect(checkbox).not.toBeDisabled()
-    expect(checkbox).toHaveAccessibleDescription('You need permission to change notifications.')
+    render(<Checkbox label="Keyboard option" onChange={onChange} />)
 
     await user.tab()
+    const checkbox = screen.getByRole('checkbox', { name: 'Keyboard option' })
     expect(checkbox).toHaveFocus()
 
-    await user.click(screen.getByText('Send me updates'))
-    await user.keyboard('{Enter}')
     await user.keyboard(' ')
 
-    expect(checkbox).not.toBeChecked()
+    expect(checkbox).toBeChecked()
+    expect(onChange).toHaveBeenCalledOnce()
   })
 
-  it('forwards a ref to the input', () => {
-    const ref = createRef<HTMLInputElement>()
+  it('forwards native change events', () => {
+    const onChange = vi.fn()
+    render(<Checkbox aria-label="Changeable" onChange={onChange} />)
 
-    render(<Checkbox ref={ref} label="Send me updates" />)
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Changeable' }))
 
-    expect(ref.current?.type).toBe('checkbox')
+    expect(onChange).toHaveBeenCalledOnce()
   })
 })

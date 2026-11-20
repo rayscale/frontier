@@ -1,0 +1,159 @@
+.frontier-progress {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: var(--_progress-thickness);
+  overflow: hidden;
+  border-radius: var(--frontier-radius-full);
+  background: var(--_progress-track-color, var(--frontier-color-border));
+}
+.frontier-progress--linear.frontier-progress--small {
+  --_progress-thickness: var(--frontier-spacing-1);
+}
+
+.frontier-progress--linear.frontier-progress--medium {
+  --_progress-thickness: var(--frontier-spacing-2);
+}
+
+.frontier-progress--linear.frontier-progress--large {
+  --_progress-thickness: var(--frontier-spacing-3);
+}
+.frontier-progress__indicator {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  border-radius: inherit;
+  background: var(--_progress-color, var(--frontier-color-primary));
+  transform: translateX(calc(var(--_progress-value, 0%) - 100%));
+  transition: transform var(--frontier-duration-slow) var(--frontier-easing-standard);
+}
+.frontier-progress--linear.frontier-progress--indeterminate .frontier-progress__indicator {
+  inline-size: 40%;
+  transform: translateX(75%);
+  transition: none;
+}
+
+.frontier-progress--linear.frontier-progress--smooth.frontier-progress--indeterminate
+  .frontier-progress__indicator {
+  animation: frontier-progress-indeterminate calc(var(--frontier-duration-slow) * 2)
+    var(--frontier-easing-standard) infinite;
+}
+
+.frontier-progress--linear.frontier-progress--none .frontier-progress__indicator {
+  transition: none;
+}
+
+@keyframes frontier-progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(250%);
+  }
+}
+.frontier-progress--circular {
+  --_progress-diameter: var(--frontier-spacing-6);
+  --_progress-thickness: var(--frontier-spacing-1);
+  --_progress-radius: calc((var(--_progress-diameter) - var(--_progress-thickness)) / 2);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--_progress-diameter);
+  block-size: var(--_progress-diameter);
+  max-inline-size: 100%;
+  flex-shrink: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+}
+.frontier-progress--circular.frontier-progress--small {
+  --_progress-diameter: var(--frontier-spacing-4);
+  --_progress-thickness: 3px;
+}
+
+.frontier-progress--circular.frontier-progress--medium {
+  --_progress-diameter: var(--frontier-spacing-6);
+  --_progress-thickness: var(--frontier-spacing-1);
+}
+
+.frontier-progress--circular.frontier-progress--large {
+  --_progress-diameter: var(--frontier-spacing-8);
+  --_progress-thickness: var(--frontier-spacing-1);
+}
+.frontier-progress__svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.frontier-progress__track,
+.frontier-progress__arc {
+  cx: calc(var(--_progress-diameter) / 2);
+  cy: calc(var(--_progress-diameter) / 2);
+  r: var(--_progress-radius);
+  fill: none;
+  stroke-width: var(--_progress-thickness);
+}
+
+.frontier-progress__track {
+  stroke: var(--_progress-track-color, var(--frontier-color-border));
+}
+.frontier-progress__arc {
+  stroke: var(--_progress-color, var(--frontier-color-primary));
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--_progress-percent, 0));
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset var(--frontier-duration-slow) var(--frontier-easing-standard);
+}
+.frontier-progress--circular.frontier-progress--small .frontier-progress__arc {
+  stroke-linecap: butt;
+}
+.frontier-progress--circular.frontier-progress--indeterminate .frontier-progress__arc {
+  stroke-dasharray: 30 70;
+  stroke-dashoffset: 0;
+  transition: none;
+}
+
+.frontier-progress--circular.frontier-progress--smooth.frontier-progress--indeterminate
+  .frontier-progress__svg {
+  animation: frontier-progress-spin calc(var(--frontier-duration-slow) * 2) linear infinite;
+}
+
+.frontier-progress--circular.frontier-progress--none .frontier-progress__arc {
+  transition: none;
+}
+
+@keyframes frontier-progress-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frontier-progress__indicator,
+  .frontier-progress__arc {
+    transition: none;
+  }
+
+  .frontier-progress--linear.frontier-progress--smooth.frontier-progress--indeterminate
+    .frontier-progress__indicator,
+  .frontier-progress--circular.frontier-progress--smooth.frontier-progress--indeterminate
+    .frontier-progress__svg {
+    animation: none;
+  }
+}

@@ -1,19 +1,28 @@
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
-import { RadioGroupItem } from './parts/radio-group-item.js'
-import { RadioGroupRoot } from './parts/radio-group-root.js'
+import { RadioGroupItem } from './parts/item.js'
+import { RadioGroupRoot } from './parts/root.js'
 import type { TRadioGroupProps } from './types.js'
 
 import './radio-group.css'
 
+export { RadioGroupItem }
+
+export type {
+  TRadioGroupItemProps,
+  TRadioGroupOrientation,
+  TRadioGroupProps,
+  TRadioGroupSize,
+} from './types.js'
+
 export interface TRadioGroupComponent extends ForwardRefExoticComponent<
   TRadioGroupProps & RefAttributes<HTMLFieldSetElement>
 > {
-  /** Renders one option in the group. Its `value` is what the group selects and submits. */
+  /** Renders a native radio option within the group. */
   Item: typeof RadioGroupItem
 }
 
-/** Collects one value out of several, with a group label and native radio options. */
+/** Compound radio group: `RadioGroup` is the root and `RadioGroup.Item` its options. */
 export const RadioGroup: TRadioGroupComponent = Object.assign(RadioGroupRoot, {
   Item: RadioGroupItem,
 })

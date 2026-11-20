@@ -1,0 +1,23 @@
+.frontier-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--frontier-spacing-1);
+  min-width: var(--frontier-spacing-5);
+  height: var(--frontier-spacing-5);
+  padding-inline: var(--frontier-spacing-1);
+  border: none;
+  border-radius: var(--frontier-radius-xs);
+  background: var(--frontier-color-surface-hover);
+  color: var(--frontier-color-text-muted);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-xs);
+  font-weight: var(--frontier-font-weight-medium);
+  line-height: 1;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  box-shadow: none;
+  user-select: none;
+  pointer-events: none;
+}

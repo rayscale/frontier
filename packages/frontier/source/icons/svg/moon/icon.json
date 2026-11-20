@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "moon",
+  "description": "Represents the dark theme or night.",
+  "keywords": ["moon", "dark", "night"],
+  "categories": ["theme"],
+  "aliases": [],
+  "useCases": ["dark theme"]
+}

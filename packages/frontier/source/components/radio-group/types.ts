@@ -1,72 +1,47 @@
 import type { FieldsetHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react'
 
-/** Direction in which the radio options are laid out. */
-export type TRadioGroupOrientation = 'vertical' | 'horizontal'
+/** Available sizes for a radio group. */
+export type TRadioGroupSize = 'small' | 'medium' | 'large'
 
-type TRadioGroupBaseProps = Omit<
+/** Direction in which the radio options are laid out. */
+export type TRadioGroupOrientation = 'horizontal' | 'vertical'
+
+/** Props for a radio group. Use `value` with `onValueChange` for controlled state or `defaultValue` for uncontrolled state. */
+export type TRadioGroupProps = Omit<
   FieldsetHTMLAttributes<HTMLFieldSetElement>,
-  'children' | 'disabled' | 'name' | 'onChange'
+  'defaultValue' | 'name' | 'onChange' | 'value'
 > & {
-  children: ReactNode
-  /** Visible group name, rendered as the fieldset legend. */
+  /** Shared form name for every radio in the group. Generated when omitted. */
+  name?: string
+  /** Visible group label, rendered as the fieldset legend. */
   label?: ReactNode
-  /** Helper text announced as the description of the group. */
+  /** Helper text associated with the group for assistive technologies. */
   description?: ReactNode
-  /** Error message associated with the group; also marks it invalid. */
-  error?: ReactNode
-  /** Marks the group invalid even when no error is displayed. */
-  invalid?: boolean
-  /** Initial selection when the group is uncontrolled. */
+  /** TValue selected initially when the group is uncontrolled. */
   defaultValue?: string
   /** Selected value when the group is controlled. */
   value?: string
-  /** Called with the newly selected value when the selection changes. */
+  /** Called with the newly selected value when the user changes the selection. */
   onValueChange?: (value: string) => void
-  /** Shared form name for every option. Generated when omitted. */
-  name?: string
-  /** Requires one option to be selected. */
+  /** Disables every option in the group. Defaults to `false`. */
+  disabled?: boolean
+  /** Requires one option to be selected before form submission. Defaults to `false`. */
   required?: boolean
-  /** Layout direction of the options. Defaults to vertical. */
+  /** TLayout direction of the options. Defaults to `vertical`. */
   orientation?: TRadioGroupOrientation
+  /** Visual size of the options. Defaults to `medium`. */
+  size?: TRadioGroupSize
 }
 
-interface TRadioGroupEnabledProps {
-  disabled?: false
-  disabledReason?: never
-}
-
-interface TRadioGroupDisabledProps {
-  disabled: true
-  /** Explains why the group is unavailable. It replaces the description. */
-  disabledReason: string
-}
-
-export type TRadioGroupProps = TRadioGroupBaseProps &
-  (TRadioGroupEnabledProps | TRadioGroupDisabledProps)
-
-type TRadioGroupItemBaseProps = Omit<
+/** Props for a single radio option within a `RadioGroup`. */
+export type TRadioGroupItemProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'checked' | 'defaultChecked' | 'disabled' | 'name' | 'required' | 'type' | 'value'
+  'checked' | 'defaultChecked' | 'name' | 'size' | 'type'
 > & {
-  /** Value submitted with the form when this option is selected. */
+  /** TValue submitted with the form when this option is selected. */
   value: string
-  /** Visible name of the option. It is also the accessible name. */
-  label: ReactNode
-  /** Helper text announced as the description of the option. */
+  /** Visible label associated with the option. */
+  label?: ReactNode
+  /** Helper text associated with the option for assistive technologies. */
   description?: ReactNode
 }
-
-interface TRadioGroupItemEnabledProps {
-  disabled?: false
-  disabledReason?: never
-}
-
-interface TRadioGroupItemDisabledProps {
-  /** Disables this option only. */
-  disabled: true
-  /** Explains why the option is unavailable. It replaces the description. */
-  disabledReason: string
-}
-
-export type TRadioGroupItemProps = TRadioGroupItemBaseProps &
-  (TRadioGroupItemEnabledProps | TRadioGroupItemDisabledProps)

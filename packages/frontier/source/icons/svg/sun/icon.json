@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "sun",
+  "description": "Represents the light theme or day.",
+  "keywords": ["sun", "light", "day"],
+  "categories": ["theme"],
+  "aliases": [],
+  "useCases": ["light theme"]
+}

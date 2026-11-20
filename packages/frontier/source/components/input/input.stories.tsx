@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { Input, Search, X } from '../../index.js'
+import { AtSign, Search, X } from '../../icons/index.js'
+import { Button } from '../button/button.js'
+
+import { Input } from './input.js'
 
 function ClearableSearchExample() {
-  const [value, setValue] = useState('Frontier')
+  const [value, setValue] = useState('One')
 
   return (
     <Input
@@ -13,24 +16,18 @@ function ClearableSearchExample() {
       onChange={(event) => {
         setValue(event.target.value)
       }}
-      leadingIcon={<Search size={20} />}
+      leadingIcon={<Search />}
       trailingIcon={
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="icon-small"
           aria-label="Clear search"
           onClick={() => {
             setValue('')
           }}
-          style={{
-            padding: 0,
-            border: 0,
-            background: 'transparent',
-            color: 'inherit',
-            cursor: 'pointer',
-          }}
         >
-          <X size={20} />
-        </button>
+          <X aria-hidden="true" />
+        </Button>
       }
       trailingIconInteractive
     />
@@ -43,21 +40,16 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    docs: {
-      description: {
-        component:
-          'Collects a single line of text with an optional label, description, error, and leading or trailing content.',
-      },
-    },
   },
   args: {
-    label: 'Email',
+    label: 'Email address',
     placeholder: 'you@example.com',
+    description: 'We will only use this to contact you.',
   },
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'email', 'password', 'search', 'number', 'tel', 'url'],
+      options: ['text', 'email', 'password', 'search', 'number', 'tel', 'url', 'date'],
     },
     leadingIcon: { control: false },
     trailingIcon: { control: false },
@@ -71,101 +63,141 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
-  name: 'Default',
   parameters: {
     docs: {
       description: {
-        story: 'Shows a labeled text input.',
+        story: 'The default text input field with label and description.',
       },
     },
-  },
-}
-
-export const Description: TStory = {
-  name: 'Description',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Adds helper text under the box.',
-      },
-    },
-  },
-  args: {
-    description: 'We only use this to contact you.',
-  },
-}
-
-export const Error: TStory = {
-  name: 'Error',
-  parameters: {
-    docs: {
-      description: {
-        story: 'An error message marks the input invalid and is announced.',
-      },
-    },
-  },
-  args: {
-    defaultValue: 'not-an-email',
-    error: 'Enter a valid email.',
-  },
-}
-
-export const Disabled: TStory = {
-  name: 'Disabled',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Keeps the input focusable and read-only, and shows why it is unavailable.',
-      },
-    },
-  },
-  args: {
-    defaultValue: 'alex@example.com',
-    disabled: true,
-    disabledReason: 'Your plan does not include email.',
-  },
-}
-
-export const ReadOnly: TStory = {
-  name: 'Read only',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Keeps the value focusable and selectable without editing.',
-      },
-    },
-  },
-  args: {
-    defaultValue: 'alex@example.com',
-    readOnly: true,
   },
 }
 
 export const Icons: TStory = {
-  name: 'Icons',
   parameters: {
     docs: {
       description: {
-        story: 'Shows decorative leading and trailing content.',
+        story: 'Inputs support leading and trailing decorative icons.',
       },
     },
   },
   args: {
     label: 'Search',
     placeholder: 'Search your projects',
-    leadingIcon: <Search size={20} />,
-    trailingIcon: <X size={20} />,
+    description: undefined,
+    leadingIcon: <Search aria-hidden="true" />,
+    trailingIcon: <AtSign aria-hidden="true" />,
   },
 }
 
 export const Clearable: TStory = {
-  name: 'Clearable',
   parameters: {
     docs: {
       description: {
-        story: 'Shows an interactive trailing control that clears the value.',
+        story: 'Inputs support interactive trailing controls such as clear buttons.',
       },
     },
   },
   render: () => <ClearableSearchExample />,
+}
+
+export const Invalid: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support invalid error states and inline error messages.',
+      },
+    },
+  },
+  args: {
+    label: 'Email address',
+    defaultValue: 'not-an-email',
+    invalid: true,
+    error: 'Enter a valid email address.',
+    description: undefined,
+  },
+}
+
+export const Disabled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs can be disabled to prevent user interaction.',
+      },
+    },
+  },
+  args: {
+    label: 'Email address',
+    defaultValue: 'alex@example.com',
+    disabled: true,
+  },
+}
+
+export const ReadOnly: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support read-only mode for fixed values.',
+      },
+    },
+  },
+  args: {
+    label: 'Account ID',
+    value: 'usr_12345',
+    readOnly: true,
+    description: 'This value cannot be changed.',
+  },
+}
+
+export const Types: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Inputs support various native HTML types such as email, password, search, number, and date.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gap: '24px', maxWidth: '24rem' }}>
+      <Input label="Email" type="email" placeholder="you@example.com" />
+      <Input label="Password" type="password" autoComplete="current-password" />
+      <Input label="Search" type="search" placeholder="Search projects" />
+      <Input label="Quantity" type="number" min={1} max={10} defaultValue={1} />
+      <Input label="Start date" type="date" />
+    </div>
+  ),
+}
+
+export const File: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Inputs support file selection mode.',
+      },
+    },
+  },
+  args: {
+    label: 'Profile photo',
+    type: 'file',
+    accept: 'image/*',
+    description: 'Choose an image file to upload.',
+  },
+}
+
+export const States: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A comparison view of default, disabled, read-only, and invalid input states.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gap: '24px', maxWidth: '24rem' }}>
+      <Input label="Default" placeholder="Enter a value" />
+      <Input label="Disabled" placeholder="Unavailable" disabled />
+      <Input label="Read only" value="Locked value" readOnly />
+      <Input label="Invalid" value="Incorrect value" error="Please check this value." />
+    </div>
+  ),
 }

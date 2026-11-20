@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "loader-circle",
+  "description": "Shows that work is in progress.",
+  "keywords": ["loader", "spinner", "loading"],
+  "categories": ["status"],
+  "aliases": [],
+  "useCases": ["loading indicator"]
+}

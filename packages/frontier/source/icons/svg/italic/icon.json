@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "italic",
+  "description": "Applies italic emphasis to text.",
+  "keywords": ["italic", "slant", "format"],
+  "categories": ["text"],
+  "aliases": [],
+  "useCases": ["format text"]
+}

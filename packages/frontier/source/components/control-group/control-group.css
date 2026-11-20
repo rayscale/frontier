@@ -1,0 +1,165 @@
+.frontier-control-group {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.frontier-control-group[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+.frontier-control-group > .frontier-button--outline {
+  background: var(--frontier-color-surface);
+}
+
+.frontier-control-group
+  > :is(
+    .frontier-button,
+    .frontier-select__trigger,
+    .frontier-field,
+    .frontier-control-group__text
+  ) {
+  position: relative;
+  min-width: 0;
+  border-radius: 0;
+}
+.frontier-control-group[data-orientation='horizontal']
+  > :is(
+    .frontier-button,
+    .frontier-select__trigger,
+    .frontier-field,
+    .frontier-control-group__text
+  ):not(:first-child) {
+  margin-inline-start: calc(0px - var(--frontier-border-width));
+}
+
+.frontier-control-group[data-orientation='vertical']
+  > :is(
+    .frontier-button,
+    .frontier-select__trigger,
+    .frontier-field,
+    .frontier-control-group__text
+  ):not(:first-child) {
+  margin-block-start: calc(0px - var(--frontier-border-width));
+}
+
+.frontier-control-group[data-orientation='horizontal'] > .frontier-field {
+  flex: 1 1 0;
+  width: auto;
+}
+
+.frontier-control-group > .frontier-select__trigger {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.frontier-control-group > .frontier-field .frontier-field__box {
+  border-radius: 0;
+}
+
+.frontier-control-group
+  > :is(
+    .frontier-button,
+    .frontier-select__trigger,
+    .frontier-field,
+    .frontier-control-group__text
+  ):focus-visible,
+.frontier-control-group > .frontier-field:focus-within {
+  z-index: 1;
+}
+
+.frontier-control-group[data-orientation='horizontal']
+  > :is(.frontier-button, .frontier-select__trigger, .frontier-control-group__text):first-child,
+.frontier-control-group[data-orientation='horizontal']
+  > .frontier-field:first-child
+  .frontier-field__box {
+  border-start-start-radius: var(--frontier-radius-lg);
+  border-end-start-radius: var(--frontier-radius-lg);
+}
+
+.frontier-control-group[data-orientation='horizontal']
+  > :is(.frontier-button, .frontier-select__trigger, .frontier-control-group__text):not(
+    :has(
+      ~ :is(
+        .frontier-button,
+        .frontier-select__trigger,
+        .frontier-field,
+        .frontier-control-group__text
+      )
+    )
+  ),
+.frontier-control-group[data-orientation='horizontal']
+  > .frontier-field:not(
+    :has(
+      ~ :is(
+        .frontier-button,
+        .frontier-select__trigger,
+        .frontier-field,
+        .frontier-control-group__text
+      )
+    )
+  )
+  .frontier-field__box {
+  border-start-end-radius: var(--frontier-radius-lg);
+  border-end-end-radius: var(--frontier-radius-lg);
+}
+
+.frontier-control-group[data-orientation='vertical']
+  > :is(.frontier-button, .frontier-select__trigger, .frontier-control-group__text):first-child,
+.frontier-control-group[data-orientation='vertical']
+  > .frontier-field:first-child
+  .frontier-field__box {
+  border-start-start-radius: var(--frontier-radius-lg);
+  border-start-end-radius: var(--frontier-radius-lg);
+}
+
+.frontier-control-group[data-orientation='vertical']
+  > :is(.frontier-button, .frontier-select__trigger, .frontier-control-group__text):not(
+    :has(
+      ~ :is(
+        .frontier-button,
+        .frontier-select__trigger,
+        .frontier-field,
+        .frontier-control-group__text
+      )
+    )
+  ),
+.frontier-control-group[data-orientation='vertical']
+  > .frontier-field:not(
+    :has(
+      ~ :is(
+        .frontier-button,
+        .frontier-select__trigger,
+        .frontier-field,
+        .frontier-control-group__text
+      )
+    )
+  )
+  .frontier-field__box {
+  border-end-start-radius: var(--frontier-radius-lg);
+  border-end-end-radius: var(--frontier-radius-lg);
+}
+
+.frontier-control-group__text {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--frontier-control-size-large);
+  padding-inline: var(--frontier-spacing-3);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  background: var(--frontier-color-surface-sunken);
+  color: var(--frontier-color-text-muted);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+  white-space: nowrap;
+}
+
+.frontier-control-group > .frontier-control-group {
+  margin-inline-start: var(--frontier-spacing-2);
+}
+
+.frontier-control-group[data-orientation='vertical'] > .frontier-control-group {
+  margin-inline-start: 0;
+  margin-block-start: var(--frontier-spacing-2);
+}

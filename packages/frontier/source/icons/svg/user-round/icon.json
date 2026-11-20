@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "user-round",
+  "description": "Represents a person or an account.",
+  "keywords": ["user", "person", "account"],
+  "categories": ["people"],
+  "aliases": [],
+  "useCases": ["profile", "avatar fallback"]
+}

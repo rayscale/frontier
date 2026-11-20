@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "at-sign",
+  "description": "Marks an email address or a mention.",
+  "keywords": ["at", "email", "mention"],
+  "categories": ["communication"],
+  "aliases": [],
+  "useCases": ["email address", "mention"]
+}

@@ -1,0 +1,24 @@
+.frontier-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-3);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-fieldset__legend {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: var(--frontier-font-size-sm);
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-normal);
+}
+
+.frontier-fieldset[data-disabled] .frontier-fieldset__legend {
+  color: var(--frontier-color-on-disabled);
+}

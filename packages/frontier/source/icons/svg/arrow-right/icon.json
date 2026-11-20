@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "arrow-right",
+  "description": "Points forward or to the next destination.",
+  "keywords": ["arrow", "right", "next", "forward"],
+  "categories": ["arrows", "ui"],
+  "aliases": [],
+  "useCases": ["next", "go forward"]
+}

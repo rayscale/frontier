@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "circle",
+  "description": "Represents an empty marker or a radio.",
+  "keywords": ["circle", "dot", "radio"],
+  "categories": ["shapes"],
+  "aliases": [],
+  "useCases": ["radio marker"]
+}

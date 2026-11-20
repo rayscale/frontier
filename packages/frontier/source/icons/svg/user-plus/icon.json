@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "user-plus",
+  "description": "Adds a person.",
+  "keywords": ["user", "add", "invite"],
+  "categories": ["people"],
+  "aliases": [],
+  "useCases": ["invite user"]
+}

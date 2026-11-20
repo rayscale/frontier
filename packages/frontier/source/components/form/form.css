@@ -1,0 +1,9 @@
+.frontier-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-3);
+}
+
+.frontier-form > .frontier-button {
+  align-self: flex-start;
+}

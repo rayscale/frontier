@@ -1,0 +1,92 @@
+.frontier-callout {
+  --_callout-accent: var(--frontier-color-info);
+  --_callout-background: var(--frontier-color-info-subtle);
+  --_callout-border: var(--frontier-color-info-border);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--frontier-spacing-3);
+  box-sizing: border-box;
+  padding: var(--frontier-spacing-3) var(--frontier-spacing-4);
+  border: var(--frontier-border-width-subtle) solid var(--_callout-border);
+  border-inline-start: var(--frontier-border-width) solid var(--_callout-accent);
+  border-radius: var(--frontier-radius-md);
+  background-color: var(--_callout-background);
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+}
+
+.frontier-callout[data-tone='success'] {
+  --_callout-accent: var(--frontier-color-success);
+  --_callout-background: var(--frontier-color-success-subtle);
+  --_callout-border: var(--frontier-color-success-border);
+}
+
+.frontier-callout[data-tone='warning'] {
+  --_callout-accent: var(--frontier-color-warning);
+  --_callout-background: var(--frontier-color-warning-subtle);
+  --_callout-border: var(--frontier-color-warning-border);
+}
+
+.frontier-callout[data-tone='danger'] {
+  --_callout-accent: var(--frontier-color-danger);
+  --_callout-background: var(--frontier-color-danger-subtle);
+  --_callout-border: var(--frontier-color-danger-border);
+}
+
+.frontier-callout__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: 0.1em;
+  color: var(--_callout-accent);
+}
+
+.frontier-callout__icon > svg {
+  width: var(--frontier-spacing-5);
+  height: var(--frontier-spacing-5);
+}
+
+.frontier-callout__content {
+  display: flex;
+  flex: 1 1 12rem;
+  flex-direction: column;
+  gap: var(--frontier-spacing-1);
+  min-width: 0;
+}
+
+.frontier-callout__title {
+  margin: 0;
+  color: var(--frontier-color-text);
+  font-size: inherit;
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-tight);
+}
+
+.frontier-callout__content > :where(p, ul, ol) {
+  margin: 0;
+}
+
+.frontier-callout__content > :where(ul, ol) {
+  padding-inline-start: var(--frontier-spacing-5);
+}
+
+.frontier-callout__actions {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  margin-inline-start: auto;
+}
+
+@media (max-width: 40rem) {
+  .frontier-callout__actions {
+    flex-basis: 100%;
+    margin-inline-start: calc(var(--frontier-spacing-5) + var(--frontier-spacing-3));
+  }
+}

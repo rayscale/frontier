@@ -1,0 +1,81 @@
+.frontier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--frontier-spacing-1);
+  border: var(--frontier-border-width) solid transparent;
+  border-radius: var(--frontier-radius-full);
+  font-family: var(--frontier-font-family);
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-tight);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.frontier-badge--small {
+  padding: 0.125rem var(--frontier-spacing-2);
+  font-size: var(--frontier-font-size-xs);
+}
+
+.frontier-badge--medium {
+  padding: 0.125rem var(--frontier-spacing-3);
+  font-size: var(--frontier-font-size-sm);
+}
+
+.frontier-badge > :where(svg) {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+}
+
+.frontier-badge--default {
+  background: var(--frontier-color-primary);
+  color: var(--frontier-color-on-primary);
+}
+
+.frontier-badge--secondary {
+  background: var(--frontier-color-secondary);
+  color: var(--frontier-color-on-secondary);
+}
+
+.frontier-badge--outline {
+  border-color: var(--frontier-color-border-strong);
+  background: var(--frontier-color-surface);
+  color: var(--frontier-color-text);
+}
+
+.frontier-badge--success {
+  border-color: var(--frontier-color-success-border);
+  background: var(--frontier-color-success-subtle);
+  color: var(--frontier-color-success);
+}
+
+.frontier-badge--warning {
+  border-color: var(--frontier-color-warning-border);
+  background: var(--frontier-color-warning-subtle);
+  color: var(--frontier-color-warning);
+}
+
+.frontier-badge--danger {
+  border-color: var(--frontier-color-danger-border);
+  background: var(--frontier-color-danger-subtle);
+  color: var(--frontier-color-danger);
+}
+
+.frontier-badge__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.frontier-badge--info {
+  border-color: var(--frontier-color-info-border);
+  background: var(--frontier-color-info-subtle);
+  color: var(--frontier-color-info);
+}

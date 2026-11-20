@@ -1,224 +1,105 @@
+import { motion, useReducedMotion } from 'motion/react'
 import {
-  cloneElement,
-  type FocusEvent,
-  forwardRef,
-  Fragment,
+  Children,
+  type ElementType,
   isValidElement,
-  type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
-  type Ref,
-  useId,
-  useState,
 } from 'react'
 
-import { classNames } from '../../internal/helpers/class-names.js'
-import { Tooltip } from '../tooltip/index.js'
+import { springInteractive } from '../../styles/motion.js'
 
+import { getMotionComponent } from './helpers/motion.js'
 import type { TButtonProps } from './types.js'
 
 import './button.css'
 
-function mergeRefs<TNode>(...refs: (Ref<TNode> | undefined)[]): Ref<TNode> {
-  return (value) => {
-    for (const ref of refs) {
-      if (typeof ref === 'function') {
-        ref(value)
-      } else if (ref) {
-        ref.current = value
-      }
-    }
-  }
-}
+export type { TButtonProps, TButtonSize, TButtonVariant } from './types.js'
 
-export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(props, forwardedRef) {
-  const {
-    asChild = false,
-    children,
-    className,
-    disabled = false,
-    disabledReason,
-    iconOnly = false,
-    onBlur,
-    onClick,
-    onKeyDown,
-    onKeyUp,
-    title,
-    type = 'button',
-    variant = 'primary',
-    'aria-describedby': ariaDescribedBy,
-    'aria-label': ariaLabel,
-    ...rest
-  } = props
+/**
+ * Renders a native button with optional hover and press animations. Respects
+ * reduced-motion preferences and defaults `type` to `button`.
+ */
+export function Button({
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  asChild = false,
+  className,
+  children,
+  whileHover,
+  whileTap,
+  transition,
+  type = 'button',
+  ...props
+}: TButtonProps): ReactElement {
+  const reduceMotion = useReducedMotion()
+  const motionDisabled = disabled || reduceMotion
 
-  const reasonId = useId()
-  const [keyPressed, setKeyPressed] = useState(false)
-  const unavailable = disabled
-  const classes = classNames(
+  const classes = [
     'frontier-button',
     `frontier-button--${variant}`,
-    iconOnly && 'frontier-button--icon',
+    `frontier-button--${size}`,
     className,
-  )
-  const describedBy =
-    [ariaDescribedBy, unavailable && disabledReason ? reasonId : undefined]
-      .filter(Boolean)
-      .join(' ') || undefined
-  const reason =
-    unavailable && disabledReason ? (
-      <span className="frontier-button__reason" id={reasonId}>
-        {disabledReason}
-      </span>
-    ) : null
+  ]
+    .filter(Boolean)
+    .join(' ')
 
-  const handleClick = (event: MouseEvent<HTMLElement>): void => {
-    if (unavailable) {
-      event.preventDefault()
-      event.stopPropagation()
-
-      return
-    }
-
-    onClick?.(event)
-  }
-
-  const isPressKey = (event: KeyboardEvent<HTMLElement>): boolean =>
-    event.key === 'Enter' || event.key === ' '
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLElement>): void => {
-    if (!unavailable && isPressKey(event)) {
-      setKeyPressed(true)
-    }
-
-    onKeyDown?.(event)
-  }
-
-  const handleKeyUp = (event: KeyboardEvent<HTMLElement>): void => {
-    if (isPressKey(event)) {
-      setKeyPressed(false)
-    }
-
-    onKeyUp?.(event)
-  }
-
-  const handleBlur = (event: FocusEvent<HTMLElement>): void => {
-    setKeyPressed(false)
-    onBlur?.(event)
-  }
-
-  if (asChild) {
-    if (!isValidElement(children) || children.type === Fragment) {
-      throw new Error('Button asChild requires a single React element as children.')
-    }
-
-    const child = children as ReactElement<{ [key: string]: unknown }> & {
-      ref?: Ref<HTMLElement>
-    }
+  if (asChild && isValidElement(children)) {
+    const child = Children.only(children) as ReactElement<{ [key: string]: unknown }>
+    const MotionComponent = getMotionComponent(child.type as ElementType)
     const childProps = child.props
-    const childClassName =
-      typeof childProps.className === 'string' ? childProps.className : undefined
-    const childOnClick =
-      typeof childProps.onClick === 'function'
-        ? (childProps.onClick as (event: MouseEvent<HTMLElement>) => void)
-        : undefined
-    const childDescribedBy =
-      typeof childProps['aria-describedby'] === 'string'
-        ? childProps['aria-describedby']
-        : undefined
-    const childTitle = typeof childProps.title === 'string' ? childProps.title : undefined
-    const childOnBlur =
-      typeof childProps.onBlur === 'function'
-        ? (childProps.onBlur as (event: FocusEvent<HTMLElement>) => void)
-        : undefined
-    const childOnKeyDown =
-      typeof childProps.onKeyDown === 'function'
-        ? (childProps.onKeyDown as (event: KeyboardEvent<HTMLElement>) => void)
-        : undefined
-    const childOnKeyUp =
-      typeof childProps.onKeyUp === 'function'
-        ? (childProps.onKeyUp as (event: KeyboardEvent<HTMLElement>) => void)
-        : undefined
-    const childAriaLabel =
-      typeof childProps['aria-label'] === 'string' ? childProps['aria-label'] : undefined
-    const mergedDescribedBy = [childDescribedBy, describedBy].filter(Boolean).join(' ') || undefined
-    const mergedTitle = childTitle ?? title
-    const mergedAriaLabel = childAriaLabel ?? ariaLabel
 
-    const control = cloneElement(child, {
-      ...rest,
-      ...childProps,
-      ref: mergeRefs(forwardedRef, child.ref),
-      className: classNames(classes, childClassName),
-      'aria-disabled': unavailable ? true : childProps['aria-disabled'],
-      'aria-describedby': mergedDescribedBy,
-      'aria-label': mergedAriaLabel,
-      'data-pressed': keyPressed ? 'key' : undefined,
-      title: mergedTitle,
-      onBlur: (event: FocusEvent<HTMLElement>) => {
-        handleBlur(event)
-        childOnBlur?.(event)
-      },
-      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
-        handleKeyDown(event)
-        childOnKeyDown?.(event)
-      },
-      onKeyUp: (event: KeyboardEvent<HTMLElement>) => {
-        handleKeyUp(event)
-        childOnKeyUp?.(event)
-      },
-      onClick: (event: MouseEvent<HTMLElement>) => {
-        if (unavailable) {
-          event.preventDefault()
-          event.stopPropagation()
+    const mergedClassName = [classes, childProps.className as string | undefined]
+      .filter(Boolean)
+      .join(' ')
 
-          return
-        }
+    const handleChildClick = childProps.onClick as ((event: MouseEvent) => void) | undefined
+    const handlePropsClick = (props as { onClick?: (event: MouseEvent) => void }).onClick
 
-        childOnClick?.(event)
-        onClick?.(event)
-      },
-      children: (
-        <span className="frontier-button__content">{childProps.children as ReactNode}</span>
-      ),
-    })
+    const motionAndHtmlProps = { ...props }
+    delete motionAndHtmlProps.variant
+    delete motionAndHtmlProps.size
+    delete motionAndHtmlProps.asChild
+    delete motionAndHtmlProps.disabled
+    delete motionAndHtmlProps.type
+    delete motionAndHtmlProps.children
+    delete motionAndHtmlProps.className
+
+    const Component = MotionComponent
 
     return (
-      <>
-        {iconOnly && mergedAriaLabel ? (
-          <Tooltip content={mergedAriaLabel}>{control}</Tooltip>
-        ) : (
-          control
-        )}
-        {reason}
-      </>
+      <Component
+        {...motionAndHtmlProps}
+        {...childProps}
+        aria-disabled={disabled ? true : (childProps['aria-disabled'] as boolean | undefined)}
+        className={mergedClassName}
+        whileHover={motionDisabled ? undefined : (whileHover ?? { scale: 1.03 })}
+        whileTap={motionDisabled ? undefined : (whileTap ?? { scale: 0.97 })}
+        transition={transition ?? springInteractive}
+        onClick={(event: MouseEvent) => {
+          handleChildClick?.(event)
+          handlePropsClick?.(event)
+        }}
+      >
+        <span className="frontier-button__content">{childProps.children as ReactNode}</span>
+      </Component>
     )
   }
 
-  const control = (
-    <button
-      {...rest}
-      ref={forwardedRef as Ref<HTMLButtonElement>}
+  return (
+    <motion.button
+      {...props}
       type={type}
+      disabled={disabled}
       className={classes}
-      aria-disabled={unavailable || undefined}
-      aria-describedby={describedBy}
-      aria-label={ariaLabel}
-      data-pressed={keyPressed ? 'key' : undefined}
-      title={title}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      onKeyUp={handleKeyUp}
-      onBlur={handleBlur}
+      {...(motionDisabled
+        ? {}
+        : { whileHover: whileHover ?? { scale: 1.03 }, whileTap: whileTap ?? { scale: 0.97 } })}
+      transition={transition ?? springInteractive}
     >
       <span className="frontier-button__content">{children}</span>
-    </button>
+    </motion.button>
   )
-
-  return (
-    <>
-      {iconOnly && ariaLabel ? <Tooltip content={ariaLabel}>{control}</Tooltip> : control}
-      {reason}
-    </>
-  )
-})
+}

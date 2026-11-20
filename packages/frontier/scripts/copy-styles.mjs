@@ -1,4 +1,4 @@
-import { cp, mkdir, readdir, rm } from 'node:fs/promises'
+import { cp, mkdir, readdir } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -28,17 +28,3 @@ await copyCss(join(sourceRoot, 'styles'), join(targetRoot, 'styles'))
 await copyCss(join(sourceRoot, 'components'), join(targetRoot, 'components'))
 await copyCss(join(sourceRoot, 'internal'), join(targetRoot, 'internal'))
 await copyCss(join(sourceRoot, 'symbols'), join(targetRoot, 'symbols'))
-
-const fontsSource = join(sourceRoot, 'typeface', 'fonts')
-const fonts = (await readdir(fontsSource).catch(() => [])).filter((name) => name.endsWith('.woff2'))
-
-await rm(join(targetRoot, 'typeface'), { force: true, recursive: true })
-
-if (fonts.length === 0) {
-  console.warn('Frontier Sans is not built; run `pnpm typeface:build`. Text falls back to Outfit.')
-} else {
-  await mkdir(join(targetRoot, 'typeface', 'fonts'), { recursive: true })
-  await Promise.all(
-    fonts.map((name) => cp(join(fontsSource, name), join(targetRoot, 'typeface', 'fonts', name))),
-  )
-}

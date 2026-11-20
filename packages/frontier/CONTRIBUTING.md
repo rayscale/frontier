@@ -222,14 +222,15 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 ## Typeface
 
 Frontier Sans lives in `source/typeface/` and has its own Python toolchain; read its
-[README](./source/typeface/README.md) before changing it.
+[README](./source/typeface/README.md) before changing it. It is in the backlog: the interface is
+set in Geist, and the package neither builds nor ships Frontier Sans.
 
 - Edit glyph definitions, features, or metrics in `source/typeface/`, never the compiled fonts.
 - Run `pnpm typeface:build`, `pnpm typeface:test`, and `pnpm typeface:validate` after any
   change to the typeface.
 - Compiled fonts, UFO masters, and virtual environments are generated output and stay out of
   version control.
-- The family token lists Frontier Sans first and Outfit as the fallback; do not hardcode a family.
+- The family token lists Geist first and the system font as the fallback; do not hardcode a family.
 
 ## Symbols
 

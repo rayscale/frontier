@@ -19,7 +19,7 @@ const features = [
   {
     title: 'Typeface',
     href: '/docs/typeface',
-    description: 'Frontier Sans, the variable typeface of the system.',
+    description: 'Geist, the variable typeface of the system.',
   },
 ]
 

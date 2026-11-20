@@ -1,9 +1,1 @@
-@import '@fontsource-variable/outfit';
-
-@font-face {
-  font-family: 'Frontier Sans';
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url('../typeface/fonts/FrontierSans-Variable.woff2') format('woff2');
-}
+@import '@fontsource-variable/geist';

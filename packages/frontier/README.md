@@ -2,7 +2,7 @@
 
 **A design language for the web.**
 
-The React implementation of the Frontier design language: components, symbols, design tokens, and the Frontier Sans typeface, built to work together.
+The React implementation of the Frontier design language: components, symbols, and design tokens, built to work together.
 
 The [design guidelines](../../guidelines/README.md) state intent and behavior. This package implements them and does not extend them.
 
@@ -32,7 +32,7 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
 - **Symbols** — A set of symbols that follow one grid and one stroke, available from the package entry.
 - **Styles** — Design tokens and component styles through `@rayscale/frontier/styles.css`.
-- **Typeface** — Frontier Sans, a variable typeface built from source in [source/typeface](./source/typeface/README.md) and exported as `@rayscale/frontier/fonts/*`. Outfit is the automatic fallback.
+- **Typeface** — Geist, loaded by the stylesheet through `@fontsource-variable/geist`. The system font is the fallback. Frontier Sans, an original typeface in progress, lives in [source/typeface](./source/typeface/README.md) and is not used yet.
 
 ## Exports
 
@@ -40,14 +40,13 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 | ------------------------------- | --------------------------------------------------- |
 | `@rayscale/frontier`            | Components, symbols, and their types.               |
 | `@rayscale/frontier/styles.css` | Design tokens, the font face, and component styles. |
-| `@rayscale/frontier/fonts/*`    | The compiled Frontier Sans font files.              |
 
 ## Development
 
 > [!WARNING]
 > `@rayscale/frontier` is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
 >
-> Frontier Sans is built by a separate toolchain that needs uv and Python. Without a build, the package still works and text falls back to Outfit.
+> Frontier Sans is not part of the build. Its toolchain needs uv and Python and is described in [source/typeface](./source/typeface/README.md).
 >
 > More information will be added as the package progresses.
 

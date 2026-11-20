@@ -17,7 +17,7 @@ The site for the Frontier design language. It is a single-page app built with Re
 - **Documentation** — A navigation tree, breadcrumbs, a table of contents, and page navigation around every page.
 - **Component pages** — Live examples with their source, the API of each part, and accessibility notes. Button is the first.
 - **Symbols** — A searchable catalog of every symbol with its usage.
-- **Typeface** — Frontier Sans: its weights, usage, characters, and features.
+- **Typeface** — The typeface of Frontier: its weights and usage.
 - **Themes** — Light, dark, or the system setting, remembered between visits.
 
 ## Development

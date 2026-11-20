@@ -1,14 +1,14 @@
 ---
 title: Usage
-description: Set text in Frontier Sans, choose weights, and use its numerals.
+description: Set text in Geist, choose weights, and use numerals.
 order: 10
 ---
 
-The Frontier stylesheet already sets text in Frontier Sans. Nothing needs to be configured when `@rayscale/frontier/styles.css` is imported.
+The Frontier stylesheet already sets text in Geist. Nothing needs to be configured when `@rayscale/frontier/styles.css` is imported.
 
 ## The family token
 
-`--frontier-font-family` lists Frontier Sans first, then Outfit, then the generic `sans-serif`. Outfit is the fallback while the font loads or when it is unavailable. It is not a second typeface to choose.
+`--frontier-font-family` lists Geist first, then the system font, then the generic `sans-serif`. The system font is the fallback while Geist loads or when it is unavailable. It is not a second typeface to choose.
 
 ```css
 .title {
@@ -28,7 +28,7 @@ Use the weight tokens, and the axis supplies every value between them.
 | `--frontier-font-weight-semibold` | 600    |
 | `--frontier-font-weight-bold`     | 700    |
 
-The font also has a Light master at 300 for display text. Hierarchy comes first from size and then from weight, so a page rarely needs more than two weights.
+Hierarchy comes first from size and then from weight, so a page rarely needs more than two weights.
 
 ## Numerals
 
@@ -39,19 +39,3 @@ Figures are proportional by default. Use tabular figures where numbers are compa
   font-variant-numeric: tabular-nums;
 }
 ```
-
-A slashed zero is available where `0` and `O` must not be confused.
-
-```css
-.code {
-  font-feature-settings: 'zero';
-}
-```
-
-## Files
-
-The compiled font is exported as `@rayscale/frontier/fonts/*`. The stylesheet declares the font face for you, so most projects never reference the file.
-
-## Build it from source
-
-The source, the build pipeline, and the tests live in `packages/frontier/source/typeface`. Its README describes the workflow.

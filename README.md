@@ -35,7 +35,7 @@ The layers are described in [guidelines/](./guidelines/README.md).
 
 Workspace projects live under `apps/` and `packages/`.
 
-- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, design tokens, and the Frontier Sans typeface.
+- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, and design tokens.
 - **[@frontier/site](./apps/site/README.md)** — The documentation and marketing site, built with React, React Router, and Vite.
 
 ## Getting started
@@ -97,8 +97,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for the workspace conventions.
 
 > [!WARNING]
 > Frontier is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
->
-> Frontier Sans is at version 0.1. It has not been reviewed by a type designer.
 >
 > More information will be added as the project progresses.
 

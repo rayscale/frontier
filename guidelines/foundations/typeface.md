@@ -2,11 +2,13 @@
 
 The typeface carries most of Frontier's content. It should be clear, calm, and friendly, and it supports the warm tone of the interface without drawing attention to itself.
 
-# Frontier Sans
+# Geist
 
-**Frontier is set in Frontier Sans.** Use Frontier Sans for all interface text. Every weight from 300 to 700 comes from the same variable family, so no other typeface is part of the system. Its strokes are even, its curves are round, and its terminals are soft, so the type carries the same warmth as the shape of the interface.
+**Frontier is set in Geist.** Use Geist for all interface text. Every weight from 300 to 700 comes from the same variable family, so no other typeface is part of the system.
 
-Outfit is the fallback while Frontier Sans loads or when it is unavailable. It is not a second typeface to choose; the system falls back to it automatically.
+The system font is the fallback while Geist loads or when it is unavailable. It is not a second typeface to choose; the interface falls back to it automatically.
+
+Frontier Sans, an original typeface built in this repository, is in the backlog. It is not used by the interface yet.
 
 See [Values](./values.md#typeface) for the sizes, weights, and line heights.
 

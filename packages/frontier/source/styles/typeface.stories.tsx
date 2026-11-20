@@ -8,7 +8,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Frontier Sans is the typeface of the system: a round, even-stroked sans-serif with soft terminals. Outfit is the automatic fallback while it loads.',
+          'Geist is the typeface of the system. The system font is the fallback while it loads.',
       },
     },
   },
@@ -39,7 +39,6 @@ const features: TFeature[] = [
   { label: 'Tabular figures', tag: 'tnum', sample: '1111 8888 0000', settings: "'tnum'" },
   { label: 'Proportional figures', tag: 'pnum', sample: '1111 8888 0000', settings: "'pnum'" },
   { label: 'Slashed zero', tag: 'zero', sample: '2026 100 0', settings: "'zero'" },
-  { label: 'Single-storey a', tag: 'ss01', sample: 'banana Anna', settings: "'ss01'" },
   { label: 'Case-sensitive forms', tag: 'case', sample: 'HELLO-WORLD (A+B)', settings: "'case'" },
 ]
 
@@ -142,7 +141,7 @@ export const Features: TStory = {
     docs: {
       description: {
         story:
-          'Shows the OpenType features of Frontier Sans: figure widths, slashed zero, the alternate a, and case-sensitive punctuation.',
+          'Shows the OpenType features of Geist: figure widths, slashed zero, and case-sensitive punctuation.',
       },
     },
   },
@@ -175,8 +174,7 @@ export const Glyphs: TStory = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Shows every character Frontier Sans covers: Basic Latin, Latin-1, and Latin Extended-A.',
+        story: 'Shows the characters of Geist: Basic Latin, Latin-1, and Latin Extended-A.',
       },
     },
   },

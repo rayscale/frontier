@@ -222,7 +222,7 @@ Pixel values assume a root size of 16 px.
 
 | Token  | Value                                                             |
 | ------ | ----------------------------------------------------------------- |
-| Family | Frontier Sans, with Outfit and a sans-serif fallback              |
+| Family | Geist, with the system font and a sans-serif fallback             |
 | Mono   | ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace |
 
 ### Sizes

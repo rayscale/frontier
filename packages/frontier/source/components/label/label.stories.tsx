@@ -56,12 +56,12 @@ export const AssociatedControl: TStory = {
         id="label-story-email"
         style={{
           boxSizing: 'border-box',
-          height: 'var(--frontier-control-height)',
+          height: 'var(--frontier-control-size-medium)',
           paddingInline: 'var(--frontier-spacing-3)',
           border: 'var(--frontier-border-width) solid var(--frontier-color-border)',
-          background: 'var(--frontier-color-page)',
+          background: 'var(--frontier-color-background)',
           color: 'var(--frontier-color-text)',
-          fontFamily: 'var(--frontier-font-family-sans)',
+          fontFamily: 'var(--frontier-font-family)',
           fontSize: 'var(--frontier-font-size-sm)',
         }}
         type="email"

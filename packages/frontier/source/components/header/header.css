@@ -66,3 +66,9 @@
     transition: none;
   }
 }
+
+@media (prefers-reduced-transparency: reduce) {
+  .frontier-header--floating {
+    backdrop-filter: none;
+  }
+}

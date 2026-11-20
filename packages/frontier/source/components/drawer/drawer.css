@@ -271,3 +271,9 @@
     transition: opacity var(--frontier-duration-fast) var(--frontier-easing-standard);
   }
 }
+
+@media (prefers-reduced-transparency: reduce) {
+  .frontier-drawer__backdrop {
+    backdrop-filter: none;
+  }
+}

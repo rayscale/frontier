@@ -110,3 +110,9 @@
     transition: none;
   }
 }
+
+@media (prefers-reduced-transparency: reduce) {
+  .frontier-dialog__backdrop {
+    backdrop-filter: none;
+  }
+}

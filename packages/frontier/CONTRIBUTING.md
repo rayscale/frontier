@@ -198,6 +198,7 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 - Move `transform`, `opacity`, `background-color`, `border-color`, and `color`; avoid animating
   layout properties such as `width`, `height`, or `margin`.
 - Enter with `--frontier-duration-enter` and leave with `--frontier-duration-exit`, which is shorter.
+  A tooltip enters with `--frontier-duration-base` and leaves with `--frontier-duration-fast`.
 - Use `--frontier-press-travel` for the press response instead of a local offset.
 - Wrap every transition and animation in a `prefers-reduced-motion: reduce` fallback that keeps the
   final state and the information it carries. Do not remove state feedback under reduced motion.

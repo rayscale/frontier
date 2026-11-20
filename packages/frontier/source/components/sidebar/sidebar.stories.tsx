@@ -30,15 +30,9 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-function SidebarExample({
-  defaultOpen = true,
-  variant,
-}: {
-  defaultOpen?: boolean
-  variant?: 'docked' | 'floating'
-}) {
+function SidebarExample({ defaultOpen = true }: { defaultOpen?: boolean }) {
   return (
-    <Sidebar.Root defaultOpen={defaultOpen} variant={variant}>
+    <Sidebar.Root defaultOpen={defaultOpen}>
       <Sidebar.Header>
         <Sidebar.Brand symbol={<Box aria-hidden="true" />}>One</Sidebar.Brand>
       </Sidebar.Header>
@@ -135,18 +129,6 @@ export const Default: TStory = {
       description: {
         story:
           'A composed sidebar with grouped navigation, a nested project list, and a user footer.',
-      },
-    },
-  },
-}
-
-export const Floating: TStory = {
-  render: () => <SidebarExample variant="floating" />,
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'The sidebar detached from the edge as a rounded card. Set `--frontier-sidebar-offset` to clear a sticky header above it.',
       },
     },
   },

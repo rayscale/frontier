@@ -37,25 +37,6 @@
   transition: width var(--_sidebar-duration) var(--_sidebar-easing);
 }
 
-/* Floating: a rounded card inset from the edges. The consumer sets
-   --frontier-sidebar-offset to clear a sticky header above it. */
-.frontier-sidebar-layout[data-variant='floating']:not([data-mobile='true']) {
-  align-items: flex-start;
-  gap: var(--frontier-spacing-4);
-  padding-inline-start: var(--frontier-spacing-4);
-}
-
-.frontier-sidebar-layout[data-variant='floating']:not([data-mobile='true']) .frontier-sidebar {
-  inset-block-start: var(--frontier-sidebar-offset, var(--frontier-spacing-4));
-  height: calc(
-    100dvh - var(--frontier-sidebar-offset, var(--frontier-spacing-4)) - var(--frontier-spacing-4)
-  );
-  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border-subtle);
-  border-radius: var(--frontier-radius-lg);
-  background: var(--frontier-color-surface-floating);
-  box-shadow: var(--frontier-shadow-sm);
-}
-
 .frontier-sidebar__highlight {
   border-radius: var(--frontier-radius-sm);
 }

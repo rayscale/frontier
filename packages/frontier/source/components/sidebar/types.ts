@@ -29,11 +29,6 @@ export type TSidebarRootProps = HTMLAttributes<HTMLDivElement> & {
   animateOnHover?: boolean | undefined
   /** Accessible name of the sidebar navigation landmark. */
   label?: string | undefined
-  /**
-   * `docked` fills the height of the viewport against its edge. `floating` detaches the sidebar
-   * into a rounded card inset from the edges. Defaults to `docked`.
-   */
-  variant?: 'docked' | 'floating' | undefined
   /** Sidebar sections and an optional direct `Sidebar.Inset` child. */
   children?: ReactNode | undefined
 }

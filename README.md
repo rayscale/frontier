@@ -112,4 +112,4 @@ Explore the [design guidelines](./guidelines/README.md) for the principles, foun
 
 ## License
 
-Frontier is licensed under the MIT License.
+Frontier is licensed under the [MIT License](./LICENSE).

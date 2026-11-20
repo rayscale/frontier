@@ -55,4 +55,4 @@ Run the scripts from the repository root, as described in the [workspace README]
 
 ## License
 
-Frontier is licensed under the MIT License.
+Frontier is licensed under the [MIT License](../../LICENSE).

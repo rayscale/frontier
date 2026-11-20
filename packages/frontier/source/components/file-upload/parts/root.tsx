@@ -5,6 +5,8 @@ import { fileUploadContext } from '../context.js'
 import { useFileUploadRoot } from '../hooks/use-file-upload-root.js'
 import type { TFileUploadRootProps } from '../types.js'
 
+import '../../../internal/styles/visually-hidden.css'
+
 export const FileUploadRoot = forwardRef<HTMLDivElement, TFileUploadRootProps>(
   function FileUploadRoot(
     {
@@ -80,7 +82,7 @@ export const FileUploadRoot = forwardRef<HTMLDivElement, TFileUploadRootProps>(
             multiple={multiple}
             disabled={disabled}
             required={required}
-            className="frontier-file-upload__input"
+            className="frontier-file-upload__input frontier-visually-hidden"
             tabIndex={-1}
             aria-hidden="true"
             onChange={handleInputChange}

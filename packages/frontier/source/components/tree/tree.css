@@ -260,3 +260,14 @@
     animation: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(1),
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(2),
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(3),
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(4),
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(5),
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(n + 6) {
+    animation-delay: 0s;
+  }
+}

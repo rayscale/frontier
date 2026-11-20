@@ -120,7 +120,7 @@
   z-index: 1;
   display: flex;
   box-sizing: border-box;
-  padding: 2px;
+  padding: var(--frontier-border-width);
   transition: opacity var(--frontier-duration-fast) var(--frontier-easing-standard);
 }
 

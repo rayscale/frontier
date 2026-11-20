@@ -72,3 +72,9 @@
     backdrop-filter: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-header--hidden {
+    transition: none;
+  }
+}

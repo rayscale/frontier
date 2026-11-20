@@ -164,3 +164,11 @@
     transform: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-navigation-menu__trigger,
+  .frontier-navigation-menu__link,
+  .frontier-navigation-menu__content[data-ending-style] {
+    transition: none;
+  }
+}

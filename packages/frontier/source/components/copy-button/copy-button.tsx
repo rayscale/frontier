@@ -9,6 +9,7 @@ import { Button } from '../button/button.js'
 import type { TCopyButtonProps } from './types.js'
 
 import './copy-button.css'
+import '../../internal/styles/visually-hidden.css'
 
 /** Copies text to the clipboard and confirms the action in place. */
 export function CopyButton({
@@ -75,7 +76,11 @@ export function CopyButton({
           : (icon ?? <Copy aria-hidden="true" size={16} />)}
         {showLabel ? <span>{copied ? copiedLabel : label}</span> : null}
       </Button>
-      <span aria-atomic="true" aria-live="polite" className="frontier-copy-button__sr-only">
+      <span
+        aria-atomic="true"
+        aria-live="polite"
+        className="frontier-copy-button__sr-only frontier-visually-hidden"
+      >
         {copied ? copiedLabel : ''}
       </span>
     </>

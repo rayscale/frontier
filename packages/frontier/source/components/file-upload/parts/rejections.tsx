@@ -9,6 +9,8 @@ import {
 } from '../helpers/validation.js'
 import type { TFileUploadRejectionsProps } from '../types.js'
 
+import '../../../internal/styles/visually-hidden.css'
+
 function describeRejections(rejections: TFileUploadRejection[]): string {
   const names = rejections.map((rejection) => rejection.file.name).join(', ')
   return `${String(rejections.length)} ${rejections.length === 1 ? 'file was' : 'files were'} rejected: ${names}`
@@ -22,7 +24,7 @@ export function FileUploadRejections({
 
   return (
     <div className={classNames('frontier-file-upload__rejections', className)} {...props}>
-      <span className="frontier-file-upload__status" role="status">
+      <span className="frontier-file-upload__status frontier-visually-hidden" role="status">
         {rejections.length > 0 ? describeRejections(rejections) : ''}
       </span>
       {rejections.length > 0 && (

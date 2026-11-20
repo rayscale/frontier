@@ -48,3 +48,9 @@
     transition: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-tooltip__content[data-open] {
+    transition: none;
+  }
+}

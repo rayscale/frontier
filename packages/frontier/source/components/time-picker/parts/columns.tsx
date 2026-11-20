@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from 'react'
 
 import { revealSelection } from '../helpers/reveal-selection.js'
+import '../../../internal/styles/visually-hidden.css'
 
 interface TTimeColumnProps {
   legend: string
@@ -53,7 +54,7 @@ export function TimeOption({
       }}
     >
       <input
-        className="frontier-time-picker__input"
+        className="frontier-time-picker__input frontier-visually-hidden"
         type="radio"
         name={name}
         value={value}

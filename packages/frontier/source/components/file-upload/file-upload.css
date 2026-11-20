@@ -12,18 +12,6 @@
   font-size: var(--frontier-font-size-sm);
 }
 
-.frontier-file-upload__input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 .frontier-file-upload__dropzone {
   display: flex;
   flex-direction: column;
@@ -128,18 +116,6 @@
   display: contents;
 }
 
-.frontier-file-upload__status {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 .frontier-file-upload__rejection-list {
   display: flex;
   flex-direction: column;
@@ -208,7 +184,7 @@
 .frontier-file-upload--media .frontier-file-upload__remove {
   position: absolute;
   top: var(--frontier-spacing-1);
-  right: var(--frontier-spacing-1);
+  inset-inline-end: var(--frontier-spacing-1);
   background-color: var(--frontier-color-surface-floating);
 }
 

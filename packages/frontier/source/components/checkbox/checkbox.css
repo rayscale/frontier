@@ -122,7 +122,7 @@
 }
 
 .frontier-checkbox__description {
-  padding-left: calc(var(--frontier-spacing-5) + var(--frontier-spacing-2));
+  padding-inline-start: calc(var(--frontier-spacing-5) + var(--frontier-spacing-2));
   color: var(--frontier-color-text-muted);
   font-size: var(--frontier-font-size-xs);
   line-height: var(--frontier-line-height-normal);

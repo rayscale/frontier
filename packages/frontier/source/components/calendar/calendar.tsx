@@ -34,6 +34,7 @@ import { CalendarMonth } from './parts/month.js'
 import type { TCalendarProps } from './types.js'
 
 import './calendar.css'
+import '../../internal/styles/visually-hidden.css'
 
 export type { TCalendarDayOfWeek, TCalendarProps } from './types.js'
 
@@ -305,7 +306,7 @@ export const Calendar = forwardRef<HTMLDivElement, TCalendarProps>(function Cale
         </AnimatePresence>
       </div>
 
-      <span className="frontier-calendar__sr-only" aria-live="polite">
+      <span className="frontier-calendar__sr-only frontier-visually-hidden" aria-live="polite">
         {selected ? dayFormatter.format(selected) : ''}
       </span>
     </div>

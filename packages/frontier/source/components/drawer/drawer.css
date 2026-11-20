@@ -104,8 +104,8 @@
 .frontier-drawer--bottom[data-ending-style] {
   transform: translate(0, 100%);
 }
-.frontier-drawer[data-swiping]:not([data-ending-style]) {
-  transform: none !important;
+.frontier-drawer.frontier-drawer.frontier-drawer[data-swiping]:not([data-ending-style]) {
+  transform: none;
   transition: none;
 }
 .frontier-drawer[data-swipe-dismiss] {

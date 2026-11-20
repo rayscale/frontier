@@ -27,7 +27,7 @@
   width: fit-content;
   max-width: 100%;
   padding: 3px;
-  gap: 2px;
+  gap: var(--frontier-border-width);
   isolation: isolate;
   border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
   border-radius: var(--frontier-radius-full);
@@ -47,7 +47,7 @@
 
 .frontier-segmented-control--small {
   min-height: var(--frontier-control-size-small);
-  padding: 2px;
+  padding: var(--frontier-border-width);
   font-size: var(--frontier-font-size-xs);
 }
 

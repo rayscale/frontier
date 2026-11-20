@@ -7,6 +7,7 @@ import { NumberFlowDigit } from './parts/digit.js'
 import type { TNumberFlowProps } from './types.js'
 
 import './number-flow.css'
+import '../../internal/styles/visually-hidden.css'
 
 export type { TNumberFlowProps } from './types.js'
 
@@ -48,7 +49,7 @@ export function NumberFlow({
 
   return (
     <span {...props} className={classes} style={inlineStyle}>
-      <span className="frontier-number-flow__sr-only">{formatted}</span>
+      <span className="frontier-number-flow__sr-only frontier-visually-hidden">{formatted}</span>
       <span className="frontier-number-flow__visual" aria-hidden="true">
         {pieces.map((piece) =>
           piece.kind === 'digit' ? (

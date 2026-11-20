@@ -18,6 +18,7 @@ Patterns describe interaction behaviors that recur across many components. They 
 - [Messages](./messages.md): persistent inline feedback and its tones.
 - [Sequential navigation](./sequential-navigation.md): moving between neighboring destinations.
 - [Hierarchy](./hierarchy.md): nested destinations, disclosure, and the current path.
+- [Compact navigation](./compact-navigation.md): navigation that collapses into a panel that extends the header.
 
 ## Relationship to the other categories
 

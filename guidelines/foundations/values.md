@@ -162,6 +162,12 @@ Pixel values assume a root size of 16 px.
 | Expanded | 960–1279 |
 | Wide     | ≥ 1280   |
 
+### Navigation
+
+| Token              | Value                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| Compact navigation | At and below 48 rem (768 px); see [compact navigation](../patterns/compact-navigation.md) |
+
 ### Grid
 
 | Name     | Columns | Margin | Gutter |

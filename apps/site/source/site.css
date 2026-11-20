@@ -1,0 +1,5 @@
+body {
+  background: var(--frontier-color-background);
+  color: var(--frontier-color-text);
+  line-height: var(--frontier-line-height-normal);
+}

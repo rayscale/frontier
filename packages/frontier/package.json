@@ -15,7 +15,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles/index.css"
+    "./styles.css": "./dist/styles/index.css",
+    "./fonts/*": "./dist/typography/fonts/*"
   },
   "files": [
     "dist"
@@ -28,7 +29,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "typography:setup": "uv sync --directory source/typography",
+    "typography:build": "uv run --directory source/typography python -m scripts.compile",
+    "typography:build:static": "uv run --directory source/typography python -m scripts.compile --static otf ttf",
+    "typography:validate": "uv run --directory source/typography python -m scripts.validate",
+    "typography:test": "uv run --directory source/typography pytest",
+    "prepublishOnly": "pnpm typography:build && pnpm build"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

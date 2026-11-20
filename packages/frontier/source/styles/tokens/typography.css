@@ -1,6 +1,6 @@
 :root {
   /* Font family */
-  --frontier-font-family: 'Outfit Variable', sans-serif;
+  --frontier-font-family: 'Frontier Sans', 'Outfit Variable', sans-serif;
   --frontier-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Font sizes */

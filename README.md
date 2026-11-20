@@ -33,8 +33,9 @@ output goes to `dist/`.
 
 The CSS token layer lives in [packages/frontier/source/styles/](./packages/frontier/source/styles). It
 implements the values in [guidelines/foundations/values.md](./guidelines/foundations/values.md) and
-is published as `@rayscale/frontier/styles.css`. Typography uses Geist Sans and Geist Mono, loaded
-through Fontsource.
+is published as `@rayscale/frontier/styles.css`. Typography uses Frontier Sans, the system's own
+variable typeface, with Outfit as the fallback loaded through Fontsource. The typeface is built from
+source in [packages/frontier/source/typography/](./packages/frontier/source/typography).
 
 Import the stylesheet once:
 

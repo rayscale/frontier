@@ -113,6 +113,7 @@ packages/frontier/
 │   │   ├── helpers/       # shared functions and hooks
 │   │   └── primitives/    # shared presentational pieces with their own styles
 │   ├── styles/            # stylesheet entry, fonts, tokens, and system stories
+│   ├── typography/        # Frontier Sans sources, build pipeline, tests, and specimens
 │   ├── index.ts           # public package entry
 │   └── styles.d.ts
 ├── scripts/
@@ -217,6 +218,18 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 - Use semantic attributes for state (`:focus-visible`, `[data-open]`, `[aria-selected='true']`)
   instead of redundant state classes.
 - Never use unscoped generic classes such as `.root`, `.content`, or `.active`.
+
+## Typography
+
+Frontier Sans lives in `source/typography/` and has its own Python toolchain; read its
+[README](./source/typography/README.md) before changing it.
+
+- Edit glyph definitions, features, or metrics in `source/typography/`, never the compiled fonts.
+- Run `pnpm typography:build`, `pnpm typography:test`, and `pnpm typography:validate` after any
+  change to the typeface.
+- Compiled fonts, UFO masters, and virtual environments are generated output and stay out of
+  version control.
+- The family token lists Frontier Sans first and Outfit as the fallback; do not hardcode a family.
 
 ## Icons
 

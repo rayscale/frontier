@@ -2,9 +2,11 @@
 
 Typography carries most of Frontier's content. It should be clear, calm, and friendly. The typeface is a clean, modern sans-serif. Type supports the warm tone of the interface without drawing attention to itself.
 
-# Outfit
+# Frontier Sans
 
-**Frontier is set in Outfit.** Use Outfit, including its variants, for all interface text. Every weight comes from the same variable family, so no other typeface is part of the system.
+**Frontier is set in Frontier Sans.** Use Frontier Sans for all interface text. Every weight from 300 to 700 comes from the same variable family, so no other typeface is part of the system. Its strokes are even, its curves are round, and its terminals are soft, so the type carries the same warmth as the shape of the interface.
+
+Outfit is the fallback while Frontier Sans loads or when it is unavailable. It is not a second typeface to choose; the system falls back to it automatically.
 
 See [Values](./values.md#typography) for the sizes, weights, and line heights.
 

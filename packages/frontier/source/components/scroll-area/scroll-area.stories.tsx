@@ -118,6 +118,7 @@ function ContactList() {
 }
 
 export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the scroll area.' } } },
   render: (args) => (
     <Card padding="none">
       <ScrollArea {...args}>
@@ -128,6 +129,9 @@ export const Default: TStory = {
 }
 
 export const VerticalScrollbar: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the vertical scrollbar example of the scroll area.' } },
+  },
   args: {
     orientation: 'vertical',
     scrollbar: 'vertical',
@@ -143,6 +147,9 @@ export const VerticalScrollbar: TStory = {
 }
 
 export const Horizontal: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the horizontal example of the scroll area.' } },
+  },
   args: {
     orientation: 'horizontal',
     scrollbar: 'horizontal',
@@ -184,6 +191,9 @@ export const Horizontal: TStory = {
 }
 
 export const Bidirectional: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the bidirectional example of the scroll area.' } },
+  },
   args: {
     orientation: 'both',
     scrollbar: 'both',
@@ -312,6 +322,9 @@ export const Bidirectional: TStory = {
 }
 
 export const LongListAndText: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the long list and text example of the scroll area.' } },
+  },
   render: (args) => (
     <div style={{ display: 'grid', gap: 'var(--frontier-spacing-4)' }}>
       <Card padding="none">
@@ -341,6 +354,11 @@ export const LongListAndText: TStory = {
 }
 
 export const NestedInteractiveContent: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the nested interactive content example of the scroll area.' },
+    },
+  },
   render: (args) => (
     <Card padding="none">
       <ScrollArea {...args} style={{ height: '18rem', width: '22rem' }}>
@@ -360,6 +378,13 @@ export const NestedInteractiveContent: TStory = {
 }
 
 export const EdgeFadeEnabledAndDisabled: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the edge fade enabled and disabled example of the scroll area.',
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -406,6 +431,9 @@ function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
 }
 
 export const LightAndDark: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the light and dark example of the scroll area.' } },
+  },
   render: () => (
     <div
       style={{
@@ -421,6 +449,9 @@ export const LightAndDark: TStory = {
 }
 
 export const ShortContent: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the short content example of the scroll area.' } },
+  },
   render: (args) => (
     <Card padding="none">
       <ScrollArea
@@ -482,10 +513,16 @@ function DynamicNotifications() {
 }
 
 export const DynamicContent: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the dynamic content example of the scroll area.' } },
+  },
   render: () => <DynamicNotifications />,
 }
 
 export const SettingsPanel: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the settings panel example of the scroll area.' } },
+  },
   render: (args) => (
     <Card padding="none">
       <ScrollArea {...args} style={{ height: '20rem', width: '22rem' }}>
@@ -522,6 +559,9 @@ export const SettingsPanel: TStory = {
 }
 
 export const DialogLayout: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the dialog layout example of the scroll area.' } },
+  },
   render: () => (
     <Dialog>
       <Dialog.Trigger>
@@ -556,6 +596,9 @@ export const DialogLayout: TStory = {
 }
 
 export const FadeVisualization: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the fade visualization example of the scroll area.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 'var(--frontier-spacing-4)' }}>
       {['1.5rem', '3rem'].map((fadeSize) => (
@@ -644,6 +687,11 @@ function EdgeEffectSample({
 }
 
 export const EdgeEffectComparison: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the edge effect comparison example of the scroll area.' },
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 'var(--frontier-spacing-6)' }}>
       {(['vertical', 'horizontal'] as const).map((orientation) => (
@@ -670,6 +718,9 @@ export const EdgeEffectComparison: TStory = {
 }
 
 export const EdgeEffectThemes: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the edge effect themes example of the scroll area.' } },
+  },
   render: () => (
     <div
       style={{
@@ -702,6 +753,11 @@ export const EdgeEffectThemes: TStory = {
 }
 
 export const NarrowAndWideContainers: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the narrow and wide containers example of the scroll area.' },
+    },
+  },
   render: (args) => (
     <div style={{ display: 'grid', gap: 'var(--frontier-spacing-4)' }}>
       <Card padding="none" style={{ width: '12rem' }}>

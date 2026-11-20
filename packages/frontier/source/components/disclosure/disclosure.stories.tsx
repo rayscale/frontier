@@ -28,21 +28,30 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-export const Default: TStory = {}
+export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the disclosure.' } } },
+}
 
 export const OpenByDefault: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the open by default example of the disclosure.' } },
+  },
   args: {
     defaultOpen: true,
   },
 }
 
 export const Disabled: TStory = {
+  parameters: { docs: { description: { story: 'Shows the disabled example of the disclosure.' } } },
   args: {
     disabled: true,
   },
 }
 
 export const WithCode: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the with code example of the disclosure.' } },
+  },
   args: {
     title: 'SVG markup',
     children: (

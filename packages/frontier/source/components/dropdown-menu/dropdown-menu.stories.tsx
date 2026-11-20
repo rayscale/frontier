@@ -74,6 +74,9 @@ export const Groups: TStory = {
 }
 
 export const Placements: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the placements example of the dropdown menu.' } },
+  },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <DropdownMenu.Root>
@@ -95,6 +98,9 @@ export const Placements: TStory = {
 }
 
 export const CustomTrigger: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the custom trigger example of the dropdown menu.' } },
+  },
   render: () => (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>

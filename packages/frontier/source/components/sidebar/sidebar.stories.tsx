@@ -22,7 +22,7 @@ const meta = {
   component: Sidebar.Root,
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
 } satisfies Meta<typeof Sidebar.Root>
 

@@ -1,6 +1,7 @@
 .frontier-tree {
-  --_tree-duration: 280ms;
-  --_tree-easing: cubic-bezier(0.77, 0, 0.175, 1);
+  --_tree-duration: var(--frontier-duration-medium);
+  --_stagger-step: calc(var(--frontier-duration-fast) / 4);
+  --_tree-easing: var(--frontier-easing-emphasized-decelerate);
   --_tree-label-duration: var(--frontier-duration-fast);
   --_tree-label-easing: ease-out;
   --_tree-label-blur: 2px;
@@ -186,27 +187,27 @@
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(1) {
-  animation-delay: 0ms;
+  animation-delay: calc(var(--_stagger-step) * 0);
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(2) {
-  animation-delay: 33ms;
+  animation-delay: calc(var(--_stagger-step) * 1);
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(3) {
-  animation-delay: 66ms;
+  animation-delay: calc(var(--_stagger-step) * 2);
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(4) {
-  animation-delay: 99ms;
+  animation-delay: calc(var(--_stagger-step) * 3);
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(5) {
-  animation-delay: 132ms;
+  animation-delay: calc(var(--_stagger-step) * 4);
 }
 
 .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(n + 6) {
-  animation-delay: 165ms;
+  animation-delay: calc(var(--_stagger-step) * 5);
 }
 
 @keyframes frontier-tree-submenu-enter {

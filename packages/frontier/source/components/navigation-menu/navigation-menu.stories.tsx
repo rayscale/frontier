@@ -163,10 +163,16 @@ function ControlledNavigation() {
 }
 
 export const Controlled: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the controlled example of the navigation menu.' } },
+  },
   render: () => <ControlledNavigation />,
 }
 
 export const Narrow: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the narrow example of the navigation menu.' } },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -194,6 +200,11 @@ export const Narrow: TStory = {
 }
 
 export const CustomDropdownContent: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the custom dropdown content example of the navigation menu.' },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -228,6 +239,11 @@ export const CustomDropdownContent: TStory = {
 }
 
 export const CustomPanelContent: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the custom panel content example of the navigation menu.' },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -265,6 +281,9 @@ export const CustomPanelContent: TStory = {
 }
 
 export const GroupedColumns: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the grouped columns example of the navigation menu.' } },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -299,6 +318,13 @@ export const GroupedColumns: TStory = {
 }
 
 export const DifferentPanelDimensions: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the different panel dimensions example of the navigation menu.',
+      },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },
@@ -353,6 +379,11 @@ export const DifferentPanelDimensions: TStory = {
 }
 
 export const KeyboardNavigation: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the keyboard navigation example of the navigation menu.' },
+    },
+  },
   args: {
     'aria-label': 'Main',
   },

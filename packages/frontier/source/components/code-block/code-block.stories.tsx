@@ -54,7 +54,9 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-export const Default: TStory = {}
+export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the code block.' } } },
+}
 
 export const FloatingActions: TStory = {
   parameters: {
@@ -78,6 +80,9 @@ export const FloatingActions: TStory = {
 }
 
 export const LineNumbers: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the line numbers example of the code block.' } },
+  },
   render: (args) => (
     <CodeBlock {...args}>
       <CodeBlock.Header>
@@ -91,6 +96,7 @@ export const LineNumbers: TStory = {
 }
 
 export const Diff: TStory = {
+  parameters: { docs: { description: { story: 'Shows the diff example of the code block.' } } },
   render: (args) => (
     <CodeBlock {...args}>
       <CodeBlock.Header>
@@ -107,6 +113,7 @@ export const Diff: TStory = {
 }
 
 export const Wrap: TStory = {
+  parameters: { docs: { description: { story: 'Shows the wrap example of the code block.' } } },
   args: {
     size: 'sm',
   },

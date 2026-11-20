@@ -70,15 +70,19 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-export const Default: TStory = {}
+export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the tree.' } } },
+}
 
 export const Active: TStory = {
+  parameters: { docs: { description: { story: 'Shows the active example of the tree.' } } },
   args: {
     activeId: 'button',
   },
 }
 
 export const Expanded: TStory = {
+  parameters: { docs: { description: { story: 'Shows the expanded example of the tree.' } } },
   args: {
     defaultExpandedIds: ['components', 'data'],
   },
@@ -99,6 +103,7 @@ export const Links: TStory = {
 }
 
 export const Deep: TStory = {
+  parameters: { docs: { description: { story: 'Shows the deep example of the tree.' } } },
   render: () => (
     <Tree
       aria-label="Project files"

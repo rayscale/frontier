@@ -327,6 +327,7 @@ export const Spacious: TStory = {
 }
 
 export const InsideCard: TStory = {
+  parameters: { docs: { description: { story: 'Shows the inside card example of the empty.' } } },
   decorators: [
     (story: () => ReactNode): ReactElement => (
       <div style={{ width: 560, maxWidth: '100%' }}>{story()}</div>

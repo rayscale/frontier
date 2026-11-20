@@ -50,7 +50,9 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-export const Default: TStory = {}
+export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the callout.' } } },
+}
 
 const tones = [
   { tone: 'info', icon: <Info aria-hidden="true" />, title: 'Information' },

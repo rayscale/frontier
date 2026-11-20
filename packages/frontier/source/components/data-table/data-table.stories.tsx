@@ -86,7 +86,7 @@ const meta = {
   component: PaymentDataTable,
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
   decorators: [
     (TStory) => (
@@ -102,6 +102,7 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the data table.' } } },
   args: {
     columns,
     data: payments,
@@ -111,6 +112,9 @@ export const Default: TStory = {
 }
 
 export const WithRowSelection: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the with row selection example of the data table.' } },
+  },
   args: {
     columns,
     data: payments,
@@ -138,6 +142,7 @@ export const WithRowActions: TStory = {
 }
 
 export const Empty: TStory = {
+  parameters: { docs: { description: { story: 'Shows the empty example of the data table.' } } },
   args: {
     columns,
     data: [],

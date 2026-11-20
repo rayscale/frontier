@@ -34,7 +34,9 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-export const Default: TStory = {}
+export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the copy button.' } } },
+}
 
 export const IconOnly: TStory = {
   parameters: {
@@ -64,6 +66,7 @@ export const CustomLabels: TStory = {
 }
 
 export const Outline: TStory = {
+  parameters: { docs: { description: { story: 'Shows the outline example of the copy button.' } } },
   args: {
     size: 'medium',
     variant: 'outline',

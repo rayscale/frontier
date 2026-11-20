@@ -11,7 +11,7 @@ const meta = {
   component: Footer,
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
   decorators: [
     (TStory) => (

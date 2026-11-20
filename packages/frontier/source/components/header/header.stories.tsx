@@ -11,7 +11,7 @@ const meta = {
   component: Header,
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
   args: {
     mode: 'normal',

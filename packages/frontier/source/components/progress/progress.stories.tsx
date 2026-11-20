@@ -52,6 +52,7 @@ export const Indeterminate: TStory = {
 }
 
 export const Values: TStory = {
+  parameters: { docs: { description: { story: 'Shows the values example of the progress.' } } },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress aria-label="Quarter one" value={12} />
@@ -63,6 +64,9 @@ export const Values: TStory = {
 }
 
 export const ZeroAndComplete: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the zero and complete example of the progress.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress aria-label="Not started" value={0} />
@@ -72,6 +76,9 @@ export const ZeroAndComplete: TStory = {
 }
 
 export const CustomMaximum: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the custom maximum example of the progress.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress aria-label="Steps completed" max={4} value={3} />
@@ -81,6 +88,7 @@ export const CustomMaximum: TStory = {
 }
 
 export const Sizes: TStory = {
+  parameters: { docs: { description: { story: 'Shows the sizes example of the progress.' } } },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress aria-label="Small" size="small" value={60} />
@@ -91,6 +99,9 @@ export const Sizes: TStory = {
 }
 
 export const CustomAppearance: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the custom appearance example of the progress.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress aria-label="Custom thickness" thickness={12} value={55} />
@@ -103,6 +114,9 @@ export const CustomAppearance: TStory = {
 }
 
 export const AnimationDisabled: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the animation disabled example of the progress.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <Progress animation="none" aria-label="Determinate without animation" value={70} />
@@ -142,6 +156,7 @@ export const CircularIndeterminate: TStory = {
 }
 
 export const Variants: TStory = {
+  parameters: { docs: { description: { story: 'Shows the variants example of the progress.' } } },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
       <Progress aria-label="Linear progress" value={65} />
@@ -151,6 +166,9 @@ export const Variants: TStory = {
 }
 
 export const CircularValues: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the circular values example of the progress.' } },
+  },
   render: () => (
     <div
       style={{
@@ -170,6 +188,9 @@ export const CircularValues: TStory = {
 }
 
 export const CircularSizes: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the circular sizes example of the progress.' } },
+  },
   render: () => (
     <div
       style={{
@@ -188,6 +209,9 @@ export const CircularSizes: TStory = {
 }
 
 export const CircularAppearance: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the circular appearance example of the progress.' } },
+  },
   render: () => (
     <div
       style={{
@@ -212,6 +236,11 @@ export const CircularAppearance: TStory = {
 }
 
 export const CircularAnimationDisabled: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the circular animation disabled example of the progress.' },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
       <Progress

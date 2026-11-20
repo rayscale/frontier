@@ -138,6 +138,7 @@ export const Sides: TStory = {
 }
 
 export const Alignments: TStory = {
+  parameters: { docs: { description: { story: 'Shows the alignments example of the popover.' } } },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', padding: '4rem 1rem' }}>
       {alignments.map((align) => (
@@ -155,6 +156,7 @@ export const Alignments: TStory = {
 }
 
 export const Offsets: TStory = {
+  parameters: { docs: { description: { story: 'Shows the offsets example of the popover.' } } },
   render: () => (
     <div style={{ display: 'flex', gap: '2rem', padding: '4rem' }}>
       <Popover>
@@ -178,6 +180,9 @@ export const Offsets: TStory = {
 }
 
 export const Uncontrolled: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the uncontrolled example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -192,6 +197,9 @@ export const Uncontrolled: TStory = {
 }
 
 export const DefaultOpen: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the default open example of the popover.' } },
+  },
   render: () => (
     <Popover defaultOpen>
       <Popover.Trigger>
@@ -208,10 +216,14 @@ export const DefaultOpen: TStory = {
 }
 
 export const Controlled: TStory = {
+  parameters: { docs: { description: { story: 'Shows the controlled example of the popover.' } } },
   render: () => <ControlledPopover />,
 }
 
 export const WithCloseButton: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the with close button example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -231,6 +243,9 @@ export const WithCloseButton: TStory = {
 }
 
 export const WithoutDescription: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the without description example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -244,6 +259,9 @@ export const WithoutDescription: TStory = {
 }
 
 export const FormContent: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the form content example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -262,6 +280,9 @@ export const FormContent: TStory = {
 }
 
 export const LongContent: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the long content example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -284,6 +305,9 @@ export const LongContent: TStory = {
 }
 
 export const DisabledTrigger: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the disabled trigger example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -297,6 +321,9 @@ export const DisabledTrigger: TStory = {
 }
 
 export const IconTrigger: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the icon trigger example of the popover.' } },
+  },
   render: () => (
     <Popover>
       <Popover.Trigger>
@@ -312,6 +339,9 @@ export const IconTrigger: TStory = {
 }
 
 export const NonModalInteraction: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the non modal interaction example of the popover.' } },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem', maxWidth: '20rem' }}>
       <Popover>

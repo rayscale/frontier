@@ -31,6 +31,7 @@ const payments = [
 ]
 
 export const Default: TStory = {
+  parameters: { docs: { description: { story: 'Shows the default example of the table.' } } },
   render: () => (
     <Table>
       <Table.Caption>Recent payments</Table.Caption>
@@ -92,6 +93,7 @@ export const Sortable: TStory = {
 }
 
 export const Selected: TStory = {
+  parameters: { docs: { description: { story: 'Shows the selected example of the table.' } } },
   render: () => (
     <Table>
       <Table.Header>
@@ -113,6 +115,7 @@ export const Selected: TStory = {
 }
 
 export const Empty: TStory = {
+  parameters: { docs: { description: { story: 'Shows the empty example of the table.' } } },
   render: () => (
     <Table>
       <Table.Caption>Recent payments</Table.Caption>

@@ -29,6 +29,9 @@ export default meta
 type TStory = StoryObj<typeof meta>
 
 export const Default: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the default example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Text formatting">
       <Button variant="outline">Bold</Button>
@@ -39,6 +42,9 @@ export const Default: TStory = {
 }
 
 export const Vertical: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the vertical example of the control group.' } },
+  },
   render: () => (
     <ControlGroup orientation="vertical" aria-label="Document actions">
       <Button variant="outline">Move up</Button>
@@ -63,6 +69,9 @@ export const Vertical: TStory = {
 }
 
 export const Nested: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the nested example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Editor controls">
       <Button variant="outline">Undo</Button>
@@ -76,6 +85,9 @@ export const Nested: TStory = {
 }
 
 export const InputComposition: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the input composition example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Search controls">
       <Input aria-label="Search notes" placeholder="Search notes" />
@@ -100,6 +112,9 @@ export const InputComposition: TStory = {
 }
 
 export const SelectComposition: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the select composition example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Filter controls">
       <Select.Root defaultValue="all">
@@ -130,6 +145,13 @@ export const SelectComposition: TStory = {
 }
 
 export const FieldAndSelectComposition: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the field and select composition example of the control group.',
+      },
+    },
+  },
   render: () => (
     <ControlGroup aria-label="Search and filter">
       <Input aria-label="Search notes" placeholder="Search notes" />
@@ -165,6 +187,9 @@ export const FieldAndSelectComposition: TStory = {
 }
 
 export const SplitButton: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the split button example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Save actions">
       <Button>Save</Button>
@@ -181,6 +206,9 @@ export const SplitButton: TStory = {
 }
 
 export const PopoverComposition: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the popover composition example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Display actions">
       <Button variant="outline">Refresh</Button>
@@ -198,6 +226,9 @@ export const PopoverComposition: TStory = {
 }
 
 export const DisabledControls: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the disabled controls example of the control group.' } },
+  },
   render: () => (
     <ControlGroup aria-label="Unavailable controls">
       <Button variant="outline" disabled>

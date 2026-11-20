@@ -202,7 +202,6 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 - Use `--frontier-press-travel` for the press response instead of a local offset.
 - Wrap every transition and animation in a `prefers-reduced-motion: reduce` fallback that keeps the
   final state and the information it carries. Do not remove state feedback under reduced motion.
-- Do not add an animation library. Distances, delays, and spring physics are not part of the system.
 
 ### CSS
 
@@ -388,7 +387,6 @@ Follow the accessibility, focus, and interaction guidelines.
 
 - Reuse installed dependencies before adding one. Check the package and workspace manifests.
 - Preserve the React and React DOM peer ranges.
-- Do not add a competing framework, styling system, icon library, or browser-testing tool.
 - Use pnpm. Do not edit the lockfile by hand.
 - Remove a dependency only after checking scripts, build configuration, exports, and usage.
 

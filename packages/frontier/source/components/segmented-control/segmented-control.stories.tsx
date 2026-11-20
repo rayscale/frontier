@@ -101,6 +101,11 @@ export const Sizes: TStory = {
 }
 
 export const DifferentOptionCounts: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the different option counts example of the segmented control.' },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <SegmentedControl
@@ -163,10 +168,16 @@ function ControlledDemo() {
 }
 
 export const Controlled: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the controlled example of the segmented control.' } },
+  },
   render: () => <ControlledDemo />,
 }
 
 export const Uncontrolled: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the uncontrolled example of the segmented control.' } },
+  },
   args: {
     defaultValue: 'month',
     'aria-label': 'Uncontrolled timeframe',
@@ -179,6 +190,9 @@ export const Uncontrolled: TStory = {
 }
 
 export const WithIcons: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the with icons example of the segmented control.' } },
+  },
   render: () => (
     <SegmentedControl
       defaultValue="system"
@@ -197,6 +211,13 @@ export const WithIcons: TStory = {
 }
 
 export const IndividualDisabledOptions: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the individual disabled options example of the segmented control.',
+      },
+    },
+  },
   args: {
     defaultValue: 'standard',
     'aria-label': 'Delivery tier',
@@ -209,6 +230,11 @@ export const IndividualDisabledOptions: TStory = {
 }
 
 export const EntireControlDisabled: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the entire control disabled example of the segmented control.' },
+    },
+  },
   args: {
     disabled: true,
     defaultValue: 'week',
@@ -222,6 +248,13 @@ export const EntireControlDisabled: TStory = {
 }
 
 export const LongLabelsOrWiderLayout: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the long labels or wider layout example of the segmented control.',
+      },
+    },
+  },
   render: () => (
     <div style={{ maxWidth: '640px', width: '100%' }}>
       <SegmentedControl
@@ -281,6 +314,13 @@ function InteractivePeriodDemo() {
 }
 
 export const InteractivePeriodSelector: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the interactive period selector example of the segmented control.',
+      },
+    },
+  },
   render: () => <InteractivePeriodDemo />,
 }
 
@@ -321,10 +361,18 @@ function DraggableDemo() {
 }
 
 export const Draggable: TStory = {
+  parameters: {
+    docs: { description: { story: 'Shows the draggable example of the segmented control.' } },
+  },
   render: () => <DraggableDemo />,
 }
 
 export const DifferentWidths: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'Shows the different widths example of the segmented control.' },
+    },
+  },
   args: {
     defaultValue: 'week',
     options: [

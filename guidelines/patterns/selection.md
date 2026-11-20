@@ -1,60 +1,43 @@
 # Selection
 
-Selection is a committed choice that persists. Frontier supports single selection only. Multiple
-independent choices are expressed with [toggles](../components/toggle.md), not with a multi-select
-mode.
+Selection is how a user chooses a value or item. Frontier distinguishes between three related but different concepts: highlighted, selected, and current. Each communicates a different fact, and each must remain understandable when more than one applies to the same item.
 
-## Selected, current, and active
+## Highlighted
 
-These are different facts and must not share one treatment:
+Highlighted is the item currently identified by pointer position or keyboard navigation. It is temporary and can change as the user explores available options.
 
-- **Selected** is a value the person chose.
-- **Current** is the location a person is viewing, such as the active page in a navigation bar.
-- **Active** describes a control that is currently engaged by the interaction, such as a pressed
-  button or a tab receiving input.
+Highlight answers the question, "Where is my attention now?" It does not, by itself, mean the item has been chosen. See [Highlight](./highlight.md).
 
-A selected row is not a current page. An active tab is current, not selected. Each context owns its
-vocabulary and its treatment.
+## Selected
 
-## Selection persists
+Selected is the value or item the user has chosen. It persists until the selection changes and remains identifiable when the pointer moves elsewhere.
 
-A selected value stays selected until another value replaces it. It does not clear when the pointer
-leaves, when focus moves, or when a popup closes.
+Selected answers the question, "What did I choose?"
 
-When a control explicitly supports clearing a selection, the action is visible and reversible. A
-second activation does not silently deselect a radio-like choice.
+## Current
 
-## One selected value per group
+Current identifies the item or destination representing the user's present position within an interface, such as the current navigation destination.
 
-A choice group has at most one selected value. Selecting a new value replaces the previous one. The
-group never holds two selections, and it never uses checkmarks to represent a single choice.
+Current answers the question, "Where am I?" It is a position, not necessarily a value chosen from a set of options.
 
-## Selection and highlight
+## Visual indicators
 
-The highlight follows the pointer or keyboard and is temporary. Selection is committed and
-persistent. Both can be visible at once, and they remain distinguishable. See
-[Highlight](./highlight.md) and [States](./states.md).
+The visual treatment of a selected value must communicate its persistent meaning. A selection indicator may move when the selected value changes, but its purpose differs from that of a highlight.
 
-## Selection and focus
+A highlight follows the temporary interaction target. A selection indicator represents the committed value. Neither should obscure focus or any other meaningful state.
 
-Focus is independent of selection. A person can move focus through options without changing the
-selected value. Selection changes only on an explicit confirmation, never on focus alone.
+The same item may be highlighted and selected simultaneously. When the highlight moves elsewhere, the selected value must remain clear.
 
-## Multiple independent choices
+## Communicating selection
 
-A group of independent on/off values is a group of toggles. It is not a multi-select list. Each
-toggle has its own label and its own state.
+Selection must not rely on color alone. Typography, an icon, an indicator, or a change in shape may reinforce the selected state. In a list that users scan, font weight alone is too subtle to serve as the only indication.
 
-Bulk selection of records requires an explicit exception documented in the surface that needs it.
-The exception states which selection model applies, how the selection is cleared, and how it is
-announced.
+See [Colors](../foundations/colors.md) and [Choice](../components/choice.md).
 
-## Announcing selection
+## Current and highlighted can coexist
 
-The selected state is part of the control's accessible state, not only its appearance. A person
-using assistive technology can determine which value in a group is selected.
+The current item and the highlighted item may be the same or different. When they coincide, both meanings must remain discernible. The highlight must not hide the visual treatment that communicates the current position.
 
 ## Principle
 
-A selected value should be unambiguous, persistent, and distinct from where focus or the pointer
-happens to be.
+Highlighted, selected, and current each answer a different question. Their visual treatments must preserve those distinctions, even when the same item has more than one state.

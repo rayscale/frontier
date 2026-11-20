@@ -12,7 +12,7 @@ tone, and must survive translation and right-to-left layouts.
 
 Voice follows the [Principles](../principles/README.md), particularly clarity and restraint. Writing
 follows [Typography](../foundations/typography.md) for case and [Accessibility](../foundations/accessibility.md)
-for names and errors. [Feedback](../patterns/feedback.md) and [Forms](../patterns/forms.md) apply
+for names and errors. [Messages](../patterns/messages.md) and [Forms](../patterns/forms.md) apply
 these rules to specific surfaces.
 
 ## One vocabulary

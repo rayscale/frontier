@@ -1,41 +1,27 @@
 # Continuity
 
-Continuity keeps a person oriented while the interface changes. When one state becomes another, the
-person can follow the change instead of searching for what moved. Continuity is what makes a fast
-interface feel considered rather than abrupt.
+Continuity means the interface keeps the user oriented as things change. When the highlight moves from one option to the next, the user sees where it came from and where it went. When it simply disappears and reappears, the user has to find it again. Continuity is what makes an interface feel responsive rather than abrupt.
 
 ## Changes can be traced
 
-When something changes position, size, or state, the change is visible. A change that happens
-without a trace forces a person to re-read the surface. A short movement, a fade, or a settle keeps
-attention on the thing that changed.
+When something changes position, size, or state, the user should be able to follow it. An abrupt swap breaks that thread. A visible path keeps the user's attention where it belongs.
 
 ## Motion explains change
 
-Movement exists to show a relationship between a before and an after. It runs when something
-changed and stops when it has said what changed. It never runs to fill silence, to look busy, or to
-reward a visit. See [Motion](../foundations/motion.md).
+Movement exists to show a relationship between a before and an after. It should not run when nothing has changed, and it should not run for changes the user cannot perceive as related.
 
-## The first appearance is immediate
+## Immediate is sometimes right
 
-A surface that appears for the first time is in its final place from the first frame. Continuity
-concerns changes a person is following, not the birth of a surface. Motion that moves an element
-from a wrong place into the right one reads as a correction. See
-[Initial placement](../foundations/motion.md#initial-placement).
+Not every change should be animated. When a container first appears, its contents should be in the correct place from the first frame, without travelling from an incorrect position. Continuity is about changes the user is following, not about adding motion to every state.
 
-## Rapid input keeps its thread
+## Responding to rapid input
 
-Motion keeps up with the person. When a new target arrives while a movement is in progress, the
-movement redirects toward the new target. It does not restart, and it does not wait. A person who
-presses quickly sees one continuous response, not a queue of them.
+Motion should keep up with the user. When a new target appears while an earlier movement is still in progress, the movement should redirect toward the new target. It should not restart from zero, and it should not wait for the earlier movement to finish.
 
-## Preference is respected
+## Respecting preferences
 
-A person who prefers reduced motion keeps every outcome. Movement becomes an instant change or a
-simple fade, and the information it carried stays available in the final state. See
-[Reduced motion](../foundations/motion.md#reduced-motion).
+Motion yields to users who prefer less of it. The information carried by movement must remain available without it, through an instant change or a simple fade.
 
 ## Principle
 
-Every change a person causes or the system makes should be either followable or deliberately
-immediate, and never a surprise.
+Every change the user causes or the system makes should be either continuous and traceable, or deliberately immediate because it is a first appearance.

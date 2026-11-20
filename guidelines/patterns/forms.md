@@ -27,14 +27,14 @@ not an error state. See [Colors](../foundations/colors.md).
 ## Read-only and disabled
 
 A read-only field remains focusable and selectable, and its value is read normally. A disabled field
-remains reachable and explains why it is unavailable. Neither state is communicated by color alone.
+does not accept input and is explained where the context requires it. Neither state is communicated by color alone.
 See [States](./states.md).
 
 ## Grouping
 
 Related fields are grouped with space and, where the group needs a name, a group label. A group is
 not a card with a border; the structure comes from spacing and layout. See
-[Structure](../principles/structure.md).
+[Spacing](../foundations/spacing.md).
 
 ## Submission
 

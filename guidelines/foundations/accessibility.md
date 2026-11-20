@@ -1,74 +1,45 @@
 # Accessibility
 
-Accessibility is the baseline for every Frontier design. A design is not finished until it works with
-a keyboard, a pointer, touch, and assistive technology. Frontier does not treat accessibility as a
-separate mode.
+Accessibility is the baseline for every Frontier design, not an optional enhancement. Every interface must be usable with a keyboard, with a pointer, with touch, and with assistive technology. Accessibility is also part of expression: an element that cannot be used is not expressive at all.
 
-## Contrast
+## Usability across inputs
 
-Text and meaningful graphics meet WCAG AA in both themes. A control's boundary meets the non-text
-contrast requirement where the boundary is needed to identify it. Disabled text is exempt from the
-contrast requirement but still remains readable.
+Every enabled interactive element must be reachable and operable by keyboard. Pointer, touch, and keyboard paths should make the same outcomes available. No information or action should depend on hover alone, because hover is not available to every user.
 
-## Keyboard
-
-Every enabled interactive element is reachable and operable by keyboard. The keyboard order follows
-the reading order. Focus is always visible and follows [Focus](./focus.md). A modal surface keeps
-focus inside it and returns focus to its invoker when it closes.
+Disabled semantics depend on the control. A natively disabled control is unavailable to ordinary keyboard and pointer interaction. An accessibility state that communicates unavailability does not itself prevent activation or remove the control from focus order; behavior and focus must be handled according to the control's interaction model. See [States](../patterns/states.md).
 
 ## Names
 
-Every interactive element has a name a person can understand. The visible label is part of that
-name, so a spoken name matches what is on screen. An icon-only control has a name that describes its
-action. Decorative icons are hidden from assistive technology. See [Icons](./icons.md).
+Every interactive element needs a name that a person can understand. The name should include the text the user can see. A visible label such as "Max" should appear in the accessible name, so that a spoken name matches what is on screen. Icon-only controls need a name that describes their action.
 
-## No hover dependency
+## Landmarks and regions
 
-Information and actions never depend on hover. Hover is an enhancement. Touch, keyboard, and
-assistive input must reach the same result through a visible path.
+A region should be labeled as a landmark only when it is a real page area that users navigate to, such as the main content or primary navigation. Decorative or repeated containers should not become landmarks, because too many landmarks make navigation harder. If several regions share a purpose, give each a distinct name that describes its role.
 
-## No color dependency
+## Meaning without color
 
-Color never carries a state alone. Selection, status, error, and disabled states include text, an
-icon, a shape, or a structural change. `danger` is the only hue, and it always has a companion
-signal. See [Colors](./colors.md).
+Status, selection, and disabled states must be understood without color alone. Pair color with text, an icon, weight, or a shape change.
 
-## Touch
+## Contrast
 
-A control's visible height is at least 36. The interactive area is at least 44 on touch platforms
-and never overlaps a neighboring target. See [Spacing](./spacing.md).
-
-## Disabled elements
-
-A disabled element remains reachable by keyboard and explains why it is unavailable. Its
-unavailability is communicated with text and structure, not with a faint appearance alone. See
-[States](../patterns/states.md).
+Text and meaningful graphics meet WCAG AA contrast in both themes. See [Colors](./colors.md).
 
 ## Motion
 
-A person who prefers reduced motion keeps every outcome. Movement becomes an instant change or a
-simple fade, looping motion stops, and the information the movement carried remains visible in the
-final state. Motion is never the only signal of a state, and it never delays an action or a change
-of focus. See [Motion](./motion.md).
+Motion must respect a user's preference for reduced motion. See [Motion](./motion.md).
 
-## Forms
+## Focus
 
-Every field has a visible label. Errors appear next to the field and in a summary at the start of
-the form. The summary links to the fields it describes. An error explains what happened and how to
-resolve it. See [Forms](../patterns/forms.md) and [Writing](../content/writing.md).
+Focus must always be visible and distinct. See [Focus](./focus.md).
 
-## Language and direction
+## Gestures
 
-The interface supports translation and right-to-left layouts. Text is not embedded in images. Space
-allows for longer translations. Directional icons mirror; code remains left to right. See
-[Writing](../content/writing.md).
+A gesture, such as dragging, must always have a keyboard or assistive equivalent that reaches the same result. A user who cannot make the gesture must still be able to complete the task. See [Drag](../patterns/drag.md).
 
 ## Automated checks
 
-Automated checks catch a subset of problems. They do not confirm that an interface is
-understandable. A design is also checked with a keyboard and, where possible, with a screen reader.
+Automated accessibility checks are a floor, not the goal. They catch many problems, but they do not confirm that a design is understandable. Designs should also be checked with a keyboard and, where possible, with a screen reader.
 
 ## Principle
 
-Everything Frontier offers should be available to everyone, through every input, without a separate
-mode.
+Everything Frontier offers should be available to everyone. A design is not finished until its interactions, names, contrast, and motion all work for people who cannot use it the default way.

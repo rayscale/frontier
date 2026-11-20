@@ -1,38 +1,23 @@
 # Restraint
 
-Restraint means that Frontier adds visual or interaction effects only when they carry meaning. The
-language has a strong character, but that character comes from what it refuses as much as from what
-it includes.
+Restraint means that Frontier adds visual and motion effects only when they serve the task. Frontier has personality, and that personality should be felt, but it must never cost the user clarity, focus, or speed.
 
-## Nothing without a job
+## Add only what earns its place
 
-Every color, line, surface, icon, and state needs a reason. Ask what it communicates and what the
-interface would lose without it. If the only answer is that it looks better, it does not qualify.
+Every new effect needs a reason. Ask what it communicates and what the interface would lose without it. If the only answer is that it looks pleasant, the effect does not qualify.
 
-## One emphasis at a time
+## One expression at a time
 
-When one element needs attention, the elements around it stay quiet. Two competing highlights, two
-status colors, or two inverted surfaces split attention and make the interface harder to read.
-Hierarchy is a sequence, not a collection of strong signals.
+Avoid stacking effects. When one element moves to show a change, related elements should stay still. Two competing highlights, or two elements animating for the same reason, split attention and make the interface harder to follow.
 
 ## Quiet at rest
 
-A resting interface is calm. Emphasis appears in response to state, selection, or input. An element
-that is always prominent stops being prominent at all.
-
-## Motion needs a job
-
-Movement is allowed when it confirms an input, explains a change, reveals a temporary surface, or
-shows progress. It is removed when it only decorates, and nothing moves while nothing changes. The
-amount of motion a moment can carry is decided here; the shape of that motion belongs to
-[Motion](../foundations/motion.md).
+A resting interface is calm. Emphasis appears in response to input, state, or change. An element that is always animating or always highlighted stops communicating anything.
 
 ## Consistency over novelty
 
-A repeated interaction behaves the same way everywhere. A new visual idea is not a reason to diverge
-from an existing pattern. If the idea is genuinely better, change the pattern for everyone and
-record the reason.
+A repeated interaction behaves the same way wherever it appears. A new variant is justified only when an existing behavior genuinely cannot serve the need. Novelty is not a reason to diverge.
 
 ## Principle
 
-If a visual or interaction effect does not carry meaning, it is removed.
+Make the interface easy to read first. Expression comes second, and it must never obscure content or slow the user down.

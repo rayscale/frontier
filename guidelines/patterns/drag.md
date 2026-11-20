@@ -1,62 +1,71 @@
 # Drag
 
-Drag is direct manipulation: a person presses a control, moves it, and either commits or cancels the
-result. In Frontier, drag is used by sliders and by a small number of surfaces that cannot offer the
-same result another way. Every drag has a keyboard equivalent.
+Dragging is a form of direct manipulation. The user presses a source, moves the pointer or touch contact, and releases to complete or cancel an action.
 
-## Commitment
+Dragging should make the relationship between movement and its potential result clear. It is an input method, not a visual treatment: the appropriate feedback depends on what the interaction changes.
 
-A drag has three phases: start, move, and commit or cancel. The value does not change permanently
-until the person commits. During the gesture, the surface shows the tentative result and the source
-it came from.
+## When dragging applies
 
-Releasing commits. Moving out of the valid area or pressing Escape cancels and restores the previous
-value. The previous value remains unchanged until the gesture is complete.
+Use dragging when movement has a meaningful relationship to a target, position, or value. Do not add it when the movement provides no useful information or when it makes an action harder to discover.
 
-## Direct following
+Dragging must remain an optional input method. Users must have another accessible way to reach the same meaningful outcome. See [Accessibility](../foundations/accessibility.md).
 
-The dragged element follows the pointer or finger directly while the person moves it. This movement
-is input, not animation; it is not eased and it stops when the person stops. See
-[Motion](../foundations/motion.md).
+## Starting a drag
 
-## Keyboard equivalent
+A drag begins from a meaningful source. The interaction must distinguish an intentional drag from an ordinary press, click, or scroll gesture.
 
-Every drag has a keyboard path that reaches the same result. A slider accepts arrow keys for small
-steps and a modifier for larger steps, plus Home and End for the range limits. A reorderable surface
-provides move commands or a keyboard mode that does not require holding a key while navigating.
+A press without meaningful movement should remain an ordinary press. Use an appropriate movement threshold to avoid starting a drag because of incidental pointer motion.
 
-A gesture is never the only way to complete a task. See
-[Accessibility](../foundations/accessibility.md).
+## Tracking and feedback
 
-## Feedback
+During a drag, provide clear feedback about the source, the current candidate target, and the result that would follow from release.
 
-During a drag, the surface communicates the source, the current position or target, and whether the
-result will commit. Feedback follows the input without a trail or easing, because a delayed
-indicator would describe a position the person has already left.
+The feedback must stay connected to the user's movement and remain within the interaction's valid bounds. The user must be able to revise the candidate target before committing the action.
 
-On release, a committed result settles into place, and a cancelled result returns to its previous
-value. The settling is short and never overshoots; it confirms the outcome instead of repeating the
-gesture. See [Motion](../foundations/motion.md).
+The visual element that follows the gesture depends on the interaction. It may be a movable object, a preview, or an indicator representing a tentative value. Do not assume that every drag uses a highlight, or that every moving indicator represents a highlight.
 
-## Touch and pointer
+Disabled or unavailable targets must not accept the action. Feedback must not imply that an unavailable target is valid.
 
-A drag works with a pointer, a finger, and assistive input. The interactive area meets the touch
-target rule, and a drag does not begin accidentally when the person intended to scroll. See
-[Spacing](../foundations/spacing.md).
+## Completion and cancellation
 
-## Disabled and read-only
+Commit the action only when the user releases in a valid state defined by the interaction model.
 
-A disabled control does not start a drag and explains why. A read-only control may allow selection
-and copying but not modification.
+Releasing outside a valid target may cancel the action or resolve it according to an explicitly defined boundary rule. The behavior must be predictable and must not silently commit an unintended result.
 
-## When not to drag
+When the gesture is cancelled or interrupted, restore the previous committed state unless the interaction explicitly defines another safe outcome.
 
-A drag is not added when a simpler control can express the same value. If a person only needs to
-choose one of a few options, use [Choice](../components/choice.md). If the value is numeric and
-bounded, a [Slider](../components/slider.md) is appropriate only when direct manipulation genuinely
-helps.
+A completed drag must not also trigger an unintended click or second action from the same release.
+
+## Focus and keyboard
+
+Pointer movement alone does not determine keyboard focus. Focus behavior after a drag must remain consistent with the interaction's keyboard model.
+
+Users must be able to reach the same meaningful outcomes without dragging. Navigation, candidate movement, and commitment should follow the semantics of the interaction rather than assume that all controls behave alike.
+
+See [Focus](../foundations/focus.md) and [Accessibility](../foundations/accessibility.md).
+
+## Touch
+
+Distinguish movement along the intended gesture axis from movement that should scroll surrounding content. Preserve ordinary scrolling wherever possible.
+
+When a gesture could reasonably mean either dragging or scrolling, the interaction must provide a predictable way to determine the intended action before committing a change.
+
+## Reduced motion
+
+Direct manipulation must remain connected to the user's movement when reduced motion is preferred. Remove decorative easing and settling where appropriate, without hiding the current target or the result of the gesture.
+
+See [Motion](../foundations/motion.md).
+
+## Related guidance
+
+- [Highlight](./highlight.md) defines the temporary visual indication of an interaction target.
+- [Selection](./selection.md) distinguishes a committed value from a temporary target.
+- [States](./states.md) defines how interaction states remain distinguishable.
+
+## Focus on completion
+
+A completed drag moves keyboard focus to the resulting target, so the user can continue from where the action landed. A cancelled drag leaves focus where it was.
 
 ## Principle
 
-A drag should be predictable, reversible, and optional: the same result must be reachable without
-the gesture.
+Dragging should make an action feel intentional and continuous. The user must understand the potential result before release and be able to recover safely when the gesture is cancelled.

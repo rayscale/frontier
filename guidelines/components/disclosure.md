@@ -44,7 +44,7 @@ outer disclosure does not change the nested state.
 
 ## Disabled
 
-A disabled disclosure does not expand and explains why when the context requires it. It does not
+A disabled disclosure does not expand and is explained where the context requires it. It does not
 appear collapsed and enabled at the same time.
 
 ## Principle

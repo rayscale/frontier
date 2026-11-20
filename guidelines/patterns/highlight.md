@@ -1,53 +1,69 @@
 # Highlight
 
-The highlight marks the option currently under the pointer or the keyboard inside a group. It is
-temporary, follows the input, and never means that a value was chosen.
+The highlight is a shared background surface that identifies the item currently under the pointer or reached through keyboard navigation. It moves between eligible targets, preserving continuity as attention moves through a group.
 
-## One highlight
+The highlight communicates a temporary interaction position. It does not, by itself, communicate which value is selected or which destination is current.
 
-A group shows at most one highlight. When the pointer moves, the highlight moves with it. When the
-keyboard navigates, the highlight follows the keyboard. The highlight never splits between two
-options.
+## Purpose
 
-## Not selection
+A moving surface connects successive interaction targets. Instead of independent backgrounds appearing and disappearing, one surface moves between targets, making the transition easier to follow.
 
-The highlight does not change the selected value. A person can move the highlight through a list
-without committing anything. The selected value keeps its own treatment while the highlight moves.
-See [Selection](./selection.md).
+Use this pattern when an interface benefits from a continuous visual indication of the current interaction target. Do not add a moving highlight to independent controls when their individual hover treatment already communicates the interaction clearly.
+
+## Target
+
+The highlight follows the target designated by the interaction model. That target may be determined by pointer position, keyboard navigation, or another supported interaction.
+
+Only eligible targets may receive the highlight. Disabled or unavailable items must not appear actionable. Structural elements that cannot receive interaction are not targets.
+
+The highlight must follow the actual target rather than infer its position from the pointer alone. This keeps pointer and keyboard interactions consistent.
+
+## Appearance
+
+The highlight sits behind the target's content. It must not obscure text, icons, shortcuts, selection indicators, or other meaningful information.
+
+Its surface must remain distinguishable from its surroundings in both themes. Use the shared highlight color role rather than introducing a new color for each context. See [Colors](../foundations/colors.md).
+
+The highlight must not change layout, target size, or the position of surrounding content.
 
 ## Movement
 
-The highlight travels to its new option in a short movement that settles without overshoot. The
-travel is what tells the person the highlight followed their input instead of appearing there.
+The highlight moves and resizes to match its target. It should respond to changes in target position and dimensions, including changes caused by layout, scrolling, or updated content.
 
-A new highlight that appears for the first time, or a group that first receives focus, shows the
-highlight already in place on the first frame. It does not fly in from an earlier position.
+Movement should remain responsive to rapid input. When the target changes before the previous movement finishes, the highlight should redirect toward the latest target rather than wait for the previous transition to finish.
 
-When input changes while the highlight is still moving, it continues toward the newest option. It
-does not finish the abandoned move first and then start again. There is no trail, no glow, and no
-second indicator. When a person prefers reduced motion, the highlight jumps.
+When a target first appears, the highlight should begin in the correct position instead of visibly travelling from an unrelated location.
 
-See [Motion](../foundations/motion.md) and [Continuity](../principles/continuity.md).
+## Relationship to selection and focus
 
-## Valid targets only
+Highlight, focus, selection, and current position have different meanings. They may refer to the same item, but one must not be used as an implicit substitute for another.
 
-A disabled or unavailable option never receives the highlight. If the highlighted option disappears
-because the content changed, the highlight clears or moves to the nearest valid option. It never
-remains on an option that no longer exists.
+A selected value must remain identifiable when the highlight moves elsewhere. A focus indicator must remain visible alongside the highlight. A current-position indicator must not be obscured by the highlight.
 
-## Visible without hover
+A selection indicator that moves to represent a chosen value is a separate visual mechanism. It must not be treated as a highlight merely because both surfaces move.
 
-The highlight is also the keyboard position inside a group. It must be visible when the group has
-keyboard focus, and it must not depend on the pointer being present. See
-[Keyboard](./keyboard.md).
+See [Selection](./selection.md), [States](./states.md), and [Focus](../foundations/focus.md).
 
-## Highlight and focus
+## Dragging
 
-The highlight is not focus. Focus marks the control that receives input; the highlight marks the
-option inside that control. When both exist, both remain visible. See
-[Focus](../foundations/focus.md).
+A highlight does not automatically become the indicator for a drag operation. During direct manipulation, the interaction model determines which visual element tracks the candidate target or tentative value.
+
+Unrelated hover previews should not compete with drag feedback. If the highlight and the drag indicator serve different purposes, preserve that distinction.
+
+See [Drag](./drag.md).
+
+## Touch
+
+Touch does not provide persistent hover input. The highlight should respond to the interaction states supported by the target environment, without requiring hover to discover information or complete an action.
+
+See [States](./states.md).
+
+## Reduced motion
+
+When reduced motion is preferred, the highlight must still identify its target. Replace travel with an immediate position change or a simple fade, as appropriate.
+
+Direct manipulation must remain understandable and connected to the user's input. See [Motion](../foundations/motion.md).
 
 ## Principle
 
-The highlight should always rest on exactly one option a person can act on, and it should never be
-confused with a committed choice.
+The highlight shows where interaction is directed now. It must remain distinct from what has been chosen, where focus rests, and which position is current.

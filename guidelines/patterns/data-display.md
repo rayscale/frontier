@@ -1,60 +1,49 @@
 # Data display
 
-Data display presents structured content for comparison and action. Tables are the main surface.
-Frontier keeps them flat, dense enough to scan, and free of decorative striping.
+Tables present structured values so people can compare, scan, and act on them.
+They are for data, not for layout.
 
-## Tables
+## Structure
 
-A table has a header row and rows of data. The header names each column and does not scroll away
-from the data it describes unless the table provides a sticky header with a surface of its own.
-
-Rows use the shared row height and functional separators where the row boundary must be visible.
-There is no zebra striping, no decorative container, and no shadow.
+Use a native table with a caption or another accessible name. Header cells
+describe their column and use `scope="col"`; row headers use `scope="row"`.
+Do not use a table when a list or a set of cards communicates the same
+information more directly.
 
 ## Alignment
 
-- Text aligns to the start of its column.
-- Numbers align to the end and use tabular figures.
-- Dates follow the locale format and align consistently within their column.
-- Actions align consistently and do not shift with the width of a value.
-
-Mixed alignment inside one column is a defect. See [Typography](../foundations/typography.md).
+Text starts at the inline start. Numbers that are compared or summed align at
+the inline end and use tabular figures. Dates and times follow the same rule
+when their width matters. Alignment must come from the content, not from a
+decorative attempt to center everything.
 
 ## Sorting
 
-A sortable column shows its sort state in text or an icon, not by color alone. The sorted column
-keeps its label and its alignment. Sorting changes the order of rows without changing the selection.
+A sortable header is a control, not a decoration. It exposes the current
+direction through `aria-sort`, and the visible indicator must not be the only
+signal. Sorting must be stable enough that equal values do not jump between
+renders.
 
-## Filtering
+## Filtering and empty states
 
-Filters narrow the data and remain visible while active. An empty result explains which filters are
-active and how to clear them. A filter never hides data silently.
+Filtering narrows the rows without hiding the fact that a filter is active.
+When no rows match, show a clear empty state inside the table region and
+explain whether the data is missing or the filter is too narrow.
 
 ## Selection
 
-Tables support single selection. A selected row uses the selected treatment and remains distinct
-from the row under the pointer. Bulk record selection is an explicit exception documented in the
-surface that needs it; see [Selection](./selection.md).
-
-## Density
-
-Tables use the comfortable density and a stable internal rhythm. The row height, cell padding, and
-label size keep their proportions across tables; a data-heavy surface may tighten the rhythm within
-the same scale, but there is no separate compact mode.
+Row selection is independent from the current row and from hover. Selected rows
+remain selected when the pointer leaves, and a header selection applies only to
+the rows it names, such as the current page. A selection count is announced
+politely and should not replace the visible selection state.
 
 ## Responsive behavior
 
-A table that cannot fit keeps its most important column visible and provides a way to reach the
-rest. It does not shrink text below the readable minimum or collapse columns into an unlabeled
-stack.
-
-## Empty and loading states
-
-An empty table shows an empty state that explains what is missing and how to add it. A loading
-table shows a skeleton with the final dimensions. See [Loading](./loading.md) and
-[Feedback](./feedback.md).
+A table that cannot fit keeps its structure and scrolls horizontally inside its
+own region. Do not collapse a table into an unrelated card layout unless the
+data no longer needs column comparison.
 
 ## Principle
 
-Data should be comparable at a glance: aligned, labeled, and free of decoration that competes with
-the values.
+A table should make comparison easier. If the structure makes the data harder
+to read, the table is the wrong form.

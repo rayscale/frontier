@@ -1,45 +1,47 @@
 # Elevation
 
-Frontier is flat. There are no shadows, no glows, and no simulated depth. Layering is expressed
-through surfaces and, only when necessary, a functional border.
+Elevation describes which content sits above other content. Frontier uses depth sparingly. Most of the interface is flat, and only content that temporarily floats above the page gains a shadow and a distinct surface.
 
-See [Values](./values.md#surfaces) for surface roles and [Layering](./values.md#layering) for
-stacking order.
+See [Values](./values.md#shadows) for the shadow values.
 
-## Three surfaces
+## Layers
 
-The system has three surfaces:
+From lowest to highest, the layers are:
 
-- **Page** is the base.
-- **Surface** groups content inside the page.
-- **Overlay** floats above the page for popups, dialogs, and other temporary content.
+1. The page.
+2. Containers, such as cards and panels, which are part of the page.
+3. Floating content, such as menus, popups, and tooltips, which appears above the page for a moment.
+4. Modal content and transient messages, such as dialogs and notifications, which overlay the rest of the interface. Modal content interrupts; a notification does not necessarily do so.
 
-A surface is separated from the surface below it by a change in value. The overlay is the most
-distinct of the three and remains identifiable in both themes.
+Each layer should be distinguishable from the one below it, in both themes.
 
-## No shadows
+## Shadow
 
-A shadow is never used to indicate elevation. It is also never used for decoration, focus, or
-pressed states. If a floating element blends into the page, adjust the surface role; if an edge must
-remain identifiable, add a functional border as defined in [Shape](./shape.md).
+A shadow signals that something floats. Reserve it for floating content. Containers that sit on the page should be separated by surface and border, not by shadow. Shadows applied everywhere make the interface look busy and dilute their meaning.
 
-## Floating content
+## Stacking
 
-Floating content does not reflow the page. It sits above the layout, keeps its own alignment, and
-returns to the page without leaving a gap or moving the content underneath.
+Floating content must appear above the content it belongs to, regardless of where it sits in the document. Users should never have to work out which of two overlapping items is on top.
 
-## Modal surfaces
+Stacking levels are shared across the interface. Popups, dialogs, and drawers share the overlay level so that a popup opened from a dialog still appears above it. Toasts sit above overlays, and tooltips sit above everything. See [Values](./values.md#layering).
 
-A modal surface uses a scrim to separate it from the page and follows the focus and dismissal rules
-in [Popups](../patterns/popups.md). The scrim is a value change, not a blur or a shadow.
+## Temporary content
 
-## Stacking order
+Floating content is temporary. It appears in response to an action and goes away when the user completes or cancels that action. Its entrance and exit should match its temporary role. See [Popups](../patterns/popups.md).
 
-Content that floats is ordered by role, never by arbitrary values. Sticky elements sit above the
-page, overlays above sticky elements, popups above overlays, and tooltips and toasts above popups.
-The concrete order is defined in [Values](./values.md#layering).
+## Blur
+
+Modal content may soften the page behind it so the page recedes and the modal becomes the single
+focus. Blur softens; it never hides: the page stays recognizable through the overlay, and the
+overlay still dims it. Blur belongs to the overlay of modal content only. Floating content, containers,
+and static surfaces do not blur what is behind them, and blur is never used as decoration. When a
+person prefers reduced transparency, the overlay is a solid dim without blur. See
+[Values](./values.md#blur) for the steps.
 
 ## Principle
 
-Layering should be legible without depth effects: surfaces and, where necessary, edges carry the
-hierarchy, and nothing casts a shadow.
+Depth should tell the user what is temporary and what is permanent. Only content that truly floats should look like it does.
+
+## Modal and floating surfaces
+
+Dialogs and drawers are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both themes.

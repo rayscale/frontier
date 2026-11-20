@@ -37,7 +37,7 @@ explicit. A search does not silently apply a hidden filter.
 ## Search is not navigation
 
 Search finds; navigation moves. A search result may lead to a destination, but the search surface
-does not replace the navigation model. See [Navigation](./navigation.md).
+does not replace the navigation model. See [Sequential navigation](./sequential-navigation.md).
 
 ## Principle
 

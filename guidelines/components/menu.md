@@ -24,8 +24,7 @@ Arrow keys move the highlight through items. Enter or Space invokes the highligh
 End move to the first and last item. Typeahead moves to the first item that matches the typed
 characters. See [Keyboard](../patterns/keyboard.md).
 
-Disabled items remain visible and reachable but cannot be invoked. They never receive the
-highlight.
+Disabled items remain visible but cannot be invoked. They never receive the highlight.
 
 ## Labels
 
@@ -35,7 +34,7 @@ icon-only items is not part of the system.
 ## Grouping
 
 Related items may be grouped with space and, where a group needs a name, a group label. Groups do
-not use dividers or containers. See [Structure](../principles/structure.md).
+not use containers. A group that needs a name has a group label.
 
 ## Appearance
 

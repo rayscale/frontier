@@ -1,56 +1,37 @@
 # Principles
 
-Principles are the values behind every Frontier decision. They are short, stable, and independent of
-platform, component, or technology. When a specific rule is missing or unclear, reason from the
-principles.
+Principles are the values that guide every design decision in Frontier. They are short, stable, and independent of platform, component, or technology. When a specific rule is unclear or missing, a principle is the place to reason from.
 
-## Principles in this category
+## Guidelines in this category
 
-- [Clarity](./clarity.md): every element states what it is and what state it is in.
-- [Structure](./structure.md): layout and alignment make the interface legible before styling.
-- [Consistency](./consistency.md): the same element and interaction behave the same way everywhere.
-- [Continuity](./continuity.md): a person can follow every change.
-- [Restraint](./restraint.md): nothing is added without a job.
-- [Precision](./precision.md): values, alignment, and states are exact.
+- [Clarity](./clarity.md): every element communicates what it is and what state it is in.
+- [Restraint](./restraint.md): expression serves the task, and consistency governs when variation is justified.
+- [Expression](./expression.md): Frontier feels warm, friendly, and a little playful.
+- [Continuity](./continuity.md): the user can follow every change.
 
-## Precedence
+Accessibility is not listed here as a principle. It is a foundation, because it constrains every principle rather than competing with them. See [Accessibility](../foundations/accessibility.md).
 
-When principles conflict, they apply in this order:
+## Relationship to the other categories
 
-1. **Clarity** wins first. If a person cannot understand what an element is or what state it is in,
-   no other consideration justifies the design.
-2. **Structure** comes next. Hierarchy and alignment must remain readable before visual treatment.
-3. **Consistency** keeps the system predictable. A local improvement does not justify a new
-   vocabulary for the same thing.
-4. **Continuity** serves clarity. Movement that shows how one state became another makes change
-   understandable. Movement that exists for its own sake does not.
-5. **Restraint** decides how much visual means a moment can carry. It never removes information,
-   but it removes decoration.
-6. **Precision** governs execution. When an optical correction conflicts with system consistency,
-   the system value wins unless the correction is documented and systematic.
+Principles set the direction for [Foundations](../foundations/README.md), which turn them into shared rules. Foundations inform [Patterns](../patterns/README.md), which describe recurring behaviors. [Components](../components/README.md) apply all three.
+
+Principles also resolve tension between rules. For example, expression may shape a popup's entrance, but clarity determines that its content must be readable from its first frame.
+
+## How the principles relate
+
+The four principles are not equal in every decision. They form an order of precedence, which applies when they conflict.
+
+- **Clarity** comes first. If the user cannot tell what an element is, what state it is in, or what will happen, nothing else justifies the design.
+- **Continuity** serves clarity. Movement that shows how one state became another makes change understandable. Movement that is only transition for its own sake does not.
+- **Expression** is bounded by clarity and restraint. It gives Frontier its warmth and playfulness, but it must not obscure meaning.
+- **Restraint** governs the amount of expression. It decides how much motion, color, and detail a moment can carry, and it keeps variation consistent.
 
 ## Trade-offs
 
-Some trade-offs are unavoidable. The guidelines do not hide them.
+Some trade-offs are unavoidable, and the guidelines should not hide them.
 
-- **Density versus air.** Frontier favors comfortable density for reading, but data-heavy surfaces may
-  use a tighter internal rhythm drawn from the same spacing scale. There is no separate compact
-  mode.
-- **Uniformity versus context.** The same element keeps its behavior everywhere. Its size and
-  placement may respond to context, but its meaning does not change.
-- **Minimalism versus affordance.** A control must still look actionable. When a surface alone is
-  not enough, a functional border is allowed; decoration is not.
-- **Monochrome versus semantic color.** Only `danger` carries a hue. Other statuses rely on text,
-  icons, and structure, which costs some immediacy but preserves a calm, consistent surface.
-- **Continuity versus immediacy.** A transition takes time. Frequent, direct feedback stays short,
-  and a longer movement is reserved for a change that spans a surface, because a person must be
-  able to follow it.
+- **Expression versus speed.** A playful transition takes time. Short, direct feedback is preferred for frequent actions, and richer motion is reserved for moments that change context.
+- **Continuity versus simplicity.** A traveling highlight is more work to build than a per-option background, and it is worth that cost only where the user benefits from following the movement.
+- **Restraint versus delight.** A small playful detail is justified when it reinforces the feel of an interaction. It is not justified when it competes with the content.
 
-## Relationship to the other layers
-
-Principles set direction for [Foundations](../foundations/README.md), which turn intent into shared
-rules. Foundations inform [Patterns](../patterns/README.md) and [Components](../components/README.md),
-and [Content](../content/README.md) applies the same values to language.
-
-When a resolution to a trade-off is made, record it in the document that owns the rule, with its
-reason.
+When these trade-offs are resolved, the resolution should be recorded in the document that owns the rule, with its reason.

@@ -36,7 +36,7 @@ When a person prefers reduced motion, programmatic changes are instant.
 
 ## Disabled and read-only
 
-A disabled slider does not accept changes and explains why. A read-only slider shows its value but
+A disabled slider does not accept changes and does not look like an enabled one. A read-only slider shows its value but
 cannot be changed.
 
 ## Principle

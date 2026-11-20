@@ -1,46 +1,40 @@
 # Code
 
-Code is content that must remain exact. Frontier presents it in a monospaced family, in monochrome,
-and without decoration that competes with the characters.
-
-## Monochrome
-
-Code has no syntax color. Keywords, strings, comments, and punctuation share the text role. Meaning
-comes from the code itself, not from a palette. See [Colors](../foundations/colors.md).
-
-## Monospaced type
-
-Code uses the monospaced family and the shared type scale. It is not smaller than the minimum
-readable size for its context. Characters align between lines. See [Typography](../foundations/typography.md).
+Code is read as code, even when it appears inside a product interface. It keeps
+its own type, direction, and selection behavior.
 
 ## Direction
 
-Code always reads left to right, even when the surrounding interface is right to left. The code
-block does not mirror, and its punctuation does not flip.
+Code always reads left to right, including on right-to-left pages. Only the
+surrounding header and actions follow the page direction. Mixed direction
+inside a line makes code harder to read and to copy.
 
-## Lines and numbers
+## Type
 
-Line numbers are optional. When present, they sit outside the selectable text and never appear in
-the copied content. Long lines scroll horizontally rather than wrapping in the middle of a token,
-unless the code is a short inline fragment.
+Code uses the monospace family from the typography foundation. It does not use
+the interface typeface, because alignment between characters carries meaning.
+Code text is not smaller than the readable minimum for its context.
 
 ## Copying
 
-A code block provides a visible copy action with a clear label. Copying preserves the exact
-characters, including indentation, and excludes line numbers and decorative chrome.
+A copy action copies the code, not its presentation. Line numbers, diff
+markers, and other decoration stay out of the copied text. The action confirms
+success in place and announces it politely; it does not open a toast for a
+single copy.
 
-## Semantics
+## Structure
 
-Code is marked as code for assistive technology. Inline code inside a sentence keeps the surrounding
-reading flow; a block is a separate region with its own reading order.
+Headers name a file or a language. Long lines scroll by default; wrapping is an
+explicit choice for output and error text. A code surface is focusable so it can
+be scrolled from the keyboard.
 
-## No decorative chrome
+## Diff and highlighted lines
 
-A code block uses the surface role and, where the edge must be identified, a functional border. It
-has no window controls, traffic lights, gradients, or shadows. See [Shape](../foundations/shape.md)
-and [Elevation](../foundations/elevation.md).
+A diff line carries a marker as well as a tint, so the change does not depend on
+color alone. Highlighted lines call attention to a region without implying that
+the code changed. Decoration must remain out of the selection.
 
 ## Principle
 
-Code should be exact, readable, and copyable, with no decoration between the reader and the
-characters.
+Code should be easy to read, easy to copy, and unchanged by the interface around
+it.

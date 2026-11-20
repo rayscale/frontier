@@ -1,174 +1,155 @@
 # Values
 
-This page lists the concrete values behind Frontier's foundations. Each foundation explains when and
-why to use them; this page is the only place where the numbers and colors are stated.
+This page lists the concrete values behind Frontier's foundations. Each category links back to its guideline, which explains when and why to use these values. Use the names here, not raw numbers, when designing.
 
-Values are expressed in logical units. An implementation maps them to the units of its platform;
-the relationships between values are what the system guarantees.
+Pixel values assume a root size of 16 px.
 
 ## Colors
 
 ### Neutral palette
 
-| Name     | Value     |
+| Name     | Hex       |
 | -------- | --------- |
-| Gray 50  | `#f7f7f7` |
-| Gray 100 | `#f0f0f0` |
-| Gray 200 | `#e4e4e4` |
-| Gray 300 | `#d1d1d1` |
-| Gray 400 | `#a6a6a6` |
-| Gray 450 | `#8f8f8f` |
-| Gray 500 | `#6b6b6b` |
-| Gray 600 | `#545454` |
-| Gray 700 | `#3d3d3d` |
+| Gray 50  | `#fafafa` |
+| Gray 100 | `#f5f5f5` |
+| Gray 200 | `#e5e5e5` |
+| Gray 300 | `#d4d4d4` |
+| Gray 400 | `#a3a3a3` |
+| Gray 500 | `#737373` |
+| Gray 600 | `#525252` |
+| Gray 700 | `#404040` |
 | Gray 800 | `#262626` |
 | Gray 900 | `#171717` |
-| Gray 950 | `#0b0b0b` |
+| Gray 950 | `#0a0a0a` |
 | White    | `#ffffff` |
 | Black    | `#000000` |
 
 ### Roles
 
-| Role                  | Light     | Dark      |
-| --------------------- | --------- | --------- |
-| Page                  | `#ffffff` | `#0b0b0b` |
-| Surface               | `#f0f0f0` | `#1a1a1a` |
-| Overlay               | `#ffffff` | `#262626` |
-| Scrim                 | Black 60% | Black 70% |
-| Text                  | `#171717` | `#f0f0f0` |
-| Text muted            | `#545454` | `#a6a6a6` |
-| Text subtle           | `#6b6b6b` | `#8f8f8f` |
-| Text disabled         | `#8f8f8f` | `#767676` |
-| Text inverse          | `#ffffff` | `#171717` |
-| Primary               | `#171717` | `#f0f0f0` |
-| On primary            | `#ffffff` | `#171717` |
-| Primary hover         | `#3d3d3d` | `#d1d1d1` |
-| Primary pressed       | `#545454` | `#a6a6a6` |
-| Highlight             | `#e4e4e4` | `#3d3d3d` |
-| Pressed               | `#d1d1d1` | `#545454` |
-| Selected              | `#171717` | `#f0f0f0` |
-| Selected text         | `#ffffff` | `#171717` |
-| Border                | `#8f8f8f` | `#6b6b6b` |
-| Border subtle         | `#d1d1d1` | `#3d3d3d` |
-| Border strong         | `#545454` | `#a6a6a6` |
-| Border disabled       | `#d1d1d1` | `#3d3d3d` |
-| Focus                 | `#171717` | `#f0f0f0` |
-| Danger                | `#b42318` | `#f87171` |
-| Danger hover          | `#961c12` | `#fca5a5` |
-| Danger pressed        | `#7f1d1d` | `#fecaca` |
-| Danger subtle         | `#fef2f2` | `#450a0a` |
-| Danger subtle pressed | `#fee2e2` | `#5b0f0f` |
-| On danger             | `#ffffff` | `#171717` |
-
-Success, warning, and information have no color role. They use the neutral text, icon, and border
-roles described in [Colors](./colors.md).
+| Role               | Light          | Dark           |
+| ------------------ | -------------- | -------------- |
+| Primary            | `#171717`      | `#f5f5f5`      |
+| On primary         | `#ffffff`      | `#171717`      |
+| Primary hover      | `#262626`      | `#e5e5e5`      |
+| Primary active     | `#404040`      | `#d4d4d4`      |
+| Secondary          | `#e5e5e5`      | `#404040`      |
+| On secondary       | `#171717`      | `#f5f5f5`      |
+| Secondary hover    | `#f5f5f5`      | `#525252`      |
+| Secondary active   | `#d4d4d4`      | `#737373`      |
+| Danger             | `#b91c1c`      | `#f87171`      |
+| Danger subtle      | `#fef2f2`      | `#450a0a`      |
+| Danger border      | `#fecaca`      | `#7f1d1d`      |
+| Success            | `#166534`      | `#86efac`      |
+| Success subtle     | `#f0fdf4`      | `#052e16`      |
+| Success border     | `#bbf7d0`      | `#166534`      |
+| Warning            | `#854d0e`      | `#fde68a`      |
+| Warning subtle     | `#fffbeb`      | `#422006`      |
+| Warning border     | `#fde68a`      | `#854d0e`      |
+| Information        | `#1e40af`      | `#93c5fd`      |
+| Information subtle | `#eff6ff`      | `#172554`      |
+| Information border | `#bfdbfe`      | `#1e40af`      |
+| Background         | `#ffffff`      | `#000000`      |
+| Surface            | `#ffffff`      | `#171717`      |
+| Raised surface     | `#ffffff`      | `#262626`      |
+| Floating surface   | `#ffffff`      | `#171717`      |
+| Sunken surface     | `#fafafa`      | `#0a0a0a`      |
+| Surface hover      | `#f5f5f5`      | `#262626`      |
+| Surface active     | `#e5e5e5`      | `#404040`      |
+| Highlight          | `#f5f5f5`      | `#262626`      |
+| Overlay            | Black, 50%     | Black, 70%     |
+| Text               | `#171717`      | `#f5f5f5`      |
+| Text muted         | `#525252`      | `#a3a3a3`      |
+| Text subtle        | `#737373`      | `#737373`      |
+| Text disabled      | `#a3a3a3`      | `#525252`      |
+| Text inverse       | `#ffffff`      | `#171717`      |
+| Border             | `#e5e5e5`      | `#262626`      |
+| Border strong      | `#d4d4d4`      | `#404040`      |
+| Border subtle      | `#f5f5f5`      | `#171717`      |
+| Border disabled    | `#e5e5e5`      | `#262626`      |
+| Focus              | `#171717`      | `#f5f5f5`      |
+| Focus ring         | `#171717`, 20% | `#ffffff`, 25% |
+| Disabled           | `#f5f5f5`      | `#262626`      |
+| On disabled        | `#a3a3a3`      | `#737373`      |
+| Shadow             | Black, 5%      | Black, 20%     |
+| Strong shadow      | Black, 10%     | Black, 40%     |
 
 ## Spacing
 
-| Step | Value |
+| Step | Size  |
 | ---- | ----- |
-| 0    | 0     |
-| 1    | 4     |
-| 2    | 8     |
-| 3    | 12    |
-| 4    | 16    |
-| 5    | 20    |
-| 6    | 24    |
-| 8    | 32    |
-| 10   | 40    |
-| 12   | 48    |
-| 16   | 64    |
+| 0    | 0 px  |
+| 1    | 4 px  |
+| 2    | 8 px  |
+| 3    | 12 px |
+| 4    | 16 px |
+| 5    | 20 px |
+| 6    | 24 px |
+| 8    | 32 px |
+| 10   | 40 px |
+| 12   | 48 px |
+| 16   | 64 px |
 
 ## Radius
 
-| Token  | Value |
-| ------ | ----- |
-| Small  | 4     |
-| Medium | 8     |
-| Large  | 12    |
-| Full   | 9999  |
+| Step | Size    |
+| ---- | ------- |
+| XS   | 4 px    |
+| SM   | 8 px    |
+| MD   | 12 px   |
+| LG   | 16 px   |
+| XL   | 24 px   |
+| 2XL  | 32 px   |
+| Full | 9999 px |
 
 ## Borders
 
-| Token             | Value |
-| ----------------- | ----- |
-| Functional border | 2     |
-| Strong border     | 3     |
+| Token                | Width |
+| -------------------- | ----- |
+| Default border width | 2 px  |
+| Subtle border width  | 1 px  |
 
 ## Focus
 
-| Token          | Value |
-| -------------- | ----- |
-| Outline width  | 2     |
-| Outline offset | 2     |
+| Token              | Value |
+| ------------------ | ----- |
+| Focus width        | 2 px  |
+| Focus offset       | 2 px  |
+| Inset focus offset | -2 px |
+| Focus ring width   | 4 px  |
 
 ## Controls
 
-| Token          | Value |
-| -------------- | ----- |
-| Control height | 36    |
-| Hit area       | 44    |
-| Menu item      | 36    |
-| Table row      | 36    |
-| Table header   | 40    |
-| Checkbox       | 20    |
-| Radio          | 16    |
-| Switch track   | 36×20 |
-| Switch thumb   | 14    |
-| Slider track   | 4     |
-| Slider thumb   | 16    |
+### Sizes
 
-## Surfaces
+| Token  | Size  |
+| ------ | ----- |
+| Small  | 32 px |
+| Medium | 40 px |
+| Large  | 44 px |
 
-The system has three surface levels: page, surface, and overlay. Their values are listed under
-[Roles](#roles). There is no shadow role.
+### Item height
 
-## Typography
+| Token | Height |
+| ----- | ------ |
+| Item  | 36 px  |
 
-### Sizes and line heights
+## Shadows
 
-| Size | Line height |
-| ---- | ----------- |
-| 12   | 16          |
-| 14   | 20          |
-| 16   | 24          |
-| 20   | 28          |
-| 24   | 32          |
-| 32   | 40          |
-| 40   | 48          |
-| 48   | 56          |
+| Step   | Layers                                                                                       |
+| ------ | -------------------------------------------------------------------------------------------- |
+| Small  | Offset 0, 1 px; blur 2 px; shadow color                                                      |
+| Medium | Offset 0, 1 px; blur 3 px; strong shadow color, plus offset 0, 1 px; blur 2 px; shadow color |
+| Large  | Offset 0, 2 px; blur 8 px; strong shadow color                                               |
 
-### Weight
+## Blur
 
-| Token   | Value |
-| ------- | ----- |
-| Regular | 400   |
-
-No other weight is part of the system.
-
-### Families
-
-| Role | Value      |
-| ---- | ---------- |
-| Sans | Geist Sans |
-| Mono | Geist Mono |
-
-Numbers are tabular by default.
-
-## Icons
-
-| Token           | Value   |
-| --------------- | ------- |
-| Grid            | 24      |
-| Size inline     | 16      |
-| Size control    | 20      |
-| Size standalone | 24      |
-| Size mark       | 14      |
-| Stroke          | 1.5     |
-| Mark stroke     | 2.5     |
-| Caps and joins  | Round   |
-| Default form    | Outline |
-| Active form     | Filled  |
+| Step    | Radius |
+| ------- | ------ |
+| None    | 0 px   |
+| Subtle  | 4 px   |
+| Medium  | 8 px   |
+| Strong  | 16 px  |
+| Intense | 24 px  |
 
 ## Layout
 
@@ -176,7 +157,7 @@ Numbers are tabular by default.
 
 | Name     | Width    |
 | -------- | -------- |
-| Compact  | < 600    |
+| Compact  | < 600 px |
 | Medium   | 600–959  |
 | Expanded | 960–1279 |
 | Wide     | ≥ 1280   |
@@ -201,46 +182,68 @@ Numbers are tabular by default.
 | Token   | Value |
 | ------- | ----- |
 | Sticky  | 10    |
-| Overlay | 100   |
-| Popup   | 200   |
-| Tooltip | 300   |
-| Toast   | 400   |
+| Overlay | 50    |
+| Toast   | 100   |
+| Tooltip | 1000  |
 
 ## Motion
 
-Durations are in milliseconds.
-
 ### Durations
+
+| Token   | Duration |
+| ------- | -------- |
+| Fast    | 120 ms   |
+| Base    | 160 ms   |
+| Medium  | 200 ms   |
+| Slow    | 800 ms   |
+| Enter   | 360 ms   |
+| Exit    | 240 ms   |
+| Minimum | 120 ms   |
+| Delay   | 350 ms   |
+
+### Easing
+
+| Token                 | Curve                            |
+| --------------------- | -------------------------------- |
+| Standard              | `ease`                           |
+| Spring                | `cubic-bezier(0.2, 0.8, 0.2, 1)` |
+| Emphasized decelerate | `cubic-bezier(0.32, 0.72, 0, 1)` |
+| Emphasized accelerate | `cubic-bezier(0.5, 0, 0.75, 0)`  |
+
+## Typography
+
+### Typeface
+
+| Token  | Value                                                             |
+| ------ | ----------------------------------------------------------------- |
+| Family | Outfit, with a sans-serif fallback                                |
+| Mono   | ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace |
+
+### Sizes
+
+| Step | Size  |
+| ---- | ----- |
+| XS   | 12 px |
+| SM   | 14 px |
+| MD   | 16 px |
+| LG   | 18 px |
+| XL   | 20 px |
+| 2XL  | 24 px |
+| 3XL  | 32 px |
+
+### Weights
+
+| Token    | Weight |
+| -------- | ------ |
+| Regular  | 400    |
+| Medium   | 500    |
+| Semibold | 600    |
+| Bold     | 700    |
+
+### Line heights
 
 | Token   | Value |
 | ------- | ----- |
-| Fast    | 120   |
-| Base    | 160   |
-| Medium  | 200   |
-| Enter   | 240   |
-| Exit    | 160   |
-| Ambient | 1600  |
-| Spinner | 800   |
-
-Fast answers a direct input. Base carries a state change. Medium carries a movement across a
-surface. Enter and Exit are used when a temporary surface appears or leaves; a tooltip, which answers hover or
-focus, uses Base to appear and Fast to leave. Ambient is the slow
-rhythm of a loading placeholder. Spinner is the rotation of the indeterminate indicator.
-
-### Curves
-
-| Token    | Value                        |
-| -------- | ---------------------------- |
-| Standard | `cubic-bezier(0.2, 0, 0, 1)` |
-| Exit     | `cubic-bezier(0.4, 0, 1, 1)` |
-| Ambient  | `ease-in-out`                |
-| Spinner  | Linear                       |
-
-Standard decelerates into its destination without overshoot. Exit accelerates away. Ambient is
-symmetric, for looping motion that should not read as urgent.
-
-### Press
-
-| Token | Value |
-| ----- | ----- |
-| Scale | 0.97  |
+| Tight   | 1.2   |
+| Normal  | 1.5   |
+| Relaxed | 1.7   |

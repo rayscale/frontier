@@ -1,34 +1,23 @@
 # Foundations
 
-Foundations are the shared rules that every component and pattern builds on. They define how Frontier
-looks and behaves before any specific interaction is involved: color, type, space, layout, shape,
-elevation, motion, focus, icons, and accessibility.
+Foundations are the shared rules that every component builds on. They define how Frontier looks and behaves before any component is involved: color, shape, space, type, depth, motion, focus, and accessibility.
 
-## Foundations in this category
+## Guidelines in this category
 
-- [Colors](./colors.md): monochrome roles, `danger`, themes, and contrast.
-- [Typography](./typography.md): the neutral grotesque, the fixed scale, one weight, and mono.
-- [Spacing](./spacing.md): the base-4 scale, rhythm, density, and target size.
-- [Layout](./layout.md): the adaptive grid, breakpoints, and reading width.
-- [Shape](./shape.md): rounded corners and functional borders.
-- [Elevation](./elevation.md): flat layering and the three surfaces.
-- [Motion](./motion.md): movement with a job, from input feedback to progress.
-- [Focus](./focus.md): the outline and `focus-visible`.
-- [Icons](./icons.md): grid, geometry, sizes, color, and usage.
+- [Colors](./colors.md): roles, themes, and contrast.
+- [Shape](./shape.md): corners, borders, and the friendly curve.
+- [Spacing](./spacing.md): grouping, rhythm, and target size.
+- [Layout](./layout.md): the grid, breakpoints, and reading width.
+- [Typography](./typography.md): typeface, hierarchy, and readability.
+- [Elevation](./elevation.md): layers, depth, and floating content.
+- [Motion](./motion.md): the character, timing, and reduction of movement.
+- [Focus](./focus.md): keyboard position and its visual treatment.
 - [Accessibility](./accessibility.md): the baseline every design must meet.
-- [Values](./values.md): the concrete values behind every foundation.
+- [Icons](./icons.md): grid, stroke, color, and usage rules for icons.
+- [Values](./values.md): the concrete values behind colors, spacing, shape, depth, motion, and type.
 
-## Relationship to the other layers
+## Relationship to the other categories
 
-Foundations express the [Principles](../principles/README.md). [Patterns](../patterns/README.md)
-apply them to recurring interactions, [Components](../components/README.md) compose them into
-primitives, and [Content](../content/README.md) applies the same discipline to language.
+Foundations express the [Principles](../principles/README.md). They are used by [Patterns](../patterns/README.md), which describe how these rules combine into recurring behaviors, and by [Components](../components/README.md), which apply them to specific elements.
 
-## Changing a foundation
-
-A foundation changes only when the change affects the whole system. A component that needs a
-different value first asks whether the foundation is wrong. Local exceptions belong in the component
-that needs them and are recorded with a reason.
-
-Every concrete value lives in [Values](./values.md). A foundation explains intent and links there
-instead of repeating numbers.
+A foundation should be changed only when the change affects the whole system. A component that needs a different value should first ask whether the foundation is wrong.

@@ -1,42 +1,37 @@
 # Focus
 
-Focus shows where keyboard interaction is directed. In Frontier it is a visible outline that follows
-the element's corners, never depends on color alone, and never disappears.
+Focus shows where the keyboard is. It tells a keyboard or assistive technology user which element will respond to their next action. Focus must always be visible when the keyboard is in use, and it must be distinct from every other state.
 
-See [Values](./values.md#focus) for the outline width and offset.
+## Focus, highlight, and selection are different things
 
-## The outline
+- **Focus** is where the keyboard is.
+- **Highlight** is the option under the pointer or the active option in a list.
+- **Selection** is the value the user has chosen.
 
-Focus is drawn as an outline at the width and offset defined in [Values](./values.md#focus). The
-outline follows the element's corner radius and boundary. It uses the strongest text role
-of the theme, so it remains visible on page, surface, highlight, and selected states.
+These can coincide, but they should be visually distinct. A user should be able to tell whether the keyboard has moved, whether the pointer is hovering, and what they have already chosen.
 
-A component does not replace the outline with a border, a background change, or a shadow.
+## Visibility
 
-## When it appears
+Focus must be clearly visible against its surroundings. It should appear when the user navigates by keyboard. It should not appear as a side effect of a pointer click where it would only add noise, unless the element is a text field where focus is the editing state.
 
-The outline appears when the element receives keyboard focus. A pointer press does not draw the
-outline; if the element already had keyboard focus, the outline remains until focus moves.
+## Treatment
 
-## Never hidden
+The focus treatment is a ring or outline placed outside the element, with a clear offset from its edge. The same treatment should appear across the interface, so a user learns it once. Focus must never be removed without a replacement.
 
-The focus outline is never removed, clipped, or covered by an overlay. If an element sits at the
-edge of a scrolling region, the region leaves enough room for the outline. If an element is inside
-a floating surface, the outline is drawn inside the visible area or the surface leaves space for it.
+See [Values](./values.md#focus) for the focus width, offset, and ring width.
 
-## Focus is not selection
+## Containers
 
-Focus, highlight, and selection are different facts and must remain distinguishable when they
-coexist. The state model is defined in [States](../patterns/states.md), and selection in
-[Selection](../patterns/selection.md).
+Focus must not be clipped by the container that holds the element. When a focused element sits at the edge of a scrolling or bordered container, its focus treatment should still be fully visible.
 
-## Disabled elements
+## Dragging
 
-A disabled element remains focusable and keeps a visible focus outline. Its unavailable state is
-communicated by text and structure, so a keyboard user can reach it and understand why it cannot be
-used. See [Accessibility](./accessibility.md).
+Focus does not follow pointer movement during a drag, and focus alone does not start a drag. A committed drag moves focus to the resulting target. See [Drag](../patterns/drag.md).
 
 ## Principle
 
-A person using a keyboard should always be able to see where focus is, without relying on color and
-without losing the outline to another state.
+A keyboard user should always know where they are, and that knowledge should look the same everywhere.
+
+## Tight containers
+
+Every control uses the same focus treatment. When a control sits at the edge of a container that would clip an outside outline, the outline is drawn inside the element with a negative offset. The treatment stays the same; only its placement changes.

@@ -1,63 +1,31 @@
 # Loading
 
-Loading feedback communicates that work is in progress. Frontier uses skeletons for content, the
-spinner for actions, and a progress bar when the amount of work is known.
+Loading feedback tells the user that content or an action is still in progress. It should reduce uncertainty without making the wait feel longer than it is.
 
-## Choose by context
+## Placeholders match their content
 
-- **Skeleton** for content that is arriving. It mirrors the final layout so the page does not jump
-  when the content appears.
-- **Spinner** for an action whose duration is unknown. It communicates activity that no static state
-  can express.
-- **Progress** when the amount completed is known. The bar moves to the new value in a short
-  transition, so the person can follow the rate of progress.
+A placeholder should have the size and shape of the content it replaces. When content arrives, the layout should not shift. A placeholder that looks nothing like its final content makes the arrival feel like a jump.
 
-A skeleton is not used for an action, and a spinner is not used to stand in for a whole page that
-could show its structure.
+## Gentle activity
 
-## No layout shift
+The placeholder should show activity with a calm, continuous motion, such as a soft wave moving across the surface. The motion should be slow enough to read as ambient, not urgent. It should not compete with the content around it.
 
-Loading content keeps the final dimensions. A skeleton occupies the same space as the content it
-replaces. When content arrives, nothing below it moves.
+## Pointer response
 
-## The spinner
-
-The spinner is an indeterminate indicator: it runs continuously, linearly, and without easing. It
-is not decorative, and it is not used where a static state would communicate the same thing. It is
-the only element that repeats a movement without a state to show. See
-[Motion](../foundations/motion.md) and [Values](../foundations/values.md#motion).
-
-## The loading placeholder
-
-A skeleton shows that content is arriving with a slow, soft pulse of its surface. The pulse is
-ambient: it is slower than any other movement in the system, it does not change the skeleton's size
-or layout, and it never competes with arriving content. It is not a shimmer that sweeps across the
-surface, because a sweep draws attention to the wait itself. It stops when the content arrives.
+Loading placeholders are not interactive, so a pointer-following light is not part of the loading language. It must not appear on a placeholder, because the light would suggest an action that does not exist. A pointer light belongs only to interactive surfaces, where it signals a real affordance.
 
 ## Reduced motion
 
-When a person prefers reduced motion, the spinner is replaced by a static status indicator with a
-text label or by a determinate progress value, and the pulse stops. The information that content is
-loading remains visible in every case.
+Under reduced motion, the placeholder keeps its shape and stops its shimmer, pulse, and pointer-following spotlight. The user must still understand that content is loading. See [Motion](../foundations/motion.md).
 
-## Labels and announcements
+## Contrast
 
-A loading region has a visible or accessible label. An action that triggers loading keeps its label
-and shows that it is busy. Loading is announced as status; it does not interrupt the person unless
-the wait blocks the task.
-
-## Honest progress
-
-A determinate bar never fakes progress. If the amount is unknown, the surface uses the spinner or a
-skeleton instead. A bar that stalls without explanation is misleading.
-
-## Errors during loading
-
-When loading fails, the loading state is replaced by an error message that explains what happened
-and what to do next. The page does not remain in a permanent loading state. See
-[Feedback](./feedback.md).
+Placeholders should remain visible in both themes, but they are not text and do not need text contrast. They should still be clearly distinct from the page, so a user can see where content will appear.
 
 ## Principle
 
-Loading feedback should preserve the layout, tell the truth about progress, and never become the
-only thing a person can see.
+Loading feedback should show that something is coming, where it will appear, and roughly what it will look like, without drawing more attention than the content itself.
+
+## Open question
+
+Should pointer-following light remain part of the loading-placeholder language when placeholders themselves are not interactive, or should it be reserved for contexts where it cannot imply an affordance?

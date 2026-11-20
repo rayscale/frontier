@@ -1,51 +1,35 @@
 # Shape
 
-Shape in Frontier is rectangular with rounded corners. Edges are straight, corners are soft, and
-borders exist only when they do work. The visual character comes from exact alignment and from the
-contrast between surfaces, not from decoration.
+Shape is one of the main ways Frontier expresses its friendly character. Corners, borders, and curves signal approachability. A consistent shape language also tells the user which elements belong together.
 
-See [Values](./values.md#radius) for the radius scale and [Borders](./values.md#borders) for widths.
+See [Values](./values.md#radius) for the radius scale and [Values](./values.md#borders) for border widths.
 
-## Rounded corners
+## Corners
 
-Every surface and control uses a radius from the shared scale. The radius follows the role of the
-element: a small mark uses the small radius, a large surface the large radius, and a control uses
-the medium or large radius, or the full radius when it should read as a pill. A circle is reserved
-for a form that carries meaning, such as a switch, an avatar, or the body of a checkbox or a radio,
-where the mark inside it, a check or a dot, tells the two apart. Icons use round caps and joins; see
-[Icons](./icons.md).
+Corners follow a consistent scale. Larger containers and popups use a larger radius, and small controls use a smaller one. Corners scale with the size of the element, so a small control never looks like a miniature container.
 
-## Borders are functional
+Nested elements should use a smaller radius than the element that contains them. This keeps curves concentric, so the inner shape looks like it belongs inside the outer one rather than fighting it. Derive the inner radius by subtracting the space between the two edges from the outer radius, including padding and border width.
 
-Frontier has no structural or decorative borders. Surfaces and spacing group content. A border is
-allowed only when a person must identify an edge:
+Choosing an unrelated smaller radius leaves a visible gap or a lopsided curve instead of a concentric one.
 
-- a field or another control whose target would be ambiguous without one;
-- a separator between regions that spacing alone cannot distinguish;
-- the edge of a floating surface that would otherwise blend into the page;
-- a focus indicator, governed by [Focus](./focus.md).
+## Borders
 
-A card, a section, or a panel does not get a border to look finished. If a group needs a visible
-limit, use a surface change or a separator in the right place.
+Borders define an edge that the surface change alone cannot. Use a light border when a surface needs definition against its background. Do not add a border where a change in surface already separates the content.
 
-## Two widths
+Two border widths are available. Use the subtle hairline for separators and nested edges, and the default width for control and container edges. The width should match the role of the edge, not the size of the element.
 
-A functional border uses the functional width. A boundary that must stay distinct over a surface of
-similar value may use the strong width. Width is chosen by the role of the edge, not by the size of
-the element. The focus outline has its own rule in [Focus](./focus.md).
+## Full rounding
 
-## Straight edges
+Fully rounded shapes, such as capsules and circles, are reserved for small, self-contained elements: status markers, badges, avatars, and switches. Large containers and text fields should not be fully rounded, because the curve would reduce the space available for content.
 
-Borders and separators are straight. There are no inset shadows, glows, or bevels. The edge of a
-surface is either its boundary or its border, never both with a decorative effect.
+## Shape across components
 
-## Nested alignment
+Components of the same kind share a shape language. A component may vary in size, but it keeps its family's curve. Two components that appear side by side should not feel like they come from different systems.
 
-A nested region aligns to its container's edges or to the grid. Where a border is present, the
-content aligns to the inner edge, not to the outer one. Inconsistent insets make a surface look off
-even when every value is correct.
+## A single radius family
+
+Frontier uses a single radius family. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.
 
 ## Principle
 
-Shape should be exact and quiet: rounded corners, straight edges, and a border only where an edge
-must be identified.
+Shape should feel warm and approachable without sacrificing structure. The user should always be able to tell where one element ends and another begins.

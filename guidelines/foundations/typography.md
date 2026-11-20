@@ -1,68 +1,42 @@
 # Typography
 
-Typography carries most of Frontier's content. It is neutral, technical, and quiet: one grotesque
-family, one weight, and a small fixed scale. Hierarchy comes from size, space, and structure rather
-than from weight or color.
+Typography carries most of Frontier's content. It should be clear, calm, and friendly. The typeface is a clean, modern sans-serif. Type supports the warm tone of the interface without drawing attention to itself.
 
-See [Values](./values.md#typography) for the family criteria, sizes, line heights, and weights.
+# Outfit
 
-## One family
+**Frontier is set in Outfit.** Use Outfit, including its variants, for all interface text. Every weight comes from the same variable family, so no other typeface is part of the system.
 
-Frontier uses Geist Sans, a neutral grotesque with open forms and high legibility. Geist Mono is the
-matching family for code and technical content. A second display family is not part of the system.
+See [Values](./values.md#typography) for the sizes, weights, and line heights.
 
-## One weight
+## Typeface rules
 
-The system uses regular weight only. There is no bold, semibold, or medium.
+One typeface family is used across the interface. Using a single family keeps the voice consistent, and it lets weight and size do the work of hierarchy.
 
-This has consequences that every design must respect:
+## Hierarchy
 
-- Emphasis comes from size, space, rules, surfaces, and position, never from weight.
-- A primary action is distinguished by an inverted fill or a functional border, not by heavier text.
-- Headings are larger and better spaced, not bolder.
-- Text that needs to stand out inside a paragraph uses a separate block, a rule, or a link, never a
-  weight change.
+Use a small number of levels. Each level should be clearly different from the one above and below it. Hierarchy comes first from size and then from weight. Color should not carry hierarchy alone.
 
-Using a second weight is a change to the language, not a local decision.
-
-## A fixed scale
-
-Type sizes come from a fixed set of steps. A new size is justified only when no step can serve the
-content. Adjacent steps must remain visibly different, and a design does not use more levels than
-the content needs.
-
-## Sentence case
-
-Labels, headings, and body text use sentence case. Uppercase is reserved for short acronyms and
-established abbreviations. All-caps text is not part of the system because it reduces legibility and
-adds emphasis that weight cannot balance. See [Voice](../content/voice.md).
-
-## Mono for technical content
-
-A monospaced family is used for code, data, and technical metadata or labels. Mono is not used for
-body text. Its smaller apparent size means it must never fall below the minimum readable size for
-its context.
-
-Code always reads left to right, even when the surrounding interface is right to left. See
-[Code](../patterns/code.md).
-
-## Numbers
-
-Numbers are tabular by default, so digits align in tables, counters, and any stacked comparison.
-Proportional figures are not part of the system.
+Emphasis within a line should use weight, not capital letters or decoration.
 
 ## Readability
 
-Line height increases with the reading role of the text: body copy is more open than a display
-heading, and metadata is more compact but never cramped. Line length stays within a comfortable
-measure; text is not compressed to fit a control. See [Layout](./layout.md).
+Use sentence case for labels, headings, and body text. Avoid all-caps text except for short, deliberate labels, because it is harder to read and reads as shouting. Keep line lengths comfortable for reading, and do not compress text to fit a control.
 
 ## Labels in controls
 
-A control's label matches the control's size. A label is never smaller than the minimum readable
-size for its context, and it never relies on weight to be understood.
+A control's label should match the control's size. A small control uses a small label. A label should never be smaller than the minimum readable size for its context.
+
+## Numbers
+
+Numbers that are compared or stacked should align. Use the same width for digits where alignment matters, such as counters and tables.
+
+## Code
+
+Code uses a monospace family so characters align between lines. It always reads
+left to right, even when the surrounding interface is right to left. Code type is
+not smaller than the minimum readable size for its context, and its decoration
+such as line numbers stays out of the copied text.
 
 ## Principle
 
-Type should be the clearest route into the content, using size and space rather than weight or color
-to establish hierarchy.
+Type should be the clearest route into the content. A reader should understand the structure of a page from its type before they read the words.

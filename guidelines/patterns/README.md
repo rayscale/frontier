@@ -1,30 +1,26 @@
 # Patterns
 
-Patterns describe interaction behavior that recurs across many components. A pattern explains how a
-state appears, how a person chooses, how a popup behaves, or how feedback is delivered. It is
-reusable: a designer should find it wherever its situation applies.
+Patterns describe interaction behaviors that recur across many components. They explain how a state looks and moves, how the user chooses, how popups appear, and how loading is communicated. A pattern is reusable: a designer should find it in every component where its situation applies.
 
-## Patterns in this category
+## Guidelines in this category
 
-- [States](./states.md): the interaction states and how they combine.
-- [Selection](./selection.md): selected, current, and active, and why they differ.
-- [Highlight](./highlight.md): the pointer and keyboard highlight inside a group.
-- [Popups](./popups.md): menus, dialogs, tooltips, and their dismissal.
-- [Feedback](./feedback.md): inline messages, toasts, banners, and empty states.
-- [Loading](./loading.md): skeletons, the spinner, and progress.
-- [Data display](./data-display.md): tables, alignment, sorting, and filtering.
-- [Navigation](./navigation.md): tabs, breadcrumbs, hierarchy, and location.
+- [States](./states.md): the interaction states an element can be in, and how they combine.
+- [Selection](./selection.md): highlighted, selected, and current, and why they are different.
+- [Highlight](./highlight.md): the moving highlight that follows the user through a group of options.
+- [Drag](./drag.md): pressing and moving along a group to choose a value, with its commitment, cancellation, and alternatives.
+- [Popups](./popups.md): floating content that appears in response to an action.
+- [Loading](./loading.md): placeholders and loading feedback.
+- [Data display](./data-display.md): tables, alignment, sorting, filtering, and selection.
 - [Code](./code.md): reading, copying, and presenting code.
-- [Drag](./drag.md): direct manipulation with commitment and cancellation.
-- [Search](./search.md): queries, results, and empty results.
-- [Forms](./forms.md): validation and form errors.
-- [Keyboard](./keyboard.md): the keyboard model and shortcuts.
+- [Forms](./forms.md): labels, validation, and errors.
+- [Keyboard](./keyboard.md): the keys each kind of control uses.
+- [Search](./search.md): querying and narrowing content.
+- [Messages](./messages.md): persistent inline feedback and its tones.
+- [Sequential navigation](./sequential-navigation.md): moving between neighboring destinations.
+- [Hierarchy](./hierarchy.md): nested destinations, disclosure, and the current path.
 
-## Relationship to the other layers
+## Relationship to the other categories
 
-Patterns combine [Foundations](../foundations/README.md) into behavior and express the
-[Principles](../principles/README.md) in a specific situation. [Components](../components/README.md)
-use patterns and link here instead of restating a shared rule.
+Patterns combine [Foundations](../foundations/README.md) into behaviors. They express the [Principles](../principles/README.md) in a specific situation. [Components](../components/README.md) use patterns, and a component guideline should link to the pattern rather than restate it.
 
-A pattern is added only when a behavior recurs. A behavior that belongs to one primitive stays in
-that primitive's document.
+A pattern should be added only when a behavior recurs. A single unique behavior belongs in the component guideline that owns it.

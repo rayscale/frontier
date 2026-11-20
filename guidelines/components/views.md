@@ -1,52 +1,47 @@
 # Views
 
-Views move between mutually exclusive areas of content. Tabs and segmented regions are the common
-presentations. A view is a location, not a selected value.
+Views are mutually exclusive areas of content, and exactly one of them is current at a time. Switching to a view changes which content the user sees. A view differs from a [Choice](./choice.md): a choice sets a value, while a view is the place the user is.
 
-## One current view
+## What a view is
 
-Exactly one view is current in a region. The current view is visible and announced. The other views
-are not rendered as if they were visible; they are reached by changing the view.
+Views are peers. They are sections the user moves between, not levels of a hierarchy. Each view has a name that describes its content. The name must be available to every user, and the current view must be communicated to assistive technology, not only shown visually.
 
-The current view is not the selected value of a control inside it. See
-[Selection](../patterns/selection.md).
+## The current view
 
-## Tabs
+The current view indicator shows where the user is. It is persistent and visible at all times, so the user always knows which view is open. The indicator moves to the new view when the user switches, which lets the user follow the change. See [Selection](../patterns/selection.md).
 
-Tabs are arranged along an axis. Each tab has a label and, optionally, an icon. The current tab is
-visually distinct without relying on color alone. Tabs keep their order between visits.
+The current view differs in meaning from a highlight. The indicator is a position, and the highlight is attention.
 
-A tab that contains an error or a pending change may carry a marker, but the marker does not
-replace the tab's label.
+## Preview
 
-## Keyboard
+Moving the pointer over a view previews where the user can go. The preview follows [Highlight](../patterns/highlight.md), so it travels between views rather than appearing on each one.
 
-Arrow keys move the highlight within the tab list. The current view changes on confirmation, not on
-highlight alone. Home and End move to the first and last tab. Tab moves out of the list. See
-[Keyboard](../patterns/keyboard.md).
+When both are visible, the preview and current indicator must remain visually distinct. The preview answers "where can I go?" while the current indicator answers "where am I?" See [Selection](../patterns/selection.md).
 
-## Transition
+## Switching
 
-A view replaces another with a short fade: the outgoing view fades out and the incoming view fades
-in, entering faster than the outgoing view leaves so the surface never looks empty. There is no
-slide, no cross-fade of two fully visible views, and no change of layout.
+Switching is a committed action: a press, a confirming key, or the release of a drag. A view's content changes only after a switch. Current view-switching behavior activates as keyboard focus moves; whether that should be the system-wide rule remains open in [Choice](./choice.md). See [Drag](../patterns/drag.md) for the gesture.
 
-Views occupy the same region and keep their positions, so a person who switches repeatedly never
-hunts for the tab or the panel. The incoming view is readable from its first frame. See
-[Motion](../foundations/motion.md).
+## Orientation
 
-When a person prefers reduced motion, the change is instant.
+Views may be arranged horizontally or vertically. The meaning is the same in both. The current indicator and the preview follow the axis of the arrangement, and arrow keys move along that axis.
 
-## State retention
+## Content stability
 
-A view keeps its content state while the person moves to another view and back, unless the content
-is explicitly reloaded. The person does not lose typed input by switching tabs.
+The content area should keep its position when the user switches views, so the arrangement of views remains a stable point of reference. Content that changes shape should not shift the views themselves.
 
-## Overflow
+## Keyboard and focus
 
-When tabs do not fit, the region provides a visible way to reach the remaining tabs. It does not
-shrink labels below the readable minimum or hide tabs without a path.
+Arrow keys move focus between enabled views in the direction of the arrangement; Home and End move to the first and last enabled views. Focus follows [Focus](../foundations/focus.md) and remains distinct from the current indicator.
+
+## Disabled views
+
+A disabled view is visible but cannot be previewed or switched to, and keyboard navigation skips it. How disabled semantics affect direct focus depends on whether the platform control is natively disabled or uses an accessibility state; see [States](../patterns/states.md).
+
+## Dragging
+
+Views arranged along an axis may be dragged. The drag indicator follows the pointer, while the current view and its content remain unchanged until release. See [Drag](../patterns/drag.md).
 
 ## Principle
 
-A person should always know which view is current and should not lose work by moving between views.
+Views should make it easy to move between related places, and they should always show which place is open.

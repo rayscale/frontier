@@ -1,51 +1,29 @@
 # Spacing
 
-Spacing creates grouping and rhythm. It tells a person what belongs together before they read a
-word. Frontier uses one base-4 scale, one comfortable density, and a clear minimum target size.
+Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. Frontier uses a consistent scale, so that the same relationship looks the same everywhere.
 
-See [Values](./values.md#spacing) for the scale and [Controls](./values.md#controls) for heights.
+See [Values](./values.md#spacing) for the spacing scale.
+
+## Proximity groups content
+
+Space within a group must be smaller than space between groups. A label belongs closer to its control than to the next field. Items in a list belong closer to each other than to the list's heading. If two elements look equally related, the spacing has failed.
 
 ## One scale
 
-Every gap and inset comes from the shared scale. An unplanned value breaks the rhythm and makes
-elements look slightly misaligned. A new value is justified only when no step can express the
-relationship.
+Spacing values come from a shared scale. An unplanned value breaks the rhythm and makes components feel slightly misaligned. A new value is justified only when no value on the scale can serve the relationship.
 
-## Proximity groups
+## Density by context
 
-Space inside a group is smaller than space between groups. A label sits closer to its control than
-to the next field. Items in a list sit closer to each other than to the list's heading. When two
-elements look equally related, the spacing has failed.
+Density depends on where content appears. Page content can be comfortable, with generous space for reading. Popups and menus can be more compact, because they are temporary and scanned quickly. The same component may use different density in each context, but its proportions and internal relationships should stay the same.
 
-## One comfortable density
+## Consistent insets
 
-The system uses a single comfortable density. It is designed for reading and for mixed content, not
-for maximum data per screen.
-
-Data-heavy surfaces may use a tighter internal rhythm, but they draw it from the same scale and keep
-the same proportions between label, value, and padding. There is no separate compact mode. See
-[Data display](../patterns/data-display.md).
-
-## Stable insets
-
-The space between a control's edge and its content stays consistent across sizes. A small control
-should not look cramped next to a large one. Inset relationships are part of the control family, not
-a per-instance choice.
+The space inside a control, such as the gap between its edge and its label, should feel similar across sizes. A small control should not look cramped next to a large one.
 
 ## Target size
 
-A control's visible height is at least 36. On touch platforms, the interactive area is expanded to
-at least 44 without changing the visible height, and interactive areas never overlap.
-
-A larger target is always acceptable. A smaller one is not.
-
-## Density is not an excuse
-
-Tightening space is never allowed to make labels unreadable, targets unreachable, or groups
-ambiguous. When content does not fit, the answer is layout, disclosure, or scrolling, not smaller
-spacing.
+Interactive elements must be large enough to hit comfortably with a pointer, a finger, or assistive input. Spacing around a target should not make it harder to reach, and a target should not overlap a neighboring target.
 
 ## Principle
 
-Space should make the structure readable without a line or a color: related things sit together,
-and unrelated things have room.
+Space should make the structure of an interface readable without a single line or color. Related things sit together. Unrelated things have room.

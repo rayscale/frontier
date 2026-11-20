@@ -1,0 +1,28 @@
+[project]
+name = "frontier-sans"
+version = "0.1.0"
+description = "Build pipeline for Frontier Sans, the Frontier typeface."
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "fontmake>=3.9",
+  "fonttools[woff]>=4.50",
+  "ufoLib2>=0.16",
+  "skia-pathops>=0.8",
+  "fontbakery>=0.12",
+]
+
+[dependency-groups]
+dev = [
+    "numpy>=2.5.5",
+    "pillow>=13.0.0",
+    "pytest>=8",
+    "ruff>=0.5",
+    "uharfbuzz>=0.57.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.uv]
+package = false

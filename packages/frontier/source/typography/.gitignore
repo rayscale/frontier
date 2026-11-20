@@ -1,0 +1,10 @@
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+build/
+sources/*.ufo/
+sources/*.designspace
+fonts/*
+!fonts/.gitkeep
+specimens/*.png

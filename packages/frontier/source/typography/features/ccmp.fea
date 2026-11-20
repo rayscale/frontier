@@ -1,0 +1,9 @@
+@MarkAbove = [
+  gravecomb acutecomb circumflexcomb tildecomb macroncomb brevecomb
+  dotaccentcomb dieresiscomb ringcomb hungarumlautcomb caroncomb commaturnedabovecomb
+];
+
+feature ccmp {
+  sub i' @MarkAbove by dotlessi;
+  sub j' @MarkAbove by jdotless;
+} ccmp;

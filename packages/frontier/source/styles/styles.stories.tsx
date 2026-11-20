@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactElement } from 'react'
 
 const meta = {
   title: 'Foundations/Styles',
@@ -12,204 +12,101 @@ export default meta
 
 type TStory = StoryObj<typeof meta>
 
-const surfaces = [
-  { label: 'Page', token: '--frontier-color-page' },
-  { label: 'Surface', token: '--frontier-color-surface' },
-  { label: 'Overlay', token: '--frontier-color-overlay' },
-] as const
+interface TSwatch {
+  label: string
+  token: string
+  text?: string
+}
 
-const textRoles = [
+const surfaces: TSwatch[] = [
+  { label: 'Background', token: '--frontier-color-background' },
+  { label: 'Surface', token: '--frontier-color-surface' },
+  { label: 'Raised', token: '--frontier-color-surface-raised' },
+  { label: 'Floating', token: '--frontier-color-surface-floating' },
+  { label: 'Sunken', token: '--frontier-color-surface-sunken' },
+  { label: 'Hover', token: '--frontier-color-surface-hover' },
+  { label: 'Active', token: '--frontier-color-surface-active' },
+  { label: 'Highlight', token: '--frontier-color-surface-highlight' },
+]
+
+const fills: TSwatch[] = [
+  {
+    label: 'Primary',
+    token: '--frontier-color-primary',
+    text: '--frontier-color-on-primary',
+  },
+  {
+    label: 'Primary hover',
+    token: '--frontier-color-primary-hover',
+    text: '--frontier-color-on-primary',
+  },
+  {
+    label: 'Primary active',
+    token: '--frontier-color-primary-active',
+    text: '--frontier-color-on-primary',
+  },
+  {
+    label: 'Secondary',
+    token: '--frontier-color-secondary',
+    text: '--frontier-color-on-secondary',
+  },
+  {
+    label: 'Secondary hover',
+    token: '--frontier-color-secondary-hover',
+    text: '--frontier-color-on-secondary',
+  },
+  {
+    label: 'Secondary active',
+    token: '--frontier-color-secondary-active',
+    text: '--frontier-color-on-secondary',
+  },
+  {
+    label: 'Disabled',
+    token: '--frontier-color-disabled',
+    text: '--frontier-color-on-disabled',
+  },
+]
+
+const tones: TSwatch[] = ['danger', 'success', 'warning', 'info'].map((tone) => ({
+  label: tone[0]?.toUpperCase() + tone.slice(1),
+  token: `--frontier-color-${tone}-subtle`,
+  text: `--frontier-color-${tone}`,
+}))
+
+const textRoles: TSwatch[] = [
   { label: 'Text', token: '--frontier-color-text' },
   { label: 'Text muted', token: '--frontier-color-text-muted' },
   { label: 'Text subtle', token: '--frontier-color-text-subtle' },
   { label: 'Text disabled', token: '--frontier-color-text-disabled' },
-  {
-    label: 'Text inverse',
-    token: '--frontier-color-text-inverse',
-    background: '--frontier-color-primary',
-  },
-] as const
+]
 
-const stateRoles = [
-  {
-    label: 'Primary',
-    fill: '--frontier-color-primary',
-    text: '--frontier-color-on-primary',
-  },
-  {
-    label: 'Highlight',
-    fill: '--frontier-color-highlight',
-    text: '--frontier-color-text',
-  },
-  {
-    label: 'Pressed',
-    fill: '--frontier-color-pressed',
-    text: '--frontier-color-text',
-  },
-  {
-    label: 'Selected',
-    fill: '--frontier-color-selected',
-    text: '--frontier-color-selected-text',
-  },
-  {
-    label: 'Danger',
-    fill: '--frontier-color-danger',
-    text: '--frontier-color-on-danger',
-  },
-] as const
-
-const typeScale = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] as const
-
+const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'] as const
+const weights = ['regular', 'medium', 'semibold', 'bold'] as const
 const spacingSteps = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16] as const
-
-const radiusTokens = [
-  { label: 'Small', token: '--frontier-radius-sm' },
-  { label: 'Medium', token: '--frontier-radius-md' },
-  { label: 'Large', token: '--frontier-radius-lg' },
-  { label: 'Full', token: '--frontier-radius-full' },
-] as const
-
-const motionTokens = [
-  { label: 'Fast', token: '--frontier-duration-fast' },
-  { label: 'Base', token: '--frontier-duration-base' },
-  { label: 'Medium', token: '--frontier-duration-medium' },
-  { label: 'Enter', token: '--frontier-duration-enter' },
-  { label: 'Exit', token: '--frontier-duration-exit' },
-  { label: 'Ambient', token: '--frontier-duration-ambient' },
-  { label: 'Spinner', token: '--frontier-duration-spinner' },
-  { label: 'Standard', token: '--frontier-easing-standard' },
-  { label: 'Exit', token: '--frontier-easing-exit' },
-  { label: 'Ambient', token: '--frontier-easing-ambient' },
-  { label: 'Spinner', token: '--frontier-easing-spinner' },
-] as const
-
-const borderTokens = [
-  { label: 'Functional border', token: '--frontier-border-width' },
-  { label: 'Strong border', token: '--frontier-border-width-strong' },
-] as const
-
-const focusTokens = [
-  {
-    label: 'Outline width',
-    token: '--frontier-focus-width',
-    outline: 'var(--frontier-focus-width) solid var(--frontier-color-focus)',
-    offset: '0',
-  },
-  {
-    label: 'Outline offset',
-    token: '--frontier-focus-offset',
-    outline: 'var(--frontier-border-width) solid var(--frontier-color-focus)',
-    offset: 'var(--frontier-focus-offset)',
-  },
-] as const
-
-const controlTokens = [
-  {
-    label: 'Control height',
-    token: '--frontier-control-height',
-    radius: '--frontier-radius-sm',
-    width: '8rem',
-    height: 'var(--frontier-control-height)',
-  },
-  {
-    label: 'Hit area',
-    token: '--frontier-hit-area',
-    radius: '--frontier-radius-sm',
-    width: '8rem',
-    height: 'var(--frontier-hit-area)',
-  },
-  {
-    label: 'Menu item',
-    token: '--frontier-menu-item-height',
-    radius: '--frontier-radius-sm',
-    width: '8rem',
-    height: 'var(--frontier-menu-item-height)',
-  },
-  {
-    label: 'Table row',
-    token: '--frontier-table-row-height',
-    radius: '--frontier-radius-sm',
-    width: '8rem',
-    height: 'var(--frontier-table-row-height)',
-  },
-  {
-    label: 'Table header',
-    token: '--frontier-table-header-height',
-    radius: '--frontier-radius-sm',
-    width: '8rem',
-    height: 'var(--frontier-table-header-height)',
-  },
-  {
-    label: 'Checkbox',
-    token: '--frontier-checkbox-size',
-    radius: '--frontier-radius-full',
-    width: 'var(--frontier-checkbox-size)',
-    height: 'var(--frontier-checkbox-size)',
-  },
-  {
-    label: 'Radio',
-    token: '--frontier-radio-size',
-    radius: '--frontier-radius-full',
-    width: 'var(--frontier-radio-size)',
-    height: 'var(--frontier-radio-size)',
-  },
-  {
-    label: 'Switch track',
-    token: '--frontier-switch-track-width',
-    radius: '--frontier-radius-full',
-    width: 'var(--frontier-switch-track-width)',
-    height: 'var(--frontier-switch-track-height)',
-  },
-  {
-    label: 'Switch thumb',
-    token: '--frontier-switch-thumb-size',
-    radius: '--frontier-radius-full',
-    width: 'var(--frontier-switch-thumb-size)',
-    height: 'var(--frontier-switch-thumb-size)',
-  },
-  {
-    label: 'Slider track',
-    token: '--frontier-slider-track-size',
-    radius: '--frontier-radius-full',
-    width: '8rem',
-    height: 'var(--frontier-slider-track-size)',
-  },
-  {
-    label: 'Slider thumb',
-    token: '--frontier-slider-thumb-size',
-    radius: '--frontier-radius-full',
-    width: 'var(--frontier-slider-thumb-size)',
-    height: 'var(--frontier-slider-thumb-size)',
-  },
-] as const
+const radii = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const
+const shadows = ['sm', 'md', 'lg'] as const
+const blurs = ['none', 'subtle', 'medium', 'strong', 'intense'] as const
+const controls = ['small', 'medium', 'large'] as const
+const durations = ['fast', 'base', 'medium', 'slow', 'enter', 'exit', 'minimum', 'delay'] as const
+const easings = ['standard', 'spring', 'emphasized-decelerate', 'emphasized-accelerate'] as const
 
 const mainStyle: CSSProperties = {
   boxSizing: 'border-box',
-  width: 'min(72rem, 100%)',
-  maxHeight: 'calc(100vh - var(--frontier-spacing-16))',
-  overflow: 'auto',
   display: 'grid',
   gap: 'var(--frontier-spacing-10)',
+  width: 'min(72rem, 100%)',
+  maxHeight: 'calc(100vh - var(--frontier-spacing-16))',
   padding: 'var(--frontier-spacing-8)',
+  overflow: 'auto',
+  background: 'var(--frontier-color-background)',
   color: 'var(--frontier-color-text)',
-  background: 'var(--frontier-color-page)',
-}
-
-const sectionStyle: CSSProperties = {
-  display: 'grid',
-  gap: 'var(--frontier-spacing-4)',
-}
-
-const headingStyle: CSSProperties = {
-  margin: 0,
-  fontSize: 'var(--frontier-font-size-lg)',
-  lineHeight: 'var(--frontier-line-height-lg)',
+  fontFamily: 'var(--frontier-font-family)',
 }
 
 const gridStyle: CSSProperties = {
   display: 'grid',
   gap: 'var(--frontier-spacing-3)',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(12rem, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
 }
 
 const tokenStyle: CSSProperties = {
@@ -218,279 +115,208 @@ const tokenStyle: CSSProperties = {
   fontSize: 'var(--frontier-font-size-xs)',
 }
 
-export const tokens: TStory = {
+function Section(props: { title: string; children: ReactElement | ReactElement[] }): ReactElement {
+  return (
+    <section style={{ display: 'grid', gap: 'var(--frontier-spacing-4)' }}>
+      <h2
+        style={{
+          margin: 0,
+          fontSize: 'var(--frontier-font-size-lg)',
+          fontWeight: 'var(--frontier-font-weight-semibold)',
+        }}
+      >
+        {props.title}
+      </h2>
+      {props.children}
+    </section>
+  )
+}
+
+function Swatches(props: { items: TSwatch[] }): ReactElement {
+  return (
+    <div style={gridStyle}>
+      {props.items.map((item) => (
+        <div key={item.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 'var(--frontier-spacing-16)',
+              border: 'var(--frontier-border-width-subtle) solid var(--frontier-color-border)',
+              borderRadius: 'var(--frontier-radius-md)',
+              background: `var(${item.token})`,
+              color: item.text ? `var(${item.text})` : 'var(--frontier-color-text)',
+            }}
+          >
+            {item.label}
+          </div>
+          <span style={tokenStyle}>{item.token}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Labeled(props: { token: string; children: ReactElement }): ReactElement {
+  return (
+    <div style={{ display: 'grid', gap: 'var(--frontier-spacing-2)', justifyItems: 'start' }}>
+      {props.children}
+      <span style={tokenStyle}>{props.token}</span>
+    </div>
+  )
+}
+
+export const Tokens: TStory = {
   parameters: {
     docs: {
       description: {
         story:
-          'Shows the color, typography, spacing, shape, border, focus, control, and motion tokens in the active mode.',
+          'Shows the color, typography, spacing, shape, depth, control, and motion tokens in the active mode.',
       },
     },
   },
   render: () => (
     <main style={mainStyle}>
-      <header style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
-        <h1
-          style={{
-            margin: 0,
-            fontSize: 'var(--frontier-font-size-2xl)',
-            lineHeight: 'var(--frontier-line-height-2xl)',
-          }}
-        >
-          Frontier styles
-        </h1>
-        <p
-          style={{
-            maxWidth: 'var(--frontier-reading-measure)',
-            margin: 0,
-            color: 'var(--frontier-color-text-muted)',
-          }}
-        >
-          Design tokens available through the package stylesheet. Switch the mode from the toolbar.
-        </p>
-      </header>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Surfaces</h2>
-        <div style={gridStyle}>
-          {surfaces.map((surface) => (
-            <div key={surface.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
-              <div
-                style={{
-                  height: 'var(--frontier-spacing-16)',
-                  background: `var(${surface.token})`,
-                  border: 'var(--frontier-border-width) solid var(--frontier-color-border-subtle)',
-                }}
-              />
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{surface.label}</span>
-              <code style={tokenStyle}>{surface.token}</code>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Text</h2>
+      <Section title="Surfaces">
+        <Swatches items={surfaces} />
+      </Section>
+      <Section title="Fills">
+        <Swatches items={fills} />
+      </Section>
+      <Section title="Tones">
+        <Swatches items={tones} />
+      </Section>
+      <Section title="Text">
         <div style={gridStyle}>
           {textRoles.map((role) => (
-            <div
-              key={role.token}
-              style={{
-                display: 'grid',
-                gap: 'var(--frontier-spacing-2)',
-                padding: 'var(--frontier-spacing-3)',
-                background: `var(${'background' in role ? role.background : '--frontier-color-page'})`,
-                border: 'var(--frontier-border-width) solid var(--frontier-color-border-subtle)',
-              }}
-            >
-              <span
-                style={{
-                  color: `var(${role.token})`,
-                  fontSize: 'var(--frontier-font-size-md)',
-                  lineHeight: 'var(--frontier-line-height-md)',
-                }}
-              >
+            <Labeled key={role.token} token={role.token}>
+              <span style={{ color: `var(${role.token})` }}>{role.label}</span>
+            </Labeled>
+          ))}
+        </div>
+      </Section>
+      <Section title="Typography">
+        <div style={{ display: 'grid', gap: 'var(--frontier-spacing-3)' }}>
+          {sizes.map((size) => (
+            <Labeled key={size} token={`--frontier-font-size-${size}`}>
+              <span style={{ fontSize: `var(--frontier-font-size-${size})` }}>
                 The quick brown fox
               </span>
-              <code style={tokenStyle}>{role.token}</code>
-            </div>
+            </Labeled>
           ))}
-        </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>States</h2>
-        <div style={gridStyle}>
-          {stateRoles.map((role) => (
-            <div
-              key={role.fill}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                minHeight: 'var(--frontier-spacing-16)',
-                padding: 'var(--frontier-spacing-3)',
-                color: `var(${role.text})`,
-                background: `var(${role.fill})`,
-              }}
-            >
-              {role.label}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Type scale</h2>
-        <div style={{ display: 'grid', gap: 'var(--frontier-spacing-3)' }}>
-          {typeScale.map((step) => (
-            <div
-              key={step}
-              style={{
-                display: 'grid',
-                gap: 'var(--frontier-spacing-1)',
-                paddingBottom: 'var(--frontier-spacing-3)',
-                borderBottom:
-                  'var(--frontier-border-width) solid var(--frontier-color-border-subtle)',
-              }}
-            >
-              <span
-                style={{
-                  fontSize: `var(--frontier-font-size-${step})`,
-                  lineHeight: `var(--frontier-line-height-${step})`,
-                }}
-              >
-                Frontier 0123
+          {weights.map((weight) => (
+            <Labeled key={weight} token={`--frontier-font-weight-${weight}`}>
+              <span style={{ fontWeight: `var(--frontier-font-weight-${weight})` }}>
+                The quick brown fox
               </span>
-              <code style={tokenStyle}>{step}</code>
-            </div>
+            </Labeled>
           ))}
         </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Spacing</h2>
+      </Section>
+      <Section title="Spacing">
         <div style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
           {spacingSteps.map((step) => (
-            <div
-              key={step}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '2rem 1fr',
-                alignItems: 'center',
-                gap: 'var(--frontier-spacing-3)',
-              }}
-            >
-              <code style={tokenStyle}>{step}</code>
+            <Labeled key={step} token={`--frontier-spacing-${step}`}>
               <div
                 style={{
-                  width: `var(--frontier-spacing-${String(step)})`,
-                  height: 'var(--frontier-spacing-2)',
+                  width: `var(--frontier-spacing-${step})`,
+                  height: 'var(--frontier-spacing-3)',
                   background: 'var(--frontier-color-primary)',
                 }}
               />
-            </div>
+            </Labeled>
           ))}
         </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Radius</h2>
+      </Section>
+      <Section title="Radius">
         <div style={gridStyle}>
-          {radiusTokens.map((radius) => (
-            <div key={radius.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+          {radii.map((radius) => (
+            <Labeled key={radius} token={`--frontier-radius-${radius}`}>
               <div
                 style={{
+                  width: 'var(--frontier-spacing-16)',
                   height: 'var(--frontier-spacing-16)',
-                  background: 'var(--frontier-color-primary)',
-                  borderRadius: `var(${radius.token})`,
+                  border: 'var(--frontier-border-width) solid var(--frontier-color-border-strong)',
+                  borderRadius: `var(--frontier-radius-${radius})`,
                 }}
               />
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{radius.label}</span>
-              <code style={tokenStyle}>{radius.token}</code>
-            </div>
+            </Labeled>
           ))}
         </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Borders</h2>
+      </Section>
+      <Section title="Shadows">
         <div style={gridStyle}>
-          {borderTokens.map((border) => (
-            <div key={border.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
+          {shadows.map((shadow) => (
+            <Labeled key={shadow} token={`--frontier-shadow-${shadow}`}>
               <div
                 style={{
-                  height: `var(${border.token})`,
-                  background: 'var(--frontier-color-border)',
+                  width: 'var(--frontier-spacing-16)',
+                  height: 'var(--frontier-spacing-16)',
+                  borderRadius: 'var(--frontier-radius-md)',
+                  background: 'var(--frontier-color-surface-raised)',
+                  boxShadow: `var(--frontier-shadow-${shadow})`,
+                }}
+              />
+            </Labeled>
+          ))}
+        </div>
+      </Section>
+      <Section title="Blur">
+        <div style={gridStyle}>
+          {blurs.map((blur) => (
+            <Labeled key={blur} token={`--frontier-blur-${blur}`}>
+              <div
+                style={{
+                  position: 'relative',
+                  width: 'var(--frontier-spacing-16)',
+                  height: 'var(--frontier-spacing-16)',
+                  overflow: 'hidden',
+                  borderRadius: 'var(--frontier-radius-md)',
+                  background:
+                    'linear-gradient(90deg, var(--frontier-color-primary) 50%, var(--frontier-color-surface) 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backdropFilter: `blur(var(--frontier-blur-${blur}))`,
+                  }}
+                />
+              </div>
+            </Labeled>
+          ))}
+        </div>
+      </Section>
+      <Section title="Controls">
+        <div style={gridStyle}>
+          {controls.map((control) => (
+            <Labeled key={control} token={`--frontier-control-size-${control}`}>
+              <div
+                style={{
+                  width: '8rem',
+                  height: `var(--frontier-control-size-${control})`,
                   borderRadius: 'var(--frontier-radius-full)',
+                  background: 'var(--frontier-color-secondary)',
                 }}
               />
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{border.label}</span>
-              <code style={tokenStyle}>{border.token}</code>
-            </div>
+            </Labeled>
           ))}
         </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Focus</h2>
+      </Section>
+      <Section title="Motion">
         <div style={gridStyle}>
-          {focusTokens.map((focus) => (
-            <div key={focus.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
-              <div
-                style={{
-                  display: 'grid',
-                  placeItems: 'center',
-                  height: 'var(--frontier-spacing-16)',
-                }}
-              >
-                <span
-                  style={{
-                    display: 'block',
-                    width: '6rem',
-                    height: 'var(--frontier-spacing-8)',
-                    background: 'var(--frontier-color-surface)',
-                    border: 'var(--frontier-border-width) solid var(--frontier-color-border)',
-                    borderRadius: 'var(--frontier-radius-md)',
-                    outline: focus.outline,
-                    outlineOffset: focus.offset,
-                  }}
-                />
-              </div>
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{focus.label}</span>
-              <code style={tokenStyle}>{focus.token}</code>
-            </div>
+          {[
+            ...durations.map((name) => `duration-${name}`),
+            ...easings.map((name) => `easing-${name}`),
+          ].map((name) => (
+            <Labeled key={name} token={`--frontier-${name}`}>
+              <span>{name}</span>
+            </Labeled>
           ))}
         </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Controls</h2>
-        <div style={gridStyle}>
-          {controlTokens.map((control) => (
-            <div key={control.token} style={{ display: 'grid', gap: 'var(--frontier-spacing-2)' }}>
-              <div
-                style={{
-                  display: 'grid',
-                  placeItems: 'center',
-                  height: 'var(--frontier-spacing-16)',
-                }}
-              >
-                <span
-                  style={{
-                    display: 'block',
-                    width: control.width,
-                    height: control.height,
-                    background: 'var(--frontier-color-primary)',
-                    borderRadius: `var(${control.radius})`,
-                  }}
-                />
-              </div>
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{control.label}</span>
-              <code style={tokenStyle}>{control.token}</code>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section style={sectionStyle}>
-        <h2 style={headingStyle}>Motion</h2>
-        <div style={gridStyle}>
-          {motionTokens.map((motion) => (
-            <div
-              key={motion.token}
-              style={{
-                display: 'grid',
-                gap: 'var(--frontier-spacing-1)',
-                padding: 'var(--frontier-spacing-3)',
-                border: 'var(--frontier-border-width) solid var(--frontier-color-border-subtle)',
-              }}
-            >
-              <span style={{ fontSize: 'var(--frontier-font-size-sm)' }}>{motion.label}</span>
-              <code style={tokenStyle}>{motion.token}</code>
-            </div>
-          ))}
-        </div>
-      </section>
+      </Section>
     </main>
   ),
 }

@@ -9,7 +9,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Draws the frontier icon set on a 24-unit grid with round caps and joins.',
+        component:
+          'Draws the frontier icon set on a 24-unit grid with a 2-unit stroke and round caps and joins.',
       },
     },
   },
@@ -49,7 +50,7 @@ const gridStyle: CSSProperties = {
   gap: 'var(--frontier-spacing-6)',
 }
 
-const sizes = ['inline', 'control', 'standalone'] as const
+const sizes = [16, 20, 24] as const
 
 const iconSet = [
   { Icon: Check, name: 'check' },
@@ -62,7 +63,7 @@ export const icons: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the set at the inline, control, and standalone sizes.',
+        story: 'Shows the set at the 16, 20, and 24 sizes.',
       },
     },
   },

@@ -8,13 +8,10 @@ export interface TIconAttributes {
 /** One shape on the 24-unit icon grid, as an element tag and its attributes. */
 export type TIconNode = readonly (readonly [tag: string, attributes: TIconAttributes])[]
 
-/** Named steps of the icon size scale. */
-export type TIconSize = 'inline' | 'control' | 'standalone'
-
 export type TIconProps = Omit<ComponentPropsWithoutRef<'svg'>, 'children' | 'height' | 'width'> & {
   iconNode: TIconNode
-  /** Named size from the icon scale. Defaults to `inline`. */
-  size?: TIconSize
+  /** Width and height of the icon in pixels, or any CSS length. Defaults to 24. */
+  size?: number | string
 }
 
 export interface TCreateIconOptions {

@@ -92,7 +92,7 @@ export const IconButton: TStory = {
   },
   render: () => (
     <Button iconOnly aria-label="Add item">
-      <Plus size="control" />
+      <Plus size={20} />
     </Button>
   ),
 }

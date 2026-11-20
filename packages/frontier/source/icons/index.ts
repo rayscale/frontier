@@ -9,5 +9,4 @@ export type {
   TIconMetadata,
   TIconNode,
   TIconProps,
-  TIconSize,
 } from './types.js'

@@ -1,6 +1,10 @@
 :root {
-  --frontier-radius-sm: 0.25rem;
-  --frontier-radius-md: 0.5rem;
-  --frontier-radius-lg: 0.75rem;
+  /* Radii */
+  --frontier-radius-xs: 0.25rem;
+  --frontier-radius-sm: 0.5rem;
+  --frontier-radius-md: 0.75rem;
+  --frontier-radius-lg: 1rem;
+  --frontier-radius-xl: 1.5rem;
+  --frontier-radius-2xl: 2rem;
   --frontier-radius-full: 9999px;
 }

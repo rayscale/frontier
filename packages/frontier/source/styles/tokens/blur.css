@@ -1,0 +1,7 @@
+:root {
+  --frontier-blur-none: 0px;
+  --frontier-blur-subtle: 4px;
+  --frontier-blur-medium: 8px;
+  --frontier-blur-strong: 16px;
+  --frontier-blur-intense: 24px;
+}

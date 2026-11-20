@@ -1,22 +1,30 @@
 :root {
-  /* Durations: fast answers a direct input; base carries a state change; medium
-     carries a movement across a surface; enter and exit bring a temporary
-     surface in and out; ambient is the rhythm of a loading placeholder. */
+  /* Durations: fast for quick feedback on small properties (color, border,
+     shadow, opacity); base for standard state changes; medium for mid-length
+     motion; slow for long or looping motion. */
   --frontier-duration-fast: 120ms;
   --frontier-duration-base: 160ms;
   --frontier-duration-medium: 200ms;
-  --frontier-duration-enter: 240ms;
-  --frontier-duration-exit: 160ms;
-  --frontier-duration-ambient: 1600ms;
-  --frontier-duration-spinner: 800ms;
+  --frontier-duration-slow: 800ms;
 
-  /* Standard decelerates into its destination without overshoot; exit
-     accelerates away; ambient is symmetric and never reads as urgent. */
-  --frontier-easing-standard: cubic-bezier(0.2, 0, 0, 1);
-  --frontier-easing-exit: cubic-bezier(0.4, 0, 1, 1);
-  --frontier-easing-ambient: ease-in-out;
-  --frontier-easing-spinner: linear;
+  /* Enter and exit durations for elements that travel a large distance.
+     Enter is slightly longer than exit, so content settles gently and leaves
+     decisively. */
+  --frontier-duration-enter: 360ms;
+  --frontier-duration-exit: 240ms;
 
-  /* Amount a pressed action contracts. */
-  --frontier-press-scale: 0.97;
+  /* Shortest duration allowed when a gesture scales another duration down. */
+  --frontier-duration-minimum: 120ms;
+
+  /* Delay before a transition starts. */
+  --frontier-duration-delay: 350ms;
+
+  /* Easing: standard is CSS `ease`, used by most transitions. Spring is an
+     ease-out cubic-bezier for responsive, settling motion. Emphasized
+     decelerate starts fast and settles softly when a surface enters; emphasized
+     accelerate starts slowly and speeds up when a surface leaves, without snapping. */
+  --frontier-easing-standard: ease;
+  --frontier-easing-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --frontier-easing-emphasized-decelerate: cubic-bezier(0.32, 0.72, 0, 1);
+  --frontier-easing-emphasized-accelerate: cubic-bezier(0.5, 0, 0.75, 0);
 }

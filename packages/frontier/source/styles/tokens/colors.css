@@ -1,20 +1,26 @@
-/* Palette */
+/* Neutral palette */
 
 :root {
-  --frontier-gray-50: #f7f7f7;
-  --frontier-gray-100: #f0f0f0;
-  --frontier-gray-200: #e4e4e4;
-  --frontier-gray-300: #d1d1d1;
-  --frontier-gray-400: #a6a6a6;
-  --frontier-gray-450: #8f8f8f;
-  --frontier-gray-500: #6b6b6b;
-  --frontier-gray-600: #545454;
-  --frontier-gray-700: #3d3d3d;
+  --frontier-gray-50: #fafafa;
+  --frontier-gray-100: #f5f5f5;
+  --frontier-gray-200: #e5e5e5;
+  --frontier-gray-300: #d4d4d4;
+  --frontier-gray-400: #a3a3a3;
+  --frontier-gray-500: #737373;
+  --frontier-gray-600: #525252;
+  --frontier-gray-700: #404040;
   --frontier-gray-800: #262626;
   --frontier-gray-900: #171717;
-  --frontier-gray-950: #0b0b0b;
+  --frontier-gray-950: #0a0a0a;
+
   --frontier-white: #ffffff;
   --frontier-black: #000000;
+}
+
+/* Theme-independent roles */
+
+:root {
+  --frontier-color-mask: var(--frontier-black);
 }
 
 /* Light theme */
@@ -23,40 +29,61 @@
 [data-theme='light'] {
   color-scheme: light;
 
-  --frontier-color-page: var(--frontier-white);
-  --frontier-color-surface: var(--frontier-gray-100);
-  --frontier-color-overlay: var(--frontier-white);
-  --frontier-color-scrim: rgb(0 0 0 / 60%);
+  --frontier-color-primary: var(--frontier-gray-900);
+  --frontier-color-on-primary: var(--frontier-white);
+  --frontier-color-primary-hover: var(--frontier-gray-800);
+  --frontier-color-primary-active: var(--frontier-gray-700);
+
+  --frontier-color-secondary: var(--frontier-gray-200);
+  --frontier-color-on-secondary: var(--frontier-gray-900);
+  --frontier-color-secondary-hover: var(--frontier-gray-100);
+  --frontier-color-secondary-active: var(--frontier-gray-300);
+
+  --frontier-color-danger: #b91c1c;
+  --frontier-color-danger-subtle: #fef2f2;
+  --frontier-color-danger-border: #fecaca;
+
+  --frontier-color-success: #166534;
+  --frontier-color-success-subtle: #f0fdf4;
+  --frontier-color-success-border: #bbf7d0;
+
+  --frontier-color-warning: #854d0e;
+  --frontier-color-warning-subtle: #fffbeb;
+  --frontier-color-warning-border: #fde68a;
+
+  --frontier-color-info: #1e40af;
+  --frontier-color-info-subtle: #eff6ff;
+  --frontier-color-info-border: #bfdbfe;
+
+  --frontier-color-background: var(--frontier-white);
+  --frontier-color-surface: var(--frontier-white);
+  --frontier-color-surface-raised: var(--frontier-white);
+  --frontier-color-surface-floating: var(--frontier-white);
+  --frontier-color-surface-sunken: var(--frontier-gray-50);
+  --frontier-color-surface-hover: var(--frontier-gray-100);
+  --frontier-color-surface-active: var(--frontier-gray-200);
+  --frontier-color-surface-highlight: var(--frontier-color-surface-hover);
+  --frontier-color-overlay: rgb(0 0 0 / 50%);
 
   --frontier-color-text: var(--frontier-gray-900);
   --frontier-color-text-muted: var(--frontier-gray-600);
   --frontier-color-text-subtle: var(--frontier-gray-500);
-  --frontier-color-text-disabled: var(--frontier-gray-450);
+  --frontier-color-text-disabled: var(--frontier-gray-400);
   --frontier-color-text-inverse: var(--frontier-white);
 
-  --frontier-color-primary: var(--frontier-gray-900);
-  --frontier-color-on-primary: var(--frontier-white);
-  --frontier-color-primary-hover: var(--frontier-gray-700);
-  --frontier-color-primary-pressed: var(--frontier-gray-600);
-
-  --frontier-color-highlight: var(--frontier-gray-200);
-  --frontier-color-pressed: var(--frontier-gray-300);
-  --frontier-color-selected: var(--frontier-gray-900);
-  --frontier-color-selected-text: var(--frontier-white);
-
-  --frontier-color-border: #8f8f8f;
-  --frontier-color-border-subtle: var(--frontier-gray-300);
-  --frontier-color-border-strong: var(--frontier-gray-600);
-  --frontier-color-border-disabled: var(--frontier-gray-300);
+  --frontier-color-border: var(--frontier-gray-200);
+  --frontier-color-border-strong: var(--frontier-gray-300);
+  --frontier-color-border-subtle: var(--frontier-gray-100);
+  --frontier-color-border-disabled: var(--frontier-gray-200);
 
   --frontier-color-focus: var(--frontier-gray-900);
+  --frontier-color-focus-ring: rgb(23 23 23 / 20%);
 
-  --frontier-color-danger: #b42318;
-  --frontier-color-danger-hover: #961c12;
-  --frontier-color-danger-pressed: #7f1d1d;
-  --frontier-color-danger-subtle: #fef2f2;
-  --frontier-color-danger-subtle-pressed: #fee2e2;
-  --frontier-color-on-danger: var(--frontier-white);
+  --frontier-color-disabled: var(--frontier-gray-100);
+  --frontier-color-on-disabled: var(--frontier-gray-400);
+
+  --frontier-color-shadow: rgb(0 0 0 / 5%);
+  --frontier-color-shadow-strong: rgb(0 0 0 / 10%);
 }
 
 /* Dark theme */
@@ -64,38 +91,60 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --frontier-color-page: var(--frontier-gray-950);
-  --frontier-color-surface: #1a1a1a;
-  --frontier-color-overlay: var(--frontier-gray-800);
-  --frontier-color-scrim: rgb(0 0 0 / 70%);
+  --frontier-color-primary: var(--frontier-gray-100);
+  --frontier-color-on-primary: var(--frontier-gray-900);
+  --frontier-color-primary-hover: var(--frontier-gray-200);
+  --frontier-color-primary-active: var(--frontier-gray-300);
+
+  --frontier-color-secondary: var(--frontier-gray-700);
+  --frontier-color-on-secondary: var(--frontier-gray-100);
+  --frontier-color-secondary-hover: var(--frontier-gray-600);
+  --frontier-color-secondary-active: var(--frontier-gray-500);
+
+  --frontier-color-danger: #f87171;
+  --frontier-color-danger-subtle: #450a0a;
+  --frontier-color-danger-border: #7f1d1d;
+
+  --frontier-color-success: #86efac;
+  --frontier-color-success-subtle: #052e16;
+  --frontier-color-success-border: #166534;
+
+  --frontier-color-warning: #fde68a;
+  --frontier-color-warning-subtle: #422006;
+  --frontier-color-warning-border: #854d0e;
+
+  --frontier-color-info: #93c5fd;
+  --frontier-color-info-subtle: #172554;
+  --frontier-color-info-border: #1e40af;
+
+  --frontier-color-background: var(--frontier-black);
+  --frontier-color-surface: var(--frontier-gray-900);
+  --frontier-color-surface-raised: var(--frontier-gray-800);
+  --frontier-color-surface-floating: var(--frontier-gray-900);
+  --frontier-color-surface-sunken: var(--frontier-gray-950);
+  --frontier-color-surface-hover: var(--frontier-gray-800);
+  --frontier-color-surface-active: var(--frontier-gray-700);
+  /* Must differ from surface-floating, which popups use as their background. */
+  --frontier-color-surface-highlight: var(--frontier-gray-800);
+  --frontier-color-overlay: rgb(0 0 0 / 70%);
 
   --frontier-color-text: var(--frontier-gray-100);
   --frontier-color-text-muted: var(--frontier-gray-400);
-  --frontier-color-text-subtle: var(--frontier-gray-450);
-  --frontier-color-text-disabled: #767676;
+  --frontier-color-text-subtle: var(--frontier-gray-500);
+  --frontier-color-text-disabled: var(--frontier-gray-600);
   --frontier-color-text-inverse: var(--frontier-gray-900);
 
-  --frontier-color-primary: var(--frontier-gray-100);
-  --frontier-color-on-primary: var(--frontier-gray-900);
-  --frontier-color-primary-hover: var(--frontier-gray-300);
-  --frontier-color-primary-pressed: var(--frontier-gray-400);
-
-  --frontier-color-highlight: var(--frontier-gray-700);
-  --frontier-color-pressed: var(--frontier-gray-600);
-  --frontier-color-selected: var(--frontier-gray-100);
-  --frontier-color-selected-text: var(--frontier-gray-900);
-
-  --frontier-color-border: #6b6b6b;
-  --frontier-color-border-subtle: var(--frontier-gray-700);
-  --frontier-color-border-strong: var(--frontier-gray-400);
-  --frontier-color-border-disabled: var(--frontier-gray-700);
+  --frontier-color-border: var(--frontier-gray-800);
+  --frontier-color-border-strong: var(--frontier-gray-700);
+  --frontier-color-border-subtle: var(--frontier-gray-900);
+  --frontier-color-border-disabled: var(--frontier-gray-800);
 
   --frontier-color-focus: var(--frontier-gray-100);
+  --frontier-color-focus-ring: rgb(255 255 255 / 25%);
 
-  --frontier-color-danger: #f87171;
-  --frontier-color-danger-hover: #fca5a5;
-  --frontier-color-danger-pressed: #fecaca;
-  --frontier-color-danger-subtle: #450a0a;
-  --frontier-color-danger-subtle-pressed: #5b0f0f;
-  --frontier-color-on-danger: var(--frontier-gray-900);
+  --frontier-color-disabled: var(--frontier-gray-800);
+  --frontier-color-on-disabled: var(--frontier-gray-500);
+
+  --frontier-color-shadow: rgb(0 0 0 / 20%);
+  --frontier-color-shadow-strong: rgb(0 0 0 / 40%);
 }

@@ -13,7 +13,7 @@ function ClearableSearchExample() {
       onChange={(event) => {
         setValue(event.target.value)
       }}
-      leadingIcon={<Search size="control" />}
+      leadingIcon={<Search size={20} />}
       trailingIcon={
         <button
           type="button"
@@ -29,7 +29,7 @@ function ClearableSearchExample() {
             cursor: 'pointer',
           }}
         >
-          <X size="control" />
+          <X size={20} />
         </button>
       }
       trailingIconInteractive
@@ -153,8 +153,8 @@ export const Icons: TStory = {
   args: {
     label: 'Search',
     placeholder: 'Search your projects',
-    leadingIcon: <Search size="control" />,
-    trailingIcon: <X size="control" />,
+    leadingIcon: <Search size={20} />,
+    trailingIcon: <X size={20} />,
   },
 }
 

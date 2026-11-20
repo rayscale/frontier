@@ -113,13 +113,13 @@ export const IconOnly: TStory = {
   render: () => (
     <div style={rowStyle}>
       <Button iconOnly aria-label="Add item">
-        <Plus size="control" />
+        <Plus size={20} />
       </Button>
       <Button iconOnly variant="secondary" aria-label="Add item">
-        <Plus size="control" />
+        <Plus size={20} />
       </Button>
       <Button iconOnly variant="ghost" aria-label="Add item">
-        <Plus size="control" />
+        <Plus size={20} />
       </Button>
     </div>
   ),

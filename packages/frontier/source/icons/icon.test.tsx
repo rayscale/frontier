@@ -15,20 +15,17 @@ describe('Icon', () => {
     expect(icon?.querySelector('path')).toHaveAttribute('d', 'M20 6 9 17l-5-5')
   })
 
-  it('sizes the icon from the icon scale and defaults to inline', () => {
+  it('sizes the icon from the size prop and defaults to 24', () => {
     const { container } = render(
       <>
-        <Check data-testid="inline" />
-        <Check data-testid="control" size="control" />
-        <Check data-testid="standalone" size="standalone" />
+        <Check data-testid="default" />
+        <Check data-testid="small" size={16} />
       </>,
     )
 
-    expect(container.querySelector('[data-testid="inline"]')).toHaveClass('frontier-icon--inline')
-    expect(container.querySelector('[data-testid="control"]')).toHaveClass('frontier-icon--control')
-    expect(container.querySelector('[data-testid="standalone"]')).toHaveClass(
-      'frontier-icon--standalone',
-    )
+    expect(container.querySelector('[data-testid="default"]')).toHaveAttribute('width', '24')
+    expect(container.querySelector('[data-testid="small"]')).toHaveAttribute('width', '16')
+    expect(container.querySelector('[data-testid="small"]')).toHaveAttribute('height', '16')
   })
 
   it('forwards its class name, native props, and ref', () => {

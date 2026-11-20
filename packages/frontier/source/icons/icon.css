@@ -1,19 +1,4 @@
 .frontier-icon {
   display: block;
   flex: none;
-  width: var(--frontier-icon-size-inline);
-  height: var(--frontier-icon-size-inline);
-  stroke-width: var(--frontier-icon-stroke-width);
-  stroke-linecap: var(--frontier-icon-stroke-linecap);
-  stroke-linejoin: var(--frontier-icon-stroke-linejoin);
-}
-
-.frontier-icon--control {
-  width: var(--frontier-icon-size-control);
-  height: var(--frontier-icon-size-control);
-}
-
-.frontier-icon--standalone {
-  width: var(--frontier-icon-size-standalone);
-  height: var(--frontier-icon-size-standalone);
 }

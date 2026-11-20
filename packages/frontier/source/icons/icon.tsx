@@ -7,19 +7,23 @@ import type { TIconProps } from './types.js'
 import './icon.css'
 
 export const Icon = forwardRef<SVGSVGElement, TIconProps>(function Icon(props, ref) {
-  const { className, iconNode, size = 'inline', ...rest } = props
-  const classes = classNames('frontier-icon', `frontier-icon--${size}`, className)
+  const { className, iconNode, size = 24, ...rest } = props
 
   return (
     <svg
       {...rest}
       ref={ref}
       aria-hidden="true"
-      className={classes}
+      className={classNames('frontier-icon', className)}
       fill="none"
       focusable="false"
+      height={size}
       stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
       viewBox="0 0 24 24"
+      width={size}
       xmlns="http://www.w3.org/2000/svg"
     >
       {iconNode.map(([tag, attributes], index) =>

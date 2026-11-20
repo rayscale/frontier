@@ -416,3 +416,41 @@ export const KeyboardNavigation: TStory = {
     </div>
   ),
 }
+
+export const Stacked: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The stacked layout lists the items in a column and opens each trigger in place, which suits narrow panels. `Header.NavigationMenu` uses it on compact screens.',
+      },
+    },
+  },
+  args: {
+    'aria-label': 'Main',
+    layout: 'stacked',
+  },
+  render: (args) => (
+    <div style={{ inlineSize: 'min(20rem, 100%)' }}>
+      <NavigationMenu {...args}>
+        <NavigationMenu.List>
+          <NavigationMenu.Item>
+            <NavigationMenu.Link href="/" active>
+              Home
+            </NavigationMenu.Link>
+          </NavigationMenu.Item>
+          <NavigationMenu.Item value="products">
+            <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+            <NavigationMenu.Content>
+              <NavigationMenu.Link href="/editor">Editor</NavigationMenu.Link>
+              <NavigationMenu.Link href="/sync">Sync</NavigationMenu.Link>
+            </NavigationMenu.Content>
+          </NavigationMenu.Item>
+          <NavigationMenu.Item>
+            <NavigationMenu.Link href="/pricing">Pricing</NavigationMenu.Link>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </NavigationMenu>
+    </div>
+  ),
+}

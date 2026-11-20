@@ -408,3 +408,192 @@ function GroupedNavigation() {
     </NavigationMenu>
   )
 }
+
+describe('NavigationMenu stacked layout', () => {
+  function StackedNavigation(props: Partial<ComponentProps<typeof NavigationMenu>> = {}) {
+    return <SiteNavigation layout="stacked" {...props} />
+  }
+
+  it('renders the landmark, list, and links inline without a floating panel', () => {
+    const { container } = render(<StackedNavigation />)
+
+    expect(screen.getByRole('navigation', { name: 'Main' })).toHaveClass(
+      'frontier-navigation-menu--stacked',
+    )
+    expect(screen.getAllByRole('listitem')).toHaveLength(3)
+    expect(screen.getByRole('link', { name: 'Pricing' })).toHaveAttribute('href', '/pricing')
+    expect(container.querySelector('.frontier-navigation-menu__positioner')).toBeNull()
+  })
+
+  it('keeps every disclosure collapsed and its content inert at first', () => {
+    render(<StackedNavigation />)
+
+    const trigger = screen.getByRole('button', { name: 'Products' })
+    const content = document.getElementById(assertDefined(trigger.getAttribute('aria-controls')))
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    expect(content).toHaveAttribute('inert')
+    expect(content).not.toHaveAttribute('data-open')
+  })
+
+  it('opens a disclosure in place when its trigger is clicked', async () => {
+    const user = userEvent.setup()
+    render(<StackedNavigation />)
+
+    const trigger = screen.getByRole('button', { name: 'Products' })
+    await user.click(trigger)
+
+    const content = document.getElementById(assertDefined(trigger.getAttribute('aria-controls')))
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+    expect(content).not.toHaveAttribute('inert')
+    expect(content).toHaveAttribute('data-open')
+    expect(within(assertDefined(content)).getByRole('link', { name: 'Editor' })).toBeVisible()
+  })
+
+  it('labels the open region with its trigger', async () => {
+    const user = userEvent.setup()
+    render(<StackedNavigation />)
+
+    await user.click(screen.getByRole('button', { name: 'Products' }))
+
+    expect(screen.getByRole('region', { name: 'Products' })).toBeInTheDocument()
+  })
+
+  it('keeps one disclosure open at a time', async () => {
+    const user = userEvent.setup()
+    render(<StackedNavigation />)
+
+    await user.click(screen.getByRole('button', { name: 'Products' }))
+    await user.click(screen.getByRole('button', { name: 'Resources' }))
+
+    expect(screen.getByRole('button', { name: 'Products' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+    expect(screen.getByRole('button', { name: 'Resources' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+  })
+
+  it('closes a disclosure when its trigger is clicked again', async () => {
+    const user = userEvent.setup()
+    render(<StackedNavigation />)
+
+    const trigger = screen.getByRole('button', { name: 'Products' })
+    await user.click(trigger)
+    await user.click(trigger)
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('opens a disclosure from defaultValue', () => {
+    render(<StackedNavigation defaultValue="resources" />)
+
+    expect(screen.getByRole('button', { name: 'Resources' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+  })
+
+  it('follows a controlled value and reports changes through onValueChange', async () => {
+    const user = userEvent.setup()
+    const onValueChange = vi.fn()
+    render(<StackedNavigation value="products" onValueChange={onValueChange} />)
+
+    expect(screen.getByRole('button', { name: 'Products' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Resources' }))
+
+    expect(onValueChange).toHaveBeenCalledWith('resources')
+    expect(screen.getByRole('button', { name: 'Resources' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+  })
+
+  it('marks the active link as the current page', () => {
+    render(
+      <NavigationMenu layout="stacked" aria-label="Main">
+        <NavigationMenu.List>
+          <NavigationMenu.Item>
+            <NavigationMenu.Link href="/pricing" active>
+              Pricing
+            </NavigationMenu.Link>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </NavigationMenu>,
+    )
+
+    expect(screen.getByRole('link', { name: 'Pricing' })).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('collapses the open disclosure after a link is activated when closeOnClick is set', async () => {
+    const user = userEvent.setup()
+    render(
+      <NavigationMenu layout="stacked" aria-label="Main" defaultValue="products">
+        <NavigationMenu.List>
+          <NavigationMenu.Item value="products">
+            <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+            <NavigationMenu.Content>
+              <NavigationMenu.Link
+                href="#editor"
+                closeOnClick
+                onClick={(event) => {
+                  event.preventDefault()
+                }}
+              >
+                Editor
+              </NavigationMenu.Link>
+            </NavigationMenu.Content>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </NavigationMenu>,
+    )
+
+    await user.click(screen.getByRole('link', { name: 'Editor' }))
+
+    expect(screen.getByRole('button', { name: 'Products' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    )
+  })
+
+  it('applies the consumer className to the root and the item parts', () => {
+    render(
+      <NavigationMenu layout="stacked" aria-label="Main" className="custom-root">
+        <NavigationMenu.List className="custom-list">
+          <NavigationMenu.Item className="custom-item" value="a">
+            <NavigationMenu.Trigger className="custom-trigger">A</NavigationMenu.Trigger>
+            <NavigationMenu.Content className="custom-content">Body</NavigationMenu.Content>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </NavigationMenu>,
+    )
+
+    expect(screen.getByRole('navigation')).toHaveClass('custom-root')
+    expect(screen.getByRole('list')).toHaveClass('custom-list')
+    expect(screen.getByRole('listitem')).toHaveClass('custom-item')
+    expect(screen.getByRole('button', { name: 'A' })).toHaveClass('custom-trigger')
+    expect(document.querySelector('.custom-content')).not.toBeNull()
+  })
+
+  it('marks whether a container is revealing it so items can enter in sequence', () => {
+    const { rerender } = render(<StackedNavigation revealed={false} />)
+
+    expect(screen.getByRole('navigation')).toHaveAttribute('data-reveal', 'out')
+
+    rerender(<StackedNavigation revealed />)
+
+    expect(screen.getByRole('navigation')).toHaveAttribute('data-reveal', 'in')
+  })
+
+  it('does not mark a reveal state unless one is requested', () => {
+    render(<StackedNavigation />)
+
+    expect(screen.getByRole('navigation')).not.toHaveAttribute('data-reveal')
+  })
+})

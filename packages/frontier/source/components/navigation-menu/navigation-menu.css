@@ -172,3 +172,127 @@
     transition: none;
   }
 }
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__list {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--frontier-spacing-1);
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item {
+  flex-direction: column;
+  --_stagger: 8;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__trigger,
+.frontier-navigation-menu--stacked .frontier-navigation-menu__link {
+  inline-size: 100%;
+  min-block-size: var(--frontier-control-size-large);
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-3);
+  border-radius: var(--frontier-radius-md);
+  color: var(--frontier-color-text);
+  font-size: var(--frontier-font-size-md);
+  text-align: start;
+  white-space: normal;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__trigger {
+  justify-content: space-between;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__trigger:hover,
+.frontier-navigation-menu--stacked .frontier-navigation-menu__trigger[aria-expanded='true'],
+.frontier-navigation-menu--stacked .frontier-navigation-menu__link:hover {
+  background: var(--frontier-color-surface-hover);
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__link[aria-current='page'],
+.frontier-navigation-menu--stacked .frontier-navigation-menu__link[data-active] {
+  background: var(--frontier-color-surface-active);
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-navigation-menu__content--stacked {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--frontier-duration-exit) var(--frontier-easing-emphasized-accelerate),
+    visibility 0s linear var(--frontier-duration-exit);
+}
+
+.frontier-navigation-menu__content--stacked[data-open] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--frontier-duration-enter)
+    var(--frontier-easing-emphasized-decelerate);
+}
+
+.frontier-navigation-menu__content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-1);
+  min-block-size: 0;
+  padding-inline-start: var(--frontier-spacing-4);
+  overflow: hidden;
+}
+
+.frontier-navigation-menu--stacked[data-reveal] .frontier-navigation-menu__item {
+  transition:
+    opacity var(--frontier-duration-fast) var(--frontier-easing-standard),
+    transform var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-navigation-menu--stacked[data-reveal='out'] .frontier-navigation-menu__item {
+  opacity: 0;
+  transform: translateY(calc(var(--frontier-spacing-2) * -1));
+}
+
+.frontier-navigation-menu--stacked[data-reveal='in'] .frontier-navigation-menu__item {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--frontier-duration-enter) var(--frontier-easing-emphasized-decelerate)
+      calc(var(--_stagger) * var(--frontier-duration-fast) / 3),
+    transform var(--frontier-duration-enter) var(--frontier-easing-emphasized-decelerate)
+      calc(var(--_stagger) * var(--frontier-duration-fast) / 3);
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(1) {
+  --_stagger: 1;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(2) {
+  --_stagger: 2;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(3) {
+  --_stagger: 3;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(4) {
+  --_stagger: 4;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(5) {
+  --_stagger: 5;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(6) {
+  --_stagger: 6;
+}
+
+.frontier-navigation-menu--stacked .frontier-navigation-menu__item:nth-child(7) {
+  --_stagger: 7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-navigation-menu__content--stacked,
+  .frontier-navigation-menu__content--stacked[data-open],
+  .frontier-navigation-menu--stacked[data-reveal] .frontier-navigation-menu__item,
+  .frontier-navigation-menu--stacked[data-reveal='in'] .frontier-navigation-menu__item {
+    transition: none;
+    transform: none;
+  }
+}

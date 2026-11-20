@@ -1,17 +1,24 @@
-import { type RefObject, useEffect, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 
 import { floatThreshold, reduceDynamicHeaderState } from '../helpers/dynamic-state.js'
 import type { TDynamicHeaderState, TScrollTracker } from '../types.js'
 
 /**
  * Tracks window scroll and returns the dynamic header state. The listener is
- * only attached while `enabled` is true.
+ * only attached while `enabled` is true. While `locked` is true the header
+ * never hides, such as when its navigation panel is open.
  */
 export function useDynamicHeaderState(
   elementRef: RefObject<HTMLElement | null>,
   enabled: boolean,
+  locked = false,
 ): TDynamicHeaderState {
   const [state, setState] = useState<TDynamicHeaderState>('attached')
+  const lockedRef = useRef(locked)
+
+  useEffect(() => {
+    lockedRef.current = locked
+  }, [locked])
 
   useEffect(() => {
     if (!enabled) {
@@ -28,7 +35,7 @@ export function useDynamicHeaderState(
     setState(current)
 
     const handleScroll = () => {
-      const hide = !elementRef.current?.contains(document.activeElement)
+      const hide = !lockedRef.current && !elementRef.current?.contains(document.activeElement)
       const next = reduceDynamicHeaderState(current, window.scrollY, tracker, hide)
       if (next !== current) {
         current = next

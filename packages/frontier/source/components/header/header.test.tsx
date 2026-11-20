@@ -1,6 +1,9 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { createRef, type ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+
+import { NavigationMenu } from '../navigation-menu/index.js'
 
 import { Header, Header as PublicHeader } from './index.js'
 
@@ -203,5 +206,221 @@ describe('Header', () => {
 
   it('is exported from the package entry point', () => {
     expect(PublicHeader).toBe(Header)
+  })
+})
+
+describe('Header.NavigationMenu', () => {
+  function Links({ onNavigate }: { onNavigate?: () => void }) {
+    return (
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            href="#docs"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate?.()
+            }}
+          >
+            Docs
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item value="components">
+          <NavigationMenu.Trigger>Components</NavigationMenu.Trigger>
+          <NavigationMenu.Content>
+            <NavigationMenu.Link href="#button">Button</NavigationMenu.Link>
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+    )
+  }
+
+  function renderHeader(
+    props: { compact?: boolean; mode?: 'normal' | 'fixed' | 'dynamic'; toggleLabel?: string } = {},
+  ) {
+    const { mode = 'normal', ...menuProps } = props
+
+    return render(
+      <Header mode={mode} data-testid="header">
+        <strong>Acme</strong>
+        <Header.NavigationMenu label="Main" {...menuProps}>
+          <Links />
+        </Header.NavigationMenu>
+      </Header>,
+    )
+  }
+
+  afterEach(() => {
+    window.scrollY = 0
+    vi.unstubAllGlobals()
+  })
+
+  it('exposes the navigation menu part on the public entry point', () => {
+    expect(PublicHeader.NavigationMenu).toBe(Header.NavigationMenu)
+  })
+
+  it('renders the inline navigation without a toggle when it is not compact', () => {
+    renderHeader({ compact: false })
+
+    expect(screen.getByRole('navigation', { name: 'Main' })).not.toHaveClass(
+      'frontier-navigation-menu--stacked',
+    )
+    expect(screen.queryByRole('button', { name: 'Menu' })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Docs' })).toBeInTheDocument()
+  })
+
+  it('renders a collapsed toggle that controls an inert panel when it is compact', () => {
+    renderHeader({ compact: true })
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    const panel = document.getElementById(toggle.getAttribute('aria-controls') ?? '')
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    expect(panel).toHaveAttribute('inert')
+    expect(screen.getByTestId('header')).not.toHaveAttribute('data-expanded')
+  })
+
+  it('keeps the toggle inside the labelled navigation landmark', () => {
+    renderHeader({ compact: true })
+
+    const navigation = screen.getByRole('navigation', { name: 'Main' })
+
+    expect(navigation).toContainElement(screen.getByRole('button', { name: 'Menu' }))
+  })
+
+  it('opens the panel and marks the header as expanded', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true })
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    await user.click(toggle)
+
+    const panel = document.getElementById(toggle.getAttribute('aria-controls') ?? '')
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    expect(panel).not.toHaveAttribute('inert')
+    expect(screen.getByTestId('header')).toHaveAttribute('data-expanded')
+    expect(screen.getByTestId('header')).toHaveClass('frontier-header--expanded')
+  })
+
+  it('uses a custom toggle label', () => {
+    renderHeader({ compact: true, toggleLabel: 'Navigation' })
+
+    expect(screen.getByRole('button', { name: 'Navigation' })).toBeInTheDocument()
+  })
+
+  it('closes on Escape and returns focus to the toggle', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true })
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    await user.click(toggle)
+    screen.getByRole('link', { name: 'Docs' }).focus()
+    await user.keyboard('{Escape}')
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    expect(toggle).toHaveFocus()
+  })
+
+  it('closes when the page outside the header is pressed', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true })
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    await user.click(toggle)
+    await user.click(document.body)
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('stays open when something inside the header is pressed', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true })
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    await user.click(toggle)
+    await user.click(screen.getByText('Acme'))
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('closes after a link is activated', async () => {
+    const user = userEvent.setup()
+    const onNavigate = vi.fn()
+    render(
+      <Header>
+        <Header.NavigationMenu label="Main" compact>
+          <Links onNavigate={onNavigate} />
+        </Header.NavigationMenu>
+      </Header>,
+    )
+
+    const toggle = screen.getByRole('button', { name: 'Menu' })
+    await user.click(toggle)
+    await user.click(screen.getByRole('link', { name: 'Docs' }))
+
+    expect(onNavigate).toHaveBeenCalledTimes(1)
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('opens a disclosure row inside the panel', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true })
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    const row = screen.getByRole('button', { name: 'Components' })
+    await user.click(row)
+
+    expect(row).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('collapses and clears the expanded state when it stops being compact', async () => {
+    const user = userEvent.setup()
+    const { rerender } = renderHeader({ compact: true })
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    expect(screen.getByTestId('header')).toHaveAttribute('data-expanded')
+
+    rerender(
+      <Header data-testid="header">
+        <Header.NavigationMenu label="Main" compact={false}>
+          <Links />
+        </Header.NavigationMenu>
+      </Header>,
+    )
+
+    expect(screen.getByTestId('header')).not.toHaveAttribute('data-expanded')
+  })
+
+  it('follows the viewport when compact is omitted', () => {
+    vi.stubGlobal(
+      'matchMedia',
+      vi.fn().mockImplementation((query: string) => ({
+        matches: true,
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    )
+
+    renderHeader()
+
+    expect(screen.getByRole('button', { name: 'Menu' })).toBeInTheDocument()
+  })
+
+  it('keeps a dynamic header visible while the panel is open', async () => {
+    const user = userEvent.setup()
+    renderHeader({ compact: true, mode: 'dynamic' })
+
+    scrollTo(200)
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    ;(document.activeElement as HTMLElement | null)?.blur()
+    scrollTo(500)
+
+    expect(screen.getByTestId('header')).toHaveAttribute('data-state', 'floating')
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }))
+    ;(document.activeElement as HTMLElement | null)?.blur()
+    scrollTo(800)
+
+    expect(screen.getByTestId('header')).toHaveAttribute('data-state', 'hidden')
   })
 })

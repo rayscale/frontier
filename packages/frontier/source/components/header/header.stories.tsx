@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
+import { expect, userEvent, within } from 'storybook/test'
 
 import { Button } from '../button/button.js'
 import { NavigationMenu } from '../navigation-menu/navigation-menu.js'
@@ -106,6 +107,49 @@ export const Dynamic: TStory = {
   ),
 }
 
+/** The destinations shared by the navigation stories. */
+function SiteMenuItems() {
+  return (
+    <NavigationMenu.List>
+      <NavigationMenu.Item value="products">
+        <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+        <NavigationMenu.Content>
+          <NavigationMenu.Link href="#" closeOnClick>
+            Editor
+          </NavigationMenu.Link>
+          <NavigationMenu.Link href="#" closeOnClick>
+            Sync
+          </NavigationMenu.Link>
+          <NavigationMenu.Link href="#" closeOnClick>
+            Export
+          </NavigationMenu.Link>
+        </NavigationMenu.Content>
+      </NavigationMenu.Item>
+      <NavigationMenu.Item value="resources">
+        <NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
+        <NavigationMenu.Content>
+          <NavigationMenu.Group>
+            <NavigationMenu.Link href="#" closeOnClick>
+              Documentation
+            </NavigationMenu.Link>
+            <NavigationMenu.Link href="#" closeOnClick>
+              Changelog
+            </NavigationMenu.Link>
+          </NavigationMenu.Group>
+        </NavigationMenu.Content>
+      </NavigationMenu.Item>
+      <NavigationMenu.Item value="pricing">
+        <NavigationMenu.Link href="#" active>
+          Pricing
+        </NavigationMenu.Link>
+      </NavigationMenu.Item>
+      <NavigationMenu.Item value="coming-soon">
+        <NavigationMenu.Trigger disabled>Coming soon</NavigationMenu.Trigger>
+      </NavigationMenu.Item>
+    </NavigationMenu.List>
+  )
+}
+
 export const Custom: TStory = {
   parameters: {
     docs: {
@@ -127,44 +171,88 @@ export const Custom: TStory = {
           <strong>Acme Studio</strong>
         </span>
         <NavigationMenu aria-label="Main">
-          <NavigationMenu.List>
-            <NavigationMenu.Item value="products">
-              <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
-              <NavigationMenu.Content>
-                <NavigationMenu.Link href="#" closeOnClick>
-                  Editor
-                </NavigationMenu.Link>
-                <NavigationMenu.Link href="#" closeOnClick>
-                  Sync
-                </NavigationMenu.Link>
-                <NavigationMenu.Link href="#" closeOnClick>
-                  Export
-                </NavigationMenu.Link>
-              </NavigationMenu.Content>
-            </NavigationMenu.Item>
-            <NavigationMenu.Item value="resources">
-              <NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
-              <NavigationMenu.Content>
-                <NavigationMenu.Group>
-                  <NavigationMenu.Link href="#" closeOnClick>
-                    Documentation
-                  </NavigationMenu.Link>
-                  <NavigationMenu.Link href="#" closeOnClick>
-                    Changelog
-                  </NavigationMenu.Link>
-                </NavigationMenu.Group>
-              </NavigationMenu.Content>
-            </NavigationMenu.Item>
-            <NavigationMenu.Item value="pricing">
-              <NavigationMenu.Link href="#" active>
-                Pricing
-              </NavigationMenu.Link>
-            </NavigationMenu.Item>
-            <NavigationMenu.Item value="coming-soon">
-              <NavigationMenu.Trigger disabled>Coming soon</NavigationMenu.Trigger>
-            </NavigationMenu.Item>
-          </NavigationMenu.List>
+          <SiteMenuItems />
         </NavigationMenu>
+        <Button variant="primary">Get started</Button>
+      </Header>
+    </LongPage>
+  ),
+}
+
+export const Responsive: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Below 48rem the navigation collapses into a menu button. The panel unfolds from the header and extends it as one surface, in every mode. Use the mode control to compare them.',
+      },
+    },
+  },
+  args: {
+    mode: 'dynamic',
+  },
+  render: (args) => (
+    <LongPage>
+      <Header {...args}>
+        <strong>Acme Studio</strong>
+        <Header.NavigationMenu label="Main" compact>
+          <SiteMenuItems />
+        </Header.NavigationMenu>
+      </Header>
+    </LongPage>
+  ),
+}
+
+export const Expanded: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The compact panel open. The story presses the menu button when it loads, so the header and the panel can be inspected as one surface.',
+      },
+    },
+  },
+  args: {
+    mode: 'dynamic',
+  },
+  render: (args) => (
+    <LongPage>
+      <Header {...args}>
+        <strong>Acme Studio</strong>
+        <Header.NavigationMenu label="Main" compact>
+          <SiteMenuItems />
+        </Header.NavigationMenu>
+      </Header>
+    </LongPage>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const toggle = canvas.getByRole('button', { name: 'Menu' })
+
+    await userEvent.click(toggle)
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  },
+}
+
+export const Adaptive: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Without `compact`, the navigation follows the viewport: a row with dropdowns on wide screens and the panel on narrow ones. Resize the canvas to see it switch.',
+      },
+    },
+  },
+  args: {
+    mode: 'dynamic',
+  },
+  render: (args) => (
+    <LongPage>
+      <Header {...args}>
+        <strong>Acme Studio</strong>
+        <Header.NavigationMenu label="Main">
+          <SiteMenuItems />
+        </Header.NavigationMenu>
         <Button variant="primary">Get started</Button>
       </Header>
     </LongPage>

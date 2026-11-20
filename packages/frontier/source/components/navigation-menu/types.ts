@@ -1,5 +1,12 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
 
+/**
+ * How the navigation lays out its items. `inline` shows a row of items with
+ * floating dropdown panels. `stacked` shows a column where each trigger opens
+ * its content in place.
+ */
+export type TNavigationMenuLayout = 'inline' | 'stacked'
+
 /** Props for the {@link NavigationMenu} root, rendered as a `<nav>` landmark. */
 export type TNavigationMenuProps = Omit<HTMLAttributes<HTMLElement>, 'defaultValue'> & {
   /** Identifier of the open item when controlled. `null` closes every item. */
@@ -8,6 +15,17 @@ export type TNavigationMenuProps = Omit<HTMLAttributes<HTMLElement>, 'defaultVal
   defaultValue?: string | null | undefined
   /** Called with the identifier of the item that opened or closed. */
   onValueChange?: ((value: string | null) => void) | undefined
+  /**
+   * Layout of the navigation. Defaults to `inline`. The `stacked` layout
+   * ignores `delay` and `closeDelay` because nothing opens on hover.
+   */
+  layout?: TNavigationMenuLayout | undefined
+  /**
+   * Tells a `stacked` navigation whether its container is showing it, so the
+   * items can enter one after another when it becomes `true`. Leave it
+   * undefined when nothing hides the navigation.
+   */
+  revealed?: boolean | undefined
   /** Milliseconds before an item opens on hover. Defaults to `50`. */
   delay?: number | undefined
   /** Milliseconds before a hovered item closes. Defaults to `50`. */

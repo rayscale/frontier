@@ -3,14 +3,27 @@ import { forwardRef } from 'react'
 
 import { ChevronDown } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { useNavigationMenuContext } from '../context.js'
 import type {
   TNavigationMenuContentProps,
   TNavigationMenuGroupProps,
   TNavigationMenuTriggerProps,
 } from '../types.js'
 
+import { StackedContent, StackedTrigger } from './stacked.js'
+
 export const NavigationMenuTrigger = forwardRef<HTMLButtonElement, TNavigationMenuTriggerProps>(
   function NavigationMenuTrigger({ className, children, ...props }, ref) {
+    const { layout } = useNavigationMenuContext()
+
+    if (layout === 'stacked') {
+      return (
+        <StackedTrigger {...props} ref={ref} className={className}>
+          {children}
+        </StackedTrigger>
+      )
+    }
+
     return (
       <BaseNavigationMenu.Trigger
         {...props}
@@ -31,6 +44,16 @@ export const NavigationMenuTrigger = forwardRef<HTMLButtonElement, TNavigationMe
 
 export const NavigationMenuContent = forwardRef<HTMLDivElement, TNavigationMenuContentProps>(
   function NavigationMenuContent({ className, children, ...props }, ref) {
+    const { layout } = useNavigationMenuContext()
+
+    if (layout === 'stacked') {
+      return (
+        <StackedContent {...props} ref={ref} className={className}>
+          {children}
+        </StackedContent>
+      )
+    }
+
     return (
       <BaseNavigationMenu.Content
         {...props}

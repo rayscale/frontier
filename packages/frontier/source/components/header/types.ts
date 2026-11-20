@@ -1,4 +1,6 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react'
+
+import type { TNavigationMenuProps } from '../navigation-menu/index.js'
 
 /** Positioning behavior of the header. */
 export type THeaderMode = 'normal' | 'fixed' | 'dynamic'
@@ -15,6 +17,25 @@ export type THeaderProps = HTMLAttributes<HTMLElement> & {
   /** Logo, navigation, actions, or any other header content. */
   children?: ReactNode | undefined
 }
+
+/**
+ * Props for `Header.NavigationMenu`, in addition to the navigation menu props
+ * that apply to both layouts.
+ */
+export type THeaderNavigationMenuProps = Omit<TNavigationMenuProps, 'layout'> & {
+  /** Accessible name of the navigation landmark. */
+  label?: string | undefined
+  /** Accessible name of the button that opens the compact panel. Defaults to `Menu`. */
+  toggleLabel?: string | undefined
+  /**
+   * Forces the compact panel on or off. When omitted, the navigation becomes
+   * compact at 48rem and below.
+   */
+  compact?: boolean | undefined
+}
+
+/** Native `button` attributes accepted by the compact menu button. */
+export type TButtonHTMLProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 /** Visual state of a `dynamic` header. */
 export type TDynamicHeaderState = 'attached' | 'floating' | 'hidden'

@@ -2,28 +2,56 @@ import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-
 import { forwardRef, useState } from 'react'
 
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { navigationMenuContext } from '../context.js'
 import type { TNavigationMenuProps } from '../types.js'
+
+import { StackedRoot } from './stacked.js'
 
 export const NavigationMenuRoot = forwardRef<HTMLElement, TNavigationMenuProps>(
   function NavigationMenuRoot(
-    { value, defaultValue, onValueChange, delay, closeDelay, className, children, ...props },
+    {
+      value,
+      defaultValue,
+      onValueChange,
+      delay,
+      closeDelay,
+      layout = 'inline',
+      revealed,
+      className,
+      children,
+      ...props
+    },
     ref,
   ) {
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue ?? null)
     const openValue = value !== undefined ? value : uncontrolledValue
+
+    const handleValueChange = (nextValue: string | null): void => {
+      if (value === undefined) {
+        setUncontrolledValue(nextValue)
+      }
+
+      onValueChange?.(nextValue)
+    }
+
+    if (layout === 'stacked') {
+      return (
+        <navigationMenuContext.Provider
+          value={{ layout, value: openValue, setValue: handleValueChange }}
+        >
+          <StackedRoot {...props} ref={ref} className={className} revealed={revealed}>
+            {children}
+          </StackedRoot>
+        </navigationMenuContext.Provider>
+      )
+    }
 
     return (
       <BaseNavigationMenu.Root
         {...props}
         ref={ref}
         value={openValue}
-        onValueChange={(nextValue) => {
-          if (value === undefined) {
-            setUncontrolledValue(nextValue)
-          }
-
-          onValueChange?.(nextValue)
-        }}
+        onValueChange={handleValueChange}
         delay={delay}
         closeDelay={closeDelay}
         className={classNames('frontier-navigation-menu', className)}

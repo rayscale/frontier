@@ -1,15 +1,10 @@
-import {
-  type CSSProperties,
-  useCallback,
-  useEffect,
-  useId,
-  useState,
-  useSyncExternalStore,
-} from 'react'
+import { type CSSProperties, useCallback, useEffect, useId, useState } from 'react'
 
 import type { TCssCustomProperties } from '../../../internal/helpers/css-custom-properties.js'
+import { useMediaQuery } from '../../../internal/helpers/use-media-query.js'
 import { toCssLength } from '../helpers/css-length.js'
-import { getIsMobile, subscribeToMobile } from '../helpers/mobile.js'
+
+const mobileQuery = '(max-width: 48rem)'
 
 interface TUseSidebarRootOptions {
   open: boolean | undefined
@@ -41,7 +36,7 @@ export function useSidebarRoot({
   mobileDrawerStyle: CSSProperties & TCssCustomProperties
 } {
   const sidebarId = useId()
-  const mobileState = useSyncExternalStore(subscribeToMobile, getIsMobile, () => false)
+  const mobileState = useMediaQuery(mobileQuery)
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen)
   const [mobileOpen, setMobileOpen] = useState(false)
   const openState = open ?? uncontrolledOpen

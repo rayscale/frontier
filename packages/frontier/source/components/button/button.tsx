@@ -14,6 +14,7 @@ import {
 } from 'react'
 
 import { classNames } from '../../internal/helpers/class-names.js'
+import { Tooltip } from '../tooltip/index.js'
 
 import type { TButtonProps } from './types.js'
 
@@ -29,14 +30,6 @@ function mergeRefs<TNode>(...refs: (Ref<TNode> | undefined)[]): Ref<TNode> {
       }
     }
   }
-}
-
-function ButtonTooltip({ label }: { label: string | undefined }): ReactElement {
-  return (
-    <span className="frontier-button__tooltip" aria-hidden="true">
-      {label}
-    </span>
-  )
 }
 
 export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(props, forwardedRef) {
@@ -152,73 +145,79 @@ export const Button = forwardRef<HTMLElement, TButtonProps>(function Button(prop
     const mergedTitle = childTitle ?? title
     const mergedAriaLabel = childAriaLabel ?? ariaLabel
 
+    const control = cloneElement(child, {
+      ...rest,
+      ...childProps,
+      ref: mergeRefs(forwardedRef, child.ref),
+      className: classNames(classes, childClassName),
+      'aria-disabled': unavailable ? true : childProps['aria-disabled'],
+      'aria-describedby': mergedDescribedBy,
+      'aria-label': mergedAriaLabel,
+      'data-pressed': keyPressed ? 'key' : undefined,
+      title: mergedTitle,
+      onBlur: (event: FocusEvent<HTMLElement>) => {
+        handleBlur(event)
+        childOnBlur?.(event)
+      },
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+        handleKeyDown(event)
+        childOnKeyDown?.(event)
+      },
+      onKeyUp: (event: KeyboardEvent<HTMLElement>) => {
+        handleKeyUp(event)
+        childOnKeyUp?.(event)
+      },
+      onClick: (event: MouseEvent<HTMLElement>) => {
+        if (unavailable) {
+          event.preventDefault()
+          event.stopPropagation()
+
+          return
+        }
+
+        childOnClick?.(event)
+        onClick?.(event)
+      },
+      children: (
+        <span className="frontier-button__content">{childProps.children as ReactNode}</span>
+      ),
+    })
+
     return (
       <>
-        {cloneElement(child, {
-          ...rest,
-          ...childProps,
-          ref: mergeRefs(forwardedRef, child.ref),
-          className: classNames(classes, childClassName),
-          'aria-disabled': unavailable ? true : childProps['aria-disabled'],
-          'aria-describedby': mergedDescribedBy,
-          'aria-label': mergedAriaLabel,
-          'data-pressed': keyPressed ? 'key' : undefined,
-          title: mergedTitle,
-          onBlur: (event: FocusEvent<HTMLElement>) => {
-            handleBlur(event)
-            childOnBlur?.(event)
-          },
-          onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
-            handleKeyDown(event)
-            childOnKeyDown?.(event)
-          },
-          onKeyUp: (event: KeyboardEvent<HTMLElement>) => {
-            handleKeyUp(event)
-            childOnKeyUp?.(event)
-          },
-          onClick: (event: MouseEvent<HTMLElement>) => {
-            if (unavailable) {
-              event.preventDefault()
-              event.stopPropagation()
-
-              return
-            }
-
-            childOnClick?.(event)
-            onClick?.(event)
-          },
-          children: (
-            <>
-              <span className="frontier-button__content">{childProps.children as ReactNode}</span>
-              {iconOnly ? <ButtonTooltip label={mergedAriaLabel} /> : null}
-            </>
-          ),
-        })}
+        {iconOnly && mergedAriaLabel ? (
+          <Tooltip content={mergedAriaLabel}>{control}</Tooltip>
+        ) : (
+          control
+        )}
         {reason}
       </>
     )
   }
 
+  const control = (
+    <button
+      {...rest}
+      ref={forwardedRef as Ref<HTMLButtonElement>}
+      type={type}
+      className={classes}
+      aria-disabled={unavailable || undefined}
+      aria-describedby={describedBy}
+      aria-label={ariaLabel}
+      data-pressed={keyPressed ? 'key' : undefined}
+      title={title}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
+      onBlur={handleBlur}
+    >
+      <span className="frontier-button__content">{children}</span>
+    </button>
+  )
+
   return (
     <>
-      <button
-        {...rest}
-        ref={forwardedRef as Ref<HTMLButtonElement>}
-        type={type}
-        className={classes}
-        aria-disabled={unavailable || undefined}
-        aria-describedby={describedBy}
-        aria-label={ariaLabel}
-        data-pressed={keyPressed ? 'key' : undefined}
-        title={title}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        onKeyUp={handleKeyUp}
-        onBlur={handleBlur}
-      >
-        <span className="frontier-button__content">{children}</span>
-        {iconOnly ? <ButtonTooltip label={ariaLabel} /> : null}
-      </button>
+      {iconOnly && ariaLabel ? <Tooltip content={ariaLabel}>{control}</Tooltip> : control}
       {reason}
     </>
   )

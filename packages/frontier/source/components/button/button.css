@@ -53,33 +53,6 @@
   line-height: var(--frontier-line-height-sm);
 }
 
-.frontier-button__tooltip {
-  position: absolute;
-  inset-block-start: calc(100% + var(--frontier-spacing-2));
-  inset-inline: 0;
-  z-index: var(--frontier-layer-tooltip);
-  box-sizing: border-box;
-  width: max-content;
-  max-width: 20rem;
-  margin-inline: auto;
-  padding-block: var(--frontier-spacing-1);
-  padding-inline: var(--frontier-spacing-2);
-  border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
-  border-radius: var(--frontier-radius-md);
-  background: var(--frontier-color-overlay);
-  color: var(--frontier-color-text);
-  font-size: var(--frontier-font-size-sm);
-  line-height: var(--frontier-line-height-sm);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--frontier-duration-exit) var(--frontier-easing-exit);
-}
-
-.frontier-button:is(:hover, :focus-visible) > .frontier-button__tooltip {
-  opacity: 1;
-  transition: opacity var(--frontier-duration-enter) var(--frontier-easing-standard);
-}
-
 .frontier-button--icon {
   width: var(--frontier-control-height);
   min-width: var(--frontier-control-height);
@@ -142,9 +115,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .frontier-button,
-  .frontier-button__tooltip,
-  .frontier-button:is(:hover, :focus-visible) > .frontier-button__tooltip {
+  .frontier-button {
     transition: none;
   }
 }

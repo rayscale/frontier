@@ -116,8 +116,20 @@ describe('Button', () => {
 
     expect(button).toHaveClass('frontier-button--icon')
     expect(button).not.toHaveAttribute('title')
-    expect(button.querySelector('.frontier-button__tooltip')).toHaveTextContent('Add item')
-    expect(button.querySelector('.frontier-button__tooltip')).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it('shows the icon-only name as a tooltip on keyboard focus', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Button iconOnly aria-label="Add item">
+        <svg aria-hidden="true" />
+      </Button>,
+    )
+
+    await user.tab()
+
+    expect(await screen.findByText('Add item')).toBeInTheDocument()
   })
 
   it('keeps a disabled button focusable, explains why, and ignores activation', async () => {

@@ -220,10 +220,10 @@ Pixel values assume a root size of 16 px.
 
 ### Family
 
-| Token  | Value                                                             |
-| ------ | ----------------------------------------------------------------- |
-| Family | Geist, with the system font and a sans-serif fallback             |
-| Mono   | ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace |
+| Token  | Value                                                      |
+| ------ | ---------------------------------------------------------- |
+| Family | Geist, with the system font and a sans-serif fallback      |
+| Mono   | Geist Mono, with the system monospace font as the fallback |
 
 ### Sizes
 

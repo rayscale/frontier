@@ -32,7 +32,7 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
 - **Symbols** — A set of symbols that follow one grid and one stroke, available from the package entry.
 - **Styles** — Design tokens and component styles through `@rayscale/frontier/styles.css`.
-- **Typeface** — Geist, loaded by the stylesheet through `@fontsource-variable/geist`. The system font is the fallback.
+- **Typeface** — Geist and Geist Mono, loaded by the stylesheet through `@fontsource-variable/geist` and `@fontsource-variable/geist-mono`. The system font is the fallback.
 
 ## Exports
 

@@ -10,6 +10,8 @@ The system font is the fallback while Geist loads or when it is unavailable. It 
 
 See [Values](./values.md#typeface) for the sizes, weights, and line heights.
 
+Code and other fixed-width text use Geist Mono, with the system monospace font as the fallback.
+
 ## Typeface rules
 
 One typeface family is used across the interface. Using a single family keeps the voice consistent, and it lets weight and size do the work of hierarchy.

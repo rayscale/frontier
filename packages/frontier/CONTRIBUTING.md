@@ -113,7 +113,6 @@ packages/frontier/
 │   │   ├── helpers/       # shared functions and hooks
 │   │   └── primitives/    # shared presentational pieces with their own styles
 │   ├── styles/            # stylesheet entry, fonts, tokens, and system stories
-│   ├── typeface/          # Frontier Sans sources, build pipeline, tests, and specimens
 │   ├── index.ts           # public package entry
 │   └── styles.d.ts
 ├── scripts/
@@ -218,19 +217,6 @@ The styles in `source/styles/` implement the guidelines and are the only source 
 - Use semantic attributes for state (`:focus-visible`, `[data-open]`, `[aria-selected='true']`)
   instead of redundant state classes.
 - Never use unscoped generic classes such as `.root`, `.content`, or `.active`.
-
-## Typeface
-
-Frontier Sans lives in `source/typeface/` and has its own Python toolchain; read its
-[README](./source/typeface/README.md) before changing it. It is in the backlog: the interface is
-set in Geist, and the package neither builds nor ships Frontier Sans.
-
-- Edit glyph definitions, features, or metrics in `source/typeface/`, never the compiled fonts.
-- Run `pnpm typeface:build`, `pnpm typeface:test`, and `pnpm typeface:validate` after any
-  change to the typeface.
-- Compiled fonts, UFO masters, and virtual environments are generated output and stay out of
-  version control.
-- The family token lists Geist first and the system font as the fallback; do not hardcode a family.
 
 ## Symbols
 

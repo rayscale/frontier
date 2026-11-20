@@ -1,6 +1,0 @@
-feature ss01 {
-  featureNames {
-    name "Double-storey a";
-  };
-  sub a by a.ss01;
-} ss01;

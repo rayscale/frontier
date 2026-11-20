@@ -29,11 +29,6 @@
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "typeface:setup": "uv sync --directory source/typeface",
-    "typeface:build": "uv run --directory source/typeface python -m scripts.compile",
-    "typeface:build:static": "uv run --directory source/typeface python -m scripts.compile --static otf ttf",
-    "typeface:validate": "uv run --directory source/typeface python -m scripts.validate",
-    "typeface:test": "uv run --directory source/typeface pytest",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {

@@ -8,8 +8,6 @@ The typeface carries most of Frontier's content. It should be clear, calm, and f
 
 The system font is the fallback while Geist loads or when it is unavailable. It is not a second typeface to choose; the interface falls back to it automatically.
 
-Frontier Sans, an original typeface built in this repository, is in the backlog. It is not used by the interface yet.
-
 See [Values](./values.md#typeface) for the sizes, weights, and line heights.
 
 ## Typeface rules

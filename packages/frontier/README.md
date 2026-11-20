@@ -32,7 +32,7 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
 - **Symbols** — A set of symbols that follow one grid and one stroke, available from the package entry.
 - **Styles** — Design tokens and component styles through `@rayscale/frontier/styles.css`.
-- **Typeface** — Geist, loaded by the stylesheet through `@fontsource-variable/geist`. The system font is the fallback. Frontier Sans, an original typeface in progress, lives in [source/typeface](./source/typeface/README.md) and is not used yet.
+- **Typeface** — Geist, loaded by the stylesheet through `@fontsource-variable/geist`. The system font is the fallback.
 
 ## Exports
 
@@ -45,8 +45,6 @@ The default theme is light. Set `data-theme="dark"` on the root element to switc
 
 > [!WARNING]
 > `@rayscale/frontier` is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
->
-> Frontier Sans is not part of the build. Its toolchain needs uv and Python and is described in [source/typeface](./source/typeface/README.md).
 >
 > More information will be added as the package progresses.
 

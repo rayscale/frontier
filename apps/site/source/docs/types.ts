@@ -21,6 +21,8 @@ export interface TDocsPage {
   /** Content file, relative to the content directory, such as `components/button/index.mdx`. */
   file: string
   frontmatter: TDocsFrontmatter
+  /** The MDX of a page that is generated from data and has no file to read. */
+  source?: string | undefined
 }
 
 /** A node of the navigation tree. */

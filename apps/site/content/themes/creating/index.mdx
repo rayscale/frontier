@@ -1,0 +1,69 @@
+---
+title: Creating a theme
+description: Add a stylesheet and a manifest, and the build checks the theme and shows it in the documentation.
+order: 10
+---
+
+A theme is two files in `packages/frontier/source/styles/themes/`, named after the theme in kebab-case. The build does the rest: it checks the theme, and the theme appears in the documentation and in Storybook by itself.
+
+## The manifest
+
+`<name>.json` states what the theme is and how it relates to the guidelines.
+
+```json
+{
+  "name": "paper",
+  "title": "Paper",
+  "description": "Warm surfaces and a softer accent.",
+  "kind": "conformant",
+  "departures": []
+}
+```
+
+- `kind` is `conformant` or `extended`.
+- An extended theme lists at least one departure, with the `guideline` it departs from, such as `foundations/typeface`, and the `reason`. A conformant theme lists none.
+
+## The stylesheet
+
+`<name>.css` sets the values of the theme under `[data-theme='<name>']`, and the dark colors under `[data-theme='<name>'][data-mode='dark']`.
+
+```css
+[data-theme='paper'] {
+  --frontier-radius-xl: 1.75rem;
+
+  --frontier-color-background: #fffdf8;
+  /* ...every color role... */
+}
+
+[data-theme='paper'][data-mode='dark'] {
+  --frontier-color-background: #14110d;
+  /* ...every color role... */
+}
+```
+
+- Declare every color role in both blocks, so the theme does not depend on the theme around it. The build lists the roles that are missing.
+- Redeclare the shadows when you change the shadow colors, so they follow the theme inside a region.
+- Use plain colors for the roles, such as hex values. The build reads them to measure the contrast.
+
+## What the build checks
+
+The build reads both modes of every theme, and it fails when a requirement is not met.
+
+| Requirement                                                        | Minimum |
+| ------------------------------------------------------------------ | ------- |
+| Text and muted text over the background and the surfaces           | 4.5     |
+| The text of the primary and secondary roles over their fill        | 4.5     |
+| Status colors over the background and over their subtle background | 4.5     |
+| The focus indicator over the background and the surface            | 3       |
+
+Run the build from the repository root.
+
+```sh
+pnpm --filter @rayscale/frontier build
+```
+
+It prints what fails, for example `light: text-muted on background is 3.2, and needs 4.5`.
+
+## What changes in the documentation
+
+The page of the theme, the picker, and the gallery draw from the metadata that the build generates, so a new theme shows up in all of them with no change to the site. The theme also appears in the Storybook toolbar.

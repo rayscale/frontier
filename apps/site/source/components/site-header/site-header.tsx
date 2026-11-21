@@ -14,6 +14,7 @@ const links = [
   { label: 'Components', href: '/components' },
   { label: 'Symbols', href: '/symbols' },
   { label: 'Typeface', href: '/typeface' },
+  { label: 'Themes', href: '/themes' },
   { label: 'Docs', href: '/docs' },
 ]
 

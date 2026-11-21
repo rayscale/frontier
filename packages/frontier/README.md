@@ -29,22 +29,26 @@ The default mode is light. Set `data-mode="dark"` on the root element to switch 
 
 ## Themes
 
-Frontier is the default theme. A theme is a named set of values, and it applies to the root element or to any region inside it. Import a theme's stylesheet after the main one, and set `data-theme` where it applies.
+Frontier is the default theme. A theme is a stylesheet in your own project that sets the tokens of the system. Import it after the main stylesheet, and set `data-theme` and `data-mode` on the element where it applies, which can be the root element or any region.
 
 ```tsx
 import '@rayscale/frontier/styles.css'
-import '@rayscale/frontier/themes/bisnes.css'
+import './acme-theme.css'
 ```
-
-A page that offers a choice of theme can load every theme with `@rayscale/frontier/themes.css`.
-
-A theme also applies to a region. Set `data-theme` and `data-mode` together on the same element, so the region does not depend on the mode around it. `data-theme="frontier"` restores the default theme inside a region.
 
 ```html
-<html data-theme="bisnes" data-mode="dark"></html>
+<html data-theme="acme" data-mode="dark"></html>
 ```
 
-Every theme defines both modes. The build checks the contrast of each theme in both modes and fails when a theme does not meet the guidelines. See [Themes](../../guidelines/foundations/themes.md).
+Set both attributes on the same element, so a region does not depend on the mode around it. `data-theme="frontier"` restores the default theme inside a region.
+
+A theme sets every color role in both modes, under `[data-theme='<name>']` and `[data-theme='<name>'][data-mode='dark']`. Check a stylesheet against the guidelines with:
+
+```sh
+pnpm --filter @rayscale/frontier check:themes path/to/acme-theme.css
+```
+
+The theme is named after its file. The command reports the roles that are missing and every contrast requirement that is not met. If a `.json` manifest with the same name sits next to the stylesheet, it is checked too. See [Themes](../../guidelines/foundations/themes.md).
 
 ## What's included
 
@@ -61,7 +65,6 @@ Every theme defines both modes. The build checks the contrast of each theme in b
 | `@rayscale/frontier/styles.css`        | Design tokens, the font face, and component styles.       |
 | `@rayscale/frontier/themes/<name>.css` | The values of one theme, for use with `data-theme`.       |
 | `@rayscale/frontier/symbol-metadata`   | Descriptive data of every symbol, without the components. |
-| `@rayscale/frontier/theme-metadata`    | Kind, departures, colors, and contrast of every theme.    |
 
 ## Development
 

@@ -1,26 +1,41 @@
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { basename, dirname, join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
-import type {
-  TThemeCheck,
-  TThemeDeparture,
-  TThemeKind,
-  TThemeMetadata,
-  TThemeMode,
-  TThemeModeReport,
-} from '../source/themes/types.js'
+type TThemeKind = 'conformant' | 'extended'
+type TThemeMode = 'light' | 'dark'
+
+interface TThemeDeparture {
+  /** The guideline, as its path under `guidelines/`, such as `foundations/typeface`. */
+  guideline: string
+  /** Why the theme departs from the guideline. */
+  reason: string
+}
+
+/** The result of one contrast requirement in one mode. */
+export interface TCheck {
+  /** Role of the foreground color, without the `--frontier-color-` prefix. */
+  foreground: string
+  /** Role of the background color, without the `--frontier-color-` prefix. */
+  background: string
+  /** Measured contrast ratio, rounded to two decimals. */
+  ratio: number
+  /** Smallest ratio that the requirement allows. */
+  minimum: number
+  passed: boolean
+}
+
+/** The color roles of a mode, resolved, and how they measure up. */
+export interface TModeReport {
+  colors: { [role: string]: string }
+  checks: TCheck[]
+}
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const stylesRoot = join(packageRoot, 'source', 'styles')
-const tokensRoot = join(stylesRoot, 'tokens')
-const themesRoot = join(stylesRoot, 'themes')
-const outputPath = join(packageRoot, 'source', 'themes', 'themes.generated.ts')
-const stylesheetPath = join(themesRoot, 'index.css')
+const tokensRoot = join(packageRoot, 'source', 'styles', 'tokens')
 const guidelinesRoot = resolve(packageRoot, '..', '..', 'guidelines')
 
 const rolePrefix = '--frontier-color-'
-const defaultTheme = 'frontier'
 
 /** One rule of a stylesheet: its selectors and the custom properties it declares. */
 export interface TBlock {
@@ -242,7 +257,7 @@ export function modeVariables(
 }
 
 /** Resolves the color roles of a mode and measures every contrast requirement. */
-export function reportMode(variables: { [property: string]: string }): TThemeModeReport {
+export function reportMode(variables: { [property: string]: string }): TModeReport {
   const colors: { [role: string]: string } = {}
 
   for (const [property, value] of Object.entries(variables)) {
@@ -252,7 +267,7 @@ export function reportMode(variables: { [property: string]: string }): TThemeMod
   }
 
   const background = parseColor(colors.background ?? '')
-  const checks: TThemeCheck[] = contrastRequirements.map(([foreground, behind, minimum]) => {
+  const checks: TCheck[] = contrastRequirements.map(([foreground, behind, minimum]) => {
     const foregroundValue = colors[foreground]
     const behindValue = colors[behind]
 
@@ -304,33 +319,8 @@ export function findRoleProblems(base: TCollected, theme: TCollected): string[] 
   return problems
 }
 
-/** The values other than colors that a theme changes, compared with the base theme. */
-export function findOverrides(base: TCollected, theme: TCollected): { [token: string]: string } {
-  const baseVariables = modeVariables('light', base)
-  const themeVariables = modeVariables('light', base, theme)
-  const overrides: { [token: string]: string } = {}
-
-  for (const property of Object.keys({ ...theme.shared, ...theme.light })) {
-    // Colors have their own report, and shadows only follow the shadow colors.
-    if (property.startsWith(rolePrefix) || property.startsWith('--frontier-shadow-')) {
-      continue
-    }
-
-    const next = resolveValue(themeVariables[property] ?? '', themeVariables)
-    const previous = resolveValue(baseVariables[property] ?? '', baseVariables)
-
-    if (next !== previous) {
-      overrides[property] = next
-    }
-  }
-
-  return overrides
-}
-
 interface TManifest {
   name: string
-  title: string
-  description: string
   kind: TThemeKind
   departures: TThemeDeparture[]
 }
@@ -351,18 +341,10 @@ export function validateManifest(
     return { problems: ['The manifest must be an object.'] }
   }
 
-  const { title, description, kind, departures } = value
+  const { kind, departures } = value
 
   if (value.name !== name) {
     problems.push(`The name must be "${name}", like the file.`)
-  }
-
-  if (typeof title !== 'string' || title === '') {
-    problems.push('The manifest needs a title.')
-  }
-
-  if (typeof description !== 'string' || description === '') {
-    problems.push('The manifest needs a description.')
   }
 
   if (kind !== 'conformant' && kind !== 'extended') {
@@ -398,16 +380,11 @@ export function validateManifest(
     problems.push('An extended theme names at least one departure.')
   }
 
-  if (
-    problems.length > 0 ||
-    typeof title !== 'string' ||
-    typeof description !== 'string' ||
-    (kind !== 'conformant' && kind !== 'extended')
-  ) {
+  if (problems.length > 0 || (kind !== 'conformant' && kind !== 'extended')) {
     return { problems }
   }
 
-  return { manifest: { name, title, description, kind, departures: listed }, problems }
+  return { manifest: { name, kind, departures: listed }, problems }
 }
 
 function readBase(): TCollected {
@@ -419,140 +396,94 @@ function readBase(): TCollected {
   return collect(blocks)
 }
 
-function formatModule(themes: readonly TThemeMetadata[]): string {
-  return `// This file is generated by scripts/generate-themes.ts.
-// Run \`pnpm --filter @rayscale/frontier generate:themes\` after changing a theme.
-
-import type { TThemeMetadata } from './types.js'
-
-export type {
-  TThemeCheck,
-  TThemeDeparture,
-  TThemeKind,
-  TThemeMetadata,
-  TThemeMode,
-  TThemeModeReport,
-} from './types.js'
-
-export const themeMetadata: TThemeMetadata[] = ${JSON.stringify(themes, null, 2)}
-
-export const themeMetadataByName: { [name: string]: TThemeMetadata | undefined } =
-  Object.fromEntries(themeMetadata.map((theme) => [theme.name, theme]))
-`
+interface TTarget {
+  name: string
+  stylesheet: string
 }
 
-/** A stylesheet that imports every theme, for pages that offer a choice of theme. */
-export function formatStylesheet(names: readonly string[]): string {
-  return `/* This file is generated by scripts/generate-themes.ts. */
-/* It imports every theme, so a page that offers a choice loads them with one line. */
+/** The stylesheets named on the command line. A theme is named after its file. */
+function findTargets(args: readonly string[]): TTarget[] {
+  return args.map((file) => {
+    const stylesheet = resolve(file)
 
-${names.map((name) => `@import './${name}.css';`).join('\n')}
-`
+    return { name: basename(stylesheet, '.css'), stylesheet }
+  })
 }
 
-/** Puts the default theme first, and the others in alphabetical order. */
-function compareNames(a: string, b: string): number {
-  if (a === defaultTheme) {
-    return -1
-  }
-
-  if (b === defaultTheme) {
-    return 1
-  }
-
-  return a.localeCompare(b)
+function describeError(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
 }
 
 /**
- * Reads the stylesheet of a theme. The default theme is the base itself, so it has none, and a
- * missing stylesheet of any other theme is `null`.
+ * Lists what is wrong with a theme: the roles it leaves out, its manifest when it has one next to
+ * the stylesheet, and every contrast requirement in both modes.
  */
-function readTheme(name: string): TCollected | null | undefined {
-  if (name === defaultTheme) {
-    return undefined
+function checkTarget(
+  { name, stylesheet }: TTarget,
+  base: TCollected,
+): { problems: string[]; kind: string } {
+  const problems: string[] = []
+  const theme = collect(parseBlocks(readFileSync(stylesheet, 'utf8')))
+  const manifestPath = join(dirname(stylesheet), `${name}.json`)
+  let kind = 'no manifest'
+
+  problems.push(...findRoleProblems(base, theme))
+
+  if (existsSync(manifestPath)) {
+    try {
+      const result = validateManifest(
+        JSON.parse(readFileSync(manifestPath, 'utf8')) as unknown,
+        name,
+        (guideline) => existsSync(join(guidelinesRoot, `${guideline}.md`)),
+      )
+
+      problems.push(...result.problems)
+      kind = result.manifest?.kind ?? 'invalid manifest'
+    } catch (error) {
+      problems.push(`The manifest cannot be read: ${describeError(error)}`)
+      kind = 'invalid manifest'
+    }
   }
 
-  const path = join(themesRoot, `${name}.css`)
-
-  return existsSync(path) ? collect(parseBlocks(readFileSync(path, 'utf8'))) : null
-}
-
-function main(): void {
-  const base = readBase()
-  const manifests = readdirSync(themesRoot)
-    .filter((file) => file.endsWith('.json'))
-    .map((file) => file.slice(0, -'.json'.length))
-    .sort(compareNames)
-  const themes: TThemeMetadata[] = []
-  const problems: string[] = []
-
-  for (const name of manifests) {
-    const report = (message: string): void => {
-      problems.push(`${name}: ${message}`)
-    }
-
-    const { manifest, problems: manifestProblems } = validateManifest(
-      JSON.parse(readFileSync(join(themesRoot, `${name}.json`), 'utf8')) as unknown,
-      name,
-      (guideline) => existsSync(join(guidelinesRoot, `${guideline}.md`)),
-    )
-
-    manifestProblems.forEach(report)
-
-    const theme = readTheme(name)
-
-    if (theme === null) {
-      report('There is no stylesheet. Add the theme as a CSS file next to its manifest.')
-    }
-
-    if (!manifest || theme === null) {
-      continue
-    }
-
-    if (theme) {
-      findRoleProblems(base, theme).forEach(report)
-    }
-
-    const modes = {} as { light: TThemeModeReport; dark: TThemeModeReport }
-
-    for (const mode of ['light', 'dark'] as const) {
-      modes[mode] = reportMode(modeVariables(mode, base, theme))
-
-      for (const check of modes[mode].checks) {
+  for (const mode of ['light', 'dark'] as const) {
+    try {
+      for (const check of reportMode(modeVariables(mode, base, theme)).checks) {
         if (!check.passed) {
-          report(
+          problems.push(
             `${mode}: ${check.foreground} on ${check.background} is ${String(check.ratio)}, and needs ${String(check.minimum)}.`,
           )
         }
       }
+    } catch (error) {
+      problems.push(`${mode}: ${describeError(error)}`)
     }
-
-    themes.push({
-      name,
-      title: manifest.title,
-      description: manifest.description,
-      kind: manifest.kind,
-      departures: manifest.departures,
-      overrides: theme ? findOverrides(base, theme) : {},
-      modes,
-    })
   }
 
-  if (problems.length > 0) {
-    console.error(
-      `The themes do not meet the guidelines:\n${problems.map((line) => `  - ${line}`).join('\n')}`,
-    )
+  return { problems, kind }
+}
+
+function main(): void {
+  const targets = findTargets(process.argv.slice(2))
+
+  if (targets.length === 0) {
+    console.error('Usage: check:themes <stylesheet.css>...')
     process.exitCode = 1
 
     return
   }
 
-  writeFileSync(outputPath, formatModule(themes))
-  writeFileSync(
-    stylesheetPath,
-    formatStylesheet(themes.map((theme) => theme.name).filter((name) => name !== defaultTheme)),
-  )
-  console.log(`Checked ${String(themes.length)} themes in both modes.`)
+  const base = readBase()
+
+  for (const target of targets) {
+    const { problems, kind } = checkTarget(target, base)
+
+    if (problems.length > 0) {
+      console.error(`${target.name}\n${problems.map((line) => `  - ${line}`).join('\n')}`)
+      process.exitCode = 1
+    } else {
+      console.log(`${target.name}: ok (${kind})`)
+    }
+  }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

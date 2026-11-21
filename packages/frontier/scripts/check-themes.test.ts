@@ -3,16 +3,14 @@ import { describe, expect, it } from 'vitest'
 import {
   collect,
   contrastRatio,
-  findOverrides,
   findRoleProblems,
-  formatStylesheet,
   modeVariables,
   parseBlocks,
   parseColor,
   reportMode,
   resolveValue,
   validateManifest,
-} from './generate-themes.js'
+} from './check-themes.js'
 
 const passingRoles: { [role: string]: string } = {
   background: '#ffffff',
@@ -42,7 +40,7 @@ function toVariables(roles: { [role: string]: string }): { [property: string]: s
   )
 }
 
-describe('theme generator', () => {
+describe('theme validator', () => {
   describe('colors', () => {
     it('reads hex and rgb colors, with and without alpha', () => {
       expect(parseColor('#fd5d2a')).toEqual({ r: 253, g: 93, b: 42, a: 1 })
@@ -129,7 +127,7 @@ describe('theme generator', () => {
     })
   })
 
-  describe('roles and overrides', () => {
+  describe('roles', () => {
     const base = collect(
       parseBlocks(`
         :root, [data-mode='light'] { --frontier-color-text: #111111; --frontier-radius: 1rem; }
@@ -148,24 +146,6 @@ describe('theme generator', () => {
         '--frontier-color-text is not declared for the dark mode.',
         '--frontier-color-extra is not a color role of the system.',
       ])
-    })
-
-    it('lists only the values other than colors that differ from the base', () => {
-      const theme = collect(
-        parseBlocks(`
-          [data-theme='x'] { --frontier-color-text: #222222; --frontier-radius: 2rem; }
-        `),
-      )
-
-      expect(findOverrides(base, theme)).toEqual({ '--frontier-radius': '2rem' })
-    })
-  })
-
-  describe('stylesheet', () => {
-    it('imports every theme that has a stylesheet', () => {
-      expect(formatStylesheet(['bisnes', 'paper'])).toContain(
-        "@import './bisnes.css';\n@import './paper.css';\n",
-      )
     })
   })
 

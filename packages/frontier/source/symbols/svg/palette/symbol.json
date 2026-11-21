@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "palette",
+  "description": "Represents the colors and look of an interface.",
+  "keywords": ["palette", "color", "theme", "style"],
+  "categories": ["ui"],
+  "aliases": ["theme"],
+  "useCases": ["themes", "appearance settings"]
+}

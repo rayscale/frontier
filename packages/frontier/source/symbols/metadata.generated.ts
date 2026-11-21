@@ -158,6 +158,29 @@ export const symbolMetadata: TSymbolMetadata[] = [
     ]
   },
   {
+    "aliases": [
+      "guidelines"
+    ],
+    "categories": [
+      "files"
+    ],
+    "component": "Book",
+    "contributors": [],
+    "description": "Represents reference material to read.",
+    "keywords": [
+      "book",
+      "guide",
+      "read",
+      "docs"
+    ],
+    "name": "book",
+    "tags": [],
+    "useCases": [
+      "guidelines",
+      "documentation"
+    ]
+  },
+  {
     "aliases": [],
     "categories": [
       "objects"
@@ -917,6 +940,29 @@ export const symbolMetadata: TSymbolMetadata[] = [
     "tags": [],
     "useCases": [
       "dark theme"
+    ]
+  },
+  {
+    "aliases": [
+      "theme"
+    ],
+    "categories": [
+      "ui"
+    ],
+    "component": "Palette",
+    "contributors": [],
+    "description": "Represents the colors and look of an interface.",
+    "keywords": [
+      "palette",
+      "color",
+      "theme",
+      "style"
+    ],
+    "name": "palette",
+    "tags": [],
+    "useCases": [
+      "themes",
+      "appearance settings"
     ]
   },
   {

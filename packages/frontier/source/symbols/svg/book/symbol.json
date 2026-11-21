@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "book",
+  "description": "Represents reference material to read.",
+  "keywords": ["book", "guide", "read", "docs"],
+  "categories": ["files"],
+  "aliases": ["guidelines"],
+  "useCases": ["guidelines", "documentation"]
+}

@@ -34,7 +34,7 @@ When many extended themes depart from the same guideline, the guideline is the t
 
 ## Declaring a theme
 
-A theme declares its name, its kind, and its departures. The declaration is part of the theme, and it is published with the theme so people can see what the theme keeps and what it changes.
+A theme declares its name, its kind, and its departures. The declaration stays with the theme, so anyone who uses the theme can see what it keeps and what it changes.
 
 The requirements that a measurement can check are checked automatically in both modes. A conformant theme that fails a check is not conformant, and an extended theme that fails one is not finished.
 

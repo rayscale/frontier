@@ -20,7 +20,7 @@ Under reduced motion, the placeholder keeps its shape and stops its shimmer, pul
 
 ## Contrast
 
-Placeholders should remain visible in both themes, but they are not text and do not need text contrast. They should still be clearly distinct from the page, so a user can see where content will appear.
+Placeholders should remain visible in both modes, but they are not text and do not need text contrast. They should still be clearly distinct from the page, so a user can see where content will appear.
 
 ## Principle
 

@@ -14,7 +14,7 @@ Symbols are simple, single-color pictograms drawn on a shared grid. They communi
 
 - Symbols use a **single color**: `currentColor` by default.
 - Do not bake brand or semantic colors into the symbol. Apply color through the consuming component or token.
-- Symbols should render correctly in both light and dark themes by inheriting text color.
+- Symbols should render correctly in both light and dark modes by inheriting text color.
 
 ## Style
 

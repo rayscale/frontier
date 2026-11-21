@@ -173,7 +173,7 @@
   color: var(--shiki-light);
 }
 
-[data-theme='dark'] .frontier-code-block__token {
+[data-mode='dark'] .frontier-code-block__token {
   color: var(--shiki-dark);
 }
 

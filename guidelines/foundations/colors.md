@@ -14,18 +14,18 @@ Each color has a job. Designs should use the role, not a specific color value.
 - **Status** colors (danger, success, warning, and information) signal the outcome of an action or the condition of an item. They always appear with text or a symbol.
 - **Highlight** is a neutral surface that marks the option under the pointer or keyboard.
 
-## Two themes, one meaning
+## Two modes, one meaning
 
-Light and dark themes share the same roles. A role keeps the same job in both themes, even though its value changes. A designer should never choose a color for one theme that breaks the role in the other. If a role looks correct in light mode but disappears in dark mode, the role is failing, not the theme.
+Light and dark modes share the same roles. A role keeps the same job in both modes, even though its value changes. A designer should never choose a color for one mode that breaks the role in the other. If a role looks correct in light mode but disappears in dark mode, the role is failing, not the mode.
 
 ## Contrast
 
-Text and meaningful graphics meet WCAG AA contrast in both themes. Status colors must pass for the text they color. When a color fails, the fix is to adjust the role's color, not to weaken the requirement or to rely on color alone. Color may reinforce a state, but it never carries one alone. See [Selection](../patterns/selection.md) and [States](../patterns/states.md).
+Text and meaningful graphics meet WCAG AA contrast in both modes. Status colors must pass for the text they color. When a color fails, the fix is to adjust the role's color, not to weaken the requirement or to rely on color alone. Color may reinforce a state, but it never carries one alone. See [Selection](../patterns/selection.md) and [States](../patterns/states.md).
 
 ## Surfaces and depth
 
-Surfaces at different levels must remain distinguishable in both themes. Color supports this distinction but does not replace the depth and layering rules in [Elevation](./elevation.md).
+Surfaces at different levels must remain distinguishable in both modes. Color supports this distinction but does not replace the depth and layering rules in [Elevation](./elevation.md).
 
 ## Principle
 
-Color should tell the user what something is for. Every role must remain legible, distinct, and correct in both themes.
+Color should tell the user what something is for. Every role must remain legible, distinct, and correct in both modes.

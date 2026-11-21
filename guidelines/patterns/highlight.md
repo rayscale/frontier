@@ -22,7 +22,7 @@ The highlight must follow the actual target rather than infer its position from 
 
 The highlight sits behind the target's content. It must not obscure text, symbols, shortcuts, selection indicators, or other meaningful information.
 
-Its surface must remain distinguishable from its surroundings in both themes. Use the shared highlight color role rather than introducing a new color for each context. See [Colors](../foundations/colors.md).
+Its surface must remain distinguishable from its surroundings in both modes. Use the shared highlight color role rather than introducing a new color for each context. See [Colors](../foundations/colors.md).
 
 The highlight must not change layout, target size, or the position of surrounding content.
 

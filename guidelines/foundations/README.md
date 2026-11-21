@@ -4,7 +4,7 @@ Foundations are the shared rules that every component builds on. They define how
 
 ## Guidelines in this category
 
-- [Colors](./colors.md): roles, themes, and contrast.
+- [Colors](./colors.md): roles, modes, and contrast.
 - [Shape](./shape.md): corners, borders, and the friendly curve.
 - [Spacing](./spacing.md): grouping, rhythm, and target size.
 - [Layout](./layout.md): the grid, breakpoints, and reading width.

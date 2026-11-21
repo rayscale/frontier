@@ -158,20 +158,20 @@ export const Collection: TStory = {
   ),
 }
 
-export const Themes: TStory = {
+export const Modes: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Badges adapt correctly across light and dark themes.',
+        story: 'Badges adapt correctly across light and dark modes.',
       },
     },
   },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
-      {(['light', 'dark'] as const).map((theme) => (
+      {(['light', 'dark'] as const).map((mode) => (
         <div
-          key={theme}
-          data-theme={theme}
+          key={mode}
+          data-mode={mode}
           style={{
             display: 'flex',
             flexWrap: 'wrap',

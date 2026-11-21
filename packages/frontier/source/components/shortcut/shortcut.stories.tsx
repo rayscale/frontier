@@ -130,20 +130,20 @@ export const Inline: TStory = {
   ),
 }
 
-export const Themes: TStory = {
+export const Modes: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shortcuts adapting correctly across light and dark themes.',
+        story: 'Shortcuts adapting correctly across light and dark modes.',
       },
     },
   },
   render: () => (
     <div style={{ display: 'grid', gap: '12px' }}>
-      {(['light', 'dark'] as const).map((theme) => (
+      {(['light', 'dark'] as const).map((mode) => (
         <div
-          key={theme}
-          data-theme={theme}
+          key={mode}
+          data-mode={mode}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -154,7 +154,7 @@ export const Themes: TStory = {
             color: 'var(--frontier-color-text)',
           }}
         >
-          <span>{theme} theme:</span>
+          <span>{mode} mode:</span>
           <Shortcut>Ctrl</Shortcut>
           <span aria-hidden="true">+</span>
           <Shortcut>P</Shortcut>

@@ -155,20 +155,20 @@ export const Semantic: TStory = {
   ),
 }
 
-export const Themes: TStory = {
+export const Modes: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Cards adapt correctly across light and dark themes.',
+        story: 'Cards adapt correctly across light and dark modes.',
       },
     },
   },
   render: (args) => (
     <div style={{ display: 'grid', gap: 16 }}>
-      {(['light', 'dark'] as const).map((theme) => (
+      {(['light', 'dark'] as const).map((mode) => (
         <div
-          key={theme}
-          data-theme={theme}
+          key={mode}
+          data-mode={mode}
           style={{
             padding: 16,
             borderRadius: 'var(--frontier-radius-md)',
@@ -177,10 +177,8 @@ export const Themes: TStory = {
         >
           <Card {...args}>
             <Card.Header>
-              <Card.Title>{theme} theme</Card.Title>
-              <Card.Description>
-                Surface, border, and text follow the active theme.
-              </Card.Description>
+              <Card.Title>{mode} mode</Card.Title>
+              <Card.Description>Surface, border, and text follow the active mode.</Card.Description>
             </Card.Header>
           </Card>
         </div>

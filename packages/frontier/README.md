@@ -25,7 +25,7 @@ export function Example() {
 
 React and React DOM 18 or 19 are required as peer dependencies.
 
-The default theme is light. Set `data-theme="dark"` on the root element to switch every color role to its dark value.
+The default mode is light. Set `data-mode="dark"` on the root element to switch every color role to its dark value.
 
 ## What's included
 

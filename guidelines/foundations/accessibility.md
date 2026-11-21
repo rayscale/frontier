@@ -22,7 +22,7 @@ Status, selection, and disabled states must be understood without color alone. P
 
 ## Contrast
 
-Text and meaningful graphics meet WCAG AA contrast in both themes. See [Colors](./colors.md).
+Text and meaningful graphics meet WCAG AA contrast in both modes. See [Colors](./colors.md).
 
 ## Motion
 

@@ -10,7 +10,7 @@
   isolation: isolate;
 }
 
-[data-theme='dark'] .frontier-skeleton {
+[data-mode='dark'] .frontier-skeleton {
   background: var(--frontier-color-surface-hover);
   --_skeleton-highlight: color-mix(in srgb, var(--frontier-color-text) 10%, transparent);
 }

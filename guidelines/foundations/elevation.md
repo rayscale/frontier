@@ -13,7 +13,7 @@ From lowest to highest, the layers are:
 3. Floating content, such as menus, popups, and tooltips, which appears above the page for a moment.
 4. Modal content and transient messages, such as dialogs and notifications, which overlay the rest of the interface. Modal content interrupts; a notification does not necessarily do so.
 
-Each layer should be distinguishable from the one below it, in both themes.
+Each layer should be distinguishable from the one below it, in both modes.
 
 ## Shadow
 
@@ -44,4 +44,4 @@ Depth should tell the user what is temporary and what is permanent. Only content
 
 ## Modal and floating surfaces
 
-Dialogs and drawers are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both themes.
+Dialogs and drawers are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both modes.

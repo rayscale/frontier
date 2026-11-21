@@ -138,7 +138,7 @@ export const VerticalScrollbar: TStory = {
     style: { height: '12rem', width: '16rem' },
   },
   render: (args) => (
-    <Card padding="none" data-theme="light">
+    <Card padding="none" data-mode="light">
       <ScrollArea {...args}>
         <ContactList />
       </ScrollArea>
@@ -410,10 +410,10 @@ export const EdgeFadeEnabledAndDisabled: TStory = {
   ),
 }
 
-function ThemedScrollArea({ theme }: { theme: 'light' | 'dark' }) {
+function ModeScrollArea({ mode }: { mode: 'light' | 'dark' }) {
   return (
     <Card
-      data-theme={theme}
+      data-mode={mode}
       style={{
         background: 'var(--frontier-color-background)',
         padding: 'var(--frontier-spacing-3)',
@@ -442,8 +442,8 @@ export const LightAndDark: TStory = {
         gap: 'var(--frontier-spacing-4)',
       }}
     >
-      <ThemedScrollArea theme="light" />
-      <ThemedScrollArea theme="dark" />
+      <ModeScrollArea mode="light" />
+      <ModeScrollArea mode="dark" />
     </div>
   ),
 }
@@ -717,9 +717,9 @@ export const EdgeEffectComparison: TStory = {
   ),
 }
 
-export const EdgeEffectThemes: TStory = {
+export const EdgeEffectModes: TStory = {
   parameters: {
-    docs: { description: { story: 'Shows the edge effect themes example of the scroll area.' } },
+    docs: { description: { story: 'Shows the edge effect modes example of the scroll area.' } },
   },
   render: () => (
     <div
@@ -729,16 +729,16 @@ export const EdgeEffectThemes: TStory = {
         gap: 'var(--frontier-spacing-4)',
       }}
     >
-      {(['light', 'dark'] as const).map((theme) => (
+      {(['light', 'dark'] as const).map((mode) => (
         <Card
-          key={theme}
-          data-theme={theme}
+          key={mode}
+          data-mode={mode}
           style={{
             background: 'var(--frontier-color-background)',
             padding: 'var(--frontier-spacing-3)',
           }}
         >
-          <span style={mutedTextStyle}>{theme}</span>
+          <span style={mutedTextStyle}>{mode}</span>
           <ScrollArea
             edgeEffect="blur"
             scrollbar="vertical"

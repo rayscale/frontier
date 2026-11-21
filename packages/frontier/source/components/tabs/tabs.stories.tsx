@@ -234,20 +234,20 @@ export const Scrollable: TStory = {
   ),
 }
 
-export const Themes: TStory = {
+export const Modes: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Tabs adapt correctly across light and dark themes.',
+        story: 'Tabs adapt correctly across light and dark modes.',
       },
     },
   },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
-      {(['light', 'dark'] as const).map((theme) => (
+      {(['light', 'dark'] as const).map((mode) => (
         <div
-          key={theme}
-          data-theme={theme}
+          key={mode}
+          data-mode={mode}
           style={{
             padding: '16px',
             borderRadius: 'var(--frontier-radius-md)',
@@ -256,11 +256,11 @@ export const Themes: TStory = {
           }}
         >
           <Tabs defaultValue="first">
-            <Tabs.List aria-label={`${theme} theme example`}>
+            <Tabs.List aria-label={`${mode} mode example`}>
               <Tabs.Trigger value="first">First</Tabs.Trigger>
               <Tabs.Trigger value="second">Second tab</Tabs.Trigger>
             </Tabs.List>
-            <Tabs.Content value="first">{theme} theme.</Tabs.Content>
+            <Tabs.Content value="first">{mode} mode.</Tabs.Content>
             <Tabs.Content value="second">Active indicator example.</Tabs.Content>
           </Tabs>
         </div>

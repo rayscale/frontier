@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import type { ReactElement } from 'react'
 
 import { Logo } from '#/components/logo/index.js'
-import { ThemeToggle } from '#/components/theme/index.js'
+import { ModeToggle } from '#/components/mode/index.js'
 
 import './site-header.css'
 
@@ -41,7 +41,7 @@ export function SiteHeader(): ReactElement {
           ))}
         </NavigationMenu.List>
       </Header.NavigationMenu>
-      <ThemeToggle />
+      <ModeToggle />
     </Header>
   )
 }

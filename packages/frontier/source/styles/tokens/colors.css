@@ -17,16 +17,16 @@
   --frontier-black: #000000;
 }
 
-/* Theme-independent roles */
+/* Mode-independent roles */
 
 :root {
   --frontier-color-mask: var(--frontier-black);
 }
 
-/* Light theme */
+/* Light mode */
 
 :root,
-[data-theme='light'] {
+[data-mode='light'] {
   color-scheme: light;
 
   --frontier-color-primary: var(--frontier-gray-900);
@@ -86,9 +86,9 @@
   --frontier-color-shadow-strong: rgb(0 0 0 / 10%);
 }
 
-/* Dark theme */
+/* Dark mode */
 
-[data-theme='dark'] {
+[data-mode='dark'] {
   color-scheme: dark;
 
   --frontier-color-primary: var(--frontier-gray-100);

@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { ThemeProvider, ThemeToggle, useTheme } from './index.js'
+import { ModeProvider, ModeToggle, useMode } from './index.js'
 
 function stubSystem(dark: boolean): { change: (next: boolean) => void } {
   let matches = dark
@@ -31,7 +31,7 @@ function stubSystem(dark: boolean): { change: (next: boolean) => void } {
 }
 
 function Probe() {
-  const { preference, resolved } = useTheme()
+  const { preference, resolved } = useMode()
 
   return (
     <p>
@@ -40,10 +40,10 @@ function Probe() {
   )
 }
 
-describe('theme', () => {
+describe('mode', () => {
   beforeEach(() => {
     window.localStorage.clear()
-    delete document.documentElement.dataset.theme
+    delete document.documentElement.dataset.mode
   })
 
   afterEach(() => {
@@ -54,37 +54,37 @@ describe('theme', () => {
     stubSystem(true)
 
     render(
-      <ThemeProvider>
+      <ModeProvider>
         <Probe />
-      </ThemeProvider>,
+      </ModeProvider>,
     )
 
     expect(screen.getByText('system:dark')).toBeInTheDocument()
-    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(document.documentElement.dataset.mode).toBe('dark')
   })
 
   it('restores a stored preference', () => {
     stubSystem(true)
-    window.localStorage.setItem('frontier-theme', 'light')
+    window.localStorage.setItem('frontier-mode', 'light')
 
     render(
-      <ThemeProvider>
+      <ModeProvider>
         <Probe />
-      </ThemeProvider>,
+      </ModeProvider>,
     )
 
     expect(screen.getByText('light:light')).toBeInTheDocument()
-    expect(document.documentElement.dataset.theme).toBe('light')
+    expect(document.documentElement.dataset.mode).toBe('light')
   })
 
   it('ignores a stored value it does not know', () => {
     stubSystem(false)
-    window.localStorage.setItem('frontier-theme', 'sepia')
+    window.localStorage.setItem('frontier-mode', 'sepia')
 
     render(
-      <ThemeProvider>
+      <ModeProvider>
         <Probe />
-      </ThemeProvider>,
+      </ModeProvider>,
     )
 
     expect(screen.getByText('system:light')).toBeInTheDocument()
@@ -94,52 +94,50 @@ describe('theme', () => {
     const system = stubSystem(false)
 
     render(
-      <ThemeProvider>
+      <ModeProvider>
         <Probe />
-      </ThemeProvider>,
+      </ModeProvider>,
     )
     act(() => {
       system.change(true)
     })
 
-    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(document.documentElement.dataset.mode).toBe('dark')
   })
 
   it('cycles light, dark, and system from the toggle and remembers the choice', async () => {
     const user = userEvent.setup()
     stubSystem(false)
-    window.localStorage.setItem('frontier-theme', 'light')
+    window.localStorage.setItem('frontier-mode', 'light')
 
     render(
-      <ThemeProvider>
-        <ThemeToggle />
+      <ModeProvider>
+        <ModeToggle />
         <Probe />
-      </ThemeProvider>,
+      </ModeProvider>,
     )
 
-    await user.click(screen.getByRole('button', { name: /theme/i }))
+    await user.click(screen.getByRole('button', { name: /mode/i }))
     expect(screen.getByText('dark:dark')).toBeInTheDocument()
-    expect(window.localStorage.getItem('frontier-theme')).toBe('dark')
+    expect(window.localStorage.getItem('frontier-mode')).toBe('dark')
 
-    await user.click(screen.getByRole('button', { name: /theme/i }))
+    await user.click(screen.getByRole('button', { name: /mode/i }))
     expect(screen.getByText('system:light')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: /theme/i }))
+    await user.click(screen.getByRole('button', { name: /mode/i }))
     expect(screen.getByText('light:light')).toBeInTheDocument()
   })
 
-  it('names the current theme and the next one on the toggle', () => {
+  it('names the current mode and the next one on the toggle', () => {
     stubSystem(false)
-    window.localStorage.setItem('frontier-theme', 'light')
+    window.localStorage.setItem('frontier-mode', 'light')
 
     render(
-      <ThemeProvider>
-        <ThemeToggle />
-      </ThemeProvider>,
+      <ModeProvider>
+        <ModeToggle />
+      </ModeProvider>,
     )
 
-    expect(
-      screen.getByRole('button', { name: 'Theme: light. Switch to dark.' }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Mode: light. Switch to dark.' })).toBeInTheDocument()
   })
 })

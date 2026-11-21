@@ -3,15 +3,15 @@ import type { Decorator, Preview } from '@storybook/react-vite'
 import '../source/styles/index.css'
 import './preview.css'
 
-const withTheme: Decorator = (story, context) => {
-  document.documentElement.dataset.theme = context.globals.theme === 'dark' ? 'dark' : 'light'
+const withMode: Decorator = (story, context) => {
+  document.documentElement.dataset.mode = context.globals.mode === 'dark' ? 'dark' : 'light'
 
   return story()
 }
 
 const preview: Preview = {
   globalTypes: {
-    theme: {
+    mode: {
       description: 'Color mode',
       toolbar: {
         title: 'Mode',
@@ -26,10 +26,10 @@ const preview: Preview = {
   },
 
   initialGlobals: {
-    theme: 'light',
+    mode: 'light',
   },
 
-  decorators: [withTheme],
+  decorators: [withMode],
 
   parameters: {
     // The page background follows the mode; disable Storybook's separate control.

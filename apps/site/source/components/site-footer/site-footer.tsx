@@ -43,9 +43,6 @@ export function SiteFooter(): ReactElement {
               <a href="/typeface">Typeface</a>
             </li>
             <li>
-              <a href="/themes">Themes</a>
-            </li>
-            <li>
               <a href="/docs/guidelines">Guidelines</a>
             </li>
           </ul>

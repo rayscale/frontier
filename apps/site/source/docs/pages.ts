@@ -1,10 +1,7 @@
 import { join } from 'node:path'
 
-import { themeMetadata } from '@rayscale/frontier/theme-metadata'
-
 import { scanGuidelines } from './build/guidelines.js'
 import { scanDocsContent } from './build/manifest.js'
-import { themePages } from './build/themes.js'
 import { buildNavigationTree, listNavigationLeaves } from './navigation.js'
 import type { TDocsNavigationNode, TDocsPage } from './types.js'
 
@@ -24,17 +21,15 @@ export interface TDocs {
 let cached: Promise<TDocs> | undefined
 
 /**
- * Scans the content folder and the guidelines once, adds a page for each theme of the package, and
- * derives the tree and the reading order. Server only.
+ * Scans the content folder and the guidelines once, and derives the tree and the reading order.
+ * Server only.
  */
 export function loadDocs(): Promise<TDocs> {
   cached ??= Promise.all([
     scanDocsContent(contentDirectory),
     scanGuidelines(guidelinesDirectory, contentDirectory),
   ]).then(([content, guidelines]) => {
-    const pages = [...content, ...guidelines, ...themePages(themeMetadata)].sort((a, b) =>
-      a.path.localeCompare(b.path),
-    )
+    const pages = [...content, ...guidelines].sort((a, b) => a.path.localeCompare(b.path))
     const navigationTree = buildNavigationTree(pages)
 
     return { pages, navigationTree, readingOrder: listNavigationLeaves(navigationTree) }

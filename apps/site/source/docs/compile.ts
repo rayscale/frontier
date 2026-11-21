@@ -21,7 +21,7 @@ type TContent = ComponentType<{ components?: MDXComponents }>
  */
 export async function compilePage(page: TDocsPage): Promise<TContent> {
   const path = join(contentDirectory, page.file)
-  const source = page.source ?? (await readFile(path, 'utf8'))
+  const source = await readFile(path, 'utf8')
   const guideline = page.file.endsWith('.md')
   const { default: content } = await evaluate(source, {
     ...runtime,

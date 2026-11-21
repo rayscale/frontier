@@ -23,11 +23,6 @@ const features = [
     href: '/typeface',
     description: 'Geist, the variable typeface of the system.',
   },
-  {
-    title: 'Themes',
-    href: '/themes',
-    description: 'Named sets of values that restyle the whole interface in light and dark.',
-  },
 ]
 
 /** The landing page. */

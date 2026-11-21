@@ -68,7 +68,7 @@
   color: var(--frontier-color-text);
 }
 
-.frontier-tree__row:hover:not(:disabled):not([aria-disabled='true']) {
+.frontier-tree__row:hover:not(:disabled):not([aria-disabled='true']):not([data-highlighted]) {
   background: var(--frontier-color-surface-hover);
   color: var(--frontier-color-text);
 }

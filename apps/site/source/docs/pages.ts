@@ -1,11 +1,15 @@
 import { join } from 'node:path'
 
+import { scanGuidelines } from './build/guidelines.js'
 import { scanDocsContent } from './build/manifest.js'
 import { buildNavigationTree, listNavigationLeaves } from './navigation.js'
 import type { TDocsNavigationNode, TDocsPage } from './types.js'
 
 /** The folder that holds the documentation pages. The build runs from the app's root. */
 export const contentDirectory = join(process.cwd(), 'content')
+
+/** The folder of the design guidelines, which the documentation shows as they are written. */
+export const guidelinesDirectory = join(process.cwd(), '..', '..', 'guidelines')
 
 /** Everything the site knows about its documentation. */
 export interface TDocs {
@@ -16,9 +20,16 @@ export interface TDocs {
 
 let cached: Promise<TDocs> | undefined
 
-/** Scans the content folder once and derives the tree and the reading order. Server only. */
+/**
+ * Scans the content folder and the guidelines once, and derives the tree and the reading order.
+ * Server only.
+ */
 export function loadDocs(): Promise<TDocs> {
-  cached ??= scanDocsContent(contentDirectory).then((pages) => {
+  cached ??= Promise.all([
+    scanDocsContent(contentDirectory),
+    scanGuidelines(guidelinesDirectory, contentDirectory),
+  ]).then(([content, guidelines]) => {
+    const pages = [...content, ...guidelines].sort((a, b) => a.path.localeCompare(b.path))
     const navigationTree = buildNavigationTree(pages)
 
     return { pages, navigationTree, readingOrder: listNavigationLeaves(navigationTree) }

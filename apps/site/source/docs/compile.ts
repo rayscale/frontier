@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, relative, sep } from 'node:path'
 
 import { evaluate } from '@mdx-js/mdx'
 import type { MDXComponents } from 'mdx/types'
@@ -9,17 +9,29 @@ import rehypeSlug from 'rehype-slug'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 
-import { contentDirectory } from './pages.js'
+import { remarkGuideline } from './guidelines.js'
+import { contentDirectory, guidelinesDirectory } from './pages.js'
 import type { TDocsPage } from './types.js'
 
 type TContent = ComponentType<{ components?: MDXComponents }>
 
-/** Compiles the MDX of a page into a component. Runs on the server while the site is built. */
+/**
+ * Compiles a page into a component. A page of the content is MDX. A guideline is plain Markdown,
+ * so it is read as Markdown and prepared to be a page. Runs on the server while the site is built.
+ */
 export async function compilePage(page: TDocsPage): Promise<TContent> {
-  const source = await readFile(join(contentDirectory, page.file), 'utf8')
+  const path = join(contentDirectory, page.file)
+  const source = await readFile(path, 'utf8')
+  const guideline = page.file.endsWith('.md')
   const { default: content } = await evaluate(source, {
     ...runtime,
-    remarkPlugins: [remarkFrontmatter, remarkGfm],
+    ...(guideline ? { format: 'md' as const } : {}),
+    remarkPlugins: guideline
+      ? [
+          remarkGfm,
+          [remarkGuideline, { file: relative(guidelinesDirectory, path).split(sep).join('/') }],
+        ]
+      : [remarkFrontmatter, remarkGfm],
     rehypePlugins: [rehypeSlug],
   })
 

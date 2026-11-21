@@ -2,6 +2,7 @@
 
 import {
   Bell,
+  Book,
   CheckCircle,
   Compass,
   Download,
@@ -9,6 +10,7 @@ import {
   Home,
   Layers,
   LayoutGrid,
+  Palette,
   Pointer,
   Shapes,
   SquarePen,
@@ -19,6 +21,7 @@ import type { ReactNode } from 'react'
 
 const sidebarSymbols: { [name: string]: TSymbolComponent | undefined } = {
   bell: Bell,
+  book: Book,
   'check-circle': CheckCircle,
   compass: Compass,
   download: Download,
@@ -26,6 +29,7 @@ const sidebarSymbols: { [name: string]: TSymbolComponent | undefined } = {
   home: Home,
   layers: Layers,
   'layout-grid': LayoutGrid,
+  palette: Palette,
   pointer: Pointer,
   shapes: Shapes,
   'square-pen': SquarePen,

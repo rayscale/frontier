@@ -1,0 +1,12 @@
+{
+  "name": "bisnes",
+  "title": "Bisnes",
+  "description": "A test theme after the Bisnes website: brand orange on black and white, softer lines, and the system typeface.",
+  "kind": "extended",
+  "departures": [
+    {
+      "guideline": "foundations/typeface",
+      "reason": "The Bisnes website is set in the system typeface, so the theme replaces Geist to match it."
+    }
+  ]
+}

@@ -27,6 +27,21 @@ React and React DOM 18 or 19 are required as peer dependencies.
 
 The default mode is light. Set `data-mode="dark"` on the root element to switch every color role to its dark value.
 
+## Themes
+
+Frontier is the default theme. A theme is a named set of values, and it applies to the root element or to any region inside it. Import a theme's stylesheet after the main one, and set `data-theme` where it applies.
+
+```tsx
+import '@rayscale/frontier/styles.css'
+import '@rayscale/frontier/themes/bisnes.css'
+```
+
+```html
+<html data-theme="bisnes" data-mode="dark"></html>
+```
+
+Every theme defines both modes. The build checks the contrast of each theme in both modes and fails when a theme does not meet the guidelines. See [Themes](../../guidelines/foundations/themes.md).
+
 ## What's included
 
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
@@ -36,10 +51,13 @@ The default mode is light. Set `data-mode="dark"` on the root element to switch 
 
 ## Exports
 
-| Path                            | Contents                                            |
-| ------------------------------- | --------------------------------------------------- |
-| `@rayscale/frontier`            | Components, symbols, and their types.               |
-| `@rayscale/frontier/styles.css` | Design tokens, the font face, and component styles. |
+| Path                                   | Contents                                                  |
+| -------------------------------------- | --------------------------------------------------------- |
+| `@rayscale/frontier`                   | Components, symbols, and their types.                     |
+| `@rayscale/frontier/styles.css`        | Design tokens, the font face, and component styles.       |
+| `@rayscale/frontier/themes/<name>.css` | The values of one theme, for use with `data-theme`.       |
+| `@rayscale/frontier/symbol-metadata`   | Descriptive data of every symbol, without the components. |
+| `@rayscale/frontier/theme-metadata`    | Kind, departures, colors, and contrast of every theme.    |
 
 ## Development
 

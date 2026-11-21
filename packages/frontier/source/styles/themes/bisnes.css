@@ -73,8 +73,7 @@
   --frontier-shadow-lg: 0 2px 8px var(--frontier-color-shadow-strong);
 }
 
-[data-theme='bisnes'][data-mode='dark'],
-[data-mode='dark'] [data-theme='bisnes'] {
+[data-theme='bisnes'][data-mode='dark'] {
   --frontier-color-primary: #fd5d2a;
   --frontier-color-on-primary: #111111;
   --frontier-color-primary-hover: #fe7d52;

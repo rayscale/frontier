@@ -36,6 +36,10 @@ import '@rayscale/frontier/styles.css'
 import '@rayscale/frontier/themes/bisnes.css'
 ```
 
+A page that offers a choice of theme can load every theme with `@rayscale/frontier/themes.css`.
+
+A theme also applies to a region. Set `data-theme` and `data-mode` together on the same element, so the region does not depend on the mode around it. `data-theme="frontier"` restores the default theme inside a region.
+
 ```html
 <html data-theme="bisnes" data-mode="dark"></html>
 ```

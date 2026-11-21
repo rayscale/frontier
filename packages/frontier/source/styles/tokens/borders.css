@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme='frontier'] {
   --frontier-border-width: 2px;
   --frontier-border-width-subtle: 1px;
 }

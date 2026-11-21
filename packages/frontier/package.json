@@ -24,6 +24,7 @@
       "types": "./dist/themes/themes.generated.d.ts",
       "import": "./dist/themes/themes.generated.js"
     },
+    "./themes.css": "./dist/styles/themes/index.css",
     "./themes/*.css": "./dist/styles/themes/*.css"
   },
   "files": [
@@ -31,8 +32,8 @@
   ],
   "scripts": {
     "generate:symbols": "node --experimental-strip-types scripts/generate-symbols.ts && pnpm exec prettier --write \"source/symbols/components/**/*.{ts,tsx}\" \"source/symbols/generated.ts\"",
-    "generate:themes": "node --experimental-strip-types scripts/generate-themes.ts && pnpm exec prettier --write source/themes/themes.generated.ts",
-    "prebuild": "node -e \"for (const path of ['source/symbols/components', 'source/symbols/generated.ts', 'source/symbols/metadata.generated.ts', 'source/themes/themes.generated.ts']) require('node:fs').rmSync(path, { force: true, recursive: true })\" && pnpm generate:symbols && pnpm generate:themes",
+    "generate:themes": "node --experimental-strip-types scripts/generate-themes.ts && pnpm exec prettier --write source/themes/themes.generated.ts source/styles/themes/index.css",
+    "prebuild": "node -e \"for (const path of ['source/symbols/components', 'source/symbols/generated.ts', 'source/symbols/metadata.generated.ts', 'source/themes/themes.generated.ts', 'source/styles/themes/index.css']) require('node:fs').rmSync(path, { force: true, recursive: true })\" && pnpm generate:symbols && pnpm generate:themes",
     "build": "node -e \"require('node:fs').rmSync('dist', { force: true, recursive: true })\" && tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",

@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme='frontier'] {
   /* Font family */
   --frontier-font-family: 'Geist Variable', system-ui, sans-serif;
   --frontier-font-family-mono:

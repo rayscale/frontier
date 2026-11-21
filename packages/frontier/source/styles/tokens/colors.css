@@ -26,7 +26,8 @@
 /* Light mode */
 
 :root,
-[data-mode='light'] {
+[data-mode='light'],
+[data-theme='frontier'] {
   color-scheme: light;
 
   --frontier-color-primary: var(--frontier-gray-900);

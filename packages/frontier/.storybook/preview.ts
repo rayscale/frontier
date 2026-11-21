@@ -3,7 +3,7 @@ import type { Decorator, Preview } from '@storybook/react-vite'
 import { themeMetadata } from '../source/themes/themes.generated.js'
 
 import '../source/styles/index.css'
-import '../source/styles/themes/bisnes.css'
+import '../source/styles/themes/index.css'
 import './preview.css'
 
 const defaultTheme = 'frontier'

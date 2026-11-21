@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme='frontier'] {
   --frontier-focus-width: 2px;
   --frontier-focus-offset: 2px;
   --frontier-focus-offset-inset: -2px;

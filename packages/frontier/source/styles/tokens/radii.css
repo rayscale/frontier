@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme='frontier'] {
   /* Radii */
   --frontier-radius-xs: 0.25rem;
   --frontier-radius-sm: 0.5rem;

@@ -5,6 +5,7 @@ import {
   contrastRatio,
   findOverrides,
   findRoleProblems,
+  formatStylesheet,
   modeVariables,
   parseBlocks,
   parseColor,
@@ -157,6 +158,14 @@ describe('theme generator', () => {
       )
 
       expect(findOverrides(base, theme)).toEqual({ '--frontier-radius': '2rem' })
+    })
+  })
+
+  describe('stylesheet', () => {
+    it('imports every theme that has a stylesheet', () => {
+      expect(formatStylesheet(['bisnes', 'paper'])).toContain(
+        "@import './bisnes.css';\n@import './paper.css';\n",
+      )
     })
   })
 

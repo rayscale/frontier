@@ -1,13 +1,34 @@
 'use client'
 
-import { Box, Home, LayoutGrid, Shapes, type TSymbolComponent, Typeface } from '@rayscale/frontier'
+import {
+  Bell,
+  CheckCircle,
+  Compass,
+  Download,
+  FileText,
+  Home,
+  Layers,
+  LayoutGrid,
+  Pointer,
+  Shapes,
+  SquarePen,
+  type TSymbolComponent,
+  Typeface,
+} from '@rayscale/frontier'
 import type { ReactNode } from 'react'
 
 const sidebarSymbols: { [name: string]: TSymbolComponent | undefined } = {
-  box: Box,
+  bell: Bell,
+  'check-circle': CheckCircle,
+  compass: Compass,
+  download: Download,
+  'file-text': FileText,
   home: Home,
+  layers: Layers,
   'layout-grid': LayoutGrid,
+  pointer: Pointer,
   shapes: Shapes,
+  'square-pen': SquarePen,
   typeface: Typeface,
 }
 

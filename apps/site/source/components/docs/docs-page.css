@@ -149,6 +149,30 @@
   list-style: none;
 }
 
+.docs-page-list__group {
+  display: grid;
+  gap: var(--frontier-spacing-3);
+  margin-block-start: var(--frontier-spacing-10);
+}
+
+.docs-page-list__group > .docs-heading,
+.docs-page-list__group-description {
+  margin: 0;
+}
+
+.docs-page-list__group-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  color: inherit;
+  text-decoration: none;
+}
+
+.docs-page-list__group-description {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .docs-heading__anchor {
     transition: none;

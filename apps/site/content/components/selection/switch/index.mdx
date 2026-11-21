@@ -1,0 +1,77 @@
+---
+title: Switch
+description: Turns one setting on or off, and the change applies at once.
+order: 10
+---
+
+## Usage
+
+```tsx
+import { Switch } from '@rayscale/frontier'
+
+export function Example() {
+  return <Switch label="Airplane mode" />
+}
+```
+
+Use a switch for a setting that takes effect as soon as it changes, because the position of the knob reads as the result. Each switch is independent of the others. For a value that is part of a form someone submits later, use a checkbox.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### On by default
+
+Use `defaultChecked` to start the switch on and let it manage its own state.
+
+<Demo name="checked" />
+
+### With a description
+
+A description sits under the label and is read together with it.
+
+<Demo name="withDescription" />
+
+### Controlled
+
+Pass `checked` and `onChange` to keep the state in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+### With an error
+
+An error is shown under the switch, marks it invalid, and is announced when it appears.
+
+<Demo name="error" />
+
+## API reference
+
+### Switch
+
+Renders a native `<input type="checkbox" role="switch">` with an optional label, description, and error. It forwards its ref and the attributes of the input, except `type`. The table lists the props `Switch` adds.
+
+| Prop          | Type        | Default | Description                                                                 |
+| ------------- | ----------- | ------- | --------------------------------------------------------------------------- |
+| `description` | `ReactNode` | —       | Helper text associated with the switch for assistive technology.            |
+| `error`       | `ReactNode` | —       | Error message associated with the switch. It also marks the switch invalid. |
+| `invalid`     | `boolean`   | `false` | Marks the switch as invalid even when no error is shown.                    |
+| `label`       | `ReactNode` | —       | Visible label associated with the switch.                                   |
+
+## Accessibility
+
+<Callout title="Name every switch">
+  A switch without a label has no name for assistive technology. Pass `label`, or give the input an
+  `aria-label` or `aria-labelledby`.
+</Callout>
+
+- The switch is a native checkbox with `role="switch"`. Space changes it, and the name is read together with the state.
+- Dragging the knob is an extra way to change the switch. Every change is also available with a press or with Space.
+- The description and the error are linked to the input, and the error is announced politely when it appears.
+- The state does not rely on color. The knob sits at one end of the track when the switch is off and at the other end when it is on.
+- A disabled switch uses the native `disabled` attribute and cannot be changed.

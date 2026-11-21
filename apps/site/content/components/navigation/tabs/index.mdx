@@ -1,0 +1,95 @@
+---
+title: Tabs
+description: Moves between views of one area, showing one view at a time.
+order: 10
+---
+
+## Usage
+
+```tsx
+import { Tabs } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Tabs defaultValue="overview">
+      <Tabs.List>
+        <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+        <Tabs.Trigger value="reports">Reports</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="overview">A summary of the project.</Tabs.Content>
+      <Tabs.Content value="reports">Reports ready to download.</Tabs.Content>
+    </Tabs>
+  )
+}
+```
+
+Tabs split one area into views that exclude each other. Only the selected view shows, and the list always shows which one it is. Pair every `Tabs.Trigger` with a `Tabs.Content` that has the same `value`.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Vertical
+
+Set `orientation="vertical"` to stack the triggers beside the content.
+
+<Demo name="vertical" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the selected tab in your component. The value is `null` when no tab is selected.
+
+<Demo name="controlled" />
+
+### Disabled tab
+
+A disabled trigger cannot be selected, and the arrow keys pass over it.
+
+<Demo name="disabled" />
+
+## API reference
+
+### Tabs
+
+Groups the list and the panels, and shares the selected value between them. It renders a `<div>` and forwards its attributes and ref.
+
+| Prop            | Type                              | Default        | Description                                           |
+| --------------- | --------------------------------- | -------------- | ----------------------------------------------------- |
+| `value`         | `string \| null`                  | —              | Selected tab in controlled mode. `null` selects none. |
+| `defaultValue`  | `string \| null`                  | —              | Initial selected tab in uncontrolled mode.            |
+| `onValueChange` | `(value: string \| null) => void` | —              | Called when the selected tab changes.                 |
+| `orientation`   | `'horizontal' \| 'vertical'`      | `'horizontal'` | Direction of the tab list.                            |
+
+### Tabs.List
+
+Renders the row or column of triggers. It renders a `<div>` and accepts its attributes.
+
+### Tabs.Trigger
+
+Renders a `<button>` that selects its panel, and forwards the attributes of a button. It sets `type="button"` by default.
+
+| Prop    | Type     | Default | Description                                         |
+| ------- | -------- | ------- | --------------------------------------------------- |
+| `value` | `string` | —       | Value that links the trigger to its `Tabs.Content`. |
+
+### Tabs.Content
+
+Renders the panel of one tab. It renders a `<div>` and accepts its attributes. A panel that is not selected stays mounted but hidden, so its state is kept when someone returns to it.
+
+| Prop    | Type     | Default | Description                                       |
+| ------- | -------- | ------- | ------------------------------------------------- |
+| `value` | `string` | —       | Value that links the panel to its `Tabs.Trigger`. |
+
+## Accessibility
+
+<Callout title="Keep tab labels short">
+  The label of a trigger is the name of the view. Use a word or two, so the list stays readable and
+  every trigger is easy to tell apart.
+</Callout>
+
+- The list, its triggers, and the panels use the tablist, tab, and tabpanel roles, and each trigger is linked to its panel.
+- Only the selected trigger is in the tab order. The arrow keys move between the triggers along the orientation of the list, Home and End move to the first and last, and a tab activates as it receives focus.
+- A disabled trigger uses the native `disabled` attribute and is skipped by the arrow keys.
+- The panels move in the direction of the change. With the reduced motion preference, they change without moving.

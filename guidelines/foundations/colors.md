@@ -18,6 +18,8 @@ Each color has a job. Designs should use the role, not a specific color value.
 
 Light and dark modes share the same roles. A role keeps the same job in both modes, even though its value changes. A designer should never choose a color for one mode that breaks the role in the other. If a role looks correct in light mode but disappears in dark mode, the role is failing, not the mode.
 
+A theme may change the value of a role in both modes, but never its job. See [Themes](./themes.md).
+
 ## Contrast
 
 Text and meaningful graphics meet WCAG AA contrast in both modes. Status colors must pass for the text they color. When a color fails, the fix is to adjust the role's color, not to weaken the requirement or to rely on color alone. Color may reinforce a state, but it never carries one alone. See [Selection](../patterns/selection.md) and [States](../patterns/states.md).

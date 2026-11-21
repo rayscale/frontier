@@ -478,6 +478,26 @@ export const symbolMetadata: TSymbolMetadata[] = [
   {
     "aliases": [],
     "categories": [
+      "navigation"
+    ],
+    "component": "Compass",
+    "contributors": [],
+    "description": "Guides the way to a destination.",
+    "keywords": [
+      "compass",
+      "navigate",
+      "direction"
+    ],
+    "name": "compass",
+    "tags": [],
+    "useCases": [
+      "navigation",
+      "explore"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
       "actions"
     ],
     "component": "Copy",
@@ -492,6 +512,28 @@ export const symbolMetadata: TSymbolMetadata[] = [
     "tags": [],
     "useCases": [
       "copy text"
+    ]
+  },
+  {
+    "aliases": [],
+    "categories": [
+      "files",
+      "actions"
+    ],
+    "component": "Download",
+    "contributors": [],
+    "description": "Brings a file or package to the device.",
+    "keywords": [
+      "download",
+      "install",
+      "save",
+      "file"
+    ],
+    "name": "download",
+    "tags": [],
+    "useCases": [
+      "download file",
+      "install package"
     ]
   },
   {
@@ -759,6 +801,28 @@ export const symbolMetadata: TSymbolMetadata[] = [
     ]
   },
   {
+    "aliases": [
+      "stack"
+    ],
+    "categories": [
+      "ui"
+    ],
+    "component": "Layers",
+    "contributors": [],
+    "description": "Represents content stacked above other content.",
+    "keywords": [
+      "layers",
+      "stack",
+      "overlay"
+    ],
+    "name": "layers",
+    "tags": [],
+    "useCases": [
+      "overlays",
+      "stacked content"
+    ]
+  },
+  {
     "aliases": [],
     "categories": [
       "layout"
@@ -918,6 +982,29 @@ export const symbolMetadata: TSymbolMetadata[] = [
       "add item",
       "create new",
       "increment"
+    ]
+  },
+  {
+    "aliases": [
+      "cursor"
+    ],
+    "categories": [
+      "actions",
+      "ui"
+    ],
+    "component": "Pointer",
+    "contributors": [],
+    "description": "Represents a pointer that triggers an action.",
+    "keywords": [
+      "pointer",
+      "cursor",
+      "click"
+    ],
+    "name": "pointer",
+    "tags": [],
+    "useCases": [
+      "actions",
+      "interaction"
     ]
   },
   {

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "pointer",
+  "description": "Represents a pointer that triggers an action.",
+  "keywords": ["pointer", "cursor", "click"],
+  "categories": ["actions", "ui"],
+  "aliases": ["cursor"],
+  "useCases": ["actions", "interaction"]
+}

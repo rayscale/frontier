@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "download",
+  "description": "Brings a file or package to the device.",
+  "keywords": ["download", "install", "save", "file"],
+  "categories": ["files", "actions"],
+  "aliases": [],
+  "useCases": ["download file", "install package"]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "compass",
+  "description": "Guides the way to a destination.",
+  "keywords": ["compass", "navigate", "direction"],
+  "categories": ["navigation"],
+  "aliases": [],
+  "useCases": ["navigation", "explore"]
+}

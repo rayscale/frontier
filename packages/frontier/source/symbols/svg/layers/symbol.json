@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "layers",
+  "description": "Represents content stacked above other content.",
+  "keywords": ["layers", "stack", "overlay"],
+  "categories": ["ui"],
+  "aliases": ["stack"],
+  "useCases": ["overlays", "stacked content"]
+}

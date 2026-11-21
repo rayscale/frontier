@@ -1,57 +1,28 @@
 'use client'
 
-import * as frontier from '@rayscale/frontier'
-import {
-  Badge,
-  Input,
-  Search,
-  symbolMetadata,
-  type TSymbolComponent,
-  type TSymbolMetadata,
-} from '@rayscale/frontier'
-import { type ReactElement, useState } from 'react'
+import { Badge, ControlGroup, Input, Select } from '@rayscale/frontier'
+import Link from 'next/link'
+import { type ReactElement, useMemo, useState } from 'react'
+
+import { symbolCatalog, symbolCategories, type TSymbolCatalogEntry } from '#/docs/symbol-catalog.js'
 
 import { HighlightedCode } from './highlighted-code.js'
 
 import './symbol-gallery.css'
 
-const library: { [name: string]: unknown } = frontier
-
-function isSymbolComponent(value: unknown): value is TSymbolComponent {
-  return typeof value === 'object' && value !== null && 'symbolNode' in value
-}
-
-function getSymbolComponent(metadata: TSymbolMetadata): TSymbolComponent | undefined {
-  const value = library[metadata.component]
-
-  return isSymbolComponent(value) ? value : undefined
-}
-
-function matches(metadata: TSymbolMetadata, query: string): boolean {
-  const terms = [
-    metadata.name,
-    ...metadata.keywords,
-    ...metadata.aliases,
-    ...metadata.categories,
-    ...metadata.tags,
-  ]
-
-  return terms.some((term) => term.toLowerCase().includes(query))
-}
-
-function SymbolDetail({ metadata }: { metadata: TSymbolMetadata }): ReactElement {
-  const Current = getSymbolComponent(metadata)
+function SymbolDetail({ entry }: { entry: TSymbolCatalogEntry }): ReactElement {
+  const Current = entry.symbolComponent
 
   return (
-    <section className="symbol-gallery__detail" aria-label={`${metadata.component} symbol`}>
+    <section className="symbol-gallery__detail" aria-label={`${entry.component} symbol`}>
       <div className="symbol-gallery__preview" aria-hidden="true">
-        {Current ? <Current size={48} /> : null}
+        <Current size={48} />
       </div>
       <div className="symbol-gallery__facts">
-        <h3>{metadata.component}</h3>
-        <p>{metadata.description}</p>
+        <h3>{entry.component}</h3>
+        <p>{entry.description}</p>
         <p className="symbol-gallery__badges">
-          {metadata.categories.map((category) => (
+          {entry.categories.map((category) => (
             <Badge key={category} variant="secondary">
               {category}
             </Badge>
@@ -59,64 +30,123 @@ function SymbolDetail({ metadata }: { metadata: TSymbolMetadata }): ReactElement
         </p>
         <HighlightedCode
           language="tsx"
-          code={`import { ${metadata.component} } from '@rayscale/frontier'\n\n<${metadata.component} />`}
+          code={`import { ${entry.component} } from '@rayscale/frontier'\n\n<${entry.component} />`}
         />
       </div>
     </section>
   )
 }
 
-/** Searchable catalog of every symbol, with the usage of the one selected. */
+/**
+ * Searchable catalog of every symbol. `stacked` links each tile to the symbol's
+ * own page; `split` keeps the selected symbol's usage beside the grid.
+ */
 export default function SymbolGallery({
   layout = 'stacked',
 }: {
-  /** `split` puts the selected symbol beside the grid on wide screens. */
+  /** `split` shows the selected symbol beside the grid; `stacked` links each symbol to its page. */
   layout?: 'split' | 'stacked'
 }): ReactElement {
   const [query, setQuery] = useState('')
-  const [selectedName, setSelectedName] = useState(symbolMetadata[0]?.name)
-  const normalized = query.trim().toLowerCase()
-  const visible = symbolMetadata.filter((metadata) => matches(metadata, normalized))
-  const selected = symbolMetadata.find((metadata) => metadata.name === selectedName)
+  const [category, setCategory] = useState('all')
+  const [selectedName, setSelectedName] = useState(symbolCatalog[0]?.name)
+
+  const filtered = useMemo(() => {
+    const search = query.trim().toLowerCase()
+
+    return symbolCatalog.filter((entry) => {
+      if (category !== 'all' && !entry.categories.includes(category)) {
+        return false
+      }
+
+      return search.length === 0 || entry.searchText.includes(search)
+    })
+  }, [category, query])
+
+  const selected = symbolCatalog.find((entry) => entry.name === selectedName)
 
   return (
     <div className="symbol-gallery" data-layout={layout}>
-      <Input
-        type="search"
-        label="Search symbols"
-        placeholder="Name, keyword, or category"
-        value={query}
-        leadingSymbol={<Search aria-hidden="true" />}
-        onChange={(event) => {
-          setQuery(event.target.value)
-        }}
-      />
-      <p className="symbol-gallery__count" role="status">
-        {visible.length} {visible.length === 1 ? 'symbol' : 'symbols'}
-      </p>
-      <div className="symbol-gallery__body">
-        <ul className="symbol-gallery__grid">
-          {visible.map((metadata) => {
-            const Current = getSymbolComponent(metadata)
+      <div className="symbol-gallery__toolbar">
+        <ControlGroup className="symbol-gallery__controls">
+          <Input
+            aria-label="Search symbols"
+            onChange={(event) => {
+              setQuery(event.target.value)
+            }}
+            placeholder="Search symbols…"
+            type="search"
+            value={query}
+          />
+          <Select.Root
+            onValueChange={(value) => {
+              setCategory(value ?? 'all')
+            }}
+            value={category}
+          >
+            <Select.Trigger aria-label="Filter symbols by category">
+              <Select.Value />
+              <Select.Symbol />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.List>
+                {symbolCategories.map((item) => (
+                  <Select.Item key={item} value={item}>
+                    {item === 'all' ? 'All categories' : item}
+                  </Select.Item>
+                ))}
+              </Select.List>
+            </Select.Content>
+          </Select.Root>
+        </ControlGroup>
+        <p className="symbol-gallery__count" role="status" aria-live="polite">
+          {filtered.length} of {symbolCatalog.length} symbols
+        </p>
+      </div>
 
-            return (
-              <li key={metadata.name}>
-                <button
-                  type="button"
-                  className="symbol-gallery__item"
-                  aria-pressed={metadata.name === selectedName}
-                  onClick={() => {
-                    setSelectedName(metadata.name)
-                  }}
-                >
-                  {Current ? <Current aria-hidden="true" /> : null}
-                  <span>{metadata.name}</span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-        {selected ? <SymbolDetail metadata={selected} /> : null}
+      <div className="symbol-gallery__body">
+        {filtered.length > 0 ? (
+          <ul className="symbol-gallery__grid">
+            {filtered.map((entry) => {
+              const Current = entry.symbolComponent
+              const content = (
+                <>
+                  <Current aria-hidden="true" size={20} />
+                  <span className="symbol-gallery__label">{entry.name}</span>
+                </>
+              )
+
+              return (
+                <li key={entry.name}>
+                  {layout === 'split' ? (
+                    <button
+                      type="button"
+                      className="symbol-gallery__item"
+                      aria-pressed={entry.name === selectedName}
+                      title={entry.description}
+                      onClick={() => {
+                        setSelectedName(entry.name)
+                      }}
+                    >
+                      {content}
+                    </button>
+                  ) : (
+                    <Link
+                      className="symbol-gallery__item"
+                      href={`/docs/symbols/${entry.name}`}
+                      title={entry.description}
+                    >
+                      {content}
+                    </Link>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        ) : (
+          <p className="symbol-gallery__count">No symbols match the current search.</p>
+        )}
+        {layout === 'split' && selected ? <SymbolDetail entry={selected} /> : null}
       </div>
     </div>
   )

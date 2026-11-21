@@ -16,7 +16,7 @@ export function ComponentsCover(): ReactElement {
     <main className="cover cover--wide">
       <CoverHero
         eyebrow="Components"
-        title="Components built on native HTML."
+        title="Pieces that fit together."
         description="Accessible React components that share one set of tokens. Everything below is the real component, not a picture of it."
       >
         <Button asChild>

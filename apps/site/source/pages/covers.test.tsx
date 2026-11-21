@@ -7,7 +7,7 @@ import { TypefaceCover } from './typeface-cover/index.js'
 
 describe('cover pages', () => {
   it.each([
-    [ComponentsCover, 'Components built on native HTML.', '/docs/components'],
+    [ComponentsCover, 'Pieces that fit together.', '/docs/components'],
     [SymbolsCover, 'One grid, one stroke, every symbol.', '/docs/symbols'],
     [TypefaceCover, 'Set in Geist.', '/docs/typeface'],
   ])('renders %o with its title and a link to the documentation', (Cover, title, docs) => {

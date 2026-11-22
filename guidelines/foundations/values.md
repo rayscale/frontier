@@ -226,7 +226,11 @@ Pixel values assume a root size of 16 px.
 | Turn     | 90° for a turn, 180° to flip     | Enter    | Standard |
 | Draw     | The whole stroke                 | Enter    | Standard |
 | Ring     | 12° swing on each side, decaying | Slow     | Standard |
+| Shake    | 2 units to each side, decaying   | Enter    | Standard |
 | Sweep    | One full turn per cycle          | Slow     | Linear   |
+| Pop      | Scale up by 12%                  | Medium   | Spring   |
+| Lift     | 2 units up                       | Medium   | Spring   |
+| Tilt     | 12° counterclockwise             | Medium   | Spring   |
 
 A movement returns to rest in the Exit duration.
 

@@ -7,6 +7,7 @@ export type {
   TIconAttributes,
   TIconComponent,
   TIconMetadata,
+  TIconMotion,
   TIconNode,
   TIconProps,
 } from './types.js'

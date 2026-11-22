@@ -2,3 +2,158 @@
   display: block;
   flex: none;
 }
+
+/* Movement. An icon moves while it is told to with `data-animate`, or while the control that
+   holds it, marked with `data-icon-trigger`, is hovered, focused, or pressed. At rest it is the
+   icon as drawn. */
+.frontier-icon[data-motion] > * {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  transition: transform var(--frontier-duration-exit) var(--frontier-easing-standard);
+}
+
+.frontier-icon[data-motion='draw'] > * {
+  stroke-dasharray: 1;
+}
+
+.frontier-icon[data-motion='ring'] > * {
+  transform-origin: 12px 3px;
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion^='nudge']
+  > * {
+  transition-duration: var(--frontier-duration-medium);
+  transition-timing-function: var(--frontier-easing-spring);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='nudge-up']
+  > * {
+  transform: translateY(-3px);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='nudge-right']
+  > * {
+  transform: translateX(3px);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='nudge-down']
+  > * {
+  transform: translateY(3px);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='nudge-left']
+  > * {
+  transform: translateX(-3px);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='turn']
+  > * {
+  transform: rotate(90deg);
+  transition-duration: var(--frontier-duration-enter);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='draw']
+  > * {
+  animation: frontier-icon-draw var(--frontier-duration-enter) var(--frontier-easing-standard) both;
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='ring']
+  > * {
+  animation: frontier-icon-ring var(--frontier-duration-slow) var(--frontier-easing-standard);
+}
+
+:is(
+    .frontier-icon[data-animate],
+    [data-icon-trigger]:is(:hover, :focus-visible, :active):not(:disabled, [aria-disabled='true'])
+      .frontier-icon
+  )[data-motion='sweep']
+  > * {
+  animation: frontier-icon-sweep var(--frontier-duration-slow) linear infinite;
+}
+
+@keyframes frontier-icon-draw {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes frontier-icon-ring {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(12deg);
+  }
+
+  40% {
+    transform: rotate(-10deg);
+  }
+
+  60% {
+    transform: rotate(6deg);
+  }
+
+  80% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes frontier-icon-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion removes the movement. A drawn icon is already complete, and the other icons
+   stay as drawn. */
+@media (prefers-reduced-motion: reduce) {
+  .frontier-icon[data-motion] > * {
+    transition: none;
+    animation: none !important;
+    transform: none !important;
+  }
+}

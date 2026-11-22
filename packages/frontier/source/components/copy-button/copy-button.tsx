@@ -72,7 +72,7 @@ export function CopyButton({
         variant={variant}
       >
         {copied
-          ? (copiedIcon ?? <Check aria-hidden="true" size={16} />)
+          ? (copiedIcon ?? <Check animate aria-hidden="true" size={16} />)
           : (icon ?? <Copy aria-hidden="true" size={16} />)}
         {showLabel ? <span>{copied ? copiedLabel : label}</span> : null}
       </Button>

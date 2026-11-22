@@ -34,20 +34,57 @@ An icon is decorative: it is hidden from assistive technology, and the control t
 - Every icon uses a 2 px stroke with round caps and joins, and `currentColor`, so it follows the text color.
 - Size an icon with the `size` prop, in pixels or as any CSS length. The default is 24.
 
+## Movement
+
+An icon can move to confirm an action, show a change, or show progress. The control that holds the icon starts the movement, so an icon moves when its control is hovered, focused, or pressed. Each built-in icon that moves makes one movement that matches its meaning: arrows and chevrons nudge along their direction, a plus, a cross, and a gear turn, a check draws itself, a bell rings, and a loader sweeps.
+
+The [button](/documentation/components/actions/button) starts the movement of the icons inside it, and so does the [copy button](/documentation/components/actions/copy-button). Disabled controls do not start it. Icons return to the icon as drawn when the control is left.
+
+### In a button
+
+<Demo name="buttons" />
+
+### Completion
+
+The check of a copied value draws itself as it appears.
+
+<Demo name="copied" />
+
+### Progress
+
+Set `animate` to move an icon without a control. A loader sweeps while it is set.
+
+<Demo name="progress" />
+
+Movement is removed when the reduced motion preference is on, and the icon stays as drawn. Never rely on movement alone to show a state.
+
+### Your own controls
+
+Mark a control with `data-icon-trigger` to let it start the movement of the icons inside it.
+
+```tsx
+<a href="/next" data-icon-trigger>
+  Next
+  <ArrowRight />
+</a>
+```
+
 ## API reference
 
 ### Icon
 
 `Icon` renders an `<svg>` from the shapes of an icon and forwards the native SVG attributes. Most code uses the named icons instead, such as `Plus`, which are made with `createIcon`.
 
-| Prop       | Type               | Default | Description                                |
-| ---------- | ------------------ | ------- | ------------------------------------------ |
-| `iconNode` | `TIconNode`        | —       | The shapes to draw on the 24-unit grid.    |
-| `size`     | `number \| string` | `24`    | Width and height in pixels or as a length. |
+| Prop       | Type                                                                                                   | Default                  | Description                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------ | ------------------------ | ---------------------------------------------------------------------------- |
+| `iconNode` | `TIconNode`                                                                                            | —                        | The shapes to draw on the 24-unit grid.                                      |
+| `size`     | `number \| string`                                                                                     | `24`                     | Width and height in pixels or as a length.                                   |
+| `motion`   | `'nudge-up' \| 'nudge-right' \| 'nudge-down' \| 'nudge-left' \| 'turn' \| 'draw' \| 'ring' \| 'sweep'` | the movement of the icon | The kind of movement. Built-in icons choose their own.                       |
+| `animate`  | `boolean`                                                                                              | —                        | Plays the movement while `true`, and once when the icon appears with it set. |
 
 ### createIcon
 
-`createIcon({ name, iconNode })` returns an icon component. The component also exposes the shapes it draws as `iconNode`.
+`createIcon({ name, iconNode, motion })` returns an icon component. The component also exposes the shapes it draws as `iconNode`. `motion` is optional and sets the movement of the new icon.
 
 ## Accessibility
 

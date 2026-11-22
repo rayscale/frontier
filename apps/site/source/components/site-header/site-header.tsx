@@ -22,9 +22,8 @@ export function SiteHeader(): ReactElement {
 
   return (
     <Header mode="dynamic" className="site-header">
-      <a className="site-header__brand" href="/">
+      <a className="site-header__brand" href="/" aria-label="Frontier">
         <Logo />
-        <span>Frontier</span>
       </a>
       <Header.NavigationMenu label="Main">
         <NavigationMenu.List>

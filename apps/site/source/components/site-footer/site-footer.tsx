@@ -14,8 +14,7 @@ export function SiteFooter(): ReactElement {
       <Footer.Content>
         <Footer.Brand>
           <span className="site-footer__brand">
-            <Logo />
-            Frontier
+            <Logo aria-hidden="false" aria-label="Frontier" role="img" />
           </span>
           <p className="site-footer__summary">A design language for the web.</p>
         </Footer.Brand>

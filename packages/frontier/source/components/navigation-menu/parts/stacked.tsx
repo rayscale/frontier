@@ -1,7 +1,7 @@
 import { forwardRef, useId } from 'react'
 
+import { ChevronDown } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
-import { ChevronDown } from '../../../symbols/index.js'
 import {
   navigationMenuItemContext,
   useNavigationMenuContext,
@@ -106,7 +106,7 @@ export const StackedTrigger = forwardRef<HTMLButtonElement, TNavigationMenuTrigg
       >
         {children}
         <ChevronDown
-          className="frontier-navigation-menu__trigger-symbol"
+          className="frontier-navigation-menu__trigger-icon"
           aria-hidden="true"
           focusable="false"
           size={16}

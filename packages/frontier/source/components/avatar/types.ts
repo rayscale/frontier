@@ -16,6 +16,6 @@ export type TAvatarImageProps = ImgHTMLAttributes<HTMLImageElement>
 
 /** Props for `Avatar.Fallback`. */
 export type TAvatarFallbackProps = HTMLAttributes<HTMLSpanElement> & {
-  /** Text, a symbol, or other fallback content. */
+  /** Text, an icon, or other fallback content. */
   children?: ReactNode | undefined
 }

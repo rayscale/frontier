@@ -1,7 +1,7 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import type { ReactElement } from 'react'
 
-import { ChevronDown } from '../../../symbols/index.js'
+import { ChevronDown } from '../../../icons/index.js'
 import type { TAccordionItemProps } from '../types.js'
 
 export function AccordionItem({

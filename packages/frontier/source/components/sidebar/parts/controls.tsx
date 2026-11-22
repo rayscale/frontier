@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { PanelLeft } from '../../../symbols/index.js'
+import { PanelLeft } from '../../../icons/index.js'
 import { Button } from '../../button/button.js'
 import { useSidebarContext } from '../context.js'
 import type { TSidebarRailProps, TSidebarTriggerProps } from '../types.js'
@@ -28,7 +28,7 @@ export const SidebarTrigger = forwardRef<HTMLButtonElement, TSidebarTriggerProps
         {...props}
         ref={ref}
         variant="ghost"
-        size="symbol"
+        size="icon"
         className={['frontier-sidebar__trigger', className].filter(Boolean).join(' ')}
         aria-label={accessibleName ?? defaultName}
         aria-expanded={expanded}
@@ -41,7 +41,7 @@ export const SidebarTrigger = forwardRef<HTMLButtonElement, TSidebarTriggerProps
           }
         }}
       >
-        {children ?? <PanelLeft aria-hidden="true" className="frontier-sidebar__trigger-symbol" />}
+        {children ?? <PanelLeft aria-hidden="true" className="frontier-sidebar__trigger-icon" />}
       </Button>
     )
   },
@@ -58,7 +58,7 @@ export const SidebarRail = forwardRef<HTMLButtonElement, TSidebarRailProps>(func
       {...props}
       ref={ref}
       variant="ghost"
-      size="symbol-small"
+      size="icon-small"
       className={['frontier-sidebar__rail', className].filter(Boolean).join(' ')}
       aria-label={accessibleName}
       aria-controls={sidebarId}

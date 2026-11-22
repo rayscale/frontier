@@ -1,7 +1,7 @@
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import { Children, forwardRef, isValidElement, type ReactNode, useLayoutEffect } from 'react'
 
-import { X } from '../../../symbols/index.js'
+import { X } from '../../../icons/index.js'
 import { Button } from '../../button/button.js'
 import { useDrawerContext } from '../context.js'
 import { useDrawerPopupRegistration } from '../hooks/use-drawer-stack.js'
@@ -64,7 +64,7 @@ export const DrawerContent = forwardRef<HTMLDivElement, TDrawerContentProps>(fun
       render={
         <Button
           variant="ghost"
-          size="symbol"
+          size="icon"
           className="frontier-drawer__close-button"
           aria-label="Close drawer"
         />

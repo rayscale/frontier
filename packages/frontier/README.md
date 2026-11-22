@@ -2,13 +2,13 @@
 
 **A design language for the web.**
 
-The React implementation of the Frontier design language: components, symbols, and design tokens, built to work together.
+The React implementation of the Frontier design language: components, icons, and design tokens, built to work together.
 
 The [design guidelines](../../guidelines/README.md) state intent and behavior. This package implements them and does not extend them.
 
 ## Usage
 
-Import the stylesheet once, then use the components and symbols.
+Import the stylesheet once, then use the components and icons.
 
 ```tsx
 import { Button, Check } from '@rayscale/frontier'
@@ -53,18 +53,18 @@ The theme is named after its file. The command reports the roles that are missin
 ## What's included
 
 - **Components** — React components built on native HTML semantics, with composable parts for compound components, available from the package entry.
-- **Symbols** — A set of symbols that follow one grid and one stroke, available from the package entry.
+- **Icons** — A set of icons that follow one grid and one stroke, available from the package entry.
 - **Styles** — Design tokens and component styles through `@rayscale/frontier/styles.css`.
-- **Typeface** — Geist and Geist Mono, loaded by the stylesheet through `@fontsource-variable/geist` and `@fontsource-variable/geist-mono`. The system font is the fallback.
+- **Typeface** — Outfit, with Geist Mono for code, loaded by the stylesheet through `@fontsource-variable/outfit` and `@fontsource-variable/geist-mono`. The system font is the fallback.
 
 ## Exports
 
-| Path                                   | Contents                                                  |
-| -------------------------------------- | --------------------------------------------------------- |
-| `@rayscale/frontier`                   | Components, symbols, and their types.                     |
-| `@rayscale/frontier/styles.css`        | Design tokens, the font face, and component styles.       |
-| `@rayscale/frontier/themes/<name>.css` | The values of one theme, for use with `data-theme`.       |
-| `@rayscale/frontier/symbol-metadata`   | Descriptive data of every symbol, without the components. |
+| Path                                   | Contents                                                |
+| -------------------------------------- | ------------------------------------------------------- |
+| `@rayscale/frontier`                   | Components, icons, and their types.                     |
+| `@rayscale/frontier/styles.css`        | Design tokens, the font face, and component styles.     |
+| `@rayscale/frontier/themes/<name>.css` | The values of one theme, for use with `data-theme`.     |
+| `@rayscale/frontier/icon-metadata`     | Descriptive data of every icon, without the components. |
 
 ## Development
 

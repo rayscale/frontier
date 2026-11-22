@@ -9,8 +9,8 @@ import {
   useContext,
 } from 'react'
 
+import { Check, ChevronRight, Circle } from '../../../icons/index.js'
 import { omitUndefined } from '../../../internal/helpers/omit-undefined.js'
-import { Check, ChevronRight, Circle } from '../../../symbols/index.js'
 import { AnimatedHighlight } from '../animated-highlight/animated-highlight.js'
 import {
   FloatingPopup,

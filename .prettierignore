@@ -6,5 +6,5 @@ storybook-static/
 .superpowers/
 pnpm-lock.yaml
 
-# Generated symbol metadata (see packages/frontier/scripts/generate-symbols.ts)
-**/source/symbols/metadata.generated.ts
+# Generated icon metadata (see packages/frontier/scripts/generate-icons.ts)
+**/source/icons/metadata.generated.ts

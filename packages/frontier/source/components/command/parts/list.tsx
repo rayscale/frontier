@@ -23,9 +23,9 @@ export const CommandItemPart = forwardRef<HTMLDivElement, TCommandItemProps>(
           selectItem(item)
         }}
       >
-        {item.symbol && (
-          <span className="frontier-command__item-symbol" aria-hidden="true">
-            {item.symbol}
+        {item.icon && (
+          <span className="frontier-command__item-icon" aria-hidden="true">
+            {item.icon}
           </span>
         )}
         <span className="frontier-command__item-text">

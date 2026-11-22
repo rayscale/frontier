@@ -75,7 +75,7 @@
   color: var(--frontier-color-text-subtle);
 }
 
-.frontier-select__symbol {
+.frontier-select__icon {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -84,7 +84,7 @@
   transition: transform var(--frontier-duration-fast) var(--frontier-easing-standard);
 }
 
-.frontier-select__trigger[data-popup-open] .frontier-select__symbol {
+.frontier-select__trigger[data-popup-open] .frontier-select__icon {
   transform: rotate(180deg);
 }
 
@@ -99,7 +99,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .frontier-select__trigger,
-  .frontier-select__symbol {
+  .frontier-select__icon {
     transition: none;
   }
 }

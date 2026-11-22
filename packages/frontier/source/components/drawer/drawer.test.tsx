@@ -541,7 +541,7 @@ describe('Drawer', () => {
       expect(drawer).not.toHaveAttribute('aria-describedby')
     })
 
-    it('labels the close button and leaves its symbol hidden from assistive technology', () => {
+    it('labels the close button and leaves its icon hidden from assistive technology', () => {
       renderDrawer({ defaultOpen: true })
       const closeButton = screen.getByRole('button', { name: 'Close drawer' })
       expect(closeButton.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')

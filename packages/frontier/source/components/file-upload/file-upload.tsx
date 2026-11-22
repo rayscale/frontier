@@ -4,7 +4,7 @@ import {
   FileUploadDescription,
   FileUploadDropzone,
   FileUploadHelper,
-  FileUploadSymbol,
+  FileUploadIcon,
   FileUploadTitle,
   FileUploadTrigger,
 } from './parts/dropzone.js'
@@ -27,6 +27,7 @@ export type { TFileUploadRejection, TFileUploadRejectionCode } from './helpers/v
 export type {
   TFileUploadClearProps,
   TFileUploadDropzoneProps,
+  TFileUploadIconProps,
   TFileUploadItemProps,
   TFileUploadListProps,
   TFileUploadMode,
@@ -36,7 +37,6 @@ export type {
   TFileUploadRemoveProps,
   TFileUploadRootProps,
   TFileUploadSizeProps,
-  TFileUploadSymbolProps,
   TFileUploadTriggerProps,
 } from './types.js'
 
@@ -45,8 +45,8 @@ export interface TFileUploadComponent extends ForwardRefExoticComponent<
 > {
   /** Renders the drag-and-drop zone that accepts files. */
   Dropzone: typeof FileUploadDropzone
-  /** Renders the leading symbol of a dropzone. */
-  Symbol: typeof FileUploadSymbol
+  /** Renders the leading icon of a dropzone. */
+  Icon: typeof FileUploadIcon
   /** Renders the title of a dropzone. */
   Title: typeof FileUploadTitle
   /** Renders the description of a dropzone. */
@@ -75,7 +75,7 @@ export interface TFileUploadComponent extends ForwardRefExoticComponent<
 
 export const FileUpload: TFileUploadComponent = Object.assign(FileUploadRoot, {
   Dropzone: FileUploadDropzone,
-  Symbol: FileUploadSymbol,
+  Icon: FileUploadIcon,
   Title: FileUploadTitle,
   Description: FileUploadDescription,
   Helper: FileUploadHelper,

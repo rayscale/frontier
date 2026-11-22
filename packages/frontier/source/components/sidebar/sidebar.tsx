@@ -55,7 +55,7 @@ export interface TSidebarComponent extends ForwardRefExoticComponent<
   Root: typeof SidebarRoot
   /** Pins brand or utility content above the scrollable navigation. */
   Header: typeof SidebarHeader
-  /** Displays a mark and brand name, hiding the name in symbol-only mode. */
+  /** Displays a mark and brand name, hiding the name in icon-only mode. */
   Brand: typeof SidebarBrand
   /** Provides the scrollable region for sidebar groups. */
   Content: typeof SidebarContent
@@ -63,7 +63,7 @@ export interface TSidebarComponent extends ForwardRefExoticComponent<
   Group: typeof SidebarGroup
   /** Renders a heading for a navigation group. */
   GroupLabel: typeof SidebarGroupLabel
-  /** Renders a symbol-only action beside a group heading. */
+  /** Renders an icon-only action beside a group heading. */
   GroupAction: typeof SidebarGroupAction
   /** Contains the navigation elements of a group. */
   GroupContent: typeof SidebarGroupContent
@@ -73,7 +73,7 @@ export interface TSidebarComponent extends ForwardRefExoticComponent<
   MenuItem: typeof SidebarMenuItem
   /** Renders a link or action and supports active, collapsed, and tooltip states. */
   Item: typeof SidebarItem
-  /** Renders a symbol-only action beside a menu item. */
+  /** Renders an icon-only action beside a menu item. */
   MenuAction: typeof SidebarMenuAction
   /** Renders an optional badge beside a menu item. */
   MenuBadge: typeof SidebarMenuBadge

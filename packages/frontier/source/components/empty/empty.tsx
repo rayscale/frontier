@@ -30,7 +30,7 @@ export interface TEmptyComponent extends ForwardRefExoticComponent<
   /** Renders the region that groups media, title, and description. */
   Header: typeof EmptyHeader
   /**
-   * Renders the visual anchor of an empty state, such as a symbol or
+   * Renders the visual anchor of an empty state, such as an icon or
    * illustration.
    */
   Media: typeof EmptyMedia

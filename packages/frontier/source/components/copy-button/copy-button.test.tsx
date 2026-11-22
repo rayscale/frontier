@@ -52,7 +52,7 @@ describe('CopyButton', () => {
     await waitFor(() => expect(button).toHaveAccessibleName('Copy'))
   })
 
-  it('supports a symbol-only presentation with an accessible name', async () => {
+  it('supports an icon-only presentation with an accessible name', async () => {
     const user = userEvent.setup()
     installClipboardMock()
     render(<CopyButton showLabel={false} value="hello" />)

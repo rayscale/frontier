@@ -18,7 +18,7 @@ function toManagerOptions(options: TToastOptions, variant: TToastVariant = 'defa
     type: actualVariant,
     data: {
       variant: actualVariant,
-      symbol: options.symbol,
+      icon: options.icon,
       action: options.action,
       className: options.className,
     },
@@ -49,7 +49,7 @@ export function makeToastApi(manager: ToastManager<TToastData>): TToastApi {
       ...toManagerOptions(options),
       data: {
         variant: options.variant ?? 'default',
-        symbol: options.symbol,
+        icon: options.icon,
         action: options.action,
         className: options.className,
         render,
@@ -85,7 +85,7 @@ export function makeToastApi(manager: ToastManager<TToastData>): TToastApi {
         data: {
           ...previous.data,
           variant: options.variant ?? previous.data?.variant ?? 'default',
-          ...(Object.hasOwn(options, 'symbol') && { symbol: options.symbol }),
+          ...(Object.hasOwn(options, 'icon') && { icon: options.icon }),
           ...(options.action !== undefined && { action: options.action }),
           ...(options.className !== undefined && {
             className: options.className,

@@ -12,7 +12,7 @@ A user should always be able to tell which option is chosen, which one is curren
 
 ## Words and visuals agree
 
-A label, a symbol, and a state describe the same thing. A control's visible text should be part of its name. A symbol should not stand in for a word whose meaning is uncertain.
+A label, an icon, and a state describe the same thing. A control's visible text should be part of its name. An icon should not stand in for a word whose meaning is uncertain.
 
 ## Context changes meaning
 

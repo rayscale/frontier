@@ -8,7 +8,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Geist is the typeface of the system. The system font is the fallback while it loads.',
+          'Outfit is the typeface of the system. The system font is the fallback while it loads.',
       },
     },
   },
@@ -38,8 +38,7 @@ const weights = [
 const features: TFeature[] = [
   { label: 'Tabular figures', tag: 'tnum', sample: '1111 8888 0000', settings: "'tnum'" },
   { label: 'Proportional figures', tag: 'pnum', sample: '1111 8888 0000', settings: "'pnum'" },
-  { label: 'Slashed zero', tag: 'zero', sample: '2026 100 0', settings: "'zero'" },
-  { label: 'Case-sensitive forms', tag: 'case', sample: 'HELLO-WORLD (A+B)', settings: "'case'" },
+  { label: 'Fractions', tag: 'frac', sample: '1/2 3/4 7/8', settings: "'frac'" },
 ]
 
 const ranges: [number, number][] = [
@@ -141,7 +140,7 @@ export const Features: TStory = {
     docs: {
       description: {
         story:
-          'Shows the OpenType features of Geist: figure widths, slashed zero, and case-sensitive punctuation.',
+          'Shows the OpenType features of Outfit: tabular and proportional figures, and fractions.',
       },
     },
   },
@@ -174,7 +173,7 @@ export const Glyphs: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Shows the characters of Geist: Basic Latin, Latin-1, and Latin Extended-A.',
+        story: 'Shows the characters of Outfit: Basic Latin, Latin-1, and Latin Extended-A.',
       },
     },
   },

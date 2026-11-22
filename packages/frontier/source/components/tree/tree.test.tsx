@@ -2,7 +2,7 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Box, FileText, Home } from '../../symbols/index.js'
+import { Box, FileText, Home } from '../../icons/index.js'
 import { Sidebar } from '../sidebar/sidebar.js'
 
 import { Tree as PublicTree, Tree } from './index.js'
@@ -13,12 +13,12 @@ const items: TTreeNode[] = [
     id: 'intro',
     label: 'Introduction',
     href: '/docs',
-    symbol: <Home aria-hidden="true" />,
+    icon: <Home aria-hidden="true" />,
   },
   {
     id: 'components',
     label: 'Components',
-    symbol: <Box aria-hidden="true" />,
+    icon: <Box aria-hidden="true" />,
     children: [
       {
         id: 'overview',
@@ -29,7 +29,7 @@ const items: TTreeNode[] = [
         id: 'button',
         label: 'Button',
         href: '/docs/components/button',
-        symbol: <FileText aria-hidden="true" />,
+        icon: <FileText aria-hidden="true" />,
       },
       {
         id: 'nested',
@@ -175,24 +175,24 @@ describe('Tree', () => {
     expect(branch).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('omits the symbol slot when a node has no symbol', () => {
+  it('omits the icon slot when a node has no icon', () => {
     render(
       <Tree
         aria-label="Contents"
         items={[
           {
-            id: 'with-symbol',
-            label: 'With symbol',
-            href: '/with-symbol',
-            symbol: <Home aria-hidden="true" />,
+            id: 'with-icon',
+            label: 'With icon',
+            href: '/with-icon',
+            icon: <Home aria-hidden="true" />,
           },
-          { id: 'without-symbol', label: 'Without symbol', href: '/without-symbol' },
+          { id: 'without-icon', label: 'Without icon', href: '/without-icon' },
         ]}
       />,
     )
 
-    const row = screen.getByRole('link', { name: 'Without symbol' })
-    expect(row.querySelector('.frontier-tree__symbol')).toBeNull()
+    const row = screen.getByRole('link', { name: 'Without icon' })
+    expect(row.querySelector('.frontier-tree__icon')).toBeNull()
     expect(row.firstElementChild).toHaveClass('frontier-tree__label')
   })
 

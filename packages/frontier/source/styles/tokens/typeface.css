@@ -1,7 +1,7 @@
 :root,
 [data-theme='frontier'] {
   /* Font family */
-  --frontier-font-family: 'Geist Variable', system-ui, sans-serif;
+  --frontier-font-family: 'Outfit Variable', system-ui, sans-serif;
   --frontier-font-family-mono:
     'Geist Mono Variable', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 

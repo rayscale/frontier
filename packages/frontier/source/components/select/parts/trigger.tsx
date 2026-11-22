@@ -1,12 +1,12 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
 import { forwardRef } from 'react'
 
+import { ChevronDown } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
 import { AutoSize } from '../../../internal/primitives/auto-size/auto-size.js'
-import { ChevronDown } from '../../../symbols/index.js'
 import type {
+  TSelectIconProps,
   TSelectLabelProps,
-  TSelectSymbolProps,
   TSelectTriggerProps,
   TSelectValueProps,
 } from '../types.js'
@@ -51,15 +51,14 @@ export const SelectValue = forwardRef<HTMLSpanElement, TSelectValueProps>(functi
   )
 })
 
-export const SelectSymbol = forwardRef<HTMLSpanElement, TSelectSymbolProps>(function SelectSymbol(
+export const SelectIcon = forwardRef<HTMLSpanElement, TSelectIconProps>(function SelectIcon(
   { className, children, ...props },
   ref,
 ) {
   return (
-    // Base UI names this part Icon; the Frontier part is Select.Symbol.
     <BaseSelect.Icon
       ref={ref}
-      className={classNames('frontier-select__symbol', className)}
+      className={classNames('frontier-select__icon', className)}
       {...props}
     >
       {children ?? <ChevronDown size={16} aria-hidden="true" />}

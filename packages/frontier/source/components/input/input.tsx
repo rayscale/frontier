@@ -14,13 +14,13 @@ export type TInputProps = InputHTMLAttributes<HTMLInputElement> & {
   /** Visible label associated with the native input. */
   label?: ReactNode | undefined
   /** Decorative or interactive content displayed before the value. */
-  leadingSymbol?: ReactNode | undefined
+  leadingIcon?: ReactNode | undefined
   /** Prevents assistive technologies from hiding the leading adornment. */
-  leadingSymbolInteractive?: boolean | undefined
+  leadingIconInteractive?: boolean | undefined
   /** Decorative or interactive content displayed after the value. */
-  trailingSymbol?: ReactNode | undefined
+  trailingIcon?: ReactNode | undefined
   /** Prevents assistive technologies from hiding the trailing adornment. */
-  trailingSymbolInteractive?: boolean | undefined
+  trailingIconInteractive?: boolean | undefined
 }
 
 /**
@@ -35,10 +35,10 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(
     id,
     invalid = false,
     label,
-    leadingSymbol,
-    leadingSymbolInteractive = false,
-    trailingSymbol,
-    trailingSymbolInteractive = false,
+    leadingIcon,
+    leadingIconInteractive = false,
+    trailingIcon,
+    trailingIconInteractive = false,
     'aria-describedby': ariaDescribedBy,
     'aria-errormessage': ariaErrorMessage,
     'aria-invalid': ariaInvalid,
@@ -67,12 +67,12 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(
     >
       {label && <Field.Label>{label}</Field.Label>}
       <Field.Box>
-        {leadingSymbol && (
+        {leadingIcon && (
           <span
-            className="frontier-field__symbol"
-            aria-hidden={leadingSymbolInteractive ? undefined : true}
+            className="frontier-field__icon"
+            aria-hidden={leadingIconInteractive ? undefined : true}
           >
-            {leadingSymbol}
+            {leadingIcon}
           </span>
         )}
         <Field.Control
@@ -84,12 +84,12 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(function Input(
           aria-invalid={invalidAttribute}
           aria-errormessage={errorMessage}
         />
-        {trailingSymbol && (
+        {trailingIcon && (
           <span
-            className="frontier-field__symbol"
-            aria-hidden={trailingSymbolInteractive ? undefined : true}
+            className="frontier-field__icon"
+            aria-hidden={trailingIconInteractive ? undefined : true}
           >
-            {trailingSymbol}
+            {trailingIcon}
           </span>
         )}
       </Field.Box>

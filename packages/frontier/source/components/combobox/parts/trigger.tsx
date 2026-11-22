@@ -1,8 +1,8 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { forwardRef } from 'react'
 
+import { ChevronDown, X } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
-import { ChevronDown, X } from '../../../symbols/index.js'
 import type { TComboboxClearProps, TComboboxTriggerProps } from '../types.js'
 
 export const ComboboxTrigger = forwardRef<HTMLButtonElement, TComboboxTriggerProps>(

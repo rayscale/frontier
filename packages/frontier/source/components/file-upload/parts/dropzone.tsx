@@ -1,12 +1,12 @@
 import type { ComponentProps, MouseEvent, ReactElement } from 'react'
 
+import { Paperclip, Upload } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
-import { Paperclip, Upload } from '../../../symbols/index.js'
 import { Button } from '../../button/button.js'
 import { useFileUploadContext } from '../context.js'
 import type {
   TFileUploadDropzoneProps,
-  TFileUploadSymbolProps,
+  TFileUploadIconProps,
   TFileUploadTriggerProps,
 } from '../types.js'
 
@@ -33,7 +33,7 @@ export function FileUploadDropzone({
     >
       {children ?? (
         <>
-          <FileUploadSymbol />
+          <FileUploadIcon />
           <FileUploadTitle>Drop files here</FileUploadTitle>
           {constraintSummary && <FileUploadDescription>{constraintSummary}</FileUploadDescription>}
           <FileUploadTrigger />
@@ -43,14 +43,14 @@ export function FileUploadDropzone({
   )
 }
 
-export function FileUploadSymbol({
+export function FileUploadIcon({
   children,
   className,
   ...props
-}: TFileUploadSymbolProps): ReactElement {
+}: TFileUploadIconProps): ReactElement {
   return (
     <span
-      className={classNames('frontier-file-upload__symbol', className)}
+      className={classNames('frontier-file-upload__icon', className)}
       {...props}
       aria-hidden="true"
     >
@@ -89,7 +89,7 @@ export function FileUploadTrigger({
       type="button"
       className="frontier-file-upload__trigger"
       variant={variant ?? (inlineState ? 'ghost' : 'secondary')}
-      size={size ?? (inlineState ? 'symbol-small' : 'small')}
+      size={size ?? (inlineState ? 'icon-small' : 'small')}
       disabled={!select}
       aria-label={inlineState && !children ? 'Attach files' : undefined}
       onClick={(event) => {

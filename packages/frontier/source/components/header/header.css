@@ -105,9 +105,9 @@
   outline-offset: var(--frontier-focus-offset);
 }
 
-.frontier-header__menu-symbol,
-.frontier-header__menu-symbol::before,
-.frontier-header__menu-symbol::after {
+.frontier-header__menu-icon,
+.frontier-header__menu-icon::before,
+.frontier-header__menu-icon::after {
   display: block;
   inline-size: 1.125rem;
   block-size: 2px;
@@ -115,32 +115,32 @@
   background: currentcolor;
 }
 
-.frontier-header__menu-symbol {
+.frontier-header__menu-icon {
   position: relative;
   background: transparent;
 }
 
-.frontier-header__menu-symbol::before,
-.frontier-header__menu-symbol::after {
+.frontier-header__menu-icon::before,
+.frontier-header__menu-icon::after {
   content: '';
   position: absolute;
   inset-inline-start: 0;
   transition: transform var(--frontier-duration-enter) var(--frontier-easing-emphasized-decelerate);
 }
 
-.frontier-header__menu-symbol::before {
+.frontier-header__menu-icon::before {
   transform: translateY(-0.2rem);
 }
 
-.frontier-header__menu-symbol::after {
+.frontier-header__menu-icon::after {
   transform: translateY(0.2rem);
 }
 
-.frontier-header__menu-button[aria-expanded='true'] .frontier-header__menu-symbol::before {
+.frontier-header__menu-button[aria-expanded='true'] .frontier-header__menu-icon::before {
   transform: rotate(45deg);
 }
 
-.frontier-header__menu-button[aria-expanded='true'] .frontier-header__menu-symbol::after {
+.frontier-header__menu-button[aria-expanded='true'] .frontier-header__menu-icon::after {
   transform: rotate(-45deg);
 }
 
@@ -196,8 +196,8 @@
   .frontier-header--hidden,
   .frontier-header__panel,
   .frontier-header__panel[data-open],
-  .frontier-header__menu-symbol::before,
-  .frontier-header__menu-symbol::after {
+  .frontier-header__menu-icon::before,
+  .frontier-header__menu-icon::after {
     transition: none;
   }
 }

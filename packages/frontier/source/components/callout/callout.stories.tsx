@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { CheckCircle, CircleX, Info, TriangleAlert } from '../../symbols/index.js'
+import { CheckCircle, CircleX, Info, TriangleAlert } from '../../icons/index.js'
 import { Button } from '../button/button.js'
 
 import { Callout } from './callout.js'
@@ -35,9 +35,9 @@ const meta = {
   ],
   render: (args) => (
     <Callout {...args}>
-      <Callout.Symbol>
+      <Callout.Icon>
         <Info />
-      </Callout.Symbol>
+      </Callout.Icon>
       <Callout.Content>
         <Callout.Title>Workspace settings changed</Callout.Title>
         <p>Changes apply to every project in this workspace.</p>
@@ -55,20 +55,20 @@ export const Default: TStory = {
 }
 
 const tones = [
-  { tone: 'info', symbol: <Info aria-hidden="true" />, title: 'Information' },
+  { tone: 'info', icon: <Info aria-hidden="true" />, title: 'Information' },
   {
     tone: 'success',
-    symbol: <CheckCircle aria-hidden="true" />,
+    icon: <CheckCircle aria-hidden="true" />,
     title: 'Changes saved',
   },
   {
     tone: 'warning',
-    symbol: <TriangleAlert aria-hidden="true" />,
+    icon: <TriangleAlert aria-hidden="true" />,
     title: 'Review required',
   },
   {
     tone: 'danger',
-    symbol: <CircleX aria-hidden="true" />,
+    icon: <CircleX aria-hidden="true" />,
     title: 'Something went wrong',
   },
 ] as const
@@ -83,9 +83,9 @@ export const Tones: TStory = {
   },
   render: () => (
     <div style={{ display: 'grid', gap: 12 }}>
-      {tones.map(({ tone, symbol, title }) => (
+      {tones.map(({ tone, icon, title }) => (
         <Callout key={tone} tone={tone}>
-          <Callout.Symbol>{symbol}</Callout.Symbol>
+          <Callout.Icon>{icon}</Callout.Icon>
           <Callout.Content>
             <Callout.Title>{title}</Callout.Title>
             <p>This message uses the {tone} tone.</p>
@@ -106,9 +106,9 @@ export const WithActions: TStory = {
   },
   render: () => (
     <Callout tone="warning">
-      <Callout.Symbol>
+      <Callout.Icon>
         <TriangleAlert aria-hidden="true" />
-      </Callout.Symbol>
+      </Callout.Icon>
       <Callout.Content>
         <Callout.Title>Unsaved changes</Callout.Title>
         <p>Save your changes before leaving this page.</p>
@@ -134,9 +134,9 @@ export const Alert: TStory = {
   },
   render: () => (
     <Callout role="alert" tone="danger">
-      <Callout.Symbol>
+      <Callout.Icon>
         <CircleX aria-hidden="true" />
-      </Callout.Symbol>
+      </Callout.Icon>
       <Callout.Content>
         <Callout.Title>Connection lost</Callout.Title>
         <p>Reconnect before continuing.</p>

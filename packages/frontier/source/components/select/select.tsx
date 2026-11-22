@@ -1,7 +1,7 @@
 import { SelectGroup, SelectGroupLabel, SelectItem, SelectSeparator } from './parts/item.js'
 import { SelectContent, SelectList } from './parts/popup.js'
 import { SelectRoot } from './parts/root.js'
-import { SelectLabel, SelectSymbol, SelectTrigger, SelectValue } from './parts/trigger.js'
+import { SelectIcon, SelectLabel, SelectTrigger, SelectValue } from './parts/trigger.js'
 import type { TSelectProps } from './types.js'
 
 import '../../internal/styles/floating-surface.css'
@@ -12,12 +12,12 @@ export type {
   TSelectContentProps,
   TSelectGroupLabelProps,
   TSelectGroupProps,
+  TSelectIconProps,
   TSelectItemProps,
   TSelectLabelProps,
   TSelectListProps,
   TSelectProps,
   TSelectSeparatorProps,
-  TSelectSymbolProps,
   TSelectTriggerProps,
   TSelectValueProps,
 } from './types.js'
@@ -30,8 +30,8 @@ export interface TSelectComponent extends React.FC<TSelectProps> {
   Trigger: typeof SelectTrigger
   /** Renders the currently selected value display. */
   Value: typeof SelectValue
-  /** Renders the dropdown chevron symbol. */
-  Symbol: typeof SelectSymbol
+  /** Renders the dropdown chevron icon. */
+  Icon: typeof SelectIcon
   /** Renders the popup container for options. */
   Content: typeof SelectContent
   /** Renders the list container of options. */
@@ -48,7 +48,7 @@ export interface TSelectComponent extends React.FC<TSelectProps> {
 
 /**
  * Single-selection select built on Base UI. Compose it with `Select.Trigger`,
- * `Select.Value`, `Select.Symbol`, and `Select.Content`. Forwards refs to the
+ * `Select.Value`, `Select.Icon`, and `Select.Content`. Forwards refs to the
  * DOM element each part renders.
  */
 export const Select: TSelectComponent = Object.assign(SelectRoot, {
@@ -56,7 +56,7 @@ export const Select: TSelectComponent = Object.assign(SelectRoot, {
   Label: SelectLabel,
   Trigger: SelectTrigger,
   Value: SelectValue,
-  Symbol: SelectSymbol,
+  Icon: SelectIcon,
   Content: SelectContent,
   List: SelectList,
   Item: SelectItem,

@@ -11,8 +11,8 @@ export interface TSegmentedControlOption<TValue extends string = string> {
   value: TValue
   /** Whether this option is disabled. */
   disabled?: boolean | undefined
-  /** Optional symbol displayed alongside the label. */
-  symbol?: ReactNode | undefined
+  /** Optional icon displayed alongside the label. */
+  icon?: ReactNode | undefined
   /** Optional explicit accessible name for the option. */
   'aria-label'?: string | undefined
 }

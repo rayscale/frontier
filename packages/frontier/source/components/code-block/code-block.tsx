@@ -39,7 +39,7 @@ export interface TCodeBlockComponent extends ForwardRefExoticComponent<
   Title: typeof CodeBlockTitle
   /** Holds actions at the end of the header, or floats them when direct. */
   Actions: typeof CodeBlockActions
-  /** Copies the supplied value with a compact symbol button. */
+  /** Copies the supplied value with a compact icon button. */
   CopyButton: typeof CodeBlockCopyButton
   /** Renders the focusable, scrollable code surface. */
   Content: typeof CodeBlockContent

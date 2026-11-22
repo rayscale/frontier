@@ -82,12 +82,12 @@
   cursor: not-allowed;
 }
 
-.frontier-navigation-menu__trigger-symbol {
+.frontier-navigation-menu__trigger-icon {
   flex: none;
   transition: transform var(--frontier-duration-base) var(--frontier-easing-standard);
 }
 
-.frontier-navigation-menu__trigger[aria-expanded='true'] .frontier-navigation-menu__trigger-symbol {
+.frontier-navigation-menu__trigger[aria-expanded='true'] .frontier-navigation-menu__trigger-icon {
   transform: rotate(180deg);
 }
 
@@ -156,7 +156,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .frontier-navigation-menu__trigger-symbol,
+  .frontier-navigation-menu__trigger-icon,
   .frontier-navigation-menu__positioner,
   .frontier-navigation-menu__popup,
   .frontier-navigation-menu__content {

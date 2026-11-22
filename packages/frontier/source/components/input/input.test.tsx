@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { createRef, useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { Search, X } from '../../symbols/index.js'
+import { Search, X } from '../../icons/index.js'
 
 import { Input } from './index.js'
 
@@ -139,38 +139,32 @@ describe('Input', () => {
     expect(screen.getByRole('textbox').closest('.frontier-field')).toHaveAttribute('data-invalid')
   })
 
-  it('renders optional leading and trailing symbols as decorative content', () => {
+  it('renders optional leading and trailing icons as decorative content', () => {
     render(
       <Input
         aria-label="Search"
-        leadingSymbol={<Search data-testid="leading-symbol" />}
-        trailingSymbol={<X data-testid="trailing-symbol" />}
+        leadingIcon={<Search data-testid="leading-icon" />}
+        trailingIcon={<X data-testid="trailing-icon" />}
       />,
     )
 
-    expect(screen.getByTestId('leading-symbol').parentElement).toHaveAttribute(
-      'aria-hidden',
-      'true',
-    )
-    expect(screen.getByTestId('trailing-symbol').parentElement).toHaveAttribute(
-      'aria-hidden',
-      'true',
-    )
+    expect(screen.getByTestId('leading-icon').parentElement).toHaveAttribute('aria-hidden', 'true')
+    expect(screen.getByTestId('trailing-icon').parentElement).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('keeps explicitly interactive symbol content accessible and actionable', async () => {
+  it('keeps explicitly interactive icon content accessible and actionable', async () => {
     const user = userEvent.setup()
     const onClick = vi.fn()
 
     render(
       <Input
         aria-label="Search"
-        trailingSymbol={
+        trailingIcon={
           <button type="button" aria-label="Clear search" onClick={onClick}>
             <X />
           </button>
         }
-        trailingSymbolInteractive
+        trailingIconInteractive
       />,
     )
 

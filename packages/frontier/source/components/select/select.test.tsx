@@ -22,7 +22,7 @@ function BasicSelect(props: {
     >
       <Select.Trigger aria-label="Fruit">
         <Select.Value placeholder="Pick a fruit" />
-        <Select.Symbol />
+        <Select.Icon />
       </Select.Trigger>
       <Select.Content>
         <Select.List>
@@ -87,7 +87,7 @@ describe('Select', () => {
     const trigger = screen.getByRole('combobox', { name: 'Fruit' })
     expect(trigger).toHaveClass('frontier-select__trigger')
     expect(trigger.querySelector('.frontier-select__value')).not.toBeNull()
-    expect(trigger.querySelector('.frontier-select__symbol')).not.toBeNull()
+    expect(trigger.querySelector('.frontier-select__icon')).not.toBeNull()
   })
 
   it('animates the selected value width when its label changes', async () => {

@@ -14,12 +14,12 @@ export type TCopyButtonProps = Omit<
   copiedLabel?: string | undefined
   /** How long the copied state is shown, in milliseconds. Defaults to 1600. */
   timeout?: number | undefined
-  /** Whether to render the text label beside the symbol. Defaults to `true`. */
+  /** Whether to render the text label beside the icon. Defaults to `true`. */
   showLabel?: boolean | undefined
-  /** Symbol shown before copying. Defaults to the copy symbol. */
-  symbol?: ReactNode | undefined
-  /** Symbol shown after copying. Defaults to the check symbol. */
-  copiedSymbol?: ReactNode | undefined
+  /** Icon shown before copying. Defaults to the copy icon. */
+  icon?: ReactNode | undefined
+  /** Icon shown after copying. Defaults to the check icon. */
+  copiedIcon?: ReactNode | undefined
   /** Called after a successful copy. */
   onCopy?: ((value: string) => void) | undefined
   /** Called when copying fails. */

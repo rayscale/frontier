@@ -1,7 +1,7 @@
 import { forwardRef, useId, useMemo, useState } from 'react'
 
+import { CalendarRange, X } from '../../icons/index.js'
 import { resolveLabelledBy } from '../../internal/helpers/resolve-labelled-by.js'
-import { CalendarRange, X } from '../../symbols/index.js'
 import { Calendar } from '../calendar/calendar.js'
 import { Popover } from '../popover/popover.js'
 
@@ -138,7 +138,7 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, TDateRangePickerPro
                 aria-labelledby={labelledBy}
                 data-readonly={readOnly || undefined}
               >
-                <span className="frontier-date-range-picker__symbol" aria-hidden="true">
+                <span className="frontier-date-range-picker__icon" aria-hidden="true">
                   <CalendarRange />
                 </span>
                 <span

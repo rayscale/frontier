@@ -1,18 +1,18 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { ElementType, ReactElement } from 'react'
 
-import { classNames } from '../../../internal/helpers/class-names.js'
-import { AutoSize } from '../../../internal/primitives/auto-size/auto-size.js'
-import { durationBase, easingStandard } from '../../../styles/motion.js'
 import {
   FileAudio,
+  File as FileIcon,
   FileImage,
-  File as FileSymbol,
   FileText,
   FileVideo,
   Plus,
   X,
-} from '../../../symbols/index.js'
+} from '../../../icons/index.js'
+import { classNames } from '../../../internal/helpers/class-names.js'
+import { AutoSize } from '../../../internal/primitives/auto-size/auto-size.js'
+import { durationBase, easingStandard } from '../../../styles/motion.js'
 import { Button } from '../../button/button.js'
 import { fileItemContext, useFileItem, useFileUploadContext } from '../context.js'
 import { formatFileSize } from '../helpers/validation.js'
@@ -96,7 +96,7 @@ export function FileUploadItem({
   )
 }
 
-function getFileSymbol(file: File): ElementType {
+function getFileIcon(file: File): ElementType {
   if (file.type.startsWith('image/')) {
     return FileImage
   }
@@ -113,14 +113,14 @@ function getFileSymbol(file: File): ElementType {
     return FileText
   }
 
-  return FileSymbol
+  return FileIcon
 }
 
 export function FileUploadPreview({ className, ...props }: TFileUploadPreviewProps): ReactElement {
   const file = useFileItem()
   const imageState = file.type.startsWith('image/')
   const imageUrl = useObjectUrl(imageState ? file : null)
-  const Symbol = getFileSymbol(file)
+  const Icon = getFileIcon(file)
 
   return (
     <span
@@ -131,7 +131,7 @@ export function FileUploadPreview({ className, ...props }: TFileUploadPreviewPro
       {imageUrl ? (
         <img className="frontier-file-upload__image" src={imageUrl} alt="" />
       ) : (
-        <Symbol size={18} aria-hidden="true" />
+        <Icon size={18} aria-hidden="true" />
       )}
     </span>
   )
@@ -182,7 +182,7 @@ export function FileUploadRemove({
     <Button
       type="button"
       variant="ghost"
-      size="symbol-small"
+      size="icon-small"
       className={classNames('frontier-file-upload__remove', className)}
       aria-label={`Remove ${file.name}`}
       disabled={!select}

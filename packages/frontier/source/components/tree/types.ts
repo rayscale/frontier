@@ -8,8 +8,8 @@ export interface TTreeNode {
   label: ReactNode
   /** Optional destination. Leaves with an href render as native links. */
   href?: string | undefined
-  /** Optional symbol displayed before the label. */
-  symbol?: ReactNode | undefined
+  /** Optional icon displayed before the label. */
+  icon?: ReactNode | undefined
   /** Nested destinations. Presence makes the node a disclosure branch. */
   children?: TTreeNode[] | undefined
   /** Prevents interaction with the node. */
@@ -34,7 +34,7 @@ export type TTreeProps = Omit<HTMLAttributes<HTMLUListElement>, 'children'> & {
    */
   autoExpandActive?: boolean | undefined
   /**
-   * Enables tooltips for symbol-only presentation. `Sidebar.Tree` sets it from
+   * Enables tooltips for icon-only presentation. `Sidebar.Tree` sets it from
    * the sidebar's collapsed state.
    */
   compact?: boolean | undefined

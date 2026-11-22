@@ -138,7 +138,7 @@
   min-height: var(--frontier-control-size-large);
   padding: var(--frontier-spacing-3) var(--frontier-spacing-6);
 }
-.frontier-button--symbol {
+.frontier-button--icon {
   width: var(--frontier-control-size-medium);
   min-width: var(--frontier-control-size-medium);
   min-height: var(--frontier-control-size-medium);
@@ -146,7 +146,7 @@
   aspect-ratio: 1;
 }
 
-.frontier-button--symbol-small {
+.frontier-button--icon-small {
   width: var(--frontier-control-size-small);
   min-width: var(--frontier-control-size-small);
   min-height: var(--frontier-control-size-small);
@@ -154,7 +154,7 @@
   aspect-ratio: 1;
 }
 
-.frontier-button--symbol-large {
+.frontier-button--icon-large {
   width: var(--frontier-control-size-large);
   min-width: var(--frontier-control-size-large);
   min-height: var(--frontier-control-size-large);

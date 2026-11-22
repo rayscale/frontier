@@ -27,4 +27,4 @@ async function copyCss(source, target) {
 await copyCss(join(sourceRoot, 'styles'), join(targetRoot, 'styles'))
 await copyCss(join(sourceRoot, 'components'), join(targetRoot, 'components'))
 await copyCss(join(sourceRoot, 'internal'), join(targetRoot, 'internal'))
-await copyCss(join(sourceRoot, 'symbols'), join(targetRoot, 'symbols'))
+await copyCss(join(sourceRoot, 'icons'), join(targetRoot, 'icons'))

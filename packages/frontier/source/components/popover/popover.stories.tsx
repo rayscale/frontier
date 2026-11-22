@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { Info } from '../../symbols/index.js'
+import { Info } from '../../icons/index.js'
 import { Button } from '../button/button.js'
 import { Input } from '../input/input.js'
 import { ScrollArea } from '../scroll-area/scroll-area.js'
@@ -320,14 +320,14 @@ export const DisabledTrigger: TStory = {
   ),
 }
 
-export const SymbolTrigger: TStory = {
+export const IconTrigger: TStory = {
   parameters: {
-    docs: { description: { story: 'Shows the symbol trigger example of the popover.' } },
+    docs: { description: { story: 'Shows the icon trigger example of the popover.' } },
   },
   render: () => (
     <Popover>
       <Popover.Trigger>
-        <Button variant="ghost" size="symbol" aria-label="About this page">
+        <Button variant="ghost" size="icon" aria-label="About this page">
           <Info aria-hidden="true" />
         </Button>
       </Popover.Trigger>

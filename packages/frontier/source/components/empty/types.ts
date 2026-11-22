@@ -6,8 +6,8 @@ export type TEmptyVariant = 'default' | 'outline' | 'surface'
 /** Density of the empty state container. */
 export type TEmptySize = 'compact' | 'default' | 'spacious'
 
-/** Media presentation. `symbol` wraps a symbol in a restrained container. */
-export type TEmptyMediaVariant = 'default' | 'symbol'
+/** Media presentation. `icon` wraps an icon in a restrained container. */
+export type TEmptyMediaVariant = 'default' | 'icon'
 
 export type TEmptyRootProps = HTMLAttributes<HTMLDivElement> & {
   /** Content of the empty state, usually a header and content region. */
@@ -24,9 +24,9 @@ export type TEmptyHeaderProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export type TEmptyMediaProps = HTMLAttributes<HTMLDivElement> & {
-  /** Symbol or custom visual content, such as an illustration or avatar. */
+  /** Icon or custom visual content, such as an illustration or avatar. */
   children?: ReactNode | undefined
-  /** Use `symbol` for a symbol inside a restrained container. */
+  /** Use `icon` for an icon inside a restrained container. */
   variant?: TEmptyMediaVariant | undefined
 }
 

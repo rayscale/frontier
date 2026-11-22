@@ -28,7 +28,7 @@ describe('Callout', () => {
   it('renders compound parts with their classes and default elements', () => {
     render(
       <Callout>
-        <Callout.Symbol data-testid="symbol">!</Callout.Symbol>
+        <Callout.Icon data-testid="icon">!</Callout.Icon>
         <Callout.Content>
           <Callout.Title>Heads up</Callout.Title>
           <p>Review the settings before continuing.</p>
@@ -39,8 +39,8 @@ describe('Callout', () => {
       </Callout>,
     )
 
-    expect(screen.getByTestId('symbol')).toHaveClass('frontier-callout__symbol')
-    expect(screen.getByTestId('symbol')).toHaveAttribute('aria-hidden', 'true')
+    expect(screen.getByTestId('icon')).toHaveClass('frontier-callout__icon')
+    expect(screen.getByTestId('icon')).toHaveAttribute('aria-hidden', 'true')
     expect(screen.getByText('Heads up').tagName).toBe('P')
     expect(screen.getByText('Heads up')).toHaveClass('frontier-callout__title')
     expect(screen.getByText('Review the settings before continuing.').parentElement).toHaveClass(
@@ -71,7 +71,7 @@ describe('Callout', () => {
 
   it('is exported from the package entry point', () => {
     expect(PublicCallout).toBe(Callout)
-    expect(PublicCallout.Symbol).toBe(Callout.Symbol)
+    expect(PublicCallout.Icon).toBe(Callout.Icon)
     expect(PublicCallout.Title).toBe(Callout.Title)
     expect(PublicCallout.Content).toBe(Callout.Content)
     expect(PublicCallout.Actions).toBe(Callout.Actions)

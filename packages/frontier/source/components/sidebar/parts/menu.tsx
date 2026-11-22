@@ -39,7 +39,7 @@ export const SidebarMenuItem = forwardRef<HTMLLIElement, TSidebarMenuItemProps>(
 export const SidebarItem = forwardRef<HTMLElement, TSidebarItemProps>(function SidebarItem(
   {
     href,
-    symbol,
+    icon,
     active = false,
     label: accessibleLabel,
     tooltip,
@@ -73,9 +73,9 @@ export const SidebarItem = forwardRef<HTMLElement, TSidebarItemProps>(function S
 
   const content = (
     <>
-      {symbol && (
-        <span className="frontier-sidebar__item-symbol" aria-hidden="true">
-          {symbol}
+      {icon && (
+        <span className="frontier-sidebar__item-icon" aria-hidden="true">
+          {icon}
         </span>
       )}
       <span className="frontier-sidebar__item-label">{children}</span>
@@ -138,7 +138,7 @@ export const SidebarMenuAction = forwardRef<HTMLButtonElement, TSidebarMenuActio
         ref={ref}
         data-sidebar="menu-action"
         variant="ghost"
-        size="symbol-small"
+        size="icon-small"
         className={['frontier-sidebar__menu-action', className].filter(Boolean).join(' ')}
       />
     )

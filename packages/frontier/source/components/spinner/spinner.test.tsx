@@ -18,7 +18,7 @@ describe('Spinner', () => {
     )
   })
 
-  it('forwards a custom class and renders its symbol decoratively', () => {
+  it('forwards a custom class and renders its icon decoratively', () => {
     const { container } = render(
       <Spinner
         className="custom-spinner"

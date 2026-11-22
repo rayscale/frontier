@@ -1,9 +1,0 @@
-{
-  "$schema": "../../metadata.schema.json",
-  "name": "shapes",
-  "description": "A triangle, a circle, and a square that stand for a set of symbols.",
-  "keywords": ["shapes", "symbols", "icons", "glyphs", "geometry"],
-  "categories": ["design"],
-  "aliases": ["symbols", "icons"],
-  "useCases": ["symbol library", "icon set"]
-}

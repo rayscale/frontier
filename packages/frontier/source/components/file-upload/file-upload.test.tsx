@@ -318,7 +318,7 @@ describe('FileUpload', () => {
 
   it('exposes every compound member on the root at runtime', () => {
     expect(FileUpload.Dropzone).toBeTypeOf('function')
-    expect(FileUpload.Symbol).toBeTypeOf('function')
+    expect(FileUpload.Icon).toBeTypeOf('function')
     expect(FileUpload.Title).toBeTypeOf('function')
     expect(FileUpload.Description).toBeTypeOf('function')
     expect(FileUpload.Helper).toBeTypeOf('function')

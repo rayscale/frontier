@@ -30,7 +30,7 @@ The same item may be highlighted and selected simultaneously. When the highlight
 
 ## Communicating selection
 
-Selection must not rely on color alone. A change in type, a symbol, an indicator, or a change in shape may reinforce the selected state. In a list that users scan, font weight alone is too subtle to serve as the only indication.
+Selection must not rely on color alone. A change in type, an icon, an indicator, or a change in shape may reinforce the selected state. In a list that users scan, font weight alone is too subtle to serve as the only indication.
 
 See [Colors](../foundations/colors.md) and [Choice](../components/choice.md).
 

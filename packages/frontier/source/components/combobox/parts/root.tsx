@@ -48,7 +48,7 @@ export function ComboboxRoot({
 
 export const ComboboxInput = forwardRef<HTMLInputElement, TComboboxInputProps>(
   function ComboboxInput(
-    { children, className, description, error, invalid, label, leadingSymbol, ...props },
+    { children, className, description, error, invalid, label, leadingIcon, ...props },
     ref,
   ) {
     return (
@@ -61,9 +61,9 @@ export const ComboboxInput = forwardRef<HTMLInputElement, TComboboxInputProps>(
             error={error}
             invalid={invalid}
             label={label}
-            leadingSymbol={leadingSymbol}
-            trailingSymbol={children}
-            trailingSymbolInteractive
+            leadingIcon={leadingIcon}
+            trailingIcon={children}
+            trailingIconInteractive
           />
         }
         {...props}

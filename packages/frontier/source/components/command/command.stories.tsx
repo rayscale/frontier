@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { type ReactNode, useState } from 'react'
 
-import { Archive, FilePlus, Settings } from '../../symbols/index.js'
+import { Archive, FilePlus, Settings } from '../../icons/index.js'
 import { Button } from '../button/button.js'
 
 import { Command, type TCommandGroup, type TCommandItem } from './command.js'
@@ -12,14 +12,14 @@ function createNoteCommands(onSelect?: (value: string) => void) {
     label: 'New note',
     description: 'Create a blank note in the current folder',
     keywords: ['create', 'add'],
-    symbol: <FilePlus size={16} />,
+    icon: <FilePlus size={16} />,
     shortcut: ['Mod', 'N'],
     onSelect: () => onSelect?.('new-note'),
   }
   const openSettings: TCommandItem = {
     value: 'open-settings',
     label: 'Open settings',
-    symbol: <Settings size={16} />,
+    icon: <Settings size={16} />,
     shortcut: ['Mod', ','],
     onSelect: () => onSelect?.('open-settings'),
   }
@@ -27,7 +27,7 @@ function createNoteCommands(onSelect?: (value: string) => void) {
     value: 'archive-note',
     label: 'Archive note',
     description: 'Not available in the trash folder',
-    symbol: <Archive size={16} />,
+    icon: <Archive size={16} />,
     disabled: true,
     onSelect: () => onSelect?.('archive-note'),
   }

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Box, Code, FileText, Folder, Home, Settings } from '../../symbols/index.js'
+import { Box, Code, FileText, Folder, Home, Settings } from '../../icons/index.js'
 
 import { Tree } from './tree.js'
 import type { TTreeNode } from './types.js'
@@ -10,12 +10,12 @@ const items: TTreeNode[] = [
     id: 'home',
     label: 'Home',
     href: '#home',
-    symbol: <Home aria-hidden="true" />,
+    icon: <Home aria-hidden="true" />,
   },
   {
     id: 'components',
     label: 'Components',
-    symbol: <Box aria-hidden="true" />,
+    icon: <Box aria-hidden="true" />,
     children: [
       { id: 'button', label: 'Button', href: '#button' },
       { id: 'dialog', label: 'Dialog', href: '#dialog' },
@@ -32,7 +32,7 @@ const items: TTreeNode[] = [
   {
     id: 'patterns',
     label: 'Patterns',
-    symbol: <Code aria-hidden="true" />,
+    icon: <Code aria-hidden="true" />,
     children: [
       { id: 'loading', label: 'Loading', href: '#loading' },
       { id: 'selection', label: 'Selection', href: '#selection' },
@@ -42,7 +42,7 @@ const items: TTreeNode[] = [
     id: 'settings',
     label: 'Settings',
     href: '#settings',
-    symbol: <Settings aria-hidden="true" />,
+    icon: <Settings aria-hidden="true" />,
   },
 ]
 
@@ -112,29 +112,29 @@ export const Deep: TStory = {
         {
           id: 'src',
           label: 'src',
-          symbol: <Folder aria-hidden="true" />,
+          icon: <Folder aria-hidden="true" />,
           children: [
             {
               id: 'components',
               label: 'components',
-              symbol: <Folder aria-hidden="true" />,
+              icon: <Folder aria-hidden="true" />,
               children: [
                 {
                   id: 'data',
                   label: 'data',
-                  symbol: <Folder aria-hidden="true" />,
+                  icon: <Folder aria-hidden="true" />,
                   children: [
                     {
                       id: 'table',
                       label: 'table.tsx',
                       href: '#table',
-                      symbol: <FileText aria-hidden="true" />,
+                      icon: <FileText aria-hidden="true" />,
                     },
                     {
                       id: 'data-table',
                       label: 'data-table.tsx',
                       href: '#data-table',
-                      symbol: <FileText aria-hidden="true" />,
+                      icon: <FileText aria-hidden="true" />,
                     },
                   ],
                 },
@@ -142,7 +142,7 @@ export const Deep: TStory = {
                   id: 'button',
                   label: 'button.tsx',
                   href: '#button',
-                  symbol: <FileText aria-hidden="true" />,
+                  icon: <FileText aria-hidden="true" />,
                 },
               ],
             },
@@ -152,7 +152,7 @@ export const Deep: TStory = {
           id: 'package',
           label: 'package.json',
           href: '#package',
-          symbol: <FileText aria-hidden="true" />,
+          icon: <FileText aria-hidden="true" />,
         },
       ]}
     />

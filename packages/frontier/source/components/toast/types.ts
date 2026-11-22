@@ -14,7 +14,7 @@ export interface TToastOptions {
   description?: ReactNode | undefined
   variant?: TToastVariant | undefined
   duration?: number | undefined
-  symbol?: ReactNode | null | undefined
+  icon?: ReactNode | null | undefined
   action?: TToastAction | undefined
   id?: string | undefined
   className?: string | undefined
@@ -67,7 +67,7 @@ export interface TToastProviderProps {
 
 export interface TToastData {
   variant: TToastVariant
-  symbol?: ReactNode | null | undefined
+  icon?: ReactNode | null | undefined
   action?: TToastAction | undefined
   className?: string | undefined
   render?: ((id: string) => ReactNode) | undefined

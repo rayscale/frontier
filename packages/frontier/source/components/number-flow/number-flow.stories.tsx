@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 
-import { Minus, Plus } from '../../symbols/index.js'
+import { Minus, Plus } from '../../icons/index.js'
 import { Button } from '../button/button.js'
 
 import { NumberFlow } from './number-flow.js'
@@ -58,7 +58,7 @@ export const Interactive: TStory = {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <Button
           variant="outline"
-          size="symbol"
+          size="icon"
           aria-label="Decrease value"
           onClick={() => {
             setValue((current) => current - 1)
@@ -69,7 +69,7 @@ export const Interactive: TStory = {
         <NumberFlow value={value} />
         <Button
           variant="outline"
-          size="symbol"
+          size="icon"
           aria-label="Increase value"
           onClick={() => {
             setValue((current) => current + 1)

@@ -36,7 +36,7 @@
   font-weight: var(--frontier-font-weight-semibold);
 }
 
-.frontier-data-table__sort-symbols {
+.frontier-data-table__sort-icons {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +47,7 @@
   line-height: 1;
 }
 
-.frontier-data-table__sort-symbols > svg {
+.frontier-data-table__sort-icons > svg {
   display: block;
   flex: none;
 }

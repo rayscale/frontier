@@ -49,18 +49,15 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'Continue' })).toHaveClass('frontier-button--large')
   })
 
-  it.each(['symbol', 'symbol-small', 'symbol-large'] as const)(
-    'supports the %s symbol size',
-    (size) => {
-      render(
-        <Button size={size} aria-label="Search">
-          <span aria-hidden="true">Search symbol</span>
-        </Button>,
-      )
+  it.each(['icon', 'icon-small', 'icon-large'] as const)('supports the %s icon size', (size) => {
+    render(
+      <Button size={size} aria-label="Search">
+        <span aria-hidden="true">Search icon</span>
+      </Button>,
+    )
 
-      expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(`frontier-button--${size}`)
-    },
-  )
+    expect(screen.getByRole('button', { name: 'Search' })).toHaveClass(`frontier-button--${size}`)
+  })
 
   it('composes a spinner without coupling it to disabled or busy state', async () => {
     const user = userEvent.setup()

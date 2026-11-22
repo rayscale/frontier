@@ -224,7 +224,7 @@ Pixel values assume a root size of 16 px.
 
 | Token  | Value                                                      |
 | ------ | ---------------------------------------------------------- |
-| Family | Geist, with the system font and a sans-serif fallback      |
+| Family | Outfit, with the system font and a sans-serif fallback     |
 | Mono   | Geist Mono, with the system monospace font as the fallback |
 
 ### Sizes

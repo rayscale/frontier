@@ -40,7 +40,7 @@
   outline-offset: var(--frontier-focus-offset);
 }
 
-.frontier-file-upload__symbol {
+.frontier-file-upload__icon {
   display: inline-flex;
   color: var(--frontier-color-text-muted);
 }

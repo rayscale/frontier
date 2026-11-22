@@ -62,8 +62,8 @@ punctuation.
 ## Translation and direction
 
 Write text that can expand in translation. Do not embed text in images, and do not rely on a fixed
-width to carry meaning. Directional symbols mirror in right-to-left layouts; code remains left to
-right. See [Accessibility](../foundations/accessibility.md) and [Symbols](../foundations/symbols.md).
+width to carry meaning. Directional icons mirror in right-to-left layouts; code remains left to
+right. See [Accessibility](../foundations/accessibility.md) and [Icons](../foundations/icons.md).
 
 ## Principle
 

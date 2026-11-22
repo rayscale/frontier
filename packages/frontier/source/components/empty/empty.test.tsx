@@ -32,7 +32,7 @@ describe('Empty', () => {
     render(
       <Empty>
         <Empty.Header>
-          <Empty.Media variant="symbol">
+          <Empty.Media variant="icon">
             <svg aria-hidden="true" />
           </Empty.Media>
           <Empty.Title>No projects yet</Empty.Title>
@@ -145,7 +145,7 @@ describe('Empty.Header', () => {
 })
 
 describe('Empty.Media', () => {
-  it('renders custom media without the symbol modifier by default', () => {
+  it('renders custom media without the icon modifier by default', () => {
     render(
       <Empty.Media data-testid="media">
         <img alt="Team illustration" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" />
@@ -154,28 +154,28 @@ describe('Empty.Media', () => {
 
     const media = screen.getByTestId('media')
     expect(media).toHaveClass('frontier-empty__media')
-    expect(media).not.toHaveClass('frontier-empty__media--symbol')
+    expect(media).not.toHaveClass('frontier-empty__media--icon')
     expect(screen.getByRole('img', { name: 'Team illustration' })).toBeInTheDocument()
   })
 
-  it('applies the symbol modifier for the symbol variant', () => {
+  it('applies the icon modifier for the icon variant', () => {
     render(
-      <Empty.Media variant="symbol" data-testid="media">
+      <Empty.Media variant="icon" data-testid="media">
         <svg aria-hidden="true" />
       </Empty.Media>,
     )
 
-    expect(screen.getByTestId('media')).toHaveClass('frontier-empty__media--symbol')
+    expect(screen.getByTestId('media')).toHaveClass('frontier-empty__media--icon')
   })
 
-  it('keeps decorative symbols out of the accessibility tree', () => {
+  it('keeps decorative icons out of the accessibility tree', () => {
     render(
-      <Empty.Media variant="symbol">
-        <svg aria-hidden="true" data-testid="symbol" />
+      <Empty.Media variant="icon">
+        <svg aria-hidden="true" data-testid="icon" />
       </Empty.Media>,
     )
 
-    expect(screen.getByTestId('symbol')).toHaveAttribute('aria-hidden', 'true')
+    expect(screen.getByTestId('icon')).toHaveAttribute('aria-hidden', 'true')
     expect(screen.queryByRole('img')).not.toBeInTheDocument()
   })
 })

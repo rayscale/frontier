@@ -37,7 +37,7 @@ export type TSelectValueProps = TWithStringClassName<
   ComponentPropsWithoutRef<typeof BaseSelect.Value>
 >
 
-export type TSelectSymbolProps = TWithStringClassName<
+export type TSelectIconProps = TWithStringClassName<
   ComponentPropsWithoutRef<typeof BaseSelect.Icon>
 >
 

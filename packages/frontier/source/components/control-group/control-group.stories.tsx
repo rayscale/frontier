@@ -120,7 +120,7 @@ export const SelectComposition: TStory = {
       <Select.Root defaultValue="all">
         <Select.Trigger aria-label="Category">
           <Select.Value placeholder="Category" />
-          <Select.Symbol />
+          <Select.Icon />
         </Select.Trigger>
         <Select.Content>
           <Select.List>
@@ -158,7 +158,7 @@ export const FieldAndSelectComposition: TStory = {
       <Select.Root defaultValue="all">
         <Select.Trigger aria-label="Category">
           <Select.Value placeholder="Category" />
-          <Select.Symbol />
+          <Select.Icon />
         </Select.Trigger>
         <Select.Content>
           <Select.List>

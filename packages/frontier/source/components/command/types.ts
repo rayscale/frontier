@@ -12,8 +12,8 @@ export interface TCommandItem {
   description?: string | undefined
   /** Extra search terms that match the query without being displayed. */
   keywords?: readonly string[] | undefined
-  /** Symbol shown before the label. Decorative, so it is hidden from assistive technology. */
-  symbol?: ReactNode | undefined
+  /** Icon shown before the label. Decorative, so it is hidden from assistive technology. */
+  icon?: ReactNode | undefined
   /** Key labels shown after the item, for example `['⌘', 'S']`. */
   shortcut?: readonly string[] | undefined
   disabled?: boolean | undefined
@@ -64,9 +64,9 @@ export type TCommandInputProps = Omit<
   | 'description'
   | 'error'
   | 'invalid'
-  | 'leadingSymbol'
-  | 'trailingSymbol'
-  | 'trailingSymbolInteractive'
+  | 'leadingIcon'
+  | 'trailingIcon'
+  | 'trailingIconInteractive'
 >
 
 /** Base UI props with `className` narrowed to a string, since One composes class names directly. */

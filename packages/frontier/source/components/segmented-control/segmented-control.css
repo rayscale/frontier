@@ -162,14 +162,14 @@
   box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
 }
 
-.frontier-segmented-control__symbol {
+.frontier-segmented-control__icon {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
 }
 
-.frontier-segmented-control__symbol > :where(svg) {
+.frontier-segmented-control__icon > :where(svg) {
   width: 1.15em;
   height: 1.15em;
 }

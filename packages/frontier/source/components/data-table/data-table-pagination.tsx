@@ -40,7 +40,7 @@ export function DataTablePagination<TData extends RowData>({
           >
             <Select.Trigger aria-labelledby={pageSizeLabelId}>
               <Select.Value />
-              <Select.Symbol />
+              <Select.Icon />
             </Select.Trigger>
             <Select.Content>
               {pageSizeOptions.map((size) => (

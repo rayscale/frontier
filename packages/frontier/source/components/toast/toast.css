@@ -216,7 +216,7 @@
   overflow: auto;
 }
 
-.frontier-toast__symbol {
+.frontier-toast__icon {
   display: flex;
   flex: none;
   align-items: center;
@@ -226,25 +226,25 @@
   transition: color var(--frontier-duration-base) var(--frontier-easing-standard);
 }
 
-.frontier-toast__symbol svg,
+.frontier-toast__icon svg,
 .frontier-toast__close svg {
   width: 1em;
   height: 1em;
 }
 
-.frontier-toast--success .frontier-toast__symbol {
+.frontier-toast--success .frontier-toast__icon {
   color: var(--frontier-color-success);
 }
 
-.frontier-toast--error .frontier-toast__symbol {
+.frontier-toast--error .frontier-toast__icon {
   color: var(--frontier-color-danger);
 }
 
-.frontier-toast--warning .frontier-toast__symbol {
+.frontier-toast--warning .frontier-toast__icon {
   color: var(--frontier-color-warning);
 }
 
-.frontier-toast--info .frontier-toast__symbol {
+.frontier-toast--info .frontier-toast__icon {
   color: var(--frontier-color-info);
 }
 
@@ -381,7 +381,7 @@
     transition: none;
   }
 
-  .frontier-toast__symbol,
+  .frontier-toast__icon,
   .frontier-toast__content[data-behind] {
     transition: none;
   }

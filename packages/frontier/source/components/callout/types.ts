@@ -14,7 +14,7 @@ export type TCalloutProps = HTMLAttributes<HTMLDivElement> & {
   children?: ReactNode | undefined
 }
 
-export type TCalloutSymbolProps = HTMLAttributes<HTMLSpanElement> & {
+export type TCalloutIconProps = HTMLAttributes<HTMLSpanElement> & {
   children?: ReactNode | undefined
 }
 

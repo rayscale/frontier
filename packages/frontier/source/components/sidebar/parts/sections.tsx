@@ -26,7 +26,7 @@ export const SidebarHeader = forwardRef<HTMLDivElement, TSidebarHeaderProps>(fun
 })
 
 export const SidebarBrand = forwardRef<HTMLDivElement, TSidebarBrandProps>(function SidebarBrand(
-  { symbol, children, className, ...props },
+  { icon, children, className, ...props },
   ref,
 ) {
   return (
@@ -35,9 +35,9 @@ export const SidebarBrand = forwardRef<HTMLDivElement, TSidebarBrandProps>(funct
       ref={ref}
       className={['frontier-sidebar__brand', className].filter(Boolean).join(' ')}
     >
-      {symbol && (
-        <span className="frontier-sidebar__brand-symbol" aria-hidden="true">
-          {symbol}
+      {icon && (
+        <span className="frontier-sidebar__brand-icon" aria-hidden="true">
+          {icon}
         </span>
       )}
       <span className="frontier-sidebar__brand-label" data-sidebar="brand-label">
@@ -93,7 +93,7 @@ export const SidebarGroupAction = forwardRef<HTMLButtonElement, TSidebarGroupAct
         ref={ref}
         data-sidebar="group-action"
         variant="ghost"
-        size="symbol-small"
+        size="icon-small"
         className={['frontier-sidebar__group-action', className].filter(Boolean).join(' ')}
       />
     )

@@ -9,7 +9,7 @@ import {
   LayoutGrid,
   Moon,
   Sun,
-} from '../../symbols/index.js'
+} from '../../icons/index.js'
 
 import { SegmentedControl } from './segmented-control.js'
 
@@ -189,21 +189,21 @@ export const Uncontrolled: TStory = {
   },
 }
 
-export const WithSymbols: TStory = {
+export const WithIcons: TStory = {
   parameters: {
-    docs: { description: { story: 'Shows the with symbols example of the segmented control.' } },
+    docs: { description: { story: 'Shows the with icons example of the segmented control.' } },
   },
   render: () => (
     <SegmentedControl
       defaultValue="system"
       aria-label="Theme mode"
       options={[
-        { label: 'Light', value: 'light', symbol: <Sun aria-hidden="true" /> },
-        { label: 'Dark', value: 'dark', symbol: <Moon aria-hidden="true" /> },
+        { label: 'Light', value: 'light', icon: <Sun aria-hidden="true" /> },
+        { label: 'Dark', value: 'dark', icon: <Moon aria-hidden="true" /> },
         {
           label: 'System',
           value: 'system',
-          symbol: <Laptop aria-hidden="true" />,
+          icon: <Laptop aria-hidden="true" />,
         },
       ]}
     />
@@ -284,17 +284,17 @@ function InteractivePeriodDemo() {
           {
             label: 'Day',
             value: 'day',
-            symbol: <CalendarDays aria-hidden="true" />,
+            icon: <CalendarDays aria-hidden="true" />,
           },
           {
             label: 'Week',
             value: 'week',
-            symbol: <CalendarDays aria-hidden="true" />,
+            icon: <CalendarDays aria-hidden="true" />,
           },
           {
             label: 'Month',
             value: 'month',
-            symbol: <CalendarRange aria-hidden="true" />,
+            icon: <CalendarRange aria-hidden="true" />,
           },
         ]}
       />
@@ -379,27 +379,27 @@ export const DifferentWidths: TStory = {
       {
         value: 'day',
         label: 'Day',
-        symbol: <Sun size={16} />,
+        icon: <Sun size={16} />,
       },
       {
         value: 'week',
         label: 'This week',
-        symbol: <CalendarDays size={16} />,
+        icon: <CalendarDays size={16} />,
       },
       {
         value: 'month',
         label: 'Month',
-        symbol: <CalendarRange size={16} />,
+        icon: <CalendarRange size={16} />,
       },
       {
         value: 'year',
         label: 'All year',
-        symbol: <Clock size={16} />,
+        icon: <Clock size={16} />,
       },
       {
         value: 'all',
         label: 'Full history',
-        symbol: <LayoutGrid size={16} />,
+        icon: <LayoutGrid size={16} />,
       },
     ],
   },

@@ -1,10 +1,10 @@
 import { Toast as BaseToast } from '@base-ui/react/toast'
 import type { ReactElement } from 'react'
 
-import { Bell, Check, CircleX, Info, TriangleAlert, X } from '../../../symbols/index.js'
+import { Bell, Check, CircleX, Info, TriangleAlert, X } from '../../../icons/index.js'
 import type { TToastData } from '../types.js'
 
-function VariantSymbol(props: { variant: string }): ReactElement {
+function VariantIcon(props: { variant: string }): ReactElement {
   switch (props.variant) {
     case 'success':
       return <Check aria-hidden="true" />
@@ -25,8 +25,7 @@ export function ToastList(): ReactElement[] {
   return toasts.map((notification) => {
     const data = notification.data
     const variant = data?.variant ?? 'default'
-    const symbol =
-      data?.symbol === null ? null : (data?.symbol ?? <VariantSymbol variant={variant} />)
+    const icon = data?.icon === null ? null : (data?.icon ?? <VariantIcon variant={variant} />)
     const className = ['frontier-toast', `frontier-toast--${variant}`, data?.className]
       .filter(Boolean)
       .join(' ')
@@ -43,9 +42,9 @@ export function ToastList(): ReactElement[] {
             </div>
           ) : (
             <>
-              {symbol && (
-                <span className="frontier-toast__symbol" aria-hidden="true">
-                  {symbol}
+              {icon && (
+                <span className="frontier-toast__icon" aria-hidden="true">
+                  {icon}
                 </span>
               )}
               <div className="frontier-toast__body">

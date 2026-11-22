@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactElement } from 'react'
 
-import { LoaderCircle } from '../../symbols/index.js'
+import { LoaderCircle } from '../../icons/index.js'
 
 import './spinner.css'
 
@@ -17,7 +17,7 @@ export type TSpinnerProps = HTMLAttributes<HTMLSpanElement> & {
   size?: TSpinnerSize | undefined
 }
 
-/** Renders a decorative loading symbol inside an accessible status element. */
+/** Renders a decorative loading icon inside an accessible status element. */
 export function Spinner({
   className,
   label = 'Loading',
@@ -31,7 +31,7 @@ export function Spinner({
 
   return (
     <span {...props} className={classes} role="status" aria-label={ariaLabel ?? label}>
-      <LoaderCircle className="frontier-spinner__symbol" aria-hidden="true" />
+      <LoaderCircle className="frontier-spinner__icon" aria-hidden="true" />
     </span>
   )
 }

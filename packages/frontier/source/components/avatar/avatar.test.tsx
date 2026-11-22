@@ -1,12 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { CircleHelp } from '../../symbols/index.js'
+import { CircleHelp } from '../../icons/index.js'
 
 import { Avatar, Avatar as PublicAvatar } from './index.js'
 
 describe('Avatar', () => {
-  it('renders a default fallback symbol', () => {
+  it('renders a default fallback icon', () => {
     const { container } = render(<Avatar data-testid="avatar" />)
 
     expect(screen.getByTestId('avatar')).toHaveClass('frontier-avatar--medium')
@@ -33,7 +33,7 @@ describe('Avatar', () => {
     expect(fallback).not.toBeVisible()
   })
 
-  it('hides the default symbol when an image loads', () => {
+  it('hides the default icon when an image loads', () => {
     const { container } = render(
       <Avatar>
         <Avatar.Image src="/avatar.png" alt="Max Perez" />
@@ -50,13 +50,13 @@ describe('Avatar', () => {
     render(
       <Avatar>
         <Avatar.Fallback>
-          <CircleHelp aria-hidden="true" data-testid="fallback-symbol" />
+          <CircleHelp aria-hidden="true" data-testid="fallback-icon" />
           <span>Help</span>
         </Avatar.Fallback>
       </Avatar>,
     )
 
-    expect(screen.getByTestId('fallback-symbol')).toBeInTheDocument()
+    expect(screen.getByTestId('fallback-icon')).toBeInTheDocument()
     expect(screen.getByText('Help')).toBeVisible()
   })
 
@@ -75,7 +75,7 @@ describe('Avatar', () => {
     expect(screen.getByText('AL')).toBeVisible()
   })
 
-  it('shows the default symbol when an image fails without a custom fallback', () => {
+  it('shows the default icon when an image fails without a custom fallback', () => {
     const { container } = render(
       <Avatar>
         <Avatar.Image src="/broken.png" alt="Sam" />

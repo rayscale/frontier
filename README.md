@@ -2,7 +2,7 @@
 
 **A design language for the web.**
 
-Frontier is a design language and the React implementation that follows it. It brings together guidelines, design tokens, components, symbols, and a typeface, so an interface can be built from one set of rules.
+Frontier is a design language and the React implementation that follows it. It brings together guidelines, design tokens, components, icons, and a typeface, so an interface can be built from one set of rules.
 
 The guidelines state design intent. The packages implement it and do not extend it.
 
@@ -35,7 +35,7 @@ The layers are described in [guidelines/](./guidelines/README.md).
 
 Workspace projects live under `apps/` and `packages/`.
 
-- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, symbols, and design tokens.
+- **[@rayscale/frontier](./packages/frontier/README.md)** — The React implementation of the design language: components, icons, and design tokens.
 - **[@frontier/site](./apps/site/README.md)** — The documentation and marketing site, built with Next.js and React.
 
 ## Getting started

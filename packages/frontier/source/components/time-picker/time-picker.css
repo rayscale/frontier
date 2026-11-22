@@ -49,7 +49,7 @@
   cursor: not-allowed;
 }
 
-.frontier-time-picker__symbol {
+.frontier-time-picker__icon {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -57,7 +57,7 @@
   color: var(--frontier-color-text-muted);
 }
 
-.frontier-time-picker__symbol > :where(svg) {
+.frontier-time-picker__icon > :where(svg) {
   width: 1.125em;
   height: 1.125em;
 }

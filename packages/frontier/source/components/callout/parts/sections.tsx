@@ -4,8 +4,8 @@ import { classNames } from '../../../internal/helpers/class-names.js'
 import type {
   TCalloutActionsProps,
   TCalloutContentProps,
+  TCalloutIconProps,
   TCalloutProps,
-  TCalloutSymbolProps,
   TCalloutTitleProps,
 } from '../types.js'
 
@@ -26,20 +26,21 @@ export const CalloutRoot = forwardRef<HTMLDivElement, TCalloutProps>(function Ca
   )
 })
 
-export const CalloutSymbol = forwardRef<HTMLSpanElement, TCalloutSymbolProps>(
-  function CalloutSymbol({ children, className, ...props }, ref) {
-    return (
-      <span
-        ref={ref}
-        aria-hidden="true"
-        className={classNames('frontier-callout__symbol', className)}
-        {...props}
-      >
-        {children}
-      </span>
-    )
-  },
-)
+export const CalloutIcon = forwardRef<HTMLSpanElement, TCalloutIconProps>(function CalloutIcon(
+  { children, className, ...props },
+  ref,
+) {
+  return (
+    <span
+      ref={ref}
+      aria-hidden="true"
+      className={classNames('frontier-callout__icon', className)}
+      {...props}
+    >
+      {children}
+    </span>
+  )
+})
 
 export const CalloutContent = forwardRef<HTMLDivElement, TCalloutContentProps>(
   function CalloutContent({ children, className, ...props }, ref) {

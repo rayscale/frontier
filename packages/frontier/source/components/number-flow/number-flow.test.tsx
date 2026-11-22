@@ -118,7 +118,7 @@ describe('NumberFlow', () => {
     expect(getDigitValues(container)).toEqual([3, 4])
   })
 
-  it('applies currency formatting and keeps the currency symbol static', () => {
+  it('applies currency formatting and keeps the currency icon static', () => {
     const { container, getByText } = render(
       <NumberFlow value={1250} locale="en-US" format={{ style: 'currency', currency: 'USD' }} />,
     )

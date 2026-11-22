@@ -1,6 +1,6 @@
 # Action
 
-An action triggers an operation. Buttons, links, and symbol buttons are the common presentations. An
+An action triggers an operation. Buttons, links, and icon buttons are the common presentations. An
 action does one thing, and its result follows the press without delay.
 
 ## One action per control
@@ -38,30 +38,30 @@ action keeps its size and position, and the change is a short transition, never 
 When the operation takes time, the control shows a busy state and keeps its label. See
 [Loading](../patterns/loading.md).
 
-## Button, link, and symbol button
+## Button, link, and icon button
 
 - A **button** triggers an operation.
 - A **link** moves to a destination and follows the navigation model. See
   [Sequential navigation](../patterns/sequential-navigation.md).
-- An **symbol button** is a button whose visible content is a symbol. It always has an accessible name.
+- An **icon button** is a button whose visible content is an icon. It always has an accessible name.
 
 A control does not change its role when it becomes disabled or busy.
 
 ## Sizes
 
 An action comes in a small, a medium, and a large size, each meeting the target size in
-[Spacing](../foundations/spacing.md). Symbol-only actions share those heights.
+[Spacing](../foundations/spacing.md). Icon-only actions share those heights.
 
 ## Disabled
 
 A disabled action stays visible and does not look like an enabled one. It does not respond to presses
 and is explained where the context requires it. See [States](../patterns/states.md).
 
-## Symbol-only
+## Icon-only
 
-A symbol-only action is used when the symbol is universally understood. It has an accessible name and a
-tooltip that shows the name on hover and focus. A symbol-only action never introduces a new symbol
-without a label nearby, and a destructive action keeps visible text. See [Symbols](../foundations/symbols.md).
+An icon-only action is used when the icon is universally understood. It has an accessible name and a
+tooltip that shows the name on hover and focus. An icon-only action never introduces a new icon
+without a label nearby, and a destructive action keeps visible text. See [Icons](../foundations/icons.md).
 
 ## Focus
 

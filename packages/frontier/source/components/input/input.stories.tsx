@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 
-import { AtSign, Search, X } from '../../symbols/index.js'
+import { AtSign, Search, X } from '../../icons/index.js'
 import { Button } from '../button/button.js'
 
 import { Input } from './input.js'
@@ -16,11 +16,11 @@ function ClearableSearchExample() {
       onChange={(event) => {
         setValue(event.target.value)
       }}
-      leadingSymbol={<Search />}
-      trailingSymbol={
+      leadingIcon={<Search />}
+      trailingIcon={
         <Button
           variant="ghost"
-          size="symbol-small"
+          size="icon-small"
           aria-label="Clear search"
           onClick={() => {
             setValue('')
@@ -29,7 +29,7 @@ function ClearableSearchExample() {
           <X aria-hidden="true" />
         </Button>
       }
-      trailingSymbolInteractive
+      trailingIconInteractive
     />
   )
 }
@@ -51,10 +51,10 @@ const meta = {
       control: 'select',
       options: ['text', 'email', 'password', 'search', 'number', 'tel', 'url', 'date'],
     },
-    leadingSymbol: { control: false },
-    trailingSymbol: { control: false },
-    leadingSymbolInteractive: { control: false },
-    trailingSymbolInteractive: { control: false },
+    leadingIcon: { control: false },
+    trailingIcon: { control: false },
+    leadingIconInteractive: { control: false },
+    trailingIconInteractive: { control: false },
   },
 } satisfies Meta<typeof Input>
 
@@ -72,11 +72,11 @@ export const Default: TStory = {
   },
 }
 
-export const Symbols: TStory = {
+export const Icons: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Inputs support leading and trailing decorative symbols.',
+        story: 'Inputs support leading and trailing decorative icons.',
       },
     },
   },
@@ -84,8 +84,8 @@ export const Symbols: TStory = {
     label: 'Search',
     placeholder: 'Search your projects',
     description: undefined,
-    leadingSymbol: <Search aria-hidden="true" />,
-    trailingSymbol: <AtSign aria-hidden="true" />,
+    leadingIcon: <Search aria-hidden="true" />,
+    trailingIcon: <AtSign aria-hidden="true" />,
   },
 }
 

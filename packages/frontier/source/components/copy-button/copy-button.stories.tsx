@@ -38,11 +38,11 @@ export const Default: TStory = {
   parameters: { docs: { description: { story: 'Shows the default example of the copy button.' } } },
 }
 
-export const SymbolOnly: TStory = {
+export const IconOnly: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Symbol-only buttons keep an accessible name that changes to Copied.',
+        story: 'Icon-only buttons keep an accessible name that changes to Copied.',
       },
     },
   },

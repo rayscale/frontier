@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 
+import { DoDont } from '#/components/guideline-examples/index.js'
 import type { TDocumentationPage } from '#/documentation/types.js'
 
 import { Demo } from './demo.js'
@@ -41,5 +42,6 @@ export function createMdxComponents(
     PackageManagerTabs,
     PageList: () => <PageList current={page} pages={pages} />,
     IconGallery,
+    DoDont,
   }
 }

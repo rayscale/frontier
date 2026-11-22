@@ -1,5 +1,7 @@
 import { posix } from 'node:path'
 
+import { guidelineExamples } from './guideline-examples.js'
+
 /** The URL path of the guidelines section of the documentation. */
 export const guidelinesPath = '/documentation/guidelines'
 
@@ -85,6 +87,9 @@ interface TNode {
   type: string
   depth?: number
   url?: string
+  value?: string
+  name?: string
+  attributes?: { type: string; name: string; value: string }[]
   children?: TNode[]
 }
 
@@ -95,6 +100,58 @@ function rewriteLinks(node: TNode, fromFile: string): void {
 
   node.children?.forEach((child) => {
     rewriteLinks(child, fromFile)
+  })
+}
+
+function isDoDontTable(node: TNode): boolean {
+  const header = node.type === 'table' ? node.children?.[0] : undefined
+  const heads = (header?.children ?? []).map((cell) => plainText(cell).trim())
+
+  return heads.length === 2 && heads[0] === 'Do' && heads[1] === "Don't"
+}
+
+function plainText(node: TNode): string {
+  if (node.value !== undefined) {
+    return node.value
+  }
+
+  return (node.children ?? []).map(plainText).join('')
+}
+
+/**
+ * Shows the Do and Don't tables of a guideline as live examples. The guideline keeps its table, so
+ * it reads the same anywhere. The site decides which examples go with it: `guidelineExamples` names
+ * them for each table of the file, in order, and for each row of the table. A table with no
+ * examples stays a table.
+ */
+function replaceExamples(nodes: TNode[], file: string): TNode[] {
+  const tables = guidelineExamples.get(file) ?? []
+  let ordinal = 0
+
+  return nodes.map((node) => {
+    if (!isDoDontTable(node)) {
+      return node
+    }
+
+    const ids = tables[ordinal]
+    ordinal += 1
+    if (!ids) {
+      return node
+    }
+
+    const rows = (node.children ?? [])
+      .slice(1)
+      .map((row) => (row.children ?? []).map((cell) => plainText(cell).trim()))
+
+    return {
+      type: 'mdxJsxFlowElement',
+      name: 'DoDont',
+      attributes: [
+        { type: 'mdxJsxAttribute', name: 'examples', value: ids.join(',') },
+        { type: 'mdxJsxAttribute', name: 'captions', value: JSON.stringify(rows) },
+      ],
+      children: [],
+    }
   })
 }
 
@@ -119,7 +176,7 @@ export function remarkGuideline({ file }: { file: string }): (tree: TNode) => vo
       }
     }
 
-    tree.children = children
+    tree.children = replaceExamples(children, file)
     rewriteLinks(tree, file)
   }
 }

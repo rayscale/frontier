@@ -111,3 +111,17 @@ pnpm format:check
 
 The site imports the built package, so run `pnpm build` once before the first test or dev run.
 Open new pages in the browser and check that they appear in the sidebar in the intended order.
+
+## Guideline examples
+
+A guideline shows what to do and what to avoid in a table headed "Do" and "Don't". The page shows
+each row as a pair of live examples drawn with the real components, and the words of the row are
+their captions. The guideline does not name its examples, so it stays independent of the site.
+
+- `source/documentation/guideline-examples.ts` lists the examples of each table, by guideline, in
+  the order of the tables and of their rows.
+- `source/components/guideline-examples/examples/<name>.tsx` draws one pair. It takes the side to
+  draw, `do` or `dont`, and `registry.ts` lists it.
+- The examples are illustrations: they are hidden from assistive technology and cannot take the
+  focus. An example that shows a movement is listed as interactive, so people can play it.
+- A test fails when a table has no example for a row, or an example has no row.

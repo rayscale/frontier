@@ -15,6 +15,8 @@ Motion should do one of four things:
 
 If motion does none of these, remove it. See [Restraint](../principles/restraint.md).
 
+Icons follow the same purposes. See [Icons](./icons.md#animation).
+
 ## Character
 
 Motion for movement that follows the user, such as a highlight travelling between options, should feel springy. The movement settles quickly and does not overshoot in a way that calls attention to itself. Motion for fades, entrances, and exits should feel calm and direct. Bounce is not part of the vocabulary for exits or for content that the user is reading.

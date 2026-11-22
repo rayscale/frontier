@@ -218,6 +218,18 @@ Pixel values assume a root size of 16 px.
 | Emphasized decelerate | `cubic-bezier(0.32, 0.72, 0, 1)` |
 | Emphasized accelerate | `cubic-bezier(0.5, 0, 0.75, 0)`  |
 
+### Icon motion
+
+| Movement | Travel                           | Duration | Easing   |
+| -------- | -------------------------------- | -------- | -------- |
+| Nudge    | 3 units on the 24-unit grid      | Medium   | Spring   |
+| Turn     | 90° for a turn, 180° to flip     | Enter    | Standard |
+| Draw     | The whole stroke                 | Enter    | Standard |
+| Ring     | 12° swing on each side, decaying | Slow     | Standard |
+| Sweep    | One full turn per cycle          | Slow     | Linear   |
+
+A movement returns to rest in the Exit duration.
+
 ## Typeface
 
 ### Family

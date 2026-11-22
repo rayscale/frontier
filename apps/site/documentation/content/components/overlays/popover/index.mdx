@@ -1,0 +1,100 @@
+---
+title: Popover
+description: A small floating panel next to its trigger, for extra content that people can open and ignore.
+---
+
+## Usage
+
+```tsx
+import { Popover } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Popover>
+      <Popover.Trigger>Share</Popover.Trigger>
+      <Popover.Content>
+        <Popover.Header>
+          <Popover.Title>Share this page</Popover.Title>
+          <Popover.Description>Anyone with the link can read it.</Popover.Description>
+        </Popover.Header>
+      </Popover.Content>
+    </Popover>
+  )
+}
+```
+
+Use a popover for content that belongs to one control, such as a short form, a set of options, or more detail. It does not block the page. For a choice people must make, use a [dialog](/documentation/components/overlays/dialog). For a hint of a few words, use a [tooltip](/documentation/components/overlays/tooltip).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Placement
+
+`side` and `align` choose where the popover appears.
+
+<Demo name="placement" />
+
+### With a form
+
+<Demo name="withForm" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the open state in your component.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Popover
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                      | Default | Description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Whether the popover is open, in controlled mode.         |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the popover starts open.                         |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested state when it opens or closes. |
+| `children`     | `ReactNode`               | —       | The parts of the popover.                                |
+
+### Popover.Trigger
+
+Opens and closes the popover. Pass one element and it keeps its attributes and its `onClick`. Any other content is wrapped in a [button](/documentation/components/actions/button).
+
+### Popover.Content
+
+Renders the floating panel. It accepts the attributes of a `<div>`.
+
+| Prop          | Type                                     | Default    | Description                                  |
+| ------------- | ---------------------------------------- | ---------- | -------------------------------------------- |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Side of the trigger where the panel appears. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the chosen side.             |
+| `sideOffset`  | `number`                                 | `8`        | Distance from the trigger, in pixels.        |
+| `alignOffset` | `number`                                 | `0`        | Shift along the aligned edge, in pixels.     |
+
+### Popover.Header
+
+Groups the title and the description. It renders a `<div>` and accepts its attributes.
+
+### Popover.Title, Popover.Description
+
+Render the title and the description, and link them to the popover for assistive technology.
+
+### Popover.Close
+
+Renders a button that closes the popover. It accepts the props of a button, and its type is always `button`.
+
+## Accessibility
+
+<Callout title="Name the popover">
+  Use `Popover.Title`, so the panel has a name for assistive technology. Add a description when the
+  content needs one.
+</Callout>
+
+- The trigger, the title, and the description are linked with ARIA attributes.
+- The focus moves into the popover when it holds interactive content.
+- Escape closes the popover.
+- The popover does not block the page, so keep its content short.

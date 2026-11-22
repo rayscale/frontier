@@ -1,0 +1,91 @@
+---
+title: Accordion
+description: A stack of sections that people open and close one at a time or together.
+---
+
+## Usage
+
+```tsx
+import { Accordion } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Accordion type="single">
+      <Accordion.Item value="shipping" title="Shipping">
+        Orders ship within two business days.
+      </Accordion.Item>
+      <Accordion.Item value="returns" title="Returns">
+        You can return an item within thirty days.
+      </Accordion.Item>
+    </Accordion>
+  )
+}
+```
+
+Use an accordion for a group of related sections, such as questions and answers, where people read a few and skip the rest. For one section on its own, use a [disclosure](/documentation/components/content/disclosure). To build your own trigger, use a [collapsible](/documentation/components/content/collapsible).
+
+## Examples
+
+### Default
+
+In `single` mode, opening an item closes the one that was open.
+
+<Demo name="default" />
+
+### Multiple
+
+In `multiple` mode, any number of items can stay open.
+
+<Demo name="multiple" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the open items in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+Disable one item, or the whole accordion with `disabled` on the root.
+
+<Demo name="disabled" />
+
+## API reference
+
+### Accordion
+
+Holds the open items and shares them with its items. `Accordion.Root` is the same component. The props depend on `type`.
+
+| Prop            | Type                                                         | Default         | Description                                                       |
+| --------------- | ------------------------------------------------------------ | --------------- | ----------------------------------------------------------------- |
+| `type`          | `'single' \| 'multiple'`                                     | —               | Whether one item or several can be open.                          |
+| `value`         | `string \| null` in single mode, `string[]` in multiple mode | —               | The open items, in controlled mode. Omit it for uncontrolled use. |
+| `defaultValue`  | `string \| null` in single mode, `string[]` in multiple mode | `null`, or `[]` | The items open at the start.                                      |
+| `onValueChange` | `(value) => void`, with the same type as `value`             | —               | Called with the open items after each change.                     |
+| `disabled`      | `boolean`                                                    | `false`         | Disables every item.                                              |
+| `className`     | `string`                                                     | —               | Additional CSS class for the root.                                |
+| `children`      | `ReactNode`                                                  | —               | The items.                                                        |
+
+### Accordion.Item
+
+One section with a trigger and a panel.
+
+| Prop        | Type        | Default | Description                                     |
+| ----------- | ----------- | ------- | ----------------------------------------------- |
+| `value`     | `string`    | —       | Identifies the item. Each value must be unique. |
+| `title`     | `ReactNode` | —       | Label of the trigger.                           |
+| `children`  | `ReactNode` | —       | Content of the panel.                           |
+| `disabled`  | `boolean`   | `false` | Prevents the item from opening or closing.      |
+| `className` | `string`    | —       | Additional CSS class for the item.              |
+
+## Accessibility
+
+<Callout title="Write clear titles">
+  The title is the only thing people see when an item is closed. Write it so they can tell what the
+  panel holds without opening it.
+</Callout>
+
+- Each title is a level 3 heading that holds a button, and the button is linked to its panel.
+- Enter and Space open and close an item.
+- The arrow keys move the focus between the titles, and Home and End go to the first and last. Disabled items are skipped.
+- Keep the headings of the page in order, since the titles are level 3 headings.

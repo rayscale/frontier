@@ -1,0 +1,70 @@
+---
+title: Scroll area
+description: A region of content that scrolls, with optional scrollbars and edge effects.
+---
+
+## Usage
+
+```tsx
+import { ScrollArea } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ScrollArea aria-label="Release notes" style={{ height: 160 }}>
+      {/* long content */}
+    </ScrollArea>
+  )
+}
+```
+
+Use a scroll area for a region with its own scroll inside a page, such as a list in a card. Give it a height, or a width for horizontal scroll, so it has something to overflow. It uses native scrolling, so wheel, touch, and keyboard scrolling work as usual.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Scrollbar
+
+Show custom scrollbars with `scrollbar`. `auto` shows them on hover or while scrolling.
+
+<Demo name="scrollbar" />
+
+### Edge effect
+
+An edge effect shows that more content waits past a side.
+
+<Demo name="edgeEffect" />
+
+### Horizontal
+
+<Demo name="horizontal" />
+
+## API reference
+
+### ScrollArea
+
+Renders a wrapper with a scrollable viewport. It forwards its ref to the viewport. `className` and `style` go to the wrapper, and every other attribute of a `<div>` goes to the viewport.
+
+| Prop             | Type                                                       | Default      | Description                                                  |
+| ---------------- | ---------------------------------------------------------- | ------------ | ------------------------------------------------------------ |
+| `orientation`    | `'vertical' \| 'horizontal' \| 'both'`                     | `'vertical'` | Axes that can scroll. Overflow on the other axis is clipped. |
+| `scrollbar`      | `'none' \| 'vertical' \| 'horizontal' \| 'both' \| 'auto'` | `'none'`     | Which custom scrollbars to show.                             |
+| `edgeEffect`     | `'none' \| 'fade' \| 'blur'`                               | `'none'`     | Effect on the sides that have hidden content.                |
+| `edgeEffectSize` | `string`                                                   | `'24px'`     | Length of the edge effect, as CSS.                           |
+| `className`      | `string`                                                   | —            | Additional CSS class for the wrapper.                        |
+| `style`          | `CSSProperties`                                            | —            | Inline style for the wrapper.                                |
+| `children`       | `ReactNode`                                                | —            | The scrolling content.                                       |
+
+## Accessibility
+
+<Callout title="Name the region">
+  When the content overflows, the viewport can take the focus so the keyboard can scroll it. Give it
+  an `aria-label` that says what it holds.
+</Callout>
+
+- The scroll is native, so the keyboard, the wheel, and touch work as expected.
+- The viewport becomes focusable when its content overflows.
+- Pass `tabIndex` to make the viewport focusable when it has no overflow.
+- Edge effects are decorative and cannot be focused.

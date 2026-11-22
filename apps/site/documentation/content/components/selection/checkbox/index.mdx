@@ -1,0 +1,68 @@
+---
+title: Checkbox
+description: Turns one option on or off, with a label and an optional description.
+---
+
+## Usage
+
+```tsx
+import { Checkbox } from '@rayscale/frontier'
+
+export function Example() {
+  return <Checkbox label="Remember me" />
+}
+```
+
+Use a checkbox for an option that is part of a form someone submits later, or for choosing several items from a list. It renders a native checkbox, so `checked`, `defaultChecked`, `onChange`, `name`, and `value` work as usual. For a setting that applies as soon as it changes, use a [switch](/documentation/components/selection/switch).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Checked
+
+Use `defaultChecked` to start it checked and let it manage its own state.
+
+<Demo name="checked" />
+
+### With a description
+
+A description sits under the label and is read together with it.
+
+<Demo name="withDescription" />
+
+### Indeterminate
+
+Use `indeterminate` for a checkbox that stands for a group where only some items are selected.
+
+<Demo name="indeterminate" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Checkbox
+
+Renders a native `<input type="checkbox">` with an optional label and description. It forwards its ref and the attributes of the input, except `type` and `aria-checked`. The table lists the props `Checkbox` adds.
+
+| Prop            | Type        | Default | Description                                                        |
+| --------------- | ----------- | ------- | ------------------------------------------------------------------ |
+| `description`   | `ReactNode` | —       | Helper text associated with the checkbox for assistive technology. |
+| `indeterminate` | `boolean`   | `false` | Shows the mixed state, for a checkbox that stands for a group.     |
+| `label`         | `ReactNode` | —       | Visible label associated with the checkbox.                        |
+
+## Accessibility
+
+<Callout title="Name every checkbox">
+  A checkbox without a label has no name for assistive technology. Pass `label`, or give the input
+  an `aria-label` or `aria-labelledby`.
+</Callout>
+
+- The checkbox is native, so Space changes it and the checked state is exposed without extra attributes.
+- The mixed state is the native indeterminate state, and a press resolves it to checked or unchecked.
+- The description is linked to the input, so it is read together with the label.
+- A disabled checkbox uses the native `disabled` attribute and leaves the tab order.

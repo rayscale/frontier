@@ -1,0 +1,55 @@
+---
+title: Spinner
+description: Shows that something is loading, when the wait has no known length.
+---
+
+## Usage
+
+```tsx
+import { Spinner } from '@rayscale/frontier'
+
+export function Example() {
+  return <Spinner />
+}
+```
+
+Use a spinner for a short wait where you cannot tell how far along it is. When you know the progress, use a [progress](/documentation/components/feedback/progress) bar. When the layout of the content is known, use a [skeleton](/documentation/components/feedback/skeleton).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Inside a button
+
+Give the spinner a label that matches the action, so assistive technology reads what is happening.
+
+<Demo name="inButton" />
+
+## API reference
+
+### Spinner
+
+Renders a `<span>` with the status role and a decorative loading icon. It accepts the attributes of a `<span>`. The table lists the props `Spinner` adds.
+
+| Prop        | Type                             | Default     | Description                                                   |
+| ----------- | -------------------------------- | ----------- | ------------------------------------------------------------- |
+| `label`     | `string`                         | `'Loading'` | Accessible name of the status. `aria-label` takes precedence. |
+| `size`      | `'small' \| 'medium' \| 'large'` | `'medium'`  | Visual size.                                                  |
+| `className` | `string`                         | —           | Additional CSS class.                                         |
+
+## Accessibility
+
+<Callout title="Say what is loading">
+  The default label is "Loading". When several spinners can show at once, or the wait has a clear
+  subject, set `label` to say what is loading, such as "Saving".
+</Callout>
+
+- The spinner has the status role, so its name is announced politely.
+- The icon is decorative and hidden from assistive technology.
+- Do not rely on a spinner alone for a long wait. Say what is happening in text too.

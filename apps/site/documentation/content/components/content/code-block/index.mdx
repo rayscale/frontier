@@ -1,0 +1,112 @@
+---
+title: Code block
+description: Shows a piece of code with an optional title, a copy button, and line numbers.
+---
+
+## Usage
+
+```tsx
+import { CodeBlock } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <CodeBlock>
+      <CodeBlock.Content>pnpm add @rayscale/frontier</CodeBlock.Content>
+    </CodeBlock>
+  )
+}
+```
+
+Use a code block for commands and examples that people read or copy. Add a header with a title and a copy button when the code is long enough to be reused.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Line numbers
+
+Number the lines when `children` is a string.
+
+<Demo name="lineNumbers" />
+
+### Line variants
+
+Use `CodeBlock.Line` to mark lines as added, removed, or highlighted.
+
+<Demo name="lineVariants" />
+
+### Wrap
+
+<Demo name="wrap" />
+
+### Footer
+
+<Demo name="footer" />
+
+## API reference
+
+### CodeBlock
+
+Renders the container. It accepts the attributes of a `<div>`.
+
+| Prop      | Type                         | Default     | Description           |
+| --------- | ---------------------------- | ----------- | --------------------- |
+| `variant` | `'default' \| 'destructive'` | `'default'` | Tone of the block.    |
+| `size`    | `'default' \| 'sm'`          | `'default'` | Density of the block. |
+
+### CodeBlock.Header
+
+Groups the title and the actions. It renders a `<div>` and accepts its attributes.
+
+### CodeBlock.Title
+
+Renders the title.
+
+| Prop | Type                                             | Default | Description              |
+| ---- | ------------------------------------------------ | ------- | ------------------------ |
+| `as` | `'div' \| 'span' \| 'p' \| 'h2' \| 'h3' \| 'h4'` | `'div'` | Element that it renders. |
+
+### CodeBlock.Actions
+
+Groups the actions of the header. It renders a `<div>` and accepts its attributes.
+
+### CodeBlock.CopyButton
+
+A [copy button](/documentation/components/actions/copy-button) for the code. It takes the same props.
+
+### CodeBlock.Content
+
+Renders the code in a `<pre>`. It accepts the attributes of a `<pre>`, except `children`.
+
+| Prop          | Type        | Default | Description                                                 |
+| ------------- | ----------- | ------- | ----------------------------------------------------------- |
+| `children`    | `ReactNode` | —       | A code string, or a list of `CodeBlock.Line` elements.      |
+| `wrap`        | `boolean`   | —       | Wraps long lines instead of scrolling.                      |
+| `lineNumbers` | `boolean`   | —       | Numbers each line when `children` is a string.              |
+| `startLine`   | `number`    | `1`     | Number of the first line.                                   |
+| `tabIndex`    | `number`    | `0`     | Makes the content focusable, so the keyboard can scroll it. |
+
+### CodeBlock.Line
+
+Renders one line of code.
+
+| Prop      | Type                                                 | Default     | Description          |
+| --------- | ---------------------------------------------------- | ----------- | -------------------- |
+| `variant` | `'default' \| 'added' \| 'removed' \| 'highlighted'` | `'default'` | Meaning of the line. |
+
+### CodeBlock.Footer
+
+Holds a note under the code. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Do not rely on color for changes">
+  Added and removed lines are shown with color. Say the change in the text around the code as well,
+  so it is clear without color.
+</Callout>
+
+- The content can take the focus, so people can scroll long lines with the keyboard.
+- Code is always read from left to right, even in a right-to-left page.
+- Name the copy button for what it copies, as described for the [copy button](/documentation/components/actions/copy-button).

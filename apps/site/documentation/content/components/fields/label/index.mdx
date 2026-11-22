@@ -1,0 +1,47 @@
+---
+title: Label
+description: Names a control and makes its text a larger target for clicking and tapping.
+---
+
+## Usage
+
+```tsx
+import { Label } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <>
+      <Label htmlFor="email">Email address</Label>
+      <input id="email" type="email" />
+    </>
+  )
+}
+```
+
+Use `Label` for a control that is not already labeled by one of the components of the system. Controls such as [input](/documentation/components/fields/input) and [checkbox](/documentation/components/selection/checkbox) render their own label.
+
+## Examples
+
+### With `htmlFor`
+
+Point `htmlFor` at the `id` of the control.
+
+<Demo name="default" />
+
+### Wrapping the control
+
+A label can also wrap the control it names.
+
+<Demo name="wrapping" />
+
+## API reference
+
+### Label
+
+Renders a native `<label>`. It forwards its ref and accepts the attributes of a label.
+
+## Accessibility
+
+- A label gives its control an accessible name, and pressing the label focuses or toggles the control.
+- Keep the label visible. Placeholder text is not a label, because it disappears when people type.
+- Write labels in sentence case, and make them describe what to enter.

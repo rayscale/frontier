@@ -1,0 +1,96 @@
+---
+title: Card
+description: A container that groups related content and actions.
+---
+
+## Usage
+
+```tsx
+import { Card } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Project settings</Card.Title>
+        <Card.Description>Manage how this project is shared.</Card.Description>
+      </Card.Header>
+      <Card.Content>Visibility is set to private.</Card.Content>
+    </Card>
+  )
+}
+```
+
+Use a card to group content about one subject, so it reads as a unit. Every part is optional, so use only those you need.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Content only
+
+<Demo name="contentOnly" />
+
+### Flush content
+
+Use `padding="none"` when the content, such as a [scroll area](/documentation/components/content/scroll-area), should reach the edges of the card.
+
+<Demo name="flushContent" />
+
+### Semantic element
+
+Render the card as an `article` or a `section`, and choose the level of the title.
+
+<Demo name="semanticElement" />
+
+## API reference
+
+### Card
+
+Renders the container. It accepts the attributes of an element, and forwards its ref. The table lists the props `Card` adds.
+
+| Prop       | Type                              | Default     | Description                                         |
+| ---------- | --------------------------------- | ----------- | --------------------------------------------------- |
+| `as`       | `'div' \| 'section' \| 'article'` | `'div'`     | Element that it renders.                            |
+| `padding`  | `'default' \| 'none'`             | `'default'` | Inner padding. `none` lets content reach the edges. |
+| `children` | `ReactNode`                       | —           | The parts of the card.                              |
+
+### Card.Header
+
+Groups the title and the description. It renders a `<div>` and accepts its attributes.
+
+### Card.Title
+
+Renders the title.
+
+| Prop | Type                                                   | Default | Description              |
+| ---- | ------------------------------------------------------ | ------- | ------------------------ |
+| `as` | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h3'`  | Element that it renders. |
+
+### Card.Description
+
+Renders the description.
+
+| Prop | Type           | Default | Description                                           |
+| ---- | -------------- | ------- | ----------------------------------------------------- |
+| `as` | `'p' \| 'div'` | `'p'`   | Element that it renders. Use `div` for block content. |
+
+### Card.Content
+
+Holds the main content. It renders a `<div>` and accepts its attributes.
+
+### Card.Footer
+
+Holds the actions. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Pick the heading level">
+  The title is an `h3` by default. Set `as` so it fits the outline of the page. Render the card as
+  an `article` or a `section` when it stands for a unit of content.
+</Callout>
+
+- A card has no role of its own, so it adds no noise for assistive technology.
+- A card is not interactive. Put the link or the button inside it, and not on the whole card.

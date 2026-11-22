@@ -1,0 +1,77 @@
+---
+title: Copy button
+description: Copies a piece of text to the clipboard and confirms that it worked.
+---
+
+## Usage
+
+```tsx
+import { CopyButton } from '@rayscale/frontier'
+
+export function Example() {
+  return <CopyButton value="pnpm add @rayscale/frontier" />
+}
+```
+
+Use a copy button next to text that people need to reuse, such as a command, a link, or a code. After a successful copy, it shows a confirmation for a moment and then returns to its first state.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Custom labels
+
+Set `label` and `copiedLabel` so the button says exactly what is copied.
+
+<Demo name="labels" />
+
+### Icon only
+
+Hide the text with `showLabel={false}`. The label still names the button for assistive technology.
+
+<Demo name="iconOnly" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Callbacks
+
+`onCopy` runs after a successful copy, and `onError` runs when the text cannot be copied.
+
+<Demo name="callbacks" />
+
+## API reference
+
+### CopyButton
+
+Renders a [Button](/documentation/components/actions/button) that copies `value`. It forwards the attributes of a button, except `children` and `onClick`. The table lists the props `CopyButton` adds or changes.
+
+| Prop          | Type                                                                       | Default    | Description                                       |
+| ------------- | -------------------------------------------------------------------------- | ---------- | ------------------------------------------------- |
+| `value`       | `string`                                                                   | —          | Text copied to the clipboard.                     |
+| `label`       | `string`                                                                   | `'Copy'`   | Label before copying.                             |
+| `copiedLabel` | `string`                                                                   | `'Copied'` | Label after copying.                              |
+| `timeout`     | `number`                                                                   | `1600`     | How long the copied state shows, in milliseconds. |
+| `showLabel`   | `boolean`                                                                  | `true`     | Whether the text label shows beside the icon.     |
+| `icon`        | `ReactNode`                                                                | Copy icon  | Icon shown before copying.                        |
+| `copiedIcon`  | `ReactNode`                                                                | Check icon | Icon shown after copying.                         |
+| `onCopy`      | `(value: string) => void`                                                  | —          | Called after a successful copy.                   |
+| `onError`     | `(error: unknown) => void`                                                 | —          | Called when copying fails.                        |
+| `size`        | `'small' \| 'medium' \| 'large' \| 'icon' \| 'icon-small' \| 'icon-large'` | `'small'`  | Button size.                                      |
+| `variant`     | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger'`             | `'ghost'`  | Visual appearance.                                |
+| `type`        | `'button' \| 'submit' \| 'reset'`                                          | `'button'` | Native button type.                               |
+
+## Accessibility
+
+<Callout title="Say what is copied">
+  When the label is hidden, it becomes the name of the button. Use a label that names the content,
+  such as "Copy install command", and not a bare "Copy".
+</Callout>
+
+- The result of a copy is announced politely, so people who cannot see the button change still hear it.
+- The name of the button follows its state, and it reads `copiedLabel` after a copy.
+- A failed copy does not announce success. Use `onError` to tell people what happened.
+- The button has the type `button` by default, so it never submits a form by accident.

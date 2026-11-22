@@ -1,0 +1,51 @@
+---
+title: Shortcut
+description: Shows a single keyboard key, so keys can be combined to show a shortcut.
+---
+
+## Usage
+
+```tsx
+import { Shortcut } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <p>
+      Press <Shortcut>Esc</Shortcut> to close.
+    </p>
+  )
+}
+```
+
+Use a shortcut to show which key does something, in text or next to a command. Each `Shortcut` is one key, so render one for each key of a combination.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Combination
+
+<Demo name="combination" />
+
+### In text
+
+<Demo name="inText" />
+
+## API reference
+
+### Shortcut
+
+Renders a `<kbd>`. It forwards its ref and accepts the attributes of a `<kbd>`, such as `className`.
+
+## Accessibility
+
+<Callout title="Use the key people have">
+  Keys differ between platforms. Show the key that people have, such as Command on macOS and Control
+  elsewhere.
+</Callout>
+
+- A shortcut is a native `kbd` element, so assistive technology knows it is a key.
+- Write the name of the key in words, such as "Esc", so it is read out clearly.
+- Do not rely on the shortcut alone. Show the same action somewhere people can find it.

@@ -1,0 +1,171 @@
+---
+title: Sidebar
+description: A side navigation with groups of links that collapses to icons, and becomes a drawer on small screens.
+---
+
+## Usage
+
+```tsx
+import { Home, Sidebar } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Sidebar label="Workspace">
+      <Sidebar.Content>
+        <Sidebar.Menu>
+          <Sidebar.MenuItem>
+            <Sidebar.Item href="/" icon={<Home aria-hidden="true" />} active>
+              Overview
+            </Sidebar.Item>
+          </Sidebar.MenuItem>
+        </Sidebar.Menu>
+      </Sidebar.Content>
+      <Sidebar.Footer>
+        <Sidebar.Trigger />
+      </Sidebar.Footer>
+      <Sidebar.Inset>
+        <main>Page content</main>
+      </Sidebar.Inset>
+    </Sidebar>
+  )
+}
+```
+
+Use a sidebar for an application with many destinations, where the navigation stays beside the content. It expands to show labels, collapses to icons, and on small screens it becomes a drawer. Put the page content in `Sidebar.Inset`, so it sits beside the sidebar. For navigation inside a page, use a [table of contents](/documentation/components/navigation/table-of-contents).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Collapsed
+
+`defaultOpen={false}` starts it collapsed to icons, with each label shown when the item is hovered or focused.
+
+<Demo name="collapsed" />
+
+### Submenu and badge
+
+`Sidebar.Submenu` opens a group of links in place, and `Sidebar.MenuBadge` shows a count next to an item.
+
+<Demo name="submenu" />
+
+### Tree
+
+`Sidebar.Tree` shows a hierarchy of pages. It follows the collapsed state of the sidebar.
+
+<Demo name="tree" />
+
+## API reference
+
+### Sidebar
+
+Renders the navigation landmark and the layout around the content. `Sidebar.Root` is the same component. It accepts the attributes of a `<div>`.
+
+| Prop               | Type                      | Default     | Description                                                                         |
+| ------------------ | ------------------------- | ----------- | ----------------------------------------------------------------------------------- |
+| `open`             | `boolean`                 | —           | Whether the sidebar is expanded on large screens, in controlled mode.               |
+| `defaultOpen`      | `boolean`                 | `true`      | Whether it starts expanded, in uncontrolled mode.                                   |
+| `onOpenChange`     | `(open: boolean) => void` | —           | Called when expanding or collapsing is requested.                                   |
+| `width`            | `number \| string`        | `'16rem'`   | Width when expanded.                                                                |
+| `collapsedWidth`   | `number \| string`        | `'3rem'`    | Width when collapsed to icons.                                                      |
+| `mobileWidth`      | `number \| string`        | `'18rem'`   | Width of the drawer on small screens.                                               |
+| `keyboardShortcut` | `string \| false`         | `'b'`       | Key that toggles the sidebar with the modifier key. `false` turns the shortcut off. |
+| `animateOnHover`   | `boolean`                 | `true`      | Uses one sliding surface to highlight the item under the pointer.                   |
+| `label`            | `string`                  | `'Sidebar'` | Accessible name of the navigation landmark.                                         |
+| `children`         | `ReactNode`               | —           | The sections of the sidebar and an optional `Sidebar.Inset`.                        |
+
+### Sidebar.Header, Sidebar.Content, Sidebar.Footer
+
+Pin a header, the scrollable content, and a footer. Each one renders a `<div>` and accepts its attributes.
+
+### Sidebar.Brand
+
+Renders the brand name.
+
+| Prop   | Type        | Default | Description                                           |
+| ------ | ----------- | ------- | ----------------------------------------------------- |
+| `icon` | `ReactNode` | —       | Mark shown beside the name, and alone when collapsed. |
+
+### Sidebar.Group, Sidebar.GroupLabel, Sidebar.GroupContent
+
+Group related items under a heading. They accept the attributes of their elements.
+
+### Sidebar.GroupAction, Sidebar.MenuAction
+
+Render an icon-only button beside a group heading or an item. They accept the props of a [button](/documentation/components/actions/button), except `variant` and `size`.
+
+| Prop         | Type     | Default | Description                              |
+| ------------ | -------- | ------- | ---------------------------------------- |
+| `aria-label` | `string` | —       | Accessible name of the action. Required. |
+
+### Sidebar.Menu, Sidebar.MenuItem
+
+Render a list of items and one entry of it. They accept the attributes of a `<ul>` and an `<li>`.
+
+### Sidebar.Item
+
+Renders a link when it has `href`, and a button when it does not.
+
+| Prop       | Type                              | Default    | Description                                             |
+| ---------- | --------------------------------- | ---------- | ------------------------------------------------------- |
+| `href`     | `string`                          | —          | Destination. Without it, the item is a button.          |
+| `icon`     | `ReactNode`                       | —          | Mark shown before the label.                            |
+| `active`   | `boolean`                         | `false`    | Marks the item as the current page.                     |
+| `tooltip`  | `string`                          | label      | Text shown when the sidebar is collapsed.               |
+| `label`    | `string`                          | —          | Accessible name, required when the content is not text. |
+| `disabled` | `boolean`                         | `false`    | Prevents activation.                                    |
+| `target`   | `string`                          | —          | Link target, when `href` is set.                        |
+| `rel`      | `string`                          | —          | Link relationship, when `href` is set.                  |
+| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type, when `href` is not set.                    |
+| `onClick`  | `MouseEventHandler`               | —          | Called when the item is activated.                      |
+
+### Sidebar.MenuBadge
+
+Renders a count or a status beside an item. It accepts the attributes of a `<span>`.
+
+### Sidebar.Submenu
+
+Renders a group of links that opens in place.
+
+| Prop           | Type                      | Default | Description                             |
+| -------------- | ------------------------- | ------- | --------------------------------------- |
+| `label`        | `string`                  | —       | Visible label and name of the button.   |
+| `icon`         | `ReactNode`               | —       | Mark shown before the label.            |
+| `open`         | `boolean`                 | —       | Whether it is open, in controlled mode. |
+| `defaultOpen`  | `boolean`                 | `false` | Whether it starts open.                 |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called when it opens or closes.         |
+
+### Sidebar.SubmenuItem
+
+Renders one link inside a submenu. It accepts the props of `Sidebar.Item`.
+
+### Sidebar.Tree
+
+Renders a [tree](/documentation/components/navigation/tree) that follows the collapsed state of the sidebar. It accepts the props of the tree, except `compact` and `onCompactBranchClick`.
+
+### Sidebar.Trigger
+
+Renders the button that expands and collapses the sidebar. It accepts a name, a handler, and the common attributes of a button.
+
+### Sidebar.Rail
+
+Renders a narrow strip at the edge of the sidebar that toggles it. It accepts the same props as the trigger.
+
+### Sidebar.Inset
+
+Holds the main content next to the sidebar. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Name the sidebar">
+  The sidebar is a navigation landmark. Its name defaults to "Sidebar". Set `label` to something
+  more specific when the page has other navigation.
+</Callout>
+
+- The current item is marked as the current page.
+- A modifier key with the key set in `keyboardShortcut` toggles the sidebar.
+- When the sidebar is collapsed, each item keeps its text name and shows it in a tooltip.
+- An icon-only item or action needs a `label` or an `aria-label`.
+- On small screens, the sidebar opens as a drawer.

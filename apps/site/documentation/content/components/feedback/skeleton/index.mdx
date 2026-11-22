@@ -1,0 +1,63 @@
+---
+title: Skeleton
+description: A placeholder that holds the place of content while it loads.
+---
+
+## Usage
+
+```tsx
+import { Skeleton } from '@rayscale/frontier'
+
+export function Example() {
+  return <Skeleton variant="text" width="60%" />
+}
+```
+
+Use skeletons when you know the shape of what is loading, so the page does not jump when it arrives. Compose several of them to match the final layout. When the shape is unknown, use a [spinner](/documentation/components/feedback/spinner).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Animations
+
+<Demo name="animations" />
+
+### Layout
+
+A skeleton is hidden from assistive technology, so announce the loading state on the container around it.
+
+<Demo name="layout" />
+
+## API reference
+
+### Skeleton
+
+Renders a decorative `<span>`. It accepts the attributes of a `<span>`, except `children`. The table lists the props `Skeleton` adds.
+
+| Prop        | Type                                    | Default         | Description                                                                                                    |
+| ----------- | --------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `variant`   | `'text' \| 'circular' \| 'rectangular'` | `'rectangular'` | Basic shape. A circular placeholder stays circular when only one dimension is set.                             |
+| `animation` | `'shimmer' \| 'pulse' \| 'none'`        | `'shimmer'`     | Animation of the placeholder.                                                                                  |
+| `width`     | `number \| string`                      | —               | Width. A number is pixels.                                                                                     |
+| `height`    | `number \| string`                      | —               | Height. A number is pixels.                                                                                    |
+| `radius`    | `number \| string`                      | —               | Corner radius. A radius token name uses that token, a number is pixels, and any other string is used as given. |
+| `className` | `string`                                | —               | Additional CSS class.                                                                                          |
+
+## Accessibility
+
+<Callout title="Announce the loading state">
+  A skeleton is hidden from assistive technology, so it says nothing by itself. Mark the container
+  that holds it, for example with `aria-busy` and a label, or show a
+  [spinner](/documentation/components/feedback/spinner) with a name.
+</Callout>
+
+- The placeholder is hidden from assistive technology and is not focusable.
+- The animations stop when the reduced motion preference is on.
+- Remove the skeletons as soon as the content is ready, and do not keep them for content that failed to load.

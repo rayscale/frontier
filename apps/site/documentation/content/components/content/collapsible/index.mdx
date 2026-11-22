@@ -1,0 +1,75 @@
+---
+title: Collapsible
+description: A trigger that shows and hides a piece of content.
+---
+
+## Usage
+
+```tsx
+import { Collapsible } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Collapsible>
+      <Collapsible.Trigger>Shipping details</Collapsible.Trigger>
+      <Collapsible.Content>Orders ship within two business days.</Collapsible.Content>
+    </Collapsible>
+  )
+}
+```
+
+Use a collapsible when you want to choose the content of the trigger and arrange the layout yourself. For a ready-made titled section, use a [disclosure](/documentation/components/content/disclosure). For several sections in a group, use an [accordion](/documentation/components/content/accordion).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Open by default
+
+<Demo name="openByDefault" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the state in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Collapsible
+
+Renders a `<div>` that holds the state. It accepts the attributes of a `<div>`. The table lists the props `Collapsible` adds.
+
+| Prop           | Type                      | Default | Description                                            |
+| -------------- | ------------------------- | ------- | ------------------------------------------------------ |
+| `open`         | `boolean`                 | —       | Whether the content is shown, in controlled mode.      |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the content starts shown.                      |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the new state when the trigger changes it. |
+| `disabled`     | `boolean`                 | `false` | Prevents the trigger from changing the content.        |
+| `children`     | `ReactNode`               | —       | The trigger and the content.                           |
+
+### Collapsible.Trigger
+
+Renders a `<button>` of type `button` that shows or hides the content. It accepts the attributes of a button.
+
+### Collapsible.Content
+
+Renders the content in a `<div>`. It accepts the attributes of a `<div>`. The content stays in the page when it is hidden, so its state survives closing and opening.
+
+## Accessibility
+
+<Callout title="Say what it shows">
+  The trigger is the name that people hear. Use text that says what opens, such as "Shipping
+  details", and not just "More".
+</Callout>
+
+- The trigger reports whether it is expanded, and it is linked to the content.
+- Enter and Space change the state.
+- The focus stays on the trigger when the content closes.
+- A disabled trigger cannot change the content.

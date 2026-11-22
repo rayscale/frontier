@@ -1,0 +1,71 @@
+---
+title: Avatar group
+description: Shows several avatars together, overlapped, with a count of those that do not fit.
+---
+
+## Usage
+
+```tsx
+import { Avatar, AvatarGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <AvatarGroup max={3}>
+      <Avatar>
+        <Avatar.Fallback>AM</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Fallback>JL</Avatar.Fallback>
+      </Avatar>
+    </AvatarGroup>
+  )
+}
+```
+
+Use an avatar group to show who is part of something, such as the members of a project. It gives its avatars the same size and overlaps them. When there are more than `max`, it shows how many are hidden. See [avatar](/documentation/components/content/avatar) for a single one.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Maximum
+
+`max` limits the visible avatars and shows a count for the rest.
+
+<Demo name="max" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+## API reference
+
+### AvatarGroup
+
+Renders a `<div>` that arranges its children. It accepts the attributes of a `<div>`. The table lists the props `AvatarGroup` adds.
+
+| Prop          | Type                                              | Default        | Description                                                                           |
+| ------------- | ------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode`                                       | —              | The avatars.                                                                          |
+| `size`        | `'small' \| 'medium' \| 'large' \| 'extra-large'` | `'medium'`     | Size given to every avatar.                                                           |
+| `max`         | `number`                                          | —              | The most avatars shown. The rest are counted. A value of zero or less hides them all. |
+| `spacing`     | `number`                                          | `8`            | How much adjacent avatars overlap, in pixels.                                         |
+| `orientation` | `'horizontal' \| 'vertical'`                      | `'horizontal'` | Direction of the overlap.                                                             |
+| `overflow`    | `ReactNode`                                       | `+N`           | Content that replaces the count of hidden avatars.                                    |
+
+## Accessibility
+
+<Callout title="Name each person">
+  Overlapping avatars are hard to tell apart. Give every avatar an accessible name, such as the
+  `alt` of its image, so each member can be told apart.
+</Callout>
+
+- The count of hidden avatars has a name that says how many are hidden, such as "3 more avatars".
+- Avatars that are wrapped in a link or a button keep their native behavior.
+- The count appears only when some avatars are hidden.

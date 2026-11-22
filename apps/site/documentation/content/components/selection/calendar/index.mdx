@@ -1,0 +1,98 @@
+---
+title: Calendar
+description: Shows one month at a time so people can choose a date.
+---
+
+## Usage
+
+```tsx
+import { Calendar } from '@rayscale/frontier'
+
+export function Example() {
+  return <Calendar defaultValue={new Date(2025, 2, 14)} />
+}
+```
+
+Use a calendar to choose one day, or as the surface of a date field. It shows the month, lets people move between months, and reports the date they choose. To pick a date inside a form field, use a [date picker](/documentation/components/fields/date-picker).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Selection
+
+Use `defaultValue` for a date that is selected at the start.
+
+<Demo name="selection" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the date in your component. The value is `null` when no date is selected.
+
+<Demo name="controlled" />
+
+### Limits
+
+`minDate` and `maxDate` disable the dates outside them and stop the navigation at their months.
+
+<Demo name="limits" />
+
+### Disabled dates
+
+`isDateDisabled` returns `true` for the dates that cannot be chosen.
+
+<Demo name="disabledDates" />
+
+### First day of the week
+
+<Demo name="weekStart" />
+
+### Locale
+
+Month names, weekdays, and date labels follow the locale.
+
+<Demo name="locale" />
+
+### Highlighted range
+
+`rangeStart` and `rangeEnd` highlight a range without changing the selected date. A range picker is built on this.
+
+<Demo name="range" />
+
+## API reference
+
+### Calendar
+
+Renders a `<div>` with the month and its days. It forwards its ref and the attributes of a `<div>`, except `defaultValue`.
+
+| Prop             | Type                              | Default                      | Description                                                                             |
+| ---------------- | --------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------- |
+| `value`          | `Date \| null`                    | —                            | Selected date, in controlled mode. `null` means no date.                                |
+| `defaultValue`   | `Date \| null`                    | `null`                       | Date selected at the start, in uncontrolled mode.                                       |
+| `onValueChange`  | `(date: Date) => void`            | —                            | Called with the chosen date. It is not called when the same date is chosen again.       |
+| `month`          | `Date`                            | —                            | Visible month, in controlled mode. Only its year and month are used.                    |
+| `defaultMonth`   | `Date`                            | month of the value, or today | Month shown at the start, in uncontrolled mode.                                         |
+| `onMonthChange`  | `(month: Date) => void`           | —                            | Called with the first day of the month that becomes visible.                            |
+| `minDate`        | `Date`                            | —                            | Earliest date that can be chosen.                                                       |
+| `maxDate`        | `Date`                            | —                            | Latest date that can be chosen.                                                         |
+| `disabled`       | `boolean`                         | `false`                      | Prevents any interaction.                                                               |
+| `isDateDisabled` | `(date: Date) => boolean`         | —                            | Returns `true` for dates that cannot be chosen.                                         |
+| `weekStartsOn`   | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0`                          | First day of the week, where `0` is Sunday.                                             |
+| `locale`         | `string`                          | locale of the user           | Locale of the month, weekday, and date labels.                                          |
+| `rangeStart`     | `Date \| null`                    | —                            | First day of a highlighted range.                                                       |
+| `rangeEnd`       | `Date \| null`                    | —                            | Last day of a highlighted range. While it is `null`, hovering a day previews the range. |
+
+## Accessibility
+
+<Callout title="Dates carry no time">
+  A chosen date stands for the whole day. The calendar sets the time of the date to the start of
+  that day, so compare days and not moments.
+</Callout>
+
+- The grid is labeled by the title of the visible month, and a chosen date is announced.
+- The arrow keys move the focus by day, and Up and Down move it by week. Home and End go to the start and the end of the week.
+- Page Up and Page Down move by month, and with Shift they move by year.
+- A disabled date can receive focus, and it cannot be chosen.
+- The focus never leaves the allowed range of `minDate` and `maxDate`.

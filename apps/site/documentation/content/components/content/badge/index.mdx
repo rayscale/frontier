@@ -1,0 +1,57 @@
+---
+title: Badge
+description: A small label that names a status, a category, or a count.
+---
+
+## Usage
+
+```tsx
+import { Badge } from '@rayscale/frontier'
+
+export function Example() {
+  return <Badge>New</Badge>
+}
+```
+
+Use a badge to label something next to it, such as the state of an item or the number of unread messages. A badge is not interactive. For something people can press, use a [button](/documentation/components/actions/button) or a [link](/documentation/components/navigation/link).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### With an icon
+
+<Demo name="withIcon" />
+
+## API reference
+
+### Badge
+
+Renders a `<span>`. It accepts the attributes of a `<span>`. The table lists the props `Badge` adds.
+
+| Prop       | Type                                                                                    | Default     | Description                           |
+| ---------- | --------------------------------------------------------------------------------------- | ----------- | ------------------------------------- |
+| `children` | `ReactNode`                                                                             | —           | Text, icons, or other inline content. |
+| `variant`  | `'default' \| 'secondary' \| 'outline' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'default'` | Visual appearance.                    |
+| `size`     | `'small' \| 'medium'`                                                                   | `'medium'`  | Visual size.                          |
+
+## Accessibility
+
+<Callout title="Do not rely on color">
+  The variant is only a visual cue. Write the status in the text of the badge, such as "Failed", so
+  it is clear without color.
+</Callout>
+
+- A badge is plain inline text and is not focusable.
+- When a badge holds only an icon, add visually hidden text that says what it means.
+- Mark decorative icons inside a badge as hidden from assistive technology.

@@ -1,0 +1,73 @@
+---
+title: Header
+description: The top of a page, with a brand, navigation, and actions, that can stay in view as people scroll.
+---
+
+## Usage
+
+```tsx
+import { Button, Header, NavigationMenu } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Header>
+      <strong>Acme</strong>
+      <Header.NavigationMenu label="Main">
+        <NavigationMenu.List>
+          <NavigationMenu.Item>
+            <NavigationMenu.Link href="/" active>
+              Home
+            </NavigationMenu.Link>
+          </NavigationMenu.Item>
+        </NavigationMenu.List>
+      </Header.NavigationMenu>
+      <Button>Get started</Button>
+    </Header>
+  )
+}
+```
+
+Use a header once per page, at the top. It holds whatever the top of the page needs, such as a logo, the main [navigation menu](/documentation/components/navigation/navigation-menu), and actions. On narrow screens, `Header.NavigationMenu` collapses its links into a panel.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With navigation
+
+<Demo name="withNavigation" />
+
+## API reference
+
+### Header
+
+Renders a `<header>`. `mode` sets how it behaves when the page scrolls. It accepts the attributes of a header.
+
+| Prop       | Type                               | Default    | Description                                                                                                                                                   |
+| ---------- | ---------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mode`     | `'normal' \| 'fixed' \| 'dynamic'` | `'normal'` | `normal` stays in the flow of the page. `fixed` stays at the top. `dynamic` floats after scrolling, hides when scrolling down, and returns when scrolling up. |
+| `children` | `ReactNode`                        | —          | The logo, the navigation, the actions, or any other content.                                                                                                  |
+
+### Header.NavigationMenu
+
+Renders a [navigation menu](/documentation/components/navigation/navigation-menu) that becomes a button and a panel when the header is compact. It accepts the props of the navigation menu, except `layout`.
+
+| Prop          | Type      | Default  | Description                                                                      |
+| ------------- | --------- | -------- | -------------------------------------------------------------------------------- |
+| `label`       | `string`  | —        | Accessible name of the navigation landmark.                                      |
+| `toggleLabel` | `string`  | `'Menu'` | Accessible name of the button that opens the compact panel.                      |
+| `compact`     | `boolean` | —        | Forces the compact panel on or off. By default, it is compact on narrow screens. |
+
+## Accessibility
+
+<Callout title="One header per page">
+  A header at the top level of the page is the banner landmark. Use a single one, and name the
+  navigation inside it with `label`.
+</Callout>
+
+- The compact button reports whether the panel is open, and it controls the panel.
+- Escape closes the panel and returns the focus to the button.
+- A dynamic header does not hide while the focus is inside it.
+- The navigation keeps the keyboard behavior of the navigation menu.

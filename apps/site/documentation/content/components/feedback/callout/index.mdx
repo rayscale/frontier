@@ -1,0 +1,89 @@
+---
+title: Callout
+description: A message inside the page that draws attention to something people should know.
+---
+
+## Usage
+
+```tsx
+import { Callout, Info } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Callout>
+      <Callout.Icon>
+        <Info />
+      </Callout.Icon>
+      <Callout.Content>
+        <Callout.Title>Workspace settings changed</Callout.Title>
+        <p>Changes apply to every project in this workspace.</p>
+      </Callout.Content>
+    </Callout>
+  )
+}
+```
+
+Use a callout for a message that belongs to the content around it, such as a note, a warning, or the result of an action. It stays in the page until the content changes. For a message that appears and goes away on its own, use a [toast](/documentation/components/feedback/toast).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Tones
+
+<Demo name="tones" />
+
+### With actions
+
+<Demo name="withActions" />
+
+### Roles
+
+The role decides how assistive technology announces the callout.
+
+<Demo name="roles" />
+
+## API reference
+
+### Callout
+
+Renders a `<div>` that holds the message. It forwards its ref and the attributes of a `<div>`. The table lists the props `Callout` adds.
+
+| Prop       | Type                                           | Default  | Description                                                                  |
+| ---------- | ---------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
+| `tone`     | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Meaning of the message.                                                      |
+| `role`     | `'note' \| 'alert' \| 'status'`                | `'note'` | How assistive technology announces it. Use `alert` only for urgent messages. |
+| `children` | `ReactNode`                                    | —        | The parts of the callout.                                                    |
+
+### Callout.Icon
+
+Renders a `<span>` for the icon. It is decorative, and it accepts the attributes of a `<span>`.
+
+### Callout.Content
+
+Groups the title, the text, and the actions. It renders a `<div>` and accepts its attributes.
+
+### Callout.Title
+
+Renders the title.
+
+| Prop | Type                                   | Default | Description              |
+| ---- | -------------------------------------- | ------- | ------------------------ |
+| `as` | `'p' \| 'div' \| 'h2' \| 'h3' \| 'h4'` | `'p'`   | Element that it renders. |
+
+### Callout.Actions
+
+Groups the actions of the callout. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Choose the role with care">
+  The default role is `note`, which is not announced. Use `status` for a result that appears after
+  an action, and `alert` only for urgent messages that need attention at once.
+</Callout>
+
+- The icon is hidden from assistive technology, so the tone must also be clear from the text.
+- Do not use color as the only sign of the tone. Write a title that says it.
+- Use a heading element for the title when it should appear in the outline of the page.

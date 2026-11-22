@@ -1,0 +1,86 @@
+---
+title: Control group
+description: Joins related controls into one connected unit, with shared edges.
+---
+
+## Usage
+
+```tsx
+import { Button, ControlGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ControlGroup aria-label="Text formatting">
+      <Button variant="outline">Bold</Button>
+      <Button variant="outline">Italic</Button>
+    </ControlGroup>
+  )
+}
+```
+
+Use a control group to show that controls act together, such as a field next to the button that submits it. It works with buttons, inputs, selects, and other controls of the system, and it can be nested.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### With an input
+
+<Demo name="withInput" />
+
+### With a select
+
+<Demo name="withSelect" />
+
+### With text
+
+`ControlGroup.Text` adds fixed text, such as a prefix, to the group.
+
+<Demo name="withText" />
+
+### Nested
+
+<Demo name="nested" />
+
+## API reference
+
+### ControlGroup
+
+Renders a `<div>` with the `group` role. It forwards its ref and the attributes of a `<div>`, except `role`.
+
+| Prop          | Type                         | Default        | Description             |
+| ------------- | ---------------------------- | -------------- | ----------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Direction of the group. |
+
+### ControlGroup.Separator
+
+Renders a line between two controls. It accepts the props of a [separator](/documentation/components/content/separator), except `orientation` has a default.
+
+| Prop          | Type                         | Default                    | Description            |
+| ------------- | ---------------------------- | -------------------------- | ---------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | perpendicular to the group | Direction of the line. |
+
+### ControlGroup.Text
+
+Renders fixed text inside the group. It renders a `<span>` and accepts its attributes.
+
+| Prop     | Type           | Default | Description                               |
+| -------- | -------------- | ------- | ----------------------------------------- |
+| `render` | `ReactElement` | —       | Element rendered instead of the `<span>`. |
+
+## Accessibility
+
+<Callout title="Name the group">
+  A group is announced as a set of controls. Give it an `aria-label` or `aria-labelledby` that says
+  what the controls do together.
+</Callout>
+
+- Every control inside the group keeps its own role, name, and keyboard behavior.
+- The group changes only how the controls look and connect. It does not move the focus or add shortcuts.
+- Name each control of the group, as you would outside it.

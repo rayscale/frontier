@@ -1,0 +1,57 @@
+---
+title: Number flow
+description: Shows a number and animates it digit by digit when it changes.
+---
+
+## Usage
+
+```tsx
+import { NumberFlow } from '@rayscale/frontier'
+
+export function Example() {
+  return <NumberFlow value={1234} />
+}
+```
+
+Use number flow for a figure that changes while people watch, such as a total or a counter, so the change is easy to notice. It formats the number with the platform's number formatting, so currencies, percentages, and locales work.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Animated
+
+<Demo name="animated" />
+
+### Format
+
+`format` takes the options of `Intl.NumberFormat`, and `locale` changes the grouping and the numerals.
+
+<Demo name="format" />
+
+## API reference
+
+### NumberFlow
+
+Renders a `<span>`. It accepts the attributes of a `<span>`, except `children`. The table lists the props `NumberFlow` adds.
+
+| Prop        | Type                       | Default                  | Description                                              |
+| ----------- | -------------------------- | ------------------------ | -------------------------------------------------------- |
+| `value`     | `number`                   | —                        | The number to show. A change animates the digits.        |
+| `format`    | `Intl.NumberFormatOptions` | —                        | Options for formatting, such as a currency or a percent. |
+| `locale`    | `string`                   | the platform's locale    | Locale for grouping and numerals.                        |
+| `duration`  | `number`                   | the base motion duration | Length of the transition, in milliseconds.               |
+| `className` | `string`                   | —                        | Additional CSS class.                                    |
+
+## Accessibility
+
+<Callout title="Keep the number real">
+  The animated digits are hidden from assistive technology, and the full formatted number is
+  available as text. Pass the real value and do not draw the number yourself.
+</Callout>
+
+- The formatted number is always present as text, so it can be read and copied.
+- The animation is skipped when the reduced motion preference is on, and the number changes at once.
+- Do not use number flow for values that change many times a second.

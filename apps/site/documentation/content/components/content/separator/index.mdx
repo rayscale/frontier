@@ -1,0 +1,59 @@
+---
+title: Separator
+description: A line that divides content into groups.
+---
+
+## Usage
+
+```tsx
+import { Separator } from '@rayscale/frontier'
+
+export function Example() {
+  return <Separator />
+}
+```
+
+Use a separator to divide related content into groups, such as the sections of a menu or the links of a footer. Space often does the job without a line, so add one only when the groups need it.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### Colors
+
+<Demo name="colors" />
+
+### Thickness
+
+<Demo name="thickness" />
+
+## API reference
+
+### Separator
+
+Renders a `<div>` with the line. It accepts the attributes of a `<div>`, except `children`. The table lists the props `Separator` adds.
+
+| Prop          | Type                                       | Default          | Description                                                               |
+| ------------- | ------------------------------------------ | ---------------- | ------------------------------------------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'`               | `'horizontal'`   | Direction of the line.                                                    |
+| `decorative`  | `boolean`                                  | `false`          | Removes the separator from the accessibility tree when it is only visual. |
+| `color`       | `'subtle' \| 'default' \| 'strong'` or CSS | the border color | A border color name, or any CSS color.                                    |
+| `thickness`   | `number \| string`                         | the border width | Thickness. A number is pixels, and any other string is used as CSS.       |
+| `className`   | `string`                                   | —                | Additional CSS class.                                                     |
+
+## Accessibility
+
+<Callout title="Decide if it carries meaning">
+  A separator is exposed as a separator by default. When the line only decorates, such as between
+  inline links, set `decorative`, so assistive technology skips it.
+</Callout>
+
+- A semantic separator has the separator role and reports its orientation.
+- A decorative separator is removed from the accessibility tree.
+- A separator is never focusable.

@@ -1,0 +1,81 @@
+---
+title: Time picker
+description: A field that opens a list of hours and minutes so people can choose a time.
+---
+
+## Usage
+
+```tsx
+import { TimePicker } from '@rayscale/frontier'
+
+export function Example() {
+  return <TimePicker aria-label="Start time" />
+}
+```
+
+Use a time picker to choose a time of day inside a form. Values are strings in the `HH:mm` 24-hour format, such as `"09:30"`, whatever the display format is.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### 12-hour format
+
+`format="12h"` shows hours from 1 to 12 with an AM and PM column.
+
+<Demo name="twelveHour" />
+
+### Minute step
+
+`minuteStep` sets the interval between the minutes that are offered. It must divide 60.
+
+<Demo name="step" />
+
+### Limits
+
+`minTime` and `maxTime` limit the times that can be chosen, and both are included.
+
+<Demo name="limits" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the time in your component.
+
+<Demo name="controlled" />
+
+## API reference
+
+### TimePicker
+
+Renders a `<button>` that opens the list of times. It forwards its ref and the attributes of a button, except `defaultValue`, `type`, and `value`.
+
+| Prop            | Type                      | Default            | Description                                                                      |
+| --------------- | ------------------------- | ------------------ | -------------------------------------------------------------------------------- |
+| `value`         | `string \| null`          | —                  | Selected time as `HH:mm`, in controlled mode. `null` shows the placeholder.      |
+| `defaultValue`  | `string \| null`          | `null`             | Time selected at the start, in uncontrolled mode.                                |
+| `onValueChange` | `(time: string) => void`  | —                  | Called with the chosen time as `HH:mm`.                                          |
+| `open`          | `boolean`                 | —                  | Whether the popup is open, in controlled mode.                                   |
+| `defaultOpen`   | `boolean`                 | `false`            | Whether the popup starts open.                                                   |
+| `onOpenChange`  | `(open: boolean) => void` | —                  | Called when the popup opens or closes.                                           |
+| `disabled`      | `boolean`                 | `false`            | Disables the button, so the popup cannot open.                                   |
+| `readOnly`      | `boolean`                 | `false`            | Shows the time without letting people change it.                                 |
+| `placeholder`   | `string`                  | `'Select a time'`  | Text shown while no time is selected.                                            |
+| `format`        | `'12h' \| '24h'`          | `'24h'`            | Display format of the hours.                                                     |
+| `minuteStep`    | `number`                  | `1`                | Interval between the minutes offered. It must be a whole number that divides 60. |
+| `minTime`       | `string`                  | —                  | Earliest time that can be chosen, as `HH:mm`.                                    |
+| `maxTime`       | `string`                  | —                  | Latest time that can be chosen, as `HH:mm`. It cannot be earlier than `minTime`. |
+| `locale`        | `string`                  | locale of the user | Locale of the AM and PM labels.                                                  |
+
+## Accessibility
+
+<Callout title="Name the picker">
+  The picker has no visible label of its own. Give it an `aria-label`, or point `aria-labelledby` at
+  a label, so people know which time they are choosing.
+</Callout>
+
+- The button shows the chosen time as text, so the value is read with the name.
+- Times outside `minTime` and `maxTime` cannot be chosen.
+- A disabled or read-only picker cannot open its popup.
+- Ranges that cross midnight are not supported. Use two pickers for them.

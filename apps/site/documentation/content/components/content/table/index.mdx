@@ -1,0 +1,101 @@
+---
+title: Table
+description: Shows data in rows and columns, with real table semantics.
+---
+
+## Usage
+
+```tsx
+import { Table } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head>Name</Table.Head>
+          <Table.Head>Role</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Ana</Table.Cell>
+          <Table.Cell>Designer</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+}
+```
+
+Use a table for data that people compare across rows and columns. It renders a native table, so you compose the parts yourself. For sorting, filtering, selection, and pages out of the box, use a [data table](/documentation/components/content/data-table).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Footer
+
+<Demo name="footer" />
+
+### Selected row
+
+<Demo name="selectedRow" />
+
+### Sortable
+
+`sort` on a header cell tells assistive technology how the column is sorted. You provide the control that changes it.
+
+<Demo name="sortable" />
+
+## API reference
+
+### Table
+
+Renders a `<table>` inside a container that scrolls horizontally. It accepts the attributes of a `<table>`.
+
+| Prop                 | Type     | Default | Description                                       |
+| -------------------- | -------- | ------- | ------------------------------------------------- |
+| `containerClassName` | `string` | —       | Additional CSS class for the scrolling container. |
+
+### Table.Caption, Table.Header, Table.Body, Table.Footer
+
+Render a `<caption>`, a `<thead>`, a `<tbody>`, and a `<tfoot>`. Each one accepts the attributes of its element.
+
+### Table.Row
+
+Renders a `<tr>`. It accepts the attributes of a `<tr>`.
+
+| Prop       | Type      | Default | Description                |
+| ---------- | --------- | ------- | -------------------------- |
+| `selected` | `boolean` | —       | Marks the row as selected. |
+
+### Table.Head
+
+Renders a `<th>`. It accepts the attributes of a `<th>`, except `align`.
+
+| Prop    | Type                                    | Default   | Description                                      |
+| ------- | --------------------------------------- | --------- | ------------------------------------------------ |
+| `align` | `'start' \| 'center' \| 'end'`          | `'start'` | Horizontal alignment.                            |
+| `sort`  | `'ascending' \| 'descending' \| 'none'` | —         | Sort direction. It sets `aria-sort` on the cell. |
+
+### Table.Cell
+
+Renders a `<td>`. It accepts the attributes of a `<td>`, except `align`.
+
+| Prop    | Type                           | Default   | Description           |
+| ------- | ------------------------------ | --------- | --------------------- |
+| `align` | `'start' \| 'center' \| 'end'` | `'start'` | Horizontal alignment. |
+
+## Accessibility
+
+<Callout title="Describe the table">
+  Add a `Table.Caption` that says what the table holds, so people who use assistive technology know
+  it before they enter it.
+</Callout>
+
+- The table uses native elements, so rows, columns, and headers are exposed as they are.
+- `sort` sets `aria-sort`, so the sort direction is announced.
+- Align numbers to the end so they are easy to compare.

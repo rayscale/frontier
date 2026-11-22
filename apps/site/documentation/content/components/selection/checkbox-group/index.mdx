@@ -1,0 +1,80 @@
+---
+title: Checkbox group
+description: Groups related checkboxes under one label and keeps their selected values together.
+---
+
+## Usage
+
+```tsx
+import { CheckboxGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <CheckboxGroup label="Notifications" defaultValue={['email']}>
+      <CheckboxGroup.Item value="email" label="Email" />
+      <CheckboxGroup.Item value="push" label="Push" />
+    </CheckboxGroup>
+  )
+}
+```
+
+Use a checkbox group when several options belong to one question and more than one can apply. The group holds the list of selected values, so you do not track each checkbox on its own. For a single option, use a [checkbox](/documentation/components/selection/checkbox).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the selected values in your component.
+
+<Demo name="controlled" />
+
+### With descriptions
+
+A description can belong to the group or to one option.
+
+<Demo name="withDescription" />
+
+### Disabled
+
+Disable the whole group, or only one option.
+
+<Demo name="disabled" />
+
+## API reference
+
+### CheckboxGroup
+
+Renders a `<fieldset>` with the label as its legend. It forwards its ref and the attributes of a fieldset, except `defaultValue`, `onChange`, and `value`. The table lists the props `CheckboxGroup` adds.
+
+| Prop            | Type                        | Default | Description                                                         |
+| --------------- | --------------------------- | ------- | ------------------------------------------------------------------- |
+| `label`         | `ReactNode`                 | —       | Visible label of the group, shown as its legend.                    |
+| `description`   | `ReactNode`                 | —       | Helper text associated with the group.                              |
+| `defaultValue`  | `readonly string[]`         | none    | Values selected at the start, in uncontrolled mode.                 |
+| `value`         | `readonly string[]`         | —       | Selected values, in controlled mode.                                |
+| `onValueChange` | `(value: string[]) => void` | —       | Called with the complete list of selected values after each change. |
+| `disabled`      | `boolean`                   | `false` | Disables every option of the group.                                 |
+
+### CheckboxGroup.Item
+
+Renders a [checkbox](/documentation/components/selection/checkbox) that belongs to the group. It must be used inside a `CheckboxGroup`. It accepts the props of a checkbox, except `checked`, `defaultChecked`, `indeterminate`, and `onChange`, because the group owns them.
+
+| Prop    | Type     | Default | Description                                              |
+| ------- | -------- | ------- | -------------------------------------------------------- |
+| `value` | `string` | —       | Value added to the selection when the option is checked. |
+
+## Accessibility
+
+<Callout title="Label the group">
+  The label is the name of the group for assistive technology. Pass `label`, so people know which
+  question the options answer.
+</Callout>
+
+- The group is a fieldset with a legend, so the options are announced as one set.
+- The description is linked to the group, and the description of an option is linked to its checkbox.
+- Every option is a native checkbox, so Space changes it and each one is reachable with Tab.
+- A disabled group disables all its options, and a disabled option cannot change the selection.

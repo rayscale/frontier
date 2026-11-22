@@ -1,0 +1,92 @@
+---
+title: Toggle group
+description: Gathers related toggles, with one pressed at a time or several at once.
+---
+
+## Usage
+
+```tsx
+import { ToggleGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ToggleGroup type="single" aria-label="Alignment" defaultValue="left">
+      <ToggleGroup.Item value="left">Left</ToggleGroup.Item>
+      <ToggleGroup.Item value="center">Center</ToggleGroup.Item>
+      <ToggleGroup.Item value="right">Right</ToggleGroup.Item>
+    </ToggleGroup>
+  )
+}
+```
+
+Use a toggle group for related options that take effect at once, such as the formatting buttons of a toolbar. Set `type="single"` when only one can be pressed, and `type="multiple"` when any combination can. For one independent value, use a [toggle](/documentation/components/selection/toggle).
+
+## Examples
+
+### Single
+
+Pressing the pressed item again clears the selection.
+
+<Demo name="single" />
+
+### Multiple
+
+<Demo name="multiple" />
+
+### Icon only
+
+Give each item that holds only an icon an `aria-label`.
+
+<Demo name="iconOnly" />
+
+### Variants and sizes
+
+The group sets the variant and the size of every item.
+
+<Demo name="variants" />
+
+### Vertical
+
+<Demo name="vertical" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the pressed items in your component.
+
+<Demo name="controlled" />
+
+## API reference
+
+### ToggleGroup
+
+Renders a `<div>` that holds the items. It forwards its ref and the attributes of a `<div>`, except `defaultValue`, `onChange`, and `value`. The type of `value`, `defaultValue`, and `onValueChange` depends on `type`.
+
+| Prop            | Type                                                                                       | Default        | Description                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------ | -------------- | -------------------------------------------------------------------------------------- |
+| `type`          | `'single' \| 'multiple'`                                                                   | —              | Whether one item or several can be pressed.                                            |
+| `value`         | `string \| null` for `single`, `readonly string[]` for `multiple`                          | —              | Pressed items, in controlled mode.                                                     |
+| `defaultValue`  | `string` for `single`, `readonly string[]` for `multiple`                                  | —              | Items pressed at the start, in uncontrolled mode.                                      |
+| `onValueChange` | `(value: string \| null) => void` for `single`, `(value: string[]) => void` for `multiple` | —              | Called when the pressed items change. A single group passes `null` when it is cleared. |
+| `disabled`      | `boolean`                                                                                  | `false`        | Disables every item.                                                                   |
+| `orientation`   | `'horizontal' \| 'vertical'`                                                               | `'horizontal'` | Direction in which the items are laid out.                                             |
+| `variant`       | `'default' \| 'outline'`                                                                   | `'default'`    | Visual appearance of every item.                                                       |
+| `size`          | `'small' \| 'medium' \| 'large'`                                                           | `'medium'`     | Size of every item.                                                                    |
+
+### ToggleGroup.Item
+
+Renders a toggle that belongs to the group. It forwards its ref and the attributes of a button, except `aria-pressed` and `value`.
+
+| Prop    | Type     | Default | Description                                  |
+| ------- | -------- | ------- | -------------------------------------------- |
+| `value` | `string` | —       | Value that the item adds when it is pressed. |
+
+## Accessibility
+
+<Callout title="Name the group">
+  Give the group an `aria-label` or `aria-labelledby`, so people know what the items control. Name
+  each icon-only item with its own `aria-label`.
+</Callout>
+
+- Every item is a native button, and its pressed state is exposed to assistive technology.
+- The arrow keys move between items, following the orientation of the group.
+- A disabled group disables all its items, and a disabled item cannot be pressed.

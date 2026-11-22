@@ -1,0 +1,77 @@
+---
+title: Date range picker
+description: A field that opens a calendar so people can choose a start date and an end date.
+---
+
+## Usage
+
+```tsx
+import { DateRangePicker } from '@rayscale/frontier'
+
+export function Example() {
+  return <DateRangePicker aria-label="Trip dates" />
+}
+```
+
+Use a date range picker for a period, such as a trip, a booking, or a report. People choose the first and the last day in the same calendar, and the range is highlighted. To choose a single date, use a [date picker](/documentation/components/fields/date-picker).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the range in your component. Each bound is `null` until it is chosen.
+
+<Demo name="controlled" />
+
+### Clearable
+
+Set `clearable` to show a button that clears the range.
+
+<Demo name="clearable" />
+
+### Limits
+
+<Demo name="limits" />
+
+## API reference
+
+### DateRangePicker
+
+Renders a `<button>` that opens a calendar. It forwards its ref and the attributes of a button, except `defaultValue`, `type`, and `value`.
+
+A range is an object with a `start` and an `end`, each one a `Date` or `null`.
+
+| Prop             | Type                                         | Default                 | Description                                                                  |
+| ---------------- | -------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| `value`          | `{ start: Date \| null; end: Date \| null }` | —                       | Selected range, in controlled mode.                                          |
+| `defaultValue`   | `{ start: Date \| null; end: Date \| null }` | no selection            | Range selected at the start, in uncontrolled mode.                           |
+| `onValueChange`  | `(range: Range) => void`                     | —                       | Called each time a range is completed or cleared.                            |
+| `open`           | `boolean`                                    | —                       | Whether the calendar is open, in controlled mode.                            |
+| `defaultOpen`    | `boolean`                                    | `false`                 | Whether the calendar starts open.                                            |
+| `onOpenChange`   | `(open: boolean) => void`                    | —                       | Called when the calendar opens or closes.                                    |
+| `disabled`       | `boolean`                                    | `false`                 | Disables the button, so the calendar cannot open.                            |
+| `readOnly`       | `boolean`                                    | `false`                 | Shows the range without letting people change it.                            |
+| `clearable`      | `boolean`                                    | `false`                 | Shows a button that clears the range.                                        |
+| `minDate`        | `Date`                                       | —                       | Earliest date that can be chosen.                                            |
+| `maxDate`        | `Date`                                       | —                       | Latest date that can be chosen.                                              |
+| `isDateDisabled` | `(date: Date) => boolean`                    | —                       | Returns `true` for dates that cannot be chosen. A range cannot include them. |
+| `placeholder`    | `string`                                     | `'Select a date range'` | Text shown while no range is selected.                                       |
+| `locale`         | `string`                                     | locale of the user      | Locale of the calendar and of the dates.                                     |
+| `weekStartsOn`   | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`            | `0`                     | First day of the week, where `0` is Sunday.                                  |
+| `formatDate`     | `(date: Date) => string`                     | locale format           | Formats each date shown in the button.                                       |
+
+## Accessibility
+
+<Callout title="Name the picker">
+  The picker has no visible label of its own. Give it an `aria-label`, or point `aria-labelledby` at
+  a label, so people know which period they are choosing.
+</Callout>
+
+- The popup holds a calendar with the keyboard navigation of the [calendar](/documentation/components/selection/calendar).
+- The highlight of the range is not the only sign of the choice, because the dates are also shown as text in the button.
+- A disabled or read-only picker cannot open its calendar.
+- The clear button is a native button.

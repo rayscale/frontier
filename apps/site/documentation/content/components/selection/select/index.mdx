@@ -1,0 +1,141 @@
+---
+title: Select
+description: Lets people choose one option from a list that opens from a button.
+---
+
+## Usage
+
+```tsx
+import { Select } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Select.Root>
+      <Select.Label>Fruit</Select.Label>
+      <Select.Trigger>
+        <Select.Value placeholder="Pick a fruit" />
+        <Select.Icon />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.List>
+          <Select.Item value="apple">Apple</Select.Item>
+          <Select.Item value="banana">Banana</Select.Item>
+        </Select.List>
+      </Select.Content>
+    </Select.Root>
+  )
+}
+```
+
+Use a select when exactly one option applies and the list is too long to show in full. For a short list, a [radio group](/documentation/components/selection/radio-group) keeps every option in view. To search the options while typing, use a [combobox](/documentation/components/fields/combobox).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Groups
+
+Use `Select.Group`, `Select.GroupLabel`, and `Select.Separator` to organize a long list.
+
+<Demo name="groups" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the selection in your component. The value is `null` when nothing is selected.
+
+<Demo name="controlled" />
+
+### Disabled
+
+Disable the whole select, or only some options.
+
+<Demo name="disabled" />
+
+## API reference
+
+### Select.Root
+
+Holds the state of the select and shares it with its parts. `Select` is the same component. It renders no element of its own.
+
+| Prop            | Type                              | Default | Description                                                    |
+| --------------- | --------------------------------- | ------- | -------------------------------------------------------------- |
+| `value`         | `string \| null`                  | —       | Selected value, in controlled mode. `null` means no selection. |
+| `defaultValue`  | `string \| null`                  | —       | Value selected at the start, in uncontrolled mode.             |
+| `onValueChange` | `(value: string \| null) => void` | —       | Called when the selected value changes.                        |
+| `open`          | `boolean`                         | —       | Whether the list is open, in controlled mode.                  |
+| `defaultOpen`   | `boolean`                         | `false` | Whether the list starts open.                                  |
+| `onOpenChange`  | `(open: boolean) => void`         | —       | Called when the list opens or closes.                          |
+| `disabled`      | `boolean`                         | `false` | Prevents the select from opening.                              |
+| `readOnly`      | `boolean`                         | `false` | Shows the value without letting people change it.              |
+| `required`      | `boolean`                         | `false` | Requires a value before the form is submitted.                 |
+| `name`          | `string`                          | —       | Field name used when the form is submitted.                    |
+
+### Select.Label
+
+Renders the visible label of the select and names it for assistive technology. It accepts the attributes of a `<div>`.
+
+### Select.Trigger
+
+Renders the button that opens the list. It accepts the attributes of a button.
+
+### Select.Value
+
+Shows the label of the selected option inside the trigger.
+
+| Prop          | Type        | Default | Description                                |
+| ------------- | ----------- | ------- | ------------------------------------------ |
+| `placeholder` | `ReactNode` | —       | Content shown while no option is selected. |
+
+### Select.Icon
+
+Renders the icon that marks the trigger as a list. It accepts the attributes of a `<span>`.
+
+### Select.Content
+
+Renders the popup that holds the list, next to the trigger. It accepts the attributes of a `<div>`.
+
+| Prop          | Type                                     | Default    | Description                                                      |
+| ------------- | ---------------------------------------- | ---------- | ---------------------------------------------------------------- |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Preferred side of the trigger. It changes when there is no room. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'start'`  | Alignment along the chosen side.                                 |
+| `sideOffset`  | `number`                                 | `4`        | Distance from the trigger, in pixels.                            |
+| `alignOffset` | `number`                                 | `0`        | Shift along the alignment axis, in pixels.                       |
+
+### Select.List
+
+Renders the list of options inside the popup. It accepts the attributes of a `<div>`.
+
+### Select.Item
+
+Renders one option.
+
+| Prop       | Type      | Default | Description                            |
+| ---------- | --------- | ------- | -------------------------------------- |
+| `value`    | `string`  | —       | Value of the option.                   |
+| `disabled` | `boolean` | `false` | Prevents the option from being chosen. |
+
+### Select.Group
+
+Groups related options. It accepts the attributes of a `<div>`.
+
+### Select.GroupLabel
+
+Renders the visible label of a group. It accepts the attributes of a `<div>`.
+
+### Select.Separator
+
+Renders a line between groups. It accepts the attributes of a `<div>`.
+
+## Accessibility
+
+<Callout title="Name the select">
+  The trigger is named by `Select.Label`. When there is no visible label, give `Select.Trigger` an
+  `aria-label`.
+</Callout>
+
+- The arrow keys open the list and move through the options, and Home and End go to the first and last enabled option. Enter chooses one, and Escape closes the list and returns the focus to the trigger.
+- Options are exposed as options of a list, and a disabled option cannot be chosen.
+- The select takes part in a form through `name`, and `required` blocks submission without a value.
+- A read-only select shows its value and does not open.

@@ -1,0 +1,157 @@
+---
+title: Combobox
+description: A text field that filters a list of options as people type, so they can choose one.
+---
+
+## Usage
+
+```tsx
+import { Combobox } from '@rayscale/frontier'
+
+const fruit = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana' },
+]
+
+export function Example() {
+  return (
+    <Combobox items={fruit}>
+      <Combobox.Input label="Fruit" placeholder="Search fruit" />
+      <Combobox.Content>
+        <Combobox.List />
+        <Combobox.Empty>No fruit found.</Combobox.Empty>
+      </Combobox.Content>
+    </Combobox>
+  )
+}
+```
+
+Use a combobox when the list is long, or when people know what they are looking for and can type it. For a short list, use a [select](/documentation/components/selection/select) or a [radio group](/documentation/components/selection/radio-group). The options come from the `items` prop, so the list filters itself.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Groups
+
+Pass a list of groups to show a heading above each set of options.
+
+<Demo name="groups" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the selection in your component. The value is `null` when nothing is selected.
+
+<Demo name="controlled" />
+
+### Clear and trigger buttons
+
+Put `Combobox.Clear` and `Combobox.Trigger` inside the input to clear the choice and to open the list.
+
+<Demo name="clearAndTrigger" />
+
+### Disabled options
+
+<Demo name="disabledOptions" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Combobox
+
+Holds the state of the combobox and shares it with its parts. It renders no element of its own.
+
+| Prop            | Type                                    | Default | Description                                                     |
+| --------------- | --------------------------------------- | ------- | --------------------------------------------------------------- |
+| `items`         | `readonly Option[] \| readonly Group[]` | —       | The options, as a flat list or as groups. See the fields below. |
+| `value`         | `string \| null`                        | —       | Selected value, in controlled mode. `null` means no selection.  |
+| `defaultValue`  | `string \| null`                        | —       | Value selected at the start, in uncontrolled mode.              |
+| `onValueChange` | `(value: string \| null) => void`       | —       | Called when the selected value changes.                         |
+| `open`          | `boolean`                               | —       | Whether the list is open, in controlled mode.                   |
+| `defaultOpen`   | `boolean`                               | `false` | Whether the list starts open.                                   |
+| `onOpenChange`  | `(open: boolean) => void`               | —       | Called when the list opens or closes.                           |
+| `disabled`      | `boolean`                               | `false` | Prevents interaction.                                           |
+| `readOnly`      | `boolean`                               | `false` | Shows the value without letting people change it.               |
+| `required`      | `boolean`                               | `false` | Requires a value before the form is submitted.                  |
+| `name`          | `string`                                | —       | Field name used when the form is submitted.                     |
+
+An option has these fields.
+
+| Field      | Type      | Default | Description                                      |
+| ---------- | --------- | ------- | ------------------------------------------------ |
+| `value`    | `string`  | —       | Identifies the option.                           |
+| `label`    | `string`  | —       | Text shown and matched against what people type. |
+| `disabled` | `boolean` | `false` | Prevents the option from being chosen.           |
+
+A group has a `label` and a list of `items`, each one an option.
+
+### Combobox.Input
+
+Renders the text field. It accepts the props of an [input](/documentation/components/fields/input), except `trailingIcon`, which the controls inside it replace.
+
+| Prop       | Type        | Default | Description                                                                 |
+| ---------- | ----------- | ------- | --------------------------------------------------------------------------- |
+| `children` | `ReactNode` | —       | Controls shown at the end, such as `Combobox.Clear` and `Combobox.Trigger`. |
+
+### Combobox.Trigger
+
+Renders a button that opens and closes the list. It accepts the attributes of a button.
+
+### Combobox.Clear
+
+Renders a button that clears the selected value. It accepts the attributes of a button.
+
+### Combobox.Content
+
+Renders the popup that holds the list, next to the field. It accepts the attributes of a `<div>`.
+
+| Prop          | Type                                     | Default    | Description                                                    |
+| ------------- | ---------------------------------------- | ---------- | -------------------------------------------------------------- |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Preferred side of the field. It changes when there is no room. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'start'`  | Alignment along the chosen side.                               |
+| `sideOffset`  | `number`                                 | `4`        | Distance from the field, in pixels.                            |
+| `alignOffset` | `number`                                 | `0`        | Shift along the alignment axis, in pixels.                     |
+
+### Combobox.List
+
+Renders the options that match what people typed.
+
+| Prop       | Type                                           | Default           | Description          |
+| ---------- | ---------------------------------------------- | ----------------- | -------------------- |
+| `children` | `(option: Option, index: number) => ReactNode` | a plain item each | Renders each option. |
+
+### Combobox.Item
+
+Renders one option. Use it inside a custom `Combobox.List`.
+
+### Combobox.Empty
+
+Renders a message when no option matches. It accepts the attributes of a `<div>`.
+
+### Combobox.Group
+
+Groups related options. It accepts the attributes of a `<div>`.
+
+### Combobox.GroupLabel
+
+Renders the visible label of a group.
+
+### Combobox.Separator
+
+Renders a line between groups.
+
+## Accessibility
+
+<Callout title="Label the field">
+  Pass `label` to `Combobox.Input`, or an `aria-label`, so people know what they are choosing.
+</Callout>
+
+- People keep typing while they move through the options with the arrow keys, because the focus stays in the field.
+- Disabled options never become the highlighted option, and they cannot be chosen.
+- `Combobox.Empty` says when nothing matches, so an empty list is not mistaken for a loading list.
+- The selected value stays known when the text changes, even if it no longer matches.

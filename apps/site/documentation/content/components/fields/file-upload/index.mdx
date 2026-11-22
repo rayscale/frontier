@@ -1,0 +1,136 @@
+---
+title: File upload
+description: Lets people choose files from their device, by browsing or by dropping them, and shows what they chose.
+---
+
+## Usage
+
+```tsx
+import { FileUpload } from '@rayscale/frontier'
+import { useState } from 'react'
+
+export function Example() {
+  const [files, setFiles] = useState<File[]>([])
+
+  return (
+    <FileUpload value={files} onFilesChange={setFiles} multiple>
+      <FileUpload.Dropzone />
+      <FileUpload.List>
+        {files.map((file) => (
+          <FileUpload.Item key={file.name} file={file}>
+            <FileUpload.Name />
+            <FileUpload.Size />
+            <FileUpload.Remove />
+          </FileUpload.Item>
+        ))}
+      </FileUpload.List>
+      <FileUpload.Rejections />
+    </FileUpload>
+  )
+}
+```
+
+Compose the parts you need. The root checks every selection against the limits, keeps the files that pass, and reports the ones that do not. The same checks apply to the files that people browse and to the ones they drop.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Modes
+
+`mode` changes how the upload looks: `dropzone`, `compact`, `inline`, or `media`. The behavior is the same in all of them.
+
+<Demo name="modes" />
+
+### One file
+
+Without `multiple`, a new file replaces the previous one. `accept` limits the types.
+
+<Demo name="single" />
+
+### Limits
+
+`maxFiles` and `maxFileSize` limit the selection. Files that do not pass are listed by `FileUpload.Rejections`.
+
+<Demo name="limits" />
+
+## API reference
+
+### FileUpload
+
+Renders a `<div>` that holds the parts and a hidden native file input. It forwards its ref and the attributes of a `<div>`, except `defaultValue`, `onChange`, and the drag events.
+
+| Prop              | Type                                             | Default      | Description                                                                      |
+| ----------------- | ------------------------------------------------ | ------------ | -------------------------------------------------------------------------------- |
+| `mode`            | `'dropzone' \| 'compact' \| 'inline' \| 'media'` | `'dropzone'` | How the upload looks.                                                            |
+| `accept`          | `string`                                         | —            | Accepted MIME types, wildcards such as `image/*`, and extensions such as `.pdf`. |
+| `multiple`        | `boolean`                                        | `false`      | Allows more than one file.                                                       |
+| `maxFiles`        | `number`                                         | —            | Largest number of files, when `multiple` is set.                                 |
+| `minFileSize`     | `number`                                         | —            | Smallest size of a file, in bytes.                                               |
+| `maxFileSize`     | `number`                                         | —            | Largest size of a file, in bytes.                                                |
+| `value`           | `File[]`                                         | —            | Selected files, in controlled mode.                                              |
+| `defaultValue`    | `File[]`                                         | —            | Files selected at the start, in uncontrolled mode.                               |
+| `onFilesChange`   | `(files: File[]) => void`                        | —            | Called with the complete selection whenever it changes.                          |
+| `onFilesRejected` | `(rejections: Rejection[]) => void`              | —            | Called with the files that were rejected and why.                                |
+| `disabled`        | `boolean`                                        | `false`      | Prevents choosing and removing files.                                            |
+| `readOnly`        | `boolean`                                        | `false`      | Prevents choosing and removing files, and keeps them visible.                    |
+| `required`        | `boolean`                                        | `false`      | Marks the file input as required.                                                |
+| `invalid`         | `boolean`                                        | `false`      | Marks the upload as invalid. Pair it with an error message.                      |
+| `name`            | `string`                                         | —            | Name of the file input when the form is submitted.                               |
+| `id`              | `string`                                         | —            | Id of the file input.                                                            |
+
+A rejection is an object with the `file` and a `code`: `invalid-type`, `file-too-large`, `file-too-small`, `duplicate-file`, or `too-many-files`.
+
+### FileUpload.Dropzone
+
+Renders the area where people drop files or press to browse. It accepts the attributes of a `<div>`. Without children, it shows an icon, a title, the limits, and a button to browse.
+
+### FileUpload.Icon, FileUpload.Title, FileUpload.Description, FileUpload.Helper
+
+Parts to compose the content of a custom dropzone. Each one accepts the attributes of its element.
+
+### FileUpload.Trigger
+
+Renders a button that opens the file picker. It accepts the props of a [button](/documentation/components/actions/button). It is secondary by default, and ghost in the `inline` mode.
+
+### FileUpload.List
+
+Renders the list of selected files. It accepts the attributes of a `<ul>`.
+
+### FileUpload.Item
+
+Renders one selected file. It accepts the attributes of an `<li>`.
+
+| Prop   | Type   | Default | Description                    |
+| ------ | ------ | ------- | ------------------------------ |
+| `file` | `File` | —       | The selected file it displays. |
+
+### FileUpload.Preview, FileUpload.Name, FileUpload.Size
+
+Show a preview, the name, and the size of the file of the item. Each one accepts the attributes of a `<span>`.
+
+### FileUpload.Remove
+
+Renders a button that removes the file of the item. It accepts the props of a button.
+
+### FileUpload.Clear
+
+Renders a button that removes every file. It accepts the props of a button.
+
+### FileUpload.Rejections
+
+Lists the files that were rejected and the reason for each one. It accepts the attributes of a `<div>`.
+
+## Accessibility
+
+<Callout title="Keep a keyboard path">
+  Dropping files is for the pointer. When you compose your own dropzone, keep a button that opens
+  the file picker, such as `FileUpload.Trigger`.
+</Callout>
+
+- The file input is native, so the file picker of the system opens and works with the keyboard and with assistive technology.
+- Rejected files are announced politely, with the reason for each one.
+- Name the upload with a visible label or an `aria-label`, and say the limits in text before people choose.
+- A disabled or read-only upload cannot add or remove files.

@@ -1,0 +1,131 @@
+---
+title: Command
+description: A searchable list of commands, in a palette that opens with a shortcut or inline in a page.
+---
+
+## Usage
+
+```tsx
+import { Command } from '@rayscale/frontier'
+
+const items = [
+  { value: 'new', label: 'New note' },
+  { value: 'settings', label: 'Open settings' },
+]
+
+export function Example() {
+  return <Command.Dialog items={items} />
+}
+```
+
+Use the command palette to give quick access to many actions, by typing instead of looking for a button. `Command.Dialog` opens with a keyboard shortcut, `Mod+K` by default, where `Mod` is Command on macOS and Control elsewhere. Use the inline `Command` for a searchable list in the page itself. To search among the values of a field, use a [combobox](/documentation/components/fields/combobox).
+
+## Examples
+
+### Default
+
+Pass `open` and `onOpenChange` to open the palette from a button too.
+
+<Demo name="default" />
+
+### Groups
+
+Pass a list of groups to show a heading above each set of commands.
+
+<Demo name="groups" />
+
+### Shortcut
+
+`shortcut` changes the keys that toggle the palette. Pass `null` to turn the shortcut off.
+
+<Demo name="shortcut" />
+
+### Chosen commands
+
+Each command can have an `onSelect`. The palette closes before it runs.
+
+<Demo name="selection" />
+
+### Inline
+
+<Demo name="inline" />
+
+## API reference
+
+### Command
+
+An inline searchable list. It holds the items and shares them with its parts.
+
+| Prop       | Type                                     | Default            | Description                                                                            |
+| ---------- | ---------------------------------------- | ------------------ | -------------------------------------------------------------------------------------- |
+| `items`    | `readonly Item[] \| readonly Group[]`    | —                  | The commands, as a flat list or as groups. See the fields below.                       |
+| `filter`   | `(item: Item, query: string) => boolean` | every term matches | Decides whether a command matches. The default needs every word of the query to match. |
+| `children` | `ReactNode`                              | —                  | The parts, such as `Command.Input`, `Command.List`, and `Command.Empty`.               |
+
+A command has these fields.
+
+| Field         | Type                          | Default | Description                                                       |
+| ------------- | ----------------------------- | ------- | ----------------------------------------------------------------- |
+| `value`       | `string`                      | —       | Identifies the command.                                           |
+| `label`       | `string`                      | —       | Text shown and matched against the query.                         |
+| `description` | `string`                      | —       | Secondary text under the label, also matched.                     |
+| `keywords`    | `readonly string[]`           | —       | Extra search terms that match without being shown.                |
+| `icon`        | `ReactNode`                   | —       | Icon shown before the label. It is decorative.                    |
+| `shortcut`    | `readonly string[]`           | —       | Key labels shown after the command, such as `['Mod', 'S']`.       |
+| `disabled`    | `boolean`                     | `false` | Keeps the command visible but unavailable.                        |
+| `onSelect`    | `() => void \| Promise<void>` | —       | Runs when the command is chosen. A palette closes before it runs. |
+
+A group has a `label` and a list of `items`, each one a command.
+
+### Command.Dialog
+
+A palette in a dialog. It takes the props of `Command`, and when it has no children it shows an input, the list, and an empty message.
+
+| Prop           | Type                             | Default             | Description                                                  |
+| -------------- | -------------------------------- | ------------------- | ------------------------------------------------------------ |
+| `open`         | `boolean`                        | —                   | Whether the palette is open, in controlled mode.             |
+| `defaultOpen`  | `boolean`                        | `false`             | Whether the palette starts open.                             |
+| `onOpenChange` | `(open: boolean) => void`        | —                   | Called with the requested state when it opens or closes.     |
+| `shortcut`     | `string \| null`                 | `'Mod+K'`           | Keys that toggle the palette. `null` turns the shortcut off. |
+| `label`        | `string`                         | `'Command palette'` | Accessible name of the palette.                              |
+| `size`         | `'small' \| 'medium' \| 'large'` | `'medium'`          | Width of the palette.                                        |
+
+### Command.Input
+
+Renders the field where people type. It accepts the props of an [input](/documentation/components/fields/input), except the label, the description, the error, and the icons.
+
+### Command.List
+
+Renders the commands that match the query.
+
+| Prop       | Type                                       | Default               | Description           |
+| ---------- | ------------------------------------------ | --------------------- | --------------------- |
+| `children` | `(item: Item, index: number) => ReactNode` | a `Command.Item` each | Renders each command. |
+
+### Command.Item
+
+Renders one command.
+
+| Prop   | Type   | Default | Description           |
+| ------ | ------ | ------- | --------------------- |
+| `item` | `Item` | —       | The command it shows. |
+
+### Command.Empty
+
+Renders a message when no command matches. It accepts the attributes of a `<div>`.
+
+### Command.Group, Command.GroupLabel, Command.Separator
+
+Group related commands, label the group, and draw a line between sets.
+
+## Accessibility
+
+<Callout title="Offer another way in">
+  A shortcut is quick for people who know it, but nobody else will find it. Make the palette
+  reachable from a button too, and name it with `label`.
+</Callout>
+
+- The focus stays in the input while people move through the results.
+- The same shortcut that opens the palette closes it, and Escape closes it too.
+- Disabled commands stay visible and cannot be chosen.
+- `Command.Empty` says when nothing matches, so an empty list is not mistaken for a loading one.

@@ -1,0 +1,88 @@
+---
+title: Pagination
+description: Moves between the pages of a long list of results, with the current page always marked.
+---
+
+## Usage
+
+```tsx
+import { Pagination } from '@rayscale/frontier'
+import { useState } from 'react'
+
+export function Example() {
+  const [page, setPage] = useState(1)
+
+  return <Pagination page={page} pageCount={20} onPageChange={setPage} />
+}
+```
+
+Use pagination when the results are split into numbered pages. You own the current page: pass it with `page`, and update it from `onPageChange`. For moving between the pages of a guide in order, use a [pager](/documentation/components/navigation/pager).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### First and last
+
+`showFirstLast` adds controls that jump to the first and the last page.
+
+<Demo name="firstLast" />
+
+### Siblings
+
+`siblingCount` sets how many page numbers show on each side of the current page.
+
+<Demo name="siblings" />
+
+### Small
+
+<Demo name="small" />
+
+### Composed
+
+Pass children to replace the default layout with the parts you choose.
+
+<Demo name="composed" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Pagination
+
+Renders a `<nav>`. `Pagination.Root` is the same component. It accepts the attributes of a `<nav>`, except `children`, which replace the default layout.
+
+| Prop            | Type                     | Default    | Description                                                                                     |
+| --------------- | ------------------------ | ---------- | ----------------------------------------------------------------------------------------------- |
+| `page`          | `number`                 | —          | Current page, counted from 1. Values outside the range are clamped for display only.            |
+| `pageCount`     | `number`                 | —          | Total number of pages. Zero hides the page numbers.                                             |
+| `onPageChange`  | `(page: number) => void` | —          | Called with the requested page. It is never called for the current page or a page out of range. |
+| `siblingCount`  | `number`                 | `1`        | Page numbers shown on each side of the current page.                                            |
+| `showFirstLast` | `boolean`                | `false`    | Adds the controls for the first and last page.                                                  |
+| `disabled`      | `boolean`                | `false`    | Prevents every page change.                                                                     |
+| `size`          | `'small' \| 'medium'`    | `'medium'` | Size of the controls.                                                                           |
+| `children`      | `ReactNode`              | —          | Replaces the default layout with the parts below.                                               |
+
+### Pagination.First, Pagination.Previous, Pagination.Next, Pagination.Last
+
+Render the controls that go to the first, the previous, the next, and the last page. Each one is a native button and accepts its attributes.
+
+### Pagination.Items
+
+Renders the numbered pages and the ellipses. It accepts the attributes of a `<div>`.
+
+## Accessibility
+
+<Callout title="Keep the default name, or write a better one">
+  The landmark is named "Pagination" by default. When a page has more than one list of pages, give
+  each one its own `aria-label`, such as "Results pages".
+</Callout>
+
+- Only the current page is marked as the current page.
+- Every control is a native button, so Enter and Space activate it.
+- Selecting the current page does nothing and does not call `onPageChange`.
+- A disabled pagination prevents every change.

@@ -1,0 +1,96 @@
+---
+title: Empty
+description: Explains that a place has no content yet, and what people can do about it.
+---
+
+## Usage
+
+```tsx
+import { Empty } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Empty>
+      <Empty.Header>
+        <Empty.Title>No projects yet</Empty.Title>
+        <Empty.Description>Create a project to see it appear here.</Empty.Description>
+      </Empty.Header>
+    </Empty>
+  )
+}
+```
+
+Use an empty state where a list, a table, or a page has nothing to show. Say why it is empty, and offer the next step when there is one. For a search with no matches, say so and suggest how to widen it.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Without actions
+
+<Demo name="noActions" />
+
+## API reference
+
+### Empty
+
+Renders a `<div>` that holds the parts. `Empty.Root` is the same component. It forwards its ref and the attributes of a `<div>`. The table lists the props `Empty` adds.
+
+| Prop       | Type                                   | Default     | Description                                   |
+| ---------- | -------------------------------------- | ----------- | --------------------------------------------- |
+| `variant`  | `'default' \| 'outline' \| 'surface'`  | `'default'` | Visual appearance. The default has no border. |
+| `size`     | `'compact' \| 'default' \| 'spacious'` | `'default'` | Density of the layout.                        |
+| `children` | `ReactNode`                            | —           | The parts of the empty state.                 |
+
+### Empty.Header
+
+Groups the media, the title, and the description. It renders a `<div>` and accepts its attributes.
+
+### Empty.Media
+
+Holds an icon or another visual, such as an illustration. It renders a `<div>` and accepts its attributes.
+
+| Prop      | Type                  | Default     | Description                                 |
+| --------- | --------------------- | ----------- | ------------------------------------------- |
+| `variant` | `'default' \| 'icon'` | `'default'` | Use `icon` to place an icon in a container. |
+
+### Empty.Title
+
+Renders the title.
+
+| Prop | Type                                                   | Default | Description              |
+| ---- | ------------------------------------------------------ | ------- | ------------------------ |
+| `as` | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h3'`  | Element that it renders. |
+
+### Empty.Description
+
+Renders the description. It can hold inline links.
+
+| Prop | Type           | Default | Description                                           |
+| ---- | -------------- | ------- | ----------------------------------------------------- |
+| `as` | `'p' \| 'div'` | `'p'`   | Element that it renders. Use `div` for block content. |
+
+### Empty.Content
+
+Holds the actions or other content under the header. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Pick the heading level">
+  The title is an `h3` by default. Set `as` so it fits the outline of the page, or render it as a
+  paragraph when it is not a heading.
+</Callout>
+
+- Decorative icons are hidden from assistive technology.
+- The description is plain text, so its message does not depend on the icon.
+- Links and buttons in the description and the content are ordinary elements and keep their own names.

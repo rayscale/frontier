@@ -1,0 +1,89 @@
+---
+title: Segmented control
+description: Shows a few related options side by side so people choose one of them.
+---
+
+## Usage
+
+```tsx
+import { SegmentedControl } from '@rayscale/frontier'
+
+const options = [
+  { label: 'Day', value: 'day' },
+  { label: 'Week', value: 'week' },
+  { label: 'Month', value: 'month' },
+]
+
+export function Example() {
+  return <SegmentedControl label="Period" options={options} defaultValue="week" />
+}
+```
+
+Use a segmented control to switch between a few options that change how the same content is shown, such as a period or a view. It holds one value at a time and applies it at once. To move between separate areas of content, use [tabs](/documentation/components/navigation/tabs).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### With icons
+
+An option can carry an icon next to its label.
+
+<Demo name="withIcons" />
+
+### Controlled
+
+Pass `value` and `onChange` to keep the selection in your component. The control is generic, so the callback receives the union of your option values.
+
+<Demo name="controlled" />
+
+### Disabled
+
+Disable the whole control, or only one option.
+
+<Demo name="disabled" />
+
+## API reference
+
+### SegmentedControl
+
+Renders a group of native radio options. It forwards its ref and the attributes of a `<div>`, except `onChange` and `defaultValue`. The table lists the props `SegmentedControl` adds.
+
+| Prop           | Type                             | Default    | Description                                                 |
+| -------------- | -------------------------------- | ---------- | ----------------------------------------------------------- |
+| `options`      | `readonly Option[]`              | —          | The options of the group. See the fields below.             |
+| `value`        | `string`                         | —          | Selected value, in controlled mode.                         |
+| `defaultValue` | `string`                         | —          | Value selected at the start, in uncontrolled mode.          |
+| `onChange`     | `(value: string) => void`        | —          | Called with the selected value when the selection changes.  |
+| `disabled`     | `boolean`                        | `false`    | Disables every option.                                      |
+| `size`         | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the control.                                        |
+| `name`         | `string`                         | —          | Name shared by the radio inputs when the form is submitted. |
+| `label`        | `ReactNode`                      | —          | Visible label of the group, shown above the control.        |
+
+Each option has these fields.
+
+| Field        | Type        | Default | Description                                       |
+| ------------ | ----------- | ------- | ------------------------------------------------- |
+| `label`      | `ReactNode` | —       | Visible content of the option.                    |
+| `value`      | `string`    | —       | Unique value of the option.                       |
+| `disabled`   | `boolean`   | `false` | Prevents the option from being chosen.            |
+| `icon`       | `ReactNode` | —       | Icon shown next to the label.                     |
+| `aria-label` | `string`    | —       | Accessible name of the option, when it needs one. |
+
+## Accessibility
+
+<Callout title="Name the group">
+  Pass `label`, or an `aria-label`, so people know what the options choose. Name an option with
+  `aria-label` when its label is only an icon.
+</Callout>
+
+- The options are native radios that share one name, so the group works inside a form.
+- The selected option is the only stop for Tab. The arrow keys move the selection, and Home and End go to the first and last option.
+- Disabled options are skipped by the arrow keys and cannot be chosen.
+- The selection indicator follows the choice, and it does not move when the reduced motion preference is on.

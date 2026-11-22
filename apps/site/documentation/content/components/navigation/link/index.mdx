@@ -1,0 +1,55 @@
+---
+title: Link
+description: A link to a destination, with a clear underline and an optional arrow.
+---
+
+## Usage
+
+```tsx
+import { Link } from '@rayscale/frontier'
+
+export function Example() {
+  return <Link href="/guide">Read the guide</Link>
+}
+```
+
+Use a link to go to another page, or to another part of the page. It renders a native anchor and does no routing of its own, so pass `href` as you would to any `<a>`. For an action that does not navigate, use a [button](/documentation/components/actions/button).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With an arrow
+
+Set `arrow` to show that the link leads somewhere further.
+
+<Demo name="arrow" />
+
+### In text
+
+A link keeps its place in a line of text.
+
+<Demo name="inText" />
+
+## API reference
+
+### Link
+
+Renders a native `<a>`. It forwards its ref and accepts the attributes of an anchor.
+
+| Prop    | Type      | Default | Description                     |
+| ------- | --------- | ------- | ------------------------------- |
+| `arrow` | `boolean` | `false` | Shows an arrow after the label. |
+
+## Accessibility
+
+<Callout title="Say where it goes">
+  Write link text that makes sense out of context, such as "Read the guide" and not "Click here".
+  People who navigate by links hear the text on its own.
+</Callout>
+
+- The link is a native anchor, so it works with the keyboard, opens in a new tab with the usual shortcuts, and is announced as a link.
+- The arrow is decorative and hidden from assistive technology.
+- Use a link for navigation and a button for actions.

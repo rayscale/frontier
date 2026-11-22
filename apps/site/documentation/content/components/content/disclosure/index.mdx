@@ -1,0 +1,61 @@
+---
+title: Disclosure
+description: A titled section that people open to read more.
+---
+
+## Usage
+
+```tsx
+import { Disclosure } from '@rayscale/frontier'
+
+export function Example() {
+  return <Disclosure title="Shipping details">Orders ship within two business days.</Disclosure>
+}
+```
+
+Use a disclosure for extra detail that most people do not need, such as advanced options. It is one ready-made section with a title and a chevron. For a group of sections, use an [accordion](/documentation/components/content/accordion). To design the trigger yourself, use a [collapsible](/documentation/components/content/collapsible).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Open by default
+
+<Demo name="openByDefault" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the state in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Disclosure
+
+Renders a `<div>` with a trigger and its content. It accepts the attributes of a `<div>`, except `title`. The table lists the props `Disclosure` adds.
+
+| Prop           | Type                      | Default | Description                                            |
+| -------------- | ------------------------- | ------- | ------------------------------------------------------ |
+| `title`        | `ReactNode`               | —       | Label of the trigger.                                  |
+| `children`     | `ReactNode`               | —       | Content shown when the section is open.                |
+| `open`         | `boolean`                 | —       | Whether the section is open, in controlled mode.       |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the section starts open.                       |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the new state when the trigger toggles it. |
+| `disabled`     | `boolean`                 | `false` | Prevents the trigger from opening or closing it.       |
+
+## Accessibility
+
+<Callout title="Write a clear title">
+  The title names the trigger, so write it to say what the section holds.
+</Callout>
+
+- The title is the name of the trigger, and the content stays hidden until it opens.
+- The chevron is decorative and hidden from assistive technology.
+- A disabled disclosure cannot be opened or closed.

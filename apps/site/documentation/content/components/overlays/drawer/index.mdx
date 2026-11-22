@@ -1,0 +1,101 @@
+---
+title: Drawer
+description: A panel that slides in from an edge of the screen, for a longer task or for more detail than a dialog holds.
+---
+
+## Usage
+
+```tsx
+import { Drawer } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Drawer>
+      <Drawer.Trigger>Open filters</Drawer.Trigger>
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>Filters</Drawer.Title>
+          <Drawer.Description>Narrow the list of results.</Drawer.Description>
+        </Drawer.Header>
+        <Drawer.Footer>
+          <Drawer.Close>Close</Drawer.Close>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer>
+  )
+}
+```
+
+Use a drawer for a task or a set of options that needs more room than a [dialog](/documentation/components/overlays/dialog), while the page stays in sight behind it. It has the same parts as a dialog. `side` on the root chooses the edge it comes from.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sides
+
+<Demo name="sides" />
+
+### Sizes
+
+The size sets the width of a drawer on the left or the right, and the height of one on the top or the bottom.
+
+<Demo name="sizes" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the open state in your component.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Drawer
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                                     | Default   | Description                                              |
+| -------------- | ---------------------------------------- | --------- | -------------------------------------------------------- |
+| `open`         | `boolean`                                | —         | Whether the drawer is open, in controlled mode.          |
+| `defaultOpen`  | `boolean`                                | `false`   | Whether the drawer starts open.                          |
+| `onOpenChange` | `(open: boolean) => void`                | —         | Called with the requested state when it opens or closes. |
+| `side`         | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Edge the drawer slides in from.                          |
+| `children`     | `ReactNode`                              | —         | The parts of the drawer.                                 |
+
+### Drawer.Trigger
+
+Opens the drawer. Pass one element and it keeps its attributes and its `onClick`. Any other content is wrapped in a [button](/documentation/components/actions/button).
+
+### Drawer.Content
+
+Renders the panel and the backdrop behind it. It accepts the attributes of a `<div>`.
+
+| Prop                   | Type                             | Default    | Description                                     |
+| ---------------------- | -------------------------------- | ---------- | ----------------------------------------------- |
+| `size`                 | `'small' \| 'medium' \| 'large'` | `'medium'` | Width, or height for a top or bottom drawer.    |
+| `showCloseButton`      | `boolean`                        | `true`     | Shows a close button in the corner.             |
+| `closeOnBackdropClick` | `boolean`                        | `true`     | Closes the drawer when the backdrop is pressed. |
+
+### Drawer.Header, Drawer.Footer
+
+Group the title and the description, and the actions. Each one renders a `<div>` and accepts its attributes.
+
+### Drawer.Title, Drawer.Description
+
+Render the title and the description, and name the drawer for assistive technology.
+
+### Drawer.Close
+
+Renders a button that closes the drawer. It accepts the props of a button, and its type is always `button`.
+
+## Accessibility
+
+<Callout title="Always give it a title">
+  The title names the drawer for assistive technology. Include a `Drawer.Title` in every drawer.
+</Callout>
+
+- The focus moves into the drawer when it opens, and returns to the element that opened it when it closes.
+- The Tab key stays inside the open drawer.
+- Escape closes the drawer, even when presses on the backdrop do not.

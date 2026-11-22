@@ -1,0 +1,114 @@
+---
+title: Navigation menu
+description: The main navigation of a site, as a row of links and dropdown panels, or as a stacked list.
+---
+
+## Usage
+
+```tsx
+import { NavigationMenu } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <NavigationMenu aria-label="Main">
+      <NavigationMenu.List>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link href="/" active>
+            Home
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link href="/pricing">Pricing</NavigationMenu.Link>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+    </NavigationMenu>
+  )
+}
+```
+
+Use a navigation menu for the main destinations of a site. An item is either a link or a trigger that opens a panel with more links. In a [header](/documentation/components/navigation/header) it collapses into a panel on narrow screens.
+
+## Examples
+
+### Links
+
+<Demo name="links" />
+
+### Dropdowns
+
+An item with a `NavigationMenu.Trigger` and a `NavigationMenu.Content` opens a panel. Set `closeOnClick` on a link to close the panel when it is used.
+
+<Demo name="dropdowns" />
+
+### Groups
+
+Use `NavigationMenu.Group` to split a panel into sections.
+
+<Demo name="groups" />
+
+### Stacked
+
+`layout="stacked"` shows a column where each trigger opens its content in place. Nothing opens on hover.
+
+<Demo name="stacked" />
+
+## API reference
+
+### NavigationMenu
+
+Renders a `<nav>` and shares which item is open with its parts. It accepts the attributes of an element, except `defaultValue`.
+
+| Prop            | Type                              | Default    | Description                                                                                       |
+| --------------- | --------------------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
+| `value`         | `string \| null`                  | —          | Identifier of the open item, in controlled mode. `null` closes every item.                        |
+| `defaultValue`  | `string \| null`                  | `null`     | Item open at the start, in uncontrolled mode.                                                     |
+| `onValueChange` | `(value: string \| null) => void` | —          | Called with the identifier of the item that opened or closed.                                     |
+| `layout`        | `'inline' \| 'stacked'`           | `'inline'` | `inline` is a row with floating panels. `stacked` is a column that opens in place.                |
+| `revealed`      | `boolean`                         | —          | For a stacked menu in a container that hides it, so the items can enter one by one when it shows. |
+| `delay`         | `number`                          | `50`       | Milliseconds before an item opens on hover.                                                       |
+| `closeDelay`    | `number`                          | `50`       | Milliseconds before a hovered item closes.                                                        |
+
+### NavigationMenu.List
+
+Renders the list of items. It accepts the attributes of a `<ul>`.
+
+### NavigationMenu.Item
+
+Renders one entry of the list. It accepts the attributes of an `<li>`.
+
+| Prop    | Type     | Default   | Description                                    |
+| ------- | -------- | --------- | ---------------------------------------------- |
+| `value` | `string` | generated | Identifier used by `value` and `defaultValue`. |
+
+### NavigationMenu.Trigger
+
+Renders a button that opens the content of its item. It accepts the attributes of a button.
+
+### NavigationMenu.Content
+
+Renders the panel that shows when its item is open. It accepts the attributes of a `<div>`.
+
+### NavigationMenu.Group
+
+Renders a section of links inside a panel. It accepts the attributes of a `<div>`.
+
+### NavigationMenu.Link
+
+Renders a link. It accepts the attributes of an anchor.
+
+| Prop           | Type      | Default | Description                                  |
+| -------------- | --------- | ------- | -------------------------------------------- |
+| `active`       | `boolean` | `false` | Marks the link as the current page.          |
+| `closeOnClick` | `boolean` | `false` | Closes any open panel when the link is used. |
+
+## Accessibility
+
+<Callout title="Name the landmark">
+  The menu is a navigation landmark. Give it an `aria-label`, such as "Main", so people can tell it
+  from the other navigation on the page.
+</Callout>
+
+- The current link is marked as the current page.
+- A trigger is linked to its panel and reports whether it is open.
+- The keyboard opens a panel and moves the focus into it, the arrow keys move between the triggers, and Escape closes a panel.
+- A hover is never the only way to open a panel.

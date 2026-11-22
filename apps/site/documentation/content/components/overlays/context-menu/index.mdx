@@ -1,0 +1,134 @@
+---
+title: Context menu
+description: A list of actions for an area of the page, opened with a right click or a long press.
+---
+
+## Usage
+
+```tsx
+import { ContextMenu } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ContextMenu>
+      <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>
+      <ContextMenu.Content>
+        <ContextMenu.Item>Copy</ContextMenu.Item>
+        <ContextMenu.Item>Paste</ContextMenu.Item>
+      </ContextMenu.Content>
+    </ContextMenu>
+  )
+}
+```
+
+Use a context menu for shortcuts to actions on an area, such as a file or a canvas. It opens at the pointer. Never make it the only way to reach an action, because many people will not find it. Offer the same actions in a visible place too, such as a [dropdown menu](/documentation/components/overlays/dropdown-menu).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Groups and separators
+
+<Demo name="groups" />
+
+### Checkbox and radio items
+
+<Demo name="checkboxAndRadio" />
+
+### Submenu
+
+<Demo name="submenu" />
+
+## API reference
+
+### ContextMenu
+
+Holds the open state and shares it with its parts. `ContextMenu.Root` is the same component. It renders no element of its own.
+
+| Prop           | Type                      | Default | Description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Whether the menu is open, in controlled mode.            |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the menu starts open.                            |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested state when it opens or closes. |
+| `children`     | `ReactNode`               | —       | The trigger and the content.                             |
+
+### ContextMenu.Trigger
+
+Renders the area that opens the menu with a right click or a long press. It renders a `<div>` around its children and accepts its attributes.
+
+### ContextMenu.Content
+
+Renders the menu at the pointer. It accepts the attributes of a `<div>`.
+
+### ContextMenu.Item
+
+Renders an action. Choosing it closes the menu. It accepts the attributes of a `<div>`, such as `onClick`.
+
+| Prop       | Type      | Default | Description                             |
+| ---------- | --------- | ------- | --------------------------------------- |
+| `disabled` | `boolean` | `false` | Keeps the item visible but unavailable. |
+
+### ContextMenu.CheckboxItem
+
+Renders an item that turns an option on or off. It keeps the menu open.
+
+| Prop              | Type                         | Default | Description                                     |
+| ----------------- | ---------------------------- | ------- | ----------------------------------------------- |
+| `checked`         | `boolean`                    | —       | Whether it is on, in controlled mode.           |
+| `defaultChecked`  | `boolean`                    | `false` | Whether it starts on, in uncontrolled mode.     |
+| `onCheckedChange` | `(checked: boolean) => void` | —       | Called with the new state when it is activated. |
+| `disabled`        | `boolean`                    | `false` | Keeps the item visible but unavailable.         |
+
+### ContextMenu.RadioGroup
+
+Groups radio items so exactly one is selected. It accepts the attributes of a `<div>`.
+
+| Prop            | Type                      | Default | Description                           |
+| --------------- | ------------------------- | ------- | ------------------------------------- |
+| `value`         | `string`                  | —       | Selected value, in controlled mode.   |
+| `defaultValue`  | `string`                  | —       | Value selected at the start.          |
+| `onValueChange` | `(value: string) => void` | —       | Called with the newly selected value. |
+
+### ContextMenu.RadioItem
+
+Renders one choice of a radio group. It keeps the menu open.
+
+| Prop       | Type      | Default | Description                                  |
+| ---------- | --------- | ------- | -------------------------------------------- |
+| `value`    | `string`  | —       | Value that the item stands for in its group. |
+| `disabled` | `boolean` | `false` | Keeps the item visible but unavailable.      |
+
+### ContextMenu.Group, ContextMenu.GroupLabel, ContextMenu.Separator
+
+Group related items, label the group, and draw a line between sets. They accept the attributes of a `<div>`.
+
+### ContextMenu.Submenu
+
+Holds the state of a nested menu. It contains a `ContextMenu.SubmenuTrigger` and a `ContextMenu.Content`.
+
+| Prop           | Type                      | Default | Description                                      |
+| -------------- | ------------------------- | ------- | ------------------------------------------------ |
+| `open`         | `boolean`                 | —       | Whether the submenu is open, in controlled mode. |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the submenu starts open.                 |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called when the submenu opens or closes.         |
+
+### ContextMenu.SubmenuTrigger
+
+Renders an item that opens a submenu, with a chevron.
+
+| Prop       | Type      | Default | Description                        |
+| ---------- | --------- | ------- | ---------------------------------- |
+| `disabled` | `boolean` | `false` | Prevents the submenu from opening. |
+
+## Accessibility
+
+<Callout title="Do not hide actions here">
+  A context menu is a shortcut. Many people never discover it, and a touch screen needs a long
+  press. Every action it holds must also be available somewhere visible.
+</Callout>
+
+- The menu opens with a right click, and Escape closes it.
+- Disabled items stay visible and cannot be chosen.
+- Groups and separators give the menu a structure that assistive technology can read.

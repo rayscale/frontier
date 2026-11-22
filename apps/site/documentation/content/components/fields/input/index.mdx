@@ -1,0 +1,75 @@
+---
+title: Input
+description: A text field with a label, a hint, and an error that stay with the control.
+---
+
+## Usage
+
+```tsx
+import { Input } from '@rayscale/frontier'
+
+export function Example() {
+  return <Input label="Email" type="email" />
+}
+```
+
+An input is where someone types or edits a value, so it keeps focus while they type. It renders a native `<input>`, so `type`, `value`, `placeholder`, and the other native attributes work as usual.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With a description
+
+A description sits under the input and is read together with its label.
+
+<Demo name="withDescription" />
+
+### With an error
+
+An error appears under the input and marks it invalid.
+
+<Demo name="withError" />
+
+### With icons
+
+Put an icon before or after the value. The icons are decorative, so they are hidden from assistive technology.
+
+<Demo name="withIcons" />
+
+### Disabled and read only
+
+<Demo name="disabled" />
+
+## API reference
+
+### Input
+
+Renders a native `<input>` with an optional label, description, error, and icons. It forwards its ref and the attributes of the input. The table lists the props `Input` adds.
+
+| Prop                      | Type        | Default | Description                                                                  |
+| ------------------------- | ----------- | ------- | ---------------------------------------------------------------------------- |
+| `description`             | `ReactNode` | —       | Helper text associated with the input for assistive technology.              |
+| `error`                   | `ReactNode` | —       | Error message associated with the input. It also marks the input invalid.    |
+| `invalid`                 | `boolean`   | `false` | Marks the input as invalid even when no error is shown.                      |
+| `label`                   | `ReactNode` | —       | Visible label associated with the input.                                     |
+| `leadingIcon`             | `ReactNode` | —       | Content shown before the value.                                              |
+| `leadingIconInteractive`  | `boolean`   | `false` | Keeps the leading content available to assistive technology, for a control.  |
+| `trailingIcon`            | `ReactNode` | —       | Content shown after the value.                                               |
+| `trailingIconInteractive` | `boolean`   | `false` | Keeps the trailing content available to assistive technology, for a control. |
+
+## Accessibility
+
+<Callout title="Give every input a name">
+  An input without a name cannot be identified by assistive technology. Pass `label`, and keep that
+  text as the name so what is spoken matches what is seen. Without a visible label, set
+  `aria-label`.
+</Callout>
+
+- The label is tied to the input, so selecting the label focuses the input.
+- The description and the error are linked to the input with `aria-describedby` and `aria-errormessage`. The error is announced politely when it appears, and the input reports `aria-invalid`.
+- Icons before and after the value are hidden from assistive technology. Set `leadingIconInteractive` or `trailingIconInteractive` when an icon holds a control, and give that control its own accessible name.
+- A disabled input uses the native `disabled` attribute and leaves the tab order. A read-only input stays focusable and can be selected.
+- The focus ring comes from the focus tokens and shows while the input is being edited.

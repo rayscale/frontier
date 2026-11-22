@@ -1,0 +1,64 @@
+---
+title: Fieldset
+description: Groups related fields under one legend, so they read as a single set.
+---
+
+## Usage
+
+```tsx
+import { Field, Fieldset } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Fieldset.Root>
+      <Fieldset.Legend>Contact</Fieldset.Legend>
+      <Field.Root>
+        <Field.Label>Email</Field.Label>
+        <Field.Box>
+          <Field.Control type="email" />
+        </Field.Box>
+      </Field.Root>
+    </Fieldset.Root>
+  )
+}
+```
+
+Use a fieldset when several controls answer one question or belong to one part of a form, such as an address or contact details. The legend names the set. The [checkbox group](/documentation/components/selection/checkbox-group) and the [radio group](/documentation/components/selection/radio-group) are fieldsets already.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With choices
+
+A fieldset can hold any controls, including groups of options.
+
+<Demo name="withChoices" />
+
+### Disabled
+
+Disabling the fieldset disables every control inside it.
+
+<Demo name="disabled" />
+
+## API reference
+
+### Fieldset.Root
+
+Renders a native `<fieldset>`. It forwards its ref and accepts the attributes of a fieldset. `Fieldset` is the same component.
+
+### Fieldset.Legend
+
+Renders the `<legend>` that names the set. It accepts the attributes of a legend.
+
+## Accessibility
+
+<Callout title="Name every fieldset">
+  Add a `Fieldset.Legend` so assistive technology can say what the set is for. Keep it short.
+</Callout>
+
+- The legend is announced with each control of the set, so people keep their context.
+- A disabled fieldset disables all the controls inside it, using the native behavior.
+- Do not use a fieldset only for layout. It is for controls that belong together.

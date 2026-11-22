@@ -1,0 +1,97 @@
+---
+title: Field
+description: Builds a form control from a label, the control itself, a hint, and an error that stay together.
+---
+
+## Usage
+
+```tsx
+import { Field } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Field.Root>
+      <Field.Label>Email address</Field.Label>
+      <Field.Box>
+        <Field.Control type="email" />
+      </Field.Box>
+      <Field.Description>We will only use this to contact you.</Field.Description>
+    </Field.Root>
+  )
+}
+```
+
+`Field` is the set of parts that [input](/documentation/components/fields/input) is made from. Use `Input` for a text field. Reach for the parts when you need a control that `Input` does not cover, such as a multi-line field, or a different arrangement of the label and the hint.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Invalid
+
+Set `invalid` on the root, and show the message with `Field.Error`.
+
+<Demo name="invalid" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+### Custom control
+
+Pass an element to `render` to change what `Field.Control` renders.
+
+<Demo name="customControl" />
+
+## API reference
+
+### Field.Root
+
+Groups the parts of a field and shares their state, so the label, the hint, and the error stay linked to the control. It renders a `<div>` and accepts its attributes.
+
+| Prop       | Type      | Default | Description                                     |
+| ---------- | --------- | ------- | ----------------------------------------------- |
+| `disabled` | `boolean` | `false` | Disables the control.                           |
+| `invalid`  | `boolean` | `false` | Marks the field as invalid.                     |
+| `name`     | `string`  | —       | Name of the control when the form is submitted. |
+
+### Field.Label
+
+Renders the visible label of the control. It renders a `<label>` and accepts its attributes.
+
+### Field.Box
+
+Wraps the control and the icons around it, and draws the edge of the field. It renders a `<span>` and accepts its attributes.
+
+### Field.Control
+
+Renders the control, an `<input>` by default. It accepts the attributes of an input.
+
+| Prop     | Type           | Default | Description                            |
+| -------- | -------------- | ------- | -------------------------------------- |
+| `render` | `ReactElement` | —       | Element rendered instead of the input. |
+
+### Field.Description
+
+Renders the hint under the control and links it to the control. It accepts the attributes of a `<p>`.
+
+### Field.Error
+
+Renders the error message and links it to the control.
+
+| Prop    | Type      | Default | Description                                                                     |
+| ------- | --------- | ------- | ------------------------------------------------------------------------------- |
+| `match` | `boolean` | —       | Shows the message. Without it, the message follows the validity of the control. |
+
+## Accessibility
+
+<Callout title="Always include a label">
+  A control without a label has no name for assistive technology. Use `Field.Label`, or give the
+  control an `aria-label`.
+</Callout>
+
+- The label, the description, and the error are linked to the control, so they are read with it.
+- The error is announced when it appears, and the control reports that it is invalid.
+- A disabled field uses the native `disabled` attribute and leaves the tab order.

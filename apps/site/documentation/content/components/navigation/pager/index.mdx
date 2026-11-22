@@ -1,0 +1,59 @@
+---
+title: Pager
+description: Links to the previous and the next page of a sequence, such as the pages of a guide.
+---
+
+## Usage
+
+```tsx
+import { Pager } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Pager
+      previous={{ href: '/installation', label: 'Installation' }}
+      next={{ href: '/components', label: 'Components' }}
+    />
+  )
+}
+```
+
+Use a pager at the end of a page that belongs to a sequence, so people can keep reading in order. Omit `previous` on the first page and `next` on the last. For numbered results, use [pagination](/documentation/components/navigation/pagination).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### First page
+
+Without `previous`, only the next destination is shown.
+
+<Demo name="firstPage" />
+
+### Custom labels
+
+<Demo name="labels" />
+
+## API reference
+
+### Pager
+
+Renders a `<nav>` with a link for each direction. It accepts the attributes of an element, except `children`.
+
+A destination is an object with an `href` and a `label`.
+
+| Prop            | Type                              | Default        | Description                                      |
+| --------------- | --------------------------------- | -------------- | ------------------------------------------------ |
+| `previous`      | `{ href: string; label: string }` | —              | Previous destination. Omit it on the first page. |
+| `next`          | `{ href: string; label: string }` | —              | Next destination. Omit it on the last page.      |
+| `previousLabel` | `string`                          | `'Previous'`   | Label of the previous direction.                 |
+| `nextLabel`     | `string`                          | `'Next'`       | Label of the next direction.                     |
+| `label`         | `string`                          | `'Pagination'` | Accessible name of the navigation landmark.      |
+
+## Accessibility
+
+- The pager is a navigation landmark, and each direction is a link with the title of the page.
+- Give the landmark a more specific `label` when the page has other pagination.
+- Each link says where it goes, so the title is read together with the direction.

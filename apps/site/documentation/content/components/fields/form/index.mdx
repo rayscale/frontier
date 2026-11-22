@@ -1,0 +1,46 @@
+---
+title: Form
+description: A native form with the styles of the system, which leaves validation and submission to the browser.
+---
+
+## Usage
+
+```tsx
+import { Button, Form, Input } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Form onSubmit={(event) => event.preventDefault()}>
+      <Input label="Name" name="name" required />
+      <Button type="submit">Sign up</Button>
+    </Form>
+  )
+}
+```
+
+`Form` renders a native `<form>`. It does not intercept events, so validation, submission, and reset follow the default behavior of the browser. Handle `onSubmit` and call `preventDefault` when you need to submit the data yourself.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Browser validation
+
+Native attributes such as `required`, `type`, `min`, and `max` validate the form before it is submitted.
+
+<Demo name="validation" />
+
+## API reference
+
+### Form
+
+Renders a native `<form>`. It forwards its ref and accepts the attributes of a form.
+
+## Accessibility
+
+- A form keeps the semantics of the native element, so assistive technology announces it as a form when it has a name.
+- Give a form with several sections an `aria-label` or `aria-labelledby`, so it can be found among the landmarks of the page.
+- Validation messages come from the browser unless you show your own with each field's error.
+- Every control needs a label. See [input](/documentation/components/fields/input) and [field](/documentation/components/fields/field).

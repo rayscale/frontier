@@ -1,0 +1,104 @@
+---
+title: Toast
+description: A short message that appears over the page and goes away on its own.
+---
+
+## Usage
+
+```tsx
+import { toast, ToastProvider } from '@rayscale/frontier'
+
+export function App() {
+  return (
+    <>
+      <button onClick={() => toast.success('Changes saved.')}>Save</button>
+      <ToastProvider />
+    </>
+  )
+}
+```
+
+Render one `ToastProvider` for the app, then call `toast` from anywhere to show a message. Use a toast to confirm something that does not need an answer, such as a saved change. For a message that must stay in the page, use a [callout](/documentation/components/feedback/callout).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Variants
+
+<Demo name="variants" />
+
+### With an action
+
+<Demo name="withAction" />
+
+### Promise
+
+`toast.promise` shows a message while a promise runs, and replaces it with the result.
+
+<Demo name="promise" />
+
+### Position
+
+<Demo name="position" />
+
+## API reference
+
+### ToastProvider
+
+Renders the regions where toasts appear. Render it once, near the root of the app.
+
+| Prop              | Type                                                                                              | Default          | Description                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------ |
+| `position`        | `'top-left' \| 'top-center' \| 'top-right' \| 'bottom-left' \| 'bottom-center' \| 'bottom-right'` | `'bottom-right'` | Where toasts appear.                                                           |
+| `defaultDuration` | `number`                                                                                          | `5000`           | How long a toast stays, in milliseconds.                                       |
+| `maxToasts`       | `number`                                                                                          | `5`              | The most toasts shown at once.                                                 |
+| `controller`      | `ToastController`                                                                                 | the shared one   | A controller made with `createToastController`, for an isolated set of toasts. |
+| `children`        | `ReactNode`                                                                                       | —                | Content rendered with the provider.                                            |
+
+### toast
+
+Shows a toast and returns its id. Pass a string, or an object with the options below. It also has these methods.
+
+| Method                             | Description                                                                   |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| `toast.success(message)`           | Shows a toast with the success variant.                                       |
+| `toast.error(message)`             | Shows a toast with the error variant.                                         |
+| `toast.warning(message)`           | Shows a toast with the warning variant.                                       |
+| `toast.info(message)`              | Shows a toast with the info variant.                                          |
+| `toast.loading(message)`           | Shows a toast for something in progress.                                      |
+| `toast.custom(render, options)`    | Shows your own content. `render` receives the id of the toast.                |
+| `toast.promise(promise, messages)` | Shows `loading`, then `success` or `error`, and returns the original promise. |
+| `toast.update(id, options)`        | Changes a toast that is showing.                                              |
+| `toast.dismiss(id)`                | Closes one toast, or all of them when no id is given.                         |
+
+### Toast options
+
+| Option        | Type                                                       | Default                 | Description                                                          |
+| ------------- | ---------------------------------------------------------- | ----------------------- | -------------------------------------------------------------------- |
+| `title`       | `ReactNode`                                                | —                       | Main text.                                                           |
+| `description` | `ReactNode`                                                | —                       | Secondary text.                                                      |
+| `variant`     | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'`             | Meaning of the message.                                              |
+| `duration`    | `number`                                                   | the provider's duration | How long it stays, in milliseconds. `0` keeps it until it is closed. |
+| `icon`        | `ReactNode \| null`                                        | the icon of the variant | Icon shown before the text. `null` hides it.                         |
+| `action`      | `{ label: string; onClick: () => void }`                   | —                       | A button shown in the toast.                                         |
+| `id`          | `string`                                                   | generated               | Identifies the toast, so it can be updated or closed.                |
+| `className`   | `string`                                                   | —                       | Additional CSS class.                                                |
+
+### createToastController
+
+Returns a controller with its own `toast`. Pass it to a `ToastProvider` to keep a set of toasts apart from the shared one.
+
+## Accessibility
+
+<Callout title="Do not put what matters only in a toast">
+  A toast goes away on its own, and some people need more time to read it. Never make it the only
+  place for an error or a choice, and use an action for something people may want to undo.
+</Callout>
+
+- Each region is named after its position, so several providers stay distinct.
+- Icons are decorative, so the variant must also be clear from the text.
+- Set `duration` to `0` for a message that needs a decision, so it stays until it is closed.
+- Keep the text short and write it as a full sentence.

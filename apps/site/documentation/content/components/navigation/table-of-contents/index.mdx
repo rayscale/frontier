@@ -1,0 +1,81 @@
+---
+title: Table of contents
+description: Lists the sections of the current page and links to each one.
+---
+
+## Usage
+
+```tsx
+import { TableOfContents } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <TableOfContents.Root aria-label="On this page">
+      <TableOfContents.Header>On this page</TableOfContents.Header>
+      <TableOfContents.List>
+        <TableOfContents.Item href="#introduction" label="Introduction" />
+        <TableOfContents.Item href="#usage" label="Usage">
+          <TableOfContents.List>
+            <TableOfContents.Item href="#installation" label="Installation" />
+          </TableOfContents.List>
+        </TableOfContents.Item>
+      </TableOfContents.List>
+    </TableOfContents.Root>
+  )
+}
+```
+
+Use a table of contents next to a long page, so people can see its sections and jump to one. Each item links to the `id` of a section. The item of the section being read is highlighted as people scroll. To nest sections, put another `TableOfContents.List` inside an item.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Right side
+
+`side` places the table of contents on the left or on the right of the content.
+
+<Demo name="rightSide" />
+
+## API reference
+
+### TableOfContents.Root
+
+Renders a `<nav>`. `TableOfContents` is the same component. It accepts the attributes of an element.
+
+| Prop       | Type                | Default  | Description                                |
+| ---------- | ------------------- | -------- | ------------------------------------------ |
+| `side`     | `'left' \| 'right'` | `'left'` | Side of the content on which it is placed. |
+| `children` | `ReactNode`         | —        | The header and the list.                   |
+
+### TableOfContents.Header
+
+Renders the heading of the table of contents, as a level-two heading. It accepts the attributes of a heading.
+
+### TableOfContents.List
+
+Renders a list of items. It accepts the attributes of a `<ul>`.
+
+### TableOfContents.Item
+
+Renders a link to a section, and an optional nested list. It accepts the attributes of an anchor, except `children` and `href`.
+
+| Prop       | Type        | Default | Description                                |
+| ---------- | ----------- | ------- | ------------------------------------------ |
+| `href`     | `string`    | —       | Fragment of the section, such as `#usage`. |
+| `label`    | `ReactNode` | —       | Visible label of the link.                 |
+| `children` | `ReactNode` | —       | A nested `TableOfContents.List`.           |
+
+## Accessibility
+
+<Callout title="Name the landmark">
+  The table of contents is a navigation landmark. Give it an `aria-label`, such as "On this page",
+  so people can tell it from the other navigation.
+</Callout>
+
+- The section being read is marked as the current one, so the highlight is not only visual.
+- Following a link scrolls to its section, and the scroll is instant when the reduced motion preference is on.
+- Every link is a native anchor with a fragment, so it works without JavaScript.
+- Nested sections are nested lists, so their depth is announced.

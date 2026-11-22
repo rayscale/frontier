@@ -1,0 +1,74 @@
+---
+title: Toggle
+description: A button that stays pressed or not, for one independent on or off value.
+---
+
+## Usage
+
+```tsx
+import { Toggle } from '@rayscale/frontier'
+
+export function Example() {
+  return <Toggle>Bold</Toggle>
+}
+```
+
+Use a toggle for a value that is on or off and takes effect at once, such as a formatting option in a toolbar. Each toggle is independent of the others. To choose among several related values, use a [toggle group](/documentation/components/selection/toggle-group).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Icon only
+
+Give a toggle that holds only an icon an `aria-label`.
+
+<Demo name="iconOnly" />
+
+### Variants
+
+<Demo name="variants" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Controlled
+
+Pass `pressed` and `onPressedChange` to keep the state in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Toggle
+
+Renders a `<button>` that keeps a pressed state. It forwards its ref and the attributes of a button, except `aria-pressed` and `value`. The table lists the props `Toggle` adds.
+
+| Prop              | Type                             | Default     | Description                                                  |
+| ----------------- | -------------------------------- | ----------- | ------------------------------------------------------------ |
+| `children`        | `ReactNode`                      | —           | Content of the toggle.                                       |
+| `value`           | `string`                         | —           | Unique value, when the toggle is used inside a toggle group. |
+| `pressed`         | `boolean`                        | —           | Whether the toggle is pressed, in controlled mode.           |
+| `defaultPressed`  | `boolean`                        | `false`     | Whether the toggle starts pressed, in uncontrolled mode.     |
+| `onPressedChange` | `(pressed: boolean) => void`     | —           | Called when the pressed state changes.                       |
+| `variant`         | `'default' \| 'outline'`         | `'default'` | Visual appearance.                                           |
+| `size`            | `'small' \| 'medium' \| 'large'` | `'medium'`  | Visual size.                                                 |
+
+## Accessibility
+
+<Callout title="Name icon-only toggles">
+  A toggle with only an icon has no text for assistive technology. Give it an accessible name with
+  `aria-label`, and keep the name the same in both states.
+</Callout>
+
+- The toggle is a native button, so Enter and Space change it.
+- The pressed state is exposed to assistive technology, so the name should describe the value and not the state.
+- A disabled toggle uses the native `disabled` attribute and leaves the tab order.
+- The press animation is skipped when the reduced motion preference is on.

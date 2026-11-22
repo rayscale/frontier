@@ -1,0 +1,107 @@
+---
+title: Data table
+description: A table with sorting, filtering, row selection, column visibility, and pages.
+---
+
+## Usage
+
+```tsx
+import { DataTable } from '@rayscale/frontier'
+import type { ColumnDef, TDataTableFeatures } from '@rayscale/frontier'
+
+interface TPerson {
+  name: string
+  role: string
+}
+
+const columns: ColumnDef<TDataTableFeatures, TPerson>[] = [
+  { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'role', header: 'Role' },
+]
+
+export function Example({ people }: { people: TPerson[] }) {
+  return <DataTable columns={columns} data={people} />
+}
+```
+
+Use a data table for larger sets of data that people sort, filter, and page through. It is built on TanStack Table, so you describe the columns with its column definitions. For a small table that you lay out by hand, use a [table](/documentation/components/content/table).
+
+## Examples
+
+### Default
+
+Use `DataTableColumnHeader` as a header to make a column sortable.
+
+<Demo name="default" />
+
+### Filter and selection
+
+<Demo name="filterAndSelection" />
+
+### Minimal
+
+<Demo name="minimal" />
+
+### Empty
+
+<Demo name="empty" />
+
+## API reference
+
+### DataTable
+
+Renders the toolbar, the table, and the pagination.
+
+| Prop                     | Type                   | Default | Description                                                       |
+| ------------------------ | ---------------------- | ------- | ----------------------------------------------------------------- |
+| `columns`                | `ColumnDef[]`          | —       | Column definitions from TanStack Table.                           |
+| `data`                   | `TData[]`              | —       | The rows.                                                         |
+| `filterColumn`           | `string`               | —       | Column that the filter input searches. Omit it to hide the input. |
+| `filterPlaceholder`      | `string`               | —       | Placeholder and accessible name of the filter input.              |
+| `enableRowSelection`     | `boolean`              | `false` | Adds a checkbox column and enables row selection.                 |
+| `enableColumnVisibility` | `boolean`              | `true`  | Shows the menu that hides and shows columns.                      |
+| `enablePagination`       | `boolean`              | `true`  | Shows the pagination controls.                                    |
+| `pageSize`               | `number`               | `10`    | Initial number of rows per page.                                  |
+| `pageSizeOptions`        | `number[]`             | —       | Page sizes offered by the pagination control.                     |
+| `emptyState`             | `ReactNode`            | —       | Replaces the default empty state.                                 |
+| `toolbar`                | `(table) => ReactNode` | —       | Replaces the default toolbar.                                     |
+
+### DataTableColumnHeader
+
+A header that sorts its column when pressed. Use it in the `header` of a column.
+
+| Prop     | Type     | Default | Description                          |
+| -------- | -------- | ------- | ------------------------------------ |
+| `column` | `Column` | —       | The column that the header controls. |
+| `title`  | `string` | —       | Visible label of the header.         |
+
+### DataTableViewOptions
+
+A menu that hides and shows columns. Use it in a custom toolbar.
+
+| Prop        | Type         | Default  | Description                           |
+| ----------- | ------------ | -------- | ------------------------------------- |
+| `table`     | `ReactTable` | —        | The table that `DataTable` creates.   |
+| `label`     | `string`     | `'View'` | Label of the trigger.                 |
+| `className` | `string`     | —        | Additional CSS class for the trigger. |
+
+### DataTablePagination
+
+The page controls. Use it in a custom layout.
+
+| Prop              | Type         | Default                | Description                         |
+| ----------------- | ------------ | ---------------------- | ----------------------------------- |
+| `table`           | `ReactTable` | —                      | The table that `DataTable` creates. |
+| `pageSizeOptions` | `number[]`   | 10, 20, 25, 30, 40, 50 | Page sizes that people can choose.  |
+
+## Accessibility
+
+<Callout title="Name the filter">
+  The filter input takes its accessible name from `filterPlaceholder`. Set it to say what is
+  filtered, such as "Filter names".
+</Callout>
+
+- The table uses native table elements.
+- The checkboxes for selection are named "Select all rows on this page" and "Select row".
+- Sorting works through the header of each column.
+- Mark actions in a row with a name that says which row they belong to.

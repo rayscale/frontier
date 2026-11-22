@@ -1,0 +1,102 @@
+---
+title: Dialog
+description: A window above the page that asks for a decision or a short piece of input, and blocks the rest of the page until it closes.
+---
+
+## Usage
+
+```tsx
+import { Dialog } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Dialog>
+      <Dialog.Trigger>Delete project</Dialog.Trigger>
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.Title>Delete this project?</Dialog.Title>
+          <Dialog.Description>This cannot be undone.</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Footer>
+          <Dialog.Close>Cancel</Dialog.Close>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog>
+  )
+}
+```
+
+Use a dialog when people must answer before they continue, such as confirming a destructive action or filling a short form. Keep the content short, and give it a clear title. For extra content that people can ignore, use a [popover](/documentation/components/overlays/popover). For a panel that holds a longer task, use a [drawer](/documentation/components/overlays/drawer).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sizes
+
+<Demo name="sizes" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the open state in your component.
+
+<Demo name="controlled" />
+
+### A choice that must be made
+
+Hide the close button and ignore presses on the backdrop, so the footer buttons are the only way out. Escape still closes the dialog.
+
+<Demo name="requiredChoice" />
+
+## API reference
+
+### Dialog
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                      | Default | Description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Whether the dialog is open, in controlled mode.          |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the dialog starts open.                          |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested state when it opens or closes. |
+| `children`     | `ReactNode`               | —       | The parts of the dialog.                                 |
+
+### Dialog.Trigger
+
+Opens the dialog. Pass one element and it keeps its attributes and its `onClick`. Any other content is wrapped in a [button](/documentation/components/actions/button).
+
+### Dialog.Content
+
+Renders the window and the backdrop behind it. It accepts the attributes of a `<div>`.
+
+| Prop                   | Type                             | Default    | Description                                     |
+| ---------------------- | -------------------------------- | ---------- | ----------------------------------------------- |
+| `size`                 | `'small' \| 'medium' \| 'large'` | `'medium'` | Width of the dialog.                            |
+| `showCloseButton`      | `boolean`                        | `true`     | Shows a close button in the corner.             |
+| `closeOnBackdropClick` | `boolean`                        | `true`     | Closes the dialog when the backdrop is pressed. |
+
+### Dialog.Header, Dialog.Footer
+
+Group the title and the description, and the actions. Each one renders a `<div>` and accepts its attributes.
+
+### Dialog.Title, Dialog.Description
+
+Render the title and the description, and name the dialog for assistive technology. They accept the attributes of a heading and of a `<p>`.
+
+### Dialog.Close
+
+Renders a button that closes the dialog. It accepts the props of a button, and its type is always `button`.
+
+## Accessibility
+
+<Callout title="Always give it a title">
+  The title names the dialog for assistive technology, and the description explains it. Include a
+  `Dialog.Title` in every dialog.
+</Callout>
+
+- The focus moves into the dialog when it opens, and returns to the element that opened it when it closes.
+- The dialog is modal: it keeps people in it until they close it.
+- Escape closes the dialog, even when presses on the backdrop do not.
+- Keep a way to close the dialog that works with the keyboard.

@@ -1,0 +1,93 @@
+---
+title: Radio group
+description: Lets people choose exactly one option from a short list, with all the options in view.
+---
+
+## Usage
+
+```tsx
+import { RadioGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <RadioGroup label="Frequency" defaultValue="weekly">
+      <RadioGroup.Item value="daily" label="Daily" />
+      <RadioGroup.Item value="weekly" label="Weekly" />
+    </RadioGroup>
+  )
+}
+```
+
+Use a radio group when exactly one option applies and the list is short enough to show every option. For a longer list, use a [select](/documentation/components/selection/select). The options are native radios that share one name, so the group works inside a form.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Horizontal
+
+Set `orientation="horizontal"` to lay the options out in a row.
+
+<Demo name="horizontal" />
+
+### With descriptions
+
+A description under an option explains what it does.
+
+<Demo name="withDescriptions" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the selection in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+Disable the whole group, or only one option.
+
+<Demo name="disabled" />
+
+## API reference
+
+### RadioGroup
+
+Renders a `<fieldset>` with the label as its legend. It forwards its ref and the attributes of a fieldset, except `defaultValue`, `name`, `onChange`, and `value`. The table lists the props `RadioGroup` adds.
+
+| Prop            | Type                             | Default      | Description                                                     |
+| --------------- | -------------------------------- | ------------ | --------------------------------------------------------------- |
+| `name`          | `string`                         | generated    | Form name shared by every option.                               |
+| `label`         | `ReactNode`                      | —            | Visible label of the group, shown as its legend.                |
+| `description`   | `ReactNode`                      | —            | Helper text associated with the group.                          |
+| `defaultValue`  | `string`                         | —            | Option selected at the start, in uncontrolled mode.             |
+| `value`         | `string`                         | —            | Selected option, in controlled mode.                            |
+| `onValueChange` | `(value: string) => void`        | —            | Called with the new value when the selection changes.           |
+| `disabled`      | `boolean`                        | `false`      | Disables every option of the group.                             |
+| `required`      | `boolean`                        | `false`      | Requires an option to be selected before the form is submitted. |
+| `orientation`   | `'horizontal' \| 'vertical'`     | `'vertical'` | Direction in which the options are laid out.                    |
+| `size`          | `'small' \| 'medium' \| 'large'` | `'medium'`   | Size of the options.                                            |
+
+### RadioGroup.Item
+
+Renders one native radio with its label and description. It forwards its ref and the attributes of an input, except `checked`, `defaultChecked`, `name`, `size`, and `type`.
+
+| Prop          | Type        | Default | Description                                                |
+| ------------- | ----------- | ------- | ---------------------------------------------------------- |
+| `value`       | `string`    | —       | Value submitted with the form when the option is selected. |
+| `label`       | `ReactNode` | —       | Visible label of the option.                               |
+| `description` | `ReactNode` | —       | Helper text associated with the option.                    |
+
+## Accessibility
+
+<Callout title="Label the group">
+  The label is the name of the group for assistive technology. Pass `label`, so people know which
+  question the options answer.
+</Callout>
+
+- The group is a fieldset with a legend, and its options are native radios that share one name.
+- The selected option is the only stop for Tab. The arrow keys move the selection and the focus, and Home and End go to the first and last option.
+- Disabled options are skipped by the arrow keys and cannot be selected.
+- The description of the group and of each option is linked to it, and an option description is kept out of the option name.
+- With `required`, the form cannot be submitted until an option is selected.

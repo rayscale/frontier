@@ -1,0 +1,79 @@
+---
+title: Date picker
+description: A field that opens a calendar so people can choose a date.
+---
+
+## Usage
+
+```tsx
+import { DatePicker } from '@rayscale/frontier'
+
+export function Example() {
+  return <DatePicker aria-label="Due date" />
+}
+```
+
+Use a date picker to choose one date inside a form. It shows the chosen date in a button, opens a [calendar](/documentation/components/selection/calendar) to change it, and closes after a choice. To choose two dates, use a [date range picker](/documentation/components/fields/date-range-picker).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the date in your component. The value is `null` when no date is selected.
+
+<Demo name="controlled" />
+
+### Limits
+
+`minDate` and `maxDate` limit the dates that can be chosen. `isDateDisabled` rules out other dates.
+
+<Demo name="limits" />
+
+### Format and locale
+
+`locale` sets the language of the calendar and of the date. `formatDate` replaces the default format.
+
+<Demo name="format" />
+
+### Disabled and read only
+
+<Demo name="disabled" />
+
+## API reference
+
+### DatePicker
+
+Renders a `<button>` that opens a calendar. It forwards its ref and the attributes of a button, except `defaultValue`, `type`, and `value`.
+
+| Prop             | Type                      | Default            | Description                                                                       |
+| ---------------- | ------------------------- | ------------------ | --------------------------------------------------------------------------------- |
+| `value`          | `Date \| null`            | —                  | Selected date, in controlled mode. `null` means no date.                          |
+| `defaultValue`   | `Date \| null`            | `null`             | Date selected at the start, in uncontrolled mode.                                 |
+| `onValueChange`  | `(date: Date) => void`    | —                  | Called with the chosen date. It is not called when the same date is chosen again. |
+| `open`           | `boolean`                 | —                  | Whether the calendar is open, in controlled mode.                                 |
+| `defaultOpen`    | `boolean`                 | `false`            | Whether the calendar starts open.                                                 |
+| `onOpenChange`   | `(open: boolean) => void` | —                  | Called when the calendar opens or closes.                                         |
+| `disabled`       | `boolean`                 | `false`            | Disables the button, so the calendar cannot open.                                 |
+| `readOnly`       | `boolean`                 | `false`            | Shows the date without letting people change it.                                  |
+| `minDate`        | `Date`                    | —                  | Earliest date that can be chosen.                                                 |
+| `maxDate`        | `Date`                    | —                  | Latest date that can be chosen.                                                   |
+| `isDateDisabled` | `(date: Date) => boolean` | —                  | Returns `true` for dates that cannot be chosen.                                   |
+| `placeholder`    | `string`                  | `'Select a date'`  | Text shown while no date is selected.                                             |
+| `locale`         | `string`                  | locale of the user | Locale of the calendar and of the date.                                           |
+| `formatDate`     | `(date: Date) => string`  | locale format      | Formats the date shown in the button.                                             |
+
+## Accessibility
+
+<Callout title="Name the picker">
+  The picker has no visible label of its own. Give it an `aria-label`, or point `aria-labelledby` at
+  a label, so people know which date they are choosing.
+</Callout>
+
+- The button is named by the label together with the selected date, so the current value is read.
+- The calendar opens in a popup that is named "Choose date", and it supports the keyboard navigation of the [calendar](/documentation/components/selection/calendar).
+- Choosing a date closes the popup.
+- A disabled or read-only picker cannot open its calendar.

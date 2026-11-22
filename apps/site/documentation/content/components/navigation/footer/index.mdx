@@ -1,0 +1,86 @@
+---
+title: Footer
+description: The bottom of a page, with the brand, groups of links, and the closing line.
+---
+
+## Usage
+
+```tsx
+import { Footer } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Footer>
+      <Footer.Content>
+        <Footer.Brand>
+          <strong>Acme</strong>
+        </Footer.Brand>
+        <Footer.Section>
+          <Footer.Heading>Product</Footer.Heading>
+          <a href="/pricing">Pricing</a>
+        </Footer.Section>
+      </Footer.Content>
+      <Footer.Bottom>All rights reserved.</Footer.Bottom>
+    </Footer>
+  )
+}
+```
+
+Use a footer once per page, at the end. `Footer.Content` holds the brand and the sections of links, and `Footer.Bottom` holds the closing line, such as a license or legal links.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Transparent
+
+<Demo name="transparent" />
+
+### Heading level
+
+`Footer.Heading` is an `h2` by default. Choose the level that fits the outline of the page.
+
+<Demo name="headingLevel" />
+
+## API reference
+
+### Footer
+
+Renders a `<footer>`. It accepts the attributes of a footer.
+
+| Prop          | Type        | Default | Description                                   |
+| ------------- | ----------- | ------- | --------------------------------------------- |
+| `transparent` | `boolean`   | `false` | Renders the footer without a background.      |
+| `children`    | `ReactNode` | —       | Usually `Footer.Content` and `Footer.Bottom`. |
+
+### Footer.Content
+
+Holds the brand and the sections. It renders a `<div>` and accepts its attributes.
+
+### Footer.Brand
+
+Holds the logo, the name, or a short description. It renders a `<div>` and accepts its attributes.
+
+### Footer.Section
+
+Holds a heading and a group of links. It renders a `<div>` and accepts its attributes.
+
+### Footer.Heading
+
+Renders the heading of a section.
+
+| Prop | Type                                                   | Default | Description        |
+| ---- | ------------------------------------------------------ | ------- | ------------------ |
+| `as` | `'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6' \| 'p' \| 'div'` | `'h2'`  | Element to render. |
+
+### Footer.Bottom
+
+Holds the closing line. It renders a `<div>` and accepts its attributes.
+
+## Accessibility
+
+- A footer at the top level of the page is the content information landmark. Use a single one.
+- Choose the heading level with `as`, so the headings of the footer fit the outline of the page.
+- Use a list for each group of links, so the number of links is announced.

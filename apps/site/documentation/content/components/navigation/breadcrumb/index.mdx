@@ -1,0 +1,89 @@
+---
+title: Breadcrumb
+description: Shows where the current page sits in a hierarchy, with a link to every level above it.
+---
+
+## Usage
+
+```tsx
+import { Breadcrumb } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Breadcrumb aria-label="Breadcrumb">
+      <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+      <Breadcrumb.Item href="/settings">Settings</Breadcrumb.Item>
+      <Breadcrumb.Item current>Profile</Breadcrumb.Item>
+    </Breadcrumb>
+  )
+}
+```
+
+Use a breadcrumb on pages that sit several levels deep, so people can see where they are and go back up. List the items from the root to the current page, and mark the last one with `current`.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Separator
+
+Pass `separator` to change what appears between the items.
+
+<Demo name="separator" />
+
+### Collapsed
+
+Set `maxVisibleItems` to replace the middle items with a button that opens a menu of them.
+
+<Demo name="collapsed" />
+
+### Dropdown
+
+`Breadcrumb.Dropdown` is an item that opens a menu of sibling destinations.
+
+<Demo name="dropdown" />
+
+## API reference
+
+### Breadcrumb
+
+Renders a `<nav>` that holds an ordered list. It accepts the attributes of a `<nav>`.
+
+| Prop              | Type        | Default | Description                                                                                                            |
+| ----------------- | ----------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `separator`       | `ReactNode` | chevron | Shown between the items, and hidden from assistive technology.                                                         |
+| `maxVisibleItems` | `number`    | —       | Collapses the middle items when there are more items than this. Values below 3 count as 3. Omit it to show every item. |
+| `children`        | `ReactNode` | —       | `Breadcrumb.Item` and `Breadcrumb.Dropdown` entries, from the root to the current page.                                |
+
+### Breadcrumb.Item
+
+Renders one level of the trail.
+
+| Prop       | Type        | Default | Description                                                    |
+| ---------- | ----------- | ------- | -------------------------------------------------------------- |
+| `href`     | `string`    | —       | Destination of the item. An item without one is shown as text. |
+| `current`  | `boolean`   | `false` | Marks the item as the current page. It is not a link.          |
+| `children` | `ReactNode` | —       | Label of the item.                                             |
+
+### Breadcrumb.Dropdown
+
+Renders an item that opens a menu of destinations.
+
+| Prop    | Type                                            | Default | Description                            |
+| ------- | ----------------------------------------------- | ------- | -------------------------------------- |
+| `label` | `ReactNode`                                     | —       | Label of the item that opens the menu. |
+| `items` | `readonly { label: ReactNode; href: string }[]` | —       | The destinations in the menu.          |
+
+## Accessibility
+
+<Callout title="Name the landmark">
+  The breadcrumb is a navigation landmark. Give it an `aria-label`, such as "Breadcrumb", so people
+  can find it among the other navigation on the page.
+</Callout>
+
+- The trail is an ordered list, so the number of levels is announced.
+- The current item is marked as the current page and is not a link.
+- Separators are hidden from assistive technology.
+- A collapsed trail keeps the hidden levels in a menu, so every level stays reachable.

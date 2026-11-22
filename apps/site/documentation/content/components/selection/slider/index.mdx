@@ -1,0 +1,106 @@
+---
+title: Slider
+description: Chooses a number, or a range of numbers, by moving a handle along a track.
+---
+
+## Usage
+
+```tsx
+import { Slider } from '@rayscale/frontier'
+
+export function Example() {
+  return <Slider label="Volume" defaultValue={40} showValue />
+}
+```
+
+Use a slider when the exact number matters less than where it sits between a minimum and a maximum, such as a volume or a price range. Pass an array to `defaultValue` or `value` for a range with two handles. When the exact number matters, use a text field.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Range
+
+Pass two values for a range. Name each handle with `thumbLabels`.
+
+<Demo name="range" />
+
+### Marks
+
+Use `markInterval` to draw marks along the track, or pass `marks` for specific values and labels.
+
+<Demo name="marks" />
+
+### Formatted value
+
+`format` formats the value with `Intl.NumberFormat`, and `formatValue` returns any text you need.
+
+<Demo name="formatted" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the value in your component.
+
+<Demo name="controlled" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+### With an error
+
+An error is shown under the slider and marks it invalid.
+
+<Demo name="withError" />
+
+## API reference
+
+### Slider
+
+Renders a `<div>` with one handle for a single value or two for a range. It forwards its ref and the attributes of a `<div>`, except `children` and the ARIA value attributes, which the slider sets itself.
+
+| Prop                     | Type                                                          | Default        | Description                                                                 |
+| ------------------------ | ------------------------------------------------------------- | -------------- | --------------------------------------------------------------------------- |
+| `description`            | `ReactNode`                                                   | —              | Helper text associated with the slider.                                     |
+| `defaultValue`           | `number \| readonly number[]`                                 | —              | Value at the start, in uncontrolled mode. An array makes a range.           |
+| `disabled`               | `boolean`                                                     | `false`        | Prevents any interaction.                                                   |
+| `error`                  | `ReactNode`                                                   | —              | Message associated with an invalid slider.                                  |
+| `format`                 | `Intl.NumberFormatOptions`                                    | —              | Options used to format the value.                                           |
+| `form`                   | `string`                                                      | —              | Form that the slider belongs to.                                            |
+| `formatValue`            | `(value: number) => string`                                   | —              | Returns the text shown and announced for each value.                        |
+| `label`                  | `ReactNode`                                                   | —              | Visible label of the slider.                                                |
+| `max`                    | `number`                                                      | `100`          | Largest value.                                                              |
+| `min`                    | `number`                                                      | `0`            | Smallest value.                                                             |
+| `minStepsBetweenValues`  | `number`                                                      | `0`            | Smallest distance between the handles of a range, in steps.                 |
+| `marks`                  | `readonly (number \| { value: number; label?: ReactNode })[]` | —              | Marks along the track. A number draws a mark without a label.               |
+| `markInterval`           | `number`                                                      | —              | Draws marks at this interval, including the smallest and the largest value. |
+| `name`                   | `string`                                                      | —              | Form name used when the slider is submitted.                                |
+| `onValueChange`          | `(value: number \| readonly number[]) => void`                | —              | Called as the value changes.                                                |
+| `onValueCommitted`       | `(value: number \| readonly number[]) => void`                | —              | Called when the value is committed after an interaction.                    |
+| `orientation`            | `'horizontal' \| 'vertical'`                                  | `'horizontal'` | Direction of the track.                                                     |
+| `readOnly`               | `boolean`                                                     | `false`        | Prevents changes and keeps the value in forms.                              |
+| `required`               | `boolean`                                                     | `false`        | Marks the slider as required.                                               |
+| `step`                   | `number`                                                      | `1`            | Distance between the values that can be chosen.                             |
+| `showValue`              | `boolean`                                                     | `false`        | Shows the current value beside the label.                                   |
+| `thumbLabels`            | `readonly string[]`                                           | —              | Names of the handles of a range, in value order.                            |
+| `thumbAlignment`         | `'center' \| 'edge' \| 'edge-client-only'`                    | `'center'`     | How the handles align at the ends of the track.                             |
+| `thumbCollisionBehavior` | `'push' \| 'swap' \| 'none'`                                  | `'push'`       | What the handles of a range do when they meet.                              |
+| `locale`                 | `Intl.LocalesArgument`                                        | —              | Locale used to format the value.                                            |
+| `largeStep`              | `number`                                                      | `10`           | Larger step for the keyboard.                                               |
+| `invalid`                | `boolean`                                                     | `false`        | Marks the slider as invalid even when no error is shown.                    |
+| `value`                  | `number \| readonly number[]`                                 | —              | Value, in controlled mode.                                                  |
+
+## Accessibility
+
+<Callout title="Name the slider">
+  Pass `label`, or an `aria-label`. Name each handle of a range with `thumbLabels`, so people know
+  which end they are moving.
+</Callout>
+
+- The arrow keys change the value by one step, and larger steps move it faster. Home and End go to the smallest and the largest value.
+- The value is announced with the text of `format` or `formatValue`, so people hear units and not only a number.
+- The description and the error are linked to the slider.
+- A disabled slider does not respond to the keyboard, and a read-only slider keeps its value in the form.
+- The handles skip their animation when the reduced motion preference is on.

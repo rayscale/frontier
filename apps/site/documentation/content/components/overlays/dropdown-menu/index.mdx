@@ -1,0 +1,156 @@
+---
+title: Dropdown menu
+description: A list of actions that opens from a button.
+---
+
+## Usage
+
+```tsx
+import { DropdownMenu } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <DropdownMenu>
+      <DropdownMenu.Trigger>Actions</DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item>Edit</DropdownMenu.Item>
+        <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu>
+  )
+}
+```
+
+Use a dropdown menu to offer several actions from one button, without taking space on the page. Choosing an item runs its action and closes the menu. To choose a value for a field, use a [select](/documentation/components/selection/select). For actions on a specific area, use a [context menu](/documentation/components/overlays/context-menu).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Groups and separators
+
+Use a group, a group label, and a separator to organize the items.
+
+<Demo name="groups" />
+
+### Checkbox items
+
+A checkbox item turns an option on or off, and it keeps the menu open so several can be changed in a row.
+
+<Demo name="checkboxItems" />
+
+### Radio items
+
+Radio items choose one value from a set. They keep the menu open.
+
+<Demo name="radioItems" />
+
+### Submenu
+
+<Demo name="submenu" />
+
+### Disabled items
+
+<Demo name="disabled" />
+
+## API reference
+
+### DropdownMenu
+
+Holds the open state and shares it with its parts. `DropdownMenu.Root` is the same component. It renders no element of its own.
+
+| Prop           | Type                      | Default | Description                                              |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Whether the menu is open, in controlled mode.            |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the menu starts open.                            |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested state when it opens or closes. |
+| `children`     | `ReactNode`               | —       | The parts of the menu.                                   |
+
+### DropdownMenu.Trigger
+
+Opens the menu. Pass one element and it keeps its attributes and its `onClick`. Any other content is wrapped in a [button](/documentation/components/actions/button).
+
+### DropdownMenu.Content
+
+Renders the menu. It accepts the attributes of a `<div>`.
+
+| Prop          | Type                                     | Default                               | Description                                 |
+| ------------- | ---------------------------------------- | ------------------------------------- | ------------------------------------------- |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'`, or `'right'` in a submenu | Side of the trigger where the menu appears. |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'start'`                             | Alignment along the chosen side.            |
+| `sideOffset`  | `number`                                 | `4`                                   | Distance from the trigger, in pixels.       |
+| `alignOffset` | `number`                                 | —                                     | Shift along the aligned edge, in pixels.    |
+
+### DropdownMenu.Item
+
+Renders an action. Choosing it closes the menu. It accepts the attributes of a `<div>`, such as `onClick`.
+
+| Prop       | Type      | Default | Description                             |
+| ---------- | --------- | ------- | --------------------------------------- |
+| `disabled` | `boolean` | `false` | Keeps the item visible but unavailable. |
+
+### DropdownMenu.CheckboxItem
+
+Renders an item that turns an option on or off. It keeps the menu open.
+
+| Prop              | Type                         | Default | Description                                     |
+| ----------------- | ---------------------------- | ------- | ----------------------------------------------- |
+| `checked`         | `boolean`                    | —       | Whether it is on, in controlled mode.           |
+| `defaultChecked`  | `boolean`                    | `false` | Whether it starts on, in uncontrolled mode.     |
+| `onCheckedChange` | `(checked: boolean) => void` | —       | Called with the new state when it is activated. |
+| `disabled`        | `boolean`                    | `false` | Keeps the item visible but unavailable.         |
+
+### DropdownMenu.RadioGroup
+
+Groups radio items so exactly one is selected. It accepts the attributes of a `<div>`.
+
+| Prop            | Type                      | Default | Description                           |
+| --------------- | ------------------------- | ------- | ------------------------------------- |
+| `value`         | `string`                  | —       | Selected value, in controlled mode.   |
+| `defaultValue`  | `string`                  | —       | Value selected at the start.          |
+| `onValueChange` | `(value: string) => void` | —       | Called with the newly selected value. |
+
+### DropdownMenu.RadioItem
+
+Renders one choice of a radio group. It keeps the menu open.
+
+| Prop       | Type      | Default | Description                                  |
+| ---------- | --------- | ------- | -------------------------------------------- |
+| `value`    | `string`  | —       | Value that the item stands for in its group. |
+| `disabled` | `boolean` | `false` | Keeps the item visible but unavailable.      |
+
+### DropdownMenu.Group, DropdownMenu.GroupLabel, DropdownMenu.Separator
+
+Group related items, label the group, and draw a line between sets. They accept the attributes of a `<div>`.
+
+### DropdownMenu.Submenu
+
+Holds the state of a nested menu. It contains a `DropdownMenu.SubmenuTrigger` and a `DropdownMenu.Content`.
+
+| Prop           | Type                      | Default | Description                                      |
+| -------------- | ------------------------- | ------- | ------------------------------------------------ |
+| `open`         | `boolean`                 | —       | Whether the submenu is open, in controlled mode. |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the submenu starts open.                 |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called when the submenu opens or closes.         |
+
+### DropdownMenu.SubmenuTrigger
+
+Renders an item that opens a submenu, with a chevron.
+
+| Prop       | Type      | Default | Description                        |
+| ---------- | --------- | ------- | ---------------------------------- |
+| `disabled` | `boolean` | `false` | Prevents the submenu from opening. |
+
+## Accessibility
+
+<Callout title="Use real actions">
+  A menu holds actions, not navigation. Use links for destinations, and write each item as a clear
+  verb, such as "Duplicate".
+</Callout>
+
+- Disabled items stay visible and cannot be chosen.
+- Groups and separators give the menu a structure that assistive technology can read.
+- Checkbox and radio items report their state.
+- Keep the labels short, so each item is easy to scan.

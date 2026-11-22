@@ -1,0 +1,98 @@
+---
+title: Tree
+description: A hierarchy of destinations or actions, where branches open and close to show their children.
+---
+
+## Usage
+
+```tsx
+import { Tree } from '@rayscale/frontier'
+
+const items = [
+  {
+    id: 'guide',
+    label: 'Guide',
+    children: [
+      { id: 'install', label: 'Installation', href: '/install' },
+      { id: 'usage', label: 'Usage', href: '/usage' },
+    ],
+  },
+  { id: 'changelog', label: 'Changelog', href: '/changelog' },
+]
+
+export function Example() {
+  return <Tree aria-label="Documentation" items={items} activeId="install" />
+}
+```
+
+Use a tree for a navigation that has several levels, such as the pages of a documentation site. A node with `children` is a branch that opens and closes. A node with `href` is a link, and a node with neither is an action.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Active destination
+
+`activeId` marks the current destination and opens the branches above it.
+
+<Demo name="active" />
+
+### Icons
+
+<Demo name="icons" />
+
+### Controlled
+
+Pass `expandedIds` and `onExpandedChange` to keep the open branches in your component.
+
+<Demo name="controlled" />
+
+### Actions
+
+A node without `href` is an action. `onAction` runs when it is activated.
+
+<Demo name="actions" />
+
+## API reference
+
+### Tree
+
+Renders a `<ul>`. It accepts the attributes of a list, except `children`.
+
+| Prop                   | Type                      | Default | Description                                                 |
+| ---------------------- | ------------------------- | ------- | ----------------------------------------------------------- |
+| `items`                | `Node[]`                  | —       | The top-level nodes. See the fields below.                  |
+| `activeId`             | `string`                  | —       | Identifier of the current destination.                      |
+| `expandedIds`          | `string[]`                | —       | Identifiers of the open branches, in controlled mode.       |
+| `defaultExpandedIds`   | `string[]`                | —       | Branches open at the start, in uncontrolled mode.           |
+| `onExpandedChange`     | `(ids: string[]) => void` | —       | Called when a branch opens or closes.                       |
+| `autoExpandActive`     | `boolean`                 | `true`  | Opens the branches above `activeId`.                        |
+| `compact`              | `boolean`                 | —       | Shows only the icons, with the labels in tooltips.          |
+| `onNavigate`           | `(node: Node) => void`    | —       | Called when a link is activated.                            |
+| `onCompactBranchClick` | `() => void`              | —       | Called when a branch is pressed in compact mode.            |
+| `onAction`             | `(node: Node) => void`    | —       | Called when an action, a node without `href`, is activated. |
+
+A node has these fields.
+
+| Field       | Type        | Default | Description                                                             |
+| ----------- | ----------- | ------- | ----------------------------------------------------------------------- |
+| `id`        | `string`    | —       | Unique and stable identifier, used for the state and the focus.         |
+| `label`     | `ReactNode` | —       | Visible label.                                                          |
+| `href`      | `string`    | —       | Destination. A leaf with one renders as a link.                         |
+| `icon`      | `ReactNode` | —       | Icon shown before the label.                                            |
+| `children`  | `Node[]`    | —       | Nested nodes. A node with children is a branch.                         |
+| `disabled`  | `boolean`   | `false` | Prevents interaction with the node.                                     |
+| `textValue` | `string`    | —       | Plain text for typing to find the node, when the label is not a string. |
+
+## Accessibility
+
+<Callout title="Name the tree">
+  Give the tree an `aria-label`, so people know what it navigates.
+</Callout>
+
+- The arrow keys move between the visible nodes. Right opens a branch and moves into it, and Left closes it and moves to its parent.
+- The current destination is marked as the current page.
+- Typing the start of a label moves the focus to a matching node.
+- Icons are decorative, so give every node a text label.

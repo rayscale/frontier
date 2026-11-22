@@ -35,7 +35,7 @@ Use a tree for a navigation that has several levels, such as the pages of a docu
 
 ### Active destination
 
-`activeId` marks the current destination and opens the branches above it. When it changes, the marker glides to the new destination. Choose another one to see it.
+`activeId` marks the current destination and opens the branches above it. The marker is a segment of the guide line that leads to the destination. When `activeId` changes, it moves straight to the new destination, onto the guide line of that destination. Choose another destination to see it.
 
 <Demo name="active" />
 
@@ -93,6 +93,6 @@ A node has these fields.
 </Callout>
 
 - The arrow keys move between the visible nodes. Right opens a branch and moves into it, and Left closes it and moves to its parent.
-- The current destination is marked as the current page, and its marker moves to the new destination when it changes. Under the reduced motion preference, the marker jumps to it.
+- The current destination is marked as the current page, and its marker moves to the new destination when it changes. Under the reduced motion preference, the marker jumps to it. When the current destination is inside a closed branch, the marker stays on that branch.
 - Typing the start of a label moves the focus to a matching node.
 - Icons are decorative, so give every node a text label.

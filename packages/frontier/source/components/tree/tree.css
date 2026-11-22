@@ -68,9 +68,7 @@
   color: var(--frontier-color-text);
 }
 
-.frontier-tree__row:hover:not(:disabled):not([aria-disabled='true']):not([data-highlighted]):not(
-    [aria-current='page']
-  ) {
+.frontier-tree__row:hover:not(:disabled):not([aria-disabled='true']):not([data-highlighted]) {
   background: var(--frontier-color-surface-hover);
   color: var(--frontier-color-text);
 }
@@ -91,15 +89,10 @@
   font-weight: var(--frontier-font-weight-semibold);
 }
 
-/* The current row is marked by a surface that glides to it. Until that surface can be measured,
-   which needs the page to be running, the row draws the same marker itself. */
-.frontier-tree-root:not([data-current-indicator]) .frontier-tree__row[aria-current='page'] {
-  border-color: var(--frontier-color-border-subtle);
-  background: var(--frontier-color-surface-highlight);
-}
-
-.frontier-tree-root:not([data-current-indicator]) .frontier-tree__row[aria-current='page']::before,
-.frontier-tree__current::before {
+/* The current row is marked by a segment of the guide line that leads to it, which glides along
+   the lines to the new row. Until it can be measured, which needs the page to be running, the row
+   draws the marker itself. */
+.frontier-tree-root:not([data-current-indicator]) .frontier-tree__row[aria-current='page']::before {
   position: absolute;
   inset-block: var(--frontier-spacing-2);
   inset-inline-start: 0;
@@ -109,9 +102,16 @@
   content: '';
 }
 
-.frontier-tree__current {
-  box-sizing: border-box;
-  border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
+.frontier-tree__rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 2px;
+  border-radius: var(--frontier-radius-full);
+  background: var(--frontier-color-primary);
+  pointer-events: none;
+  will-change: transform;
 }
 
 .frontier-tree__row[data-highlighted] {

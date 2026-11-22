@@ -18,6 +18,7 @@ import { useHighlightTarget } from '../../internal/primitives/animated-highlight
 
 import { treeContext, treeHighlightContext, type TTreeContextValue } from './context.js'
 import { findFirstId, getAncestorIds } from './helpers/tree.js'
+import { TreeCurrentRail } from './parts/current-rail.js'
 import { TreeItem } from './parts/item.js'
 import type { TTreeProps } from './types.js'
 
@@ -68,7 +69,6 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
       enabled: highlightEnabled,
       containerRef: rootRef,
       selector: '.frontier-tree__row',
-      excludeSelector: '[data-current]',
     })
 
   const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>(
@@ -84,12 +84,14 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
       return undefined
     }
 
+    // The marker follows the active row while it can be seen. Inside a closed branch, it stays on
+    // the nearest row that is visible, which is that branch.
     const ancestors = getAncestorIds(items, activeId)
-    if (compact && ancestors.length > 0) {
-      return undefined
+    if (compact) {
+      return ancestors[0] ?? activeId
     }
 
-    return ancestors.every((id) => expandedSet.has(id)) ? activeId : undefined
+    return ancestors.find((id) => !expandedSet.has(id)) ?? activeId
   }, [activeId, compact, expandedSet, items])
   const [indicatorReady, setIndicatorReady] = useState(false)
 
@@ -372,12 +374,7 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
         onFocusCapture={handleFocusCapture}
         onBlurCapture={handleBlurCapture}
       >
-        <AnimatedHighlight
-          attributes={['data-current', 'data-disabled']}
-          className="frontier-tree__current"
-          followTargetShape
-          selector="[data-current]:not([data-disabled])"
-        />
+        <TreeCurrentRail />
         {highlightEnabled ? (
           <AnimatedHighlight className="frontier-tree__highlight" followTargetShape />
         ) : null}

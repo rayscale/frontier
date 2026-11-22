@@ -68,7 +68,10 @@ function resolveRadius(target: HTMLElement, width: number, height: number) {
  * stays correct while a popup is still scaling in. Scroll offsets of scrolled
  * ancestors between the target and the container are subtracted.
  */
-function measureTarget(container: HTMLElement, target: HTMLElement): THighlightBounds | null {
+export function measureTarget(
+  container: HTMLElement,
+  target: HTMLElement,
+): THighlightBounds | null {
   let top = 0
   let left = 0
   let node: HTMLElement | null = target

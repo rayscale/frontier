@@ -143,19 +143,14 @@ describe('Tree', () => {
       expect(intro).not.toHaveAttribute('data-highlighted')
     })
 
-    it('does not draw a second surface over the current row', async () => {
+    it('lets the current row take the hover highlight like any other row', async () => {
       const user = userEvent.setup()
       render(<Tree activeId="installation" aria-label="Contents" items={items} />)
 
-      const intro = screen.getByRole('link', { name: 'Introduction' })
       const current = screen.getByRole('link', { name: 'Installation' })
 
-      await user.hover(intro)
-      expect(intro).toHaveAttribute('data-highlighted')
-
       await user.hover(current)
-      expect(intro).not.toHaveAttribute('data-highlighted')
-      expect(current).not.toHaveAttribute('data-highlighted')
+      expect(current).toHaveAttribute('data-highlighted')
     })
   })
 
@@ -272,22 +267,32 @@ describe('Tree', () => {
   })
 
   describe('current indicator', () => {
-    it('renders a surface that follows the current row, and marks that row', () => {
+    it('renders a marker that follows the current row, and marks that row', () => {
       const { container } = render(
         <Tree activeId="button" aria-label="Contents" expandedIds={['components']} items={items} />,
       )
 
-      expect(container.querySelector('.frontier-tree__current')).toBeInTheDocument()
+      expect(container.querySelector('.frontier-tree__rail')).toBeInTheDocument()
       expect(screen.getByRole('link', { name: 'Button' })).toHaveAttribute('data-current')
       expect(screen.getByRole('link', { name: 'Overview' })).not.toHaveAttribute('data-current')
     })
 
-    it('stops following a current row that is inside a closed branch', () => {
+    it('stays on the closed branch that holds the current row', () => {
       render(<Tree activeId="button" aria-label="Contents" expandedIds={[]} items={items} />)
 
+      expect(screen.getByRole('button', { name: 'Components' })).toHaveAttribute('data-current')
       expect(screen.getByRole('link', { name: 'Button', hidden: true })).not.toHaveAttribute(
         'data-current',
       )
+    })
+
+    it('stays on the nearest visible branch when the branch inside it is closed too', () => {
+      render(
+        <Tree activeId="deep" aria-label="Contents" expandedIds={['components']} items={items} />,
+      )
+
+      expect(screen.getByRole('button', { name: 'Nested' })).toHaveAttribute('data-current')
+      expect(screen.getByRole('button', { name: 'Components' })).not.toHaveAttribute('data-current')
     })
 
     it('follows the current row when the active item changes', () => {

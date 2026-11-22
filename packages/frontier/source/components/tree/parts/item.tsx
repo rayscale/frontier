@@ -84,6 +84,7 @@ export function TreeItem({ node, level }: TTreeItemProps): ReactElement {
         aria-disabled={node.disabled ? true : undefined}
         aria-expanded={compact ? false : expandedState}
         className="frontier-tree__row frontier-tree__row--branch"
+        data-current={node.id === currentId ? '' : undefined}
         disabled={node.disabled}
         onClick={() => {
           if (compact) {

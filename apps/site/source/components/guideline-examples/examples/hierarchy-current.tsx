@@ -5,9 +5,22 @@ import type { TExampleProps } from '../types.js'
 
 const items = [
   { id: 'overview', label: 'Overview', href: '#' },
-  { id: 'button', label: 'Button', href: '#' },
-  { id: 'input', label: 'Input', href: '#' },
-  { id: 'select', label: 'Select', href: '#' },
+  {
+    id: 'components',
+    label: 'Components',
+    children: [
+      { id: 'button', label: 'Button', href: '#' },
+      { id: 'input', label: 'Input', href: '#' },
+    ],
+  },
+  { id: 'tokens', label: 'Tokens', href: '#' },
+]
+
+const flat = [
+  { id: 'overview', label: 'Overview', level: 0 },
+  { id: 'button', label: 'Button', level: 1 },
+  { id: 'input', label: 'Input', level: 1 },
+  { id: 'tokens', label: 'Tokens', level: 0 },
 ]
 
 export default function HierarchyCurrent({ side }: TExampleProps): ReactElement {
@@ -20,6 +33,7 @@ export default function HierarchyCurrent({ side }: TExampleProps): ReactElement 
           aria-label="Choose a page"
           items={items}
           activeId={activeId}
+          defaultExpandedIds={['components']}
           onClickCapture={(event) => {
             if (event.target instanceof Element && event.target.closest('a')) {
               event.preventDefault()
@@ -31,7 +45,7 @@ export default function HierarchyCurrent({ side }: TExampleProps): ReactElement 
         />
       ) : (
         <ul style={{ display: 'grid', gap: 4, listStyle: 'none', margin: 0, padding: 0 }}>
-          {items.map((item) => (
+          {flat.map((item) => (
             <li key={item.id}>
               <button
                 type="button"
@@ -51,6 +65,7 @@ export default function HierarchyCurrent({ side }: TExampleProps): ReactElement 
                   font: 'inherit',
                   fontSize: '0.875rem',
                   padding: '8px 12px',
+                  paddingInlineStart: 12 + item.level * 20,
                   textAlign: 'start',
                   width: '100%',
                 }}

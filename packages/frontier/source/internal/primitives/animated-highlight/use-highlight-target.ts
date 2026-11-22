@@ -13,8 +13,6 @@ interface TUseHighlightTargetOptions {
   enabled: boolean
   containerRef: RefObject<HTMLElement | null>
   selector: string
-  /** Items that never take the highlight, such as one that already has its own marker. */
-  excludeSelector?: string | undefined
 }
 
 /**
@@ -37,7 +35,6 @@ export function useHighlightTarget({
   enabled,
   containerRef,
   selector,
-  excludeSelector,
 }: TUseHighlightTargetOptions): {
   handlePointerOver: (event: ReactPointerEvent<HTMLElement>) => void
   handlePointerLeave: () => void
@@ -65,11 +62,8 @@ export function useHighlightTarget({
     highlightedTargetRef.current = nextTarget
   }, [])
 
-  const resolveTarget = (target: EventTarget | null): HTMLElement | null => {
-    const found = findHighlightTarget(target, containerRef.current, selector)
-
-    return found && excludeSelector && found.matches(excludeSelector) ? null : found
-  }
+  const resolveTarget = (target: EventTarget | null): HTMLElement | null =>
+    findHighlightTarget(target, containerRef.current, selector)
 
   const handlePointerOver = (event: ReactPointerEvent<HTMLElement>) => {
     highlightSourceRef.current = 'pointer'

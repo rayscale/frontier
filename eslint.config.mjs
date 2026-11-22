@@ -285,7 +285,7 @@ export default defineConfig(
   },
   {
     // Documentation demos are the code a reader copies, so they omit return types as consumer code does.
-    files: ['apps/site/content/**/demos/*.tsx'],
+    files: ['apps/site/documentation/content/**/demos/*.tsx'],
     rules: { '@typescript-eslint/explicit-module-boundary-types': 'off' },
   },
   eslintConfigPrettier,

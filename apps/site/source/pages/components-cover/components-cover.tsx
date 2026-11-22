@@ -20,10 +20,10 @@ export function ComponentsCover(): ReactElement {
         description="Accessible React components that share one set of tokens. Everything below is the real component, not a picture of it."
       >
         <Button asChild>
-          <a href="/docs/components">Read the docs</a>
+          <a href="/documentation/components">Read the documentation</a>
         </Button>
         <Button asChild variant="outline">
-          <a href="/docs/installation">Install</a>
+          <a href="/documentation/installation">Install</a>
         </Button>
       </CoverHero>
       <Showcase />

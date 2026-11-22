@@ -14,7 +14,7 @@ import {
   Sparkles,
   Switch,
   Tabs,
-  type TSymbolComponent,
+  type TIconComponent,
 } from '@rayscale/frontier'
 import type { ReactElement, ReactNode } from 'react'
 
@@ -136,16 +136,16 @@ function RadioDemo(): ReactElement {
   )
 }
 
-const symbols: TSymbolComponent[] = [Bell, Mail, Settings, Sparkles]
+const icons: TIconComponent[] = [Bell, Mail, Settings, Sparkles]
 
-function SymbolsDemo(): ReactElement {
-  const active = useTick(900) % symbols.length
+function IconsDemo(): ReactElement {
+  const active = useTick(900) % icons.length
 
   return (
-    <div className="showcase__symbols">
-      {symbols.map((Symbol, index) => (
-        <span key={index} className="showcase__symbol" data-active={index === active || undefined}>
-          <Symbol size={28} aria-hidden="true" />
+    <div className="showcase__icons">
+      {icons.map((Icon, index) => (
+        <span key={index} className="showcase__icon" data-active={index === active || undefined}>
+          <Icon size={28} aria-hidden="true" />
         </span>
       ))}
     </div>
@@ -194,8 +194,8 @@ export function Showcase(): ReactElement {
       <Cell label="Radio group">
         <RadioDemo />
       </Cell>
-      <Cell label="Symbols">
-        <SymbolsDemo />
+      <Cell label="Icons">
+        <IconsDemo />
       </Cell>
       <Cell label="Progress">
         <ProgressDemo />

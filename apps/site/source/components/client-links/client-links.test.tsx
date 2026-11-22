@@ -12,9 +12,9 @@ function renderLinks(): void {
   render(
     <>
       <ClientLinks />
-      <a href="/docs/button?tab=1#api">Internal</a>
-      <a href="https://example.com/docs">External</a>
-      <a href="/docs/button" target="_blank" rel="noreferrer">
+      <a href="/documentation/button?tab=1#api">Internal</a>
+      <a href="https://example.com/documentation">External</a>
+      <a href="/documentation/button" target="_blank" rel="noreferrer">
         Blank
       </a>
       <a href="/file.pdf" download>
@@ -36,7 +36,7 @@ describe('ClientLinks', () => {
 
     await user.click(screen.getByRole('link', { name: 'Internal' }))
 
-    expect(push).toHaveBeenCalledWith('/docs/button?tab=1#api')
+    expect(push).toHaveBeenCalledWith('/documentation/button?tab=1#api')
   })
 
   it('leaves external links, new tabs, downloads, and same-page hashes to the browser', async () => {

@@ -18,8 +18,8 @@
     "app/**/*.tsx",
     "source/**/*.ts",
     "source/**/*.tsx",
-    "content/**/*.ts",
-    "content/**/*.tsx",
+    "documentation/content/**/*.ts",
+    "documentation/content/**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": ["**/node_modules", "**/dist", "**/build", "**/coverage", ".next", "out"]

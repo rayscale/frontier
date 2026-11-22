@@ -7,7 +7,7 @@ import { type TModePreference, useMode } from './mode-provider.js'
 
 const order: TModePreference[] = ['light', 'dark', 'system']
 
-const symbols = {
+const icons = {
   light: Sun,
   dark: Moon,
   system: Laptop,
@@ -17,12 +17,12 @@ const symbols = {
 export function ModeToggle(): ReactElement {
   const { preference, setPreference } = useMode()
   const next = order[(order.indexOf(preference) + 1) % order.length] ?? 'system'
-  const Current = symbols[preference]
+  const Current = icons[preference]
 
   return (
     <Button
       variant="ghost"
-      size="symbol"
+      size="icon"
       aria-label={`Mode: ${preference}. Switch to ${next}.`}
       onClick={() => {
         setPreference(next)

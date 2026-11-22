@@ -3,7 +3,7 @@
 import { Button, Card } from '@rayscale/frontier'
 import type { ReactElement } from 'react'
 
-import { PackageManagerTabs } from '#/components/docs/package-manager-tabs.js'
+import { PackageManagerTabs } from '#/components/documentation/package-manager-tabs.js'
 
 import './home.css'
 
@@ -14,14 +14,9 @@ const features = [
     description: 'Accessible React components built on native HTML, with their API and usage.',
   },
   {
-    title: 'Symbols',
-    href: '/symbols',
-    description: 'A set of symbols that share one grid and one stroke.',
-  },
-  {
-    title: 'Typeface',
-    href: '/typeface',
-    description: 'Geist, the variable typeface of the system.',
+    title: 'Icons',
+    href: '/icons',
+    description: 'A set of icons that share one grid and one stroke.',
   },
 ]
 
@@ -32,12 +27,12 @@ export function Home(): ReactElement {
       <section className="home__hero" aria-labelledby="home-title">
         <h1 id="home-title">A design language for the web.</h1>
         <p>
-          Frontier brings together guidelines, design tokens, components, symbols, and a typeface,
-          so an interface can be built from one set of rules.
+          Frontier brings together guidelines, design tokens, components, and icons, so an interface
+          can be built from one set of rules.
         </p>
         <div className="home__actions">
           <Button asChild>
-            <a href="/docs">Get started</a>
+            <a href="/documentation">Get started</a>
           </Button>
           <Button asChild variant="outline">
             <a href="/components">Browse components</a>

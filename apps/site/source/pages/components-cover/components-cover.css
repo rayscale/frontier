@@ -54,14 +54,14 @@
   font-weight: var(--frontier-font-weight-regular);
 }
 
-.showcase__symbols {
+.showcase__icons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--frontier-spacing-3);
   justify-items: center;
 }
 
-.showcase__symbol {
+.showcase__icon {
   display: grid;
   place-items: center;
   inline-size: 3.5rem;
@@ -73,7 +73,7 @@
     color var(--frontier-duration-medium) var(--frontier-easing-standard);
 }
 
-.showcase__symbol[data-active] {
+.showcase__icon[data-active] {
   background: var(--frontier-color-surface-hover);
   color: var(--frontier-color-text);
 }
@@ -91,7 +91,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .showcase__symbol {
+  .showcase__icon {
     transition: none;
   }
 }

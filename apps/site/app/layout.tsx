@@ -10,8 +10,7 @@ import '#/site.css'
 
 export const metadata: Metadata = {
   title: { default: 'Frontier', template: '%s · Frontier' },
-  description:
-    'A design language for the web: guidelines, design tokens, components, symbols, and a typeface.',
+  description: 'A design language for the web: guidelines, design tokens, components and icons.',
 }
 
 /** The document: the mode, client-side link routing, and the global styles. */

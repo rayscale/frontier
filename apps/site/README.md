@@ -16,8 +16,7 @@ The site for the Frontier design language. It is a Next.js app that exports plai
 - **Landing** — A home page that introduces the system, with the Frontier header and footer.
 - **Documentation** — A navigation tree, breadcrumbs, a table of contents, and page navigation around every page.
 - **Component pages** — Live examples with their source, the API of each part, and accessibility notes. Button is the first.
-- **Symbols** — A searchable catalog of every symbol with its usage.
-- **Typeface** — The typeface of Frontier: its weights and usage.
+- **Icons** — A searchable catalog of every icon with its usage.
 - **Themes** — Light, dark, or the system setting, remembered between visits.
 
 ## Development
@@ -33,16 +32,17 @@ The site is a workspace project. Run these from the repository root.
 
 The site imports `@rayscale/frontier`, which is served from the built package. Run `pnpm build` once so that `packages/frontier/dist` exists before starting the development server.
 
-Documentation lives in `content/`. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to write a page, a demo, or an API reference.
+Documentation lives in `documentation/content/`. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to write a page, a demo, or an API reference.
 
 ## Structure
 
 ```text
 apps/site/
-├── content/            # the documentation: one folder per page
+├── documentation/
+│   └── content/        # the pages: one folder per page
 ├── source/
-│   ├── components/     # docs shell, theme, header, footer
-│   ├── docs/           # the docs engine
+│   ├── components/     # documentation shell, theme, header, footer
+│   ├── documentation/  # the documentation engine
 │   ├── layout/         # shared layouts
 │   └── pages/          # the screens: home, covers, not found
 ├── app/                # the routes: layouts and pages
@@ -52,6 +52,6 @@ apps/site/
 ## Development status
 
 > [!WARNING]
-> The site is under active development. It documents Button, the symbols, and the typeface so far, and the other components do not have pages yet.
+> The site is under active development. It documents the components and the icons.
 >
 > More information will be added as the site progresses.

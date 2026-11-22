@@ -12,9 +12,8 @@ import './site-header.css'
 const links = [
   { label: 'Home', href: '/' },
   { label: 'Components', href: '/components' },
-  { label: 'Symbols', href: '/symbols' },
-  { label: 'Typeface', href: '/typeface' },
-  { label: 'Docs', href: '/docs' },
+  { label: 'Icons', href: '/icons' },
+  { label: 'Documentation', href: '/documentation' },
 ]
 
 /** The header of the marketing pages. It collapses its links into a panel on narrow screens. */

@@ -15,7 +15,7 @@ export interface THeaderComponent extends React.ForwardRefExoticComponent<
   /**
    * Navigation that shows its items inline and collapses into a menu button
    * and a vertical panel on compact screens. The panel extends the header, so
-   * a floating header grows downward as one surface.
+   * the header grows downward as one surface.
    */
   NavigationMenu: typeof HeaderNavigationMenu
 }
@@ -75,7 +75,7 @@ const HeaderRoot = forwardRef<HTMLElement, THeaderProps>(function Header(
 
 /**
  * Renders a page header. `normal` stays in the flow, `fixed` sticks to the
- * top of its scroll container, and `dynamic` changes its presentation with
+ * top of its scroll container, and `dynamic` stays pinned and changes its presentation with
  * scroll direction. Layout and content come entirely from children. Use
  * `Header.NavigationMenu` for navigation that adapts to compact screens.
  */

@@ -8,7 +8,7 @@ The destinations, their order, and their grouping do not change with the width. 
 
 ## The panel belongs to the header
 
-The panel unfolds from the header and extends it as one surface. It uses the same fill, its corners continue the header's, and no seam separates the two. When the header floats, the floating header grows downward instead of a second surface appearing beneath it.
+The panel unfolds from the header and extends it as one surface. It uses the same fill, its corners continue the header's, and no seam separates the two. When the header gains a surface on scroll, that header grows downward instead of a second surface appearing beneath it.
 
 The panel floats above the page. Opening it does not move the content underneath, in line with [Layout](../foundations/layout.md).
 

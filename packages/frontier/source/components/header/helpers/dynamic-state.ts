@@ -1,10 +1,10 @@
 import type { TDynamicHeaderState, TScrollTracker } from '../types.js'
 
 /** Scroll offset at which a dynamic header stops being attached to the top. */
-export const floatThreshold = 80
+export const scrollThreshold = 80
 /** Scroll offset at or below which a dynamic header is attached again. */
 const topThreshold = 8
-/** Downward scroll distance required before a floating header hides. */
+/** Downward scroll distance required before a scrolled header hides. */
 const hideDistance = 72
 /** Upward scroll distance required before a hidden header reappears. */
 const revealDistance = 16
@@ -55,15 +55,15 @@ function resolveNextState(
   tracker.distance += Math.abs(delta)
 
   if (state === 'attached') {
-    return scrollY > floatThreshold ? 'floating' : 'attached'
+    return scrollY > scrollThreshold ? 'scrolled' : 'attached'
   }
 
-  if (state === 'floating' && direction === 1 && hide && tracker.distance >= hideDistance) {
+  if (state === 'scrolled' && direction === 1 && hide && tracker.distance >= hideDistance) {
     return 'hidden'
   }
 
   if (state === 'hidden' && direction === -1 && tracker.distance >= revealDistance) {
-    return 'floating'
+    return 'scrolled'
   }
 
   return state

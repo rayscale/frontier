@@ -9,8 +9,8 @@ export type THeaderMode = 'normal' | 'fixed' | 'dynamic'
 export type THeaderProps = HTMLAttributes<HTMLElement> & {
   /**
    * `normal` stays in the document flow. `fixed` stays at the top of its
-   * scroll container. `dynamic` floats after scrolling, hides on scroll down,
-   * and reappears on scroll up.
+   * scroll container. `dynamic` stays pinned to the top, gains a surface after
+   * scrolling, hides on scroll down, and reappears on scroll up.
    * @default 'normal'
    */
   mode?: THeaderMode | undefined
@@ -38,7 +38,7 @@ export type THeaderNavigationMenuProps = Omit<TNavigationMenuProps, 'layout'> & 
 export type TButtonHTMLProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 /** Visual state of a `dynamic` header. */
-export type TDynamicHeaderState = 'attached' | 'floating' | 'hidden'
+export type TDynamicHeaderState = 'attached' | 'scrolled' | 'hidden'
 
 export interface TScrollTracker {
   lastY: number

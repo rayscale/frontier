@@ -68,14 +68,14 @@ describe('Header', () => {
     addSpy.mockRestore()
   })
 
-  it('starts attached and moves to floating after scrolling past the threshold', () => {
+  it('starts attached and moves to scrolled after scrolling past the threshold', () => {
     renderDynamic()
     const header = screen.getByTestId('header')
     expect(header).toHaveAttribute('data-state', 'attached')
 
     scrollTo(120)
-    expect(header).toHaveAttribute('data-state', 'floating')
-    expect(header).toHaveClass('frontier-header--floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
+    expect(header).toHaveClass('frontier-header--scrolled')
   })
 
   it('hides after a sufficient downward scroll and reveals on upward scroll', () => {
@@ -88,17 +88,17 @@ describe('Header', () => {
     expect(header).toHaveAttribute('inert')
 
     scrollTo(180)
-    expect(header).toHaveAttribute('data-state', 'floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
     expect(header).not.toHaveAttribute('inert')
   })
 
-  it('stays floating until the downward scroll exceeds the hide distance', () => {
+  it('stays scrolled until the downward scroll exceeds the hide distance', () => {
     renderDynamic()
     const header = screen.getByTestId('header')
 
     scrollTo(120)
     scrollTo(180)
-    expect(header).toHaveAttribute('data-state', 'floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
 
     scrollTo(200)
     expect(header).toHaveAttribute('data-state', 'hidden')
@@ -121,7 +121,7 @@ describe('Header', () => {
     scrollTo(130)
     scrollTo(122)
     scrollTo(131)
-    expect(header).toHaveAttribute('data-state', 'floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
   })
 
   it('resets accumulated distance when the direction reverses', () => {
@@ -133,7 +133,7 @@ describe('Header', () => {
     scrollTo(110)
     scrollTo(130)
     scrollTo(150)
-    expect(header).toHaveAttribute('data-state', 'floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
   })
 
   it('keeps children mounted across state changes', () => {
@@ -158,7 +158,7 @@ describe('Header', () => {
     })
     scrollTo(240)
 
-    expect(header).toHaveAttribute('data-state', 'floating')
+    expect(header).toHaveAttribute('data-state', 'scrolled')
   })
 
   it('removes the scroll listener on unmount', () => {
@@ -415,7 +415,7 @@ describe('Header.NavigationMenu', () => {
     ;(document.activeElement as HTMLElement | null)?.blur()
     scrollTo(500)
 
-    expect(screen.getByTestId('header')).toHaveAttribute('data-state', 'floating')
+    expect(screen.getByTestId('header')).toHaveAttribute('data-state', 'scrolled')
 
     await user.click(screen.getByRole('button', { name: 'Menu' }))
     ;(document.activeElement as HTMLElement | null)?.blur()

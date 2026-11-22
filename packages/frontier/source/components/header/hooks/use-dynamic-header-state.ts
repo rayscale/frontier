@@ -1,6 +1,6 @@
 import { type RefObject, useEffect, useRef, useState } from 'react'
 
-import { floatThreshold, reduceDynamicHeaderState } from '../helpers/dynamic-state.js'
+import { reduceDynamicHeaderState, scrollThreshold } from '../helpers/dynamic-state.js'
 import type { TDynamicHeaderState, TScrollTracker } from '../types.js'
 
 /**
@@ -31,7 +31,7 @@ export function useDynamicHeaderState(
       direction: 0,
       distance: 0,
     }
-    let current: TDynamicHeaderState = window.scrollY > floatThreshold ? 'floating' : 'attached'
+    let current: TDynamicHeaderState = window.scrollY > scrollThreshold ? 'scrolled' : 'attached'
     setState(current)
 
     const handleScroll = () => {

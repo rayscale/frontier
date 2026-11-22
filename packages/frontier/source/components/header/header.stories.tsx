@@ -90,7 +90,8 @@ export const Dynamic: TStory = {
   parameters: {
     docs: {
       description: {
-        story: 'Dynamic headers hide on scroll down and reveal on scroll up.',
+        story:
+          'Dynamic headers stay pinned to the top, gain a surface after scrolling, hide on scroll down, and reveal on scroll up.',
       },
     },
   },

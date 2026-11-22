@@ -45,10 +45,10 @@ Use a header once per page, at the top. It holds whatever the top of the page ne
 
 Renders a `<header>`. `mode` sets how it behaves when the page scrolls. It accepts the attributes of a header.
 
-| Prop       | Type                               | Default    | Description                                                                                                                                                   |
-| ---------- | ---------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mode`     | `'normal' \| 'fixed' \| 'dynamic'` | `'normal'` | `normal` stays in the flow of the page. `fixed` stays at the top. `dynamic` floats after scrolling, hides when scrolling down, and returns when scrolling up. |
-| `children` | `ReactNode`                        | —          | The logo, the navigation, the actions, or any other content.                                                                                                  |
+| Prop       | Type                               | Default    | Description                                                                                                                                                                                     |
+| ---------- | ---------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mode`     | `'normal' \| 'fixed' \| 'dynamic'` | `'normal'` | `normal` stays in the flow of the page. `fixed` stays at the top. `dynamic` stays pinned to the top, gains a surface after scrolling, hides when scrolling down, and returns when scrolling up. |
+| `children` | `ReactNode`                        | —          | The logo, the navigation, the actions, or any other content.                                                                                                                                    |
 
 ### Header.NavigationMenu
 

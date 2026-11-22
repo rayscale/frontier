@@ -1,5 +1,4 @@
 .frontier-header {
-  --_header-inset: var(--frontier-spacing-3);
   --_header-surface: var(--frontier-color-surface);
   --_header-radius: 0;
 
@@ -25,8 +24,7 @@
 
 .frontier-header--dynamic {
   transition-property:
-    transform, margin-inline, border-radius, background-color, box-shadow, border-block-end-color,
-    backdrop-filter;
+    transform, background-color, box-shadow, border-block-end-color, backdrop-filter;
   transition-duration: var(--frontier-duration-enter);
   transition-timing-function: var(--frontier-easing-emphasized-decelerate);
 }
@@ -37,25 +35,19 @@
   border-block-end-color: transparent;
 }
 
-.frontier-header--floating,
+.frontier-header--scrolled,
 .frontier-header--hidden {
-  --_header-gutter: clamp(var(--frontier-spacing-2), 2vw, var(--frontier-spacing-6));
   --_header-surface: color-mix(in srgb, var(--frontier-color-surface-floating) 80%, transparent);
-  --_header-radius: var(--frontier-radius-lg);
 
-  margin-inline: var(--_header-gutter);
-  border-radius: var(--_header-radius);
-  border-block-end-color: transparent;
   box-shadow: var(--frontier-shadow-sm);
-  transform: translateY(var(--_header-inset));
 }
 
-.frontier-header--floating {
+.frontier-header--scrolled {
   backdrop-filter: blur(var(--frontier-blur-medium));
 }
 
 .frontier-header--hidden {
-  transform: translateY(calc(-100% - var(--_header-inset) - var(--frontier-spacing-4)));
+  transform: translateY(-100%);
   transition-duration: var(--frontier-duration-exit);
   transition-timing-function: var(--frontier-easing-emphasized-accelerate);
 }
@@ -63,8 +55,6 @@
 .frontier-header--expanded {
   --_header-surface: var(--frontier-color-surface-floating);
 
-  border-end-start-radius: 0;
-  border-end-end-radius: 0;
   border-block-end-color: transparent;
   box-shadow: none;
   backdrop-filter: none;
@@ -169,7 +159,6 @@
     var(--frontier-easing-emphasized-decelerate);
 }
 
-.frontier-header--floating .frontier-header__panel,
 .frontier-header--attached .frontier-header__panel {
   border-block-end-color: transparent;
 }
@@ -186,7 +175,7 @@
 }
 
 @supports not (backdrop-filter: blur(1px)) {
-  .frontier-header--floating {
+  .frontier-header--scrolled {
     --_header-surface: var(--frontier-color-surface-floating);
   }
 }
@@ -203,7 +192,7 @@
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .frontier-header--floating {
+  .frontier-header--scrolled {
     backdrop-filter: none;
   }
 }

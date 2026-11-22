@@ -1,4 +1,5 @@
 import { Tree } from '@rayscale/frontier'
+import { useState } from 'react'
 
 const items = [
   {
@@ -21,5 +22,21 @@ const items = [
 ]
 
 export default function Active() {
-  return <Tree aria-label="Documentation" items={items} activeId="tokens" />
+  const [activeId, setActiveId] = useState('tokens')
+
+  return (
+    <Tree
+      aria-label="Documentation"
+      items={items}
+      activeId={activeId}
+      onClickCapture={(event) => {
+        if (event.target instanceof Element && event.target.closest('a')) {
+          event.preventDefault()
+        }
+      }}
+      onNavigate={(node) => {
+        setActiveId(node.id)
+      }}
+    />
+  )
 }

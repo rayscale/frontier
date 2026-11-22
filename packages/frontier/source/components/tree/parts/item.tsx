@@ -53,6 +53,7 @@ export function TreeItem({ node, level }: TTreeItemProps): ReactElement {
   const {
     activeId,
     compact,
+    currentId,
     expanded,
     onAction,
     onNavigate,
@@ -133,6 +134,7 @@ export function TreeItem({ node, level }: TTreeItemProps): ReactElement {
         aria-current={active ? 'page' : undefined}
         aria-disabled={node.disabled ? true : undefined}
         className="frontier-tree__row"
+        data-current={node.id === currentId ? '' : undefined}
         href={node.disabled ? undefined : node.href}
         onClick={(event) => {
           if (node.disabled) {

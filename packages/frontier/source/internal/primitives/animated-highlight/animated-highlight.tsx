@@ -23,6 +23,10 @@ export interface TAnimatedHighlightProps {
    * rounded items keep their shape while the highlight moves between them.
    */
   followTargetShape?: boolean | undefined
+  /** Selects the element that the surface follows. Defaults to the item with `data-highlighted`. */
+  selector?: string | undefined
+  /** Attributes to watch for a change of target. Defaults to `data-highlighted` and `data-disabled`. */
+  attributes?: readonly string[] | undefined
 }
 
 /**
@@ -31,8 +35,10 @@ export interface TAnimatedHighlightProps {
  * the highlighted item with `data-highlighted`.
  */
 export function AnimatedHighlight({
+  attributes,
   className,
   followTargetShape = false,
+  selector,
 }: TAnimatedHighlightProps): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = useReducedMotion() ?? false
@@ -71,7 +77,7 @@ export function AnimatedHighlight({
     [prefersReducedMotion, x, y, width, height, radius, opacity],
   )
 
-  useAnimatedHighlight(ref, handleUpdate)
+  useAnimatedHighlight(ref, handleUpdate, { attributes, selector })
 
   return (
     <motion.div

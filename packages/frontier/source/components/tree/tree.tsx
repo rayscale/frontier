@@ -78,6 +78,24 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
   const expandedSet = useMemo(() => new Set(expanded), [expanded])
   expandedRef.current = expanded
 
+  const currentId = useMemo(() => {
+    if (!activeId) {
+      return undefined
+    }
+
+    const ancestors = getAncestorIds(items, activeId)
+    if (compact && ancestors.length > 0) {
+      return undefined
+    }
+
+    return ancestors.every((id) => expandedSet.has(id)) ? activeId : undefined
+  }, [activeId, compact, expandedSet, items])
+  const [indicatorReady, setIndicatorReady] = useState(false)
+
+  useEffect(() => {
+    setIndicatorReady(true)
+  }, [])
+
   const [focusId, setFocusId] = useState<string | null>(activeId ?? findFirstId(items) ?? null)
   const firstId = findFirstId(items)
   const tabbableId = focusId ?? activeId ?? firstId
@@ -317,6 +335,7 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
   const context = useMemo<TTreeContextValue>(
     () => ({
       activeId,
+      currentId,
       compact,
       expanded: expandedSet,
       focusId,
@@ -329,6 +348,7 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
     }),
     [
       activeId,
+      currentId,
       compact,
       expandedSet,
       focusId,
@@ -345,11 +365,18 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
       <div
         ref={rootRef}
         className="frontier-tree-root"
+        data-current-indicator={indicatorReady ? '' : undefined}
         onPointerOver={handlePointerOver}
         onPointerLeave={handlePointerLeave}
         onFocusCapture={handleFocusCapture}
         onBlurCapture={handleBlurCapture}
       >
+        <AnimatedHighlight
+          attributes={['data-current', 'data-disabled']}
+          className="frontier-tree__current"
+          followTargetShape
+          selector="[data-current]:not([data-disabled])"
+        />
         {highlightEnabled ? (
           <AnimatedHighlight className="frontier-tree__highlight" followTargetShape />
         ) : null}

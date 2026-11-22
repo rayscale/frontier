@@ -85,13 +85,19 @@
 }
 
 .frontier-tree__row[aria-current='page'] {
-  border-color: var(--frontier-color-border-subtle);
-  background: var(--frontier-color-surface-highlight);
   color: var(--frontier-color-text);
   font-weight: var(--frontier-font-weight-semibold);
 }
 
-.frontier-tree__row[aria-current='page']::before {
+/* The current row is marked by a surface that glides to it. Until that surface can be measured,
+   which needs the page to be running, the row draws the same marker itself. */
+.frontier-tree-root:not([data-current-indicator]) .frontier-tree__row[aria-current='page'] {
+  border-color: var(--frontier-color-border-subtle);
+  background: var(--frontier-color-surface-highlight);
+}
+
+.frontier-tree-root:not([data-current-indicator]) .frontier-tree__row[aria-current='page']::before,
+.frontier-tree__current::before {
   position: absolute;
   inset-block: var(--frontier-spacing-2);
   inset-inline-start: 0;
@@ -99,6 +105,11 @@
   border-radius: var(--frontier-radius-full);
   background: var(--frontier-color-primary);
   content: '';
+}
+
+.frontier-tree__current {
+  box-sizing: border-box;
+  border: var(--frontier-border-width) solid var(--frontier-color-border-subtle);
 }
 
 .frontier-tree__row[data-highlighted] {

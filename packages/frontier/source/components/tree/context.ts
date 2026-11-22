@@ -9,6 +9,8 @@ export interface TTreeContextValue {
   setFocusId: (id: string) => void
   setExpanded: (id: string, open: boolean) => void
   activeId?: string | undefined
+  /** The active node while it can be seen, so the current indicator has a row to follow. */
+  currentId?: string | undefined
   onNavigate?: ((node: TTreeNode) => void) | undefined
   onCompactBranchClick?: (() => void) | undefined
   onAction?: ((node: TTreeNode) => void) | undefined

@@ -45,6 +45,12 @@ The current destination uses `aria-current="page"` and a persistent visual
 marker. Opening an ancestor is automatic so the current page is always
 reachable, but expanding a branch does not select it.
 
+When the current destination changes, its marker moves to the new one instead of jumping, so the user can follow the change. See [Motion](../foundations/motion.md#purpose).
+
+| Do                                                         | Don't                                                          |
+| ---------------------------------------------------------- | -------------------------------------------------------------- |
+| Move the marker of the current destination to the new one. | Redraw the marker on the new destination without any movement. |
+
 ## Highlight
 
 Hover and focus move a single highlight surface between rows instead of

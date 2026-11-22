@@ -25,6 +25,6 @@ export const guidelineExamples: ReadonlyMap<string, readonly (readonly string[])
   ['patterns/forms.md', [['forms-label'], ['forms-validation-timing'], ['forms-error-placement']]],
   [
     'patterns/hierarchy.md',
-    [['hierarchy-disclosure'], ['hierarchy-depth'], ['hierarchy-alignment']],
+    [['hierarchy-disclosure'], ['hierarchy-depth'], ['hierarchy-alignment'], ['hierarchy-current']],
   ],
 ])

@@ -221,6 +221,45 @@ describe('Tree', () => {
     expect(screen.getByRole('link', { name: 'Deep link' })).toHaveAttribute('aria-current', 'page')
   })
 
+  describe('current indicator', () => {
+    it('renders a surface that follows the current row, and marks that row', () => {
+      const { container } = render(
+        <Tree activeId="button" aria-label="Contents" expandedIds={['components']} items={items} />,
+      )
+
+      expect(container.querySelector('.frontier-tree__current')).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: 'Button' })).toHaveAttribute('data-current')
+      expect(screen.getByRole('link', { name: 'Overview' })).not.toHaveAttribute('data-current')
+    })
+
+    it('stops following a current row that is inside a closed branch', () => {
+      render(<Tree activeId="button" aria-label="Contents" expandedIds={[]} items={items} />)
+
+      expect(screen.getByRole('link', { name: 'Button', hidden: true })).not.toHaveAttribute(
+        'data-current',
+      )
+    })
+
+    it('follows the current row when the active item changes', () => {
+      const { rerender } = render(<Tree activeId="intro" aria-label="Contents" items={items} />)
+
+      expect(screen.getByRole('link', { name: 'Introduction' })).toHaveAttribute('data-current')
+
+      rerender(<Tree activeId="installation" aria-label="Contents" items={items} />)
+
+      expect(screen.getByRole('link', { name: 'Introduction' })).not.toHaveAttribute('data-current')
+      expect(screen.getByRole('link', { name: 'Installation' })).toHaveAttribute('data-current')
+    })
+
+    it('marks itself as ready to draw the indicator once it is running', () => {
+      const { container } = render(<Tree activeId="intro" aria-label="Contents" items={items} />)
+
+      expect(container.querySelector('.frontier-tree-root')).toHaveAttribute(
+        'data-current-indicator',
+      )
+    })
+  })
+
   it('calls onNavigate when a link is activated', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()

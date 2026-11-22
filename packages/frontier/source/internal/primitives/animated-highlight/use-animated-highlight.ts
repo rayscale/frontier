@@ -29,7 +29,18 @@ export interface THighlightUpdate {
  * `data-highlighted` on the active item and disabled items never become
  * highlight targets.
  */
-const targetSelector = '[data-highlighted]:not([data-disabled])'
+const defaultSelector = '[data-highlighted]:not([data-disabled])'
+
+/** Attributes whose change can move the highlight to another target. */
+const defaultAttributes: readonly string[] = ['data-highlighted', 'data-disabled']
+
+/** Chooses which element the highlight follows. */
+export interface THighlightOptions {
+  /** Selects the target inside the container. Defaults to the item with `data-highlighted`. */
+  selector?: string | undefined
+  /** Attributes to watch, so a change of any of them moves the highlight. */
+  attributes?: readonly string[] | undefined
+}
 
 /** Time without scroll events after which the highlight animates target changes again. */
 const scrollSettleMs = 150
@@ -116,7 +127,10 @@ function isSameBounds(first: THighlightBounds | null, second: THighlightBounds |
 export function useAnimatedHighlight(
   highlightRef: RefObject<HTMLElement | null>,
   onUpdate: (update: THighlightUpdate) => void,
+  { selector = defaultSelector, attributes = defaultAttributes }: THighlightOptions = {},
 ): void {
+  const attributeKey = attributes.join(' ')
+
   useEffect(() => {
     const container = highlightRef.current?.parentElement
     if (!container) {
@@ -132,7 +146,7 @@ export function useAnimatedHighlight(
 
     const update = () => {
       frame = null
-      const target = container.querySelector<HTMLElement>(targetSelector)
+      const target = container.querySelector<HTMLElement>(selector)
       const nextBounds = target ? measureTarget(container, target) : null
 
       if (target === null || nextBounds === null) {
@@ -187,7 +201,7 @@ export function useAnimatedHighlight(
       subtree: true,
       childList: true,
       attributes: true,
-      attributeFilter: ['data-highlighted', 'data-disabled'],
+      attributeFilter: attributeKey.split(' '),
     })
 
     const resizeObserver = new ResizeObserver(scheduleUpdate)
@@ -215,5 +229,5 @@ export function useAnimatedHighlight(
         capture: true,
       })
     }
-  }, [highlightRef, onUpdate])
+  }, [attributeKey, highlightRef, onUpdate, selector])
 }

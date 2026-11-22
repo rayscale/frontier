@@ -14,6 +14,7 @@ export const examples: ReadonlyMap<
   ['forms-label', lazy(() => import('./examples/forms-label.js'))],
   ['forms-validation-timing', lazy(() => import('./examples/forms-validation-timing.js'))],
   ['hierarchy-alignment', lazy(() => import('./examples/hierarchy-alignment.js'))],
+  ['hierarchy-current', lazy(() => import('./examples/hierarchy-current.js'))],
   ['hierarchy-depth', lazy(() => import('./examples/hierarchy-depth.js'))],
   ['hierarchy-disclosure', lazy(() => import('./examples/hierarchy-disclosure.js'))],
   ['motion-exit', lazy(() => import('./examples/motion-exit.js'))],
@@ -32,6 +33,7 @@ export const examples: ReadonlyMap<
 
 /** Examples that show a movement, so people can play them. The others are only illustrations. */
 export const interactiveExamples: ReadonlySet<string> = new Set([
+  'hierarchy-current',
   'motion-exit',
   'motion-first-frame',
   'motion-purpose',

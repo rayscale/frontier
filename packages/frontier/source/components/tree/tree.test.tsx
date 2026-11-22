@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -107,6 +107,56 @@ describe('Tree', () => {
     installation.focus()
     expect(intro).not.toHaveAttribute('data-highlighted')
     expect(installation).toHaveAttribute('data-highlighted')
+  })
+
+  describe('hover highlight', () => {
+    it('stays on the last row while the pointer crosses the space between rows', async () => {
+      const user = userEvent.setup()
+      const { container } = render(<Tree aria-label="Contents" items={items} />)
+
+      const intro = screen.getByRole('link', { name: 'Introduction' })
+      await user.hover(intro)
+      expect(intro).toHaveAttribute('data-highlighted')
+
+      const list = container.querySelector('.frontier-tree')
+      if (!list) {
+        throw new Error('The tree did not render')
+      }
+
+      fireEvent.pointerOver(list)
+      expect(intro).toHaveAttribute('data-highlighted')
+    })
+
+    it('does not return to a row that was only clicked once the pointer leaves', async () => {
+      const user = userEvent.setup()
+      render(<Tree aria-label="Contents" items={items} />)
+
+      const intro = screen.getByRole('link', { name: 'Introduction' })
+      const installation = screen.getByRole('link', { name: 'Installation' })
+
+      await user.click(intro)
+      await user.hover(installation)
+      expect(installation).toHaveAttribute('data-highlighted')
+
+      await user.unhover(installation)
+      expect(installation).not.toHaveAttribute('data-highlighted')
+      expect(intro).not.toHaveAttribute('data-highlighted')
+    })
+
+    it('does not draw a second surface over the current row', async () => {
+      const user = userEvent.setup()
+      render(<Tree activeId="installation" aria-label="Contents" items={items} />)
+
+      const intro = screen.getByRole('link', { name: 'Introduction' })
+      const current = screen.getByRole('link', { name: 'Installation' })
+
+      await user.hover(intro)
+      expect(intro).toHaveAttribute('data-highlighted')
+
+      await user.hover(current)
+      expect(intro).not.toHaveAttribute('data-highlighted')
+      expect(current).not.toHaveAttribute('data-highlighted')
+    })
   })
 
   it('renders branch rows with tree-owned layout classes', () => {

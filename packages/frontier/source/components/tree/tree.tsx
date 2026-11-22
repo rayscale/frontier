@@ -68,6 +68,7 @@ export const Tree = forwardRef<HTMLUListElement, TTreeProps>(function Tree(
       enabled: highlightEnabled,
       containerRef: rootRef,
       selector: '.frontier-tree__row',
+      excludeSelector: '[data-current]',
     })
 
   const [uncontrolledExpanded, setUncontrolledExpanded] = useState<string[]>(

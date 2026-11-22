@@ -13,12 +13,31 @@ interface TUseHighlightTargetOptions {
   enabled: boolean
   containerRef: RefObject<HTMLElement | null>
   selector: string
+  /** Items that never take the highlight, such as one that already has its own marker. */
+  excludeSelector?: string | undefined
+}
+
+/**
+ * Whether an element shows its focus because of the keyboard. A click focuses an item too, but it
+ * is the pointer that is acting then, so the highlight must not stay on that item afterwards.
+ */
+function isFocusVisible(element: EventTarget | null): boolean {
+  if (!(element instanceof Element)) {
+    return false
+  }
+
+  try {
+    return element.matches(':focus-visible')
+  } catch {
+    return true
+  }
 }
 
 export function useHighlightTarget({
   enabled,
   containerRef,
   selector,
+  excludeSelector,
 }: TUseHighlightTargetOptions): {
   handlePointerOver: (event: ReactPointerEvent<HTMLElement>) => void
   handlePointerLeave: () => void
@@ -46,19 +65,29 @@ export function useHighlightTarget({
     highlightedTargetRef.current = nextTarget
   }, [])
 
+  const resolveTarget = (target: EventTarget | null): HTMLElement | null => {
+    const found = findHighlightTarget(target, containerRef.current, selector)
+
+    return found && excludeSelector && found.matches(excludeSelector) ? null : found
+  }
+
   const handlePointerOver = (event: ReactPointerEvent<HTMLElement>) => {
-    if (!enabled) {
+    highlightSourceRef.current = 'pointer'
+
+    if (!enabled || event.pointerType === 'touch') {
       pointerTargetRef.current = null
-      highlightSourceRef.current = 'pointer'
       updateHighlight()
       return
     }
 
-    pointerTargetRef.current =
-      event.pointerType === 'touch'
-        ? null
-        : findHighlightTarget(event.target, containerRef.current, selector)
-    highlightSourceRef.current = 'pointer'
+    const element = event.target instanceof Element ? event.target : null
+    if (!element?.closest(selector)) {
+      // Between two items the highlight stays where it is, so crossing the space is not a flicker.
+      updateHighlight()
+      return
+    }
+
+    pointerTargetRef.current = resolveTarget(event.target)
     updateHighlight()
   }
 
@@ -69,17 +98,17 @@ export function useHighlightTarget({
   }
 
   const handleFocusCapture = (event: ReactFocusEvent<HTMLElement>) => {
-    focusedTargetRef.current = enabled
-      ? findHighlightTarget(event.target, containerRef.current, selector)
-      : null
+    const focused = enabled && isFocusVisible(event.target) ? resolveTarget(event.target) : null
+
+    // Focus that arrives while the pointer is over the same item came from a click.
+    focusedTargetRef.current = focused === pointerTargetRef.current ? null : focused
     highlightSourceRef.current = 'focus'
     updateHighlight()
   }
 
   const handleBlurCapture = (event: ReactFocusEvent<HTMLElement>) => {
-    focusedTargetRef.current = enabled
-      ? findHighlightTarget(event.relatedTarget, containerRef.current, selector)
-      : null
+    focusedTargetRef.current =
+      enabled && isFocusVisible(event.relatedTarget) ? resolveTarget(event.relatedTarget) : null
     highlightSourceRef.current = 'focus'
     updateHighlight()
   }

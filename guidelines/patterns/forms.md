@@ -9,15 +9,27 @@ Every field has a visible label that describes the value. The label is part of t
 accessible name. Required fields are marked in text, not only with an asterisk. Help text explains a
 constraint before the person encounters it, and it sits with the field it describes.
 
+| Do                                                                       | Don't                                                                     |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Keep a visible label with the field and put an example in the help text. | Use the placeholder as the label, so it disappears when the person types. |
+
 ## Validation
 
 Validate when the person has had a reasonable chance to enter a valid value: on blur for a field
 that has been touched, and on submit for the form. Do not show an error while a value is still being
 typed for the first time.
 
+| Do                                                         | Don't                                                           |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| Validate a field on blur, after the person has touched it. | Show an error while the person is still typing the first value. |
+
 An error explains what happened and how to resolve it. It is attached to the field, announced as an
 error, and also listed in a summary at the start of the form. The summary links to each field it
 describes. See [Writing](../content/writing.md).
+
+| Do                                                                                      | Don't                                                      |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Explain the error next to the field, and list it in a summary at the start of the form. | Show "Invalid input" in one banner at the top of the form. |
 
 ## No color-only errors
 

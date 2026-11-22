@@ -13,6 +13,10 @@ A branch that also has its own page needs a separate destination for that page.
 The docs sidebar uses a disclosure row and an **Overview** child for the section
 index. Do not make the disclosure row navigate and toggle at the same time.
 
+| Do                                                                                    | Don't                                                       |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Give a branch that has its own page a disclosure row and a separate "Overview" child. | Make one row both open its branch and navigate to its page. |
+
 ## Depth
 
 Each level is indented and connected by the disclosure control. Deep trees are
@@ -20,12 +24,20 @@ harder to scan, so prefer shallow structures when the same content can be
 organized as a flat list. Do not hide essential destinations behind more levels
 than the content needs.
 
+| Do                                             | Don't                                               |
+| ---------------------------------------------- | --------------------------------------------------- |
+| Show five related destinations as a flat list. | Nest the same five destinations under three levels. |
+
 ## Alignment
 
 Rows at the same depth share the same start edge, whether they are branches or
 leaves. When some siblings use icons, reserve the icon slot for the rest so
 labels stay aligned. Keep the disclosure control at the end of the row so it
 does not shift the label.
+
+| Do                                                                | Don't                                                                  |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Reserve the icon slot on every row when some siblings have icons. | Let labels start at different edges because only some rows have icons. |
 
 ## The current destination
 

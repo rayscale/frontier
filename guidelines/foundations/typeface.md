@@ -22,9 +22,17 @@ Use a small number of levels. Each level should be clearly different from the on
 
 Emphasis within a line should use weight, not capital letters or decoration.
 
+| Do                            | Don't                                                  |
+| ----------------------------- | ------------------------------------------------------ |
+| Emphasize a word with weight. | Emphasize a word with capital letters or an underline. |
+
 ## Readability
 
 Use sentence case for labels, headings, and body text. Avoid all-caps text except for short, deliberate labels, because it is harder to read and reads as shouting. Keep line lengths comfortable for reading, and do not compress text to fit a control.
+
+| Do                    | Don't                 |
+| --------------------- | --------------------- |
+| Write "Save changes". | Write "SAVE CHANGES". |
 
 ## Labels in controls
 

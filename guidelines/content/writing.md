@@ -8,6 +8,10 @@ consistent and make it translatable.
 A label names the value it describes. Use a noun or a short noun phrase for fields and sections:
 "Name", "API key", "Billing address". Do not use a full sentence as a label.
 
+| Do                | Don't                                               |
+| ----------------- | --------------------------------------------------- |
+| "Billing address" | "Please enter the address where we send your bills" |
+
 A required field is marked with the word "required" in its label or help text. An asterisk alone is
 not enough. See [Forms](../patterns/forms.md).
 
@@ -15,6 +19,10 @@ not enough. See [Forms](../patterns/forms.md).
 
 An action label starts with a verb and names the result: "Save changes", "Delete file", "Create
 project". Do not use "OK" or "Submit" when a specific verb exists.
+
+| Do                            | Don't          |
+| ----------------------------- | -------------- |
+| "Save changes", "Delete file" | "OK", "Submit" |
 
 A destructive action names what it destroys. When the result is irreversible, the confirmation says
 so and names the object again.
@@ -24,8 +32,9 @@ so and names the object again.
 An error says what happened and how to resolve it. It does not blame the person and does not use a
 generic apology.
 
-- Write "The file is larger than 10 MB. Choose a smaller file."
-- Do not write "Invalid input."
+| Do                                                      | Don't            |
+| ------------------------------------------------------- | ---------------- |
+| "The file is larger than 10 MB. Choose a smaller file." | "Invalid input." |
 
 An error summary at the start of a form lists each error with a link to its field. The field keeps
 the same message next to it. See [Forms](../patterns/forms.md).
@@ -35,15 +44,18 @@ the same message next to it. See [Forms](../patterns/forms.md).
 An empty state says what is missing and what the person can do next. It does not pretend that the
 absence is a success, and it does not leave the person without a path.
 
-- Write "No projects yet. Create a project to get started."
+| Do                                                  | Don't                  |
+| --------------------------------------------------- | ---------------------- |
+| "No projects yet. Create a project to get started." | "Nothing to see here." |
 
 ## Confirmations
 
 A confirmation says what changed, briefly. It does not repeat the label of the action or add
 enthusiasm.
 
-- Write "Changes saved."
-- Do not write "Awesome! Your changes were saved successfully!"
+| Do               | Don't                                            |
+| ---------------- | ------------------------------------------------ |
+| "Changes saved." | "Awesome! Your changes were saved successfully!" |
 
 ## Numbers, dates, and units
 

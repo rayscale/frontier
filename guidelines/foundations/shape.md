@@ -12,6 +12,10 @@ Nested elements should use a smaller radius than the element that contains them.
 
 Choosing an unrelated smaller radius leaves a visible gap or a lopsided curve instead of a concentric one.
 
+| Do                                                                                                     | Don't                                                            |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Give an image inside a card a radius derived from the card's radius and the space between their edges. | Give the image the same radius as the card, or an unrelated one. |
+
 ## Borders
 
 Borders define an edge that the surface change alone cannot. Use a light border when a surface needs definition against its background. Do not add a border where a change in surface already separates the content.
@@ -21,6 +25,10 @@ Two border widths are available. Use the subtle hairline for separators and nest
 ## Full rounding
 
 Fully rounded shapes, such as capsules and circles, are reserved for small, self-contained elements: status markers, badges, avatars, and switches. Large containers and text fields should not be fully rounded, because the curve would reduce the space available for content.
+
+| Do                                           | Don't                                          |
+| -------------------------------------------- | ---------------------------------------------- |
+| Fully round a badge, an avatar, or a switch. | Fully round a large container or a text field. |
 
 ## Shape across components
 

@@ -36,6 +36,10 @@ repository-wide rules.
 - Use sentence case for headings.
 - Keep one rule per paragraph; do not duplicate a rule that another document owns.
 - Document exceptions where the owning rule lives, with the reason and the condition.
+- Illustrate a rule that people often break with one or two Do and Don't pairs, in a two-column
+  table headed "Do" and "Don't". Put the table right after the rule it illustrates, and keep it
+  conceptual: describe what the interface shows, not how it is built. Every Don't has a matching
+  Do, and neither depends on color to be understood.
 
 ## 4. Changing the guidelines
 
@@ -57,6 +61,7 @@ Do not redefine shared guidance to match one implementation's incidental behavio
 - Values are stated only in `foundations/values.md`.
 - No implementation details, class names, or framework APIs.
 - Terminology matches the rest of the guidelines.
+- Each Do and Don't pair sits with the rule that owns it and illustrates a rule that exists.
 - Links and layer indexes resolve.
 - The document follows the voice and writing rules in `content/`.
 - `pnpm format:check` passes for changed files.

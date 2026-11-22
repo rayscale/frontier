@@ -17,9 +17,18 @@ If motion does none of these, remove it. See [Restraint](../principles/restraint
 
 Icons follow the same purposes. See [Icons](./icons.md#animation).
 
+| Do                                                                  | Don't                                                    |
+| ------------------------------------------------------------------- | -------------------------------------------------------- |
+| Move a highlight between options, so the person sees where it went. | Loop an animation on a panel that is not doing anything. |
+
 ## Character
 
 Motion for movement that follows the user, such as a highlight travelling between options, should feel springy. The movement settles quickly and does not overshoot in a way that calls attention to itself. Motion for fades, entrances, and exits should feel calm and direct. Bounce is not part of the vocabulary for exits or for content that the user is reading.
+
+| Do                                                    | Don't                                        |
+| ----------------------------------------------------- | -------------------------------------------- |
+| Let a popup leave quickly and directly.               | Bounce a popup as it leaves.                 |
+| Show a new element in its place from the first frame. | Slide an element in from the wrong position. |
 
 Motion should be fluid. Interrupting a movement should redirect it, not restart it.
 

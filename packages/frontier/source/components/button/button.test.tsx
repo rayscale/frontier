@@ -118,18 +118,4 @@ describe('Button', () => {
     expect(link).toHaveAttribute('href', 'https://github.com')
     expect(link).toHaveClass('frontier-button', 'frontier-button--outline')
   })
-
-  it('marks itself as the trigger of the icons inside it', () => {
-    render(
-      <>
-        <Button>Save</Button>
-        <Button asChild>
-          <a href="/next">Next</a>
-        </Button>
-      </>,
-    )
-
-    expect(screen.getByRole('button', { name: 'Save' })).toHaveAttribute('data-icon-trigger')
-    expect(screen.getByRole('link', { name: 'Next' })).toHaveAttribute('data-icon-trigger')
-  })
 })

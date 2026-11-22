@@ -31,7 +31,7 @@ export function Spinner({
 
   return (
     <span {...props} className={classes} role="status" aria-label={ariaLabel ?? label}>
-      <LoaderCircle className="frontier-spinner__icon" aria-hidden="true" />
+      <LoaderCircle className="frontier-spinner__icon" aria-hidden="true" motion={undefined} />
     </span>
   )
 }

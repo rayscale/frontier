@@ -25,8 +25,9 @@ shared way to trigger them from the control around the icon.
 2. **A vocabulary, not a movement per icon.** Icons name a kind of movement (`nudge-*`, `turn`,
    `draw`, `ring`, `sweep`), and one stylesheet defines each kind. The kinds match the meanings
    in the guideline: direction, opening and closing, completion, attention, progress.
-3. **The control owns the trigger.** A control marks itself with `data-icon-trigger`. Its icons
-   move when it is hovered, focused, or pressed, and not when it is disabled. An icon can also
+3. **The control owns the trigger.** Any button, link, tab, menu item, or option starts the
+   movement of the icons inside it, and `data-icon-trigger` marks any other element. Its icons
+   move when it is hovered, focused, pressed, or highlighted, and not when it is disabled. An icon can also
    be driven directly with the `animate` prop, which is how an icon that appears with a state,
    such as the check of a copied value, plays once as it mounts.
 4. **Rest is the static icon.** Movement starts from the drawn icon and returns to it. Hover
@@ -40,11 +41,14 @@ shared way to trigger them from the control around the icon.
 1. Add `TIconMotion` and the `motion` and `animate` props to the icon types.
 2. Render `data-motion` and `data-animate` on the icon. For `draw`, give each shape a
    normalized path length, so one rule draws any stroke.
-3. Map the built-in icons to a kind: arrows and chevrons nudge, plus, x, and settings turn,
-   check draws, bell rings, and the loader sweeps. Let `createIcon` take a `motion` option for
+3. Map every built-in icon to a kind: arrows and chevrons nudge, plus, x, settings, sun, and
+   compass turn, check and activity draw, bell rings, warnings shake, the loader sweeps,
+   documents and containers lift, tools tilt, and the rest pop. A test fails when an icon has no
+   movement. Let `createIcon` take a `motion` option for
    custom icons.
 4. Write the movements in `icon.css`, and turn them all off under reduced motion.
-5. Mark `Button` as a trigger. `CopyButton` inherits it, and its check plays as it appears.
+5. Let the native controls be the trigger. The check of `CopyButton` plays as it appears, and
+   the spinner opts out of the movement.
 6. Test the attributes and the mapping, and document the behavior on the icons page.
 7. Run lint, format, tests, and the build, then look at the movements in the browser.
 

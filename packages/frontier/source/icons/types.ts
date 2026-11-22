@@ -9,17 +9,29 @@ export interface TIconAttributes {
 export type TIconNode = readonly (readonly [tag: string, attributes: TIconAttributes])[]
 
 /**
- * The kind of movement an icon makes. Directions nudge the icon along its arrow, a turn opens or
- * closes, a draw completes, a ring calls attention, and a sweep shows progress.
+ * The kind of movement an icon makes. Directions nudge the icon along its arrow, a turn opens,
+ * closes, or configures, a draw completes, a ring and a shake call attention, and a sweep shows
+ * progress. Presence pops, containers lift, and tools tilt.
  */
 export type TIconMotion =
-  'nudge-up' | 'nudge-right' | 'nudge-down' | 'nudge-left' | 'turn' | 'draw' | 'ring' | 'sweep'
+  | 'nudge-up'
+  | 'nudge-right'
+  | 'nudge-down'
+  | 'nudge-left'
+  | 'turn'
+  | 'draw'
+  | 'ring'
+  | 'shake'
+  | 'sweep'
+  | 'pop'
+  | 'lift'
+  | 'tilt'
 
 export type TIconProps = Omit<ComponentPropsWithoutRef<'svg'>, 'children' | 'height' | 'width'> & {
   iconNode: TIconNode
   /**
    * The movement of the icon. Built-in icons choose their own. The icon moves when the control
-   * around it is marked with `data-icon-trigger` and is hovered, focused, or pressed.
+   * around it is hovered, focused, or pressed.
    */
   motion?: TIconMotion | undefined
   /** Plays the movement while `true`, and once when the icon appears with it set. */

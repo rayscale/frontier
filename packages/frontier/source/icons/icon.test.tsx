@@ -2,7 +2,8 @@ import { render } from '@testing-library/react'
 import { createRef } from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { ArrowRight, Check, createIcon, Icon, Info } from './index.js'
+import { ArrowRight, Check, createIcon, Icon, iconMetadata, Info } from './index.js'
+import { iconMotions } from './motion.js'
 
 describe('Icon', () => {
   it('draws its shapes on the 24-unit grid and stays out of the accessibility tree', () => {
@@ -76,7 +77,11 @@ describe('Icon', () => {
         'data-motion',
         'draw',
       )
-      expect(container.querySelector('[data-testid="info"]')).not.toHaveAttribute('data-motion')
+      expect(container.querySelector('[data-testid="info"]')).toHaveAttribute('data-motion', 'pop')
+    })
+
+    it.each(iconMetadata.map((icon) => icon.component))('animates %s', (component) => {
+      expect(iconMotions.has(component)).toBe(true)
     })
 
     it('plays the movement only when animate is true', () => {

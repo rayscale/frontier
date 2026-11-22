@@ -75,7 +75,6 @@ export function Button({
         {...childProps}
         aria-disabled={disabled ? true : (childProps['aria-disabled'] as boolean | undefined)}
         className={mergedClassName}
-        data-icon-trigger=""
         whileHover={motionDisabled ? undefined : (whileHover ?? { scale: 1.03 })}
         whileTap={motionDisabled ? undefined : (whileTap ?? { scale: 0.97 })}
         transition={transition ?? springInteractive}
@@ -95,7 +94,6 @@ export function Button({
       type={type}
       disabled={disabled}
       className={classes}
-      data-icon-trigger=""
       {...(motionDisabled
         ? {}
         : { whileHover: whileHover ?? { scale: 1.03 }, whileTap: whileTap ?? { scale: 0.97 } })}

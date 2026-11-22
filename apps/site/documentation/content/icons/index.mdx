@@ -36,9 +36,9 @@ An icon is decorative: it is hidden from assistive technology, and the control t
 
 ## Movement
 
-An icon can move to confirm an action, show a change, or show progress. The control that holds the icon starts the movement, so an icon moves when its control is hovered, focused, or pressed. Each built-in icon that moves makes one movement that matches its meaning: arrows and chevrons nudge along their direction, a plus, a cross, and a gear turn, a check draws itself, a bell rings, and a loader sweeps.
+Every icon moves in one way that matches its meaning. Arrows and chevrons nudge along their direction. A plus, a cross, and a gear turn. A check and a pulse draw themselves. A bell rings, and a warning shakes. A loader sweeps. Documents, folders, and boxes lift. Tools such as a pen or a search tilt, and the rest pop.
 
-The [button](/documentation/components/actions/button) starts the movement of the icons inside it, and so does the [copy button](/documentation/components/actions/copy-button). Disabled controls do not start it. Icons return to the icon as drawn when the control is left.
+The control that holds the icon starts the movement, so an icon moves when its control is hovered, focused, pressed, or highlighted. Any button, link, tab, menu item, or option is such a control, and disabled ones do not start it. Icons return to the icon as drawn when the control is left.
 
 ### In a button
 
@@ -60,7 +60,7 @@ Movement is removed when the reduced motion preference is on, and the icon stays
 
 ### Your own controls
 
-Mark a control with `data-icon-trigger` to let it start the movement of the icons inside it.
+Mark any other element with `data-icon-trigger` to let it start the movement of the icons inside it.
 
 ```tsx
 <a href="/next" data-icon-trigger>

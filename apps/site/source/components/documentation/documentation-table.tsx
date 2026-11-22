@@ -15,7 +15,7 @@ function cellAlign(align: string | undefined): TCellAlign | undefined {
   return align === undefined ? undefined : cellAlignments[align]
 }
 
-/** The elements of a Markdown table, rendered with the Frontier table. */
+/** The elements of a Markdown table, rendered with the table component. */
 export function DocumentationTable(props: ComponentPropsWithoutRef<'table'>): ReactElement {
   return <Table {...props} />
 }

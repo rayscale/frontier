@@ -1,6 +1,6 @@
 # Restraint
 
-Restraint means that Frontier adds visual and motion effects only when they serve the task. Frontier has personality, and that personality should be felt, but it must never cost the user clarity, focus, or speed.
+Restraint means that visual and motion effects are added only when they serve the task. Frontier has personality, and that personality should be felt, but it must never cost the user clarity, focus, or speed.
 
 ## Add only what earns its place
 

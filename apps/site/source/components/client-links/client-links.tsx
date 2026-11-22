@@ -15,7 +15,7 @@ function isPlainLeftClick(event: MouseEvent): boolean {
 }
 
 /**
- * Routes clicks on internal links through the Next.js router. Frontier components
+ * Routes clicks on internal links through the Next.js router. The components
  * render native anchors, so one delegated handler gives every one of them
  * client-side navigation without wrapping each link.
  */

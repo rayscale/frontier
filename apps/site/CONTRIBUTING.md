@@ -69,14 +69,14 @@ on the server; the interactive parts run in the browser too.
 - A section that has pages of its own gets an `Overview` row in the sidebar automatically, so a
   row never toggles and navigates at once.
 - Write the text of a callout directly inside it. Do not nest block elements in it.
-- Fenced code blocks render through the Frontier `CodeBlock` with client-side highlighting.
+- Fenced code blocks render through the `CodeBlock` with client-side highlighting.
 
 ### Demos
 
 - Put one demo per file in `<page>/demos/`, named in kebab-case, such as `with-icon.tsx`, with
   a default export.
 - Reference it by its camelCase name: `<Demo name="withIcon" />`.
-- Demos use the real Frontier components. They are checked like any other source.
+- Demos use the real components. They are checked like any other source.
 - A demo is a client component loaded in the browser, so it may use hooks. Do not add a
   `'use client'` line: the file is shown as written in the Code tab.
 
@@ -94,7 +94,7 @@ Every component page follows the same order: `## Usage`, `## Examples`, `## API 
 
 ## Styles
 
-Use the Frontier tokens. Do not hardcode colors, spacing, typography, or radii. Keep site styles
+Use the design tokens. Do not hardcode colors, spacing, typography, or radii. Keep site styles
 in a stylesheet next to the component they style, scoped to site classes.
 
 ## Verification

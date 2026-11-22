@@ -1,6 +1,6 @@
 # Colors
 
-Color in Frontier communicates roles. It tells the user what a surface is for, what a piece of text means, and what status something carries. Decoration is secondary. The palette is restrained: mostly neutral surfaces, with a small set of accents and status colors used sparingly.
+Color communicates roles. It tells the user what a surface is for, what a piece of text means, and what status something carries. Decoration is secondary. The palette is restrained: mostly neutral surfaces, with a small set of accents and status colors used sparingly.
 
 See [Values](./values.md#colors) for the exact colors of each role.
 

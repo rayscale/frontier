@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://frontier.design/icons/metadata.schema.json",
-  "title": "Frontier icon metadata",
+  "title": "Icon metadata",
   "type": "object",
   "required": ["name", "keywords", "categories", "useCases", "aliases"],
   "additionalProperties": false,

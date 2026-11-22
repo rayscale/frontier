@@ -1,6 +1,6 @@
 # Principles
 
-Principles are the values that guide every design decision in Frontier. They are short, stable, and independent of platform, component, or technology. When a specific rule is unclear or missing, a principle is the place to reason from.
+Principles are the values that guide every design decision. They are short, stable, and independent of platform, component, or technology. When a specific rule is unclear or missing, a principle is the place to reason from.
 
 ## Guidelines in this category
 

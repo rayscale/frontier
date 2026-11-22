@@ -13,7 +13,7 @@ The site for the Frontier design language. It is a Next.js app that exports plai
 
 ## What is in the site
 
-- **Landing** — A home page that introduces the system, with the Frontier header and footer.
+- **Landing** — A home page that introduces the system, with the header and footer.
 - **Documentation** — A navigation tree, breadcrumbs, a table of contents, and page navigation around every page.
 - **Component pages** — Live examples with their source, the API of each part, and accessibility notes. Button is the first.
 - **Icons** — A searchable catalog of every icon with its usage.

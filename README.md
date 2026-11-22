@@ -21,7 +21,7 @@ The guidelines state design intent. The packages implement it and do not extend 
 
 ## Design language
 
-The Frontier design language defines the visual foundations and principles behind everything in the workspace. It is built around five layers:
+The design language defines the visual foundations and principles behind everything in the workspace. It is built around five layers:
 
 - **Principles** — The values behind every decision.
 - **Foundations** — Color, typeface, spacing, shape, elevation, focus, motion, and accessibility.
@@ -40,7 +40,7 @@ Workspace projects live under `apps/` and `packages/`.
 
 ## Getting started
 
-Frontier requires Node.js 22 or newer and the pnpm version declared in [package.json](./package.json). See [Corepack](https://pnpm.io/installation#using-corepack) for managing pnpm.
+The workspace requires Node.js 22 or newer and the pnpm version declared in [package.json](./package.json). See [Corepack](https://pnpm.io/installation#using-corepack) for managing pnpm.
 
 ```sh
 pnpm install
@@ -96,13 +96,13 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for the workspace conventions.
 ## Development
 
 > [!WARNING]
-> Frontier is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
+> The project is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
 >
 > More information will be added as the project progresses.
 
 ## Guidelines
 
-Explore the [design guidelines](./guidelines/README.md) for the principles, foundations, patterns, and conventions that define Frontier.
+Explore the [design guidelines](./guidelines/README.md) for the principles, foundations, patterns, and conventions that define the system.
 
 - [Principles](./guidelines/principles/README.md)
 - [Foundations](./guidelines/foundations/README.md)

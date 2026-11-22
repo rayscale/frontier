@@ -122,7 +122,7 @@ export const Specimen: TStory = {
                   fontWeight: weight.value,
                 }}
               >
-                Frontier is a design language for the web
+                A design language for the web
               </span>
               <span style={captionStyle}>
                 {weight.label} {weight.value}

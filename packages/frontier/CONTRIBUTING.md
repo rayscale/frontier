@@ -94,7 +94,7 @@ Use a namespace API when a component has meaningful public parts:
 Use a headless primitive when a component needs complex focus, dismissal, keyboard, positioning,
 or coordinated state. Do not recreate that behavior by hand.
 
-- Wrap the primitive in a Frontier component and expose Frontier's own props, types, and composition.
+- Wrap the primitive in a component of the package and expose the package's own props, types, and composition.
 - Keep primitive imports, state adapters, and types private.
 - Do not require consumers to import the primitive.
 - Do not forward every prop for convenience.
@@ -337,7 +337,7 @@ mode control.
 - Use asynchronous queries and `waitFor` only when behavior is asynchronous.
 - Keep tests deterministic and isolated. Restore mocks; avoid sleeps, snapshots, and order
   dependence.
-- Do not test behavior a primitive already guarantees. Test Frontier's integration, defaults, state
+- Do not test behavior a primitive already guarantees. Test the integration, defaults, state
   mapping, styling contracts, and accessibility relationships.
 - Add a regression test for every bug fix. It must fail before the fix and pass after.
 - Do not delete, skip, or weaken assertions to make a run pass.
@@ -379,7 +379,7 @@ Follow the accessibility, focus, and interaction guidelines.
   `package.json`.
 - Keep each component's `index.ts` limited to that component's public API.
 - Never export internal helpers, private hooks, adapters, or internal types.
-- Do not expose an interaction primitive as a substitute for a Frontier component.
+- Do not expose an interaction primitive as a substitute for a component of the package.
 - Keep exports, declarations, package metadata, styles, and documentation synchronized.
 - Preserve supported import paths and module formats.
 - Treat export changes as public API changes.

@@ -1,7 +1,7 @@
 import { CodeBlock } from '@rayscale/frontier'
 
 const code =
-  'curl --request POST --header "Content-Type: application/json" --data \'{"name":"Frontier"}\' https://example.com/api/projects'
+  'curl --request POST --header "Content-Type: application/json" --data \'{"name":"Atlas"}\' https://example.com/api/projects'
 
 export default function Wrap() {
   return (

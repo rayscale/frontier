@@ -1,6 +1,6 @@
 # Clarity
 
-Clarity means that every element tells the user what it is, what it does, and what state it is in, without making them work it out. Frontier prefers an interface that can be understood at a glance over one that is merely attractive.
+Clarity means that every element tells the user what it is, what it does, and what state it is in, without making them work it out. An interface that can be understood at a glance is preferred over one that is merely attractive.
 
 ## Every cue carries meaning
 

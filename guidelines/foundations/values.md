@@ -1,6 +1,6 @@
 # Values
 
-This page lists the concrete values behind Frontier's foundations. Each category links back to its guideline, which explains when and why to use these values. Use the names here, not raw numbers, when designing.
+This page lists the concrete values behind the foundations. Each category links back to its guideline, which explains when and why to use these values. Use the names here, not raw numbers, when designing.
 
 These are the values of the Frontier theme. Another theme sets its own values for what [Themes](./themes.md) leaves open.
 

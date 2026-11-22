@@ -1,6 +1,6 @@
 # Spacing
 
-Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. Frontier uses a consistent scale, so that the same relationship looks the same everywhere.
+Spacing creates grouping and rhythm. It tells the user which elements belong together and which are separate, before they read a single word. A consistent scale is used, so that the same relationship looks the same everywhere.
 
 See [Values](./values.md#spacing) for the spacing scale.
 

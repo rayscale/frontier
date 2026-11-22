@@ -59,8 +59,8 @@ export const Inline: TStory = {
   },
   render: (args) => (
     <p>
-      Frontier is a design language. <Link {...args}>Read the guidelines</Link> to see how
-      components should behave.
+      Every component follows a design language. <Link {...args}>Read the guidelines</Link> to see
+      how components should behave.
     </p>
   ),
 }

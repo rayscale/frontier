@@ -6,7 +6,7 @@ export interface TDocumentationFrontmatter {
   description?: string | undefined
   /** Position among siblings. Pages without one sort last, by title. */
   order?: number | undefined
-  /** Name of a Frontier icon shown beside the title in the sidebar. */
+  /** Name of an icon shown beside the title in the sidebar. */
   icon?: string | undefined
   /** Maturity of what the page documents. */
   status?: 'draft' | 'beta' | 'stable' | undefined

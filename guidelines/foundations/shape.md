@@ -36,7 +36,7 @@ Components of the same kind share a shape language. A component may vary in size
 
 ## A single radius family
 
-Frontier uses a single radius family. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.
+A single radius family is used. Each size takes its step on that scale. Dense controls, such as those in popups, take the step their size and nesting call for, not a separate and tighter curve.
 
 ## Principle
 

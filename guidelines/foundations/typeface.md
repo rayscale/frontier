@@ -1,6 +1,6 @@
 # Typeface
 
-The typeface carries most of Frontier's content. It should be clear, calm, and friendly, and it supports the warm tone of the interface without drawing attention to itself.
+The typeface carries most of the content. It should be clear, calm, and friendly, and it supports the warm tone of the interface without drawing attention to itself.
 
 # Outfit
 

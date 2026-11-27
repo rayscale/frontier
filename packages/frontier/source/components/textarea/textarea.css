@@ -1,0 +1,21 @@
+.frontier-textarea__box {
+  align-items: stretch;
+  padding: 0;
+}
+
+.frontier-textarea {
+  box-sizing: border-box;
+  min-height: 0;
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-3);
+  border-radius: calc(var(--frontier-radius-lg) - var(--frontier-border-width));
+  resize: vertical;
+}
+
+.frontier-textarea--fixed {
+  resize: none;
+}
+
+.frontier-textarea--auto-size {
+  field-sizing: content;
+  resize: none;
+}

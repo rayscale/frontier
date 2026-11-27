@@ -56,6 +56,14 @@
   --frontier-color-info-subtle: #eff6ff;
   --frontier-color-info-border: #bfdbfe;
 
+  /* Chart series, in the order a chart assigns them. Each one is at least 3:1 on a surface. */
+  --frontier-color-chart-1: var(--frontier-gray-900);
+  --frontier-color-chart-2: #2563eb;
+  --frontier-color-chart-3: #15803d;
+  --frontier-color-chart-4: #b45309;
+  --frontier-color-chart-5: #9333ea;
+  --frontier-color-chart-6: #db2777;
+
   --frontier-color-background: var(--frontier-white);
   --frontier-color-surface: var(--frontier-white);
   --frontier-color-surface-raised: var(--frontier-white);
@@ -117,6 +125,13 @@
   --frontier-color-info: #93c5fd;
   --frontier-color-info-subtle: #172554;
   --frontier-color-info-border: #1e40af;
+
+  --frontier-color-chart-1: var(--frontier-gray-100);
+  --frontier-color-chart-2: #60a5fa;
+  --frontier-color-chart-3: #4ade80;
+  --frontier-color-chart-4: #fbbf24;
+  --frontier-color-chart-5: #c084fc;
+  --frontier-color-chart-6: #f472b6;
 
   --frontier-color-background: var(--frontier-black);
   --frontier-color-surface: var(--frontier-gray-900);

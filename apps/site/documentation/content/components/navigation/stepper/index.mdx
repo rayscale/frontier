@@ -1,0 +1,123 @@
+---
+title: Stepper
+description: The steps of a process, and where someone is in them.
+---
+
+## Usage
+
+```tsx
+import { Stepper } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Stepper.Root defaultValue={2}>
+      <Stepper.List aria-label="Checkout">
+        <Stepper.Item value={1}>
+          <Stepper.Indicator />
+          <Stepper.Title>Cart</Stepper.Title>
+        </Stepper.Item>
+        <Stepper.Item value={2}>
+          <Stepper.Indicator />
+          <Stepper.Title>Shipping</Stepper.Title>
+        </Stepper.Item>
+      </Stepper.List>
+    </Stepper.Root>
+  )
+}
+```
+
+A stepper shows the steps of a process that has an order, such as a checkout, a setup, or the status of an order. Steps before the current one are completed, the current one is marked, and the rest are upcoming. Number the steps from 1 with `value`, and set the current one on the root.
+
+By default a stepper only shows progress. The page decides when to move on, for example with a Next button. Pass `onValueChange` to let people select a step themselves.
+
+## Examples
+
+### Default
+
+Steps with only an indicator, and the content of the current step in a `Stepper.Panel` below.
+
+<Demo name="default" />
+
+### Labeled
+
+Put a `Stepper.Title` next to the indicator to name each step.
+
+<Demo name="labeled" />
+
+### Icons
+
+Children of `Stepper.Indicator` replace the number and the check mark. An icon stays in every state, so a completed step with its own icon keeps it.
+
+<Demo name="icons" />
+
+### Vertical
+
+Set `orientation="vertical"` to stack the steps in a column. Add a `Stepper.Description` under each title, and the panel sits beside the list.
+
+<Demo name="vertical" />
+
+### Interactive
+
+Pass `value` and `onValueChange` to control the stepper from the page. The steps become buttons, and a disabled step cannot be chosen.
+
+<Demo name="interactive" />
+
+## API reference
+
+### Stepper.Root
+
+Renders a `<div>` that holds the steps and the content of the current step. It forwards its ref and the attributes of a `div`, except `defaultValue`.
+
+| Prop             | Type                         | Default        | Description                                                                         |
+| ---------------- | ---------------------------- | -------------- | ----------------------------------------------------------------------------------- |
+| `completedLabel` | `string`                     | `'Completed'`  | Text read before a completed step so people who cannot see its mark hear its state. |
+| `defaultValue`   | `number`                     | `1`            | Step that is current at the start, in uncontrolled mode.                            |
+| `onValueChange`  | `(value: number) => void`    | —              | Called with the step a person chose. Passing it makes the steps selectable.         |
+| `orientation`    | `'horizontal' \| 'vertical'` | `'horizontal'` | Direction in which the steps are laid out.                                          |
+| `value`          | `number`                     | —              | Step that is current, in controlled mode. A value past the last step completes all. |
+
+### Stepper.List
+
+Renders the ordered list, an `<ol>`, that holds the steps. It forwards its ref and the attributes of an `ol`. Give it an accessible name.
+
+### Stepper.Item
+
+Renders one step, an `<li>`, with the line that joins it to the next. Its state follows from its `value` and the current step. It forwards its ref and the attributes of an `li`, except `value`.
+
+| Prop       | Type      | Default | Description                             |
+| ---------- | --------- | ------- | --------------------------------------- |
+| `value`    | `number`  | —       | Number of the step, starting at 1.      |
+| `disabled` | `boolean` | `false` | Prevents this step from being selected. |
+
+### Stepper.Indicator
+
+Renders the mark of a step: its number, a check once it is completed, or the children you pass. It is hidden from assistive technology. It forwards its ref and the attributes of a `span`.
+
+### Stepper.Title
+
+Renders the name of a step. It forwards its ref and the attributes of a `span`.
+
+### Stepper.Description
+
+Renders supporting text under the name of a step. It forwards its ref and the attributes of a `span`.
+
+### Stepper.Panel
+
+Renders the content that belongs to one step. It is hidden while that step is not current, and it stays mounted so what people typed in it is kept. It forwards its ref and the attributes of a `div`.
+
+| Prop    | Type     | Default | Description                                 |
+| ------- | -------- | ------- | ------------------------------------------- |
+| `value` | `number` | —       | Number of the step this content belongs to. |
+
+## Accessibility
+
+<Callout title="Name the list">
+  The steps are an ordered list, so give `Stepper.List` an `aria-label` that says what process the
+  steps belong to, such as "Checkout".
+</Callout>
+
+- The current step reports `aria-current="step"`, so assistive technology announces where someone is.
+- A completed step is read with the `completedLabel` before its title. The check mark and the number are hidden from assistive technology, and the state is not shown by color alone.
+- When `onValueChange` is set, each step is a native button in the tab order, and the focus ring comes from the focus tokens. A disabled step uses the native `disabled` attribute.
+- An icon in an indicator is decorative. The title names the step, so a step with an icon and no title needs an `aria-label` on its item.
+- Panels that are not current are hidden from everyone, not just from sight.

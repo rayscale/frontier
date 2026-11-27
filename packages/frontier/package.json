@@ -1,7 +1,16 @@
 {
   "name": "@rayscale/frontier",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "A design language for the web.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayscale/frontier.git",
+    "directory": "packages/frontier"
+  },
+  "homepage": "https://github.com/rayscale/frontier/tree/main/packages/frontier#readme",
+  "bugs": {
+    "url": "https://github.com/rayscale/frontier/issues"
+  },
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -24,6 +33,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "generate:icons": "node --experimental-strip-types scripts/generate-icons.ts && pnpm exec prettier --write \"source/icons/components/**/*.{ts,tsx}\" \"source/icons/generated.ts\"",
     "check:themes": "node --experimental-strip-types scripts/check-themes.ts",

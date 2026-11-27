@@ -1,0 +1,70 @@
+name: Publish
+
+# Publishes @rayscale/frontier to npm when a version tag is pushed, such as v0.1.0-alpha.0.
+# It signs in to npm with trusted publishing (OIDC), so no token is stored in the repository.
+# The trusted publisher on npmjs.com must name this file: publish.yml.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check that the tag matches the package version
+        id: release
+        working-directory: packages/frontier
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match package version ${version}." >&2
+            exit 1
+          fi
+
+          # A version such as 0.1.0-alpha.0 goes out under the alpha tag, not latest.
+          channel=latest
+          if [[ "${version}" == *-* ]]; then
+            channel="${version#*-}"
+            channel="${channel%%.*}"
+          fi
+
+          echo "channel=${channel}" >> "${GITHUB_OUTPUT}"
+
+      - name: Test
+        run: pnpm --filter @rayscale/frontier test
+
+      - name: Type-check
+        run: pnpm --filter @rayscale/frontier typecheck
+
+      - name: Build
+        run: pnpm --filter @rayscale/frontier build
+
+      - name: Publish
+        working-directory: packages/frontier
+        run: |
+          npm --version
+          npm publish --ignore-scripts --tag "${{ steps.release.outputs.channel }}"

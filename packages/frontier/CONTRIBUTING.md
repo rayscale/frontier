@@ -436,3 +436,17 @@ A package change is complete when:
 Follow the workspace [CONTRIBUTING.md](../../CONTRIBUTING.md) for Conventional Commits and the
 repository [AGENTS.md](../../AGENTS.md) for commit policy. Keep each commit focused on one logical
 change.
+
+## Releases
+
+The package is published to npm by [publish.yml](../../.github/workflows/publish.yml) when a tag
+`v<version>` is pushed, where `<version>` is the `version` in `package.json`. The workflow signs
+in with npm trusted publishing, so the repository holds no npm token. A prerelease such as
+`0.1.0-alpha.0` is published under its own dist-tag (`alpha`), never under `latest`.
+
+To release, change `version`, commit it, then push the tag:
+
+```bash
+git tag v0.1.0-alpha.1
+git push origin v0.1.0-alpha.1
+```

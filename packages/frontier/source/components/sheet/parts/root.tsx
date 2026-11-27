@@ -9,20 +9,20 @@ import {
 
 import { withConsumerClick } from '../../../internal/helpers/with-consumer-click.js'
 import { Button } from '../../button/button.js'
-import { drawerContext, useDrawerContext } from '../context.js'
+import { sheetContext, useSheetContext } from '../context.js'
 import { swipeDirectionBySide } from '../helpers/swipe.js'
-import { useDrawerStack } from '../hooks/use-drawer-stack.js'
-import type { TDrawerProps, TDrawerTriggerProps } from '../types.js'
+import { useSheetStack } from '../hooks/use-sheet-stack.js'
+import type { TSheetProps, TSheetTriggerProps } from '../types.js'
 
-export function DrawerRoot({
+export function SheetRoot({
   open,
   defaultOpen = false,
   onOpenChange,
   side = 'right',
   children,
-}: TDrawerProps): ReactElement {
+}: TSheetProps): ReactElement {
   const actionsRef = useRef<BaseDrawer.Root.Actions | null>(null)
-  const { closeOnBackdropClickRef, stackEntry } = useDrawerStack(actionsRef)
+  const { closeOnBackdropClickRef, stackEntry } = useSheetStack(actionsRef)
 
   const handleOpenChange = (
     nextOpen: boolean,
@@ -38,7 +38,7 @@ export function DrawerRoot({
   }
 
   return (
-    <drawerContext.Provider value={{ closeOnBackdropClickRef, side, stackEntry }}>
+    <sheetContext.Provider value={{ closeOnBackdropClickRef, side, stackEntry }}>
       <BaseDrawer.Root
         open={open}
         defaultOpen={defaultOpen}
@@ -48,12 +48,12 @@ export function DrawerRoot({
       >
         {children}
       </BaseDrawer.Root>
-    </drawerContext.Provider>
+    </sheetContext.Provider>
   )
 }
 
-export function DrawerTrigger({ children }: TDrawerTriggerProps): ReactElement {
-  useDrawerContext('Drawer.Trigger')
+export function SheetTrigger({ children }: TSheetTriggerProps): ReactElement {
+  useSheetContext('Sheet.Trigger')
 
   const trigger: ReactElement<{ onClick?: MouseEventHandler<HTMLElement> }> = isValidElement<{
     onClick?: MouseEventHandler<HTMLElement>

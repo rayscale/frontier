@@ -1,25 +1,25 @@
 import { type ForwardedRef, type RefObject, useCallback, useMemo, useRef } from 'react'
 
-import type { TDrawerStackEntry } from '../context.js'
+import type { TSheetStackEntry } from '../context.js'
 
 /** Pointer movement above this many pixels is a swipe, not a click. */
 const clickTolerancePx = 4
 
-/** Mounted drawers, ordered from the back-most to the front-most. */
-const openDrawerStack: TDrawerStackEntry[] = []
+/** Mounted sheets, ordered from the back-most to the front-most. */
+const openSheetStack: TSheetStackEntry[] = []
 let pressOrigin: { x: number; y: number } | null = null
-/** How many drawers were mounted before the current press, so drawers it opens are ignored. */
+/** How many sheets were mounted before the current press, so sheets it opens are ignored. */
 let pressStackLength = 0
 
 function handleDocumentPointerDown(event: globalThis.PointerEvent) {
   pressOrigin = { x: event.clientX, y: event.clientY }
-  pressStackLength = openDrawerStack.length
+  pressStackLength = openSheetStack.length
 }
 
 /**
- * Base UI dismisses only the front-most drawer on an outside click, and it
- * ignores clicks on a lower drawer when that drawer is nested. Clicking a lower
- * drawer, or the page behind the stack, closes the drawers in front of it.
+ * Base UI dismisses only the front-most sheet on an outside click, and it
+ * ignores clicks on a lower sheet when that sheet is nested. Clicking a lower
+ * sheet, or the page behind the stack, closes the sheets in front of it.
  */
 function handleDocumentClick(event: globalThis.MouseEvent) {
   const origin = pressOrigin
@@ -32,7 +32,7 @@ function handleDocumentClick(event: globalThis.MouseEvent) {
     return
   }
 
-  const stack = openDrawerStack.slice(0, pressStackLength)
+  const stack = openSheetStack.slice(0, pressStackLength)
   const frontIndex = stack.length - 1
   let clickedIndex = -1
 
@@ -74,23 +74,23 @@ function handleDocumentClick(event: globalThis.MouseEvent) {
   }
 }
 
-function addOpenDrawer(entry: TDrawerStackEntry) {
-  if (openDrawerStack.length === 0) {
+function addOpenSheet(entry: TSheetStackEntry) {
+  if (openSheetStack.length === 0) {
     document.addEventListener('pointerdown', handleDocumentPointerDown, true)
     document.addEventListener('click', handleDocumentClick)
   }
 
-  openDrawerStack.push(entry)
+  openSheetStack.push(entry)
 }
 
-function removeOpenDrawer(entry: TDrawerStackEntry) {
-  const index = openDrawerStack.indexOf(entry)
+function removeOpenSheet(entry: TSheetStackEntry) {
+  const index = openSheetStack.indexOf(entry)
 
   if (index !== -1) {
-    openDrawerStack.splice(index, 1)
+    openSheetStack.splice(index, 1)
   }
 
-  if (openDrawerStack.length === 0) {
+  if (openSheetStack.length === 0) {
     document.removeEventListener('pointerdown', handleDocumentPointerDown, true)
     document.removeEventListener('click', handleDocumentClick)
     pressOrigin = null
@@ -107,13 +107,13 @@ function isPointInsideElement(element: HTMLElement | null, x: number, y: number)
   return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom
 }
 
-export function useDrawerStack(actionsRef: RefObject<{ close: () => void } | null>): {
+export function useSheetStack(actionsRef: RefObject<{ close: () => void } | null>): {
   closeOnBackdropClickRef: RefObject<boolean>
-  stackEntry: TDrawerStackEntry
+  stackEntry: TSheetStackEntry
 } {
   const popupRef = useRef<HTMLElement | null>(null)
   const closeOnBackdropClickRef = useRef(true)
-  const stackEntry = useMemo<TDrawerStackEntry>(
+  const stackEntry = useMemo<TSheetStackEntry>(
     () => ({
       popupRef,
       close: () => actionsRef.current?.close(),
@@ -125,8 +125,8 @@ export function useDrawerStack(actionsRef: RefObject<{ close: () => void } | nul
   return { closeOnBackdropClickRef, stackEntry }
 }
 
-export function useDrawerPopupRegistration(
-  stackEntry: TDrawerStackEntry,
+export function useSheetPopupRegistration(
+  stackEntry: TSheetStackEntry,
   ref: ForwardedRef<HTMLDivElement>,
 ): (element: HTMLDivElement | null) => void {
   return useCallback(
@@ -134,9 +134,9 @@ export function useDrawerPopupRegistration(
       const previousElement = stackEntry.popupRef.current
       stackEntry.popupRef.current = element
       if (previousElement && !element) {
-        removeOpenDrawer(stackEntry)
+        removeOpenSheet(stackEntry)
       } else if (element && !previousElement) {
-        addOpenDrawer(stackEntry)
+        addOpenSheet(stackEntry)
       }
 
       if (typeof ref === 'function') {

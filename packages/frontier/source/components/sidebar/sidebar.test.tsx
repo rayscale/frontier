@@ -122,7 +122,7 @@ describe('Sidebar', () => {
     expect(await screen.findByRole('link', { name: 'Alpha' })).toBeVisible()
   })
 
-  it('opens the mobile drawer and closes it after navigation', async () => {
+  it('opens the mobile sheet and closes it after navigation', async () => {
     const user = userEvent.setup()
 
     vi.stubGlobal(

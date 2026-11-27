@@ -6,95 +6,95 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { assertDefined } from '../../internal/helpers/assert-defined.js'
 import { Button } from '../button/button.js'
 
-import { Drawer, type TDrawerProps, type TDrawerSide } from './index.js'
+import { Sheet, type TSheetProps, type TSheetSide } from './index.js'
 
 afterEach(() => {
   cleanup()
 })
 
-function renderDrawer(props: Partial<TDrawerProps> = {}) {
+function renderSheet(props: Partial<TSheetProps> = {}) {
   return render(
-    <Drawer {...props}>
-      <Drawer.Trigger>
-        <Button>Open drawer</Button>
-      </Drawer.Trigger>
-      <Drawer.Content>
-        <Drawer.Header>
-          <Drawer.Title>Project settings</Drawer.Title>
-          <Drawer.Description>Changes apply to this project.</Drawer.Description>
-        </Drawer.Header>
+    <Sheet {...props}>
+      <Sheet.Trigger>
+        <Button>Open sheet</Button>
+      </Sheet.Trigger>
+      <Sheet.Content>
+        <Sheet.Header>
+          <Sheet.Title>Project settings</Sheet.Title>
+          <Sheet.Description>Changes apply to this project.</Sheet.Description>
+        </Sheet.Header>
         <p>Body text</p>
-        <Drawer.Footer>
-          <Drawer.Close>Cancel</Drawer.Close>
+        <Sheet.Footer>
+          <Sheet.Close>Cancel</Sheet.Close>
           <Button variant="primary">Save</Button>
-        </Drawer.Footer>
-      </Drawer.Content>
-    </Drawer>,
+        </Sheet.Footer>
+      </Sheet.Content>
+    </Sheet>,
   )
 }
 
-function ControlledDrawer({ onOpenChange }: { onOpenChange?: (open: boolean) => void }) {
+function ControlledSheet({ onOpenChange }: { onOpenChange?: (open: boolean) => void }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <Drawer
+    <Sheet
       open={open}
       onOpenChange={(nextOpen) => {
         onOpenChange?.(nextOpen)
         setOpen(nextOpen)
       }}
     >
-      <Drawer.Trigger>
-        <Button>Open drawer</Button>
-      </Drawer.Trigger>
-      <Drawer.Content>
-        <Drawer.Title>Controlled</Drawer.Title>
-        <Drawer.Close>Close</Drawer.Close>
-      </Drawer.Content>
-    </Drawer>
+      <Sheet.Trigger>
+        <Button>Open sheet</Button>
+      </Sheet.Trigger>
+      <Sheet.Content>
+        <Sheet.Title>Controlled</Sheet.Title>
+        <Sheet.Close>Close</Sheet.Close>
+      </Sheet.Content>
+    </Sheet>
   )
 }
 
 function getBackdrop(): HTMLElement {
-  const backdrop = document.querySelector<HTMLElement>('.frontier-drawer__backdrop')
+  const backdrop = document.querySelector<HTMLElement>('.frontier-sheet__backdrop')
 
   if (!backdrop) {
-    throw new Error('Expected the drawer backdrop to be rendered.')
+    throw new Error('Expected the sheet backdrop to be rendered.')
   }
 
   return backdrop
 }
 
-describe('Drawer', () => {
-  it('forwards its ref to the drawer surface element', async () => {
+describe('Sheet', () => {
+  it('forwards its ref to the sheet surface element', async () => {
     const user = userEvent.setup()
     const contentRef = createRef<HTMLDivElement>()
     render(
-      <Drawer>
-        <Drawer.Trigger>
-          <Button>Open drawer</Button>
-        </Drawer.Trigger>
-        <Drawer.Content ref={contentRef}>
-          <Drawer.Title>Ref check</Drawer.Title>
-        </Drawer.Content>
-      </Drawer>,
+      <Sheet>
+        <Sheet.Trigger>
+          <Button>Open sheet</Button>
+        </Sheet.Trigger>
+        <Sheet.Content ref={contentRef}>
+          <Sheet.Title>Ref check</Sheet.Title>
+        </Sheet.Content>
+      </Sheet>,
     )
-    await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+    await user.click(screen.getByRole('button', { name: 'Open sheet' }))
     expect(await screen.findByRole('dialog')).toBe(contentRef.current)
   })
 
   describe('state', () => {
     it('is closed by default and opens from the trigger', async () => {
       const user = userEvent.setup()
-      renderDrawer()
-      await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+      renderSheet()
+      await user.click(screen.getByRole('button', { name: 'Open sheet' }))
       expect(await screen.findByRole('dialog')).toBeInTheDocument()
     })
 
     it('opens and closes in uncontrolled mode', async () => {
       const user = userEvent.setup()
-      renderDrawer()
-      await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+      renderSheet()
+      await user.click(screen.getByRole('button', { name: 'Open sheet' }))
       await screen.findByRole('dialog')
       await user.click(screen.getByRole('button', { name: 'Cancel' }))
       await waitFor(() => {
@@ -103,15 +103,15 @@ describe('Drawer', () => {
     })
 
     it('renders open on mount when defaultOpen is set', () => {
-      renderDrawer({ defaultOpen: true })
+      renderSheet({ defaultOpen: true })
       expect(screen.getByRole('dialog')).toBeInTheDocument()
     })
 
     it('calls onOpenChange with the requested state in uncontrolled mode', async () => {
       const user = userEvent.setup()
       const onOpenChange = vi.fn()
-      renderDrawer({ onOpenChange })
-      await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+      renderSheet({ onOpenChange })
+      await user.click(screen.getByRole('button', { name: 'Open sheet' }))
       await screen.findByRole('dialog')
       await user.click(screen.getByRole('button', { name: 'Cancel' }))
       await waitFor(() => {
@@ -120,38 +120,38 @@ describe('Drawer', () => {
       expect(onOpenChange).toHaveBeenNthCalledWith(1, true)
     })
 
-    it('keeps the drawer closed when a controlled parent ignores onOpenChange', async () => {
+    it('keeps the sheet closed when a controlled parent ignores onOpenChange', async () => {
       const user = userEvent.setup()
       const onOpenChange = vi.fn()
       render(
-        <Drawer open={false} onOpenChange={onOpenChange}>
-          <Drawer.Trigger>
-            <Button>Open drawer</Button>
-          </Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Ignored</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet open={false} onOpenChange={onOpenChange}>
+          <Sheet.Trigger>
+            <Button>Open sheet</Button>
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Ignored</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+      await user.click(screen.getByRole('button', { name: 'Open sheet' }))
       expect(onOpenChange).toHaveBeenCalledWith(true)
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     })
 
     it('follows the open prop when a controlled parent updates it', () => {
       const { rerender } = render(
-        <Drawer open={false}>
-          <Drawer.Content>
-            <Drawer.Title>Controlled</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet open={false}>
+          <Sheet.Content>
+            <Sheet.Title>Controlled</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       rerender(
-        <Drawer open>
-          <Drawer.Content>
-            <Drawer.Title>Controlled</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet open>
+          <Sheet.Content>
+            <Sheet.Title>Controlled</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       expect(screen.getByRole('dialog')).toBeInTheDocument()
     })
@@ -159,8 +159,8 @@ describe('Drawer', () => {
     it('works with controlled state managed by a parent component', async () => {
       const user = userEvent.setup()
       const onOpenChange = vi.fn()
-      render(<ControlledDrawer onOpenChange={onOpenChange} />)
-      await user.click(screen.getByRole('button', { name: 'Open drawer' }))
+      render(<ControlledSheet onOpenChange={onOpenChange} />)
+      await user.click(screen.getByRole('button', { name: 'Open sheet' }))
       await screen.findByRole('dialog')
       await user.click(screen.getByRole('button', { name: 'Close' }))
       await waitFor(() => {
@@ -175,7 +175,7 @@ describe('Drawer', () => {
     it('closes on Escape and reports the close once', async () => {
       const user = userEvent.setup()
       const onOpenChange = vi.fn()
-      renderDrawer({ defaultOpen: true, onOpenChange })
+      renderSheet({ defaultOpen: true, onOpenChange })
       await user.keyboard('{Escape}')
       await waitFor(() => {
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
@@ -184,23 +184,23 @@ describe('Drawer', () => {
       expect(onOpenChange).toHaveBeenCalledWith(false)
     })
 
-    it('keeps a controlled drawer open on Escape when the parent ignores the request', async () => {
+    it('keeps a controlled sheet open on Escape when the parent ignores the request', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer open onOpenChange={vi.fn()}>
-          <Drawer.Content>
-            <Drawer.Title>Locked</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet open onOpenChange={vi.fn()}>
+          <Sheet.Content>
+            <Sheet.Title>Locked</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.keyboard('{Escape}')
       expect(screen.getByRole('dialog')).toBeInTheDocument()
     })
 
-    it('moves focus into the drawer when it opens and restores it on close', async () => {
+    it('moves focus into the sheet when it opens and restores it on close', async () => {
       const user = userEvent.setup()
-      renderDrawer()
-      const trigger = screen.getByRole('button', { name: 'Open drawer' })
+      renderSheet()
+      const trigger = screen.getByRole('button', { name: 'Open sheet' })
       await user.click(trigger)
       await screen.findByRole('dialog')
       await waitFor(() => {
@@ -212,20 +212,20 @@ describe('Drawer', () => {
       })
     })
 
-    it('traps Tab focus inside the open drawer', async () => {
+    it('traps Tab focus inside the open sheet', async () => {
       const user = userEvent.setup()
-      renderDrawer({ defaultOpen: true })
-      const drawer = screen.getByRole('dialog')
+      renderSheet({ defaultOpen: true })
+      const sheet = screen.getByRole('dialog')
       const cancelButton = screen.getByRole('button', { name: 'Cancel' })
       const saveButton = screen.getByRole('button', { name: 'Save' })
       const focusedElements: (Element | null)[] = []
-      const isFocusInsideDrawerOrGuard = (element: Element | null) =>
+      const isFocusInsideSheetOrGuard = (element: Element | null) =>
         element instanceof HTMLElement &&
-        (element.hasAttribute('data-base-ui-focus-guard') || drawer.contains(element))
+        (element.hasAttribute('data-base-ui-focus-guard') || sheet.contains(element))
       for (let index = 0; index < 6; index += 1) {
         await user.tab()
         await waitFor(() => {
-          expect(isFocusInsideDrawerOrGuard(document.activeElement)).toBe(true)
+          expect(isFocusInsideSheetOrGuard(document.activeElement)).toBe(true)
         })
         focusedElements.push(document.activeElement)
       }
@@ -233,21 +233,21 @@ describe('Drawer', () => {
       expect(focusedElements).toContain(cancelButton)
       expect(focusedElements).toContain(saveButton)
       for (const focusedElement of focusedElements) {
-        expect(isFocusInsideDrawerOrGuard(focusedElement)).toBe(true)
+        expect(isFocusInsideSheetOrGuard(focusedElement)).toBe(true)
       }
     })
   })
 
-  describe('Drawer.Trigger', () => {
+  describe('Sheet.Trigger', () => {
     it('wraps non-element children in a Button and exposes dialog ARIA state', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer>
-          <Drawer.Trigger>Open text</Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Wrapped</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet>
+          <Sheet.Trigger>Open text</Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Wrapped</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       const trigger = screen.getByRole('button', { name: 'Open text' })
       await user.click(trigger)
@@ -259,16 +259,16 @@ describe('Drawer', () => {
       const user = userEvent.setup()
       const onClick = vi.fn()
       render(
-        <Drawer>
-          <Drawer.Trigger>
+        <Sheet>
+          <Sheet.Trigger>
             <button type="button" className="custom-trigger" onClick={onClick}>
               Custom
             </button>
-          </Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Custom</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Custom</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       const trigger = screen.getByRole('button', { name: 'Custom' })
       await user.click(trigger)
@@ -280,8 +280,8 @@ describe('Drawer', () => {
     it('does not open when the child onClick calls preventDefault', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer>
-          <Drawer.Trigger>
+        <Sheet>
+          <Sheet.Trigger>
             <button
               type="button"
               onClick={(event: MouseEvent<HTMLButtonElement>) => {
@@ -290,32 +290,32 @@ describe('Drawer', () => {
             >
               Blocked
             </button>
-          </Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Blocked</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Blocked</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.click(screen.getByRole('button', { name: 'Blocked' }))
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     })
   })
 
-  describe('Drawer.Close', () => {
+  describe('Sheet.Close', () => {
     it('renders as type="button" so it never submits a surrounding form', async () => {
       const user = userEvent.setup()
       const onSubmit = vi.fn((event: SyntheticEvent<HTMLFormElement>) => {
         event.preventDefault()
       })
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Form</Drawer.Title>
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Form</Sheet.Title>
             <form onSubmit={onSubmit}>
-              <Drawer.Close>Dismiss</Drawer.Close>
+              <Sheet.Close>Dismiss</Sheet.Close>
             </form>
-          </Drawer.Content>
-        </Drawer>,
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.click(screen.getByRole('button', { name: 'Dismiss' }))
       expect(onSubmit).not.toHaveBeenCalled()
@@ -323,12 +323,12 @@ describe('Drawer', () => {
 
     it('renders custom children and uses the outline variant by default', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Variant</Drawer.Title>
-            <Drawer.Close>Dismiss</Drawer.Close>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Variant</Sheet.Title>
+            <Sheet.Close>Dismiss</Sheet.Close>
+          </Sheet.Content>
+        </Sheet>,
       )
       const closeButton = screen.getByRole('button', { name: 'Dismiss' })
       expect(closeButton).toHaveClass('frontier-button--outline')
@@ -337,18 +337,18 @@ describe('Drawer', () => {
     it('does not close when its onClick calls preventDefault', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Guarded</Drawer.Title>
-            <Drawer.Close
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Guarded</Sheet.Title>
+            <Sheet.Close
               onClick={(event: MouseEvent<HTMLElement>) => {
                 event.preventDefault()
               }}
             >
               Stay
-            </Drawer.Close>
-          </Drawer.Content>
-        </Drawer>,
+            </Sheet.Close>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.click(screen.getByRole('button', { name: 'Stay' }))
       expect(screen.getByRole('dialog')).toBeInTheDocument()
@@ -358,12 +358,12 @@ describe('Drawer', () => {
       const user = userEvent.setup()
       const onClick = vi.fn()
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Clicks</Drawer.Title>
-            <Drawer.Close onClick={onClick}>Done</Drawer.Close>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Clicks</Sheet.Title>
+            <Sheet.Close onClick={onClick}>Done</Sheet.Close>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.click(screen.getByRole('button', { name: 'Done' }))
       expect(onClick).toHaveBeenCalledTimes(1)
@@ -373,11 +373,11 @@ describe('Drawer', () => {
     })
   })
 
-  describe('Drawer.Content close button', () => {
-    it('renders an accessible close button by default that closes the drawer', async () => {
+  describe('Sheet.Content close button', () => {
+    it('renders an accessible close button by default that closes the sheet', async () => {
       const user = userEvent.setup()
-      renderDrawer({ defaultOpen: true })
-      await user.click(screen.getByRole('button', { name: 'Close drawer' }))
+      renderSheet({ defaultOpen: true })
+      await user.click(screen.getByRole('button', { name: 'Close sheet' }))
       await waitFor(() => {
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
       })
@@ -385,29 +385,29 @@ describe('Drawer', () => {
 
     it('hides the close button when showCloseButton is false', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content showCloseButton={false}>
-            <Drawer.Title>No close</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content showCloseButton={false}>
+            <Sheet.Title>No close</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      expect(screen.queryByRole('button', { name: 'Close drawer' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Close sheet' })).not.toBeInTheDocument()
     })
   })
 
   describe('backdrop dismissal', () => {
     it('closes when the backdrop is clicked', async () => {
       const user = userEvent.setup()
-      renderDrawer({ defaultOpen: true })
+      renderSheet({ defaultOpen: true })
       await user.click(getBackdrop())
       await waitFor(() => {
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
       })
     })
 
-    it('does not close when clicking inside the drawer', async () => {
+    it('does not close when clicking inside the sheet', async () => {
       const user = userEvent.setup()
-      renderDrawer({ defaultOpen: true })
+      renderSheet({ defaultOpen: true })
       await user.click(screen.getByText('Body text'))
       expect(screen.getByRole('dialog')).toBeInTheDocument()
     })
@@ -415,11 +415,11 @@ describe('Drawer', () => {
     it('does not close on backdrop click when closeOnBackdropClick is false', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content closeOnBackdropClick={false}>
-            <Drawer.Title>Notice</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content closeOnBackdropClick={false}>
+            <Sheet.Title>Notice</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.click(getBackdrop())
       expect(screen.getByRole('dialog')).toBeInTheDocument()
@@ -428,11 +428,11 @@ describe('Drawer', () => {
     it('still closes with Escape when closeOnBackdropClick is false', async () => {
       const user = userEvent.setup()
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content closeOnBackdropClick={false}>
-            <Drawer.Title>Notice</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content closeOnBackdropClick={false}>
+            <Sheet.Title>Notice</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       await user.keyboard('{Escape}')
       await waitFor(() => {
@@ -440,8 +440,8 @@ describe('Drawer', () => {
       })
     })
 
-    it('does not close when a pointer press starts inside the drawer and ends on the backdrop', () => {
-      renderDrawer({ defaultOpen: true })
+    it('does not close when a pointer press starts inside the sheet and ends on the backdrop', () => {
+      renderSheet({ defaultOpen: true })
       const body = screen.getByText('Body text')
       fireEvent.pointerDown(body)
       fireEvent.pointerUp(getBackdrop())
@@ -451,99 +451,92 @@ describe('Drawer', () => {
   })
 
   describe('placement', () => {
-    it.each<[TDrawerSide]>([['right'], ['left'], ['top'], ['bottom']])(
-      'applies the %s placement class to the drawer surface',
+    it.each<[TSheetSide]>([['right'], ['left'], ['top'], ['bottom']])(
+      'applies the %s placement class to the sheet surface',
       (side) => {
         render(
-          <Drawer defaultOpen side={side}>
-            <Drawer.Content>
-              <Drawer.Title>Placed</Drawer.Title>
-            </Drawer.Content>
-          </Drawer>,
+          <Sheet defaultOpen side={side}>
+            <Sheet.Content>
+              <Sheet.Title>Placed</Sheet.Title>
+            </Sheet.Content>
+          </Sheet>,
         )
-        expect(screen.getByRole('dialog')).toHaveClass(
-          'frontier-drawer',
-          `frontier-drawer--${side}`,
-        )
+        expect(screen.getByRole('dialog')).toHaveClass('frontier-sheet', `frontier-sheet--${side}`)
       },
     )
 
     it('defaults to the right placement', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Default</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Default</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      expect(screen.getByRole('dialog')).toHaveClass('frontier-drawer--right')
+      expect(screen.getByRole('dialog')).toHaveClass('frontier-sheet--right')
     })
   })
 
-  describe('Drawer.Content props', () => {
+  describe('Sheet.Content props', () => {
     it('defaults to the medium size', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Size</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Size</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      expect(screen.getByRole('dialog')).toHaveClass('frontier-drawer--medium')
+      expect(screen.getByRole('dialog')).toHaveClass('frontier-sheet--medium')
     })
 
     it.each(['small', 'medium', 'large'] as const)('applies the %s size class', (size) => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content size={size}>
-            <Drawer.Title>Size</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content size={size}>
+            <Sheet.Title>Size</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      expect(screen.getByRole('dialog')).toHaveClass(`frontier-drawer--${size}`)
+      expect(screen.getByRole('dialog')).toHaveClass(`frontier-sheet--${size}`)
     })
 
     it('merges className and forwards style and HTML attributes to the surface', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content
-            className="custom-drawer"
-            style={{ zIndex: 7 }}
-            data-testid="drawer-surface"
-          >
-            <Drawer.Title>Attributes</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content className="custom-sheet" style={{ zIndex: 7 }} data-testid="sheet-surface">
+            <Sheet.Title>Attributes</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
       const surface = screen.getByRole('dialog')
-      expect(surface).toHaveClass('frontier-drawer', 'custom-drawer')
+      expect(surface).toHaveClass('frontier-sheet', 'custom-sheet')
       expect(surface).toHaveStyle({ zIndex: '7' })
-      expect(surface).toHaveAttribute('data-testid', 'drawer-surface')
+      expect(surface).toHaveAttribute('data-testid', 'sheet-surface')
     })
   })
 
   describe('accessibility', () => {
-    it('names the drawer from Drawer.Title and describes it from Drawer.Description', () => {
-      renderDrawer({ defaultOpen: true })
-      const drawer = screen.getByRole('dialog', { name: 'Project settings' })
-      expect(drawer).toHaveAccessibleDescription('Changes apply to this project.')
+    it('names the sheet from Sheet.Title and describes it from Sheet.Description', () => {
+      renderSheet({ defaultOpen: true })
+      const sheet = screen.getByRole('dialog', { name: 'Project settings' })
+      expect(sheet).toHaveAccessibleDescription('Changes apply to this project.')
     })
 
-    it('omits the description reference when no Drawer.Description is rendered', () => {
+    it('omits the description reference when no Sheet.Description is rendered', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Title>Only title</Drawer.Title>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Title>Only title</Sheet.Title>
+          </Sheet.Content>
+        </Sheet>,
       )
-      const drawer = screen.getByRole('dialog', { name: 'Only title' })
-      expect(drawer).not.toHaveAttribute('aria-describedby')
+      const sheet = screen.getByRole('dialog', { name: 'Only title' })
+      expect(sheet).not.toHaveAttribute('aria-describedby')
     })
 
     it('labels the close button and leaves its icon hidden from assistive technology', () => {
-      renderDrawer({ defaultOpen: true })
-      const closeButton = screen.getByRole('button', { name: 'Close drawer' })
+      renderSheet({ defaultOpen: true })
+      const closeButton = screen.getByRole('button', { name: 'Close sheet' })
       expect(closeButton.querySelector('svg')).toHaveAttribute('aria-hidden', 'true')
     })
   })
@@ -551,17 +544,17 @@ describe('Drawer', () => {
   describe('layout parts', () => {
     it('forwards className and HTML attributes from Header, Title, Description, and Footer', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Header className="custom-header" data-testid="header">
-              <Drawer.Title className="custom-title">TLayout</Drawer.Title>
-              <Drawer.Description className="custom-description">Details</Drawer.Description>
-            </Drawer.Header>
-            <Drawer.Footer className="custom-footer" data-testid="footer">
-              <Drawer.Close>Done</Drawer.Close>
-            </Drawer.Footer>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Header className="custom-header" data-testid="header">
+              <Sheet.Title className="custom-title">TLayout</Sheet.Title>
+              <Sheet.Description className="custom-description">Details</Sheet.Description>
+            </Sheet.Header>
+            <Sheet.Footer className="custom-footer" data-testid="footer">
+              <Sheet.Close>Done</Sheet.Close>
+            </Sheet.Footer>
+          </Sheet.Content>
+        </Sheet>,
       )
       expect(screen.getByTestId('header')).toHaveClass('custom-header')
       expect(screen.getByRole('heading', { name: 'TLayout' })).toHaveClass('custom-title')
@@ -573,17 +566,17 @@ describe('Drawer', () => {
   describe('layout parts', () => {
     it('forwards className and HTML attributes from Header, Title, Description, and Footer', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Header className="custom-header" data-testid="header">
-              <Drawer.Title className="custom-title">TLayout</Drawer.Title>
-              <Drawer.Description className="custom-description">Details</Drawer.Description>
-            </Drawer.Header>
-            <Drawer.Footer className="custom-footer" data-testid="footer">
-              <Drawer.Close>Done</Drawer.Close>
-            </Drawer.Footer>
-          </Drawer.Content>
-        </Drawer>,
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Header className="custom-header" data-testid="header">
+              <Sheet.Title className="custom-title">TLayout</Sheet.Title>
+              <Sheet.Description className="custom-description">Details</Sheet.Description>
+            </Sheet.Header>
+            <Sheet.Footer className="custom-footer" data-testid="footer">
+              <Sheet.Close>Done</Sheet.Close>
+            </Sheet.Footer>
+          </Sheet.Content>
+        </Sheet>,
       )
       expect(screen.getByTestId('header')).toHaveClass('custom-header')
       expect(screen.getByRole('heading', { name: 'TLayout' })).toHaveClass('custom-title')
@@ -592,129 +585,129 @@ describe('Drawer', () => {
     })
 
     it('keeps the header and footer outside the scrolling body', () => {
-      renderDrawer({ defaultOpen: true })
-      expect(screen.getByText('Body text').closest('.frontier-drawer__body')).not.toBeNull()
+      renderSheet({ defaultOpen: true })
+      expect(screen.getByText('Body text').closest('.frontier-sheet__body')).not.toBeNull()
       expect(
-        screen.getByRole('heading', { name: 'Project settings' }).closest('.frontier-drawer__body'),
+        screen.getByRole('heading', { name: 'Project settings' }).closest('.frontier-sheet__body'),
       ).toBeNull()
-      expect(screen.getByText('Save').closest('.frontier-drawer__body')).toBeNull()
+      expect(screen.getByText('Save').closest('.frontier-sheet__body')).toBeNull()
     })
 
     it('keeps the header and footer pinned when they are placed among body content', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
-            <Drawer.Footer>
-              <Drawer.Close>Done</Drawer.Close>
-            </Drawer.Footer>
+        <Sheet defaultOpen>
+          <Sheet.Content>
+            <Sheet.Footer>
+              <Sheet.Close>Done</Sheet.Close>
+            </Sheet.Footer>
             <p>Body text</p>
-            <Drawer.Header>
-              <Drawer.Title>Late header</Drawer.Title>
-            </Drawer.Header>
-          </Drawer.Content>
-        </Drawer>,
+            <Sheet.Header>
+              <Sheet.Title>Late header</Sheet.Title>
+            </Sheet.Header>
+          </Sheet.Content>
+        </Sheet>,
       )
-      expect(screen.getByText('Body text').closest('.frontier-drawer__body')).not.toBeNull()
-      expect(screen.getByText('Done').closest('.frontier-drawer__body')).toBeNull()
+      expect(screen.getByText('Body text').closest('.frontier-sheet__body')).not.toBeNull()
+      expect(screen.getByText('Done').closest('.frontier-sheet__body')).toBeNull()
       expect(
-        screen.getByRole('heading', { name: 'Late header' }).closest('.frontier-drawer__body'),
+        screen.getByRole('heading', { name: 'Late header' }).closest('.frontier-sheet__body'),
       ).toBeNull()
     })
 
     it('places the close button on the header when a header is present', () => {
-      renderDrawer({ defaultOpen: true })
-      const closeButton = screen.getByRole('button', { name: 'Close drawer' })
-      expect(closeButton.parentElement).toHaveClass('frontier-drawer')
-      expect(closeButton.closest('.frontier-drawer__toolbar')).toBeNull()
+      renderSheet({ defaultOpen: true })
+      const closeButton = screen.getByRole('button', { name: 'Close sheet' })
+      expect(closeButton.parentElement).toHaveClass('frontier-sheet')
+      expect(closeButton.closest('.frontier-sheet__toolbar')).toBeNull()
     })
 
     it('places the close button in a toolbar outside the body when there is no header', () => {
       render(
-        <Drawer defaultOpen>
-          <Drawer.Content>
+        <Sheet defaultOpen>
+          <Sheet.Content>
             <p>Body text</p>
-          </Drawer.Content>
-        </Drawer>,
+          </Sheet.Content>
+        </Sheet>,
       )
-      const closeButton = screen.getByRole('button', { name: 'Close drawer' })
-      expect(closeButton.closest('.frontier-drawer__toolbar')).not.toBeNull()
-      expect(closeButton.closest('.frontier-drawer__body')).toBeNull()
+      const closeButton = screen.getByRole('button', { name: 'Close sheet' })
+      expect(closeButton.closest('.frontier-sheet__toolbar')).not.toBeNull()
+      expect(closeButton.closest('.frontier-sheet__body')).toBeNull()
     })
   })
 
   describe('nesting', () => {
-    function renderNestedDrawers() {
+    function renderNestedSheets() {
       return render(
-        <Drawer>
-          <Drawer.Trigger>
+        <Sheet>
+          <Sheet.Trigger>
             <Button>Open parent</Button>
-          </Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Parent</Drawer.Title>
-            <Drawer>
-              <Drawer.Trigger>
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Parent</Sheet.Title>
+            <Sheet>
+              <Sheet.Trigger>
                 <Button>Open child</Button>
-              </Drawer.Trigger>
-              <Drawer.Content>
-                <Drawer.Title>Child</Drawer.Title>
-                <Drawer.Close>Close child</Drawer.Close>
-              </Drawer.Content>
-            </Drawer>
-          </Drawer.Content>
-        </Drawer>,
+              </Sheet.Trigger>
+              <Sheet.Content>
+                <Sheet.Title>Child</Sheet.Title>
+                <Sheet.Close>Close child</Sheet.Close>
+              </Sheet.Content>
+            </Sheet>
+          </Sheet.Content>
+        </Sheet>,
       )
     }
 
-    function renderThreeLevelDrawers() {
+    function renderThreeLevelSheets() {
       return render(
-        <Drawer>
-          <Drawer.Trigger>
+        <Sheet>
+          <Sheet.Trigger>
             <Button>Open parent</Button>
-          </Drawer.Trigger>
-          <Drawer.Content>
-            <Drawer.Title>Parent</Drawer.Title>
-            <Drawer>
-              <Drawer.Trigger>
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Title>Parent</Sheet.Title>
+            <Sheet>
+              <Sheet.Trigger>
                 <Button>Open child</Button>
-              </Drawer.Trigger>
-              <Drawer.Content>
-                <Drawer.Title>Child</Drawer.Title>
-                <Drawer>
-                  <Drawer.Trigger>
+              </Sheet.Trigger>
+              <Sheet.Content>
+                <Sheet.Title>Child</Sheet.Title>
+                <Sheet>
+                  <Sheet.Trigger>
                     <Button>Open grandchild</Button>
-                  </Drawer.Trigger>
-                  <Drawer.Content>
-                    <Drawer.Title>Grandchild</Drawer.Title>
-                  </Drawer.Content>
-                </Drawer>
-              </Drawer.Content>
-            </Drawer>
-          </Drawer.Content>
-        </Drawer>,
+                  </Sheet.Trigger>
+                  <Sheet.Content>
+                    <Sheet.Title>Grandchild</Sheet.Title>
+                  </Sheet.Content>
+                </Sheet>
+              </Sheet.Content>
+            </Sheet>
+          </Sheet.Content>
+        </Sheet>,
       )
     }
 
-    function ControlledNestedDrawers({ parentOpen }: { parentOpen: boolean }) {
+    function ControlledNestedSheets({ parentOpen }: { parentOpen: boolean }) {
       return (
-        <Drawer open={parentOpen} onOpenChange={() => undefined}>
-          <Drawer.Content>
-            <Drawer.Title>Parent</Drawer.Title>
-            <Drawer>
-              <Drawer.Trigger>
+        <Sheet open={parentOpen} onOpenChange={() => undefined}>
+          <Sheet.Content>
+            <Sheet.Title>Parent</Sheet.Title>
+            <Sheet>
+              <Sheet.Trigger>
                 <Button>Open child</Button>
-              </Drawer.Trigger>
-              <Drawer.Content>
-                <Drawer.Title>Child</Drawer.Title>
-              </Drawer.Content>
-            </Drawer>
-          </Drawer.Content>
-        </Drawer>
+              </Sheet.Trigger>
+              <Sheet.Content>
+                <Sheet.Title>Child</Sheet.Title>
+              </Sheet.Content>
+            </Sheet>
+          </Sheet.Content>
+        </Sheet>
       )
     }
 
-    it('stacks a child drawer above its parent and moves focus into it', async () => {
+    it('stacks a child sheet above its parent and moves focus into it', async () => {
       const user = userEvent.setup()
-      renderNestedDrawers()
+      renderNestedSheets()
       await user.click(screen.getByRole('button', { name: 'Open parent' }))
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       const child = await screen.findByRole('dialog', { name: 'Child' })
@@ -730,7 +723,7 @@ describe('Drawer', () => {
 
     it('closes only the child on Escape and keeps the parent open', async () => {
       const user = userEvent.setup()
-      renderNestedDrawers()
+      renderNestedSheets()
       await user.click(screen.getByRole('button', { name: 'Open parent' }))
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       await screen.findByRole('dialog', { name: 'Child' })
@@ -743,7 +736,7 @@ describe('Drawer', () => {
 
     it('closes only the child from its close button and returns focus to its trigger', async () => {
       const user = userEvent.setup()
-      renderNestedDrawers()
+      renderNestedSheets()
       await user.click(screen.getByRole('button', { name: 'Open parent' }))
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       await screen.findByRole('dialog', { name: 'Child' })
@@ -759,11 +752,11 @@ describe('Drawer', () => {
 
     it('closes only the child on an outside press', async () => {
       const user = userEvent.setup()
-      renderNestedDrawers()
+      renderNestedSheets()
       await user.click(screen.getByRole('button', { name: 'Open parent' }))
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       await screen.findByRole('dialog', { name: 'Child' })
-      const viewports = document.querySelectorAll<HTMLElement>('.frontier-drawer__viewport')
+      const viewports = document.querySelectorAll<HTMLElement>('.frontier-sheet__viewport')
       await user.click(assertDefined(viewports[viewports.length - 1]))
       await waitFor(() => {
         expect(screen.queryByRole('dialog', { name: 'Child' })).not.toBeInTheDocument()
@@ -773,7 +766,7 @@ describe('Drawer', () => {
 
     it('dismisses three levels of nesting one at a time, topmost first', async () => {
       const user = userEvent.setup()
-      renderThreeLevelDrawers()
+      renderThreeLevelSheets()
       await user.click(screen.getByRole('button', { name: 'Open parent' }))
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       await user.click(screen.getByRole('button', { name: 'Open grandchild' }))
@@ -798,34 +791,34 @@ describe('Drawer', () => {
 
     it('removes the child overlay and backdrop when the parent closes', async () => {
       const user = userEvent.setup()
-      const { rerender } = render(<ControlledNestedDrawers parentOpen />)
+      const { rerender } = render(<ControlledNestedSheets parentOpen />)
       await user.click(screen.getByRole('button', { name: 'Open child' }))
       await screen.findByRole('dialog', { name: 'Child' })
-      rerender(<ControlledNestedDrawers parentOpen={false} />)
+      rerender(<ControlledNestedSheets parentOpen={false} />)
       await waitFor(() => {
-        expect(document.querySelector('.frontier-drawer')).toBeNull()
+        expect(document.querySelector('.frontier-sheet')).toBeNull()
       })
-      expect(document.querySelector('.frontier-drawer__backdrop')).toBeNull()
+      expect(document.querySelector('.frontier-sheet__backdrop')).toBeNull()
     })
   })
 
   describe('compound component context', () => {
     it.each([
-      ['Drawer.Trigger', () => <Drawer.Trigger>Open</Drawer.Trigger>],
+      ['Sheet.Trigger', () => <Sheet.Trigger>Open</Sheet.Trigger>],
       [
-        'Drawer.Content',
+        'Sheet.Content',
         () => (
-          <Drawer.Content>
+          <Sheet.Content>
             <p>Body</p>
-          </Drawer.Content>
+          </Sheet.Content>
         ),
       ],
-      ['Drawer.Title', () => <Drawer.Title>Title</Drawer.Title>],
-      ['Drawer.Description', () => <Drawer.Description>Description</Drawer.Description>],
-      ['Drawer.Close', () => <Drawer.Close>Close</Drawer.Close>],
-    ])('throws when %s is used outside Drawer', (name, renderPart) => {
+      ['Sheet.Title', () => <Sheet.Title>Title</Sheet.Title>],
+      ['Sheet.Description', () => <Sheet.Description>Description</Sheet.Description>],
+      ['Sheet.Close', () => <Sheet.Close>Close</Sheet.Close>],
+    ])('throws when %s is used outside Sheet', (name, renderPart) => {
       const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined)
-      expect(() => render(renderPart())).toThrow(`${name} must be used within Drawer.`)
+      expect(() => render(renderPart())).toThrow(`${name} must be used within Sheet.`)
 
       consoleError.mockRestore()
     })

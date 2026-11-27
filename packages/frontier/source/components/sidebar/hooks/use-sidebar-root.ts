@@ -33,7 +33,7 @@ export function useSidebarRoot({
   setOpen: (nextOpen: boolean) => void
   toggleSidebar: () => void
   sidebarStyle: CSSProperties & TCssCustomProperties
-  mobileDrawerStyle: CSSProperties & TCssCustomProperties
+  mobileSheetStyle: CSSProperties & TCssCustomProperties
 } {
   const sidebarId = useId()
   const mobileState = useMediaQuery(mobileQuery)
@@ -95,8 +95,8 @@ export function useSidebarRoot({
     '--_sidebar-width': toCssLength(width),
     '--_sidebar-collapsed-width': toCssLength(collapsedWidth),
   }
-  const mobileDrawerStyle: CSSProperties & TCssCustomProperties = {
-    '--_drawer-horizontal-size': toCssLength(mobileWidth),
+  const mobileSheetStyle: CSSProperties & TCssCustomProperties = {
+    '--_sheet-horizontal-size': toCssLength(mobileWidth),
   }
 
   return {
@@ -108,6 +108,6 @@ export function useSidebarRoot({
     setOpen,
     toggleSidebar,
     sidebarStyle,
-    mobileDrawerStyle,
+    mobileSheetStyle,
   }
 }

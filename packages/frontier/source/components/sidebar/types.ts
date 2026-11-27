@@ -11,7 +11,7 @@ import type { TTreeProps } from '../tree/types.js'
 
 /** Props for `Sidebar.Root`, including layout and expansion controls. */
 export type TSidebarRootProps = HTMLAttributes<HTMLDivElement> & {
-  /** Current desktop expansion state. Mobile drawer visibility stays internal. */
+  /** Current desktop expansion state. Mobile sheet visibility stays internal. */
   open?: boolean | undefined
   /** Initial expanded state when uncontrolled. Defaults to `true`. */
   defaultOpen?: boolean | undefined
@@ -21,7 +21,7 @@ export type TSidebarRootProps = HTMLAttributes<HTMLDivElement> & {
   width?: number | string | undefined
   /** Icon-only desktop width. Defaults to `3rem`. */
   collapsedWidth?: number | string | undefined
-  /** Mobile drawer width. Defaults to `18rem`. */
+  /** Mobile sheet width. Defaults to `18rem`. */
   mobileWidth?: number | string | undefined
   /** Modifier shortcut key. `false` disables the shortcut; defaults to `b`. */
   keyboardShortcut?: string | false | undefined

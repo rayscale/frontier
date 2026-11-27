@@ -3,25 +3,25 @@ import { Children, forwardRef, isValidElement, type ReactNode, useLayoutEffect }
 
 import { X } from '../../../icons/index.js'
 import { Button } from '../../button/button.js'
-import { useDrawerContext } from '../context.js'
-import { useDrawerPopupRegistration } from '../hooks/use-drawer-stack.js'
-import type { TDrawerContentProps } from '../types.js'
+import { useSheetContext } from '../context.js'
+import { useSheetPopupRegistration } from '../hooks/use-sheet-stack.js'
+import type { TSheetContentProps } from '../types.js'
 
-import { DrawerFooter, DrawerHeader } from './sections.js'
+import { SheetFooter, SheetHeader } from './sections.js'
 
 /**
- * Separates `Drawer.Header` and `Drawer.Footer` from the remaining content, so
+ * Separates `Sheet.Header` and `Sheet.Footer` from the remaining content, so
  * they stay outside the scroll container wherever a consumer places them.
  */
-function partitionDrawerChildren(children: ReactNode) {
+function partitionSheetChildren(children: ReactNode) {
   const headers: ReactNode[] = []
   const body: ReactNode[] = []
   const footers: ReactNode[] = []
 
   for (const child of Children.toArray(children)) {
-    if (isValidElement(child) && child.type === DrawerHeader) {
+    if (isValidElement(child) && child.type === SheetHeader) {
       headers.push(child)
-    } else if (isValidElement(child) && child.type === DrawerFooter) {
+    } else if (isValidElement(child) && child.type === SheetFooter) {
       footers.push(child)
     } else {
       body.push(child)
@@ -31,7 +31,7 @@ function partitionDrawerChildren(children: ReactNode) {
   return { headers, body, footers }
 }
 
-export const DrawerContent = forwardRef<HTMLDivElement, TDrawerContentProps>(function DrawerContent(
+export const SheetContent = forwardRef<HTMLDivElement, TSheetContentProps>(function SheetContent(
   {
     size = 'medium',
     showCloseButton = true,
@@ -42,31 +42,31 @@ export const DrawerContent = forwardRef<HTMLDivElement, TDrawerContentProps>(fun
   },
   ref,
 ) {
-  const { closeOnBackdropClickRef, side, stackEntry } = useDrawerContext('Drawer.Content')
+  const { closeOnBackdropClickRef, side, stackEntry } = useSheetContext('Sheet.Content')
   useLayoutEffect(() => {
     closeOnBackdropClickRef.current = closeOnBackdropClick
   }, [closeOnBackdropClick, closeOnBackdropClickRef])
 
-  const setPopupElement = useDrawerPopupRegistration(stackEntry, ref)
+  const setPopupElement = useSheetPopupRegistration(stackEntry, ref)
 
   const classes = [
-    'frontier-drawer',
-    `frontier-drawer--${side}`,
-    `frontier-drawer--${size}`,
+    'frontier-sheet',
+    `frontier-sheet--${side}`,
+    `frontier-sheet--${size}`,
     className,
   ]
     .filter(Boolean)
     .join(' ')
 
-  const { headers, body, footers } = partitionDrawerChildren(children)
+  const { headers, body, footers } = partitionSheetChildren(children)
   const closeButton = showCloseButton ? (
     <BaseDrawer.Close
       render={
         <Button
           variant="ghost"
           size="icon"
-          className="frontier-drawer__close-button"
-          aria-label="Close drawer"
+          className="frontier-sheet__close-button"
+          aria-label="Close sheet"
         />
       }
     >
@@ -76,15 +76,15 @@ export const DrawerContent = forwardRef<HTMLDivElement, TDrawerContentProps>(fun
 
   return (
     <BaseDrawer.Portal>
-      <BaseDrawer.Backdrop className="frontier-drawer__backdrop" />
-      <BaseDrawer.Viewport className="frontier-drawer__viewport">
+      <BaseDrawer.Backdrop className="frontier-sheet__backdrop" />
+      <BaseDrawer.Viewport className="frontier-sheet__viewport">
         <BaseDrawer.Popup {...props} ref={setPopupElement} className={classes}>
           {headers}
-          <BaseDrawer.Content className="frontier-drawer__body">{body}</BaseDrawer.Content>
+          <BaseDrawer.Content className="frontier-sheet__body">{body}</BaseDrawer.Content>
           {footers}
           {headers.length > 0
             ? closeButton
-            : closeButton && <div className="frontier-drawer__toolbar">{closeButton}</div>}
+            : closeButton && <div className="frontier-sheet__toolbar">{closeButton}</div>}
         </BaseDrawer.Popup>
       </BaseDrawer.Viewport>
     </BaseDrawer.Portal>

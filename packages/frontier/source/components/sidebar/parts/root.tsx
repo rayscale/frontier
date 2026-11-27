@@ -2,7 +2,7 @@ import { Children, forwardRef, isValidElement, useRef } from 'react'
 
 import { AnimatedHighlight } from '../../../internal/primitives/animated-highlight/animated-highlight.js'
 import { useHighlightTarget } from '../../../internal/primitives/animated-highlight/use-highlight-target.js'
-import { Drawer } from '../../drawer/drawer.js'
+import { Sheet } from '../../sheet/sheet.js'
 import { sidebarContext } from '../context.js'
 import { sidebarHighlightSelector } from '../helpers/highlight.js'
 import { useSidebarRoot } from '../hooks/use-sidebar-root.js'
@@ -48,7 +48,7 @@ export const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(functio
     setOpen,
     toggleSidebar,
     sidebarStyle,
-    mobileDrawerStyle,
+    mobileSheetStyle,
   } = useSidebarRoot({
     open,
     defaultOpen,
@@ -114,16 +114,16 @@ export const SidebarRoot = forwardRef<HTMLDivElement, TSidebarRootProps>(functio
         style={{ ...style }}
       >
         {mobileState ? (
-          <Drawer open={mobileOpen} onOpenChange={setMobileOpen} side="left">
-            <Drawer.Content
-              className="frontier-sidebar__mobile-drawer"
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen} side="left">
+            <Sheet.Content
+              className="frontier-sidebar__mobile-sheet"
               showCloseButton={false}
               aria-label={label}
-              style={mobileDrawerStyle}
+              style={mobileSheetStyle}
             >
               {sidebar}
-            </Drawer.Content>
-          </Drawer>
+            </Sheet.Content>
+          </Sheet>
         ) : (
           sidebar
         )}

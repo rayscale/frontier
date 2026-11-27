@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-description: A side navigation with groups of links that collapses to icons, and becomes a drawer on small screens.
+description: A side navigation with groups of links that collapses to icons, and becomes a sheet on small screens.
 ---
 
 ## Usage
@@ -31,7 +31,7 @@ export function Example() {
 }
 ```
 
-Use a sidebar for an application with many destinations, where the navigation stays beside the content. It expands to show labels, collapses to icons, and on small screens it becomes a drawer. Put the page content in `Sidebar.Inset`, so it sits beside the sidebar. For navigation inside a page, use a [table of contents](/documentation/components/navigation/table-of-contents).
+Use a sidebar for an application with many destinations, where the navigation stays beside the content. It expands to show labels, collapses to icons, and on small screens it becomes a sheet. Put the page content in `Sidebar.Inset`, so it sits beside the sidebar. For navigation inside a page, use a [table of contents](/documentation/components/navigation/table-of-contents).
 
 ## Examples
 
@@ -70,7 +70,7 @@ Renders the navigation landmark and the layout around the content. `Sidebar.Root
 | `onOpenChange`     | `(open: boolean) => void` | —           | Called when expanding or collapsing is requested.                                   |
 | `width`            | `number \| string`        | `'16rem'`   | Width when expanded.                                                                |
 | `collapsedWidth`   | `number \| string`        | `'3rem'`    | Width when collapsed to icons.                                                      |
-| `mobileWidth`      | `number \| string`        | `'18rem'`   | Width of the drawer on small screens.                                               |
+| `mobileWidth`      | `number \| string`        | `'18rem'`   | Width of the sheet on small screens.                                                |
 | `keyboardShortcut` | `string \| false`         | `'b'`       | Key that toggles the sidebar with the modifier key. `false` turns the shortcut off. |
 | `animateOnHover`   | `boolean`                 | `true`      | Uses one sliding surface to highlight the item under the pointer.                   |
 | `label`            | `string`                  | `'Sidebar'` | Accessible name of the navigation landmark.                                         |
@@ -168,4 +168,4 @@ Holds the main content next to the sidebar. It renders a `<div>` and accepts its
 - A modifier key with the key set in `keyboardShortcut` toggles the sidebar.
 - When the sidebar is collapsed, each item keeps its text name and shows it in a tooltip.
 - An icon-only item or action needs a `label` or an `aria-label`.
-- On small screens, the sidebar opens as a drawer.
+- On small screens, the sidebar opens as a sheet.

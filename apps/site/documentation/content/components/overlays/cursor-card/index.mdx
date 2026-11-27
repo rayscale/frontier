@@ -1,0 +1,98 @@
+---
+title: Cursor card
+description: A card that opens when the cursor enters a zone and moves with the cursor.
+---
+
+## Usage
+
+```tsx
+import { CursorCard } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <CursorCard>
+      <CursorCard.Zone>
+        <div style={{ height: 160 }}>Move the cursor here</div>
+      </CursorCard.Zone>
+      <CursorCard.Content>
+        {({ x, y }) => `x ${Math.round(x)}, y ${Math.round(y)}`}
+      </CursorCard.Content>
+    </CursorCard>
+  )
+}
+```
+
+A cursor card shows information about the spot under the cursor, such as the value of a chart at that point. It opens when the cursor enters the zone, follows the cursor while it stays inside, and closes when the cursor leaves. The card does not take the pointer, so it never gets in the way of what is under it.
+
+Give the content a function and it receives the position of the cursor inside the zone, so the card can show the value that belongs to that position. For a label anchored to a fixed element, use a [tooltip](/documentation/components/overlays/tooltip), and for richer content that people can move into, a [hover card](/documentation/components/overlays/hover-card).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Follow axis
+
+With `followAxis="x"` the card slides along the zone and stays level with it. Use `y` to slide it down the zone instead.
+
+<Demo name="followAxis" />
+
+### Values
+
+Read the cursor position to pick the value under the cursor. Here each seventh of the zone is one day of the week.
+
+<Demo name="values" />
+
+### Delay
+
+`openDelay` is the time before the card opens, so a cursor that only crosses the zone does not open it.
+
+<Demo name="delay" />
+
+## API reference
+
+### CursorCard
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                      | Default  | Description                                                                            |
+| -------------- | ------------------------- | -------- | -------------------------------------------------------------------------------------- |
+| `children`     | `ReactNode`               | —        | The parts of the cursor card.                                                          |
+| `closeDelay`   | `number`                  | `0`      | Time to wait after the cursor leaves the zone before the card closes, in milliseconds. |
+| `defaultOpen`  | `boolean`                 | `false`  | Whether the card starts open.                                                          |
+| `disabled`     | `boolean`                 | `false`  | Prevents the card from opening.                                                        |
+| `followAxis`   | `'both' \| 'x' \| 'y'`    | `'both'` | Axis along which the card follows the cursor.                                          |
+| `onOpenChange` | `(open: boolean) => void` | —        | Called with the requested state when it opens or closes.                               |
+| `open`         | `boolean`                 | —        | Whether the card is open, in controlled mode.                                          |
+| `openDelay`    | `number`                  | `0`      | Time to wait after the cursor enters the zone before the card opens, in milliseconds.  |
+
+### CursorCard.Zone
+
+Marks the region where the card follows the cursor. Pass one element, and it keeps its attributes and its handlers. The card opens for any element, but only an element that can take focus, such as a button or a link, opens it from the keyboard.
+
+### CursorCard.Content
+
+Renders the card. It accepts the attributes of a `<div>`, except `children`.
+
+| Prop          | Type                                                   | Default    | Description                                                           |
+| ------------- | ------------------------------------------------------ | ---------- | --------------------------------------------------------------------- |
+| `align`       | `'start' \| 'center' \| 'end'`                         | `'start'`  | Alignment along the chosen side.                                      |
+| `alignOffset` | `number`                                               | `0`        | Shift along the aligned edge, in pixels.                              |
+| `children`    | `ReactNode \| (position: CursorPosition) => ReactNode` | —          | Content of the card, or a function that receives the cursor position. |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'`               | `'bottom'` | Side of the cursor where the card appears.                            |
+| `sideOffset`  | `number`                                               | `12`       | Distance between the cursor and the card, in pixels.                  |
+
+`CursorPosition` has four numbers: `x` and `y` are the distance from the top left corner of the zone, and `width` and `height` are the size of the zone, so `x / width` is how far across the cursor is.
+
+## Accessibility
+
+<Callout title="Keep the card supplementary">
+  The card needs a cursor, so it never opens on a touch screen, and assistive technology does not
+  announce it. Show the same information somewhere everyone can reach, such as a table next to a
+  chart.
+</Callout>
+
+- The card does not take the pointer, so people can click, select, and drag what is under it.
+- Opening from the keyboard works when the zone can take focus. The card then sits beside the focused element, because there is no cursor to follow.
+- The card enters and leaves with the same motion as the other overlays, and the motion is removed when reduced motion is on.

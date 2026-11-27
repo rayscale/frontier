@@ -1,0 +1,92 @@
+---
+title: Hover card
+description: A card with extra information that opens when the pointer enters an element.
+---
+
+## Usage
+
+```tsx
+import { HoverCard, Link } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <HoverCard>
+      <HoverCard.Trigger>
+        <Link href="/ana">@ana</Link>
+      </HoverCard.Trigger>
+      <HoverCard.Content>Ana designs the system.</HoverCard.Content>
+    </HoverCard>
+  )
+}
+```
+
+A hover card shows a little more about an element, such as the profile behind a mention or the preview of a link, without leaving the page. It opens when the pointer enters the trigger or the trigger gets keyboard focus, and it closes when the pointer leaves both the trigger and the card. People can move the pointer into the card, so it can hold links and other controls.
+
+Use a [tooltip](/documentation/components/overlays/tooltip) for a short label with no interaction, and a [popover](/documentation/components/overlays/popover) when the content should open on a click.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Placement
+
+Choose the side with `side` and the alignment with `align`. The card moves to the other side when there is no room.
+
+<Demo name="placement" />
+
+### Delays
+
+`openDelay` is the time before the card opens and `closeDelay` is the time before it closes. A longer close delay gives people time to move into the card.
+
+<Demo name="delays" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to control the card from the page.
+
+<Demo name="controlled" />
+
+## API reference
+
+### HoverCard
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                      | Default | Description                                                                                             |
+| -------------- | ------------------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| `children`     | `ReactNode`               | —       | The parts of the hover card.                                                                            |
+| `closeDelay`   | `number`                  | `200`   | Time to wait after the pointer leaves the trigger and the card before it closes, in milliseconds.       |
+| `defaultOpen`  | `boolean`                 | `false` | Whether the card starts open.                                                                           |
+| `onOpenChange` | `(open: boolean) => void` | —       | Called with the requested state when it opens or closes.                                                |
+| `open`         | `boolean`                 | —       | Whether the card is open, in controlled mode.                                                           |
+| `openDelay`    | `number`                  | `400`   | Time to wait after the pointer enters or the trigger gets focus before the card opens, in milliseconds. |
+
+### HoverCard.Trigger
+
+Opens the card when it is hovered or focused. Pass one element, and it keeps its attributes and its handlers. Use an element that can take focus, such as a link or a button, so keyboard users can open the card too.
+
+### HoverCard.Content
+
+Renders the card. It accepts the attributes of a `<div>`.
+
+| Prop          | Type                                     | Default    | Description                                 |
+| ------------- | ---------------------------------------- | ---------- | ------------------------------------------- |
+| `align`       | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the chosen side.            |
+| `alignOffset` | `number`                                 | `0`        | Shift along the aligned edge, in pixels.    |
+| `side`        | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Side of the trigger where the card appears. |
+| `sideOffset`  | `number`                                 | `8`        | Distance from the trigger, in pixels.       |
+
+## Accessibility
+
+<Callout title="Keep the card supplementary">
+  Touch screens have no hover, and assistive technology does not announce the card when it opens.
+  Put only extra detail in it, and keep anything people need to finish a task where everyone can
+  reach it.
+</Callout>
+
+- The trigger opens the card on keyboard focus as well as on hover, and `Escape` closes it.
+- The pointer can move from the trigger into the card without closing it, so links and controls inside work with a mouse.
+- The card and its content are not announced when they open. Anything essential must also be on the page.
+- The card enters and leaves with the same motion as the other overlays, and the motion is removed when reduced motion is on.

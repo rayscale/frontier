@@ -1,0 +1,91 @@
+---
+title: Input OTP
+description: A one-time code field that shows one character per slot.
+---
+
+## Usage
+
+```tsx
+import { InputOTP } from '@rayscale/frontier'
+
+export function Example() {
+  return <InputOTP label="Verification code" />
+}
+```
+
+An input OTP takes a short code, such as the one sent by email or text message. Each character has its own slot, but the slots sit over one native `<input>`, so typing, deleting, pasting, and autofill work as they do in any field. It accepts digits by default.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With a description
+
+A description sits under the slots and is read together with the label. Set `autoComplete="one-time-code"` so the browser can fill in a code it receives.
+
+<Demo name="withDescription" />
+
+### Groups
+
+Split the slots into groups to make a long code easier to read. The group sizes must add up to `length`.
+
+<Demo name="groups" />
+
+### Pattern
+
+Change `pattern` to accept other characters, and set `inputMode` to match the keyboard to them.
+
+<Demo name="pattern" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the code in your own state. Use `onComplete` to act as soon as the last character is entered.
+
+<Demo name="controlled" />
+
+### With an error
+
+An error appears under the slots and marks the input invalid.
+
+<Demo name="withError" />
+
+### Disabled and read only
+
+<Demo name="disabled" />
+
+## API reference
+
+### InputOTP
+
+Renders one native `<input>` with a slot for each character, and an optional label, description, and error. It forwards its ref and the attributes of the input, except `children`, `maxLength`, `minLength`, `onChange`, `size`, and `type`. The table lists the props `InputOTP` adds or changes.
+
+| Prop            | Type                      | Default     | Description                                                                         |
+| --------------- | ------------------------- | ----------- | ----------------------------------------------------------------------------------- |
+| `description`   | `ReactNode`               | —           | Helper text linked to the input.                                                    |
+| `error`         | `ReactNode`               | —           | Error message linked to the input. It also marks the input invalid.                 |
+| `groups`        | `readonly number[]`       | —           | Characters in each group. The sizes must add up to `length`, or one group is shown. |
+| `invalid`       | `boolean`                 | `false`     | Marks the input invalid even when no error is shown.                                |
+| `label`         | `ReactNode`               | —           | Visible label linked to the input.                                                  |
+| `length`        | `number`                  | `6`         | Number of characters in the code. It must be a positive whole number.               |
+| `onValueChange` | `(value: string) => void` | —           | Called with the characters entered so far each time the code changes.               |
+| `onComplete`    | `(value: string) => void` | —           | Called with the complete code once every slot is filled.                            |
+| `pattern`       | `string`                  | `'^\\d+$'`  | Regular expression source that accepted characters must match.                      |
+| `value`         | `string`                  | —           | Code in controlled mode. Use `defaultValue` for uncontrolled mode.                  |
+| `inputMode`     | `string`                  | `'numeric'` | Keyboard shown on touch devices.                                                    |
+
+## Accessibility
+
+<Callout title="Give every input a name">
+  An input without a name cannot be identified by assistive technology. Pass `label`, and keep that
+  text as the name so what is spoken matches what is seen. Without a visible label, set
+  `aria-label`.
+</Callout>
+
+- There is one input, so assistive technology reads the whole code as a single value, not as separate slots.
+- The label is tied to the input, so selecting the label focuses the input.
+- The description and the error are linked to the input with `aria-describedby` and `aria-errormessage`. The error is announced politely when it appears, and the input reports `aria-invalid`.
+- The slots and dividers are decorative and hidden from assistive technology.
+- The slot that receives the next character shows the focus ring from the focus tokens, so the position is not shown by a blinking caret alone. The caret stops blinking when reduced motion is on.
+- A disabled input uses the native `disabled` attribute and leaves the tab order. A read-only input stays focusable.

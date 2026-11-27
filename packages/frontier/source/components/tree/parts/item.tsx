@@ -92,10 +92,9 @@ export function TreeItem({ node, level }: TTreeItemProps): ReactElement {
             return
           }
 
-          if (!expandedState) {
-            setHasBeenOpened(true)
-          }
-
+          // Mark the branch on every toggle, so a branch that starts open can
+          // also play its exit the first time it closes.
+          setHasBeenOpened(true)
           setExpanded(node.id, !expandedState)
         }}
         type="button"

@@ -2,7 +2,7 @@
 .frontier-sidebar {
   --_sidebar-duration: var(--frontier-duration-medium);
   --_stagger-step: calc(var(--frontier-duration-fast) / 4);
-  --_sidebar-easing: var(--frontier-easing-emphasized-decelerate);
+  --_sidebar-easing: var(--frontier-easing-standard);
   --_sidebar-label-duration: var(--frontier-duration-fast);
   --_sidebar-label-easing: ease-out;
   --_sidebar-label-blur: 2px;
@@ -620,9 +620,17 @@
   display: none;
 }
 
+/* Closing is quicker than opening: the transition takes the values of the
+   state the element moves into. */
+.frontier-sidebar[data-state='collapsed'] {
+  --_sidebar-duration: var(--frontier-duration-base);
+  --_sidebar-easing: var(--frontier-easing-standard);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .frontier-sidebar-layout,
-  .frontier-sidebar {
+  .frontier-sidebar,
+  .frontier-sidebar[data-state='collapsed'] {
     --_sidebar-duration: 0ms;
     --_sidebar-color-duration: 0ms;
   }

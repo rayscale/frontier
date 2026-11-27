@@ -237,6 +237,68 @@
   }
 }
 
+/* While the panel closes, Base UI keeps it mounted with data-ending-style until
+   the animations finish. The exit mirrors the enter and runs bottom to top. */
+.frontier-tree__branch[data-tree-stagger] [data-ending-style] .frontier-tree__item {
+  animation: frontier-tree-submenu-exit var(--frontier-duration-exit)
+    var(--frontier-easing-emphasized-accelerate) forwards;
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(1) {
+  animation-delay: calc(var(--_stagger-step) * 0);
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(2) {
+  animation-delay: calc(var(--_stagger-step) * 1);
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(3) {
+  animation-delay: calc(var(--_stagger-step) * 2);
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(4) {
+  animation-delay: calc(var(--_stagger-step) * 3);
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(5) {
+  animation-delay: calc(var(--_stagger-step) * 4);
+}
+
+.frontier-tree__branch[data-tree-stagger]
+  [data-ending-style]
+  .frontier-tree__item:nth-last-child(n + 6) {
+  animation-delay: calc(var(--_stagger-step) * 5);
+}
+
+/* Hold the panel open while the items leave, so the collapse does not clip the exit. */
+.frontier-tree__branch[data-tree-stagger] > .frontier-collapsible__content[data-ending-style] {
+  transition-delay: calc(var(--_stagger-step) * 5 + var(--frontier-duration-exit));
+}
+
+@keyframes frontier-tree-submenu-exit {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(var(--frontier-blur-subtle));
+    transform: translateX(var(--frontier-spacing-2));
+  }
+}
+
 .frontier-tree--compact .frontier-tree__row {
   justify-content: center;
   gap: 0;
@@ -269,7 +331,8 @@
     transition: none;
   }
 
-  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item {
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item,
+  .frontier-tree__branch[data-tree-stagger] [data-ending-style] .frontier-tree__item {
     animation: none;
   }
 }
@@ -280,7 +343,25 @@
   .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(3),
   .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(4),
   .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(5),
-  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(n + 6) {
+  .frontier-tree__branch[data-tree-stagger] [data-open] .frontier-tree__item:nth-child(n + 6),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(1),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(2),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(3),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(4),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(5),
+  .frontier-tree__branch[data-tree-stagger]
+    [data-ending-style]
+    .frontier-tree__item:nth-last-child(n + 6) {
     animation-delay: 0s;
   }
 }

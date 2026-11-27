@@ -1,0 +1,121 @@
+---
+title: Carousel
+description: A row or a column of slides that people drag, step through, or jump through.
+---
+
+## Usage
+
+```tsx
+import { Carousel } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Carousel.Root aria-label="Photos">
+      <Carousel.Content>
+        <Carousel.Item aria-label="1 of 3">One</Carousel.Item>
+        <Carousel.Item aria-label="2 of 3">Two</Carousel.Item>
+        <Carousel.Item aria-label="3 of 3">Three</Carousel.Item>
+      </Carousel.Content>
+      <Carousel.Previous />
+      <Carousel.Next />
+    </Carousel.Root>
+  )
+}
+```
+
+A carousel shows a set of slides in a limited space, such as photos, cards, or tips, and lets people move through them. They can drag or swipe the slides, press the previous and next buttons, use the arrow keys, or jump straight to a slide with the dots. It is built on [Embla Carousel](https://www.embla-carousel.com/), which handles the dragging and the scrolling.
+
+Use a carousel when the slides are alike and people can skip any of them. Do not put content in it that people must read to finish a task, because a slide that is out of view is easy to miss.
+
+The carousel fills the width of its container. The previous and next buttons sit over the slides, so leave a little room around the carousel if you do not want them to cover content, or move them with a class.
+
+## Examples
+
+### Default
+
+One slide at a time, with previous and next buttons. A button is disabled when there is no slide to move to.
+
+<Demo name="default" />
+
+### Dots
+
+`Carousel.Dots` shows where the carousel is and jumps straight to a slide.
+
+<Demo name="dots" />
+
+### Several slides
+
+Set `slidesPerView` to show more than one slide at once. A fractional value shows part of the next slide, which tells people that there is more.
+
+<Demo name="severalSlides" />
+
+### Loop
+
+With `loop` the carousel continues from the last slide to the first, so the buttons are never disabled.
+
+<Demo name="loop" />
+
+### Vertical
+
+Set `orientation="vertical"` to stack the slides in a column. A vertical carousel needs a height, and the arrow keys are up and down.
+
+<Demo name="vertical" />
+
+### Controlled
+
+Pass `index` and `onIndexChange` to keep the current slide in the page, so that other controls can move the carousel.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Carousel.Root
+
+Renders a `<div>` with `role="region"` and `aria-roledescription="carousel"`. It forwards its ref and the attributes of a `div`, except `defaultValue`. Give it an `aria-label`, and set `dir="rtl"` for right-to-left languages.
+
+| Prop             | Type                           | Default        | Description                                                                         |
+| ---------------- | ------------------------------ | -------------- | ----------------------------------------------------------------------------------- |
+| `align`          | `'start' \| 'center' \| 'end'` | `'start'`      | Where the current slide rests inside the viewport.                                  |
+| `defaultIndex`   | `number`                       | `0`            | Slide that is current at the start, in uncontrolled mode.                           |
+| `dragFree`       | `boolean`                      | `false`        | Lets people drag the slides freely and rest between them instead of snapping.       |
+| `index`          | `number`                       | —              | Position of the current slide, starting at 0, in controlled mode.                   |
+| `loop`           | `boolean`                      | `false`        | Continues from the last slide to the first, and the other way around.               |
+| `onIndexChange`  | `(index: number) => void`      | —              | Called with the position of the slide that became current.                          |
+| `orientation`    | `'horizontal' \| 'vertical'`   | `'horizontal'` | Direction in which the slides sit side by side.                                     |
+| `slidesPerView`  | `number`                       | `1`            | How many slides share the width, or the height when vertical. It can be fractional. |
+| `slidesToScroll` | `number`                       | `1`            | How many slides one step moves.                                                     |
+
+### Carousel.Content
+
+Renders the strip that holds the slides, inside a clipped viewport. It forwards its ref and the attributes of a `div` to the strip.
+
+### Carousel.Item
+
+Renders one slide, with `role="group"` and `aria-roledescription="slide"`. It forwards its ref and the attributes of a `div`. Give each slide an `aria-label` such as "1 of 5", so its position is announced.
+
+### Carousel.Previous, Carousel.Next
+
+Render the buttons that move to the previous or the next slide. They take the props of a [button](/documentation/components/actions/button), and their `size` and `variant` default to `icon` and `outline`. Their `aria-label` is "Previous slide" and "Next slide", so change it for other languages. A button is disabled when there is no slide to move to, unless the carousel loops. Call `preventDefault` in `onClick` to stop the move.
+
+### Carousel.Dots
+
+Renders a row of buttons, one for each slide, that jump straight to it. The button of the current slide has `aria-current="true"`. It forwards its ref and the attributes of a `div`, except `children`.
+
+| Prop       | Type                                       | Default                    | Description                     |
+| ---------- | ------------------------------------------ | -------------------------- | ------------------------------- |
+| `getLabel` | `(index: number, count: number) => string` | `Go to slide 1`, and so on | Names the button of each slide. |
+
+## Accessibility
+
+<Callout title="Name the carousel and its slides">
+  The carousel is a region, so give it an `aria-label` that says what it holds, such as "Photos".
+  Give each slide an `aria-label` that says where it is, such as "2 of 5", so assistive technology
+  announces the position.
+</Callout>
+
+- The carousel is announced as a carousel and each slide as a slide, with the names you give them.
+- The previous and next buttons are native buttons with their own names. A disabled button leaves the tab order.
+- The arrow keys move the carousel while focus is inside it: left and right, or up and down when it is vertical, and they swap for right-to-left text. They do nothing inside a text field, so people can still move the cursor there.
+- When focus moves to something inside a slide that is out of view, the carousel scrolls to that slide.
+- With reduced motion on, the carousel jumps to a slide instead of scrolling to it.
+- The carousel never moves by itself, so people have time to read each slide.

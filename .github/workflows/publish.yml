@@ -3,6 +3,7 @@ name: Publish
 # Publishes @rayscale/frontier to npm when a version tag is pushed, such as v0.1.0-alpha.0.
 # It signs in to npm with trusted publishing (OIDC), so no token is stored in the repository.
 # The trusted publisher on npmjs.com must name this file: publish.yml.
+# Only a commit that is on main is published, whatever branch the tag was pushed from.
 on:
   push:
     tags:
@@ -19,6 +20,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check that the tagged commit is on main
+        run: |
+          git fetch --no-tags origin main
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" origin/main; then
+            echo "Commit ${GITHUB_SHA} is not on main. Only commits on main are published." >&2
+            exit 1
+          fi
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4

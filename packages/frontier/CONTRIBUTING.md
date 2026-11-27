@@ -442,7 +442,9 @@ change.
 The package is published to npm by [publish.yml](../../.github/workflows/publish.yml) when a tag
 `v<version>` is pushed, where `<version>` is the `version` in `package.json`. The workflow signs
 in with npm trusted publishing, so the repository holds no npm token. A prerelease such as
-`0.1.0-alpha.0` is published under its own dist-tag (`alpha`), never under `latest`.
+`0.1.0-alpha.0` is published under its own dist-tag (`alpha`), never under `latest`. Only a
+commit that is on `main` is published: the workflow fails for a tag on any other branch. Work
+happens on `develop` and reaches `main` before it is released.
 
 To release, change `version`, commit it, then push the tag:
 

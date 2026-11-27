@@ -1,0 +1,131 @@
+.frontier-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frontier-spacing-3);
+  width: 100%;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-chart__plot {
+  position: relative;
+  width: 100%;
+}
+
+.frontier-chart__svg {
+  display: block;
+  overflow: visible;
+}
+
+.frontier-chart__grid line {
+  stroke: var(--frontier-color-border);
+  stroke-width: var(--frontier-border-width-subtle);
+}
+
+.frontier-chart__axis-line {
+  stroke: var(--frontier-color-border-strong);
+  stroke-width: var(--frontier-border-width-subtle);
+}
+
+.frontier-chart__tick {
+  fill: var(--frontier-color-text-muted);
+  font-family: inherit;
+  font-size: var(--frontier-font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.frontier-chart__cursor {
+  fill: var(--frontier-color-surface-hover);
+}
+
+.frontier-chart__bar {
+  fill: var(--_series-color);
+}
+
+.frontier-chart__line {
+  fill: none;
+  stroke: var(--_series-color);
+  stroke-width: var(--frontier-border-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.frontier-chart__area {
+  fill: var(--_series-color);
+  fill-opacity: 0.16;
+  stroke: none;
+}
+
+.frontier-chart__dot {
+  fill: var(--_series-color);
+}
+
+.frontier-chart__active-dot {
+  fill: var(--frontier-color-surface);
+  stroke: var(--_series-color);
+  stroke-width: var(--frontier-border-width);
+}
+
+.frontier-chart__zone {
+  fill: transparent;
+}
+
+.frontier-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--frontier-spacing-2) var(--frontier-spacing-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+}
+
+.frontier-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-chart__swatch {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: var(--frontier-spacing-3);
+  height: var(--frontier-spacing-3);
+  border-radius: var(--frontier-radius-sm);
+  background: var(--_series-color);
+}
+
+.frontier-chart__tooltip {
+  display: grid;
+  gap: var(--frontier-spacing-2);
+  min-width: 8rem;
+}
+
+.frontier-chart__tooltip-label {
+  font-weight: var(--frontier-font-weight-semibold);
+}
+
+.frontier-chart__tooltip-list {
+  display: grid;
+  gap: var(--frontier-spacing-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.frontier-chart__tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-chart__tooltip-name {
+  flex: 1 1 auto;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-chart__tooltip-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--frontier-font-weight-medium);
+}

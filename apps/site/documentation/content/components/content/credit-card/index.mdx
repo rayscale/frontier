@@ -1,0 +1,97 @@
+---
+title: Credit Card
+description: The face of a payment card, with its network logo, number, holder, and expiry.
+---
+
+## Usage
+
+```tsx
+import { CreditCard } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <CreditCard
+      issuer="Frontier."
+      number="4242 4242 4242 1234"
+      holder="Olivia Rhye"
+      expiry="06/28"
+    />
+  )
+}
+```
+
+A credit card shows a payment method the way it looks in a wallet, so people recognize it at a glance. It only displays a card: it never stores, validates, or sends the number. The network is read from the number, and every digit but the last four is hidden unless you ask otherwise.
+
+## Examples
+
+### Default
+
+A masked Visa card. The network logo comes from the number.
+
+<Demo name="default" />
+
+### Variants
+
+Use `variant` to match the surface to the page: `primary` follows the theme's primary color, `inverse` flips against the theme, and `subtle` uses the surface color with a border.
+
+<Demo name="variants" />
+
+### Accent
+
+Pass any CSS color to `accent` to tint the `primary` variant with a gradient of it.
+
+<Demo name="accent" />
+
+### Networks
+
+Set `brand` when the number is not available. Without a number or a brand the card shows a neutral logo.
+
+<Demo name="networks" />
+
+### Monochrome
+
+Set `monochrome` to draw the logo in the text color, for a card that should stay in one color.
+
+<Demo name="monochrome" />
+
+### Custom logo
+
+Pass `logo` to show the mark of a network the component has no logo for.
+
+<Demo name="custom-logo" />
+
+## API reference
+
+### CreditCard
+
+Renders a `<div>` with `role="group"`. It forwards its ref and the attributes of a `div`, except `children`.
+
+| Prop          | Type                                                                                                                    | Default     | Description                                                                 |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
+| `number`      | `string`                                                                                                                | —           | Card number. Spaces are ignored and the digits are grouped for the network. |
+| `brand`       | `'auto' \| 'visa' \| 'mastercard' \| 'amex' \| 'discover' \| 'jcb' \| 'unionpay' \| 'diners' \| 'maestro' \| 'generic'` | `'auto'`    | Card network. `auto` reads it from the number.                              |
+| `holder`      | `string`                                                                                                                | —           | Name of the card holder.                                                    |
+| `expiry`      | `string`                                                                                                                | —           | Expiry date as it is printed, for example `06/28`.                          |
+| `issuer`      | `ReactNode`                                                                                                             | —           | Name or mark of the issuer, shown at the top start.                         |
+| `variant`     | `'primary' \| 'inverse' \| 'subtle'`                                                                                    | `'primary'` | Surface treatment.                                                          |
+| `size`        | `'small' \| 'medium' \| 'large'`                                                                                        | `'medium'`  | Width of the card. The type scales with it.                                 |
+| `accent`      | `string`                                                                                                                | —           | Any CSS color. Tints the `primary` variant with a gradient of it.           |
+| `masked`      | `boolean`                                                                                                               | `true`      | Hides every digit but the last four.                                        |
+| `monochrome`  | `boolean`                                                                                                               | `false`     | Draws the logo in the text color instead of its own colors.                 |
+| `contactless` | `boolean`                                                                                                               | `true`      | Shows the contactless symbol.                                               |
+| `logo`        | `ReactNode`                                                                                                             | —           | Replaces the network logo.                                                  |
+
+### detectCreditCardBrand
+
+`detectCreditCardBrand(number: string): TCreditCardBrand` reads the network from the leading digits of a number and returns `'generic'` when it has no match. Use it to pick a brand while someone types.
+
+## Logos
+
+The network logos come from [svg-credit-card-payment-icons](https://github.com/aaronfagan/svg-credit-card-payment-icons), licensed under Apache 2.0 (a copy sits in `brands/LICENSE.txt`). The color logos are cropped to their artwork, and the monochrome ones are redrawn with `currentColor`. The license covers the files, not the trademarks: each network's brand guidelines apply to how you show its logo.
+
+## Accessibility
+
+- The card is a group named "Visa card ending in 1234", built from the network and the last digits. Pass `aria-label` to use another name.
+- A masked number is announced as "Card number ending in 1234" instead of a row of bullets. Only the last four digits ever reach assistive technology while the number is masked.
+- The logo and the contactless symbol are decorative and hidden from assistive technology. The card name already carries the network.
+- Pass `masked={false}` only on a screen where people ask to see the number.

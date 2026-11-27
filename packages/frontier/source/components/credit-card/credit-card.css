@@ -1,0 +1,151 @@
+.frontier-credit-card {
+  --_credit-card-width: 21.5rem;
+  --_credit-card-from: var(--_credit-card-accent, var(--frontier-color-primary));
+
+  position: relative;
+  container-type: inline-size;
+  box-sizing: border-box;
+  inline-size: var(--_credit-card-width);
+  max-inline-size: 100%;
+  aspect-ratio: 1.586;
+  overflow: hidden;
+  border-radius: var(--frontier-radius-lg);
+  box-shadow: var(--frontier-shadow-md);
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-credit-card--small {
+  --_credit-card-width: 15rem;
+}
+
+.frontier-credit-card--large {
+  --_credit-card-width: 27rem;
+}
+
+.frontier-credit-card--primary {
+  background: linear-gradient(
+    135deg,
+    var(--_credit-card-from),
+    color-mix(in srgb, var(--_credit-card-from) 70%, var(--frontier-black))
+  );
+  color: var(--frontier-color-on-primary);
+}
+
+.frontier-credit-card--primary.frontier-credit-card--accent {
+  color: var(--frontier-white);
+}
+
+.frontier-credit-card--inverse {
+  background: linear-gradient(
+    135deg,
+    var(--frontier-color-text),
+    color-mix(in srgb, var(--frontier-color-text) 75%, var(--frontier-color-background))
+  );
+  color: var(--frontier-color-text-inverse);
+}
+
+.frontier-credit-card--subtle {
+  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border);
+  background: var(--frontier-color-surface);
+  color: var(--frontier-color-text);
+}
+
+.frontier-credit-card--primary::before,
+.frontier-credit-card--inverse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 100% 0%,
+    color-mix(in srgb, currentColor 14%, transparent),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.frontier-credit-card__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: 6.5cqi;
+}
+
+.frontier-credit-card__top,
+.frontier-credit-card__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--frontier-spacing-3);
+}
+
+.frontier-credit-card__top {
+  align-items: flex-start;
+}
+
+.frontier-credit-card__issuer {
+  font-size: 5.4cqi;
+  font-weight: var(--frontier-font-weight-semibold);
+  line-height: var(--frontier-line-height-tight);
+}
+
+.frontier-credit-card__contactless {
+  flex: 0 0 auto;
+  inline-size: 7.5cqi;
+  block-size: 7.5cqi;
+}
+
+.frontier-credit-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4cqi;
+  min-inline-size: 0;
+}
+
+.frontier-credit-card__meta {
+  display: flex;
+  gap: 8cqi;
+  font-size: 3.6cqi;
+  font-weight: var(--frontier-font-weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.frontier-credit-card__number {
+  font-size: 5.6cqi;
+  font-weight: var(--frontier-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.frontier-credit-card__brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 1.6cqi 2.4cqi;
+  border-radius: var(--frontier-radius-xs);
+  background: var(--frontier-white);
+  color: var(--frontier-black);
+}
+
+.frontier-credit-card__brand[data-monochrome] {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+
+.frontier-credit-card__logo {
+  display: block;
+  inline-size: 13cqi;
+  block-size: 7cqi;
+}
+
+.frontier-credit-card__brand[data-monochrome] > .frontier-credit-card__logo {
+  inline-size: 12cqi;
+  block-size: 8cqi;
+}

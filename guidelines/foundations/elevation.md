@@ -23,7 +23,7 @@ A shadow signals that something floats. Reserve it for floating content. Contain
 
 Floating content must appear above the content it belongs to, regardless of where it sits in the document. Users should never have to work out which of two overlapping items is on top.
 
-Stacking levels are shared across the interface. Popups, dialogs, and drawers share the overlay level so that a popup opened from a dialog still appears above it. Toasts sit above overlays, and tooltips sit above everything. See [Values](./values.md#layering).
+Stacking levels are shared across the interface. Popups, dialogs, and sheets share the overlay level so that a popup opened from a dialog still appears above it. Toasts sit above overlays, and tooltips sit above everything. See [Values](./values.md#layering).
 
 ## Temporary content
 
@@ -44,4 +44,4 @@ Depth should tell the user what is temporary and what is permanent. Only content
 
 ## Modal and floating surfaces
 
-Dialogs and drawers are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both modes.
+Dialogs and sheets are modal content. They use a distinct treatment: the raised surface, the stronger shadow, and an overlay that interrupts the page. Menus, popups, and tooltips stay in the floating layer with their own surface. The two stay distinguishable in both modes.

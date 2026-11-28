@@ -1,0 +1,80 @@
+.frontier-resizable {
+  width: 100%;
+  height: 100%;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+}
+
+.frontier-resizable__handle {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--frontier-color-border);
+  outline: none;
+  transition: background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-resizable__handle[aria-orientation='vertical'] {
+  width: var(--frontier-border-width);
+}
+
+.frontier-resizable__handle[aria-orientation='horizontal'] {
+  height: var(--frontier-border-width);
+}
+
+.frontier-resizable__handle[data-separator='hover'],
+.frontier-resizable__handle[data-separator='active'] {
+  background: var(--frontier-color-border-strong);
+}
+
+.frontier-resizable__handle[data-separator='active'],
+.frontier-resizable__handle:focus-visible {
+  background: var(--frontier-color-focus);
+}
+
+.frontier-resizable__handle:focus-visible {
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+
+.frontier-resizable__handle[data-separator='disabled'] {
+  background: var(--frontier-color-border-disabled);
+}
+
+.frontier-resizable__grip {
+  position: absolute;
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  border-radius: var(--frontier-radius-lg);
+  background: var(--frontier-color-surface);
+  box-shadow: var(--frontier-shadow-sm);
+  pointer-events: none;
+  transition: border-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-resizable__handle[aria-orientation='vertical'] > .frontier-resizable__grip {
+  width: var(--frontier-spacing-3);
+  height: var(--frontier-spacing-6);
+}
+
+.frontier-resizable__handle[aria-orientation='horizontal'] > .frontier-resizable__grip {
+  width: var(--frontier-spacing-6);
+  height: var(--frontier-spacing-3);
+}
+
+.frontier-resizable__handle[data-separator='active'] > .frontier-resizable__grip,
+.frontier-resizable__handle:focus-visible > .frontier-resizable__grip {
+  border-color: var(--frontier-color-focus);
+}
+
+.frontier-resizable__handle[data-separator='disabled'] > .frontier-resizable__grip {
+  border-color: var(--frontier-color-border-disabled);
+  background: var(--frontier-color-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-resizable__handle,
+  .frontier-resizable__grip {
+    transition: none;
+  }
+}

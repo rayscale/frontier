@@ -1,0 +1,101 @@
+.frontier-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frontier-spacing-1);
+  vertical-align: middle;
+}
+
+.frontier-rating--sm {
+  --_size: var(--frontier-spacing-4);
+}
+
+.frontier-rating--md {
+  --_size: var(--frontier-spacing-6);
+}
+
+.frontier-rating--lg {
+  --_size: var(--frontier-spacing-8);
+}
+
+.frontier-rating__item {
+  position: relative;
+  display: inline-block;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  border-radius: var(--frontier-radius-xs);
+  transition: scale var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+/* Both shapes fill the item. The filled one is cut to the share of the item that is rated. */
+.frontier-rating__shape {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  display: block;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  color: var(--frontier-color-border-strong);
+}
+
+.frontier-rating__shape :where(svg) {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.frontier-rating__shape--filled {
+  inline-size: var(--_fill);
+  overflow: hidden;
+  color: var(--frontier-color-rating);
+  transition: inline-size var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+
+.frontier-rating__shape--filled :where(svg) {
+  inline-size: var(--_size);
+  fill: currentColor;
+}
+
+/* Each choice covers the item, or half of it when people can give half a shape. */
+.frontier-rating__choice {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.frontier-rating__choice--half {
+  inset-inline-end: 50%;
+}
+
+.frontier-rating__choice--half + .frontier-rating__choice--half {
+  inset-inline: 50% 0;
+}
+
+.frontier-rating__item:has(input:focus-visible) {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+@media (hover: hover) {
+  .frontier-rating:not([data-readonly], [data-disabled]) .frontier-rating__item:hover {
+    scale: 1.1;
+  }
+}
+
+.frontier-rating[data-readonly] .frontier-rating__item {
+  cursor: default;
+}
+
+.frontier-rating[data-disabled] {
+  opacity: 0.55;
+}
+
+.frontier-rating[data-disabled] .frontier-rating__choice {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-rating__item,
+  .frontier-rating__shape--filled {
+    transition: none;
+  }
+}

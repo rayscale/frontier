@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Drawer, PanelLeft, Tree, type TTreeNode } from '@rayscale/frontier'
+import { Button, PanelLeft, Sheet, Tree, type TTreeNode } from '@rayscale/frontier'
 import { usePathname } from 'next/navigation'
 import { type ReactElement, useMemo, useState } from 'react'
 
@@ -44,28 +44,28 @@ export function DocumentationNav(): ReactElement {
   )
 }
 
-/** On narrow screens, a button that opens the documentation tree in a drawer. */
-export function DocumentationNavDrawer(): ReactElement {
+/** On narrow screens, a button that opens the documentation tree in a sheet. */
+export function DocumentationNavSheet(): ReactElement {
   const [open, setOpen] = useState(false)
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} side="left">
-      <Drawer.Trigger>
+    <Sheet open={open} onOpenChange={setOpen} side="left">
+      <Sheet.Trigger>
         <Button variant="ghost" size="small" className="documentation-nav-trigger">
           <PanelLeft aria-hidden="true" />
           Menu
         </Button>
-      </Drawer.Trigger>
-      <Drawer.Content size="small">
-        <Drawer.Header>
-          <Drawer.Title>Documentation</Drawer.Title>
-        </Drawer.Header>
+      </Sheet.Trigger>
+      <Sheet.Content size="small">
+        <Sheet.Header>
+          <Sheet.Title>Documentation</Sheet.Title>
+        </Sheet.Header>
         <DocumentationTree
           onNavigate={() => {
             setOpen(false)
           }}
         />
-      </Drawer.Content>
-    </Drawer>
+      </Sheet.Content>
+    </Sheet>
   )
 }

@@ -1,0 +1,101 @@
+---
+title: Sheet
+description: A panel that slides in from an edge of the screen, for a longer task or for more detail than a dialog holds.
+---
+
+## Usage
+
+```tsx
+import { Sheet } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Sheet>
+      <Sheet.Trigger>Open filters</Sheet.Trigger>
+      <Sheet.Content>
+        <Sheet.Header>
+          <Sheet.Title>Filters</Sheet.Title>
+          <Sheet.Description>Narrow the list of results.</Sheet.Description>
+        </Sheet.Header>
+        <Sheet.Footer>
+          <Sheet.Close>Close</Sheet.Close>
+        </Sheet.Footer>
+      </Sheet.Content>
+    </Sheet>
+  )
+}
+```
+
+Use a sheet for a task or a set of options that needs more room than a [dialog](/documentation/components/overlays/dialog), while the page stays in sight behind it. It has the same parts as a dialog. `side` on the root chooses the edge it comes from.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sides
+
+<Demo name="sides" />
+
+### Sizes
+
+The size sets the width of a sheet on the left or the right, and the height of one on the top or the bottom.
+
+<Demo name="sizes" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to keep the open state in your component.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Sheet
+
+Holds the open state and shares it with its parts. It renders no element of its own.
+
+| Prop           | Type                                     | Default   | Description                                              |
+| -------------- | ---------------------------------------- | --------- | -------------------------------------------------------- |
+| `open`         | `boolean`                                | —         | Whether the sheet is open, in controlled mode.           |
+| `defaultOpen`  | `boolean`                                | `false`   | Whether the sheet starts open.                           |
+| `onOpenChange` | `(open: boolean) => void`                | —         | Called with the requested state when it opens or closes. |
+| `side`         | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Edge the sheet slides in from.                           |
+| `children`     | `ReactNode`                              | —         | The parts of the sheet.                                  |
+
+### Sheet.Trigger
+
+Opens the sheet. Pass one element and it keeps its attributes and its `onClick`. Any other content is wrapped in a [button](/documentation/components/actions/button).
+
+### Sheet.Content
+
+Renders the panel and the backdrop behind it. It accepts the attributes of a `<div>`.
+
+| Prop                   | Type                             | Default    | Description                                    |
+| ---------------------- | -------------------------------- | ---------- | ---------------------------------------------- |
+| `size`                 | `'small' \| 'medium' \| 'large'` | `'medium'` | Width, or height for a top or bottom sheet.    |
+| `showCloseButton`      | `boolean`                        | `true`     | Shows a close button in the corner.            |
+| `closeOnBackdropClick` | `boolean`                        | `true`     | Closes the sheet when the backdrop is pressed. |
+
+### Sheet.Header, Sheet.Footer
+
+Group the title and the description, and the actions. Each one renders a `<div>` and accepts its attributes.
+
+### Sheet.Title, Sheet.Description
+
+Render the title and the description, and name the sheet for assistive technology.
+
+### Sheet.Close
+
+Renders a button that closes the sheet. It accepts the props of a button, and its type is always `button`.
+
+## Accessibility
+
+<Callout title="Always give it a title">
+  The title names the sheet for assistive technology. Include a `Sheet.Title` in every sheet.
+</Callout>
+
+- The focus moves into the sheet when it opens, and returns to the element that opened it when it closes.
+- The Tab key stays inside the open sheet.
+- Escape closes the sheet, even when presses on the backdrop do not.

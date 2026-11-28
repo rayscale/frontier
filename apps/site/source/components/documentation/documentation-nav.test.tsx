@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import type { TDocumentationPage } from '#/documentation/types.js'
 
-import { DocumentationNav, DocumentationNavDrawer } from './documentation-nav.js'
+import { DocumentationNav, DocumentationNavSheet } from './documentation-nav.js'
 import { DocumentationProvider } from './documentation-provider.js'
 
 vi.mock('next/navigation', () => ({ usePathname: () => '/documentation' }))
@@ -34,10 +34,10 @@ describe('DocumentationNav', () => {
     )
   })
 
-  it('opens the tree in a drawer from the menu button', async () => {
+  it('opens the tree in a sheet from the menu button', async () => {
     const user = userEvent.setup()
 
-    renderWithDocumentation(<DocumentationNavDrawer />)
+    renderWithDocumentation(<DocumentationNavSheet />)
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 

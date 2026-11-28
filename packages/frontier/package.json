@@ -1,6 +1,6 @@
 {
   "name": "@rayscale/frontier",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "A design language for the web.",
   "repository": {
     "type": "git",
@@ -31,7 +31,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "publishConfig": {
     "access": "public"
@@ -59,6 +60,10 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.9",
+    "@types/culori": "^4.0.1",
+    "@types/d3-array": "^3.2.2",
+    "@types/d3-scale": "^4.0.9",
+    "@types/d3-shape": "^3.2.0",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
@@ -74,8 +79,20 @@
     "@base-ui/react": "^1.9.0",
     "@fontsource-variable/geist-mono": "5.3.0",
     "@fontsource-variable/outfit": "5.3.0",
+    "@lexical/history": "^0.53.0",
+    "@lexical/plain-text": "^0.53.0",
+    "@lexical/react": "^0.53.0",
     "@tanstack/react-table": "^9.3.1",
+    "culori": "^4.0.2",
+    "d3-array": "^3.2.5",
+    "d3-scale": "^4.0.3",
+    "d3-shape": "^3.2.1",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "input-otp": "^1.5.0",
+    "lexical": "^0.53.0",
     "motion": "^14.14.0",
+    "react-resizable-panels": "^4.24.3",
     "shiki": "^4.6.0"
   }
 }

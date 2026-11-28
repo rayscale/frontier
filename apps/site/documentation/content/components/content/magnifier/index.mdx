@@ -1,0 +1,69 @@
+---
+title: Magnifier
+description: A lens that follows the pointer over an image and shows the part under it larger.
+---
+
+## Usage
+
+```tsx
+import { Magnifier } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Magnifier zoom={2.5}>
+      <img src="/photos/jacket.jpg" alt="Green jacket, front" />
+    </Magnifier>
+  )
+}
+```
+
+A magnifier lets people look at the detail of an image without leaving the page or opening anything: the lens follows the pointer over the image and shows the part under it larger. It is useful for products, maps, and pictures with fine detail.
+
+It is built on the [cursor card](/documentation/components/overlays/cursor-card), so the lens opens when the pointer enters the image, follows it, and closes when it leaves, with the same animation as other floating surfaces. It needs a pointer that hovers, so it does not open on a touch screen. Where people may not have one, give them another way to see the picture closely, such as [image zoom](/documentation/components/content/image-zoom).
+
+The child must be one `img`. The lens shows the same picture, so it is only as sharp as the file. To see more detail than the page shows, pass `src` with a larger file: the page loads a small one, and the lens a sharp one.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Square lens
+
+`shape="square"` makes the lens a rounded square, and `size` and `zoom` change how big it is and how much it enlarges.
+
+<Demo name="square" />
+
+### Sharper source
+
+The page shows a small picture, and the lens shows a large one, so it has more detail than the image on the page.
+
+<Demo name="sharperSource" />
+
+## API reference
+
+### Magnifier
+
+It renders the image that you pass, with a class for the cursor, and the lens in a floating layer. It forwards nothing else: put the class, the size, and the rounded corners on the `img`.
+
+| Prop        | Type                   | Default                 | Description                                                                             |
+| ----------- | ---------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
+| `children`  | `ReactElement`         | —                       | The image to look at closely, as one `img`.                                             |
+| `zoom`      | `number`               | `2`                     | How many times larger the picture is seen through the lens than on the page.            |
+| `size`      | `number`               | `160`                   | Width and height of the lens, in pixels.                                                |
+| `shape`     | `'circle' \| 'square'` | `'circle'`              | Shape of the lens.                                                                      |
+| `src`       | `string`               | The source of the image | Source of the picture seen through the lens.                                            |
+| `openDelay` | `number`               | `0`                     | Time to wait after the pointer enters the image before the lens opens, in milliseconds. |
+| `disabled`  | `boolean`              | `false`                 | Stops the lens from opening.                                                            |
+
+## Accessibility
+
+<Callout title="The lens is not for everyone">
+  The lens needs a pointer that hovers, and it is hidden from assistive technology. It adds a closer
+  look for people who can use it, so the image must still have a good `alt`, and anything important
+  in it must be readable without the lens.
+</Callout>
+
+- The lens shows the same picture as the image, so it adds no information that screen readers would miss.
+- It does not open with the keyboard. Offer image zoom, which does, when the detail matters.

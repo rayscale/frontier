@@ -1,0 +1,133 @@
+---
+title: Image zoom
+description: Shows an image larger, in the middle of the screen over a blurred page, where it can be zoomed.
+---
+
+## Usage
+
+```tsx
+import { ImageZoom } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ImageZoom>
+      <ImageZoom.Trigger>
+        <img src="/photos/mountains-small.jpg" alt="Blue mountains at dusk" />
+      </ImageZoom.Trigger>
+      <ImageZoom.Content />
+    </ImageZoom>
+  )
+}
+```
+
+An image zoom lets people look at a picture in more detail without leaving the page. Pressing the image takes it out of its place and moves it to the middle of the screen, where it takes more space, and the page behind it is blurred. One more press zooms in where they pressed, dragging moves the zoomed image, and the keyboard and the wheel zoom too. Closing it sends the image back to where it was.
+
+It is built on a modal dialog, so the focus stays inside it, Escape closes it, and the page behind it cannot be used until it is closed.
+
+The trigger takes one `img` as its child, and the enlarged image uses its source. To show a sharper file when it is enlarged, pass `src` to `ImageZoom.Content`. The move from the trigger to the middle of the screen looks best when the image in the trigger shows the whole picture, with the same proportions, and not a cropped part of it.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With actions
+
+Without children, `ImageZoom.Content` has the zoom buttons and a close button. Pass `ImageZoom.Toolbar` to choose them, and add your own buttons next to them, such as a download. `ImageZoom.Caption` adds text under the image.
+
+<Demo name="actions" />
+
+### Gallery
+
+Each image has its own `ImageZoom`, so a grid of pictures opens one at a time.
+
+<Demo name="gallery" />
+
+### Controlled
+
+Pass `open` and `onOpenChange` to open the image from somewhere else.
+
+<Demo name="controlled" />
+
+## API reference
+
+### ImageZoom
+
+Holds the open state and the zoom. It renders no element.
+
+| Prop            | Type                                   | Default | Description                                                                             |
+| --------------- | -------------------------------------- | ------- | --------------------------------------------------------------------------------------- |
+| `open`          | `boolean`                              | —       | Open state, in controlled mode.                                                         |
+| `defaultOpen`   | `boolean`                              | `false` | Open state at the start, in uncontrolled mode.                                          |
+| `onOpenChange`  | `(open: boolean) => void`              | —       | Called when the image opens or closes.                                                  |
+| `value`         | `string`                               | —       | Which image is shown, by the `value` of its trigger. Only needed with several triggers. |
+| `defaultValue`  | `string`                               | —       | The image shown at the start, in uncontrolled mode.                                     |
+| `onValueChange` | `(value: string \| undefined) => void` | —       | Called with the `value` of the trigger whose image is shown, when it changes.           |
+| `maxZoom`       | `number`                               | `4`     | The highest zoom, as a multiple of the size the image has when it opens.                |
+
+### ImageZoom.Trigger
+
+Renders a button around the image that people press. Its child must be one `img` element. The name of the button is the `alt` of the image, so write one that says what the image shows.
+
+| Prop        | Type           | Description                                                                                              |
+| ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| `children`  | `ReactElement` | The `img` that people press.                                                                             |
+| `value`     | `string`       | Names this image when one `ImageZoom` has several triggers, so the right one is enlarged and flies back. |
+| `className` | `string`       | Class for the button that wraps the image.                                                               |
+
+### ImageZoom.Content
+
+Renders the dialog: the enlarged image over a blurred background, and what goes over it. It takes the attributes of a `div` and forwards its ref.
+
+| Prop          | Type                      | Default                     | Description                                                                                                      |
+| ------------- | ------------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `src`         | `string`                  | The source of the trigger   | Source of the enlarged image.                                                                                    |
+| `srcSet`      | `string`                  | —                           | Source set of the enlarged image, so a sharper file can load.                                                    |
+| `alt`         | `string`                  | The `alt` of the trigger    | Text that describes the enlarged image.                                                                          |
+| `label`       | `string`                  | The `alt`                   | Name of the dialog.                                                                                              |
+| `children`    | `ReactNode`               | A toolbar with the controls | What goes over the image, such as `ImageZoom.Toolbar` and `ImageZoom.Caption`.                                   |
+| `direction`   | `'forward' \| 'backward'` | The order of the triggers   | Which way people are going when another image replaces the shown one. It sets the side the new one comes from.   |
+| `bottomSpace` | `number`                  | `0`                         | Room kept under the image, in pixels, for controls that you put there.                                           |
+| `onKeyDown`   | `KeyboardEventHandler`    | —                           | Called after the image has handled the key. The keys it uses are already prevented, so check `defaultPrevented`. |
+
+### ImageZoom.Toolbar
+
+A bar over the image that holds the actions. It renders a `<div>` with `role="group"` and the name "Image controls", and takes its attributes.
+
+| Prop        | Type                | Default | Description                        |
+| ----------- | ------------------- | ------- | ---------------------------------- |
+| `placement` | `'top' \| 'bottom'` | `'top'` | Where the bar sits over the image. |
+
+### ImageZoom.ZoomIn, ImageZoom.ZoomOut, ImageZoom.Close
+
+Buttons for the toolbar. They take the props of a [button](/documentation/components/actions/button), and their `aria-label` is "Zoom in", "Zoom out", and "Close", so change it for other languages. A zoom button is disabled at its limit. Call `preventDefault` in `onClick` to stop what the button does.
+
+### ImageZoom.Caption
+
+Text over the image, under it. It renders a `<p>` and takes its attributes.
+
+## Several images
+
+One `ImageZoom` can have several triggers. Give each trigger a `value`, and control which one is shown with `value` and `onValueChange`: the image that opens is the one that was pressed, another can be shown while it is open by changing `value`, and it flies back to the trigger of the image that is shown. The picture that replaces another slides in from the side it is on in the page, or from the side that `direction` says, and the next one loads before it is shown, so the image never has a wrong size for a moment. [Lightbox](/documentation/components/content/lightbox) is built this way, and adds the controls to go through the pictures.
+
+## Zooming
+
+- A press on the image zooms to twice its size where it was pressed, and another press goes back.
+- When it is zoomed, dragging moves the image. It cannot be moved past its edges.
+- The wheel zooms around the pointer, and the zoom buttons zoom around the middle.
+- `+` and `-` zoom, `0` goes back to the size it had, and the arrow keys move a zoomed image.
+- A press on the blurred background, Escape, or the close button closes it.
+
+## Accessibility
+
+<Callout title="Describe the image">
+  The button that opens the image takes its name from the `alt` of the image, and the dialog takes
+  the same name. Write an `alt` that says what the picture shows, and use `label` when the dialog
+  should be called something else.
+</Callout>
+
+- The dialog traps the focus while it is open, and the focus goes back to the trigger when it closes. The focus starts on the dialog, so the keys work at once.
+- Everything the pointer does has a key: `+`, `-`, `0`, and the arrow keys, and the toolbar buttons are native buttons.
+- With reduced motion on, the image appears in the middle of the screen and goes away without moving, and zooming does not animate. With reduced transparency on, the background is not blurred.
+- The blurred background and the toolbar are never the only way to close: Escape always works.

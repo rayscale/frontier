@@ -4,7 +4,7 @@ import { SiteHeader } from '#/components/site-header/index.js'
 import { loadDocumentation } from '#/documentation/pages.js'
 
 import { DocumentationBreadcrumbs } from './documentation-breadcrumbs.js'
-import { DocumentationNav, DocumentationNavDrawer } from './documentation-nav.js'
+import { DocumentationNav, DocumentationNavSheet } from './documentation-nav.js'
 import { DocumentationProvider } from './documentation-provider.js'
 
 import './documentation.css'
@@ -24,7 +24,7 @@ export async function DocumentationLayout({
         <DocumentationNav />
         <div className="documentation-layout__inset">
           <div className="documentation-layout__trail">
-            <DocumentationNavDrawer />
+            <DocumentationNavSheet />
             <DocumentationBreadcrumbs />
           </div>
           {children}

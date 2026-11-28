@@ -1,0 +1,115 @@
+---
+title: Resizable
+description: Panels whose sizes people change by dragging the handle between them.
+---
+
+## Usage
+
+```tsx
+import { Resizable } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Resizable.Root>
+      <Resizable.Panel defaultSize={50}>One</Resizable.Panel>
+      <Resizable.Handle aria-label="Resize panels" />
+      <Resizable.Panel defaultSize={50}>Two</Resizable.Panel>
+    </Resizable.Root>
+  )
+}
+```
+
+Use resizable panels when people need to decide how much room each area gets, such as a sidebar beside its content or an editor above a terminal. The group fills its parent, so give the parent a height. Moving the handle with the pointer is one way to resize; focusing it and using the arrow keys is the other, so every size can be reached without dragging.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Grip
+
+Add `grip` to make the handle easier to spot and grab.
+
+<Demo name="grip" />
+
+### Vertical
+
+Set `orientation="vertical"` on the group to stack the panels in a column.
+
+<Demo name="vertical" />
+
+### Nested
+
+Put a group inside a panel to split it further.
+
+<Demo name="nested" />
+
+### Collapsible
+
+A collapsible panel collapses when it is dragged below its `minSize` and returns when it is dragged back.
+
+<Demo name="collapsible" />
+
+### Units
+
+A number is a percentage of the group. Pass a string with a unit, such as `"12rem"` or `"240px"`, to size a panel in fixed units.
+
+<Demo name="units" />
+
+### Disabled
+
+<Demo name="disabled" />
+
+## API reference
+
+### Resizable.Root
+
+Renders a `<div>` that lays out its panels and handles. It forwards its ref and the attributes of a `div`.
+
+| Prop             | Type                                       | Default        | Description                                                      |
+| ---------------- | ------------------------------------------ | -------------- | ---------------------------------------------------------------- |
+| `defaultLayout`  | `Record<string, number>`                   | —              | Sizes the panels start with, as percentages keyed by panel `id`. |
+| `disabled`       | `boolean`                                  | `false`        | Prevents every panel from being resized.                         |
+| `onLayoutChange` | `(layout: Record<string, number>) => void` | —              | Called with the new layout once a resize has finished.           |
+| `orientation`    | `'horizontal' \| 'vertical'`               | `'horizontal'` | Direction in which panels sit side by side.                      |
+
+### Resizable.Panel
+
+Renders a region whose size changes when a neighboring handle moves. It forwards its ref and the attributes of a `div`, except `id`.
+
+| Prop            | Type                     | Default | Description                                                                    |
+| --------------- | ------------------------ | ------- | ------------------------------------------------------------------------------ |
+| `collapsedSize` | `number \| string`       | `0`     | Size the panel collapses to.                                                   |
+| `collapsible`   | `boolean`                | `false` | Lets the panel collapse when it is resized below `minSize`.                    |
+| `defaultSize`   | `number \| string`       | —       | Size the panel starts with. Panels without one share the remaining space.      |
+| `disabled`      | `boolean`                | `false` | Prevents the panel from being resized, directly or through its neighbors.      |
+| `id`            | `string`                 | —       | Identifies the panel in a layout. Required to save and restore a layout.       |
+| `maxSize`       | `number \| string`       | `100`   | Largest size the panel can take.                                               |
+| `minSize`       | `number \| string`       | `0`     | Smallest size the panel can take.                                              |
+| `onResize`      | `(size: number) => void` | —       | Called with the panel's size as a percentage of the group whenever it changes. |
+
+A size is a number, read as a percentage of the group, or a string with a unit: `%`, `px`, `em`, `rem`, `vh`, or `vw`.
+
+### Resizable.Handle
+
+Renders the separator between two panels. It sits directly inside `Resizable.Root`, between the panels it resizes. It forwards its ref and the attributes of a `div`, except `id`.
+
+| Prop       | Type      | Default | Description                                       |
+| ---------- | --------- | ------- | ------------------------------------------------- |
+| `disabled` | `boolean` | `false` | Prevents this handle from resizing its neighbors. |
+| `grip`     | `boolean` | `false` | Shows a grip so the handle is easy to spot.       |
+| `id`       | `string`  | —       | Identifies the handle in the group.               |
+
+## Accessibility
+
+<Callout title="Name each handle">
+  A handle without a name is announced only as a separator. Set `aria-label` to say what it resizes,
+  such as "Resize sidebar".
+</Callout>
+
+- The handle is a focusable separator that reports its position with `aria-valuenow`, so assistive technology announces how much room the panel before it has.
+- The arrow keys move the focused handle, and `Home` and `End` move it to the smallest and largest size, so resizing never depends on dragging.
+- A disabled handle reports `aria-disabled` and does not move.
+- The focused handle shows the focus ring from the focus tokens, and the handle changes color on hover and while it is dragged, so its state is not shown by position alone.
+- The grip is decorative and hidden from assistive technology.

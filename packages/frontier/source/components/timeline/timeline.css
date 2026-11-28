@@ -1,0 +1,155 @@
+.frontier-timeline {
+  --_indicator: var(--frontier-spacing-6);
+  --_gap: var(--frontier-spacing-3);
+
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family);
+  font-size: var(--frontier-font-size-md);
+  list-style: none;
+}
+
+.frontier-timeline__item {
+  --_accent: var(--frontier-color-text-subtle);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--_indicator) minmax(0, 1fr);
+  column-gap: var(--_gap);
+  padding-block-end: var(--frontier-spacing-6);
+}
+
+.frontier-timeline__item[data-tone='info'] {
+  --_accent: var(--frontier-color-info);
+}
+
+.frontier-timeline__item[data-tone='success'] {
+  --_accent: var(--frontier-color-success);
+}
+
+.frontier-timeline__item[data-tone='warning'] {
+  --_accent: var(--frontier-color-warning);
+}
+
+.frontier-timeline__item[data-tone='danger'] {
+  --_accent: var(--frontier-color-danger);
+}
+
+.frontier-timeline__item:last-child {
+  padding-block-end: 0;
+}
+
+/* The line runs from under the indicator to the next one. */
+.frontier-timeline__item:not(:last-child)::before {
+  position: absolute;
+  inset-block: calc(var(--_indicator) + var(--frontier-spacing-1)) var(--frontier-spacing-1);
+  inset-inline-start: calc((var(--_indicator) - var(--frontier-border-width-subtle)) / 2);
+  inline-size: var(--frontier-border-width-subtle);
+  background: var(--frontier-color-border);
+  content: '';
+}
+
+.frontier-timeline__indicator {
+  display: inline-flex;
+  grid-column: 1;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: var(--_indicator);
+  block-size: var(--_indicator);
+  color: var(--_accent);
+}
+
+/* With no content, the indicator is a dot. */
+.frontier-timeline__indicator:empty::before {
+  inline-size: var(--frontier-spacing-3);
+  block-size: var(--frontier-spacing-3);
+  border-radius: var(--frontier-radius-full);
+  background: var(--_accent);
+  content: '';
+}
+
+/* With an icon, it is a circle around it. */
+.frontier-timeline__indicator:not(:empty) {
+  border: var(--frontier-border-width-subtle) solid var(--_accent);
+  border-radius: var(--frontier-radius-full);
+  background: var(--frontier-color-surface);
+}
+
+.frontier-timeline__indicator > :where(svg) {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.frontier-timeline__content {
+  display: flex;
+  grid-column: 2;
+  flex-direction: column;
+  gap: var(--frontier-spacing-1);
+  min-inline-size: 0;
+}
+
+.frontier-timeline__title {
+  margin: 0;
+  color: var(--frontier-color-text);
+  font-size: inherit;
+  font-weight: var(--frontier-font-weight-semibold);
+  /* The title lines up with the middle of the indicator. */
+  line-height: var(--_indicator);
+}
+
+.frontier-timeline__time {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+}
+
+.frontier-timeline__description {
+  margin: 0;
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+}
+
+/* Horizontal: the events sit side by side, with the indicator above its text. */
+.frontier-timeline[data-orientation='horizontal'] {
+  flex-direction: row;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__item {
+  flex: 1 1 0;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: var(--_indicator) auto;
+  row-gap: var(--frontier-spacing-2);
+  padding-block-end: 0;
+  padding-inline-end: var(--frontier-spacing-4);
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__item:last-child {
+  padding-inline-end: 0;
+}
+
+/* The line runs from beside the indicator to the next one. */
+.frontier-timeline[data-orientation='horizontal']
+  .frontier-timeline__item:not(:last-child)::before {
+  inset-block: calc((var(--_indicator) - var(--frontier-border-width-subtle)) / 2) auto;
+  inset-inline: calc(var(--_indicator) + var(--frontier-spacing-1)) var(--frontier-spacing-1);
+  inline-size: auto;
+  block-size: var(--frontier-border-width-subtle);
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__indicator,
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__content {
+  grid-column: 1;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__content {
+  grid-row: 2;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__title {
+  line-height: var(--frontier-line-height-tight);
+}

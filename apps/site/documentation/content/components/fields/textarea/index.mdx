@@ -1,0 +1,79 @@
+---
+title: Textarea
+description: A multi-line text field with a label, a hint, and an error that stay with the control.
+---
+
+## Usage
+
+```tsx
+import { Textarea } from '@rayscale/frontier'
+
+export function Example() {
+  return <Textarea label="Message" />
+}
+```
+
+A textarea is where someone types or edits text that runs over several lines, so it keeps focus while they type. It renders a native `<textarea>`, so `rows`, `maxLength`, `value`, `placeholder`, and the other native attributes work as usual.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### With a description
+
+A description sits under the textarea and is read together with its label.
+
+<Demo name="withDescription" />
+
+### With an error
+
+An error appears under the textarea and marks it invalid.
+
+<Demo name="withError" />
+
+### Fixed height
+
+People can drag the corner to change the height. Set `resize="none"` to keep it at the number of `rows`.
+
+<Demo name="fixedHeight" />
+
+### Auto size
+
+Set `autoSize` to let the field grow with its content. It relies on the CSS `field-sizing` property, so browsers without it keep the height set by `rows`.
+
+<Demo name="autoSize" />
+
+### Disabled and read only
+
+<Demo name="disabled" />
+
+## API reference
+
+### Textarea
+
+Renders a native `<textarea>` with an optional label, description, and error. It forwards its ref and the attributes of a textarea. The table lists the props `Textarea` adds or changes.
+
+| Prop          | Type                   | Default      | Description                                                        |
+| ------------- | ---------------------- | ------------ | ------------------------------------------------------------------ |
+| `autoSize`    | `boolean`              | `false`      | Grows and shrinks the field with its content instead of scrolling. |
+| `description` | `ReactNode`            | —            | Helper text linked to the textarea.                                |
+| `error`       | `ReactNode`            | —            | Error message linked to the textarea. It also marks it invalid.    |
+| `invalid`     | `boolean`              | `false`      | Marks the textarea invalid even when no error is shown.            |
+| `label`       | `ReactNode`            | —            | Visible label linked to the textarea.                              |
+| `resize`      | `'none' \| 'vertical'` | `'vertical'` | Whether people can drag the corner to change the height.           |
+| `rows`        | `number`               | `3`          | Number of lines shown before the text scrolls.                     |
+
+## Accessibility
+
+<Callout title="Give every textarea a name">
+  A textarea without a name cannot be identified by assistive technology. Pass `label`, and keep
+  that text as the name so what is spoken matches what is seen. Without a visible label, set
+  `aria-label`.
+</Callout>
+
+- The label is tied to the textarea, so selecting the label focuses it.
+- The description and the error are linked with `aria-describedby` and `aria-errormessage`. The error is announced politely when it appears, and the textarea reports `aria-invalid`.
+- A disabled textarea uses the native `disabled` attribute and leaves the tab order. A read-only textarea stays focusable and can be selected.
+- The focus ring comes from the focus tokens and shows while the textarea is being edited.

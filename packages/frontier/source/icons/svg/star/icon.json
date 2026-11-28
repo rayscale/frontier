@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "star",
+  "description": "Marks something as a favorite, or shows a rating.",
+  "keywords": ["star", "favorite", "rating", "bookmark"],
+  "categories": ["ui"],
+  "aliases": ["favorite"],
+  "useCases": ["ratings", "favorites"]
+}

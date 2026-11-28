@@ -39,6 +39,12 @@ Use a callout for a message that belongs to the content around it, such as a not
 
 <Demo name="withActions" />
 
+### Dismissible
+
+Pass `onDismiss` to show a close button in the corner. The callout does not hide itself, so remove it in the handler. Use it for messages that people can do without, such as a result or a tip, and not for errors that must be fixed.
+
+<Demo name="dismissible" />
+
 ### Roles
 
 The role decides how assistive technology announces the callout.
@@ -51,11 +57,13 @@ The role decides how assistive technology announces the callout.
 
 Renders a `<div>` that holds the message. It forwards its ref and the attributes of a `<div>`. The table lists the props `Callout` adds.
 
-| Prop       | Type                                           | Default  | Description                                                                  |
-| ---------- | ---------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
-| `tone`     | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'` | Meaning of the message.                                                      |
-| `role`     | `'note' \| 'alert' \| 'status'`                | `'note'` | How assistive technology announces it. Use `alert` only for urgent messages. |
-| `children` | `ReactNode`                                    | —        | The parts of the callout.                                                    |
+| Prop           | Type                                           | Default     | Description                                                                   |
+| -------------- | ---------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| `tone`         | `'info' \| 'success' \| 'warning' \| 'danger'` | `'info'`    | Meaning of the message.                                                       |
+| `role`         | `'note' \| 'alert' \| 'status'`                | `'note'`    | How assistive technology announces it. Use `alert` only for urgent messages.  |
+| `onDismiss`    | `() => void`                                   | —           | Shows a button that dismisses the message, and calls this when it is pressed. |
+| `dismissLabel` | `string`                                       | `'Dismiss'` | Name of the dismiss button.                                                   |
+| `children`     | `ReactNode`                                    | —           | The parts of the callout.                                                     |
 
 ### Callout.Icon
 
@@ -86,4 +94,5 @@ Groups the actions of the callout. It renders a `<div>` and accepts its attribut
 
 - The icon is hidden from assistive technology, so the tone must also be clear from the text.
 - Do not use color as the only sign of the tone. Write a title that says it.
+- The dismiss button is a native button with a name, "Dismiss" by default. Change it for other languages with `dismissLabel`. When the message is dismissed, move the focus to something sensible, because the button that had it is gone.
 - Use a heading element for the title when it should appear in the outline of the page.

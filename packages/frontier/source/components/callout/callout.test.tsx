@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { Callout, Callout as PublicCallout } from './index.js'
 
@@ -67,6 +68,33 @@ describe('Callout', () => {
     expect(callout).toHaveClass('frontier-callout', 'custom')
     expect(callout).toHaveAttribute('id', 'notice')
     expect(ref.current).toBe(callout)
+  })
+
+  it('has no dismiss button unless onDismiss is given', () => {
+    render(<Callout>Message</Callout>)
+
+    expect(screen.queryByRole('button')).toBeNull()
+  })
+
+  it('shows a dismiss button that calls onDismiss', async () => {
+    const user = userEvent.setup()
+    const onDismiss = vi.fn()
+    render(<Callout onDismiss={onDismiss}>Message</Callout>)
+
+    await user.click(screen.getByRole('button', { name: 'Dismiss' }))
+
+    expect(onDismiss).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('note')).toHaveAttribute('data-dismissible')
+  })
+
+  it('names the dismiss button with dismissLabel', () => {
+    render(
+      <Callout dismissLabel="Cerrar aviso" onDismiss={() => undefined}>
+        Message
+      </Callout>,
+    )
+
+    expect(screen.getByRole('button', { name: 'Cerrar aviso' })).toBeInTheDocument()
   })
 
   it('is exported from the package entry point', () => {

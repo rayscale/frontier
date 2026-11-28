@@ -1,0 +1,102 @@
+.frontier-input-otp {
+  --_slot-size: var(--frontier-control-size-large);
+
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  width: fit-content;
+  color: var(--frontier-color-text);
+  font-family: var(--frontier-font-family-mono);
+}
+
+.frontier-input-otp__group {
+  display: flex;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-input-otp__slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--_slot-size);
+  height: var(--_slot-size);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  border-radius: var(--frontier-radius-lg);
+  background: var(--frontier-color-surface);
+  box-shadow: var(--frontier-shadow-sm);
+  font-size: var(--frontier-font-size-lg);
+  font-weight: var(--frontier-font-weight-medium);
+  line-height: var(--frontier-line-height-normal);
+  transition:
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard),
+    background-color var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-input-otp__slot[data-active] {
+  border-color: var(--frontier-color-focus);
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+
+.frontier-input-otp__separator {
+  flex: 0 0 auto;
+  width: var(--frontier-spacing-3);
+  height: var(--frontier-border-width);
+  border-radius: var(--frontier-radius-lg);
+  background: var(--frontier-color-border-strong);
+}
+
+.frontier-input-otp__caret {
+  position: absolute;
+  width: var(--frontier-border-width);
+  height: 1.25em;
+  background: var(--frontier-color-text);
+  animation: frontier-input-otp-caret var(--frontier-duration-slow) steps(1) infinite;
+  pointer-events: none;
+}
+
+.frontier-field[data-invalid] .frontier-input-otp__slot {
+  border-color: var(--frontier-color-danger);
+}
+
+.frontier-field[data-invalid] .frontier-input-otp__slot[data-active] {
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-danger-border);
+}
+
+.frontier-field[data-disabled] .frontier-input-otp {
+  cursor: not-allowed;
+}
+
+.frontier-field[data-disabled] .frontier-input-otp__slot {
+  border-color: var(--frontier-color-border-disabled);
+  background: var(--frontier-color-disabled);
+  color: var(--frontier-color-on-disabled);
+}
+
+.frontier-field[data-readonly] .frontier-input-otp__slot {
+  background: var(--frontier-color-surface-sunken);
+}
+
+@keyframes frontier-input-otp-caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-input-otp__slot {
+    transition: none;
+  }
+
+  .frontier-input-otp__caret {
+    animation: none;
+  }
+}

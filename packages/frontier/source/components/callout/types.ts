@@ -11,6 +11,13 @@ export type TCalloutProps = HTMLAttributes<HTMLDivElement> & {
   tone?: TCalloutTone | undefined
   /** Accessible role. Use `alert` only for urgent, time-sensitive messages. */
   role?: TCalloutRole | undefined
+  /**
+   * Shows a button that dismisses the message, and calls this when it is pressed. The callout does
+   * not hide itself: remove it in the handler.
+   */
+  onDismiss?: (() => void) | undefined
+  /** Name of the dismiss button. Defaults to `Dismiss`. */
+  dismissLabel?: string | undefined
   children?: ReactNode | undefined
 }
 

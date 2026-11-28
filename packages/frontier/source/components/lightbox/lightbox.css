@@ -1,0 +1,106 @@
+.frontier-lightbox__counter {
+  padding-inline: var(--frontier-spacing-3);
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.frontier-lightbox__nav {
+  position: fixed;
+  inset-block: 0;
+  margin-block: auto;
+  border-radius: var(--frontier-radius-full);
+}
+
+.frontier-lightbox__nav--previous {
+  inset-inline-start: var(--frontier-spacing-4);
+}
+
+.frontier-lightbox__nav--next {
+  inset-inline-end: var(--frontier-spacing-4);
+}
+
+/* The caption and the strip sit under the picture, one over the other. */
+.frontier-lightbox__footer {
+  position: fixed;
+  inset-block-end: var(--frontier-spacing-4);
+  inset-inline: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--frontier-spacing-2);
+  pointer-events: none;
+}
+
+.frontier-lightbox__footer > * {
+  pointer-events: auto;
+}
+
+.frontier-lightbox__caption {
+  max-inline-size: min(36rem, calc(100vw - var(--frontier-spacing-8)));
+  margin: 0;
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-4);
+  border-radius: var(--frontier-radius-lg);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+  text-align: center;
+}
+
+.frontier-lightbox__thumbnails {
+  display: flex;
+  gap: var(--frontier-spacing-2);
+  box-sizing: border-box;
+  max-inline-size: min(40rem, calc(100vw - var(--frontier-spacing-8)));
+  padding: var(--frontier-spacing-2);
+  overflow-x: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--frontier-radius-lg);
+}
+
+.frontier-lightbox__thumbnail {
+  flex: none;
+  box-sizing: border-box;
+  inline-size: var(--frontier-spacing-12);
+  block-size: var(--frontier-spacing-12);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: var(--frontier-border-width) solid transparent;
+  border-radius: var(--frontier-radius-sm);
+  background: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    opacity var(--frontier-duration-base) var(--frontier-easing-standard),
+    border-color var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+
+.frontier-lightbox__thumbnail > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+@media (hover: hover) {
+  .frontier-lightbox__thumbnail:hover {
+    opacity: 1;
+  }
+}
+
+.frontier-lightbox__thumbnail[aria-current='true'] {
+  border-color: var(--frontier-color-primary);
+  opacity: 1;
+}
+
+.frontier-lightbox__thumbnail:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-lightbox__thumbnail {
+    transition: none;
+  }
+}

@@ -1,6 +1,8 @@
 import { type ElementType, forwardRef } from 'react'
 
+import { X } from '../../../icons/index.js'
 import { classNames } from '../../../internal/helpers/class-names.js'
+import { Button } from '../../button/button.js'
 import type {
   TCalloutActionsProps,
   TCalloutContentProps,
@@ -10,18 +12,38 @@ import type {
 } from '../types.js'
 
 export const CalloutRoot = forwardRef<HTMLDivElement, TCalloutProps>(function CalloutRoot(
-  { children, className, role = 'note', tone = 'info', ...props },
+  {
+    children,
+    className,
+    dismissLabel = 'Dismiss',
+    onDismiss,
+    role = 'note',
+    tone = 'info',
+    ...props
+  },
   ref,
 ) {
   return (
     <div
       ref={ref}
       role={role}
+      data-dismissible={onDismiss ? '' : undefined}
       data-tone={tone}
       className={classNames('frontier-callout', className)}
       {...props}
     >
       {children}
+      {onDismiss && (
+        <Button
+          aria-label={dismissLabel}
+          className="frontier-callout__dismiss"
+          size="icon-small"
+          variant="ghost"
+          onClick={onDismiss}
+        >
+          <X aria-hidden="true" />
+        </Button>
+      )}
     </div>
   )
 })

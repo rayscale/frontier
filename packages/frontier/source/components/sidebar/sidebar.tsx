@@ -85,7 +85,7 @@ export interface TSidebarComponent extends ForwardRefExoticComponent<
   SubmenuItem: typeof SidebarSubmenuItem
   /** Pins utility or account content below the scrollable navigation. */
   Footer: typeof SidebarFooter
-  /** Toggles desktop expansion or opens and closes the mobile drawer. */
+  /** Toggles desktop expansion or opens and closes the mobile sheet. */
   Trigger: typeof SidebarTrigger
   /** Renders a narrow toggle target at the sidebar's inner edge. */
   Rail: typeof SidebarRail

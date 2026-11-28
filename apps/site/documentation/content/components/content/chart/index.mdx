@@ -1,0 +1,189 @@
+---
+title: Chart
+description: Bars, lines, and areas that show how values change across positions, with a tooltip that follows the cursor.
+---
+
+## Usage
+
+```tsx
+import { Chart } from '@rayscale/frontier'
+
+const data = [
+  { day: 'Mon', visits: 120 },
+  { day: 'Tue', visits: 180 },
+  { day: 'Wed', visits: 150 },
+]
+
+export function Example() {
+  return (
+    <Chart.Root data={data} xKey="day" config={{ visits: { label: 'Visits' } }}>
+      <Chart.Plot aria-label="Visits by day of the week">
+        <Chart.Grid />
+        <Chart.XAxis />
+        <Chart.YAxis />
+        <Chart.Bar dataKey="visits" />
+        <Chart.Tooltip />
+      </Chart.Plot>
+    </Chart.Root>
+  )
+}
+```
+
+A chart shows how one or more values change across a row of positions, such as a metric for each day or month. The type of chart is not a prop: it comes from the marks you put in the plot. Use `Chart.Bar` for bars, `Chart.Line` for lines, and `Chart.Area` for areas, and combine them in one plot when they belong together, such as bars of visits with a line for the goal.
+
+The data is a list of rows. `xKey` names the field that labels each row along the bottom, and every other numeric field can be a series. `config` names each series for the legend and the tooltip, and gives it a color. Without a color, series take the `--frontier-color-chart-*` tokens in order, which hold up in the light and the dark mode.
+
+The chart fills the width of its container and keeps the height you give the plot, so set the width on the container. It draws categories along the x axis, with each row in an equal slot. Stacked series, scatter plots, and circular charts are not part of this component yet.
+
+## Examples
+
+### Bars
+
+Bars with a grid, both axes, a legend, and a tooltip. The tooltip is a [cursor card](/documentation/components/overlays/cursor-card) that follows the cursor across the plot, shows the values at that position, and highlights them on the plot.
+
+<Demo name="bars" />
+
+### Grouped bars
+
+Several bar series sit side by side at each position.
+
+<Demo name="groupedBars" />
+
+### Lines
+
+Lines with their points marked. `valueFormat` formats the values in the tooltip and `tickFormat` formats the labels of an axis.
+
+<Demo name="lines" />
+
+### Areas
+
+An area fills the space under its line.
+
+<Demo name="areas" />
+
+### Mixed
+
+Marks share the same axes, so a line can show a goal over bars. A line can be `linear`, `monotone`, which is smooth without overshooting, or `step`.
+
+<Demo name="mixed" />
+
+### Custom tooltip
+
+Pass a function to `Chart.Tooltip` to build the content from the row under the cursor, including fields that are not series.
+
+<Demo name="customTooltip" />
+
+### Sparkline
+
+Leave out the axes and the grid and reduce the margins to get a small trend line.
+
+<Demo name="sparkline" />
+
+## API reference
+
+### Chart.Root
+
+Holds the data and the series and shares them with the other parts. It renders a `<div>`, forwards its ref, and accepts its attributes.
+
+| Prop     | Type                                                 | Default                           | Description                                                                                       |
+| -------- | ---------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `data`   | `Record<string, string \| number \| null>[]`         | —                                 | The rows of data, one for each position along the x axis.                                         |
+| `xKey`   | `string`                                             | —                                 | Field of each row that names its position along the x axis.                                       |
+| `config` | `Record<string, { label?: string; color?: string }>` | every numeric field except `xKey` | Name and color of each series, keyed by data field. The keys also decide which fields are series. |
+
+A row can hold `null` or no number for a series. A bar is skipped there, and a line or an area breaks.
+
+### Chart.Plot
+
+Renders the drawing area. It measures its container, scales the data, and gives the marks their place. It renders a `<div>`, forwards its ref, and accepts its attributes. Give it an accessible name with `aria-label`.
+
+| Prop      | Type                                                               | Default                      | Description                                                                    |
+| --------- | ------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------ |
+| `height`  | `number`                                                           | `280`                        | Height of the drawing area in pixels.                                          |
+| `margin`  | `{ top?: number; right?: number; bottom?: number; left?: number }` | `12`, `12`, `32`, `48`       | Space around the plot for axes and labels, in pixels.                          |
+| `width`   | `number`                                                           | width of the container       | Fixed width in pixels. Without it the plot follows the width of its container. |
+| `yDomain` | `[number, number]`                                                 | fits every series, with zero | Lowest and highest value of the y axis.                                        |
+
+### Chart.Grid
+
+Draws grid lines behind the marks. It accepts the attributes of a `<g>`.
+
+| Prop         | Type      | Default | Description                                    |
+| ------------ | --------- | ------- | ---------------------------------------------- |
+| `horizontal` | `boolean` | `true`  | Draws a line across the plot at each y tick.   |
+| `ticks`      | `number`  | `5`     | Approximate number of y ticks.                 |
+| `vertical`   | `boolean` | `false` | Draws a line down the plot at each x position. |
+
+### Chart.XAxis
+
+Labels each position along the bottom of the plot, and skips labels when there is not room for all of them. It accepts the attributes of a `<g>`.
+
+| Prop         | Type                                       | Default | Description                         |
+| ------------ | ------------------------------------------ | ------- | ----------------------------------- |
+| `tickFormat` | `(label: string, index: number) => string` | —       | Formats the label of each position. |
+
+### Chart.YAxis
+
+Labels the value scale along the left of the plot. It accepts the attributes of a `<g>`.
+
+| Prop         | Type                        | Default                   | Description                     |
+| ------------ | --------------------------- | ------------------------- | ------------------------------- |
+| `ticks`      | `number`                    | `5`                       | Approximate number of ticks.    |
+| `tickFormat` | `(value: number) => string` | number in the user locale | Formats the label of each tick. |
+
+### Chart.Bar
+
+Draws a series as bars. Bars of several series sit side by side. It accepts the attributes of a `<g>`.
+
+| Prop      | Type     | Default | Description                                           |
+| --------- | -------- | ------- | ----------------------------------------------------- |
+| `dataKey` | `string` | —       | Field of the data this series reads.                  |
+| `radius`  | `number` | `4`     | Corner radius of the free end of each bar, in pixels. |
+
+### Chart.Line
+
+Draws a series as a line. It accepts the attributes of a `<g>`.
+
+| Prop      | Type                               | Default      | Description                          |
+| --------- | ---------------------------------- | ------------ | ------------------------------------ |
+| `dataKey` | `string`                           | —            | Field of the data this series reads. |
+| `curve`   | `'linear' \| 'monotone' \| 'step'` | `'monotone'` | Shape of the line between points.    |
+| `dots`    | `boolean`                          | `false`      | Marks every point of the line.       |
+
+### Chart.Area
+
+Draws a series as an area under a line. It accepts the attributes of a `<g>`.
+
+| Prop      | Type                               | Default      | Description                          |
+| --------- | ---------------------------------- | ------------ | ------------------------------------ |
+| `dataKey` | `string`                           | —            | Field of the data this series reads. |
+| `curve`   | `'linear' \| 'monotone' \| 'step'` | `'monotone'` | Shape of the line between points.    |
+
+### Chart.Tooltip
+
+Draws a card that follows the cursor across the plot and shows the values at that position. Put it last in the plot so it sits above the marks. It accepts the props of the content of a [cursor card](/documentation/components/overlays/cursor-card), such as `side`, `align`, and `sideOffset`, except `children`. The card goes above the plot by default.
+
+| Prop          | Type                                     | Default                    | Description                                              |
+| ------------- | ---------------------------------------- | -------------------------- | -------------------------------------------------------- |
+| `children`    | `(info: TooltipInfo) => ReactNode`       | the label and every series | Replaces the content of the card.                        |
+| `valueFormat` | `(value: number, key: string) => string` | number in the user locale  | Formats the value of each series in the default content. |
+
+`TooltipInfo` holds `index`, the position of the row in the data, `label`, its x label, `datum`, the row itself, and `items`, one entry for each series with its `key`, `label`, `color`, and `value`, which is `null` when the row has none.
+
+### Chart.Legend
+
+Renders a list that names each series with its color. It renders a `<ul>`, forwards its ref, and accepts its attributes.
+
+## Accessibility
+
+<Callout title="Name every plot">
+  A chart is a picture, so give `Chart.Plot` an `aria-label` that says what it shows, such as
+  "Visits by day of the week". Without a name, people who cannot see the chart cannot tell what it
+  is.
+</Callout>
+
+- The plot is an image with the name you give it. Next to it, the same data is offered as a table with a caption, a header for each series, and a row for each position, so people who use assistive technology read the actual values.
+- The tooltip appears with the pointer, and it is not announced. Everything it shows is also in the table.
+- Color is not the only way to tell series apart: the legend and the tooltip name each series, and the table has a column for each one. When series must be told apart at a glance, mark the points with `dots` or give the series different shapes, such as a bar and a line.
+- Each color of the series palette keeps at least 3:1 contrast against a surface in both modes.
+- The grid, axes, and marks are hidden from assistive technology, because the table carries the data.

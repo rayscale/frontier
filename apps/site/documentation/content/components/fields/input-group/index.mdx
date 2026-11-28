@@ -1,0 +1,121 @@
+---
+title: Input group
+description: A field and the controls around it, in one box.
+---
+
+## Usage
+
+```tsx
+import { InputGroup } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <InputGroup label="Website">
+      <InputGroup.Addon>
+        <InputGroup.Text>https://</InputGroup.Text>
+      </InputGroup.Addon>
+      <InputGroup.Input />
+    </InputGroup>
+  )
+}
+```
+
+An input group puts a field and the controls that belong to it inside one box, with one border and one focus ring. Use it for a message box with its actions, a search field with its button, or a value with a prefix or a unit. For a field with only an icon at either side, [input](/documentation/components/fields/input) is enough. To join separate controls that keep their own boxes, use [control group](/documentation/components/fields/control-group).
+
+The group is made of a field, `InputGroup.Input` or `InputGroup.Textarea`, and any number of `InputGroup.Addon`. An addon holds text, icons, buttons, or any other control, and `align` decides where it sits.
+
+## Examples
+
+### Default
+
+A message box with its actions in a row below the text. The field grows as people type. Push an item to the end of the row with `margin-inline-start: auto`.
+
+<Demo name="default" />
+
+### Prefix and icons
+
+Put an addon at the `start` or the `end` of a single-line field. A button with an icon needs an `aria-label`.
+
+<Demo name="prefix" />
+
+### Search
+
+<Demo name="search" />
+
+### Top and bottom
+
+An addon at the `top` or the `bottom` takes a full row above or below the field.
+
+<Demo name="topAndBottom" />
+
+### With a counter
+
+Combine a description with an addon to show how much of a limit is used.
+
+<Demo name="withCounter" />
+
+### With an error
+
+An error appears under the group and marks the field invalid.
+
+<Demo name="withError" />
+
+### Disabled and read only
+
+<Demo name="disabled" />
+
+## API reference
+
+### InputGroup
+
+Renders the box that holds the field and its addons, with an optional label, description, and error. It forwards its ref and the attributes of a `div` to the box.
+
+| Prop          | Type        | Default | Description                                                         |
+| ------------- | ----------- | ------- | ------------------------------------------------------------------- |
+| `description` | `ReactNode` | —       | Helper text linked to the field.                                    |
+| `disabled`    | `boolean`   | `false` | Disables the field and shows the whole group as unavailable.        |
+| `error`       | `ReactNode` | —       | Error message linked to the field. It also marks the field invalid. |
+| `invalid`     | `boolean`   | `false` | Marks the field invalid even when no error is shown.                |
+| `label`       | `ReactNode` | —       | Visible label linked to the field.                                  |
+| `readOnly`    | `boolean`   | `false` | Lets people select the text of the field but not change it.         |
+
+### InputGroup.Input
+
+Renders the single-line field. It forwards its ref and the attributes of an input, except `disabled`, `id`, and `readOnly`, which the group sets.
+
+### InputGroup.Textarea
+
+Renders the multi-line field. It forwards its ref and the attributes of a textarea, except `disabled`, `id`, and `readOnly`, which the group sets.
+
+| Prop       | Type      | Default | Description                                                                                        |
+| ---------- | --------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `autoSize` | `boolean` | `true`  | Grows and shrinks the field with its content. Set it to `false` to keep `rows` and scroll instead. |
+| `rows`     | `number`  | `3`     | Number of lines shown before the text grows or scrolls.                                            |
+
+The field has no resize handle: it grows with what people type. Limit how far it grows with `max-height` through `className` or `style`; the text then scrolls. Browsers without the CSS `field-sizing` property keep the height set by `rows`.
+
+### InputGroup.Addon
+
+Renders a strip of content attached to one side of the field. It forwards its ref and the attributes of a `div`. Clicking an empty part of it moves focus to the field.
+
+| Prop    | Type                                    | Default   | Description                                                                       |
+| ------- | --------------------------------------- | --------- | --------------------------------------------------------------------------------- |
+| `align` | `'start' \| 'end' \| 'top' \| 'bottom'` | `'start'` | Side the addon is attached to. `top` and `bottom` take a full row above or below. |
+
+### InputGroup.Text
+
+Renders static text, such as a prefix, a unit, or a counter, inside an addon. It forwards its ref and the attributes of a `span`.
+
+## Accessibility
+
+<Callout title="Give every group a name">
+  The field has no name without a label. Pass `label`, and keep that text as the name so what is
+  spoken matches what is seen. Without a visible label, set `aria-label` on the field.
+</Callout>
+
+- There is one field, and the label, the description, and the error are tied to it. The description and the error are linked with `aria-describedby` and `aria-errormessage`, the error is announced politely when it appears, and the field reports `aria-invalid`.
+- Text in an addon is not part of the field's value or name. If a prefix or unit changes what the value means, repeat it in the label or the description.
+- Every button in an addon needs its own accessible name. An icon alone has none, so set `aria-label`.
+- Icons that only decorate are hidden from assistive technology with `aria-hidden`.
+- The focus ring shows around the whole group while the field or any control inside it has focus.
+- A disabled group disables the field and leaves the tab order; disable the buttons inside it too. A read-only field stays focusable and can be selected.

@@ -1,0 +1,11 @@
+.frontier-cursor-card {
+  box-sizing: border-box;
+  z-index: var(--frontier-layer-tooltip);
+  width: max-content;
+  max-width: min(20rem, calc(100vw - var(--frontier-spacing-8)));
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-3);
+  border: var(--frontier-border-width-subtle) solid var(--frontier-color-border);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+  pointer-events: none;
+}

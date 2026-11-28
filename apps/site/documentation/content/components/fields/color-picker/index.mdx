@@ -1,0 +1,171 @@
+---
+title: Color picker
+description: Lets people pick a color with an area, sliders, a wheel, fields, swatches, or the eyedropper.
+---
+
+## Usage
+
+```tsx
+import { ColorPicker } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <ColorPicker.Root defaultValue="#2563eb">
+      <ColorPicker.Area />
+      <ColorPicker.Slider channel="hue" />
+      <ColorPicker.Input label="Color" />
+    </ColorPicker.Root>
+  )
+}
+```
+
+A color picker lets people choose a color, by dragging, with the keyboard, by typing, or by taking one from a list. You build it from parts, so you choose how it looks: an area and a hue slider, a wheel, number fields for each channel, a list of ready-made colors, or any mix of them.
+
+`ColorPicker.Root` holds the color and shares it with the parts inside, so they stay in step. It renders no element, so it can wrap a trigger and a popover at once. Each part also works on its own, with its own `value` and `onValueChange`.
+
+The value is a string. Colors are read and written with [culori](https://culorijs.org/), so the value can be written as hex, rgb, hsl, or oklch, and `defaultValue` and `value` accept any CSS color, such as `#2563eb`, `rgb(37 99 235)`, or `rebeccapurple`.
+
+## Examples
+
+### Default
+
+An area for how vivid and how bright the color is, a slider for the hue, and a field for the text.
+
+<Demo name="default" />
+
+### Alpha
+
+Set `alpha` on the root to let the color be see-through. The value then includes the alpha, such as `#2563ebcc`, and `ColorPicker.Slider channel="alpha"` changes it.
+
+<Demo name="alpha" />
+
+### Wheel
+
+`ColorPicker.Wheel` picks the hue on a ring. Pair it with a slider for the brightness.
+
+<Demo name="wheel" />
+
+### Swatches
+
+`ColorPicker.Swatches` shows ready-made colors. The one that matches the current color is checked, even when it is written another way.
+
+<Demo name="swatches" />
+
+### Channels
+
+A slider and a field can work on one channel: `hue`, `saturation`, `brightness`, `alpha`, `red`, `green`, or `blue`. The field takes a number, so people can type the exact value.
+
+<Demo name="channels" />
+
+### Formats
+
+`format` sets how the value is written. Each field below shows the same color.
+
+<Demo name="formats" />
+
+### In a popover
+
+Put the root around both the trigger and the popover. `ColorPicker.Preview` shows the current color in the trigger, and `ColorPicker.EyeDropper` lets people take a color from the screen. The eyedropper only shows in browsers that support it.
+
+<Demo name="popover" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the color in the page.
+
+<Demo name="controlled" />
+
+## API reference
+
+### ColorPicker.Root
+
+Holds the color and shares it with the parts inside. It renders no element.
+
+| Prop            | Type                                              | Default     | Description                                      |
+| --------------- | ------------------------------------------------- | ----------- | ------------------------------------------------ |
+| `alpha`         | `boolean`                                         | `false`     | Whether the color can be see-through.            |
+| `defaultValue`  | `string`                                          | `'#000000'` | Color at the start, in uncontrolled mode.        |
+| `disabled`      | `boolean`                                         | `false`     | Stops people from changing the color.            |
+| `format`        | `'hex' \| 'rgb' \| 'hsl' \| 'oklch'`              | `'hex'`     | How the value is written.                        |
+| `onValueChange` | `(value: string, details: TColorDetails) => void` | —           | Called with the new color every time it changes. |
+| `value`         | `string`                                          | —           | Color, as any CSS color, in controlled mode.     |
+
+`details` holds `color`, the color as `{ hue, saturation, brightness, alpha }`, and `hex`, the color as a hex string whatever the format is. The hue is 0 to 360, saturation and brightness are 0 to 100, and alpha is 0 to 1.
+
+### Props that every part takes
+
+Each part takes `alpha`, `defaultValue`, `format`, `onValueChange`, and `value` like the root does, and `disabled`. Inside a root they are ignored in favor of the root's color, except `disabled`, which is on when either is on. Outside a root, the part keeps its own color.
+
+### ColorPicker.Area
+
+A square where the horizontal axis is the saturation and the vertical axis is the brightness, on the current hue. It renders a `<div>` with `role="group"` and forwards its ref and its attributes. It has one slider for each axis, for assistive technology and the keyboard.
+
+| Prop              | Type     | Default        | Description                     |
+| ----------------- | -------- | -------------- | ------------------------------- |
+| `saturationLabel` | `string` | `'Saturation'` | Name of the saturation control. |
+| `brightnessLabel` | `string` | `'Brightness'` | Name of the brightness control. |
+
+It fills its container, and is never narrower than 16rem. Set its size with `className` or `style`.
+
+### ColorPicker.Slider
+
+A slider for one channel. It is built the same way as [Slider](/documentation/components/selection/slider), so the thumb, the dragging, and the keyboard work the same. The track shows the channel from its lowest to its highest value, so people can see what each position gives. It renders a `<div>` and forwards its ref and its attributes.
+
+| Prop          | Type                                                                             | Default            | Description                       |
+| ------------- | -------------------------------------------------------------------------------- | ------------------ | --------------------------------- |
+| `channel`     | `'hue' \| 'saturation' \| 'brightness' \| 'alpha' \| 'red' \| 'green' \| 'blue'` | —                  | The part of the color it changes. |
+| `label`       | `string`                                                                         | The channel's name | Name of the slider.               |
+| `orientation` | `'horizontal' \| 'vertical'`                                                     | `'horizontal'`     | Direction of the track.           |
+
+### ColorPicker.Wheel
+
+A ring where people pick the hue. It renders a `<div>` and forwards its ref and its attributes.
+
+| Prop        | Type     | Default | Description                  |
+| ----------- | -------- | ------- | ---------------------------- |
+| `label`     | `string` | `'Hue'` | Name of the wheel.           |
+| `thickness` | `number` | `20`    | Width of the ring in pixels. |
+
+It is 12rem wide by default. Set its size with `className` or `style`.
+
+### ColorPicker.Input
+
+A field with the color as text, or with one channel as a number. It takes the props of an [input](/documentation/components/fields/input), such as `label`, `description`, and `error`.
+
+| Prop      | Type                                                                             | Default | Description                                                      |
+| --------- | -------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------- |
+| `channel` | `'hue' \| 'saturation' \| 'brightness' \| 'alpha' \| 'red' \| 'green' \| 'blue'` | —       | Edit one channel as a number instead of the whole color as text. |
+
+Text changes the color when people press Enter or leave the field, and only when it is a color. Text that is not a color is marked invalid, and the field goes back to the current color when people leave it. Escape drops the text. A number changes the color as people type.
+
+### ColorPicker.Swatches
+
+A group of ready-made colors, shown as radio buttons. It renders a `<div>` with `role="radiogroup"` and forwards its ref and its attributes.
+
+| Prop     | Type                | Default    | Description                                     |
+| -------- | ------------------- | ---------- | ----------------------------------------------- |
+| `colors` | `readonly string[]` | —          | The colors people can choose, as any CSS color. |
+| `label`  | `string`            | `'Colors'` | Name of the group.                              |
+
+### ColorPicker.EyeDropper
+
+A button that takes a color from anywhere on the screen, through the browser's eyedropper. It is a [button](/documentation/components/actions/button), so it takes the props of a button. It renders nothing in browsers that do not support the eyedropper. Its `aria-label` is "Pick a color from the screen", so change it for other languages. The alpha of the color stays as it was.
+
+### ColorPicker.Preview
+
+Shows the current color, with the checkerboard behind it. It is a [color swatch](/documentation/components/content/color-swatch), so it takes its props, except `color`.
+
+## Accessibility
+
+<Callout title="Every control is a native slider">
+  The area has two sliders, one for each axis, and the wheel and each slider have one. They are
+  native range inputs, so screen readers read their names and values, and the arrow keys, Page Up,
+  Page Down, Home, and End move them.
+</Callout>
+
+- Dragging, the keyboard, and typing all give the same colors, so no one needs the pointer to pick one.
+- Each control has a name, such as "Hue" or "Saturation". Change the names for other languages with `label`, `saturationLabel`, and `brightnessLabel`.
+- The values are read as percentages, or degrees for the hue, instead of a raw number.
+- The swatches are radio buttons in a group: the arrow keys move between them, and Home and End jump to the first and the last.
+- A color is never the only way to tell something. Show the value as text, as the examples do, so people who cannot tell the colors apart can read it.
+- The thumbs show a focus ring when the keyboard moves them.

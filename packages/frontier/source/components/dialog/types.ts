@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode, RefObject } from 'react'
 
 import type { TButtonProps } from '../button/button.js'
 
@@ -31,6 +31,11 @@ export type TDialogContentProps = HTMLAttributes<HTMLDivElement> & {
   showCloseButton?: boolean | undefined
   /** Closes the dialog when the backdrop is clicked. Defaults to `true`. */
   closeOnBackdropClick?: boolean | undefined
+  /**
+   * The element that takes the focus when the dialog opens, or a function that returns it. Without
+   * it, the focus goes to the first thing people can use in the dialog.
+   */
+  initialFocus?: RefObject<HTMLElement | null> | (() => HTMLElement | null) | undefined
 }
 
 /** Props for `Dialog.Header`. */

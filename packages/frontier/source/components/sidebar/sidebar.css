@@ -600,12 +600,12 @@
   padding-inline: var(--frontier-spacing-1);
 }
 
-.frontier-sidebar__mobile-drawer .frontier-drawer__body {
+.frontier-sidebar__mobile-sheet .frontier-sheet__body {
   gap: 0;
   padding-block: 0;
 }
 
-.frontier-sidebar__mobile-drawer .frontier-drawer__body > .frontier-sidebar {
+.frontier-sidebar__mobile-sheet .frontier-sheet__body > .frontier-sidebar {
   position: relative;
   inset-block-start: auto;
   flex: 1 1 auto;
@@ -616,7 +616,7 @@
   background: transparent;
 }
 
-.frontier-sidebar__mobile-drawer .frontier-sidebar__rail {
+.frontier-sidebar__mobile-sheet .frontier-sidebar__rail {
   display: none;
 }
 

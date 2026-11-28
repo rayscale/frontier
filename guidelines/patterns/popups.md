@@ -28,7 +28,7 @@ A popup closes according to its role: an option list closes after a choice, Esca
 
 ## Modal surfaces
 
-A dialog or a drawer is modal. It dims and blurs the page behind it, keeps focus inside, and requires
+A dialog or a sheet is modal. It dims and blurs the page behind it, keeps focus inside, and requires
 an explicit dismissal such as a close control or a cancel action; Escape also dismisses it. A modal
 surface never changes to non-modal while it is open. Closing returns focus to the invoker. See
 [Elevation](../foundations/elevation.md).

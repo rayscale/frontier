@@ -18,7 +18,7 @@ const thumbnailsSpace = 48
 
 export const LightboxContent = forwardRef<HTMLDivElement, TLightboxContentProps>(
   function LightboxContent({ children, label, onKeyDown, thumbnails = true, ...props }, ref) {
-    const { count, goTo, index, item, items, next, previous } =
+    const { count, direction, goTo, index, item, items, next, previous } =
       useLightboxContext('Lightbox.Content')
     const several = count > 1
 
@@ -37,6 +37,7 @@ export const LightboxContent = forwardRef<HTMLDivElement, TLightboxContentProps>
         ref={ref}
         alt={item?.alt ?? ''}
         bottomSpace={children === undefined && several && thumbnails ? thumbnailsSpace : 0}
+        direction={direction}
         label={label ?? item?.alt}
         src={item?.src}
         onKeyDown={(event) => {

@@ -56,33 +56,40 @@ Pass `open` and `onOpenChange` to open the image from somewhere else.
 
 Holds the open state and the zoom. It renders no element.
 
-| Prop           | Type                      | Default | Description                                                              |
-| -------------- | ------------------------- | ------- | ------------------------------------------------------------------------ |
-| `open`         | `boolean`                 | —       | Open state, in controlled mode.                                          |
-| `defaultOpen`  | `boolean`                 | `false` | Open state at the start, in uncontrolled mode.                           |
-| `onOpenChange` | `(open: boolean) => void` | —       | Called when the image opens or closes.                                   |
-| `maxZoom`      | `number`                  | `4`     | The highest zoom, as a multiple of the size the image has when it opens. |
+| Prop            | Type                                   | Default | Description                                                                             |
+| --------------- | -------------------------------------- | ------- | --------------------------------------------------------------------------------------- |
+| `open`          | `boolean`                              | —       | Open state, in controlled mode.                                                         |
+| `defaultOpen`   | `boolean`                              | `false` | Open state at the start, in uncontrolled mode.                                          |
+| `onOpenChange`  | `(open: boolean) => void`              | —       | Called when the image opens or closes.                                                  |
+| `value`         | `string`                               | —       | Which image is shown, by the `value` of its trigger. Only needed with several triggers. |
+| `defaultValue`  | `string`                               | —       | The image shown at the start, in uncontrolled mode.                                     |
+| `onValueChange` | `(value: string \| undefined) => void` | —       | Called with the `value` of the trigger whose image is shown, when it changes.           |
+| `maxZoom`       | `number`                               | `4`     | The highest zoom, as a multiple of the size the image has when it opens.                |
 
 ### ImageZoom.Trigger
 
 Renders a button around the image that people press. Its child must be one `img` element. The name of the button is the `alt` of the image, so write one that says what the image shows.
 
-| Prop        | Type           | Description                                |
-| ----------- | -------------- | ------------------------------------------ |
-| `children`  | `ReactElement` | The `img` that people press.               |
-| `className` | `string`       | Class for the button that wraps the image. |
+| Prop        | Type           | Description                                                                                              |
+| ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| `children`  | `ReactElement` | The `img` that people press.                                                                             |
+| `value`     | `string`       | Names this image when one `ImageZoom` has several triggers, so the right one is enlarged and flies back. |
+| `className` | `string`       | Class for the button that wraps the image.                                                               |
 
 ### ImageZoom.Content
 
 Renders the dialog: the enlarged image over a blurred background, and what goes over it. It takes the attributes of a `div` and forwards its ref.
 
-| Prop       | Type        | Default                     | Description                                                                    |
-| ---------- | ----------- | --------------------------- | ------------------------------------------------------------------------------ |
-| `src`      | `string`    | The source of the trigger   | Source of the enlarged image.                                                  |
-| `srcSet`   | `string`    | —                           | Source set of the enlarged image, so a sharper file can load.                  |
-| `alt`      | `string`    | The `alt` of the trigger    | Text that describes the enlarged image.                                        |
-| `label`    | `string`    | The `alt`                   | Name of the dialog.                                                            |
-| `children` | `ReactNode` | A toolbar with the controls | What goes over the image, such as `ImageZoom.Toolbar` and `ImageZoom.Caption`. |
+| Prop          | Type                      | Default                     | Description                                                                                                      |
+| ------------- | ------------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `src`         | `string`                  | The source of the trigger   | Source of the enlarged image.                                                                                    |
+| `srcSet`      | `string`                  | —                           | Source set of the enlarged image, so a sharper file can load.                                                    |
+| `alt`         | `string`                  | The `alt` of the trigger    | Text that describes the enlarged image.                                                                          |
+| `label`       | `string`                  | The `alt`                   | Name of the dialog.                                                                                              |
+| `children`    | `ReactNode`               | A toolbar with the controls | What goes over the image, such as `ImageZoom.Toolbar` and `ImageZoom.Caption`.                                   |
+| `direction`   | `'forward' \| 'backward'` | The order of the triggers   | Which way people are going when another image replaces the shown one. It sets the side the new one comes from.   |
+| `bottomSpace` | `number`                  | `0`                         | Room kept under the image, in pixels, for controls that you put there.                                           |
+| `onKeyDown`   | `KeyboardEventHandler`    | —                           | Called after the image has handled the key. The keys it uses are already prevented, so check `defaultPrevented`. |
 
 ### ImageZoom.Toolbar
 
@@ -102,7 +109,7 @@ Text over the image, under it. It renders a `<p>` and takes its attributes.
 
 ## Several images
 
-One `ImageZoom` can have several triggers. Give each trigger a `value`, and control which one is shown with `value` and `onValueChange`: the image that opens is the one that was pressed, another can be shown while it is open by changing `value`, and it flies back to the trigger of the image that is shown. The picture that replaces another slides in from the side it is on in the page, and the next one loads before it is shown, so the image never has a wrong size for a moment. [Lightbox](/documentation/components/content/lightbox) is built this way, and adds the controls to go through the pictures.
+One `ImageZoom` can have several triggers. Give each trigger a `value`, and control which one is shown with `value` and `onValueChange`: the image that opens is the one that was pressed, another can be shown while it is open by changing `value`, and it flies back to the trigger of the image that is shown. The picture that replaces another slides in from the side it is on in the page, or from the side that `direction` says, and the next one loads before it is shown, so the image never has a wrong size for a moment. [Lightbox](/documentation/components/content/lightbox) is built this way, and adds the controls to go through the pictures.
 
 ## Zooming
 

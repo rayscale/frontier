@@ -4,6 +4,8 @@ import type { TLightboxItem } from './types.js'
 
 export interface TLightboxContextValue {
   readonly count: number
+  /** Which way people went to reach the shown picture. */
+  readonly direction: 'forward' | 'backward'
   readonly goTo: (index: number) => void
   readonly index: number
   readonly item: TLightboxItem | undefined

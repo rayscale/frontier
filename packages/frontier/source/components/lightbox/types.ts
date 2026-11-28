@@ -57,7 +57,7 @@ export interface TLightboxTriggerProps {
 /** Props for `Lightbox.Content`. */
 export type TLightboxContentProps = Omit<
   TImageZoomContentProps,
-  'alt' | 'bottomSpace' | 'src' | 'srcSet'
+  'alt' | 'bottomSpace' | 'direction' | 'src' | 'srcSet'
 > & {
   /**
    * Shows the strip of small pictures under the enlarged one, when the default controls are used.

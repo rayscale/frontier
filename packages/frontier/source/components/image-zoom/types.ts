@@ -42,6 +42,12 @@ export type TImageZoomContentProps = Omit<HTMLAttributes<HTMLDivElement>, 'child
   alt?: string | undefined
   /** Name of the dialog. Defaults to the `alt` of the image. */
   label?: string | undefined
+  /**
+   * Which way people are going when another image replaces the one that is shown: the new one
+   * comes from the end side when `forward`, and from the start side when `backward`. Defaults to
+   * the order of the triggers in the page.
+   */
+  direction?: 'forward' | 'backward' | undefined
   /** Room kept under the image, in pixels, for controls that you put there. Defaults to `0`. */
   bottomSpace?: number | undefined
   /**

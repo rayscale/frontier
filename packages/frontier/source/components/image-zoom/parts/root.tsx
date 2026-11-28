@@ -5,6 +5,15 @@ import { imageZoomContext, type TImageZoomContextValue, type TImageZoomSource } 
 import { clampZoom, restingZoom, type TSize, zoomAround } from '../helpers/zoom.js'
 import type { TImageZoomProps } from '../types.js'
 
+function isSameSource(first: TImageZoomSource | undefined, second: TImageZoomSource): boolean {
+  return (
+    first?.alt === second.alt &&
+    first.height === second.height &&
+    first.src === second.src &&
+    first.width === second.width
+  )
+}
+
 export function ImageZoomRoot({
   children,
   defaultOpen = false,
@@ -63,6 +72,14 @@ export function ImageZoomRoot({
     }
   }, [])
 
+  // Triggers set their source from an effect, so this keeps one identity, and data that did not
+  // change keeps the same map. Without both, setting it would run the effect again without end.
+  const setSource = useCallback((key: string, source: TImageZoomSource) => {
+    setSources((previous) =>
+      isSameSource(previous.get(key), source) ? previous : new Map(previous).set(key, source),
+    )
+  }, [])
+
   const contextValue = useMemo<TImageZoomContextValue>(
     () => ({
       getDirection: (from, to) => {
@@ -95,9 +112,7 @@ export function ImageZoomRoot({
       registerTrigger,
       requestOpenChange,
       setMounted,
-      setSource: (key, source) => {
-        setSources((previous) => new Map(previous).set(key, source))
-      },
+      setSource,
       setValue,
       source: sources.get(currentValue ?? '') ?? null,
       value: currentValue,
@@ -118,6 +133,7 @@ export function ImageZoomRoot({
       mounted,
       registerTrigger,
       requestOpenChange,
+      setSource,
       setValue,
       sources,
       zoom,

@@ -102,6 +102,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup()
+  vi.restoreAllMocks()
 })
 
 describe('ImageZoom', () => {
@@ -111,6 +112,36 @@ describe('ImageZoom', () => {
     const trigger = screen.getByRole('button', { name: 'Blue mountains' })
     expect(trigger.querySelector('img')?.getAttribute('src')).toBe(picture)
     expect(screen.queryByRole('dialog')).toBeNull()
+  })
+
+  it('settles when the images are already loaded, instead of rendering forever', async () => {
+    // jsdom never loads an image, so these stand for loaded ones. After many reads the width
+    // reports 0, which breaks a loop: a regression then fails the test instead of hanging it.
+    const readLimit = 50
+    let reads = 0
+    vi.spyOn(HTMLImageElement.prototype, 'complete', 'get').mockReturnValue(true)
+    vi.spyOn(HTMLImageElement.prototype, 'naturalHeight', 'get').mockReturnValue(300)
+    vi.spyOn(HTMLImageElement.prototype, 'naturalWidth', 'get').mockImplementation(() => {
+      reads += 1
+
+      return reads < readLimit ? 400 : 0
+    })
+
+    render(
+      <ImageZoom>
+        <ImageZoom.Trigger value="one">
+          <img alt="One" src={picture} />
+        </ImageZoom.Trigger>
+        <ImageZoom.Trigger value="two">
+          <img alt="Two" src={sharper} />
+        </ImageZoom.Trigger>
+      </ImageZoom>,
+    )
+    await act(async () => {
+      await Promise.resolve()
+    })
+
+    expect(reads).toBeLessThan(readLimit)
   })
 
   it('needs an img as the child of the trigger', () => {

@@ -181,6 +181,57 @@ describe('Lightbox', () => {
     expect(getShownImage().getAttribute('alt')).toBe('Third picture')
   })
 
+  it('slides the pictures the way people are going, also when it goes round', async () => {
+    const user = userEvent.setup()
+    renderLightbox({ loop: true })
+    await openPicture('First picture')
+    const animate = vi.spyOn(HTMLElement.prototype, 'animate')
+
+    /** Presses a button, and returns where the old picture leaves to and the new one comes from. */
+    async function getSlide(button: string, next: number): Promise<string[]> {
+      animate.mockClear()
+      await user.click(screen.getByRole('button', { name: button }))
+      await waitFor(() => {
+        expect(getShownImage().getAttribute('src')).toBe(items[next]?.src)
+      })
+
+      return animate.mock.calls
+        .flatMap(([frames]) => (Array.isArray(frames) ? frames : []))
+        .map((frame) => String(frame.transform))
+        .filter((transform) => transform.startsWith('translateX'))
+    }
+
+    const forward = ['translateX(-28px)', 'translateX(56px)']
+    const backward = ['translateX(28px)', 'translateX(-56px)']
+
+    expect(await getSlide('Next image', 1)).toEqual(forward)
+    expect(await getSlide('Previous image', 0)).toEqual(backward)
+    expect(await getSlide('Previous image', 2)).toEqual(backward)
+    expect(await getSlide('Next image', 0)).toEqual(forward)
+    expect(await getSlide('Third picture', 2)).toEqual(forward)
+    expect(await getSlide('Second picture', 1)).toEqual(backward)
+  })
+
+  it('opens another picture straight away, without sliding from the one seen before', async () => {
+    const user = userEvent.setup()
+    renderLightbox()
+    await openPicture('First picture')
+    await user.click(screen.getByRole('button', { name: 'Close' }))
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).toBeNull()
+    })
+    const animate = vi.spyOn(HTMLElement.prototype, 'animate')
+    animate.mockClear()
+
+    await openPicture('Third picture')
+
+    expect(getShownImage().getAttribute('src')).toBe(items[2]?.src)
+    const slides = animate.mock.calls
+      .flatMap(([frames]) => (Array.isArray(frames) ? frames : []))
+      .filter((frame) => String(frame.transform).startsWith('translateX'))
+    expect(slides).toEqual([])
+  })
+
   it('goes through the pictures with the arrow keys, Home, and End', async () => {
     const user = userEvent.setup()
     renderLightbox()

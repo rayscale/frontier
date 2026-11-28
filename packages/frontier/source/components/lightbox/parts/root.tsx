@@ -21,6 +21,16 @@ export function LightboxRoot({
     items.findIndex((item) => item.id === currentId),
   )
 
+  // Which way people went to the shown picture. The buttons say it themselves, because going
+  // round from the last picture to the first is still going forward. Otherwise the order says it.
+  const [travel, setTravel] = useState<{
+    direction: TLightboxContextValue['direction']
+    index: number
+  }>({ direction: 'forward', index })
+  if (travel.index !== index) {
+    setTravel({ direction: index > travel.index ? 'forward' : 'backward', index })
+  }
+
   const contextValue = useMemo<TLightboxContextValue>(() => {
     const select = (id: string): void => {
       if (value === undefined) {
@@ -35,12 +45,15 @@ export function LightboxRoot({
       const item = items[wrapped]
 
       if (item && wrapped !== index) {
+        // A target past the end is still ahead, even though it wraps to an earlier picture.
+        setTravel({ direction: target > index ? 'forward' : 'backward', index: wrapped })
         select(item.id)
       }
     }
 
     return {
       count,
+      direction: travel.direction,
       goTo,
       index,
       item: items[index],
@@ -54,7 +67,7 @@ export function LightboxRoot({
       },
       previousAvailable: loop ? count > 1 : index > 0,
     }
-  }, [count, index, items, loop, onValueChange, value])
+  }, [count, index, items, loop, onValueChange, travel.direction, value])
 
   return (
     <lightboxContext.Provider value={contextValue}>

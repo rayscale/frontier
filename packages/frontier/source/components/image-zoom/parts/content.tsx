@@ -31,6 +31,15 @@ const slideDistance = 56
 /** How far an arrow key moves a zoomed image, in pixels. */
 const panStep = 48
 
+/** The side a new picture comes from: `1` is the end side, and `-1` the start side. */
+function getSide(direction: 'forward' | 'backward' | undefined, pageOrder: 1 | -1): 1 | -1 {
+  if (direction === undefined) {
+    return pageOrder
+  }
+
+  return direction === 'forward' ? 1 : -1
+}
+
 interface TDrag {
   moved: boolean
   readonly startX: number
@@ -143,6 +152,7 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
       bottomSpace,
       children,
       className,
+      direction,
       label,
       onClick,
       onKeyDown,
@@ -159,6 +169,7 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
       getTrigger,
       imageRef,
       maxZoom,
+      mounted,
       pan,
       requestOpenChange,
       source,
@@ -187,6 +198,12 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
       src: resolvedSrc,
       width: 0,
     })
+
+    // While the popup is not on the screen there is nothing to slide away from, so the picture to
+    // show is simply the one asked for.
+    if (!mounted && shown.src !== resolvedSrc) {
+      setShown({ height: 0, src: resolvedSrc, width: 0 })
+    }
 
     const attachPopup = useCallback(
       (node: HTMLDivElement | null) => {
@@ -331,9 +348,9 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
     }
 
     // The effect reads the latest of these without starting over when they change.
-    const latest = useRef({ getDirection, reduceMotion, value })
+    const latest = useRef({ direction, getDirection, reduceMotion, value })
     useLayoutEffect(() => {
-      latest.current = { getDirection, reduceMotion, value }
+      latest.current = { direction, getDirection, reduceMotion, value }
     })
     const leavingRef = useRef<Animation | null>(null)
 
@@ -355,11 +372,14 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
 
       // The picture that is shown slides out to the other side while the next one loads.
       const frame = frameRef.current
-      const { getDirection: directionOf, reduceMotion: reduced, value: now } = latest.current
+      const { reduceMotion: reduced } = latest.current
       let leaving: Promise<unknown> = Promise.resolve()
 
       if (frame && !reduced) {
-        const direction = directionOf(previousValue.current, now)
+        const side = getSide(
+          latest.current.direction,
+          latest.current.getDirection(previousValue.current, latest.current.value),
+        )
         const { duration, easing } = readMotion(
           frame,
           '--frontier-duration-fast',
@@ -368,7 +388,7 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
         const animation = frame.animate(
           [
             { opacity: 1, transform: 'none' },
-            { opacity: 0, transform: `translateX(${String((-direction * slideDistance) / 2)}px)` },
+            { opacity: 0, transform: `translateX(${String((-side * slideDistance) / 2)}px)` },
           ],
           { duration, easing, fill: 'forwards' },
         )
@@ -392,18 +412,19 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
 
     // The picture that replaces another slides in from the side it is on, and fades in.
     useLayoutEffect(() => {
+      // Only a new picture counts. The value changes before its picture has loaded, and the one
+      // that belongs to the picture still shown is what tells which way people are going.
+      if (previousShown.current === shown.src) {
+        return
+      }
+
       const frame = frameRef.current
 
-      if (
-        previousShown.current !== undefined &&
-        previousShown.current !== shown.src &&
-        frame &&
-        !reduceMotion
-      ) {
+      if (mounted && previousShown.current !== undefined && frame && !reduceMotion) {
         // The picture that left stops holding the frame, and the new one comes in.
         leavingRef.current?.cancel()
         leavingRef.current = null
-        const direction = getDirection(previousValue.current, value)
+        const side = getSide(direction, getDirection(previousValue.current, value))
         const { duration, easing } = readMotion(
           frame,
           '--frontier-duration-enter',
@@ -411,7 +432,7 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
         )
         frame.animate(
           [
-            { opacity: 0, transform: `translateX(${String(direction * slideDistance)}px)` },
+            { opacity: 0, transform: `translateX(${String(side * slideDistance)}px)` },
             { opacity: 1, transform: 'none' },
           ],
           { duration, easing },
@@ -420,7 +441,7 @@ export const ImageZoomContent = forwardRef<HTMLDivElement, TImageZoomContentProp
 
       previousShown.current = shown.src
       previousValue.current = value
-    }, [getDirection, reduceMotion, shown.src, value])
+    }, [direction, getDirection, mounted, reduceMotion, shown.src, value])
 
     // The shape of the shown picture is its own once it is known. Before that, and when it is the
     // image of the trigger, the trigger's image gives it.

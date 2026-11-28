@@ -1,0 +1,62 @@
+---
+title: Color swatch
+description: A small circle that shows a color.
+---
+
+## Usage
+
+```tsx
+import { ColorSwatch } from '@rayscale/frontier'
+
+export function Example() {
+  return <ColorSwatch color="#2563eb" />
+}
+```
+
+A color swatch shows a color so people can see it, in a table, a list, a tag, or a trigger. It does not let people change the color. To let them choose one, use the [color picker](/documentation/components/fields/color-picker).
+
+The `color` can be any CSS color. A color that is see-through shows a checkerboard behind it, so the transparency is visible.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Sizes
+
+`sm`, `md`, and `lg`.
+
+<Demo name="sizes" />
+
+### Several colors
+
+A swatch is always a circle, so a row of them reads as a set.
+
+<Demo name="palette" />
+
+### Transparent
+
+<Demo name="transparent" />
+
+## API reference
+
+### ColorSwatch
+
+Renders a `<span>` with `role="img"`. It forwards its ref and the attributes of a `span`, except `children`.
+
+| Prop    | Type                   | Default     | Description                          |
+| ------- | ---------------------- | ----------- | ------------------------------------ |
+| `color` | `string`               | —           | The color to show, as any CSS color. |
+| `label` | `string`               | The `color` | Name read out for the color.         |
+| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`      | Size of the swatch.                  |
+
+## Accessibility
+
+<Callout title="Give the color a name people understand">
+  A swatch is announced as an image named after its color, such as "#2563eb". When the color has a
+  meaning, such as "Brand blue", pass it as `label`. When the color is already written next to the
+  swatch, pass `aria-hidden` so it is not read twice.
+</Callout>
+
+- A color is never the only way to say something. Write what the color means next to it.

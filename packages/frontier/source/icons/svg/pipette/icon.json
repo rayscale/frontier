@@ -1,0 +1,9 @@
+{
+  "$schema": "../../metadata.schema.json",
+  "name": "pipette",
+  "description": "Picks a color from anywhere on the screen.",
+  "keywords": ["pipette", "eyedropper", "color", "sample"],
+  "categories": ["ui"],
+  "aliases": ["eyedropper"],
+  "useCases": ["color pickers", "sampling a color"]
+}

@@ -1,0 +1,267 @@
+/*
+ * The area, the sliders, and the wheel share one thumb, and it moves like the thumb of Slider: it
+ * glides to a new position, also while it is dragged, it grows a little when pressed, and its
+ * border darkens on hover.
+ */
+.frontier-color-area__thumb,
+.frontier-color-slider__thumb,
+.frontier-color-wheel__thumb {
+  position: absolute;
+  box-sizing: border-box;
+  inline-size: var(--frontier-spacing-5);
+  block-size: var(--frontier-spacing-5);
+  border: var(--frontier-border-width) solid var(--frontier-color-border-strong);
+  border-radius: var(--frontier-radius-full);
+  background: var(--_thumb-color, var(--frontier-color-surface));
+  box-shadow: var(--frontier-shadow-sm);
+  transition:
+    inset-inline-start var(--frontier-duration-base) var(--frontier-easing-standard),
+    inset-block-start var(--frontier-duration-base) var(--frontier-easing-standard),
+    bottom var(--frontier-duration-base) var(--frontier-easing-standard),
+    border-color var(--frontier-duration-fast) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard),
+    scale var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+/* On the area and the wheel the thumb shows the color, so its ring is white to stand out on it. */
+.frontier-color-area__thumb,
+.frontier-color-wheel__thumb {
+  border-color: var(--frontier-color-surface);
+  box-shadow:
+    0 0 0 var(--frontier-border-width-subtle) var(--frontier-color-border-strong),
+    var(--frontier-shadow-sm);
+  pointer-events: none;
+  translate: -50% -50%;
+}
+
+.frontier-color-area__thumb:has(input:focus-visible),
+.frontier-color-slider__thumb:has(input:focus-visible),
+.frontier-color-wheel__thumb:has(input:focus-visible) {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+@media (hover: hover) {
+  .frontier-color-slider__thumb:hover,
+  .frontier-color-area:hover .frontier-color-area__thumb,
+  .frontier-color-wheel:hover .frontier-color-wheel__thumb {
+    border-color: var(--frontier-color-primary);
+  }
+}
+
+.frontier-color-slider__thumb:active,
+.frontier-color-area:active .frontier-color-area__thumb,
+.frontier-color-wheel:active .frontier-color-wheel__thumb {
+  scale: 1.05;
+}
+
+.frontier-color-area[data-disabled] .frontier-color-area__thumb,
+.frontier-color-slider[data-disabled] .frontier-color-slider__thumb,
+.frontier-color-wheel[data-disabled] .frontier-color-wheel__thumb {
+  border-color: var(--frontier-color-border-strong);
+  background: var(--frontier-color-disabled);
+  box-shadow: none;
+}
+
+.frontier-color-area,
+.frontier-color-wheel {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.frontier-color-area[data-dragging],
+.frontier-color-wheel[data-dragging] {
+  cursor: grabbing;
+}
+
+.frontier-color-area[data-disabled],
+.frontier-color-wheel[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Area */
+.frontier-color-area {
+  inline-size: 100%;
+  min-inline-size: calc(var(--frontier-spacing-16) * 4);
+  block-size: calc(var(--frontier-spacing-16) * 2.5);
+  border-radius: var(--frontier-radius-sm);
+  background:
+    linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, var(--_hue));
+  box-shadow: inset 0 0 0 var(--frontier-border-width-subtle) var(--frontier-color-border-strong);
+}
+
+.frontier-color-area__thumb {
+  inset-block-start: var(--_y);
+  inset-inline-start: var(--_x);
+}
+
+/* Slider: the control, the thumb, and the focus ring match the ones of Slider. */
+.frontier-color-slider {
+  position: relative;
+}
+
+.frontier-color-slider--horizontal {
+  inline-size: 100%;
+  min-inline-size: calc(var(--frontier-spacing-16) * 3);
+}
+
+.frontier-color-slider__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.frontier-color-slider--horizontal .frontier-color-slider__control {
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding-inline: calc(var(--frontier-spacing-5) / 2);
+  block-size: var(--frontier-spacing-8);
+  touch-action: pan-y;
+}
+
+.frontier-color-slider--vertical .frontier-color-slider__control {
+  box-sizing: border-box;
+  justify-content: center;
+  padding-block: calc(var(--frontier-spacing-5) / 2);
+  inline-size: var(--frontier-spacing-8);
+  block-size: calc(var(--frontier-spacing-16) * 3);
+  touch-action: pan-x;
+}
+
+.frontier-color-slider__track {
+  position: relative;
+  display: block;
+  border-radius: var(--frontier-radius-full);
+  background: repeating-conic-gradient(
+      var(--frontier-color-border) 0% 25%,
+      var(--frontier-color-surface) 0% 50%
+    )
+    0 0 / var(--frontier-spacing-2) var(--frontier-spacing-2);
+  box-shadow: inset 0 0 0 var(--frontier-border-width-subtle) var(--frontier-color-border-strong);
+  touch-action: none;
+}
+
+/* The gradient sits on its own layer so a right-to-left slider can flip it with the value. */
+.frontier-color-slider__track::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--_gradient);
+  content: '';
+}
+
+.frontier-color-slider:dir(rtl).frontier-color-slider--horizontal
+  .frontier-color-slider__track::before {
+  scale: -1 1;
+}
+
+.frontier-color-slider--horizontal .frontier-color-slider__track {
+  inline-size: 100%;
+  block-size: var(--frontier-spacing-4);
+}
+
+.frontier-color-slider--vertical .frontier-color-slider__track {
+  inline-size: var(--frontier-spacing-4);
+  block-size: 100%;
+}
+
+.frontier-color-slider__thumb {
+  display: block;
+  cursor: grab;
+}
+
+.frontier-color-slider__thumb:active,
+.frontier-color-slider__thumb[data-dragging] {
+  cursor: grabbing;
+}
+
+.frontier-color-slider[data-disabled] .frontier-color-slider__track::before {
+  opacity: 0.55;
+}
+
+.frontier-color-slider[data-disabled] .frontier-color-slider__control,
+.frontier-color-slider[data-disabled] .frontier-color-slider__thumb {
+  cursor: not-allowed;
+}
+
+/* Wheel */
+.frontier-color-wheel {
+  inline-size: calc(var(--frontier-spacing-16) * 3);
+  aspect-ratio: 1;
+  border-radius: var(--frontier-radius-full);
+}
+
+.frontier-color-wheel__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--_gradient);
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - var(--_thickness)),
+    #000 calc(100% - var(--_thickness) + 0.5px)
+  );
+}
+
+.frontier-color-wheel__arm {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  rotate: var(--_hue);
+  transition: rotate var(--frontier-duration-base) var(--frontier-easing-standard);
+}
+
+.frontier-color-wheel__thumb {
+  inset-block-start: calc(var(--_thickness) / 2);
+  inset-inline-start: 50%;
+}
+
+/* Swatches */
+.frontier-color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--frontier-spacing-2);
+}
+
+.frontier-color-swatches__item {
+  display: inline-flex;
+  border-radius: var(--frontier-radius-full);
+  cursor: pointer;
+  /* The ring is always there, so it can grow out of the swatch and fade when the choice changes. */
+  outline: var(--frontier-focus-width) solid transparent;
+  outline-offset: 0;
+  transition:
+    outline-color var(--frontier-duration-base) var(--frontier-easing-standard),
+    outline-offset var(--frontier-duration-base) var(--frontier-easing-standard),
+    box-shadow var(--frontier-duration-fast) var(--frontier-easing-standard);
+}
+
+.frontier-color-swatches__item:has(input:checked) {
+  outline-color: var(--frontier-color-text);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+.frontier-color-swatches__item:has(input:focus-visible) {
+  box-shadow: 0 0 0 var(--frontier-focus-ring-width) var(--frontier-color-focus-ring);
+}
+
+.frontier-color-swatches__item:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-color-area__thumb,
+  .frontier-color-slider__thumb,
+  .frontier-color-wheel__thumb,
+  .frontier-color-wheel__arm,
+  .frontier-color-swatches__item {
+    transition: none;
+  }
+}

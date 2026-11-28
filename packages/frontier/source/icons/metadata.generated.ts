@@ -1004,6 +1004,29 @@ export const iconMetadata: TIconMetadata[] = [
   },
   {
     "aliases": [
+      "eyedropper"
+    ],
+    "categories": [
+      "ui"
+    ],
+    "component": "Pipette",
+    "contributors": [],
+    "description": "Picks a color from anywhere on the screen.",
+    "keywords": [
+      "pipette",
+      "eyedropper",
+      "color",
+      "sample"
+    ],
+    "name": "pipette",
+    "tags": [],
+    "useCases": [
+      "color pickers",
+      "sampling a color"
+    ]
+  },
+  {
+    "aliases": [
       "add",
       "create",
       "new"

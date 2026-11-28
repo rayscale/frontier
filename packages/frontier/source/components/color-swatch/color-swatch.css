@@ -1,0 +1,39 @@
+.frontier-color-swatch {
+  --_checker-size: var(--frontier-spacing-2);
+
+  position: relative;
+  display: inline-block;
+  flex: none;
+  overflow: hidden;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  border-radius: var(--frontier-radius-full);
+  background: repeating-conic-gradient(
+      var(--frontier-color-border) 0% 25%,
+      var(--frontier-color-surface) 0% 50%
+    )
+    0 0 / var(--_checker-size) var(--_checker-size);
+  vertical-align: middle;
+}
+
+.frontier-color-swatch::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--_color);
+  box-shadow: inset 0 0 0 var(--frontier-border-width-subtle) var(--frontier-color-border-strong);
+  content: '';
+}
+
+.frontier-color-swatch--sm {
+  --_size: var(--frontier-spacing-4);
+  --_checker-size: var(--frontier-spacing-1);
+}
+
+.frontier-color-swatch--md {
+  --_size: var(--frontier-spacing-6);
+}
+
+.frontier-color-swatch--lg {
+  --_size: var(--frontier-spacing-10);
+}

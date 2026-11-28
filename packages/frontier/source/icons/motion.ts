@@ -53,6 +53,7 @@ export const iconMotions: ReadonlyMap<string, TIconMotion> = new Map<string, TIc
   ['Palette', 'tilt'],
   ['PanelLeft', 'pop'],
   ['Paperclip', 'tilt'],
+  ['Pipette', 'tilt'],
   ['Plus', 'turn'],
   ['Pointer', 'tilt'],
   ['Search', 'tilt'],

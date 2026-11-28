@@ -21,6 +21,8 @@
     "storybook": "pnpm --filter @rayscale/frontier storybook",
     "storybook:build": "pnpm --filter @rayscale/frontier storybook:build",
     "site": "pnpm --filter @frontier/site dev",
+    "changeset": "changeset",
+    "release:version": "changeset version && prettier --write .changeset packages/frontier/CHANGELOG.md packages/frontier/package.json",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -31,6 +33,7 @@
     "*.{json,jsonc,md,yml,yaml,css}": "prettier --write"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@eslint/js": "^10.0.1",

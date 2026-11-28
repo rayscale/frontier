@@ -96,7 +96,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for the workspace conventions.
 ## Development
 
 > [!WARNING]
-> The project is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
+> The project is under active development. It is in alpha, and components, tokens, and APIs are evolving.
 >
 > More information will be added as the project progresses.
 

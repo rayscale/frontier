@@ -69,7 +69,7 @@ The theme is named after its file. The command reports the roles that are missin
 ## Development
 
 > [!WARNING]
-> `@rayscale/frontier` is under active development. The package version is 0.0.0, and components, tokens, and APIs are evolving.
+> `@rayscale/frontier` is under active development. It is in alpha, and components, tokens, and APIs are evolving.
 >
 > More information will be added as the package progresses.
 

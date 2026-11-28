@@ -439,17 +439,18 @@ change.
 
 ## Releases
 
-The package is published to npm by [publish.yml](../../.github/workflows/publish.yml) when a tag
-`v<version>` is pushed, where `<version>` is the `version` in `package.json`. The workflow signs
-in with npm trusted publishing, so the repository holds no npm token. A prerelease such as
-`0.1.0-alpha.0` is published under its own dist-tag (`alpha`), never under `latest`. Only a
-commit that is on `main` is published: the workflow fails for a tag on any other branch. Work
-happens on `develop` and reaches `main` through a pull request, because `main` accepts no direct
-pushes. Release from `main` once the pull request is merged.
+Releases use [Changesets](https://github.com/changesets/changesets).
 
-To release, change `version`, commit it, then push the tag:
+1. A change that people who use the package will notice needs a changeset. Run `pnpm changeset`,
+   write what changed, and commit the file with the change.
+2. To release, run `pnpm release:version` on `develop`. It sets the next `version`, writes
+   [CHANGELOG.md](./CHANGELOG.md), and marks the changesets as released. Commit the result.
+3. Open a pull request from `develop` to `main` and merge it once the checks pass.
 
-```bash
-git tag v0.1.0-alpha.1
-git push origin v0.1.0-alpha.1
-```
+The merge runs [publish.yml](../../.github/workflows/publish.yml). When npm does not have the
+version yet, it tests, builds, and publishes the package, tags the commit `v<version>`, and creates
+the GitHub release from the CHANGELOG. Run the workflow again by hand if it fails halfway. It signs
+in with npm trusted publishing, so the repository holds no npm token.
+
+The repository is in prerelease mode (`.changeset/pre.json`): versions are `x.y.z-alpha.n` and go
+out under the `alpha` dist-tag, never under `latest`. Leave it with `pnpm changeset pre exit`.

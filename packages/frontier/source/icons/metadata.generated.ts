@@ -1205,6 +1205,29 @@ export const iconMetadata: TIconMetadata[] = [
     ]
   },
   {
+    "aliases": [
+      "favorite"
+    ],
+    "categories": [
+      "ui"
+    ],
+    "component": "Star",
+    "contributors": [],
+    "description": "Marks something as a favorite, or shows a rating.",
+    "keywords": [
+      "star",
+      "favorite",
+      "rating",
+      "bookmark"
+    ],
+    "name": "star",
+    "tags": [],
+    "useCases": [
+      "ratings",
+      "favorites"
+    ]
+  },
+  {
     "aliases": [],
     "categories": [
       "theme"

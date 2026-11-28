@@ -1,0 +1,96 @@
+---
+title: Rating
+description: Lets people rate something with a number of stars, or shows a rating that is given.
+---
+
+## Usage
+
+```tsx
+import { Rating } from '@rayscale/frontier'
+
+export function Example() {
+  return <Rating label="Rate this recipe" defaultValue={3} />
+}
+```
+
+A rating lets people say how much they like something by choosing a number of stars. Hover shows the rating before it is chosen. The same component shows a rating that is already given, such as an average, when it is `readOnly`.
+
+Each choice is a native radio button, so the arrow keys, the focus, and forms work as they do for any radio group.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Half stars
+
+Set `precision={0.5}` to let people give half a star. Each star then has two choices, one for each half.
+
+<Demo name="half" />
+
+### Sizes
+
+`sm`, `md`, and `lg`.
+
+<Demo name="sizes" />
+
+### Take it back
+
+With `allowClear`, clicking the rating that is given takes it back, and the value is `0`.
+
+<Demo name="allowClear" />
+
+### Read only
+
+Shows a value, such as an average, that people cannot change. It is read out as one image, such as "Average rating: 4.5 of 5".
+
+<Demo name="readOnly" />
+
+### Custom icon
+
+Pass `icon` to repeat another shape. The shape takes the color of the rating, so it should be drawn with `currentColor`, and it needs a `viewBox` so it scales.
+
+<Demo name="customIcon" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the rating in the page.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Rating
+
+Renders a `<div>` with `role="radiogroup"`, or `role="img"` when it is read only. It forwards its ref and the attributes of a `div`, except `children`.
+
+| Prop            | Type                                     | Default    | Description                                                          |
+| --------------- | ---------------------------------------- | ---------- | -------------------------------------------------------------------- |
+| `allowClear`    | `boolean`                                | `false`    | Lets people click the rating they gave to take it back.              |
+| `defaultValue`  | `number`                                 | `0`        | Rating at the start, in uncontrolled mode.                           |
+| `disabled`      | `boolean`                                | `false`    | Stops people from changing the rating.                               |
+| `getLabel`      | `(value: number, max: number) => string` | `'3 of 5'` | Names each choice, and the whole rating when it is read only.        |
+| `icon`          | `ReactNode`                              | A star     | The shape that is repeated.                                          |
+| `label`         | `string`                                 | —          | Name of the rating. Say what is rated.                               |
+| `max`           | `number`                                 | `5`        | How many shapes there are, and the highest rating.                   |
+| `name`          | `string`                                 | —          | Name of the field, so the rating is sent with a form.                |
+| `onValueChange` | `(value: number) => void`                | —          | Called with the new rating. It is `0` when the rating is taken back. |
+| `precision`     | `0.5 \| 1`                               | `1`        | Whether people can give half a shape.                                |
+| `readOnly`      | `boolean`                                | `false`    | Shows the rating without letting people change it.                   |
+| `size`          | `'sm' \| 'md' \| 'lg'`                   | `'md'`     | Size of the shapes.                                                  |
+| `value`         | `number`                                 | —          | Rating, in controlled mode. `0` is no rating.                        |
+
+## Accessibility
+
+<Callout title="Say what is rated">
+  A rating is a group of choices, so give it a `label` such as "Rate this recipe". Without it,
+  people who use a screen reader hear "1 of 5" and the other choices without knowing what they rate.
+</Callout>
+
+- Each choice is a native radio button named "1 of 5", "2 of 5", and so on. Change the names for other languages with `getLabel`.
+- The arrow keys move between the choices and choose one, and Tab leaves the group, as in any radio group.
+- A read only rating is one image with the rating as its name, so it is not a stop in the tab order.
+- The filled part is never the only way to tell the rating. When the number matters, write it next to the stars, as the examples do.
+- The preview on hover only shows what a click would choose. It does not change the value.
+- With reduced motion on, the stars fill and grow without animation.

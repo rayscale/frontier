@@ -1,0 +1,42 @@
+/* The wrapper adds nothing to the layout, so the field sits where it would without it. */
+.frontier-mentions {
+  display: contents;
+}
+
+/* The popup shares its look with Select: the same surface, list, and options. */
+.frontier-mentions__popup {
+  min-inline-size: calc(var(--frontier-spacing-16) * 3);
+  max-inline-size: min(24rem, var(--available-width));
+  padding: var(--frontier-spacing-2);
+}
+
+.frontier-mentions__list {
+  gap: var(--frontier-spacing-1);
+}
+
+.frontier-mentions__item {
+  gap: var(--frontier-spacing-3);
+  padding-block: var(--frontier-spacing-2);
+}
+
+.frontier-mentions__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--frontier-color-text-muted);
+}
+
+.frontier-mentions__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--frontier-spacing-1);
+  min-inline-size: 0;
+}
+
+.frontier-mentions__description {
+  color: var(--frontier-color-text-muted);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-normal);
+}

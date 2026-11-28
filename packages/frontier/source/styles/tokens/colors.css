@@ -64,6 +64,9 @@
   --frontier-color-chart-5: #9333ea;
   --frontier-color-chart-6: #db2777;
 
+  /* The filled part of a rating. It is at least 3:1 on a surface. */
+  --frontier-color-rating: #b45309;
+
   --frontier-color-background: var(--frontier-white);
   --frontier-color-surface: var(--frontier-white);
   --frontier-color-surface-raised: var(--frontier-white);
@@ -132,6 +135,8 @@
   --frontier-color-chart-4: #fbbf24;
   --frontier-color-chart-5: #c084fc;
   --frontier-color-chart-6: #f472b6;
+
+  --frontier-color-rating: #fbbf24;
 
   --frontier-color-background: var(--frontier-black);
   --frontier-color-surface: var(--frontier-gray-900);

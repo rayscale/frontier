@@ -448,9 +448,13 @@ Releases use [Changesets](https://github.com/changesets/changesets).
 3. Open a pull request from `develop` to `main` and merge it once the checks pass.
 
 The merge runs [publish.yml](../../.github/workflows/publish.yml). When npm does not have the
-version yet, it tests, builds, and publishes the package, tags the commit `v<version>`, and creates
-the GitHub release from the CHANGELOG. Run the workflow again by hand if it fails halfway. It signs
-in with npm trusted publishing, so the repository holds no npm token.
+version yet, it tests, builds, and publishes the package. Run the workflow again by hand if it
+fails halfway. It signs in with npm trusted publishing, so the repository holds no npm token.
 
-The repository is in prerelease mode (`.changeset/pre.json`): versions are `x.y.z-alpha.n` and go
-out under the `alpha` dist-tag, never under `latest`. Leave it with `pnpm changeset pre exit`.
+4. Once the run passes, run `pnpm release:github`. It tags the commit `v<version>` and creates the
+   GitHub release from the CHANGELOG. It needs `gh` signed in as a repository admin, because only
+   an admin can create `v*` tags.
+
+The repository is in prerelease mode (`.changeset/pre.json`): versions are `x.y.z-alpha.n`. Leave
+it with `pnpm changeset pre exit`. Until there is a stable version, each alpha goes out under the
+`latest` dist-tag. After that, prereleases go out under their own tag, such as `alpha`.

@@ -1,7 +1,7 @@
 name: Publish
 
-# Publishes @rayscale/frontier to npm when main holds a version that npm does not have yet, then
-# tags the commit and creates the GitHub release from the CHANGELOG.
+# Publishes @rayscale/frontier to npm when main holds a version that npm does not have yet.
+# The tag and the GitHub release are made afterwards with `pnpm release:github`.
 # It signs in to npm with trusted publishing (OIDC), so no token is stored in the repository.
 # The trusted publisher on npmjs.com must name this file: publish.yml.
 on:
@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
   id-token: write
 
 jobs:
@@ -44,19 +44,17 @@ jobs:
       - name: Read the version and what is left to do
         id: release
         working-directory: packages/frontier
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           name="$(node -p "require('./package.json').name")"
           version="$(node -p "require('./package.json').version")"
 
-          # A version such as 0.1.0-alpha.0 goes out under the alpha tag, not latest.
+          # Until there is a stable version, the newest prerelease is `latest`, which is what npm
+          # shows and installs. After that, 1.1.0-alpha.0 goes out under the alpha tag.
           channel=latest
-          prerelease=false
-          if [[ "${version}" == *-* ]]; then
+          latest="$(npm view "${name}" dist-tags.latest)"
+          if [[ "${version}" == *-* && "${latest}" != *-* ]]; then
             channel="${version#*-}"
             channel="${channel%%.*}"
-            prerelease=true
           fi
 
           # Only "not found" means unpublished. Any other registry error stops the run.
@@ -71,17 +69,9 @@ jobs:
             publish=true
           fi
 
-          release=false
-          if ! gh release view "v${version}" > /dev/null 2>&1; then
-            release=true
-          fi
-
           {
-            echo "version=${version}"
             echo "channel=${channel}"
-            echo "prerelease=${prerelease}"
             echo "publish=${publish}"
-            echo "release=${release}"
           } >> "${GITHUB_OUTPUT}"
 
       - name: Install dependencies
@@ -106,17 +96,3 @@ jobs:
         run: |
           npm --version
           npm publish --ignore-scripts --tag "${{ steps.release.outputs.channel }}"
-
-      - name: Tag the commit and create the GitHub release
-        if: steps.release.outputs.release == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ steps.release.outputs.version }}
-          PRERELEASE: ${{ steps.release.outputs.prerelease }}
-        run: |
-          # The notes are the section of this version in the CHANGELOG.
-          awk -v heading="## ${VERSION}" '$0 == heading { found = 1; next } /^## / { found = 0 } found' \
-            packages/frontier/CHANGELOG.md > "${RUNNER_TEMP}/notes.md"
-
-          gh release create "v${VERSION}" --target "${GITHUB_SHA}" --title "v${VERSION}" \
-            --notes-file "${RUNNER_TEMP}/notes.md" --prerelease="${PRERELEASE}"

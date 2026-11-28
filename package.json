@@ -22,6 +22,7 @@
     "storybook:build": "pnpm --filter @rayscale/frontier storybook:build",
     "site": "pnpm --filter @frontier/site dev",
     "changeset": "changeset",
+    "release:github": "bash scripts/github-release.sh",
     "release:version": "changeset version && prettier --write .changeset packages/frontier/CHANGELOG.md packages/frontier/package.json",
     "prepare": "husky"
   },

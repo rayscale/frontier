@@ -1,15 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import { ArrowUp, Plus } from '../../icons/index.js'
 import { Avatar } from '../avatar/avatar.js'
 import { Button } from '../button/button.js'
-import { InputGroup } from '../input-group/input-group.js'
-import { Input } from '../input/input.js'
-import { Textarea } from '../textarea/textarea.js'
 
 import { Mentions } from './mentions.js'
-import type { TMentionItem, TMentionTrigger } from './types.js'
+import type { TMentionItem, TMentionTrigger, TMentionValue } from './types.js'
 
 const people: readonly TMentionItem[] = [
   { id: 'ana', label: 'Ana García', description: 'ana@example.com', insert: '@ana' },
@@ -26,19 +23,9 @@ const people: readonly TMentionItem[] = [
 ]
 
 const commands: readonly TMentionItem[] = [
-  {
-    id: 'summarize',
-    label: 'summarize',
-    description: 'Sum up the conversation',
-    insert: '/summarize',
-  },
-  {
-    id: 'translate',
-    label: 'translate',
-    description: 'Translate the message',
-    insert: '/translate',
-  },
-  { id: 'clear', label: 'clear', description: 'Start a new conversation', insert: '/clear' },
+  { id: 'summarize', label: 'summarize', description: 'Sum up the conversation' },
+  { id: 'translate', label: 'translate', description: 'Translate the message' },
+  { id: 'clear', label: 'clear', description: 'Start a new conversation' },
 ]
 
 const triggers: readonly TMentionTrigger[] = [
@@ -46,69 +33,84 @@ const triggers: readonly TMentionTrigger[] = [
   { char: '/', items: commands, atStart: true, label: 'Commands' },
 ]
 
-function withAvatars(items: readonly TMentionItem[]): readonly TMentionItem[] {
-  return items.map((item) => ({
-    ...item,
-    icon: (
-      <Avatar size="small">
-        <Avatar.Fallback>{item.label.slice(0, 1)}</Avatar.Fallback>
-      </Avatar>
-    ),
-  }))
-}
+const peopleWithAvatars: readonly TMentionItem[] = people.map((person) => ({
+  ...person,
+  icon: (
+    <Avatar size="small">
+      <Avatar.Fallback>{person.label.slice(0, 1)}</Avatar.Fallback>
+    </Avatar>
+  ),
+}))
 
 function ChatExample() {
   const [value, setValue] = useState('')
-  const withIcons = useMemo<readonly TMentionTrigger[]>(
-    () => [
-      { char: '@', items: withAvatars(people), label: 'People' },
-      { char: '/', items: commands, atStart: true, label: 'Commands' },
-    ],
-    [],
-  )
+  const [mentions, setMentions] = useState<readonly TMentionValue[]>([])
+  const [sent, setSent] = useState('Nothing sent yet.')
+
+  function send(): void {
+    if (value.trim() === '') {
+      return
+    }
+
+    setSent(`Sent “${value.trim()}” mentioning ${String(mentions.length)}.`)
+    setValue('')
+    setMentions([])
+  }
 
   return (
-    <Mentions triggers={withIcons}>
-      <InputGroup label="Message" description="Type @ to mention someone, or / for a command.">
-        <InputGroup.Textarea
-          placeholder="Write a message…"
-          value={value}
-          onChange={(event) => {
-            setValue(event.target.value)
-          }}
-        />
-        <InputGroup.Addon align="bottom">
-          <Button variant="outline" size="icon-small" aria-label="Attach a file">
-            <Plus aria-hidden="true" />
-          </Button>
-          <Button
-            size="icon-small"
-            aria-label="Send"
-            disabled={value.length === 0}
-            style={{ marginInlineStart: 'auto' }}
-          >
-            <ArrowUp aria-hidden="true" />
-          </Button>
-        </InputGroup.Addon>
-      </InputGroup>
-    </Mentions>
+    <div style={{ display: 'grid', gap: '0.75rem' }}>
+      <Mentions
+        description="Enter sends. Shift and Enter starts a new line."
+        footer={
+          <>
+            <Button variant="outline" size="icon-small" aria-label="Attach a file">
+              <Plus aria-hidden="true" />
+            </Button>
+            <Button
+              size="icon-small"
+              aria-label="Send"
+              disabled={value.trim() === ''}
+              style={{ marginInlineStart: 'auto' }}
+              onClick={send}
+            >
+              <ArrowUp aria-hidden="true" />
+            </Button>
+          </>
+        }
+        label="Message"
+        placeholder="Write a message…"
+        rows={2}
+        triggers={[
+          { char: '@', items: peopleWithAvatars, label: 'People' },
+          { char: '/', items: commands, atStart: true, label: 'Commands' },
+        ]}
+        value={value}
+        onSubmit={send}
+        onValueChange={(next, details) => {
+          setValue(next)
+          setMentions(details.mentions)
+        }}
+      />
+      <span role="status">{sent}</span>
+    </div>
   )
 }
 
 function RemoteExample() {
   const [query, setQuery] = useState('')
-  const results = useMemo(
-    () => people.filter((person) => person.label.toLowerCase().includes(query.toLowerCase())),
-    [query],
+  // Stands for a search on a server.
+  const results = people.filter((person) =>
+    person.label.toLowerCase().includes(query.toLowerCase()),
   )
 
   return (
     <Mentions
+      description="The list comes from a search of your own."
+      label="Comment"
+      placeholder="Type @"
       triggers={[{ char: '@', items: results, filter: false, label: 'People' }]}
       onQueryChange={setQuery}
-    >
-      <Textarea label="Comment" description="The list comes from a search of your own." />
-    </Mentions>
+    />
   )
 }
 
@@ -121,23 +123,31 @@ const meta = {
     docs: {
       description: {
         component:
-          'Opens a list of choices when people type a trigger such as `@` or `/` in a text field, and puts the one they choose into the text. Wrap any text field with it.',
+          'A text field where typing a trigger such as `@` or `/` opens a list, and the chosen item becomes a chip. A chip is deleted whole, as a character is, and the value stays plain text.',
       },
     },
   },
   args: {
+    label: 'Message',
+    placeholder: 'Try @ or /',
     triggers,
-    children: <Textarea label="Message" />,
+    rows: 3,
+    singleLine: false,
+    disabled: false,
+    readOnly: false,
   },
   argTypes: {
     triggers: { control: false },
-    children: { control: false },
+    footer: { control: false },
+    value: { control: false },
     onSelect: { control: false },
+    onSubmit: { control: false },
+    onValueChange: { control: false },
     onQueryChange: { control: false },
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '24rem', maxWidth: '100%', minHeight: '20rem' }}>
+      <div style={{ width: '24rem', maxWidth: '100%', minHeight: '22rem' }}>
         <Story />
       </div>
     ),
@@ -153,23 +163,26 @@ export const Default: TStory = {
     docs: {
       description: {
         story:
-          'Type `@` to mention someone. Type `/` at the start for a command. The arrow keys move, Enter or Tab choose, and Escape closes.',
+          'Type `@` to mention someone, or `/` at the start for a command. The arrow keys move, Enter or Tab choose, Escape closes, and Backspace takes a whole chip away.',
       },
     },
   },
-  render: (args) => (
-    <Mentions {...args}>
-      <Textarea label="Message" placeholder="Try @ or /" />
-    </Mentions>
-  ),
 }
 
-export const InAChatBox: TStory = {
+export const WithChips: TStory = {
+  parameters: {
+    docs: {
+      description: { story: 'The text of an item in `defaultValue` starts out as a chip.' },
+    },
+  },
+  args: { defaultValue: '/summarize the notes of @ana and @ben, please.' },
+}
+
+export const ChatBox: TStory = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Wrap an `InputGroup` to add mentions to a message box with controls. The list opens at the cursor.',
+        story: 'A `footer` holds controls inside the field, and `onSubmit` sends with Enter.',
       },
     },
   },
@@ -178,13 +191,9 @@ export const InAChatBox: TStory = {
 
 export const SingleLine: TStory = {
   parameters: {
-    docs: { description: { story: 'It works with a single line `Input` too.' } },
+    docs: { description: { story: 'With `singleLine`, the field keeps one line.' } },
   },
-  render: (args) => (
-    <Mentions {...args}>
-      <Input label="Assign to" placeholder="Type @" />
-    </Mentions>
-  ),
+  args: { label: 'Assign to', placeholder: 'Type @', singleLine: true },
 }
 
 export const OwnSearch: TStory = {
@@ -197,4 +206,11 @@ export const OwnSearch: TStory = {
     },
   },
   render: () => <RemoteExample />,
+}
+
+export const Disabled: TStory = {
+  parameters: {
+    docs: { description: { story: 'A disabled field shows its chips and cannot change.' } },
+  },
+  args: { disabled: true, defaultValue: 'Ask @carla.' },
 }

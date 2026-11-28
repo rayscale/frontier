@@ -1,12 +1,12 @@
 ---
 title: Mentions
-description: Opens a list of choices when people type @ or / in a text field, and inserts the one they choose.
+description: A text field where typing @ or / opens a list, and the chosen item becomes a chip in the text.
 ---
 
 ## Usage
 
 ```tsx
-import { Mentions, Textarea } from '@rayscale/frontier'
+import { Mentions } from '@rayscale/frontier'
 
 const people = [
   { id: 'ana', label: 'Ana García', insert: '@ana' },
@@ -14,19 +14,17 @@ const people = [
 ]
 
 export function Example() {
-  return (
-    <Mentions triggers={[{ char: '@', items: people, label: 'People' }]}>
-      <Textarea label="Comment" />
-    </Mentions>
-  )
+  return <Mentions label="Comment" triggers={[{ char: '@', items: people, label: 'People' }]} />
 }
 ```
 
-Mentions adds a list of choices to a text field. When people type a trigger, such as `@` for a person or `/` for a command, a list opens at the cursor. They filter it by typing, move through it with the arrow keys or the pointer, and choose an item to put it in the text.
+Mentions is a text field where people mention things, such as `@` for a person or `/` for a command. Typing a trigger opens a list at the cursor. They filter it by typing, move through it with the arrow keys or the pointer, and the item they choose becomes a chip in the text.
 
-It wraps the field instead of replacing it, so you keep the field you already use: a [textarea](/documentation/components/fields/textarea), an [input](/documentation/components/fields/input), or the field of an [input group](/documentation/components/fields/input-group). The field keeps its own value and works controlled or not. Mentions renders no element around it.
+A chip behaves as one character. The cursor stays outside it, one press of Backspace or Delete takes it away whole, and undo brings it back. The spell checker does not underline it.
 
-The text is plain: choosing "Ana García" inserts what `insert` says, such as `@ana`, and nothing else. It does not turn the mention into a chip. Read the mentions from the text when you need them.
+The value is plain text, with each chip written as its text, so you can store it and send it as any message. `onValueChange` also gives the chips in it, with the `id` of the item each one stands for. A `value` or a `defaultValue` with the text of an item shows it as a chip again.
+
+It is built on [Lexical](https://lexical.dev/).
 
 ## Examples
 
@@ -44,13 +42,9 @@ Each trigger has its own list. Set `atStart` on a trigger that only means someth
 
 ### In a chat box
 
-Wrap the whole `InputGroup`, so the list opens at the cursor and the controls stay where they are.
+`footer` holds controls inside the field. With `onSubmit`, Enter sends and Shift with Enter starts a new line.
 
 <Demo name="chatBox" />
-
-### Single line
-
-<Demo name="singleLine" />
 
 ### Your own search
 
@@ -62,14 +56,31 @@ Set `filter` to `false` to show the items as you give them, and use `onQueryChan
 
 ### Mentions
 
-Wraps a text field. It renders the field and a wrapper that adds nothing to the layout.
+It forwards its ref to the editable element.
 
-| Prop            | Type                                            | Description                                                                   |
-| --------------- | ----------------------------------------------- | ----------------------------------------------------------------------------- |
-| `children`      | `ReactElement`                                  | The text field to watch, or a group that holds it.                            |
-| `triggers`      | `TMentionTrigger[]`                             | The triggers, each with its own list.                                         |
-| `onQueryChange` | `(query: string, trigger: string) => void`      | Called with the text typed after a trigger, each time it changes.             |
-| `onSelect`      | `(item: TMentionItem, trigger: string) => void` | Called with the item that people chose, and the trigger that opened the list. |
+| Prop            | Type                                                | Default | Description                                                                   |
+| --------------- | --------------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `triggers`      | `TMentionTrigger[]`                                 | —       | The triggers, each with its own list.                                         |
+| `value`         | `string`                                            | —       | Text in controlled mode.                                                      |
+| `defaultValue`  | `string`                                            | `''`    | Text at the start, in uncontrolled mode.                                      |
+| `onValueChange` | `(value: string, details: TMentionDetails) => void` | —       | Called with the text and its chips every time they change.                    |
+| `onSelect`      | `(item: TMentionItem, trigger: string) => void`     | —       | Called with the item that people chose.                                       |
+| `onQueryChange` | `(query: string, trigger: string) => void`          | —       | Called with the text typed after a trigger, each time it changes.             |
+| `onSubmit`      | `() => void`                                        | —       | Called when people press Enter without Shift. Enter then adds no line.        |
+| `onKeyDown`     | `KeyboardEventHandler`                              | —       | Called with the keys of the field. Check `defaultPrevented` before using one. |
+| `label`         | `ReactNode`                                         | —       | Visible label of the field. Without one, pass `aria-label`.                   |
+| `description`   | `ReactNode`                                         | —       | Helper text.                                                                  |
+| `error`         | `ReactNode`                                         | —       | Error message. It marks the field as invalid.                                 |
+| `invalid`       | `boolean`                                           | `false` | Marks the field as invalid without a message.                                 |
+| `placeholder`   | `string`                                            | —       | Text shown while the field is empty.                                          |
+| `footer`        | `ReactNode`                                         | —       | Controls under the text, inside the field.                                    |
+| `rows`          | `number`                                            | `3`     | Lines the field is tall before it grows.                                      |
+| `singleLine`    | `boolean`                                           | `false` | Keeps the text in one line.                                                   |
+| `disabled`      | `boolean`                                           | `false` | Stops people from using the field.                                            |
+| `readOnly`      | `boolean`                                           | `false` | Lets people read the text but not change it.                                  |
+| `name`          | `string`                                            | —       | Name of the field, so the text is sent with a form.                           |
+| `id`            | `string`                                            | —       | Id of the editable element.                                                   |
+| `className`     | `string`                                            | —       | Class for the editable element.                                               |
 
 ### Trigger
 
@@ -79,7 +90,7 @@ Wraps a text field. It renders the field and a wrapper that adds nothing to the 
 | `items`       | `TMentionItem[]`                                          | —                   | The choices.                                                          |
 | `atStart`     | `boolean`                                                 | `false`             | Opens the list only when the trigger is the first thing in the field. |
 | `filter`      | `false \| (item: TMentionItem, query: string) => boolean` | Search of the label | Decides which items match. `false` shows them all.                    |
-| `insertSpace` | `boolean`                                                 | `true`              | Adds a space after the inserted text.                                 |
+| `insertSpace` | `boolean`                                                 | `true`              | Adds a space after the chip.                                          |
 | `label`       | `string`                                                  | `'Suggestions'`     | Name of the list for assistive technology, such as `People`.          |
 
 ### Item
@@ -89,8 +100,8 @@ Wraps a text field. It renders the field and a wrapper that adds nothing to the 
 | `id`          | `string`    | Tells the item apart from the others.                        |
 | `label`       | `string`    | Name of the item. People search it.                          |
 | `description` | `ReactNode` | A second line, such as an email or what a command does.      |
-| `icon`        | `ReactNode` | Shown before the label, such as an avatar. It is decorative. |
-| `insert`      | `string`    | The text to insert. Defaults to the trigger and the label.   |
+| `icon`        | `ReactNode` | Shown before the label in the list. It is decorative.        |
+| `insert`      | `string`    | The text of the chip. Defaults to the trigger and the label. |
 | `disabled`    | `boolean`   | Keeps people from choosing the item.                         |
 
 ## Accessibility
@@ -100,9 +111,8 @@ Wraps a text field. It renders the field and a wrapper that adds nothing to the 
   with `aria-activedescendant`, so a screen reader announces each item as the arrow keys move.
 </Callout>
 
-- The arrow keys move through the list and skip disabled items. Enter or Tab chooses, and Escape closes it. While the list is open these keys do not reach your own handlers, so Enter does not send a message that is half written.
+- The arrow keys move through the list and skip disabled items. Enter or Tab chooses, and Escape closes it. While the list is open, Enter does not send the message.
 - The list is a listbox named after the trigger, such as "People", and each item is an option.
-- The field gets `aria-autocomplete`, `aria-controls`, and `aria-activedescendant` while the list is open.
-- A status message says how many suggestions there are.
+- The field is a text box named by its label. A status message says how many suggestions there are.
+- A chip is read as its text, and is deleted whole.
 - The list closes when the field loses focus, and when nothing matches.
-- The keys are ignored while people compose text with an input method, so choosing a character does not choose an item.

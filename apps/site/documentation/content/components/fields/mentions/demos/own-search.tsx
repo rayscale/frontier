@@ -1,4 +1,4 @@
-import { Mentions, Textarea } from '@rayscale/frontier'
+import { Mentions } from '@rayscale/frontier'
 import { useState } from 'react'
 
 const people = [
@@ -16,13 +16,13 @@ export default function OwnSearch() {
   )
 
   return (
-    <div style={{ width: '24rem', maxWidth: '100%', minHeight: '14rem' }}>
+    <div style={{ width: '24rem', maxWidth: '100%', minHeight: '16rem' }}>
       <Mentions
+        label="Comment"
+        placeholder="Type @"
         triggers={[{ char: '@', items: results, filter: false, label: 'People' }]}
         onQueryChange={setQuery}
-      >
-        <Textarea label="Comment" placeholder="Type @" />
-      </Mentions>
+      />
     </div>
   )
 }

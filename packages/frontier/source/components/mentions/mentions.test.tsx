@@ -1,14 +1,25 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useState } from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import {
+  $getRoot,
+  $getSelection,
+  $isRangeSelection,
+  getNearestEditorFromDOMNode,
+  type LexicalEditor,
+} from 'lexical'
+import { createRef, useState } from 'react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { Textarea } from '../textarea/textarea.js'
-
-import { Mentions, type TMentionItem, type TMentionTrigger } from './index.js'
+import {
+  Mentions,
+  type TMentionDetails,
+  type TMentionItem,
+  type TMentionsProps,
+  type TMentionTrigger,
+} from './index.js'
 
 const people: readonly TMentionItem[] = [
-  { id: 'ana', label: 'Ana', description: 'ana@example.com' },
+  { id: 'ana', label: 'Ana', description: 'ana@example.com', insert: '@ana' },
   { id: 'ben', label: 'Ben' },
   { id: 'bea', label: 'Bea', disabled: true },
 ]
@@ -23,24 +34,77 @@ const triggers: readonly TMentionTrigger[] = [
   { char: '/', items: commands, atStart: true, label: 'Commands' },
 ]
 
-function Field({ onSelect }: { onSelect?: (item: TMentionItem, trigger: string) => void }) {
-  const [value, setValue] = useState('')
-
-  return (
-    <Mentions triggers={triggers} onSelect={onSelect}>
-      <Textarea
-        aria-label="Message"
-        value={value}
-        onChange={(event) => {
-          setValue(event.currentTarget.value)
-        }}
-      />
-    </Mentions>
-  )
+function renderMentions(props: Partial<TMentionsProps> = {}) {
+  return render(<Mentions label="Message" triggers={triggers} {...props} />)
 }
 
-function getField(): HTMLTextAreaElement {
-  return screen.getByRole<HTMLTextAreaElement>('textbox', { name: 'Message' })
+function getField(): HTMLElement {
+  return screen.getByRole('textbox', { name: 'Message' })
+}
+
+function getEditor(): LexicalEditor {
+  const editor = getNearestEditorFromDOMNode(getField())
+  if (!editor) {
+    throw new Error('The field has no editor.')
+  }
+
+  return editor
+}
+
+/** Writes at the end of the field, as typing does. jsdom cannot type into an editable element. */
+async function type(text: string): Promise<void> {
+  const editor = getEditor()
+  await act(async () => {
+    editor.update(
+      () => {
+        if (!$isRangeSelection($getSelection())) {
+          $getRoot().selectEnd()
+        }
+
+        const selection = $getSelection()
+        if ($isRangeSelection(selection)) {
+          selection.insertText(text)
+        }
+      },
+      { discrete: true },
+    )
+    await Promise.resolve()
+  })
+}
+
+/** Presses Backspace with the cursor at the end of the text. */
+async function pressBackspaceAtTheEnd(): Promise<void> {
+  const editor = getEditor()
+  await act(async () => {
+    editor.update(
+      () => {
+        $getRoot().selectEnd()
+        const selection = $getSelection()
+        if ($isRangeSelection(selection)) {
+          selection.deleteCharacter(true)
+        }
+      },
+      { discrete: true },
+    )
+    await Promise.resolve()
+  })
+}
+
+async function press(key: string, options: KeyboardEventInit = {}): Promise<void> {
+  await act(async () => {
+    fireEvent.keyDown(getField(), { key, ...options })
+    await Promise.resolve()
+  })
+}
+
+function getText(): string {
+  return getEditor()
+    .getEditorState()
+    .read(() => $getRoot().getTextContent())
+}
+
+function getChips(): HTMLElement[] {
+  return Array.from(getField().querySelectorAll<HTMLElement>('.frontier-mentions__chip'))
 }
 
 async function expectClosed(): Promise<void> {
@@ -49,291 +113,354 @@ async function expectClosed(): Promise<void> {
   })
 }
 
+beforeEach(() => {
+  // jsdom has no layout.
+  Object.defineProperty(Range.prototype, 'getBoundingClientRect', {
+    configurable: true,
+    writable: true,
+    value: () => new DOMRect(),
+  })
+})
+
+afterEach(() => {
+  cleanup()
+})
+
 describe('Mentions', () => {
-  it('stays closed until a trigger is typed', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('is a labelled multi-line text box with a placeholder', () => {
+    renderMentions({ placeholder: 'Write a message' })
 
-    await user.type(getField(), 'hello')
-
-    await expectClosed()
+    expect(getField().getAttribute('aria-multiline')).toBe('true')
+    expect(getField().getAttribute('aria-placeholder')).toBe('Write a message')
+    expect(screen.getByText('Write a message')).toBeTruthy()
   })
 
-  it('opens the list of the trigger at the start of a word', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('takes a name from aria-label when it has no label', () => {
+    render(<Mentions aria-label="Comment" triggers={triggers} />)
 
-    await user.type(getField(), 'hi @')
+    expect(screen.getByRole('textbox', { name: 'Comment' })).toBeTruthy()
+  })
 
+  it('shows the text of an item in the default value as a chip', () => {
+    renderMentions({ defaultValue: 'Hi @ana and @Ben, not name@ana' })
+
+    expect(getChips().map((chip) => chip.textContent)).toEqual(['@ana', '@Ben'])
+    expect(getChips()[0]?.getAttribute('data-mention-id')).toBe('ana')
+    expect(getChips()[0]?.getAttribute('data-trigger')).toBe('@')
+    expect(getText()).toBe('Hi @ana and @Ben, not name@ana')
+  })
+
+  it('keeps the lines of the value', () => {
+    renderMentions({ defaultValue: 'one\n@ana' })
+
+    expect(getText()).toBe('one\n@ana')
+    expect(getChips()).toHaveLength(1)
+  })
+
+  it('opens the list of a trigger at the start of a word, and filters it', async () => {
+    renderMentions()
+
+    await type('hi @')
     expect(await screen.findByRole('listbox', { name: 'People' })).toBeTruthy()
     expect(screen.getAllByRole('option')).toHaveLength(3)
-  })
 
-  it('does not open in the middle of a word', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
-
-    await user.type(getField(), 'name@')
-
-    await expectClosed()
-  })
-
-  it('filters the items by what is typed after the trigger', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
-
-    await user.type(getField(), '@b')
-
-    await screen.findByRole('listbox')
+    await type('b')
     expect(screen.getAllByRole('option').map((option) => option.textContent)).toEqual([
       'Ben',
       'Bea',
     ])
   })
 
-  it('closes the list when nothing matches', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('does not open in the middle of a word', async () => {
+    renderMentions()
 
-    await user.type(getField(), '@zzz')
+    await type('name@')
 
     await expectClosed()
   })
 
   it('opens a trigger that is only for the start of the field only there', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
-
-    await user.type(getField(), 'text /')
+    const { unmount } = renderMentions({ defaultValue: 'text ' })
+    await type('/')
     await expectClosed()
+    unmount()
 
-    await user.clear(getField())
-    await user.type(getField(), '/')
+    renderMentions()
+    await type('/')
     expect(await screen.findByRole('listbox', { name: 'Commands' })).toBeTruthy()
   })
 
-  it('inserts the chosen item in place of what was typed', async () => {
+  it('opens after a chip, but not for a start-only trigger', async () => {
+    renderMentions({ defaultValue: '@ana ' })
+
+    await type('/')
+    await expectClosed()
+
+    await type(' @')
+    expect(await screen.findByRole('listbox', { name: 'People' })).toBeTruthy()
+  })
+
+  it('turns the chosen item into a chip, and reports the text and the chips', async () => {
     const user = userEvent.setup()
     const onSelect = vi.fn()
-    render(<Field onSelect={onSelect} />)
+    const onValueChange = vi.fn<(value: string, details: TMentionDetails) => void>()
+    renderMentions({ onSelect, onValueChange })
 
-    await user.type(getField(), 'hi @an')
+    await type('hi @an')
     await user.click(await screen.findByRole('option', { name: /Ana/ }))
 
-    expect(getField().value).toBe('hi @Ana ')
+    expect(getText()).toBe('hi @ana ')
+    expect(getChips().map((chip) => chip.textContent)).toEqual(['@ana'])
     expect(onSelect).toHaveBeenCalledWith(people[0], '@')
+    await waitFor(() => {
+      expect(onValueChange).toHaveBeenLastCalledWith('hi @ana ', {
+        mentions: [{ id: 'ana', text: '@ana', trigger: '@' }],
+      })
+    })
     await expectClosed()
   })
 
-  it('inserts the text of the item when it has one', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('writes the trigger and the label when the item has no text of its own', async () => {
+    renderMentions()
 
-    await user.type(getField(), '/he')
-    await user.click(await screen.findByRole('option', { name: 'help' }))
+    await type('@ben')
+    await press('Enter')
 
-    expect(getField().value).toBe('/help --all ')
+    expect(getText()).toBe('@Ben ')
   })
 
-  it('chooses with Enter and moves with the arrow keys', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('moves with the arrow keys, skipping disabled items, and chooses with Tab', async () => {
+    renderMentions()
 
-    await user.type(getField(), '@')
+    await type('@')
     await screen.findByRole('listbox')
-    await user.keyboard('{ArrowDown}{Enter}')
+    await press('ArrowDown')
+    expect(screen.getByRole('option', { name: 'Ben' }).getAttribute('aria-selected')).toBe('true')
 
-    expect(getField().value).toBe('@Ben ')
-  })
+    await press('ArrowDown')
+    expect(screen.getByRole('option', { name: /Ana/ }).getAttribute('aria-selected')).toBe('true')
 
-  it('skips disabled items when moving', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+    await press('ArrowUp')
+    await press('Tab')
 
-    await user.type(getField(), '@b')
-    await screen.findByRole('listbox')
-    await user.keyboard('{ArrowDown}{Enter}')
-
-    expect(getField().value).toBe('@Ben ')
+    expect(getText()).toBe('@Ben ')
   })
 
   it('does not choose a disabled item', async () => {
     const user = userEvent.setup()
-    render(<Field />)
+    renderMentions()
 
-    await user.type(getField(), '@bea')
+    await type('@bea')
     await user.click(await screen.findByRole('option', { name: 'Bea' }))
 
-    expect(getField().value).toBe('@bea')
-  })
-
-  it('chooses with Tab', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
-
-    await user.type(getField(), '@a')
-    await screen.findByRole('listbox')
-    await user.keyboard('{Tab}')
-
-    expect(getField().value).toBe('@Ana ')
+    expect(getText()).toBe('@bea')
+    expect(getChips()).toHaveLength(0)
   })
 
   it('closes with Escape and stays closed until the next trigger', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+    renderMentions()
 
-    await user.type(getField(), '@')
+    await type('@')
     await screen.findByRole('listbox')
-    await user.keyboard('{Escape}')
+    await press('Escape')
     await expectClosed()
 
-    await user.type(getField(), 'a')
+    await type('a')
     await expectClosed()
 
-    await user.type(getField(), ' @')
+    await type(' @')
     expect(await screen.findByRole('listbox')).toBeTruthy()
   })
 
-  it('keeps the keys from reaching the field while the list is open', async () => {
-    const user = userEvent.setup()
-    const onKeyDown = vi.fn()
-    render(
-      <Mentions triggers={triggers}>
-        <Textarea aria-label="Message" onKeyDown={onKeyDown} />
-      </Mentions>,
-    )
+  it('keeps the cursor out of a chip, and the spell checker off it', () => {
+    renderMentions({ defaultValue: 'hi @ana' })
 
-    await user.type(getField(), '@')
-    await screen.findByRole('listbox')
-    onKeyDown.mockClear()
-    await user.keyboard('{Enter}')
-
-    expect(onKeyDown).not.toHaveBeenCalled()
+    const chip = getChips()[0]
+    expect(chip?.getAttribute('contenteditable')).toBe('false')
+    expect(chip?.getAttribute('spellcheck')).toBe('false')
   })
 
-  it('links the field to the list for assistive technology', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('takes a chip away whole, as one character', async () => {
+    renderMentions({ defaultValue: 'hi @ana' })
 
-    await user.type(getField(), '@')
+    await pressBackspaceAtTheEnd()
+
+    expect(getText()).toBe('hi ')
+    expect(getChips()).toHaveLength(0)
+  })
+
+  it('links the field to the list while it is open, and says how many there are', async () => {
+    renderMentions()
+
+    await type('@')
     const list = await screen.findByRole('listbox')
 
     expect(getField().getAttribute('aria-controls')).toBe(list.id)
-    expect(getField().getAttribute('aria-autocomplete')).toBe('list')
     expect(getField().getAttribute('aria-activedescendant')).toBe(
       screen.getAllByRole('option')[0]?.id,
     )
+    expect(screen.getByRole('status').textContent).toBe('3 suggestions')
 
-    await user.keyboard('{Escape}')
-
+    await press('Escape')
     await waitFor(() => {
       expect(getField().hasAttribute('aria-controls')).toBe(false)
     })
   })
 
-  it('marks the active item as selected', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
-
-    await user.type(getField(), '@')
-    await screen.findByRole('listbox')
-    await user.keyboard('{ArrowDown}')
-
-    expect(screen.getByRole('option', { name: 'Ben' }).getAttribute('aria-selected')).toBe('true')
-    expect(screen.getByRole('option', { name: /Ana/ }).getAttribute('aria-selected')).toBe('false')
-  })
-
   it('reports what is typed after a trigger', async () => {
-    const user = userEvent.setup()
     const onQueryChange = vi.fn()
-    render(
-      <Mentions triggers={triggers} onQueryChange={onQueryChange}>
-        <Textarea aria-label="Message" />
-      </Mentions>,
-    )
+    renderMentions({ onQueryChange })
 
-    await user.type(getField(), '@an')
+    await type('@an')
 
     expect(onQueryChange).toHaveBeenLastCalledWith('an', '@')
   })
 
   it('shows the items as they are when filter is false', async () => {
-    const user = userEvent.setup()
-    render(
-      <Mentions triggers={[{ char: '@', items: people, filter: false }]}>
-        <Textarea aria-label="Message" />
-      </Mentions>,
-    )
+    renderMentions({ triggers: [{ char: '@', items: people, filter: false }] })
 
-    await user.type(getField(), '@zzz')
+    await type('@zzz')
 
     expect(await screen.findAllByRole('option')).toHaveLength(3)
   })
 
   it('leaves out the space when insertSpace is false', async () => {
-    const user = userEvent.setup()
-    render(
-      <Mentions triggers={[{ char: '@', items: people, insertSpace: false }]}>
-        <Textarea aria-label="Message" />
-      </Mentions>,
-    )
+    renderMentions({ triggers: [{ char: '@', items: people, insertSpace: false }] })
 
-    await user.type(getField(), '@an')
-    await user.click(await screen.findByRole('option', { name: /Ana/ }))
+    await type('@ben')
+    await press('Enter')
 
-    expect(getField().value).toBe('@Ana')
-    await expectClosed()
+    expect(getText()).toBe('@Ben')
   })
 
-  it('works with a field that keeps its own value', async () => {
+  it('follows a controlled value, and turns its mentions into chips', async () => {
     const user = userEvent.setup()
-    render(
-      <Mentions triggers={triggers}>
-        <textarea aria-label="Message" />
-      </Mentions>,
-    )
 
-    await user.type(getField(), '@an')
-    await user.click(await screen.findByRole('option', { name: /Ana/ }))
+    function Controlled() {
+      const [value, setValue] = useState('start')
 
-    expect(getField().value).toBe('@Ana ')
+      return (
+        <>
+          <Mentions label="Message" triggers={triggers} value={value} onValueChange={setValue} />
+          <button
+            type="button"
+            onClick={() => {
+              setValue('to @ana')
+            }}
+          >
+            Fill
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setValue('')
+            }}
+          >
+            Clear
+          </button>
+          <output>{value}</output>
+        </>
+      )
+    }
+
+    render(<Controlled />)
+    await user.click(screen.getByRole('button', { name: 'Fill' }))
+    await waitFor(() => {
+      expect(getChips()).toHaveLength(1)
+    })
+    expect(getText()).toBe('to @ana')
+
+    await user.click(screen.getByRole('button', { name: 'Clear' }))
+    await waitFor(() => {
+      expect(getText()).toBe('')
+    })
+
+    await type('typed')
+    await waitFor(() => {
+      expect(document.querySelector('output')?.textContent).toBe('typed')
+    })
   })
 
-  it('works with a single line input', async () => {
-    const user = userEvent.setup()
-    render(
-      <Mentions triggers={triggers}>
-        <input aria-label="Message" />
-      </Mentions>,
-    )
+  it('sends with Enter when there is somewhere to send to', async () => {
+    const onSubmit = vi.fn()
+    renderMentions({ defaultValue: 'hello', onSubmit })
 
-    await user.type(screen.getByRole('textbox', { name: 'Message' }), '@be')
+    await press('Enter')
 
-    expect(await screen.findByRole('option', { name: 'Ben' })).toBeTruthy()
+    expect(onSubmit).toHaveBeenCalledTimes(1)
+    expect(getText()).toBe('hello')
   })
 
-  it('closes when the field loses focus', async () => {
-    const user = userEvent.setup()
-    render(
-      <>
-        <Field />
-        <button type="button">Other</button>
-      </>,
-    )
+  it('gives Enter to the list while it is open, not to onSubmit', async () => {
+    const onSubmit = vi.fn()
+    renderMentions({ onSubmit })
 
-    await user.type(getField(), '@')
-    await screen.findByRole('listbox')
-    await user.click(screen.getByRole('button', { name: 'Other' }))
+    await type('@ben')
+    await press('Enter')
 
-    await expectClosed()
+    expect(onSubmit).not.toHaveBeenCalled()
+    expect(getText()).toBe('@Ben ')
   })
 
-  it('announces how many suggestions there are', async () => {
-    const user = userEvent.setup()
-    render(<Field />)
+  it('adds no line in a single line field', async () => {
+    renderMentions({ defaultValue: 'hello', singleLine: true })
 
-    await user.type(getField(), '@')
+    await press('Enter')
 
-    expect(await screen.findByRole('status')).toHaveProperty('textContent', '3 suggestions')
+    expect(getText()).toBe('hello')
+    expect(getField().getAttribute('aria-multiline')).toBe('false')
+  })
+
+  it('cannot be edited when disabled or read only', () => {
+    const { unmount } = renderMentions({ disabled: true })
+    expect(getField().getAttribute('contenteditable')).toBe('false')
+    expect(getField().getAttribute('aria-disabled')).toBe('true')
+    unmount()
+
+    renderMentions({ readOnly: true })
+    expect(getField().getAttribute('contenteditable')).toBe('false')
+    expect(getField().getAttribute('aria-readonly')).toBe('true')
+  })
+
+  it('sends its text with a form', async () => {
+    const { container } = render(
+      <form>
+        <Mentions defaultValue="hi @ana" label="Message" name="message" triggers={triggers} />
+      </form>,
+    )
+    const form = container.querySelector('form')
+
+    expect(new FormData(form ?? undefined).get('message')).toBe('hi @ana')
+
+    await type('!')
+    await waitFor(() => {
+      expect(new FormData(form ?? undefined).get('message')).toBe('hi @ana!')
+    })
+  })
+
+  it('links the description and the error, and marks the field invalid', () => {
+    renderMentions({ description: 'Mention someone.', error: 'Required.' })
+
+    const describedBy = getField().getAttribute('aria-describedby')?.split(' ') ?? []
+    expect(describedBy).toContain(screen.getByText('Mention someone.').id)
+    expect(describedBy).toContain(screen.getByText('Required.').id)
+    expect(getField().getAttribute('aria-invalid')).toBe('true')
+  })
+
+  it('shows the controls of the footer, and forwards the ref and the class name', () => {
+    const ref = createRef<HTMLDivElement>()
+    render(
+      <Mentions
+        ref={ref}
+        className="extra"
+        footer={<button type="button">Send</button>}
+        label="Message"
+        triggers={triggers}
+      />,
+    )
+
+    expect(screen.getByRole('button', { name: 'Send' })).toBeTruthy()
+    expect(ref.current).toBe(getField())
+    expect(ref.current?.classList.contains('extra')).toBe(true)
   })
 })

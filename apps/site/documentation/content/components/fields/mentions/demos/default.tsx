@@ -1,4 +1,4 @@
-import { Mentions, Textarea } from '@rayscale/frontier'
+import { Mentions } from '@rayscale/frontier'
 
 const people = [
   { id: 'ana', label: 'Ana García', description: 'ana@example.com', insert: '@ana' },
@@ -8,10 +8,12 @@ const people = [
 
 export default function Default() {
   return (
-    <div style={{ width: '24rem', maxWidth: '100%', minHeight: '14rem' }}>
-      <Mentions triggers={[{ char: '@', items: people, label: 'People' }]}>
-        <Textarea label="Comment" placeholder="Type @ to mention someone" />
-      </Mentions>
+    <div style={{ width: '24rem', maxWidth: '100%', minHeight: '16rem' }}>
+      <Mentions
+        label="Comment"
+        placeholder="Type @ to mention someone"
+        triggers={[{ char: '@', items: people, label: 'People' }]}
+      />
     </div>
   )
 }

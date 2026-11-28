@@ -1,56 +1,51 @@
-import { ArrowUp, Button, InputGroup, Mentions, Plus } from '@rayscale/frontier'
+import { ArrowUp, Button, Mentions, Plus } from '@rayscale/frontier'
 import { useState } from 'react'
 
 const people = [
   { id: 'ana', label: 'Ana García', description: 'ana@example.com', insert: '@ana' },
   { id: 'ben', label: 'Ben Carter', description: 'ben@example.com', insert: '@ben' },
-  { id: 'carla', label: 'Carla Núñez', description: 'carla@example.com', insert: '@carla' },
-]
-
-const commands = [
-  {
-    id: 'summarize',
-    label: 'summarize',
-    description: 'Sum up the conversation',
-    insert: '/summarize',
-  },
-  { id: 'clear', label: 'clear', description: 'Start a new conversation', insert: '/clear' },
 ]
 
 export default function ChatBox() {
   const [value, setValue] = useState('')
+  const [sent, setSent] = useState('Nothing sent yet.')
+
+  function send(): void {
+    if (value.trim() !== '') {
+      setSent(`Sent “${value.trim()}”`)
+      setValue('')
+    }
+  }
 
   return (
-    <div style={{ width: '26rem', maxWidth: '100%', minHeight: '18rem' }}>
+    <div style={{ display: 'grid', gap: '0.75rem', width: '26rem', maxWidth: '100%' }}>
       <Mentions
-        triggers={[
-          { char: '@', items: people, label: 'People' },
-          { char: '/', items: commands, atStart: true, label: 'Commands' },
-        ]}
-      >
-        <InputGroup label="Message" description="Type @ to mention someone, or / for a command.">
-          <InputGroup.Textarea
-            placeholder="Write a message…"
-            value={value}
-            onChange={(event) => {
-              setValue(event.target.value)
-            }}
-          />
-          <InputGroup.Addon align="bottom">
+        description="Enter sends. Shift and Enter starts a new line."
+        footer={
+          <>
             <Button variant="outline" size="icon-small" aria-label="Attach a file">
               <Plus aria-hidden="true" />
             </Button>
             <Button
               size="icon-small"
               aria-label="Send"
-              disabled={value.length === 0}
+              disabled={value.trim() === ''}
               style={{ marginInlineStart: 'auto' }}
+              onClick={send}
             >
               <ArrowUp aria-hidden="true" />
             </Button>
-          </InputGroup.Addon>
-        </InputGroup>
-      </Mentions>
+          </>
+        }
+        label="Message"
+        placeholder="Write a message…"
+        rows={2}
+        triggers={[{ char: '@', items: people, label: 'People' }]}
+        value={value}
+        onSubmit={send}
+        onValueChange={setValue}
+      />
+      <span role="status">{sent}</span>
     </div>
   )
 }

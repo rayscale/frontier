@@ -1,0 +1,22 @@
+.frontier-number-field {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The buttons sit close to the border, as part of the box. */
+.frontier-number-field__box--sides,
+.frontier-number-field__box--end {
+  gap: var(--frontier-spacing-1);
+  padding-inline: var(--frontier-spacing-1);
+}
+
+.frontier-number-field__box--end {
+  padding-inline-start: var(--frontier-spacing-3);
+}
+
+.frontier-number-field__box--sides .frontier-number-field {
+  text-align: center;
+}
+
+.frontier-number-field__button {
+  flex: none;
+}

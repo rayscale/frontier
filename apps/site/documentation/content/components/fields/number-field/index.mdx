@@ -1,0 +1,87 @@
+---
+title: Number field
+description: An input of numbers with buttons that step the value.
+---
+
+## Usage
+
+```tsx
+import { NumberField } from '@rayscale/frontier'
+
+export function Example() {
+  return <NumberField label="Guests" defaultValue={2} min={1} max={6} />
+}
+```
+
+A number field takes a number that people can type or step with buttons and keys, such as a quantity, a price, or a percent. It keeps the number between `min` and `max`, and writes it in the way of the language, with the `format` you choose.
+
+Use a [slider](/documentation/components/selection/slider) when the exact number matters less than where it falls in a range. For text that only looks like a number, such as a phone or a postal code, use an [input](/documentation/components/fields/input).
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Buttons at the end
+
+`controls="end"` puts both buttons after the number, and `controls="none"` leaves them out.
+
+<Demo name="endControls" />
+
+### Money and percent
+
+`format` takes the options of `Intl.NumberFormat`. A percent is written from a number between 0 and 1.
+
+<Demo name="formats" />
+
+### Limits
+
+A button is disabled when the number cannot go further in its direction.
+
+<Demo name="limits" />
+
+### Controlled
+
+Pass `value` and `onValueChange`. The value is `null` when the field is empty.
+
+<Demo name="controlled" />
+
+## API reference
+
+### NumberField
+
+It forwards its ref and the attributes of an `input` to the input, except those about its value.
+
+| Prop               | Type                              | Default       | Description                                                        |
+| ------------------ | --------------------------------- | ------------- | ------------------------------------------------------------------ |
+| `value`            | `number \| null`                  | —             | Number in controlled mode. `null` is an empty field.               |
+| `defaultValue`     | `number`                          | —             | Number at the start, in uncontrolled mode.                         |
+| `onValueChange`    | `(value: number \| null) => void` | —             | Called with the new number every time it changes.                  |
+| `onValueCommitted` | `(value: number \| null) => void` | —             | Called when people finish changing the number.                     |
+| `min`, `max`       | `number`                          | —             | Lowest and highest number allowed.                                 |
+| `step`             | `number`                          | `1`           | How much the buttons and the arrows change the value.              |
+| `largeStep`        | `number`                          | `10`          | How much Page Up, Page Down, and Shift with the arrows change it.  |
+| `smallStep`        | `number`                          | `0.1`         | How much the arrows change it while Alt is held.                   |
+| `format`           | `Intl.NumberFormatOptions`        | —             | How the number is written, such as a currency or a percent.        |
+| `locale`           | `Intl.LocalesArgument`            | The browser's | Language and region used to write and read the number.             |
+| `controls`         | `'sides' \| 'end' \| 'none'`      | `'sides'`     | Where the step buttons are.                                        |
+| `allowWheelScrub`  | `boolean`                         | `false`       | Lets the mouse wheel step the value while the field has the focus. |
+| `label`            | `ReactNode`                       | —             | Visible label of the field.                                        |
+| `description`      | `ReactNode`                       | —             | Helper text.                                                       |
+| `error`            | `ReactNode`                       | —             | Error message. It marks the field as invalid.                      |
+| `invalid`          | `boolean`                         | `false`       | Marks the field as invalid without a message.                      |
+| `incrementLabel`   | `string`                          | `'Increase'`  | Name of the button that raises the value.                          |
+| `decrementLabel`   | `string`                          | `'Decrease'`  | Name of the button that lowers the value.                          |
+
+## Accessibility
+
+<Callout title="Always give it a label">
+  The label names the input and says what the number counts. Write one, or pass `aria-label` when
+  the design has no room for it.
+</Callout>
+
+- The arrow keys step the value, Page Up and Page Down step it by `largeStep`, and Home and End go to the limits.
+- The step buttons have names, "Increase" and "Decrease". Change them for other languages.
+- The error is announced when it appears, and is linked to the input along with the description.
+- A numeric keyboard opens on touch screens.

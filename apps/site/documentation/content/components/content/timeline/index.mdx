@@ -1,0 +1,100 @@
+---
+title: Timeline
+description: A list of events in the order they happened, joined by a line.
+---
+
+## Usage
+
+```tsx
+import { Timeline } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <Timeline aria-label="Order history">
+      <Timeline.Item tone="success">
+        <Timeline.Indicator />
+        <Timeline.Content>
+          <Timeline.Title>Delivered</Timeline.Title>
+          <Timeline.Time dateTime="2025-03-04">March 4</Timeline.Time>
+        </Timeline.Content>
+      </Timeline.Item>
+      <Timeline.Item>
+        <Timeline.Indicator />
+        <Timeline.Content>
+          <Timeline.Title>Shipped</Timeline.Title>
+          <Timeline.Time dateTime="2025-03-02">March 2</Timeline.Time>
+        </Timeline.Content>
+      </Timeline.Item>
+    </Timeline>
+  )
+}
+```
+
+A timeline shows what happened and when, such as the history of an order, the activity on a project, or the steps of a deployment. Each event has an indicator on a line, and text beside it: a title, a time, and details.
+
+Put the newest event first or last, but keep one order for the whole list. A timeline only shows events. To show where someone is in a process they move through, use a [stepper](/documentation/components/navigation/stepper).
+
+## Examples
+
+### Default
+
+Without content, the indicator is a dot. Its color follows the `tone` of the event.
+
+<Demo name="default" />
+
+### With icons
+
+Put an icon in the indicator to draw a circle around it.
+
+<Demo name="icons" />
+
+### Tones
+
+`neutral`, `info`, `success`, `warning`, and `danger`.
+
+<Demo name="tones" />
+
+## API reference
+
+### Timeline
+
+Renders an `<ol>`. It forwards its ref and the attributes of an `ol`. Give it an `aria-label` that says what the events are.
+
+### Timeline.Item
+
+Renders one event as an `<li>`. It forwards its ref and the attributes of an `li`.
+
+| Prop   | Type                                                        | Default     | Description                                   |
+| ------ | ----------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `tone` | `'neutral' \| 'info' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Meaning of the event, as the indicator color. |
+
+### Timeline.Indicator
+
+Renders the mark of the event on the line. It is a dot when it is empty, and a circle around its content when it is not, such as an icon. It is hidden from assistive technology.
+
+### Timeline.Content
+
+Holds the text of the event, beside the indicator. It renders a `<div>`.
+
+### Timeline.Title
+
+Names the event. It renders a `<p>`, or the element that `as` says: `p`, `div`, `h3`, `h4`, or `h5`.
+
+### Timeline.Time
+
+Says when the event happened. It renders a `<time>` and takes its attributes. Pass `dateTime` so that machines can read it.
+
+### Timeline.Description
+
+Gives the details of the event. It renders a `<p>`.
+
+## Accessibility
+
+<Callout title="Say the tone in the text">
+  The indicator is hidden from assistive technology and its color is not enough to tell the tone.
+  Write it in the title, such as "Deployment failed", so everyone gets it.
+</Callout>
+
+- The timeline is an ordered list, so screen readers announce the number of events and the position of each one. Name the list with `aria-label`.
+- `Timeline.Time` is a `time` element. Write the time for people, and pass `dateTime` for machines.
+- Use a heading for the title with `as` when each event should appear in the outline of the page.

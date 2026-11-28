@@ -533,4 +533,23 @@ describe('Dialog', () => {
       consoleError.mockRestore()
     })
   })
+  it('puts the focus on the element that initialFocus names', async () => {
+    render(
+      <Dialog defaultOpen>
+        <Dialog.Content initialFocus={() => document.getElementById('second')}>
+          <Dialog.Title>Pick</Dialog.Title>
+          <button id="first" type="button">
+            First
+          </button>
+          <button id="second" type="button">
+            Second
+          </button>
+        </Dialog.Content>
+      </Dialog>,
+    )
+
+    await waitFor(() => {
+      expect(document.activeElement).toBe(document.getElementById('second'))
+    })
+  })
 })

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
 
 import { CheckCircle, CircleX, Info, TriangleAlert } from '../../icons/index.js'
 import { Button } from '../button/button.js'
@@ -143,4 +144,47 @@ export const Alert: TStory = {
       </Callout.Content>
     </Callout>
   ),
+}
+
+function DismissibleExample() {
+  const [visible, setVisible] = useState(true)
+
+  return visible ? (
+    <Callout
+      tone="success"
+      role="status"
+      onDismiss={() => {
+        setVisible(false)
+      }}
+    >
+      <Callout.Icon>
+        <CheckCircle />
+      </Callout.Icon>
+      <Callout.Content>
+        <Callout.Title>Changes saved</Callout.Title>
+        <p>Your settings are up to date.</p>
+      </Callout.Content>
+    </Callout>
+  ) : (
+    <Button
+      variant="outline"
+      onClick={() => {
+        setVisible(true)
+      }}
+    >
+      Show the message again
+    </Button>
+  )
+}
+
+export const Dismissible: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Pass `onDismiss` to show a button in the corner. The callout does not hide itself: remove it in the handler.',
+      },
+    },
+  },
+  render: () => <DismissibleExample />,
 }

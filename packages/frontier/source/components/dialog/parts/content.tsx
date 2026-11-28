@@ -2,6 +2,7 @@ import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { forwardRef, type ReactElement, useLayoutEffect } from 'react'
 
 import { X } from '../../../icons/index.js'
+import { omitUndefined } from '../../../internal/helpers/omit-undefined.js'
 import { withConsumerClick } from '../../../internal/helpers/with-consumer-click.js'
 import { Button } from '../../button/button.js'
 import { useDialogContext } from '../context.js'
@@ -12,6 +13,7 @@ export const DialogContent = forwardRef<HTMLDivElement, TDialogContentProps>(fun
     size = 'medium',
     showCloseButton = true,
     closeOnBackdropClick = true,
+    initialFocus,
     className,
     children,
     ...props
@@ -31,7 +33,12 @@ export const DialogContent = forwardRef<HTMLDivElement, TDialogContentProps>(fun
   return (
     <BaseDialog.Portal>
       <BaseDialog.Backdrop className="frontier-dialog__backdrop" />
-      <BaseDialog.Popup {...props} ref={ref} className={classes}>
+      <BaseDialog.Popup
+        {...props}
+        {...omitUndefined({ initialFocus })}
+        ref={ref}
+        className={classes}
+      >
         <div className="frontier-dialog__body">
           {children}
           {showCloseButton && (

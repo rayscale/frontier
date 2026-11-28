@@ -1,4 +1,5 @@
 export * from './components/accordion/index.js'
+export * from './components/alert-dialog/index.js'
 export * from './components/avatar-group/index.js'
 export * from './components/avatar/index.js'
 export * from './components/badge/index.js'

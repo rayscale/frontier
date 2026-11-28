@@ -1,0 +1,95 @@
+---
+title: Alert dialog
+description: Asks people to confirm something before it happens, and does not let them dismiss it by accident.
+---
+
+## Usage
+
+```tsx
+import { AlertDialog, Button } from '@rayscale/frontier'
+
+export function Example() {
+  return (
+    <AlertDialog>
+      <AlertDialog.Trigger>
+        <Button variant="danger">Delete project</Button>
+      </AlertDialog.Trigger>
+      <AlertDialog.Content>
+        <AlertDialog.Header>
+          <AlertDialog.Title>Delete this project?</AlertDialog.Title>
+          <AlertDialog.Description>This cannot be undone.</AlertDialog.Description>
+        </AlertDialog.Header>
+        <AlertDialog.Footer>
+          <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+          <AlertDialog.Action variant="danger">Delete</AlertDialog.Action>
+        </AlertDialog.Footer>
+      </AlertDialog.Content>
+    </AlertDialog>
+  )
+}
+```
+
+An alert dialog interrupts people to ask one question that needs an answer before they go on, such as deleting data or leaving a page with unsaved work. It is a [dialog](/documentation/components/overlays/dialog) with three differences:
+
+- It is announced as an alert dialog, so assistive technology reads the question right away.
+- Pressing outside it does nothing, and it has no close button. People answer with the cancel or the action, or press Escape to cancel.
+- The focus starts on the cancel, so that pressing Enter by reflex does not confirm.
+
+Use a dialog when people can fill in a form or leave without answering. Use an alert dialog only for a question, and write the title as that question.
+
+## Examples
+
+### Default
+
+<Demo name="default" />
+
+### Destructive
+
+When the action destroys something, give it `variant="danger"`, and say in the description what is lost. Name the buttons after what they do, such as "Delete account" and "Keep my account", instead of "OK" and "Cancel".
+
+<Demo name="destructive" />
+
+### Slow action
+
+The action closes the dialog when it is pressed. Call `preventDefault` in its `onClick` to keep the dialog open while the work is done, then close it yourself with `open` and `onOpenChange`.
+
+<Demo name="slowAction" />
+
+## API reference
+
+### AlertDialog
+
+The root. It takes the props of [Dialog](/documentation/components/overlays/dialog): `open`, `defaultOpen`, and `onOpenChange`.
+
+### AlertDialog.Trigger
+
+The element that opens the dialog. It works as `Dialog.Trigger` does: pass a button, or text that is wrapped in one.
+
+### AlertDialog.Content
+
+Renders the dialog. It takes the props of a `div`, and the `size` of `Dialog.Content`, which defaults to `small` here. It forwards its ref.
+
+### AlertDialog.Header, AlertDialog.Title, AlertDialog.Description, AlertDialog.Footer
+
+The same parts as in `Dialog`. The title names the dialog and the description says what will happen. Both are always needed.
+
+### AlertDialog.Cancel
+
+A button that closes the dialog without doing anything. It takes the props of a [button](/documentation/components/actions/button), with `variant` `outline` by default. The focus starts on it.
+
+### AlertDialog.Action
+
+A button that confirms. It takes the props of a button, with `variant` `primary` by default. It closes the dialog, unless its `onClick` calls `preventDefault`.
+
+## Accessibility
+
+<Callout title="Always name the question">
+  The title is the name of the dialog and the description is its description, and screen readers
+  read both when it opens. Write the title as the question, such as "Delete this project?", and say
+  in the description what will happen.
+</Callout>
+
+- The dialog has `role="alertdialog"`, and the page behind it is inert while it is open.
+- The focus starts on the cancel, and stays inside the dialog until it closes. When it closes, the focus goes back to the trigger.
+- Escape cancels. Pressing the backdrop does not.
+- Name the buttons after what they do, so people who hear only the buttons know what each does.

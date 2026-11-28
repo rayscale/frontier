@@ -3,6 +3,7 @@
   --_callout-background: var(--frontier-color-info-subtle);
   --_callout-border: var(--frontier-color-info-border);
 
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -89,4 +90,15 @@
     flex-basis: 100%;
     margin-inline-start: calc(var(--frontier-spacing-5) + var(--frontier-spacing-3));
   }
+}
+
+/* The dismiss button sits in the top corner, so it stays there when the actions wrap. */
+.frontier-callout[data-dismissible] {
+  padding-inline-end: var(--frontier-spacing-12);
+}
+
+.frontier-callout__dismiss {
+  position: absolute;
+  inset-block-start: var(--frontier-spacing-2);
+  inset-inline-end: var(--frontier-spacing-2);
 }

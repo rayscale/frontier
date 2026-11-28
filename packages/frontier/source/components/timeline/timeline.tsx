@@ -18,6 +18,7 @@ export type {
   TTimelineDescriptionProps,
   TTimelineIndicatorProps,
   TTimelineItemProps,
+  TTimelineOrientation,
   TTimelineProps,
   TTimelineTimeProps,
   TTimelineTitleProps,

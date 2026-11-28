@@ -97,6 +97,16 @@ describe('Timeline', () => {
     expect(itemRef.current?.classList.contains('frontier-timeline__item')).toBe(true)
   })
 
+  it('is vertical unless the orientation says otherwise', () => {
+    const { rerender } = render(<Timeline aria-label="Events" />)
+
+    expect(screen.getByRole('list').getAttribute('data-orientation')).toBe('vertical')
+
+    rerender(<Timeline aria-label="Events" orientation="horizontal" />)
+
+    expect(screen.getByRole('list').getAttribute('data-orientation')).toBe('horizontal')
+  })
+
   it('exposes its parts on the root', () => {
     expect(Timeline.Root).toBe(Timeline)
   })

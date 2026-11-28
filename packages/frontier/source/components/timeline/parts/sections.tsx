@@ -12,10 +12,17 @@ import type {
 } from '../types.js'
 
 export const TimelineRoot = forwardRef<HTMLOListElement, TTimelineProps>(function TimelineRoot(
-  { className, ...props },
+  { className, orientation = 'vertical', ...props },
   ref,
 ) {
-  return <ol {...props} ref={ref} className={classNames('frontier-timeline', className)} />
+  return (
+    <ol
+      {...props}
+      ref={ref}
+      className={classNames('frontier-timeline', className)}
+      data-orientation={orientation}
+    />
+  )
 })
 
 export const TimelineItem = forwardRef<HTMLLIElement, TTimelineItemProps>(function TimelineItem(

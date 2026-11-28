@@ -48,6 +48,12 @@ Put an icon in the indicator to draw a circle around it.
 
 <Demo name="icons" />
 
+### Horizontal
+
+Set `orientation="horizontal"` to put the events side by side, with the line across and the text under each indicator. Each event takes an equal share of the width, so use it when there are few events and short text.
+
+<Demo name="horizontal" />
+
 ### Tones
 
 `neutral`, `info`, `success`, `warning`, and `danger`.
@@ -59,6 +65,10 @@ Put an icon in the indicator to draw a circle around it.
 ### Timeline
 
 Renders an `<ol>`. It forwards its ref and the attributes of an `ol`. Give it an `aria-label` that says what the events are.
+
+| Prop          | Type                         | Default      | Description                                                           |
+| ------------- | ---------------------------- | ------------ | --------------------------------------------------------------------- |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Whether the events are stacked, or side by side with the line across. |
 
 ### Timeline.Item
 

@@ -124,6 +124,53 @@ export const WithIcons: TStory = {
   ),
 }
 
+export const Horizontal: TStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'With `orientation="horizontal"`, the events sit side by side and the line runs across. Give it room: each event takes an equal share of the width.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ width: '40rem', maxWidth: '100%' }}>
+      <Timeline aria-label="Order history" orientation="horizontal">
+        <Timeline.Item tone="success">
+          <Timeline.Indicator />
+          <Timeline.Content>
+            <Timeline.Title>Order placed</Timeline.Title>
+            <Timeline.Time dateTime="2025-03-01">March 1</Timeline.Time>
+          </Timeline.Content>
+        </Timeline.Item>
+        <Timeline.Item tone="success">
+          <Timeline.Indicator />
+          <Timeline.Content>
+            <Timeline.Title>Shipped</Timeline.Title>
+            <Timeline.Time dateTime="2025-03-02">March 2</Timeline.Time>
+          </Timeline.Content>
+        </Timeline.Item>
+        <Timeline.Item tone="info">
+          <Timeline.Indicator>
+            <Info />
+          </Timeline.Indicator>
+          <Timeline.Content>
+            <Timeline.Title>Out for delivery</Timeline.Title>
+            <Timeline.Time dateTime="2025-03-04">March 4</Timeline.Time>
+          </Timeline.Content>
+        </Timeline.Item>
+        <Timeline.Item>
+          <Timeline.Indicator />
+          <Timeline.Content>
+            <Timeline.Title>Delivered</Timeline.Title>
+            <Timeline.Description>Expected tomorrow.</Timeline.Description>
+          </Timeline.Content>
+        </Timeline.Item>
+      </Timeline>
+    </div>
+  ),
+}
+
 export const Tones: TStory = {
   parameters: {
     docs: {

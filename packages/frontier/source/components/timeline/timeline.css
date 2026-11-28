@@ -113,3 +113,43 @@
   font-size: var(--frontier-font-size-sm);
   line-height: var(--frontier-line-height-relaxed);
 }
+
+/* Horizontal: the events sit side by side, with the indicator above its text. */
+.frontier-timeline[data-orientation='horizontal'] {
+  flex-direction: row;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__item {
+  flex: 1 1 0;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: var(--_indicator) auto;
+  row-gap: var(--frontier-spacing-2);
+  padding-block-end: 0;
+  padding-inline-end: var(--frontier-spacing-4);
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__item:last-child {
+  padding-inline-end: 0;
+}
+
+/* The line runs from beside the indicator to the next one. */
+.frontier-timeline[data-orientation='horizontal']
+  .frontier-timeline__item:not(:last-child)::before {
+  inset-block: calc((var(--_indicator) - var(--frontier-border-width-subtle)) / 2) auto;
+  inset-inline: calc(var(--_indicator) + var(--frontier-spacing-1)) var(--frontier-spacing-1);
+  inline-size: auto;
+  block-size: var(--frontier-border-width-subtle);
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__indicator,
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__content {
+  grid-column: 1;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__content {
+  grid-row: 2;
+}
+
+.frontier-timeline[data-orientation='horizontal'] .frontier-timeline__title {
+  line-height: var(--frontier-line-height-tight);
+}

@@ -6,11 +6,17 @@ import type {
   TimeHTMLAttributes,
 } from 'react'
 
+/** Direction in which the events follow each other. */
+export type TTimelineOrientation = 'vertical' | 'horizontal'
+
 /** Meaning of an event, shown in the color of its indicator. */
 export type TTimelineTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger'
 
 /** Props for the {@link Timeline} component. It is an ordered list, so it takes the props of an `ol`. */
-export type TTimelineProps = OlHTMLAttributes<HTMLOListElement>
+export type TTimelineProps = OlHTMLAttributes<HTMLOListElement> & {
+  /** Direction of the line. `vertical` stacks the events, `horizontal` puts them side by side. Defaults to `vertical`. */
+  orientation?: TTimelineOrientation | undefined
+}
 
 /** Props for `Timeline.Item`, which is one event. */
 export type TTimelineItemProps = LiHTMLAttributes<HTMLLIElement> & {

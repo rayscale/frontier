@@ -1,0 +1,131 @@
+---
+title: Lightbox
+description: Shows a gallery one picture at a time over a blurred page, with zoom, next and previous, and a strip of small pictures.
+---
+
+## Usage
+
+```tsx
+import { Lightbox } from '@rayscale/frontier'
+
+const photos = [
+  { id: 'mountains', src: '/photos/mountains.jpg', alt: 'Mountains', caption: 'Blue mountains.' },
+  { id: 'sunset', src: '/photos/sunset.jpg', alt: 'Sunset' },
+]
+
+export function Example() {
+  return (
+    <Lightbox items={photos}>
+      {photos.map((photo) => (
+        <Lightbox.Trigger key={photo.id} value={photo.id}>
+          <img src={`/thumbs/${photo.id}.jpg`} alt={photo.alt} />
+        </Lightbox.Trigger>
+      ))}
+      <Lightbox.Content />
+    </Lightbox>
+  )
+}
+```
+
+A lightbox shows a gallery of pictures one at a time, large, over the page. Pressing a small image opens its picture in the middle of the screen, where people zoom it, go to the next and the previous one, and jump to any picture with a strip of small ones. The picture flies out of the small image that was pressed, and flies back to the one that is shown when it closes, even when people went to another picture.
+
+It is built on [image zoom](/documentation/components/content/image-zoom), so a picture zooms, drags, and closes the same way, and it is a modal dialog: the focus stays inside, Escape closes it, and the page behind it cannot be used.
+
+You give it the `items`, in the order people go through them, and place a `Lightbox.Trigger` for each one wherever you want, such as in a grid or a row. The trigger and the item share an `id`. The small images can be any size or shape: only the enlarged picture needs to show the whole of it.
+
+## Examples
+
+### Default
+
+Press a picture. The buttons, the arrow keys, and the strip go to the others, Home and End jump to the first and the last, and each picture slides in from the side it is on. Everything works on each picture as in image zoom.
+
+<Demo name="default" />
+
+### Loop
+
+With `loop`, the last picture goes on to the first, and the first back to the last.
+
+<Demo name="loop" />
+
+### Custom controls
+
+Pass children to `Lightbox.Content` to choose what is over the picture, and arrange the parts as you want. Without children, the content has a toolbar with the count and the zoom and close buttons, the previous and next buttons, the caption, and the strip.
+
+<Demo name="customControls" />
+
+### Controlled
+
+Pass `value` and `onValueChange` to keep the shown picture in the page. Pass `open` and `onOpenChange` to open and close it from elsewhere.
+
+<Demo name="controlled" />
+
+## API reference
+
+### Lightbox
+
+Holds the pictures and which one is shown, and shares them with the parts. It renders no element.
+
+| Prop            | Type                      | Default       | Description                                                              |
+| --------------- | ------------------------- | ------------- | ------------------------------------------------------------------------ |
+| `items`         | `TLightboxItem[]`         | —             | The pictures, in the order people go through them.                       |
+| `value`         | `string`                  | —             | The `id` of the shown picture, in controlled mode.                       |
+| `defaultValue`  | `string`                  | The first one | The `id` of the picture shown at the start.                              |
+| `onValueChange` | `(value: string) => void` | —             | Called with the `id` of the picture that becomes the shown one.          |
+| `open`          | `boolean`                 | —             | Open state, in controlled mode.                                          |
+| `defaultOpen`   | `boolean`                 | `false`       | Open state at the start, in uncontrolled mode.                           |
+| `onOpenChange`  | `(open: boolean) => void` | —             | Called when the lightbox opens or closes.                                |
+| `loop`          | `boolean`                 | `false`       | Goes from the last picture to the first, and from the first to the last. |
+| `maxZoom`       | `number`                  | `4`           | The highest zoom, as a multiple of the size a picture has when it opens. |
+
+### Item
+
+| Property    | Type        | Description                                                                |
+| ----------- | ----------- | -------------------------------------------------------------------------- |
+| `id`        | `string`    | Tells the picture apart. It is the `value` of the trigger that opens it.   |
+| `src`       | `string`    | Source of the picture when it is enlarged.                                 |
+| `alt`       | `string`    | Text that describes the picture. It names the dialog and the strip button. |
+| `caption`   | `ReactNode` | Text shown with the picture when it is enlarged.                           |
+| `thumbnail` | `string`    | Source of the small picture in the strip. Defaults to `src`.               |
+
+### Lightbox.Trigger
+
+The small image that opens a picture. Its child must be one `img`, and its `value` the `id` of an item. It renders a button, whose name is the `alt` of the image. It takes `className`.
+
+### Lightbox.Content
+
+Renders the dialog: the picture over a blurred background and the controls. It takes the props of [`ImageZoom.Content`](/documentation/components/content/image-zoom), except those about the source, and `thumbnails`.
+
+| Prop         | Type      | Default | Description                                                            |
+| ------------ | --------- | ------- | ---------------------------------------------------------------------- |
+| `thumbnails` | `boolean` | `true`  | Shows the strip of small pictures, when the default controls are used. |
+
+### Parts for the content
+
+| Part                                                    | What it is                                                                                      |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Lightbox.Toolbar`                                      | A bar over the picture that holds actions. Its `placement` is `top` or `bottom`.                |
+| `Lightbox.ZoomIn`, `Lightbox.ZoomOut`, `Lightbox.Close` | Buttons for the toolbar. They are the ones of image zoom.                                       |
+| `Lightbox.Counter`                                      | Says which picture is shown, such as "3 of 12".                                                 |
+| `Lightbox.Previous`, `Lightbox.Next`                    | Buttons at the sides of the picture. They are disabled at the ends, unless it loops.            |
+| `Lightbox.Footer`                                       | The area under the picture that holds the caption and the strip.                                |
+| `Lightbox.Caption`                                      | The caption of the shown picture. It shows nothing when it has none.                            |
+| `Lightbox.Thumbnails`                                   | The strip of small pictures. The shown one is marked, and the strip scrolls to keep it in view. |
+
+## Keyboard
+
+- The left and right arrows go to the previous and the next picture, and Home and End to the first and the last. While a picture is zoomed, the arrows move it instead.
+- `+`, `-`, and `0` zoom in, zoom out, and go back to the size it had.
+- Escape closes the lightbox.
+
+## Accessibility
+
+<Callout title="Write an alt for every picture">
+  The `alt` of each item names the dialog when it is shown, and the strip button that jumps to it.
+  Write one that says what the picture shows, so people who hear the strip know which is which.
+</Callout>
+
+- The counter is a status, so a screen reader says "2 of 6" when the picture changes.
+- The buttons for the previous and the next picture have names, "Previous image" and "Next image", and are disabled at the ends. Change the names for other languages with `aria-label`.
+- The strip is a group of buttons. The shown one has `aria-current`.
+- The pictures next to the shown one load before people ask for them.
+- With reduced motion on, the pictures change without sliding, and the strip scrolls without animation.

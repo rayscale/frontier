@@ -1,0 +1,162 @@
+.frontier-image-zoom__trigger {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--frontier-radius-md);
+  background: none;
+  color: inherit;
+  cursor: zoom-in;
+  font: inherit;
+  line-height: 0;
+}
+
+.frontier-image-zoom__trigger:focus-visible {
+  outline: var(--frontier-focus-width) solid var(--frontier-color-focus);
+  outline-offset: var(--frontier-focus-offset);
+}
+
+/* The image in the page stays where it is, empty, while its copy is over the screen. */
+.frontier-image-zoom__trigger[data-active] > :where(img) {
+  visibility: hidden;
+}
+
+.frontier-image-zoom__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--frontier-layer-overlay);
+  background-color: var(--frontier-color-overlay);
+  backdrop-filter: blur(var(--frontier-blur-medium));
+  /* Only the opacity changes. A blur that changes size is costly to draw, and it stutters. */
+  transition: opacity var(--frontier-duration-enter) var(--frontier-easing-standard);
+}
+
+.frontier-image-zoom__backdrop[data-starting-style],
+.frontier-image-zoom__backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.frontier-image-zoom__backdrop[data-ending-style] {
+  transition-duration: var(--frontier-duration-exit);
+}
+
+.frontier-image-zoom {
+  /* The image leaves room for the toolbar above it and the caption under it, and it is never huge. */
+  --_max-inline: min(calc(100vw - var(--frontier-spacing-16)), 72rem);
+  --_max-block: min(
+    calc(100dvh - var(--frontier-spacing-16) * 3 - var(--_extra-block, 0px)),
+    56rem
+  );
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--frontier-layer-overlay);
+  display: grid;
+  box-sizing: border-box;
+  padding-block-end: var(--_extra-block, 0px);
+  place-items: center;
+  overflow: hidden;
+  outline: none;
+  font-family: var(--frontier-font-family);
+  /* While it closes, the popup stays visible for as long as the image takes to fly back. */
+  transition: visibility var(--frontier-duration-exit);
+}
+
+.frontier-image-zoom[data-ending-style] {
+  visibility: hidden;
+}
+
+/* The frame carries the flight from the trigger to the middle of the screen, and back. */
+.frontier-image-zoom__frame {
+  display: block;
+  line-height: 0;
+}
+
+/* The image itself carries the zoom. */
+.frontier-image-zoom__image {
+  display: block;
+  inline-size: min(
+    var(--_natural-width, var(--_max-inline)),
+    var(--_max-inline),
+    calc(var(--_max-block) * var(--_ratio, 1))
+  );
+  max-block-size: var(--_max-block);
+  max-inline-size: var(--_max-inline);
+  block-size: auto;
+  border-radius: var(--frontier-radius-md);
+  box-shadow: var(--frontier-shadow-lg);
+  cursor: zoom-in;
+  object-fit: contain;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  transition: transform var(--frontier-duration-medium) var(--frontier-easing-standard);
+}
+
+.frontier-image-zoom[data-zoomed] .frontier-image-zoom__image {
+  cursor: grab;
+}
+
+.frontier-image-zoom__image[data-dragging] {
+  cursor: grabbing;
+  transition: none;
+}
+
+.frontier-image-zoom__toolbar {
+  position: fixed;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--frontier-spacing-1);
+  inline-size: fit-content;
+  margin-inline: auto;
+  padding: var(--frontier-spacing-1);
+  border-radius: var(--frontier-radius-full);
+  transition: opacity var(--frontier-duration-enter) var(--frontier-easing-standard);
+}
+
+.frontier-image-zoom__toolbar[data-placement='top'] {
+  inset-block-start: var(--frontier-spacing-4);
+}
+
+.frontier-image-zoom__toolbar[data-placement='bottom'] {
+  inset-block-end: var(--frontier-spacing-4);
+}
+
+.frontier-image-zoom__caption {
+  position: fixed;
+  inset-block-end: var(--frontier-spacing-4);
+  inset-inline: 0;
+  inline-size: fit-content;
+  max-inline-size: min(36rem, var(--_max-inline));
+  margin: 0 auto;
+  padding: var(--frontier-spacing-2) var(--frontier-spacing-4);
+  border-radius: var(--frontier-radius-lg);
+  font-size: var(--frontier-font-size-sm);
+  line-height: var(--frontier-line-height-relaxed);
+  text-align: center;
+  transition: opacity var(--frontier-duration-enter) var(--frontier-easing-standard);
+}
+
+.frontier-image-zoom[data-starting-style] .frontier-image-zoom__toolbar,
+.frontier-image-zoom[data-ending-style] .frontier-image-zoom__toolbar,
+.frontier-image-zoom[data-starting-style] .frontier-image-zoom__caption,
+.frontier-image-zoom[data-ending-style] .frontier-image-zoom__caption {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frontier-image-zoom,
+  .frontier-image-zoom__backdrop,
+  .frontier-image-zoom__image,
+  .frontier-image-zoom__toolbar,
+  .frontier-image-zoom__caption {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .frontier-image-zoom__backdrop {
+    backdrop-filter: none;
+  }
+}
